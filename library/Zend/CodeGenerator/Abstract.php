@@ -21,10 +21,10 @@
  */
 
 /**
- * @category   Zend
- * @package    Zend_CodeGenerator
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_CodeGenerator
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_CodeGenerator_Abstract
 {
@@ -57,7 +57,7 @@ abstract class Zend_CodeGenerator_Abstract
     /**
      * setConfig()
      *
-     * @param Zend_Config $config
+     * @param  Zend_Config $config
      * @return Zend_CodeGenerator_Abstract
      */
     public function setConfig(Zend_Config $config)
@@ -69,7 +69,7 @@ abstract class Zend_CodeGenerator_Abstract
     /**
      * setOptions()
      *
-     * @param array $options
+     * @param  array $options
      * @return Zend_CodeGenerator_Abstract
      */
     public function setOptions(Array $options)
@@ -106,7 +106,6 @@ abstract class Zend_CodeGenerator_Abstract
 
     /**
      * _init() - this is called before the constuctor
-     *
      */
     protected function _init()
     {
@@ -115,7 +114,6 @@ abstract class Zend_CodeGenerator_Abstract
 
     /**
      * _prepare() - this is called at construction completion
-     *
      */
     protected function _prepare()
     {
@@ -124,7 +122,6 @@ abstract class Zend_CodeGenerator_Abstract
 
     /**
      * generate() - must be implemented by the child
-     *
      */
     abstract public function generate();
 

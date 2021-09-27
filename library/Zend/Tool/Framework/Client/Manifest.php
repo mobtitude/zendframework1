@@ -52,10 +52,11 @@ require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
 
 /**
  * Zend_Tool_Framework_Client_ConsoleClient_Manifest
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Client_Manifest
     implements Zend_Tool_Framework_Registry_EnabledInterface,
@@ -67,7 +68,7 @@ class Zend_Tool_Framework_Client_Manifest
     /**
      * setRegistry() - Required for the Zend_Tool_Framework_Registry_EnabledInterface interface
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
+     * @param  Zend_Tool_Framework_Registry_Interface $registry
      * @return Zend_Tool_Framework_Client_Console_Manifest
      */
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
@@ -111,25 +112,29 @@ class Zend_Tool_Framework_Client_Manifest
         // loop through all actions and create a metadata for each
         foreach ($actionRepository->getActions() as $action) {
             // each action metadata will be called
-            $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
+            $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(
+                array(
                 'name'            => 'normalizedActionName',
                 'value'           => $lowerFilter->filter($action->getName()),
                 'reference'       => $action,
                 'actionName'      => $action->getName(),
                 'clientName'      => 'all'
-                ));
+                )
+            );
         }
 
         foreach ($providerRepository->getProviderSignatures() as $providerSignature) {
 
             // create the metadata for the provider's cliProviderName
-            $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
+            $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(
+                array(
                 'name'            => 'normalizedProviderName',
                 'value'           => $lowerFilter->filter($providerSignature->getName()),
                 'reference'       => $providerSignature,
                 'clientName'      => 'all',
                 'providerName'    => $providerSignature->getName()
-                ));
+                )
+            );
 
             // create the metadatas for the per provider specialites in providerSpecaltyNames
             foreach ($providerSignature->getSpecialties() as $specialty) {
@@ -138,14 +143,16 @@ class Zend_Tool_Framework_Client_Manifest
                     continue;
                 }
 
-                $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
+                $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(
+                    array(
                     'name'            => 'normalizedSpecialtyName',
                     'value'           => $lowerFilter->filter($specialty),
                     'reference'       => $providerSignature,
                     'clientName'      => 'all',
                     'providerName'    => $providerSignature->getName(),
                     'specialtyName'   => $specialty
-                    ));
+                    )
+                );
 
             }
 
@@ -167,7 +174,8 @@ class Zend_Tool_Framework_Client_Manifest
                 }
 
                 // create metadata for the long name cliActionableMethodLongParameters
-                $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
+                $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(
+                    array(
                     'name'            => 'normalizedActionableMethodLongParams',
                     'value'           => $methodLongParams,
                     'clientName'      => 'console',
@@ -175,10 +183,12 @@ class Zend_Tool_Framework_Client_Manifest
                     'specialtyName'   => $actionableMethodData['specialty'],
                     'actionName'      => $actionableMethodData['actionName'],
                     'reference'       => &$actionableMethodData
-                    ));
+                    )
+                );
 
                 // create metadata for the short name cliActionableMethodShortParameters
-                $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
+                $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(
+                    array(
                     'name'            => 'normalizedActionableMethodShortParams',
                     'value'           => $methodShortParams,
                     'clientName'      => 'console',
@@ -186,7 +196,8 @@ class Zend_Tool_Framework_Client_Manifest
                     'specialtyName'   => $actionableMethodData['specialty'],
                     'actionName'      => $actionableMethodData['actionName'],
                     'reference'       => &$actionableMethodData
-                    ));
+                    )
+                );
 
             }
 

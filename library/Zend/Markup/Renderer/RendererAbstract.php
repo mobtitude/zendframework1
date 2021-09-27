@@ -184,14 +184,14 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      *
      * @param string $name
      * @param string $type
-     * @param array $options
+     * @param array  $options
      *
      * @return Zend_Markup_Renderer_RendererAbstract
      */
     public function addMarkup($name, $type, array $options)
     {
         if (!isset($options['group']) && ($type ^ self::TYPE_ALIAS)) {
-            require_once 'Zend/Markup/Renderer/Exception.php';
+            include_once 'Zend/Markup/Renderer/Exception.php';
             throw new Zend_Markup_Renderer_Exception("There is no render group defined.");
         }
 
@@ -213,7 +213,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
             // add a callback tag
             if (isset($options['callback'])) {
                 if (!($options['callback'] instanceof Zend_Markup_Renderer_TokenConverterInterface)) {
-                    require_once 'Zend/Markup/Renderer/Exception.php';
+                    include_once 'Zend/Markup/Renderer/Exception.php';
                     throw new Zend_Markup_Renderer_Exception("Not a valid tag callback.");
                 }
                 if (method_exists($options['callback'], 'setRenderer')) {
@@ -230,9 +230,10 @@ abstract class Zend_Markup_Renderer_RendererAbstract
         } elseif ($type & self::TYPE_ALIAS) {
             // add an alias
             if (empty($options['name'])) {
-                require_once 'Zend/Markup/Renderer/Exception.php';
+                include_once 'Zend/Markup/Renderer/Exception.php';
                 throw new Zend_Markup_Renderer_Exception(
-                        'No alias was provided but tag was defined as such');
+                    'No alias was provided but tag was defined as such'
+                );
             }
 
             $this->_markups[$name] = array(
@@ -384,7 +385,8 @@ abstract class Zend_Markup_Renderer_RendererAbstract
 
         // check for the filter
         if (!isset($markup['filter'])
-            || (!($markup['filter'] instanceof Zend_Filter_Interface) && ($markup['filter'] !== false))) {
+            || (!($markup['filter'] instanceof Zend_Filter_Interface) && ($markup['filter'] !== false))
+        ) {
             $this->_markups[$name]['filter'] = $this->getDefaultFilter();
         }
 
@@ -410,7 +412,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
                 $markup['callback'] = new $class;
 
                 if (!($markup['callback'] instanceof Zend_Markup_Renderer_TokenConverterInterface)) {
-                    require_once 'Zend/Markup/Renderer/Exception.php';
+                    include_once 'Zend/Markup/Renderer/Exception.php';
                     throw new Zend_Markup_Renderer_Exception("Callback for tag '$name' found, but it isn't valid.");
                 }
 
@@ -510,7 +512,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      * Execute a replace token
      *
      * @param  Zend_Markup_Token $token
-     * @param  array $tag
+     * @param  array             $tag
      * @return string
      */
     protected function _executeReplace(Zend_Markup_Token $token, $tag)
@@ -522,7 +524,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      * Execute a single replace token
      *
      * @param  Zend_Markup_Token $token
-     * @param  array $tag
+     * @param  array             $tag
      * @return string
      */
     protected function _executeSingleReplace(Zend_Markup_Token $token, $tag)
@@ -602,8 +604,8 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      * Add a filter for an existing markup
      *
      * @param Zend_Filter_Interface $filter
-     * @param string $markup
-     * @param string $placement
+     * @param string                $markup
+     * @param string                $placement
      *
      * @return Zend_Markup_Renderer_RendererAbstract
      */
@@ -637,7 +639,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      * Set the filter for an existing
      *
      * @param Zend_Filter_Interface $filter
-     * @param string $markup
+     * @param string                $markup
      *
      * @return Zend_Markup_Renderer_RendererAbstract
      */
@@ -654,8 +656,8 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      * Add a render group
      *
      * @param string $name
-     * @param array $allowedInside
-     * @param array $allowsInside
+     * @param array  $allowedInside
+     * @param array  $allowsInside
      *
      * @return void
      */

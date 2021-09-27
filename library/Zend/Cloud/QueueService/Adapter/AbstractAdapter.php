@@ -35,15 +35,23 @@ require_once 'Zend/Cloud/QueueService/MessageSet.php';
 abstract class Zend_Cloud_QueueService_Adapter_AbstractAdapter
     implements Zend_Cloud_QueueService_Adapter
 {
-    /**@+ option keys */
+    /**
+* @+ option keys 
+*/
     const MESSAGE_CLASS    = 'message_class';
     const MESSAGESET_CLASS = 'messageset_class';
-    /**@-*/
+    /**
+     * @-
+     */
 
-    /** @var string Class to use for queue messages */
+    /**
+     * @var string Class to use for queue messages 
+     */
     protected string $_messageClass    = 'Zend_Cloud_QueueService_Message';
 
-    /** @var string Class to use for collections of queue messages */
+    /**
+     * @var string Class to use for collections of queue messages 
+     */
     protected string $_messageSetClass = 'Zend_Cloud_QueueService_MessageSet';
 
     /**

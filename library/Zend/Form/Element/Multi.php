@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Xhtml */
+/**
+ * Zend_Form_Element_Xhtml 
+ */
 require_once 'Zend/Form/Element/Xhtml.php';
 
 /**
@@ -46,6 +48,7 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
 
     /**
      * Separator to use between options; defaults to '<br />'.
+     *
      * @var string
      */
     protected $_separator = '<br />';
@@ -68,7 +71,7 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
     /**
      * Set separator
      *
-     * @param mixed $separator
+     * @param  mixed $separator
      * @return self
      */
     public function setSeparator($separator)
@@ -235,7 +238,7 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
      * Autoregisters InArray validator if necessary.
      *
      * @param  string $value
-     * @param  mixed $context
+     * @param  mixed  $context
      * @return bool
      */
     public function isValid($value, $context = null)

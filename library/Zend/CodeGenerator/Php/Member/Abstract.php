@@ -31,21 +31,25 @@ require_once 'Zend/CodeGenerator/Php/Abstract.php';
 require_once 'Zend/CodeGenerator/Php/Docblock.php';
 
 /**
- * @category   Zend
- * @package    Zend_CodeGenerator
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_CodeGenerator
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator_Php_Abstract
 {
 
-    /**#@+
+    /**
+* #@+
+     *
      * @param const string
      */
     const VISIBILITY_PUBLIC    = 'public';
     const VISIBILITY_PROTECTED = 'protected';
     const VISIBILITY_PRIVATE   = 'private';
-    /**#@-*/
+    /**
+     * #@-
+     */
 
     /**
      * @var Zend_CodeGenerator_Php_Docblock
@@ -71,7 +75,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     /**
      * setDocblock() Set the docblock
      *
-     * @param Zend_CodeGenerator_Php_Docblock|array|string $docblock
+     * @param  Zend_CodeGenerator_Php_Docblock|array|string $docblock
      * @return Zend_CodeGenerator_Php_File
      */
     public function setDocblock($docblock)
@@ -83,7 +87,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
         if (is_array($docblock)) {
             $docblock = new Zend_CodeGenerator_Php_Docblock($docblock);
         } elseif (!$docblock instanceof Zend_CodeGenerator_Php_Docblock) {
-            require_once 'Zend/CodeGenerator/Php/Exception.php';
+            include_once 'Zend/CodeGenerator/Php/Exception.php';
             throw new Zend_CodeGenerator_Php_Exception('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
         }
 
@@ -104,7 +108,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     /**
      * setAbstract()
      *
-     * @param bool $isAbstract
+     * @param  bool $isAbstract
      * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setAbstract($isAbstract)
@@ -126,7 +130,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     /**
      * setFinal()
      *
-     * @param bool $isFinal
+     * @param  bool $isFinal
      * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setFinal($isFinal)
@@ -148,7 +152,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     /**
      * setStatic()
      *
-     * @param bool $isStatic
+     * @param  bool $isStatic
      * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setStatic($isStatic)
@@ -170,7 +174,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     /**
      * setVisitibility()
      *
-     * @param const $visibility
+     * @param  const $visibility
      * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setVisibility($visibility)
@@ -192,7 +196,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
     /**
      * setName()
      *
-     * @param string $name
+     * @param  string $name
      * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setName($name)

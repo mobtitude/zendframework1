@@ -63,16 +63,17 @@ class Zend_Gdata_Extension_Who extends Zend_Gdata_Extension
 
     /**
      * Constructs a new Zend_Gdata_Extension_Who object.
-     * @param string $email (optional) Email address.
-     * @param string $rel (optional) Relationship description.
-     * @param string $valueString (optional) Simple string describing this person.
+     *
+     * @param string                              $email          (optional) Email address.
+     * @param string                              $rel            (optional) Relationship description.
+     * @param string                              $valueString    (optional) Simple string describing this person.
      * @param Zend_Gdata_Extension_AttendeeStatus $attendeeStatus (optional) The status of the attendee.
-     * @param Zend_Gdata_Extension_AttendeeType $attendeeType (optional) The type of the attendee.
-     * @param string $entryLink URL pointing to an associated entry (Contact kind) describing this person.
+     * @param Zend_Gdata_Extension_AttendeeType   $attendeeType   (optional) The type of the attendee.
+     * @param string                              $entryLink      URL pointing to an associated entry (Contact kind) describing this person.
      */
     public function __construct($email = null, $rel = null, $valueString = null,
-        $attendeeStatus = null, $attendeeType = null, $entryLink = null)
-    {
+        $attendeeStatus = null, $attendeeType = null, $entryLink = null
+    ) {
         parent::__construct();
         $this->_email = $email;
         $this->_rel = $rel;
@@ -88,7 +89,7 @@ class Zend_Gdata_Extension_Who extends Zend_Gdata_Extension
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -199,7 +200,7 @@ class Zend_Gdata_Extension_Who extends Zend_Gdata_Extension
     /**
      * Set the value for this element's ValueString attribute.
      *
-     * @param string $value The desired value for this attribute.
+     * @param  string $value The desired value for this attribute.
      * @return Zend_Gdata_Extension_Who The element being modified.
      */
     public function setValueString($value)
@@ -221,7 +222,7 @@ class Zend_Gdata_Extension_Who extends Zend_Gdata_Extension
     /**
      * Set the value for this element's Email attribute.
      *
-     * @param string $value The desired value for this attribute.
+     * @param  string $value The desired value for this attribute.
      * @return Zend_Gdata_Extension_Who The element being modified.
      */
     public function setEmail($value)
@@ -243,7 +244,7 @@ class Zend_Gdata_Extension_Who extends Zend_Gdata_Extension
     /**
      * Set the value for this element's Rel attribute.
      *
-     * @param string $value The desired value for this attribute.
+     * @param  string $value The desired value for this attribute.
      * @return Zend_Gdata_Extension_Who The element being modified.
      */
     public function setRel($value)
@@ -265,7 +266,7 @@ class Zend_Gdata_Extension_Who extends Zend_Gdata_Extension
     /**
      * Set the child's AttendeeStatus element.
      *
-     * @param Zend_Gdata_Extension_AttendeeStatus $value The desired value for this attribute.
+     * @param  Zend_Gdata_Extension_AttendeeStatus $value The desired value for this attribute.
      * @return Zend_Gdata_Extension_Who The element being modified.
      */
     public function setAttendeeStatus($value)
@@ -287,7 +288,7 @@ class Zend_Gdata_Extension_Who extends Zend_Gdata_Extension
     /**
      * Set the child's AttendeeType element.
      *
-     * @param Zend_Gdata_Extension_AttendeeType $value The desired value for this attribute.
+     * @param  Zend_Gdata_Extension_AttendeeType $value The desired value for this attribute.
      * @return Zend_Gdata_Extension_Who The element being modified.
      */
     public function setAttendeeType($value)

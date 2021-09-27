@@ -89,9 +89,9 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
     /**
      * Create Amazon client.
      *
-     * @param  string $access_key       Override the default Access Key
-     * @param  string $secret_key       Override the default Secret Key
-     * @param  string $region           Sets the AWS Region
+     * @param  string $access_key Override the default Access Key
+     * @param  string $secret_key Override the default Secret Key
+     * @param  string $region     Sets the AWS Region
      * @return void
      */
     public function __construct($accessKey=null, $secretKey=null, $region=null)
@@ -101,7 +101,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
         } else {
             // make rue the region is valid
             if(!empty($region) && !in_array(strtolower($region), self::$_validEc2Regions, true)) {
-                require_once 'Zend/Service/Amazon/Exception.php';
+                include_once 'Zend/Service/Amazon/Exception.php';
                 throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
             }
         }
@@ -122,7 +122,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
         if(in_array(strtolower($region), self::$_validEc2Regions, true)) {
             self::$_defaultRegion = $region;
         } else {
-            require_once 'Zend/Service/Amazon/Exception.php';
+            include_once 'Zend/Service/Amazon/Exception.php';
             throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
         }
     }
@@ -155,9 +155,11 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
             $request = self::getHttpClient();
             $request->resetParameters();
 
-            $request->setConfig(array(
+            $request->setConfig(
+                array(
                 'timeout' => $this->_httpTimeout
-            ));
+                )
+            );
 
             $request->setUri($url);
             $request->setMethod(Zend_Http_Client::POST);
@@ -243,7 +245,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
 
         $data .= implode('&', $arrData);
 
-        require_once 'Zend/Crypt/Hmac.php';
+        include_once 'Zend/Crypt/Hmac.php';
         $hmac = Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Zend_Crypt_Hmac::BINARY);
 
         return base64_encode($hmac);

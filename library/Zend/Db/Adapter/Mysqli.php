@@ -140,7 +140,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Mysqli_Exception
              */
-            require_once 'Zend/Db/Adapter/Mysqli/Exception.php';
+            include_once 'Zend/Db/Adapter/Mysqli/Exception.php';
             throw new Zend_Db_Adapter_Mysqli_Exception($this->getConnection()->error);
         }
         return $result;
@@ -170,14 +170,14 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
      * PRIMARY_POSITION => integer; position of column in primary key
      * IDENTITY         => integer; true if column is auto-generated with unique values
      *
-     * @param string $tableName
-     * @param string $schemaName OPTIONAL
+     * @param  string $tableName
+     * @param  string $schemaName OPTIONAL
      * @return array
      */
     public function describeTable($tableName, $schemaName = null)
     {
         /**
-         * @todo  use INFORMATION_SCHEMA someday when
+         * @todo use INFORMATION_SCHEMA someday when
          * MySQL's implementation isn't too slow.
          */
 
@@ -200,7 +200,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Mysqli_Exception
              */
-            require_once 'Zend/Db/Adapter/Mysqli/Exception.php';
+            include_once 'Zend/Db/Adapter/Mysqli/Exception.php';
             throw new Zend_Db_Adapter_Mysqli_Exception($this->getConnection()->error);
         }
 
@@ -287,7 +287,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Mysqli_Exception
              */
-            require_once 'Zend/Db/Adapter/Mysqli/Exception.php';
+            include_once 'Zend/Db/Adapter/Mysqli/Exception.php';
             throw new Zend_Db_Adapter_Mysqli_Exception('The Mysqli extension is required for this adapter but the extension is not loaded');
         }
 
@@ -311,8 +311,9 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
                     // Suppress warnings here
                     // Ignore it if it's not a valid constant
                     $option = @constant(strtoupper($option));
-                    if($option === null)
+                    if($option === null) {
                         continue;
+                    }
                 }
                 mysqli_options($this->_connection, $option, $value);
             }
@@ -336,7 +337,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Mysqli_Exception
              */
-            require_once 'Zend/Db/Adapter/Mysqli/Exception.php';
+            include_once 'Zend/Db/Adapter/Mysqli/Exception.php';
             throw new Zend_Db_Adapter_Mysqli_Exception(mysqli_connect_error());
         }
 
@@ -371,7 +372,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
     /**
      * Prepare a statement and return a PDOStatement-like object.
      *
-     * @param  string  $sql  SQL query
+     * @param  string $sql SQL query
      * @return Zend_Db_Statement_Mysqli
      */
     public function prepare($sql)
@@ -382,7 +383,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
         }
         $stmtClass = $this->_defaultStmtClass;
         if (!class_exists($stmtClass)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($stmtClass);
         }
         $stmt = new $stmtClass($this, $sql);
@@ -406,10 +407,10 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
      *
      * MySQL does not support sequences, so $tableName and $primaryKey are ignored.
      *
-     * @param string $tableName   OPTIONAL Name of table.
-     * @param string $primaryKey  OPTIONAL Name of primary key column.
+     * @param  string $tableName  OPTIONAL Name of table.
+     * @param  string $primaryKey OPTIONAL Name of primary key column.
      * @return string
-     * @todo Return value should be int?
+     * @todo   Return value should be int?
      */
     public function lastInsertId($tableName = null, $primaryKey = null)
     {
@@ -455,43 +456,43 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
     /**
      * Set the fetch mode.
      *
-     * @param int $mode
+     * @param  int $mode
      * @return void
      * @throws Zend_Db_Adapter_Mysqli_Exception
      */
     public function setFetchMode($mode)
     {
         switch ($mode) {
-            case Zend_Db::FETCH_LAZY:
-            case Zend_Db::FETCH_ASSOC:
-            case Zend_Db::FETCH_NUM:
-            case Zend_Db::FETCH_BOTH:
-            case Zend_Db::FETCH_NAMED:
-            case Zend_Db::FETCH_OBJ:
-                $this->_fetchMode = $mode;
+        case Zend_Db::FETCH_LAZY:
+        case Zend_Db::FETCH_ASSOC:
+        case Zend_Db::FETCH_NUM:
+        case Zend_Db::FETCH_BOTH:
+        case Zend_Db::FETCH_NAMED:
+        case Zend_Db::FETCH_OBJ:
+            $this->_fetchMode = $mode;
+            break;
+        case Zend_Db::FETCH_BOUND: // bound to PHP variable
+            /**
+             * @see Zend_Db_Adapter_Mysqli_Exception
+             */
+            include_once 'Zend/Db/Adapter/Mysqli/Exception.php';
+            throw new Zend_Db_Adapter_Mysqli_Exception('FETCH_BOUND is not supported yet');
                 break;
-            case Zend_Db::FETCH_BOUND: // bound to PHP variable
-                /**
-                 * @see Zend_Db_Adapter_Mysqli_Exception
-                 */
-                require_once 'Zend/Db/Adapter/Mysqli/Exception.php';
-                throw new Zend_Db_Adapter_Mysqli_Exception('FETCH_BOUND is not supported yet');
-                break;
-            default:
-                /**
-                 * @see Zend_Db_Adapter_Mysqli_Exception
-                 */
-                require_once 'Zend/Db/Adapter/Mysqli/Exception.php';
-                throw new Zend_Db_Adapter_Mysqli_Exception("Invalid fetch mode '$mode' specified");
+        default:
+            /**
+             * @see Zend_Db_Adapter_Mysqli_Exception
+             */
+            include_once 'Zend/Db/Adapter/Mysqli/Exception.php';
+            throw new Zend_Db_Adapter_Mysqli_Exception("Invalid fetch mode '$mode' specified");
         }
     }
 
     /**
      * Adds an adapter-specific LIMIT clause to the SELECT statement.
      *
-     * @param string $sql
-     * @param int $count
-     * @param int $offset OPTIONAL
+     * @param  string $sql
+     * @param  int    $count
+     * @param  int    $offset OPTIONAL
      * @return string
      */
     public function limit($sql, $count, $offset = 0)
@@ -501,7 +502,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Mysqli_Exception
              */
-            require_once 'Zend/Db/Adapter/Mysqli/Exception.php';
+            include_once 'Zend/Db/Adapter/Mysqli/Exception.php';
             throw new Zend_Db_Adapter_Mysqli_Exception("LIMIT argument count=$count is not valid");
         }
 
@@ -510,7 +511,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Mysqli_Exception
              */
-            require_once 'Zend/Db/Adapter/Mysqli/Exception.php';
+            include_once 'Zend/Db/Adapter/Mysqli/Exception.php';
             throw new Zend_Db_Adapter_Mysqli_Exception("LIMIT argument offset=$offset is not valid");
         }
 
@@ -525,24 +526,24 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
     /**
      * Check if the adapter supports real SQL parameters.
      *
-     * @param string $type 'positional' or 'named'
+     * @param  string $type 'positional' or 'named'
      * @return bool
      */
     public function supportsParameters($type)
     {
         switch ($type) {
-            case 'positional':
-                return true;
-            case 'named':
-            default:
-                return false;
+        case 'positional':
+            return true;
+        case 'named':
+        default:
+            return false;
         }
     }
 
     /**
      * Retrieve server version in PHP style
      *
-     *@return string
+     * @return string
      */
     public function getServerVersion()
     {

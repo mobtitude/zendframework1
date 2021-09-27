@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_Amf_Value_Messaging_AbstractMessage */
+/**
+ * Zend_Amf_Value_Messaging_AbstractMessage 
+ */
 require_once 'Zend/Amf/Value/Messaging/AbstractMessage.php';
 
 /**

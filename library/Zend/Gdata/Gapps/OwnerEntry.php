@@ -64,7 +64,7 @@ class Zend_Gdata_Gapps_OwnerEntry extends Zend_Gdata_Entry
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {
@@ -77,7 +77,7 @@ class Zend_Gdata_Gapps_OwnerEntry extends Zend_Gdata_Entry
      * child properties.  This is used to build an entry back into a DOM
      * and eventually XML text for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      *          child properties.
      */
@@ -103,22 +103,22 @@ class Zend_Gdata_Gapps_OwnerEntry extends Zend_Gdata_Entry
 
         switch ($absoluteNodeName) {
 
-            case $this->lookupNamespace('apps') . ':' . 'property';
-                $property = new Zend_Gdata_Gapps_Extension_Property();
-                $property->transferFromDOM($child);
-                $this->_property[] = $property;
-                break;
-            default:
-                parent::takeChildFromDOM($child);
-                break;
+        case $this->lookupNamespace('apps') . ':' . 'property';
+            $property = new Zend_Gdata_Gapps_Extension_Property();
+            $property->transferFromDOM($child);
+            $this->_property[] = $property;
+            break;
+        default:
+            parent::takeChildFromDOM($child);
+            break;
         }
     }
 
     /**
      * Returns all property tags for this entry
      *
-     * @param string $rel The rel value of the property to be found. If null,
-     *          the array of properties is returned instead.
+     * @param  string $rel The rel value of the property to be found. If null,
+     *                     the array of properties is returned instead.
      * @return mixed Either an array of Zend_Gdata_Gapps_Extension_Property
      *          objects if $rel is null, a single
      *          Zend_Gdata_Gapps_Extension_Property object if $rel is specified
@@ -142,8 +142,8 @@ class Zend_Gdata_Gapps_OwnerEntry extends Zend_Gdata_Entry
     /**
      * Set the value of the  property property for this object.
      *
-     * @param array $value A collection of
-     *          Zend_Gdata_Gapps_Extension_Property objects.
+     * @param  array $value A collection of
+     *                      Zend_Gdata_Gapps_Extension_Property objects.
      * @return Zend_Gdata_Gapps_OwnerEntry Provides a fluent interface.
      */
     public function setProperty($value)

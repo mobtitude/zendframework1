@@ -12,10 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_EventManager
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 require_once 'Zend/EventManager/EventManager.php';
@@ -28,10 +28,10 @@ require_once 'Zend/EventManager/SharedEventCollection.php';
  * The assumption is that the SharedEventManager will be injected into EventManager 
  * instances, and then queried for additional listeners when triggering an event.
  *
- * @category   Zend
- * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_EventManager
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_EventManager_SharedEventManager implements Zend_EventManager_SharedEventCollection
 {
@@ -63,10 +63,10 @@ class Zend_EventManager_SharedEventManager implements Zend_EventManager_SharedEv
      * );
      * </code>
      * 
-     * @param  string|array $id Identifier(s) for event emitting component(s)
-     * @param  string $event 
-     * @param  callback $callback PHP Callback
-     * @param  int $priority Priority at which listener should execute
+     * @param  string|array $id       Identifier(s) for event emitting component(s)
+     * @param  string       $event 
+     * @param  callback     $callback PHP Callback
+     * @param  int          $priority Priority at which listener should execute
      * @return void
      */
     public function attach($id, $event, $callback, $priority = 1)
@@ -83,7 +83,7 @@ class Zend_EventManager_SharedEventManager implements Zend_EventManager_SharedEv
     /**
      * Detach a listener from an event offered by a given resource
      * 
-     * @param  string|int $id
+     * @param  string|int                  $id
      * @param  Zend_Stdlib_CallbackHandler $listener 
      * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or listener not found
      */
@@ -127,7 +127,7 @@ class Zend_EventManager_SharedEventManager implements Zend_EventManager_SharedEv
     /**
      * Clear all listeners for a given identifier, optionally for a specific event
      * 
-     * @param  string|int $id 
+     * @param  string|int  $id 
      * @param  null|string $event 
      * @return bool
      */

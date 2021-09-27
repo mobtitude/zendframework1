@@ -80,7 +80,7 @@ class Zend_Gdata_Extension_EventStatus extends Zend_Gdata_Extension
     /**
      * Set the value for this element's Value attribute.
      *
-     * @param string $value The desired value for this attribute.
+     * @param  string $value The desired value for this attribute.
      * @return Zend_Gdata_Extension_Visibility The element being modified.
      */
     public function setValue($value)

@@ -27,7 +27,9 @@
  */
 require_once 'Zend/Http/Client.php';
 
-/** @see Zend_Xml_Security */
+/**
+ * @see Zend_Xml_Security 
+*/
 require_once 'Zend/Xml/Security.php';
 
 /**
@@ -42,21 +44,21 @@ class Zend_Service_Audioscrobbler
     /**
      * Zend_Http_Client Object
      *
-     * @access  protected
+     * @access protected
      */
     protected ?\Zend_Http_Client $_client = null;
 
     /**
      * Array that contains parameters being used by the webservice
      *
-     * @access  protected
+     * @access protected
      */
     protected ?array $_params = null;
 
     /**
      * Holds error information (e.g., for handling simplexml_load_string() warnings)
      *
-     * @access  protected
+     * @access protected
      */
     protected ?array $_error = null;
 
@@ -169,19 +171,19 @@ class Zend_Service_Audioscrobbler
             /**
              * @see Zend_Http_Client_Exception
              */
-            require_once 'Zend/Http/Client/Exception.php';
+            include_once 'Zend/Http/Client/Exception.php';
             throw new Zend_Http_Client_Exception('Could not find: ' . $this->_client->getUri());
         } elseif (preg_match('/No user exists with this name/', $responseBody)) {
             /**
              * @see Zend_Http_Client_Exception
              */
-            require_once 'Zend/Http/Client/Exception.php';
+            include_once 'Zend/Http/Client/Exception.php';
             throw new Zend_Http_Client_Exception('No user exists with this name');
         } elseif (!$response->isSuccessful()) {
             /**
              * @see Zend_Http_Client_Exception
              */
-            require_once 'Zend/Http/Client/Exception.php';
+            include_once 'Zend/Http/Client/Exception.php';
             throw new Zend_Http_Client_Exception('The web service ' . $this->_client->getUri() . ' returned the following status code: ' . $response->getStatus());
         }
 
@@ -192,7 +194,7 @@ class Zend_Service_Audioscrobbler
             /**
              * @see Zend_Service_Exception
              */
-            require_once 'Zend/Service/Exception.php';
+            include_once 'Zend/Service/Exception.php';
             $exception = new Zend_Service_Exception('Response failed to load with SimpleXML');
             $exception->error    = $this->_error;
             $exception->response = $responseBody;
@@ -205,10 +207,10 @@ class Zend_Service_Audioscrobbler
     }
 
     /**
-    * Utility function to get Audioscrobbler profile information (eg: Name, Gender)
+     * Utility function to get Audioscrobbler profile information (eg: Name, Gender)
      *
-    * @return array containing information
-    */
+     * @return array containing information
+     */
     public function userGetProfileInformation()
     {
         $service = "/{$this->get('version')}/user/{$this->get('user')}/profile.xml";
@@ -219,7 +221,7 @@ class Zend_Service_Audioscrobbler
      * Utility function get this user's 50 most played artists
      *
      * @return array containing info
-    */
+     */
     public function userGetTopArtists()
     {
         $service = "/{$this->get('version')}/user/{$this->get('user')}/topartists.xml";
@@ -230,7 +232,7 @@ class Zend_Service_Audioscrobbler
      * Utility function to get this user's 50 most played albums
      *
      * @return SimpleXMLElement object containing result set
-    */
+     */
     public function userGetTopAlbums()
     {
         $service = "/{$this->get('version')}/user/{$this->get('user')}/topalbums.xml";
@@ -239,8 +241,9 @@ class Zend_Service_Audioscrobbler
 
     /**
      * Utility function to get this user's 50 most played tracks
+     *
      * @return SimpleXML object containing resut set
-    */
+     */
     public function userGetTopTracks()
     {
         $service = "/{$this->get('version')}/user/{$this->get('user')}/toptracks.xml";
@@ -296,6 +299,7 @@ class Zend_Service_Audioscrobbler
 
     /**
      * Utility function that retrieves this user's list of friends
+     *
      * @return SimpleXMLElement object containing result set
      */
     public function userGetFriends()
@@ -365,15 +369,15 @@ class Zend_Service_Audioscrobbler
     /**
      * Utility function that returns weekly album chart data for this user
      *
-     * @param integer $from optional UNIX timestamp for start of date range
-     * @param integer $to optional UNIX timestamp for end of date range
+     * @param  integer $from optional UNIX timestamp for start of date range
+     * @param  integer $to   optional UNIX timestamp for end of date range
      * @return SimpleXMLElement object containing result set
      */
-    public function userGetWeeklyAlbumChart($from = NULL, $to = NULL)
+    public function userGetWeeklyAlbumChart($from = null, $to = null)
     {
         $params = "";
 
-        if ($from != NULL && $to != NULL) {
+        if ($from != null && $to != null) {
             $from = (int)$from;
             $to = (int)$to;
             $params = "from={$from}&to={$to}";
@@ -386,15 +390,15 @@ class Zend_Service_Audioscrobbler
     /**
      * Utility function that returns weekly artist chart data for this user
      *
-     * @param integer $from optional UNIX timestamp for start of date range
-     * @param integer $to optional UNIX timestamp for end of date range
+     * @param  integer $from optional UNIX timestamp for start of date range
+     * @param  integer $to   optional UNIX timestamp for end of date range
      * @return SimpleXMLElement object containing result set
      */
-    public function userGetWeeklyArtistChart($from = NULL, $to = NULL)
+    public function userGetWeeklyArtistChart($from = null, $to = null)
     {
         $params = "";
 
-        if ($from != NULL && $to != NULL) {
+        if ($from != null && $to != null) {
             $from = (int)$from;
             $to = (int)$to;
             $params = "from={$from}&to={$to}";
@@ -407,15 +411,15 @@ class Zend_Service_Audioscrobbler
     /**
      * Utility function that returns weekly track chart data for this user
      *
-     * @param integer $from optional UNIX timestamp for start of date range
-     * @param integer $to optional UNIX timestamp for end of date range
+     * @param  integer $from optional UNIX timestamp for start of date range
+     * @param  integer $to   optional UNIX timestamp for end of date range
      * @return SimpleXMLElement object containing result set
      */
-    public function userGetWeeklyTrackChart($from = NULL, $to = NULL)
+    public function userGetWeeklyTrackChart($from = null, $to = null)
     {
         $params = "";
 
-        if ($from != NULL && $to != NULL) {
+        if ($from != null && $to != null) {
             $from = (int)$from;
             $to = (int)$to;
             $params = "from={$from}&to={$to}";
@@ -562,7 +566,7 @@ class Zend_Service_Audioscrobbler
     /**
      * Get weekly chart list by current set group.
      *
-     * @see set()
+     * @see    set()
      * @return SimpleXMLElement
      */
     public function groupGetWeeklyChartList()
@@ -578,10 +582,10 @@ class Zend_Service_Audioscrobbler
      * @param  int $to
      * @return SimpleXMLElement
      */
-    public function groupGetWeeklyArtistChartList($from = NULL, $to = NULL)
+    public function groupGetWeeklyArtistChartList($from = null, $to = null)
     {
 
-        if ($from != NULL && $to != NULL) {
+        if ($from != null && $to != null) {
             $from = (int)$from;
             $to = (int)$to;
             $params = "from={$from}&$to={$to}";
@@ -600,9 +604,9 @@ class Zend_Service_Audioscrobbler
      * @param  int $to
      * @return SimpleXMLElement
      */
-    public function groupGetWeeklyTrackChartList($from = NULL, $to = NULL)
+    public function groupGetWeeklyTrackChartList($from = null, $to = null)
     {
-        if ($from != NULL && $to != NULL) {
+        if ($from != null && $to != null) {
             $from = (int)$from;
             $to = (int)$to;
             $params = "from={$from}&to={$to}";
@@ -617,13 +621,13 @@ class Zend_Service_Audioscrobbler
     /**
      * Retrieve Weekly album charts.
      *
-     * @param int $from
-     * @param int $to
+     * @param  int $from
+     * @param  int $to
      * @return SimpleXMLElement
      */
-    public function groupGetWeeklyAlbumChartList($from = NULL, $to = NULL)
+    public function groupGetWeeklyAlbumChartList($from = null, $to = null)
     {
-        if ($from != NULL && $to != NULL) {
+        if ($from != null && $to != null) {
             $from = (int)$from;
             $to = (int)$to;
             $params = "from={$from}&to={$to}";
@@ -666,7 +670,7 @@ class Zend_Service_Audioscrobbler
     public function __call($method, $args)
     {
         if(substr($method, 0, 3) !== "set") {
-            require_once "Zend/Service/Exception.php";
+            include_once "Zend/Service/Exception.php";
             throw new Zend_Service_Exception(
                 "Method ".$method." does not exist in class Zend_Service_Audioscrobbler."
             );
@@ -674,7 +678,7 @@ class Zend_Service_Audioscrobbler
         $field = strtolower(substr($method, 3));
 
         if(!is_array($args) || count($args) != 1) {
-            require_once "Zend/Service/Exception.php";
+            include_once "Zend/Service/Exception.php";
             throw new Zend_Service_Exception(
                 "A value is required for setting a parameter field."
             );

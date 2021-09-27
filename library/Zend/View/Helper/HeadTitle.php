@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_View_Helper_Placeholder_Container_Standalone */
+/**
+ * Zend_View_Helper_Placeholder_Container_Standalone 
+ */
 require_once 'Zend/View/Helper/Placeholder/Container/Standalone.php';
 
 /**
@@ -36,6 +38,7 @@ class Zend_View_Helper_HeadTitle extends Zend_View_Helper_Placeholder_Container_
 {
     /**
      * Registry key for placeholder
+     *
      * @var string
      */
     protected $_regKey = 'Zend_View_Helper_HeadTitle';
@@ -90,12 +93,15 @@ class Zend_View_Helper_HeadTitle extends Zend_View_Helper_Placeholder_Container_
      */
     public function setDefaultAttachOrder($setType)
     {
-        if (!in_array($setType, array(
+        if (!in_array(
+            $setType, array(
             Zend_View_Helper_Placeholder_Container_Abstract::APPEND,
             Zend_View_Helper_Placeholder_Container_Abstract::SET,
             Zend_View_Helper_Placeholder_Container_Abstract::PREPEND
-        ))) {
-            require_once 'Zend/View/Exception.php';
+            )
+        )
+        ) {
+            include_once 'Zend/View/Exception.php';
             throw new Zend_View_Exception("You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'");
         }
 
@@ -126,7 +132,7 @@ class Zend_View_Helper_HeadTitle extends Zend_View_Helper_Placeholder_Container_
         } elseif ($translate instanceof Zend_Translate) {
             $this->_translator = $translate->getAdapter();
         } else {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception("You must set an instance of Zend_Translate or Zend_Translate_Adapter");
             $e->setView($this->view);
             throw $e;
@@ -145,7 +151,7 @@ class Zend_View_Helper_HeadTitle extends Zend_View_Helper_Placeholder_Container_
     public function getTranslator()
     {
         if (null === $this->_translator) {
-            require_once 'Zend/Registry.php';
+            include_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Translate')) {
                 $this->setTranslator(Zend_Registry::get('Zend_Translate'));
             }

@@ -101,15 +101,15 @@ abstract class Zend_Service_Rackspace_Abstract
     public function __construct($user, $key, $authUrl=self::US_AUTH_URL)
     {
         if (!isset($user)) {
-            require_once 'Zend/Service/Rackspace/Exception.php';
+            include_once 'Zend/Service/Rackspace/Exception.php';
             throw new Zend_Service_Rackspace_Exception("The user cannot be empty");
         }
         if (!isset($key)) {
-            require_once 'Zend/Service/Rackspace/Exception.php';
+            include_once 'Zend/Service/Rackspace/Exception.php';
             throw new Zend_Service_Rackspace_Exception("The key cannot be empty");
         }
         if (!in_array($authUrl, array(self::US_AUTH_URL, self::UK_AUTH_URL))) {
-            require_once 'Zend/Service/Rackspace/Exception.php';
+            include_once 'Zend/Service/Rackspace/Exception.php';
             throw new Zend_Service_Rackspace_Exception("The authentication URL should be valid");
         }
         $this->setUser($user);
@@ -188,7 +188,7 @@ abstract class Zend_Service_Rackspace_Abstract
     /**
      * Set the user account
      *
-     * @param string $user
+     * @param  string $user
      * @return void
      */
     public function setUser($user)
@@ -200,7 +200,7 @@ abstract class Zend_Service_Rackspace_Abstract
     /**
      * Set the authentication key
      *
-     * @param string $key
+     * @param  string $key
      * @return void
      */
     public function setKey($key)
@@ -212,7 +212,7 @@ abstract class Zend_Service_Rackspace_Abstract
     /**
      * Set the Authentication URL
      *
-     * @param string $url
+     * @param  string $url
      * @return void
      */
     public function setAuthUrl($url)
@@ -220,7 +220,7 @@ abstract class Zend_Service_Rackspace_Abstract
         if (!empty($url) && in_array($url, array(self::US_AUTH_URL, self::UK_AUTH_URL))) {
             $this->authUrl = $url;
         } else {
-            require_once 'Zend/Service/Rackspace/Exception.php';
+            include_once 'Zend/Service/Rackspace/Exception.php';
             throw new Zend_Service_Rackspace_Exception("The authentication URL is not valid");
         }
     }
@@ -305,11 +305,11 @@ abstract class Zend_Service_Rackspace_Abstract
     /**
      * HTTP call
      *
-     * @param string $url
-     * @param string $method
-     * @param array $headers
-     * @param array $get
-     * @param string $body
+     * @param  string $url
+     * @param  string $method
+     * @param  array  $headers
+     * @param  array  $get
+     * @param  string $body
      * @return Zend_Http_Response
      */
     protected function httpCall($url,$method,$headers=array(),$data=array(),$body=null)
@@ -352,7 +352,7 @@ abstract class Zend_Service_Rackspace_Abstract
             /**
              * @see Zend_Service_Rackspace_Exception
              */
-            require_once 'Zend/Service/Rackspace/Exception.php';
+            include_once 'Zend/Service/Rackspace/Exception.php';
             throw new Zend_Service_Rackspace_Exception("User has not been set");
         }
 
@@ -360,7 +360,7 @@ abstract class Zend_Service_Rackspace_Abstract
             self::AUTHUSER_HEADER => $this->user,
             self::AUTHKEY_HEADER => $this->key
         );
-        $result = $this->httpCall($this->authUrl.'/'.self::VERSION,'GET', $headers);
+        $result = $this->httpCall($this->authUrl.'/'.self::VERSION, 'GET', $headers);
         if ($result->getStatus()==204) {
             $this->token = $result->getHeader(self::AUTHTOKEN);
             $this->cdnUrl = $result->getHeader(self::CDNM_URL);

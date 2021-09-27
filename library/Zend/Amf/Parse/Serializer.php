@@ -56,7 +56,7 @@ abstract class Zend_Amf_Parse_Serializer
      * Find the PHP object type and convert it into an AMF object type
      *
      * @param  mixed $content
-     * @param  int $markerType
+     * @param  int   $markerType
      * @param  mixed $contentByVal
      * @return void
      */

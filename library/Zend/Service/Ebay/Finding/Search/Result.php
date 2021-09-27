@@ -54,7 +54,7 @@ class Zend_Service_Ebay_Finding_Search_Result extends Zend_Service_Ebay_Finding_
             /**
              * @see Zend_Service_Ebay_Finding_Search_Item_Set
              */
-            require_once 'Zend/Service/Ebay/Finding/Search/Item/Set.php';
+            include_once 'Zend/Service/Ebay/Finding/Search/Item/Set.php';
             $this->item = new Zend_Service_Ebay_Finding_Search_Item_Set($nodes);
         }
     }

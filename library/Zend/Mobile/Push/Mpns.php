@@ -20,13 +20,19 @@
  * @version    $Id$
  */
 
-/** Zend_Http_Client **/
+/**
+ * Zend_Http_Client 
+ **/
 require_once 'Zend/Http/Client.php';
 
-/** Zend_Mobile_Push_Abstract **/
+/**
+ * Zend_Mobile_Push_Abstract 
+**/
 require_once 'Zend/Mobile/Push/Abstract.php';
 
-/** Zend_Mobile_Push_Message_Mpns **/
+/**
+ * Zend_Mobile_Push_Message_Mpns 
+**/
 require_once 'Zend/Mobile/Push/Message/Mpns.php';
 
 /**
@@ -55,9 +61,11 @@ class Zend_Mobile_Push_Mpns extends Zend_Mobile_Push_Abstract
     {
         if (!$this->_httpClient) {
             $this->_httpClient = new Zend_Http_Client();
-            $this->_httpClient->setConfig(array(
+            $this->_httpClient->setConfig(
+                array(
                 'strictredirects' => true,
-            ));
+                )
+            );
         }
         return $this->_httpClient;
     }
@@ -96,11 +104,13 @@ class Zend_Mobile_Push_Mpns extends Zend_Mobile_Push_Abstract
 
         $client = $this->getHttpClient();
         $client->setUri($message->getToken());
-        $client->setHeaders(array(
+        $client->setHeaders(
+            array(
             'Context-Type' => 'text/xml',
             'Accept' => 'application/*',
             'X-NotificationClass' => $message->getDelay()
-        ));
+            )
+        );
         if ($message->getId()) {
             $client->setHeaders('X-MessageID', $message->getId());
         }
@@ -116,40 +126,40 @@ class Zend_Mobile_Push_Mpns extends Zend_Mobile_Push_Abstract
         {
             case 200:
                 // check headers for response?  need to test how this actually works to correctly handle different states.
-                if ($response->getHeader('NotificationStatus') == 'QueueFull') {
-                    require_once 'Zend/Mobile/Push/Exception/DeviceQuotaExceeded.php';
-                    throw new Zend_Mobile_Push_Exception_DeviceQuotaExceeded('The devices push notification queue is full, use exponential backoff');
-                }
+        if ($response->getHeader('NotificationStatus') == 'QueueFull') {
+            include_once 'Zend/Mobile/Push/Exception/DeviceQuotaExceeded.php';
+            throw new Zend_Mobile_Push_Exception_DeviceQuotaExceeded('The devices push notification queue is full, use exponential backoff');
+        }
                 break;
-            case 400:
-                require_once 'Zend/Mobile/Push/Exception/InvalidPayload.php';
-                throw new Zend_Mobile_Push_Exception_InvalidPayload('The message xml was invalid');
+        case 400:
+            include_once 'Zend/Mobile/Push/Exception/InvalidPayload.php';
+            throw new Zend_Mobile_Push_Exception_InvalidPayload('The message xml was invalid');
                 break;
-            case 401:
-                require_once 'Zend/Mobile/Push/Exception/InvalidToken.php';
-                throw new Zend_Mobile_Push_Exception_InvalidToken('The device token is not valid or there is a mismatch between certificates');
+        case 401:
+            include_once 'Zend/Mobile/Push/Exception/InvalidToken.php';
+            throw new Zend_Mobile_Push_Exception_InvalidToken('The device token is not valid or there is a mismatch between certificates');
                 break;
-            case 404:
-                require_once 'Zend/Mobile/Push/Exception/InvalidToken.php';
-                throw new Zend_Mobile_Push_Exception_InvalidToken('The device subscription is invalid, stop sending notifications to this device');
+        case 404:
+            include_once 'Zend/Mobile/Push/Exception/InvalidToken.php';
+            throw new Zend_Mobile_Push_Exception_InvalidToken('The device subscription is invalid, stop sending notifications to this device');
                 break;
-            case 405:
-                throw new Zend_Mobile_Push_Exception('Invalid method, only POST is allowed'); // will never be hit unless overwritten
+        case 405:
+            throw new Zend_Mobile_Push_Exception('Invalid method, only POST is allowed'); // will never be hit unless overwritten
                 break;
-            case 406:
-                require_once 'Zend/Mobile/Push/Exception/QuotaExceeded.php';
-                throw new Zend_Mobile_Push_Exception_QuotaExceeded('The unauthenticated web service has reached the per-day throttling limit');
+        case 406:
+            include_once 'Zend/Mobile/Push/Exception/QuotaExceeded.php';
+            throw new Zend_Mobile_Push_Exception_QuotaExceeded('The unauthenticated web service has reached the per-day throttling limit');
                 break;
-            case 412:
-                require_once 'Zend/Mobile/Push/Exception/InvalidToken.php';
-                throw new Zend_Mobile_Push_Exception_InvalidToken('The device is in an inactive state.  You may retry once per hour');
+        case 412:
+            include_once 'Zend/Mobile/Push/Exception/InvalidToken.php';
+            throw new Zend_Mobile_Push_Exception_InvalidToken('The device is in an inactive state.  You may retry once per hour');
                 break;
-            case 503:
-                require_once 'Zend/Mobile/Push/Exception/ServerUnavailable.php';
-                throw new Zend_Mobile_Push_Exception_ServerUnavailable('The server was unavailable.');
+        case 503:
+            include_once 'Zend/Mobile/Push/Exception/ServerUnavailable.php';
+            throw new Zend_Mobile_Push_Exception_ServerUnavailable('The server was unavailable.');
                 break;
-            default:
-                break;
+        default:
+            break;
         }
         return true;
     }

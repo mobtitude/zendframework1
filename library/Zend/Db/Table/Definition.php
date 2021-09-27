@@ -51,7 +51,7 @@ class Zend_Db_Table_Definition
     /**
      * setConfig()
      *
-     * @param Zend_Config $config
+     * @param  Zend_Config $config
      * @return Zend_Db_Table_Definition
      */
     public function setConfig(Zend_Config $config)
@@ -63,7 +63,7 @@ class Zend_Db_Table_Definition
     /**
      * setOptions()
      *
-     * @param array $options
+     * @param  array $options
      * @return Zend_Db_Table_Definition
      */
     public function setOptions(Array $options)
@@ -75,8 +75,8 @@ class Zend_Db_Table_Definition
     }
 
     /**
-     * @param string $tableName
-     * @param array  $tableConfig
+     * @param  string $tableName
+     * @param  array  $tableConfig
      * @return Zend_Db_Table_Definition
      */
     public function setTableConfig($tableName, array $tableConfig)
@@ -96,7 +96,7 @@ class Zend_Db_Table_Definition
     /**
      * getTableConfig()
      *
-     * @param string $tableName
+     * @param  string $tableName
      * @return array
      */
     public function getTableConfig($tableName)
@@ -117,7 +117,7 @@ class Zend_Db_Table_Definition
     /**
      * hasTableConfig()
      *
-     * @param string $tableName
+     * @param  string $tableName
      * @return bool
      */
     public function hasTableConfig($tableName)

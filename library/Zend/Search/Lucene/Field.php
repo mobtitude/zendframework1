@@ -85,9 +85,9 @@ class Zend_Search_Lucene_Field
     /**
      * Object constructor
      *
-     * @param string $name
-     * @param string $value
-     * @param string $encoding
+     * @param string  $name
+     * @param string  $value
+     * @param string  $encoding
      * @param boolean $isStored
      * @param boolean $isIndexed
      * @param boolean $isTokenized
@@ -119,9 +119,9 @@ class Zend_Search_Lucene_Field
      * Constructs a String-valued Field that is not tokenized, but is indexed
      * and stored.  Useful for non-text fields, e.g. date or url.
      *
-     * @param string $name
-     * @param string $value
-     * @param string $encoding
+     * @param  string $name
+     * @param  string $value
+     * @param  string $encoding
      * @return Zend_Search_Lucene_Field
      */
     public static function keyword($name, $value, $encoding = '')
@@ -134,9 +134,9 @@ class Zend_Search_Lucene_Field
      * Constructs a String-valued Field that is not tokenized nor indexed,
      * but is stored in the index, for return with hits.
      *
-     * @param string $name
-     * @param string $value
-     * @param string $encoding
+     * @param  string $name
+     * @param  string $value
+     * @param  string $encoding
      * @return Zend_Search_Lucene_Field
      */
     public static function unIndexed($name, $value, $encoding = '')
@@ -149,9 +149,9 @@ class Zend_Search_Lucene_Field
      * Constructs a Binary String valued Field that is not tokenized nor indexed,
      * but is stored in the index, for return with hits.
      *
-     * @param string $name
-     * @param string $value
-     * @param string $encoding
+     * @param  string $name
+     * @param  string $value
+     * @param  string $encoding
      * @return Zend_Search_Lucene_Field
      */
     public static function binary($name, $value)
@@ -164,9 +164,9 @@ class Zend_Search_Lucene_Field
      * and is stored in the index, for return with hits.  Useful for short text
      * fields, like "title" or "subject". Term vector will not be stored for this field.
      *
-     * @param string $name
-     * @param string $value
-     * @param string $encoding
+     * @param  string $name
+     * @param  string $value
+     * @param  string $encoding
      * @return Zend_Search_Lucene_Field
      */
     public static function text($name, $value, $encoding = '')
@@ -179,9 +179,9 @@ class Zend_Search_Lucene_Field
      * Constructs a String-valued Field that is tokenized and indexed,
      * but that is not stored in the index.
      *
-     * @param string $name
-     * @param string $value
-     * @param string $encoding
+     * @param  string $name
+     * @param  string $value
+     * @param  string $encoding
      * @return Zend_Search_Lucene_Field
      */
     public static function unStored($name, $value, $encoding = '')
@@ -196,8 +196,9 @@ class Zend_Search_Lucene_Field
      */
     public function getUtf8Value()
     {
-        if (strcasecmp($this->encoding, 'utf8' ) == 0  ||
-            strcasecmp($this->encoding, 'utf-8') == 0 ) {
+        if (strcasecmp($this->encoding, 'utf8') == 0  
+            || strcasecmp($this->encoding, 'utf-8') == 0 
+        ) {
                 return $this->value;
         } else {
 

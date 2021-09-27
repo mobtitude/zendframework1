@@ -48,6 +48,7 @@ require_once 'Zend/Gdata/App/Extension/Title.php';
 
 /**
  * Service class for interacting with the Google Document List data API
+ *
  * @link http://code.google.com/apis/documents/
  *
  * @category   Zend
@@ -91,9 +92,10 @@ class Zend_Gdata_Docs extends Zend_Gdata
     /**
      * Create Gdata_Docs object
      *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *          when communicating with the Google servers.
-     * @param string $applicationId The identity of the app in the form of Company-AppName-Version
+     * @param Zend_Http_Client $client        (optional) The HTTP client to use when
+     *                                        when communicating with the Google
+     *                                        servers.
+     * @param string           $applicationId The identity of the app in the form of Company-AppName-Version
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
@@ -108,7 +110,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
      * 'text/comma-separated-values'. The Mime type is sent as a header in
      * the upload HTTP POST request.
      *
-     * @param string $fileExtension
+     * @param  string $fileExtension
      * @return string The mime type to be sent to the server to tell it how the
      *          multipart mime data should be interpreted.
      */
@@ -120,7 +122,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
     /**
      * Retreive feed object containing entries for the user's documents.
      *
-     * @param mixed $location The location for the feed, as a URL or Query
+     * @param  mixed $location The location for the feed, as a URL or Query
      * @return Zend_Gdata_Docs_DocumentListFeed
      */
     public function getDocumentListFeed($location = null)
@@ -138,16 +140,16 @@ class Zend_Gdata_Docs extends Zend_Gdata
     /**
      * Retreive entry object representing a single document.
      *
-     * @param mixed $location The location for the entry, as a URL or Query
+     * @param  mixed $location The location for the entry, as a URL or Query
      * @return Zend_Gdata_Docs_DocumentListEntry
      * @throws Zend_Gdata_App_InvalidArgumentException
      */
     public function getDocumentListEntry($location = null)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
+            include_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null'
+                'Location must not be null'
             );
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
@@ -162,10 +164,12 @@ class Zend_Gdata_Docs extends Zend_Gdata
      *
      * This method builds the URL where this item is stored using the type
      * and the id of the document.
-     * @param string $docId The URL key for the document. Examples:
-     *     dcmg89gw_62hfjj8m, pKq0CzjiF3YmGd0AIlHKqeg
-     * @param string $docType The type of the document as used in the Google
-     *     Document List URLs. Examples: document, spreadsheet, presentation
+     *
+     * @param  string $docId   The URL key for the document. Examples:
+     *                         dcmg89gw_62hfjj8m,
+     *                         pKq0CzjiF3YmGd0AIlHKqeg
+     * @param  string $docType The type of the document as used in the Google
+     *                         Document List URLs. Examples: document, spreadsheet, presentation
      * @return Zend_Gdata_Docs_DocumentListEntry
      */
     public function getDoc($docId, $docType)
@@ -179,7 +183,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
     /**
      * Retreive entry object for the desired word processing document.
      *
-     * @param string $id The URL id for the document. Example: dcmg89gw_62hfjj8m
+     * @param  string $id The URL id for the document. Example: dcmg89gw_62hfjj8m
      * @return Zend_Gdata_Docs_DocumentListEntry
      */
     public function getDocument($id)
@@ -190,7 +194,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
     /**
      * Retreive entry object for the desired spreadsheet.
      *
-     * @param string $id The URL id for the document. Example: pKq0CzjiF3YmGd0AIlHKqeg
+     * @param  string $id The URL id for the document. Example: pKq0CzjiF3YmGd0AIlHKqeg
      * @return Zend_Gdata_Docs_DocumentListEntry
      */
     public function getSpreadsheet($id)
@@ -201,7 +205,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
     /**
      * Retreive entry object for the desired presentation.
      *
-     * @param string $id The URL id for the document. Example: dcmg89gw_21gtrjcn
+     * @param  string $id The URL id for the document. Example: dcmg89gw_21gtrjcn
      * @return Zend_Gdata_Docs_DocumentListEntry
      */
     public function getPresentation($id)
@@ -212,29 +216,31 @@ class Zend_Gdata_Docs extends Zend_Gdata
     /**
      * Upload a local file to create a new Google Document entry.
      *
-     * @param string $fileLocation The full or relative path of the file to
-     *         be uploaded.
-     * @param string $title The name that this document should have on the
-     *         server. If set, the title is used as the slug header in the
-     *         POST request. If no title is provided, the location of the
-     *         file will be used as the slug header in the request. If no
-     *         mimeType is provided, this method attempts to determine the
-     *         mime type based on the slugHeader by looking for .doc,
-     *         .csv, .txt, etc. at the end of the file name.
-     *         Example value: 'test.doc'.
-     * @param string $mimeType Describes the type of data which is being sent
-     *         to the server. This must be one of the accepted mime types
-     *         which are enumerated in SUPPORTED_FILETYPES.
-     * @param string $uri (optional) The URL to which the upload should be
-     *         made.
-     *         Example: 'https://docs.google.com/feeds/documents/private/full'.
+     * @param  string $fileLocation The full or relative path of the file to
+     *                              be uploaded.
+     * @param  string $title        The name that this document should have on the
+     *                              server. If set, the title is used as the slug
+     *                              header in the POST request. If no title is
+     *                              provided, the location of the file will be
+     *                              used as the slug header in the request. If no
+     *                              mimeType is provided, this method attempts to
+     *                              determine the mime type based on the
+     *                              slugHeader by looking for .doc, .csv, .txt,
+     *                              etc. at the end of the file name. Example
+     *                              value: 'test.doc'.
+     * @param  string $mimeType     Describes the type of data which is being sent
+     *                              to the server. This must be one of the
+     *                              accepted mime types which are enumerated in
+     *                              SUPPORTED_FILETYPES.
+     * @param  string $uri          (optional) The URL to which the upload should be
+     *                              made. Example:
+     *                              'https://docs.google.com/feeds/documents/private/full'.
      * @return Zend_Gdata_Docs_DocumentListEntry The entry for the newly
      *         created Google Document.
      */
     public function uploadFile($fileLocation, $title = null, $mimeType = null,
         $uri = null
-    )
-    {
+    ) {
         // Set the URI to which the file will be uploaded.
         if ($uri === null) {
             $uri = $this->_defaultPostUri;
@@ -255,9 +261,9 @@ class Zend_Gdata_Docs extends Zend_Gdata
 
         // Set the mime type of the data.
         if ($mimeType === null) {
-          $filenameParts = explode('.', $fileLocation);
-          $fileExtension = end($filenameParts);
-          $mimeType = self::lookupMimeType($fileExtension);
+            $filenameParts = explode('.', $fileLocation);
+            $fileExtension = end($filenameParts);
+            $mimeType = self::lookupMimeType($fileExtension);
         }
 
         // Set the mime type for the upload request.
@@ -270,11 +276,11 @@ class Zend_Gdata_Docs extends Zend_Gdata
     /**
      * Creates a new folder in Google Docs
      *
-     * @param string $folderName The folder name to create
-     * @param string|null $folderResourceId The parent folder to create it in
-     *        ("folder%3Amy_parent_folder")
+     * @param  string      $folderName       The folder name to create
+     * @param  string|null $folderResourceId The parent folder to create it in
+     *                                       ("folder%3Amy_parent_folder")
      * @return Zend_Gdata_Entry The folder entry created.
-     * @todo ZF-8732: This should return a *subclass* of Zend_Gdata_Entry, but
+     * @todo   ZF-8732: This should return a *subclass* of Zend_Gdata_Entry, but
      *       the appropriate type doesn't exist yet.
      */
     public function createFolder($folderName, $folderResourceId = null)
@@ -300,19 +306,20 @@ class Zend_Gdata_Docs extends Zend_Gdata
     /**
      * Inserts an entry to a given URI and returns the response as an Entry.
      *
-     * @param mixed  $data The Zend_Gdata_Docs_DocumentListEntry or media
-     *         source to post. If it is a DocumentListEntry, the mediaSource
-     *         should already have been set. If $data is a mediaSource, it
-     *         should have the correct slug header and mime type.
-     * @param string $uri POST URI
-     * @param string $className (optional) The class of entry to be returned.
-     *         The default is a 'Zend_Gdata_Docs_DocumentListEntry'.
+     * @param  mixed  $data      The Zend_Gdata_Docs_DocumentListEntry or media
+     *                           source to post. If it is a DocumentListEntry,
+     *                           the mediaSource should already have been set.
+     *                           If $data is a mediaSource, it should have the
+     *                           correct slug header and mime type.
+     * @param  string $uri       POST URI
+     * @param  string $className (optional) The class of entry to be returned.
+     *                           The default is a 'Zend_Gdata_Docs_DocumentListEntry'.
      * @return Zend_Gdata_Docs_DocumentListEntry The entry returned by the
      *     service after insertion.
      */
     public function insertDocument($data, $uri,
-        $className = 'Zend_Gdata_Docs_DocumentListEntry')
-    {
+        $className = 'Zend_Gdata_Docs_DocumentListEntry'
+    ) {
         return $this->insertEntry($data, $uri, $className);
     }
 }

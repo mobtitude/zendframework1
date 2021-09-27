@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Router_Route_Abstract */
+/**
+ * Zend_Controller_Router_Route_Abstract 
+ */
 require_once 'Zend/Controller/Router/Route/Abstract.php';
 
 /**
@@ -66,7 +68,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
     /**
      * Instantiates route based on passed Zend_Config structure
      *
-     * @param Zend_Config $config Configuration object
+     * @param  Zend_Config $config Configuration object
      * @return Zend_Controller_Router_Route_Regex
      */
     public static function getInstance(Zend_Config $config)
@@ -81,7 +83,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
     /**
      * Constructor
      *
-     * @param       $route
+     * @param $route
      * @param array $defaults
      * @param array $map
      * @param null  $reverse
@@ -199,7 +201,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
     /**
      * Assembles a URL path defined by this route
      *
-     * @param  array   $data An array of name (or index) and value pairs used as parameters
+     * @param  array   $data    An array of name (or index) and value pairs used as parameters
      * @param  boolean $reset
      * @param  boolean $encode
      * @param  boolean $partial
@@ -209,7 +211,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
     public function assemble($data = array(), $reset = false, $encode = false, $partial = false)
     {
         if ($this->_reverse === null) {
-            require_once 'Zend/Controller/Router/Exception.php';
+            include_once 'Zend/Controller/Router/Exception.php';
             throw new Zend_Controller_Router_Exception('Cannot assemble. Reversed route is not specified.');
         }
 
@@ -243,7 +245,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
         $return = @vsprintf($this->_reverse, $mergedData);
 
         if ($return === false) {
-            require_once 'Zend/Controller/Router/Exception.php';
+            include_once 'Zend/Controller/Router/Exception.php';
             throw new Zend_Controller_Router_Exception('Cannot assemble. Too few arguments?');
         }
 
@@ -253,7 +255,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
     /**
      * Return a single parameter of route's defaults
      *
-     * @param string $name Array key of the parameter
+     * @param  string $name Array key of the parameter
      * @return string Previously set default
      */
     public function getDefault($name)
@@ -297,8 +299,8 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
      * _arrayMergeNumericKeys() - allows for a strict key (numeric's included) array_merge.
      * php's array_merge() lacks the ability to merge with numeric keys.
      *
-     * @param array $array1
-     * @param array $array2
+     * @param  array $array1
+     * @param  array $array2
      * @return array
      */
     protected function _arrayMergeNumericKeys(Array $array1, Array $array2)

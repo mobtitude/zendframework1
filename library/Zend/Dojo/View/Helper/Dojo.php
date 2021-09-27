@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Registry */
+/**
+ * Zend_Registry 
+ */
 require_once 'Zend/Registry.php';
 
 /**
@@ -36,7 +38,8 @@ require_once 'Zend/Registry.php';
  */
 class Zend_Dojo_View_Helper_Dojo
 {
-    /**#@+
+    /**
+* #@+
      * Programmatic dijit creation style constants
      */
     const PROGRAMMATIC_SCRIPT = 1;
@@ -65,7 +68,7 @@ class Zend_Dojo_View_Helper_Dojo
     {
         $registry = Zend_Registry::getInstance();
         if (!isset($registry[__CLASS__])) {
-            require_once 'Zend/Dojo/View/Helper/Dojo/Container.php';
+            include_once 'Zend/Dojo/View/Helper/Dojo/Container.php';
             $container = new Zend_Dojo_View_Helper_Dojo_Container();
             $registry[__CLASS__] = $container;
         }
@@ -98,14 +101,14 @@ class Zend_Dojo_View_Helper_Dojo
      * Proxy to container methods
      *
      * @param  string $method
-     * @param  array $args
+     * @param  array  $args
      * @return mixed
      * @throws Zend_Dojo_View_Exception For invalid method calls
      */
     public function __call($method, $args)
     {
         if (!method_exists($this->_container, $method)) {
-            require_once 'Zend/Dojo/View/Exception.php';
+            include_once 'Zend/Dojo/View/Exception.php';
             throw new Zend_Dojo_View_Exception(sprintf('Invalid method "%s" called on dojo view helper', $method));
         }
 

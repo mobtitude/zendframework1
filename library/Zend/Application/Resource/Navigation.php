@@ -76,8 +76,9 @@ class Zend_Application_Resource_Navigation
     public function store()
     {
         $options = $this->getOptions();
-        if (isset($options['storage']['registry']) &&
-            $options['storage']['registry'] == true) {
+        if (isset($options['storage']['registry']) 
+            && $options['storage']['registry'] == true
+        ) {
             $this->_storeRegistry();
         } else {
             $this->_storeHelper();

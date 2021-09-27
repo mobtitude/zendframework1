@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  * @version   $Id$
  */
@@ -29,7 +29,7 @@ require_once 'Zend/Loader.php';
  *
  * @category  Zend
  * @package   Zend_File_Transfer
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_File_Transfer
@@ -73,7 +73,7 @@ class Zend_File_Transfer
         $direction = (integer) $direction;
         $this->_adapter[$direction] = new $adapter($options);
         if (!$this->_adapter[$direction] instanceof Zend_File_Transfer_Adapter_Abstract) {
-            require_once 'Zend/File/Transfer/Exception.php';
+            include_once 'Zend/File/Transfer/Exception.php';
             throw new Zend_File_Transfer_Exception("Adapter " . $adapter . " does not extend Zend_File_Transfer_Adapter_Abstract");
         }
 
@@ -83,9 +83,9 @@ class Zend_File_Transfer
     /**
      * Returns all set adapters
      *
-     * @param boolean $direction On null, all directions are returned
-     *                           On false, download direction is returned
-     *                           On true, upload direction is returned
+     * @param  boolean $direction On null, all directions are returned
+     *                            On false, download direction is returned
+     *                            On true, upload direction is returned
      * @return array|Zend_File_Transfer_Adapter
      */
     public function getAdapter($direction = null)
@@ -117,7 +117,7 @@ class Zend_File_Transfer
             return call_user_func_array(array($this->_adapter[$direction], $method), $options);
         }
 
-        require_once 'Zend/File/Transfer/Exception.php';
+        include_once 'Zend/File/Transfer/Exception.php';
         throw new Zend_File_Transfer_Exception("Unknown method '" . $method . "' called!");
     }
 }

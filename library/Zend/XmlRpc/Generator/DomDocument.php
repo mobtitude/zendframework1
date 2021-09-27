@@ -37,7 +37,7 @@ class Zend_XmlRpc_Generator_DomDocument extends Zend_XmlRpc_Generator_GeneratorA
     /**
      * Start XML element
      *
-     * @param string $name
+     * @param  string $name
      * @return void
      */
     protected function _openElement($name)
@@ -62,7 +62,7 @@ class Zend_XmlRpc_Generator_DomDocument extends Zend_XmlRpc_Generator_GeneratorA
      *
      * Resets $_currentElement to the next parent node in the hierarchy
      *
-     * @param string $name
+     * @param  string $name
      * @return void
      */
     protected function _closeElement($name)

@@ -36,10 +36,10 @@ require_once 'Zend/CodeGenerator/Php/Docblock.php';
 require_once 'Zend/CodeGenerator/Php/Parameter.php';
 
 /**
- * @category   Zend
- * @package    Zend_CodeGenerator
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_CodeGenerator
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstract
 {
@@ -60,7 +60,7 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
     /**
      * fromReflection()
      *
-     * @param Zend_Reflection_Method $reflectionMethod
+     * @param  Zend_Reflection_Method $reflectionMethod
      * @return Zend_CodeGenerator_Php_Method
      */
     public static function fromReflection(Zend_Reflection_Method $reflectionMethod)
@@ -110,7 +110,7 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
     /**
      * setParameters()
      *
-     * @param array $parameters
+     * @param  array $parameters
      * @return Zend_CodeGenerator_Php_Method
      */
     public function setParameters(Array $parameters)
@@ -124,7 +124,7 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
     /**
      * setParameter()
      *
-     * @param Zend_CodeGenerator_Php_Parameter|array $parameter
+     * @param  Zend_CodeGenerator_Php_Parameter|array $parameter
      * @return Zend_CodeGenerator_Php_Method
      */
     public function setParameter($parameter)
@@ -135,7 +135,7 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
         } elseif ($parameter instanceof Zend_CodeGenerator_Php_Parameter) {
             $parameterName = $parameter->getName();
         } else {
-            require_once 'Zend/CodeGenerator/Php/Exception.php';
+            include_once 'Zend/CodeGenerator/Php/Exception.php';
             throw new Zend_CodeGenerator_Php_Exception('setParameter() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Parameter');
         }
 
@@ -156,7 +156,7 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
     /**
      * setBody()
      *
-     * @param string $body
+     * @param  string $body
      * @return Zend_CodeGenerator_Php_Method
      */
     public function setBody($body)

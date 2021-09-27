@@ -26,10 +26,10 @@
 require_once 'Zend/Tool/Framework/Metadata/Basic.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Basic
 {
@@ -39,22 +39,30 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
      */
     protected $_type = 'Tool';
 
-    /**#@+
+    /**
+     * #@+
+     *
      * @var string
      */
     protected $_clientName    = null;
     protected ?string $_actionName    = null;
     protected ?string $_providerName  = null;
     protected ?string $_specialtyName = null;
-    /**#@-*/
+    /**
+     * #@-
+     */
 
-    /**#@+
+    /**
+     * #@+
+     *
      * @var string
      */
     protected ?\Zend_Tool_Framework_Client_Abstract $_clientReference = null;
     protected ?\Zend_Tool_Framework_Action_Interface $_actionReference = null;
     protected ?\Zend_Tool_Framework_Provider_Interface $_providerReference = null;
-    /**#@-*/
+    /**
+     * #@-
+     */
 
     public function setClientName($clientName)
     {
@@ -70,7 +78,7 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     /**
      * setActionName()
      *
-     * @param string $actionName
+     * @param  string $actionName
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setActionName($actionName)
@@ -92,7 +100,7 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     /**
      * setProviderName()
      *
-     * @param string $providerName
+     * @param  string $providerName
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setProviderName($providerName)
@@ -114,7 +122,7 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     /**
      * setSpecialtyName()
      *
-     * @param string $specialtyName
+     * @param  string $specialtyName
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setSpecialtyName($specialtyName)
@@ -136,7 +144,7 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     /**
      * setClientReference()
      *
-     * @param Zend_Tool_Framework_Client_Abstract $client
+     * @param  Zend_Tool_Framework_Client_Abstract $client
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setClientReference(Zend_Tool_Framework_Client_Abstract $client)
@@ -158,7 +166,7 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     /**
      * setActionReference()
      *
-     * @param Zend_Tool_Framework_Action_Interface $action
+     * @param  Zend_Tool_Framework_Action_Interface $action
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setActionReference(Zend_Tool_Framework_Action_Interface $action)
@@ -180,7 +188,7 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     /**
      * setProviderReference()
      *
-     * @param Zend_Tool_Framework_Provider_Interface $provider
+     * @param  Zend_Tool_Framework_Provider_Interface $provider
      * @return Zend_Tool_Framework_Metadata_Tool
      */
     public function setProviderReference(Zend_Tool_Framework_Provider_Interface $provider)

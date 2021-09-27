@@ -52,7 +52,7 @@ class Zend_Gdata_Photos_Extension_CommentingEnabled extends Zend_Gdata_Extension
      * Constructs a new Zend_Gdata_Photos_Extension_CommentingEnabled object.
      *
      * @param string $text (optional) Whether commenting should be enabled
-     *          or not.
+     *                     or not.
      */
     public function __construct($text = null)
     {

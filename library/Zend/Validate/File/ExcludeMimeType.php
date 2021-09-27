@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  * @version   $Id$
  */
@@ -29,7 +29,7 @@ require_once 'Zend/Validate/File/MimeType.php';
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_ExcludeMimeType extends Zend_Validate_File_MimeType
@@ -68,7 +68,7 @@ class Zend_Validate_File_ExcludeMimeType extends Zend_Validate_File_MimeType
         }
 
         // Is file readable ?
-        require_once 'Zend/Loader.php';
+        include_once 'Zend/Loader.php';
         if (!Zend_Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_READABLE);
         }

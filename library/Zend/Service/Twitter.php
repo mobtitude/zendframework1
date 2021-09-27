@@ -124,9 +124,9 @@ class Zend_Service_Twitter
     /**
      * Constructor
      *
-     * @param  null|array|Zend_Config $options
-     * @param  null|Zend_Oauth_Consumer $consumer
-     * @param  null|Zend_Http_Client $httpClient
+     * @param null|array|Zend_Config   $options
+     * @param null|Zend_Oauth_Consumer $consumer
+     * @param null|Zend_Http_Client    $httpClient
      */
     public function __construct($options = null, Zend_Oauth_Consumer $consumer = null, Zend_Http_Client $httpClient = null)
     {
@@ -211,7 +211,7 @@ class Zend_Service_Twitter
         $type = strtolower($type);
         $type = str_replace('_', '', $type);
         if (!in_array($type, $this->methodTypes)) {
-            require_once 'Zend/Service/Twitter/Exception.php';
+            include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
                 'Invalid method type "' . $type . '"'
             );
@@ -224,7 +224,7 @@ class Zend_Service_Twitter
      * Method overloading
      *
      * @param  string $method
-     * @param  array $params
+     * @param  array  $params
      * @return mixed
      * @throws Exception\BadMethodCallException if unable to find method
      */
@@ -238,7 +238,7 @@ class Zend_Service_Twitter
             return $return;
         }
         if (empty($this->methodType)) {
-            require_once 'Zend/Service/Twitter/Exception.php';
+            include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
                 'Invalid method "' . $method . '"'
             );
@@ -247,7 +247,7 @@ class Zend_Service_Twitter
         $test = str_replace('_', '', strtolower($method));
         $test = $this->methodType . $test;
         if (!method_exists($this, $test)) {
-            require_once 'Zend/Service/Twitter/Exception.php';
+            include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
                 'Invalid method "' . $test . '"'
             );
@@ -259,7 +259,7 @@ class Zend_Service_Twitter
     /**
      * Set HTTP client
      *
-     * @param Zend_Http_Client $client
+     * @param  Zend_Http_Client $client
      * @return self
      */
     public function setHttpClient(Zend_Http_Client $client)
@@ -352,7 +352,7 @@ class Zend_Service_Twitter
      * Blocks the user specified in the ID parameter as the authenticating user.
      * Destroys a friendship to the blocked user if it exists.
      *
-     * @param  integer|string $id       The ID or screen name of a user to block.
+     * @param  integer|string $id The ID or screen name of a user to block.
      * @throws Exception\DomainException if unable to decode JSON payload
      * @return Zend_Service_Twitter_Response
      */
@@ -368,7 +368,7 @@ class Zend_Service_Twitter
     /**
      * Un-blocks the user specified in the ID parameter for the authenticating user
      *
-     * @param  integer|string $id       The ID or screen_name of the user to un-block.
+     * @param  integer|string $id The ID or screen_name of the user to un-block.
      * @throws Exception\DomainException if unable to decode JSON payload
      * @return Zend_Service_Twitter_Response
      */
@@ -384,7 +384,7 @@ class Zend_Service_Twitter
     /**
      * Returns an array of user ids that the authenticating user is blocking
      *
-     * @param  integer $cursor  Optional. Specifies the cursor position at which to begin listing ids; defaults to first "page" of results.
+     * @param  integer $cursor Optional. Specifies the cursor position at which to begin listing ids; defaults to first "page" of results.
      * @throws Exception\DomainException if unable to decode JSON payload
      * @return Zend_Service_Twitter_Response
      */
@@ -399,7 +399,7 @@ class Zend_Service_Twitter
     /**
      * Returns an array of user objects that the authenticating user is blocking
      *
-     * @param  integer $cursor  Optional. Specifies the cursor position at which to begin listing ids; defaults to first "page" of results.
+     * @param  integer $cursor Optional. Specifies the cursor position at which to begin listing ids; defaults to first "page" of results.
      * @throws Exception\DomainException if unable to decode JSON payload
      * @return Zend_Service_Twitter_Response
      */
@@ -450,23 +450,23 @@ class Zend_Service_Twitter
         $params = array();
         foreach ($options as $key => $value) {
             switch (strtolower($key)) {
-                case 'count':
+            case 'count':
                     $params['count'] = (int) $value;
-                    break;
-                case 'since_id':
+                break;
+            case 'since_id':
                     $params['since_id'] = $this->validInteger($value);
-                    break;
-                case 'max_id':
+                break;
+            case 'max_id':
                     $params['max_id'] = $this->validInteger($value);
-                    break;
-                case 'include_entities':
+                break;
+            case 'include_entities':
                     $params['include_entities'] = (bool) $value;
-                    break;
-                case 'skip_status':
-                    $params['skip_status'] = (bool) $value;
-                    break;
-                default:
-                    break;
+                break;
+            case 'skip_status':
+                $params['skip_status'] = (bool) $value;
+                break;
+            default:
+                break;
             }
         }
         $response = $this->get($path, $params);
@@ -477,7 +477,7 @@ class Zend_Service_Twitter
      * Send a direct message to a user
      *
      * @param  int|string $user User to whom to send message
-     * @param  string $text Message to send to user
+     * @param  string     $text Message to send to user
      * @throws Exception\InvalidArgumentException if message is empty
      * @throws Exception\OutOfRangeException if message is too long
      * @throws Zend_Http_Client_Exception if HTTP request fails or times out
@@ -491,12 +491,12 @@ class Zend_Service_Twitter
 
         $len = iconv_strlen($text, 'UTF-8');
         if (0 == $len) {
-            require_once 'Zend/Service/Twitter/Exception.php';
+            include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
                 'Direct message must contain at least one character'
             );
         } elseif (140 < $len) {
-            require_once 'Zend/Service/Twitter/Exception.php';
+            include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
                 'Direct message must contain no more than 140 characters'
             );
@@ -530,23 +530,23 @@ class Zend_Service_Twitter
         $params = array();
         foreach ($options as $key => $value) {
             switch (strtolower($key)) {
-                case 'count':
-                    $params['count'] = (int) $value;
-                    break;
-                case 'page':
-                    $params['page'] = (int) $value;
-                    break;
-                case 'since_id':
-                    $params['since_id'] = $this->validInteger($value);
-                    break;
-                case 'max_id':
-                    $params['max_id'] = $this->validInteger($value);
-                    break;
-                case 'include_entities':
-                    $params['include_entities'] = (bool) $value;
-                    break;
-                default:
-                    break;
+            case 'count':
+                $params['count'] = (int) $value;
+                break;
+            case 'page':
+                $params['page'] = (int) $value;
+                break;
+            case 'since_id':
+                $params['since_id'] = $this->validInteger($value);
+                break;
+            case 'max_id':
+                $params['max_id'] = $this->validInteger($value);
+                break;
+            case 'include_entities':
+                $params['include_entities'] = (bool) $value;
+                break;
+            default:
+                break;
             }
         }
         $response = $this->get($path, $params);
@@ -610,26 +610,26 @@ class Zend_Service_Twitter
         $params = array();
         foreach ($options as $key => $value) {
             switch (strtolower($key)) {
-                case 'user_id':
-                    $params['user_id'] = $this->validInteger($value);
-                    break;
-                case 'screen_name':
-                    $params['screen_name'] = $value;
-                    break;
-                case 'count':
-                    $params['count'] = (int) $value;
-                    break;
-                case 'since_id':
-                    $params['since_id'] = $this->validInteger($value);
-                    break;
-                case 'max_id':
-                    $params['max_id'] = $this->validInteger($value);
-                    break;
-                case 'include_entities':
-                    $params['include_entities'] = (bool) $value;
-                    break;
-                default:
-                    break;
+            case 'user_id':
+                $params['user_id'] = $this->validInteger($value);
+                break;
+            case 'screen_name':
+                $params['screen_name'] = $value;
+                break;
+            case 'count':
+                $params['count'] = (int) $value;
+                break;
+            case 'since_id':
+                $params['since_id'] = $this->validInteger($value);
+                break;
+            case 'max_id':
+                $params['max_id'] = $this->validInteger($value);
+                break;
+            case 'include_entities':
+                $params['include_entities'] = (bool) $value;
+                break;
+            default:
+                break;
             }
         }
         $response = $this->get($path, $params);
@@ -639,8 +639,8 @@ class Zend_Service_Twitter
     /**
      * Create friendship
      *
-     * @param  int|string $id User ID or name of new friend
-     * @param  array $params Additional parameters to pass
+     * @param  int|string $id     User ID or name of new friend
+     * @param  array      $params Additional parameters to pass
      * @throws Zend_Http_Client_Exception if HTTP request fails or times out
      * @throws Exception\DomainException if unable to decode JSON payload
      * @return Zend_Service_Twitter_Response
@@ -692,7 +692,7 @@ class Zend_Service_Twitter
      * - include_entities: whether or not to include embedded entities
      *
      * @param  string $query
-     * @param  array $options
+     * @param  array  $options
      * @throws Zend_Http_Client_Exception if HTTP request fails or times out
      * @throws Exception\DomainException if unable to decode JSON payload
      * @return Zend_Service_Twitter_Response
@@ -704,7 +704,7 @@ class Zend_Service_Twitter
 
         $len = iconv_strlen($query, 'UTF-8');
         if (0 == $len) {
-            require_once 'Zend/Service/Twitter/Exception.php';
+            include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
                 'Query must contain at least one character'
             );
@@ -713,83 +713,83 @@ class Zend_Service_Twitter
         $params = array('q' => $query);
         foreach ($options as $key => $value) {
             switch (strtolower($key)) {
-                case 'geocode':
-                    if (!substr_count($value, ',') !== 2) {
-                        require_once 'Zend/Service/Twitter/Exception.php';
-                        throw new Zend_Service_Twitter_Exception(
-                            '"geocode" must be of the format "latitude,longitude,radius"'
-                        );
-                    }
-                    list($latitude, $longitude, $radius) = explode(',', $value);
-                    $radius = trim($radius);
-                    if (!preg_match('/^\d+(mi|km)$/', $radius)) {
-                        require_once 'Zend/Service/Twitter/Exception.php';
-                        throw new Zend_Service_Twitter_Exception(
-                            'Radius segment of "geocode" must be of the format "[unit](mi|km)"'
-                        );
-                    }
-                    $latitude  = (float) $latitude;
-                    $longitude = (float) $longitude;
-                    $params['geocode'] = $latitude . ',' . $longitude . ',' . $radius;
-                    break;
-                case 'lang':
-                    if (strlen($value) > 2) {
-                        require_once 'Zend/Service/Twitter/Exception.php';
-                        throw new Zend_Service_Twitter_Exception(
-                            'Query language must be a 2 character string'
-                        );
-                    }
-                    $params['lang'] = strtolower($value);
-                    break;
-                case 'locale':
-                    if (strlen($value) > 2) {
-                        require_once 'Zend/Service/Twitter/Exception.php';
-                        throw new Zend_Service_Twitter_Exception(
-                            'Query locale must be a 2 character string'
-                        );
-                    }
-                    $params['locale'] = strtolower($value);
-                    break;
-                case 'result_type':
-                    $value = strtolower($value);
-                    if (!in_array($value, array('mixed', 'recent', 'popular'))) {
-                        require_once 'Zend/Service/Twitter/Exception.php';
-                        throw new Zend_Service_Twitter_Exception(
-                            'result_type must be one of "mixed", "recent", or "popular"'
-                        );
-                    }
-                    $params['result_type'] = $value;
-                    break;
-                case 'count':
-                    $value = (int) $value;
-                    if (1 > $value || 100 < $value) {
-                        require_once 'Zend/Service/Twitter/Exception.php';
-                        throw new Zend_Service_Twitter_Exception(
-                            'count must be between 1 and 100'
-                        );
-                    }
-                    $params['count'] = $value;
-                    break;
-                case 'until':
-                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
-                        require_once 'Zend/Service/Twitter/Exception.php';
-                        throw new Zend_Service_Twitter_Exception(
-                            '"until" must be a date in the format YYYY-MM-DD'
-                        );
-                    }
-                    $params['until'] = $value;
-                    break;
-                case 'since_id':
-                    $params['since_id'] = $this->validInteger($value);
-                    break;
-                case 'max_id':
-                    $params['max_id'] = $this->validInteger($value);
-                    break;
-                case 'include_entities':
-                    $params['include_entities'] = (bool) $value;
-                    break;
-                default:
-                    break;
+            case 'geocode':
+                if (!substr_count($value, ',') !== 2) {
+                    include_once 'Zend/Service/Twitter/Exception.php';
+                    throw new Zend_Service_Twitter_Exception(
+                        '"geocode" must be of the format "latitude,longitude,radius"'
+                    );
+                }
+                list($latitude, $longitude, $radius) = explode(',', $value);
+                $radius = trim($radius);
+                if (!preg_match('/^\d+(mi|km)$/', $radius)) {
+                    include_once 'Zend/Service/Twitter/Exception.php';
+                    throw new Zend_Service_Twitter_Exception(
+                        'Radius segment of "geocode" must be of the format "[unit](mi|km)"'
+                    );
+                }
+                $latitude  = (float) $latitude;
+                $longitude = (float) $longitude;
+                $params['geocode'] = $latitude . ',' . $longitude . ',' . $radius;
+                break;
+            case 'lang':
+                if (strlen($value) > 2) {
+                    include_once 'Zend/Service/Twitter/Exception.php';
+                    throw new Zend_Service_Twitter_Exception(
+                        'Query language must be a 2 character string'
+                    );
+                }
+                $params['lang'] = strtolower($value);
+                break;
+            case 'locale':
+                if (strlen($value) > 2) {
+                    include_once 'Zend/Service/Twitter/Exception.php';
+                    throw new Zend_Service_Twitter_Exception(
+                        'Query locale must be a 2 character string'
+                    );
+                }
+                $params['locale'] = strtolower($value);
+                break;
+            case 'result_type':
+                $value = strtolower($value);
+                if (!in_array($value, array('mixed', 'recent', 'popular'))) {
+                    include_once 'Zend/Service/Twitter/Exception.php';
+                    throw new Zend_Service_Twitter_Exception(
+                        'result_type must be one of "mixed", "recent", or "popular"'
+                    );
+                }
+                $params['result_type'] = $value;
+                break;
+            case 'count':
+                $value = (int) $value;
+                if (1 > $value || 100 < $value) {
+                    include_once 'Zend/Service/Twitter/Exception.php';
+                    throw new Zend_Service_Twitter_Exception(
+                        'count must be between 1 and 100'
+                    );
+                }
+                $params['count'] = $value;
+                break;
+            case 'until':
+                if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
+                    include_once 'Zend/Service/Twitter/Exception.php';
+                    throw new Zend_Service_Twitter_Exception(
+                        '"until" must be a date in the format YYYY-MM-DD'
+                    );
+                }
+                $params['until'] = $value;
+                break;
+            case 'since_id':
+                $params['since_id'] = $this->validInteger($value);
+                break;
+            case 'max_id':
+                $params['max_id'] = $this->validInteger($value);
+                break;
+            case 'include_entities':
+                $params['include_entities'] = (bool) $value;
+                break;
+            default:
+                break;
             }
         }
         $response = $this->get($path, $params);
@@ -836,34 +836,34 @@ class Zend_Service_Twitter
         $params = array();
         foreach ($options as $key => $value) {
             switch (strtolower($key)) {
-                case 'count':
-                    $params['count'] = (int) $value;
-                    break;
-                case 'since_id':
-                    $params['since_id'] = $this->validInteger($value);
-                    break;
-                case 'max_id':
-                    $params['max_id'] = $this->validInteger($value);
-                    break;
-                case 'trim_user':
-                    if (in_array($value, array(true, 'true', 't', 1, '1'))) {
-                        $value = true;
-                    } else {
-                        $value = false;
-                    }
-                    $params['trim_user'] = $value;
-                    break;
-                case 'contributor_details:':
-                    $params['contributor_details:'] = (bool) $value;
-                    break;
-                case 'include_entities':
-                    $params['include_entities'] = (bool) $value;
-                    break;
-                case 'exclude_replies':
-                    $params['exclude_replies'] = (bool) $value;
-                    break;
-                default:
-                    break;
+            case 'count':
+                $params['count'] = (int) $value;
+                break;
+            case 'since_id':
+                $params['since_id'] = $this->validInteger($value);
+                break;
+            case 'max_id':
+                $params['max_id'] = $this->validInteger($value);
+                break;
+            case 'trim_user':
+                if (in_array($value, array(true, 'true', 't', 1, '1'))) {
+                    $value = true;
+                } else {
+                    $value = false;
+                }
+                $params['trim_user'] = $value;
+                break;
+            case 'contributor_details:':
+                $params['contributor_details:'] = (bool) $value;
+                break;
+            case 'include_entities':
+                $params['include_entities'] = (bool) $value;
+                break;
+            case 'exclude_replies':
+                $params['exclude_replies'] = (bool) $value;
+                break;
+            default:
+                break;
             }
         }
         $response = $this->get($path, $params);
@@ -893,31 +893,31 @@ class Zend_Service_Twitter
         $params = array();
         foreach ($options as $key => $value) {
             switch (strtolower($key)) {
-                case 'count':
-                    $params['count'] = (int) $value;
-                    break;
-                case 'since_id':
-                    $params['since_id'] = $this->validInteger($value);
-                    break;
-                case 'max_id':
-                    $params['max_id'] = $this->validInteger($value);
-                    break;
-                case 'trim_user':
-                    if (in_array($value, array(true, 'true', 't', 1, '1'))) {
-                        $value = true;
-                    } else {
-                        $value = false;
-                    }
-                    $params['trim_user'] = $value;
-                    break;
-                case 'contributor_details:':
-                    $params['contributor_details:'] = (bool) $value;
-                    break;
-                case 'include_entities':
-                    $params['include_entities'] = (bool) $value;
-                    break;
-                default:
-                    break;
+            case 'count':
+                $params['count'] = (int) $value;
+                break;
+            case 'since_id':
+                $params['since_id'] = $this->validInteger($value);
+                break;
+            case 'max_id':
+                $params['max_id'] = $this->validInteger($value);
+                break;
+            case 'trim_user':
+                if (in_array($value, array(true, 'true', 't', 1, '1'))) {
+                    $value = true;
+                } else {
+                    $value = false;
+                }
+                $params['trim_user'] = $value;
+                break;
+            case 'contributor_details:':
+                $params['contributor_details:'] = (bool) $value;
+                break;
+            case 'include_entities':
+                $params['include_entities'] = (bool) $value;
+                break;
+            default:
+                break;
             }
         }
         $response = $this->get($path, $params);
@@ -959,7 +959,7 @@ class Zend_Service_Twitter
      * Update user's current status
      *
      * @todo   Support additional parameters supported by statuses/update endpoint
-     * @param  string $status
+     * @param  string   $status
      * @param  null|int $inReplyToStatusId
      * @throws Zend_Http_Client_Exception if HTTP request fails or times out
      * @throws Exception\OutOfRangeException if message is too long
@@ -973,14 +973,14 @@ class Zend_Service_Twitter
         $path = 'statuses/update';
         $len = iconv_strlen(htmlspecialchars($status, ENT_QUOTES, 'UTF-8'), 'UTF-8');
         if ($len > self::STATUS_MAX_CHARACTERS) {
-            require_once 'Zend/Service/Twitter/Exception.php';
+            include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
                 'Status must be no more than '
                 . self::STATUS_MAX_CHARACTERS
                 . ' characters in length'
             );
         } elseif (0 == $len) {
-            require_once 'Zend/Service/Twitter/Exception.php';
+            include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
                 'Status must contain at least one character'
             );
@@ -1020,40 +1020,40 @@ class Zend_Service_Twitter
         $params = array();
         foreach ($options as $key => $value) {
             switch (strtolower($key)) {
-                case 'user_id':
-                    $params['user_id'] = $this->validInteger($value);
-                    break;
-                case 'screen_name':
-                    $params['screen_name'] = $this->validateScreenName($value);
-                    break;
-                case 'count':
-                    $params['count'] = (int) $value;
-                    break;
-                case 'since_id':
-                    $params['since_id'] = $this->validInteger($value);
-                    break;
-                case 'max_id':
-                    $params['max_id'] = $this->validInteger($value);
-                    break;
-                case 'trim_user':
-                    if (in_array($value, array(true, 'true', 't', 1, '1'))) {
-                        $value = true;
-                    } else {
-                        $value = false;
-                    }
-                    $params['trim_user'] = $value;
-                    break;
-                case 'contributor_details:':
-                    $params['contributor_details:'] = (bool) $value;
-                    break;
-                case 'exclude_replies':
-                    $params['exclude_replies'] = (bool) $value;
-                    break;
-                case 'include_rts':
-                    $params['include_rts'] = (bool) $value;
-                    break;
-                default:
-                    break;
+            case 'user_id':
+                $params['user_id'] = $this->validInteger($value);
+                break;
+            case 'screen_name':
+                $params['screen_name'] = $this->validateScreenName($value);
+                break;
+            case 'count':
+                $params['count'] = (int) $value;
+                break;
+            case 'since_id':
+                $params['since_id'] = $this->validInteger($value);
+                break;
+            case 'max_id':
+                $params['max_id'] = $this->validInteger($value);
+                break;
+            case 'trim_user':
+                if (in_array($value, array(true, 'true', 't', 1, '1'))) {
+                    $value = true;
+                } else {
+                    $value = false;
+                }
+                $params['trim_user'] = $value;
+                break;
+            case 'contributor_details:':
+                $params['contributor_details:'] = (bool) $value;
+                break;
+            case 'exclude_replies':
+                $params['exclude_replies'] = (bool) $value;
+                break;
+            case 'include_rts':
+                $params['include_rts'] = (bool) $value;
+                break;
+            default:
+                break;
             }
         }
         $response = $this->get($path, $params);
@@ -1069,7 +1069,7 @@ class Zend_Service_Twitter
      * - include_entities: if set to boolean true, include embedded entities
      *
      * @param  string $query
-     * @param  array $options
+     * @param  array  $options
      * @throws Zend_Http_Client_Exception if HTTP request fails or times out
      * @throws Exception\DomainException if unable to decode JSON payload
      * @return Zend_Service_Twitter_Response
@@ -1081,7 +1081,7 @@ class Zend_Service_Twitter
 
         $len = iconv_strlen($query, 'UTF-8');
         if (0 == $len) {
-            require_once 'Zend/Service/Twitter/Exception.php';
+            include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
                 'Query must contain at least one character'
             );
@@ -1090,24 +1090,24 @@ class Zend_Service_Twitter
         $params = array('q' => $query);
         foreach ($options as $key => $value) {
             switch (strtolower($key)) {
-                case 'count':
-                    $value = (int) $value;
-                    if (1 > $value || 20 < $value) {
-                        require_once 'Zend/Service/Twitter/Exception.php';
-                        throw new Zend_Service_Twitter_Exception(
-                            'count must be between 1 and 20'
-                        );
-                    }
-                    $params['count'] = $value;
-                    break;
-                case 'page':
-                    $params['page'] = (int) $value;
-                    break;
-                case 'include_entities':
-                    $params['include_entities'] = (bool) $value;
-                    break;
-                default:
-                    break;
+            case 'count':
+                $value = (int) $value;
+                if (1 > $value || 20 < $value) {
+                    include_once 'Zend/Service/Twitter/Exception.php';
+                    throw new Zend_Service_Twitter_Exception(
+                        'count must be between 1 and 20'
+                    );
+                }
+                $params['count'] = $value;
+                break;
+            case 'page':
+                $params['page'] = (int) $value;
+                break;
+            case 'include_entities':
+                $params['include_entities'] = (bool) $value;
+                break;
+            default:
+                break;
             }
         }
         $response = $this->get($path, $params);
@@ -1141,7 +1141,7 @@ class Zend_Service_Twitter
     protected function init()
     {
         if (!$this->isAuthorised() && $this->getUsername() !== null) {
-            require_once 'Zend/Service/Twitter/Exception.php';
+            include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
                 'Twitter session is unauthorised. You need to initialize '
                 . __CLASS__ . ' with an OAuth Access Token or use '
@@ -1181,18 +1181,19 @@ class Zend_Service_Twitter
     /**
      * Validate a screen name using Twitter rules
      *
-     * @param string $name
+     * @param  string $name
      * @return string
      * @throws Exception\InvalidArgumentException
      */
     protected function validateScreenName($name)
     {
         if (!preg_match('/^[a-zA-Z0-9_]{0,20}$/', $name)) {
-            require_once 'Zend/Service/Twitter/Exception.php';
+            include_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(
                 'Screen name, "' . $name
                 . '" should only contain alphanumeric characters and'
-                . ' underscores, and not exceed 15 characters.');
+                . ' underscores, and not exceed 15 characters.'
+            );
         }
         return $name;
     }
@@ -1200,7 +1201,7 @@ class Zend_Service_Twitter
     /**
      * Call a remote REST web service URI
      *
-     * @param  string $path The path to append to the URI
+     * @param  string           $path   The path to append to the URI
      * @param  Zend_Http_Client $client
      * @throws Zend_Http_Client_Exception
      * @return void
@@ -1218,8 +1219,8 @@ class Zend_Service_Twitter
     /**
      * Performs an HTTP GET request to the $path.
      *
-     * @param string $path
-     * @param array  $query Array of GET parameters
+     * @param  string $path
+     * @param  array  $query Array of GET parameters
      * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
@@ -1235,8 +1236,8 @@ class Zend_Service_Twitter
     /**
      * Performs an HTTP POST request to $path.
      *
-     * @param string $path
-     * @param mixed $data Raw data to send
+     * @param  string $path
+     * @param  mixed  $data Raw data to send
      * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
@@ -1255,8 +1256,8 @@ class Zend_Service_Twitter
      * client. String data is pushed in as raw POST data; array or object data
      * is pushed in as POST parameters.
      *
-     * @param mixed $method
-     * @param mixed $data
+     * @param  mixed $method
+     * @param  mixed $data
      * @return Zend_Http_Response
      */
     protected function performPost($method, $data, Zend_Http_Client $client)
@@ -1276,7 +1277,7 @@ class Zend_Service_Twitter
      * If not, assumes the $id is the "screen_name".
      *
      * @param  int|string $id
-     * @param  array $params
+     * @param  array      $params
      * @return array
      */
     protected function createUserParameter($id, array $params)

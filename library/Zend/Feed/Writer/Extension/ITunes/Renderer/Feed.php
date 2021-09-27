@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Feed_Writer
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -25,10 +25,10 @@
 require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Feed_Writer
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     extends Zend_Feed_Writer_Extension_RendererAbstract
@@ -71,15 +71,17 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      */
     protected function _appendNamespaces()
     {
-        $this->getRootElement()->setAttribute('xmlns:itunes',
-            'http://www.itunes.com/dtds/podcast-1.0.dtd');
+        $this->getRootElement()->setAttribute(
+            'xmlns:itunes',
+            'http://www.itunes.com/dtds/podcast-1.0.dtd'
+        );
     }
 
     /**
      * Set feed authors
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
@@ -101,7 +103,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      * Set feed itunes block
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setBlock(DOMDocument $dom, DOMElement $root)
@@ -121,7 +123,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      * Set feed categories
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setCategories(DOMDocument $dom, DOMElement $root)
@@ -153,7 +155,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      * Set feed image (icon)
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setImage(DOMDocument $dom, DOMElement $root)
@@ -172,7 +174,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      * Set feed cumulative duration
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setDuration(DOMDocument $dom, DOMElement $root)
@@ -192,7 +194,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      * Set explicit flag
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setExplicit(DOMDocument $dom, DOMElement $root)
@@ -212,7 +214,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      * Set feed keywords
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setKeywords(DOMDocument $dom, DOMElement $root)
@@ -232,7 +234,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      * Set feed's new URL
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setNewFeedUrl(DOMDocument $dom, DOMElement $root)
@@ -252,7 +254,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      * Set feed owners
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setOwners(DOMDocument $dom, DOMElement $root)
@@ -280,7 +282,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      * Set feed subtitle
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setSubtitle(DOMDocument $dom, DOMElement $root)
@@ -300,7 +302,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      * Set feed summary
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setSummary(DOMDocument $dom, DOMElement $root)

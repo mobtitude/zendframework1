@@ -117,6 +117,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
     /**
      * Characters representing path delimiters in the controller
+     *
      * @var string|array
      */
     protected $_pathDelimiters;
@@ -226,7 +227,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
             /**
              * @see Zend_Controller_Action_Exception
              */
-            require_once 'Zend/Controller/Action/Exception.php';
+            include_once 'Zend/Controller/Action/Exception.php';
             throw new Zend_Controller_Action_Exception('ViewRenderer cannot locate module directory for module "' . $module . '"');
         }
         $this->_moduleDir = dirname($moduleDir);
@@ -244,24 +245,26 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
             /**
              * @see Zend_Filter_Inflector
              */
-            require_once 'Zend/Filter/Inflector.php';
+            include_once 'Zend/Filter/Inflector.php';
             /**
              * @see Zend_Filter_PregReplace
              */
-            require_once 'Zend/Filter/PregReplace.php';
+            include_once 'Zend/Filter/PregReplace.php';
             /**
              * @see Zend_Filter_Word_UnderscoreToSeparator
              */
-            require_once 'Zend/Filter/Word/UnderscoreToSeparator.php';
+            include_once 'Zend/Filter/Word/UnderscoreToSeparator.php';
             $this->_inflector = new Zend_Filter_Inflector();
             $this->_inflector->setStaticRuleReference('moduleDir', $this->_moduleDir) // moduleDir must be specified before the less specific 'module'
-                 ->addRules(array(
+                ->addRules(
+                    array(
                      ':module'     => array('Word_CamelCaseToDash', 'StringToLower'),
                      ':controller' => array('Word_CamelCaseToDash', new Zend_Filter_Word_UnderscoreToSeparator('/'), 'StringToLower', new Zend_Filter_PregReplace('/\./', '-')),
                      ':action'     => array('Word_CamelCaseToDash', new Zend_Filter_PregReplace('#[^a-z0-9' . preg_quote('/', '#') . ']+#i', '-'), 'StringToLower'),
-                 ))
-                 ->setStaticRuleReference('suffix', $this->_viewSuffix)
-                 ->setTargetReference($this->_inflectorTarget);
+                    )
+                )
+                ->setStaticRuleReference('suffix', $this->_viewSuffix)
+                ->setTargetReference($this->_inflectorTarget);
         }
 
         // Ensure that module directory is current
@@ -282,8 +285,8 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         $this->_inflector = $inflector;
         if ($reference) {
             $this->_inflector->setStaticRuleReference('suffix', $this->_viewSuffix)
-                 ->setStaticRuleReference('moduleDir', $this->_moduleDir)
-                 ->setTargetReference($this->_inflectorTarget);
+                ->setStaticRuleReference('moduleDir', $this->_moduleDir)
+                ->setTargetReference($this->_inflectorTarget);
         }
         return $this;
     }
@@ -389,21 +392,21 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
                 case 'neverRender':
                 case 'neverController':
                 case 'noController':
-                case 'noRender':
+            case 'noRender':
                     $property = '_' . $key;
-                    $this->{$property} = ($value) ? true : false;
-                    break;
-                case 'responseSegment':
-                case 'scriptAction':
-                case 'viewBasePathSpec':
-                case 'viewScriptPathSpec':
-                case 'viewScriptPathNoControllerSpec':
-                case 'viewSuffix':
-                    $property = '_' . $key;
-                    $this->{$property} = (string) $value;
-                    break;
-                default:
-                    break;
+                $this->{$property} = ($value) ? true : false;
+                break;
+            case 'responseSegment':
+            case 'scriptAction':
+            case 'viewBasePathSpec':
+            case 'viewScriptPathSpec':
+            case 'viewScriptPathNoControllerSpec':
+            case 'viewSuffix':
+                $property = '_' . $key;
+                $this->{$property} = (string) $value;
+                break;
+            default:
+                break;
             }
         }
 
@@ -452,7 +455,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
                 /**
                  * @see Zend_Controller_Action_Exception
                  */
-                require_once 'Zend/Controller/Action/Exception.php';
+                include_once 'Zend/Controller/Action/Exception.php';
                 throw new Zend_Controller_Action_Exception('ViewRenderer initialization failed: retrieved view base path is empty');
             }
         }
@@ -827,7 +830,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         $module = $dispatcher->formatModuleName($request->getModuleName());
 
         // Format controller name
-        require_once 'Zend/Filter/Word/CamelCaseToDash.php';
+        include_once 'Zend/Filter/Word/CamelCaseToDash.php';
         $filter     = new Zend_Filter_Word_CamelCaseToDash();
         $controller = $filter->filter($request->getControllerName());
         $controller = $dispatcher->formatControllerName($controller);
@@ -841,15 +844,15 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         $params     = compact('module', 'controller', 'action');
         foreach ($vars as $key => $value) {
             switch ($key) {
-                case 'module':
-                case 'controller':
-                case 'action':
-                case 'moduleDir':
-                case 'suffix':
-                    $params[$key] = (string) $value;
-                    break;
-                default:
-                    break;
+            case 'module':
+            case 'controller':
+            case 'action':
+            case 'moduleDir':
+            case 'suffix':
+                $params[$key] = (string) $value;
+                break;
+            default:
+                break;
             }
         }
 

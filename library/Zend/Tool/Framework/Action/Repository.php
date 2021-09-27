@@ -26,10 +26,10 @@
 require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Action_Repository
     implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
@@ -52,7 +52,7 @@ class Zend_Tool_Framework_Action_Repository
     /**
      * addAction()
      *
-     * @param Zend_Tool_Framework_Action_Interface $action
+     * @param  Zend_Tool_Framework_Action_Interface $action
      * @return Zend_Tool_Framework_Action_Repository
      */
     public function addAction(Zend_Tool_Framework_Action_Interface $action, $overrideExistingAction = false)
@@ -60,14 +60,16 @@ class Zend_Tool_Framework_Action_Repository
         $actionName = $action->getName();
 
         if ($actionName == '' || $actionName == 'Base') {
-            require_once 'Zend/Tool/Framework/Action/Exception.php';
+            include_once 'Zend/Tool/Framework/Action/Exception.php';
             throw new Zend_Tool_Framework_Action_Exception('An action name for the provided action could not be determined.');
         }
 
         if (!$overrideExistingAction && array_key_exists(strtolower($actionName), $this->_actions)) {
-            require_once 'Zend/Tool/Framework/Action/Exception.php';
-            throw new Zend_Tool_Framework_Action_Exception('An action by the name ' . $actionName
-                . ' is already registered and $overrideExistingAction is set to false.');
+            include_once 'Zend/Tool/Framework/Action/Exception.php';
+            throw new Zend_Tool_Framework_Action_Exception(
+                'An action by the name ' . $actionName
+                . ' is already registered and $overrideExistingAction is set to false.'
+            );
         }
 
         $this->_actions[strtolower($actionName)] = $action;
@@ -97,7 +99,7 @@ class Zend_Tool_Framework_Action_Repository
     /**
      * getAction() - get an action by a specific name
      *
-     * @param string $actionName
+     * @param  string $actionName
      * @return Zend_Tool_Framework_Action_Interface
      */
     public function getAction($actionName)

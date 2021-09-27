@@ -55,20 +55,20 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
     protected $_socket = null;
 
     /********************************************************************
-    * Constructor / Destructor
+     * Constructor / Destructor
      *********************************************************************/
 
     /**
      * Constructor
      *
      * @param  array|Zend_Config $options
-     * @param  null|Zend_Queue $queue
+     * @param  null|Zend_Queue   $queue
      * @return void
      */
     public function __construct($options, Zend_Queue $queue = null)
     {
         if (!extension_loaded('memcache')) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Memcache extension does not appear to be loaded');
         }
 
@@ -88,7 +88,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
         $result = $this->_cache->connect($options['host'], $options['port']);
 
         if ($result === false) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Could not connect to MemcacheQ');
         }
 
@@ -176,7 +176,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
      *
      * Returns false if the queue is not found, true if the queue exists
      *
-     * @param  string  $name queue name
+     * @param  string $name queue name
      * @return boolean
      * @throws Zend_Queue_Exception
      */
@@ -227,7 +227,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
      */
     public function count(Zend_Queue $queue=null)
     {
-        require_once 'Zend/Queue/Exception.php';
+        include_once 'Zend/Queue/Exception.php';
         throw new Zend_Queue_Exception('count() is not supported in this adapter');
     }
 
@@ -250,7 +250,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
         }
 
         if (!$this->isExists($queue->getName())) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Queue does not exist:' . $queue->getName());
         }
 
@@ -264,7 +264,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
 
         $result = $this->_cache->set($queue->getName(), $message, 0, 0);
         if ($result === false) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('failed to insert message into queue:' . $queue->getName());
         }
 
@@ -275,7 +275,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
 
         $classname = $queue->getMessageClass();
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
         return new $classname($options);
@@ -284,8 +284,8 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
     /**
      * Get messages in the queue
      *
-     * @param  integer    $maxMessages  Maximum number of messages to return
-     * @param  integer    $timeout      Visibility timeout for these messages
+     * @param  integer    $maxMessages Maximum number of messages to return
+     * @param  integer    $timeout     Visibility timeout for these messages
      * @param  Zend_Queue $queue
      * @return Zend_Queue_Message_Iterator
      * @throws Zend_Queue_Exception
@@ -323,7 +323,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
 
         $classname = $queue->getMessageSetClass();
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
         return new $classname($options);
@@ -341,7 +341,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
      */
     public function deleteMessage(Zend_Queue_Message $message)
     {
-        require_once 'Zend/Queue/Exception.php';
+        include_once 'Zend/Queue/Exception.php';
         throw new Zend_Queue_Exception('deleteMessage() is not supported in  ' . get_class($this));
     }
 
@@ -383,8 +383,8 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
      * supported by MemcacheQ
      * Non-standard requests are handled by this function.
      *
-     * @param  string  $command - command to send to memcacheQ
-     * @param  array   $terminator - strings to indicate end of memcacheQ response
+     * @param  string  $command      - command to send to memcacheQ
+     * @param  array   $terminator   - strings to indicate end of memcacheQ response
      * @param  boolean $include_term - include terminator in response
      * @return array
      * @throws Zend_Queue_Exception if connection cannot be opened
@@ -395,7 +395,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
             $this->_socket = fsockopen($this->_host, $this->_port, $errno, $errstr, 10);
         }
         if ($this->_socket === false) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception("Could not open a connection to $this->_host:$this->_port errno=$errno : $errstr");
         }
 

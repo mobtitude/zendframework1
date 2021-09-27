@@ -22,8 +22,8 @@
  */
 
 /**
-*  @see Zend_Gdata_MimeFile
-*/
+ * @see Zend_Gdata_MimeFile
+ */
 require_once 'Zend/Gdata/MimeFile.php';
 
 /**
@@ -63,6 +63,7 @@ class Zend_Gdata_MediaMimeStream
 
     /**
      * The size of the MIME message.
+     *
      * @var integer
      */
     protected $_totalSize = 0;
@@ -76,25 +77,28 @@ class Zend_Gdata_MediaMimeStream
     /**
      * Create a new MimeMediaStream object.
      *
-     * @param string $xmlString The string corresponding to the XML section
-     *               of the message, typically an atom entry or feed.
-     * @param string $filePath The path to the file that constitutes the binary
-     *               part of the message.
-     * @param string $fileContentType The valid internet media type of the file.
+     * @param  string $xmlString       The string corresponding to the XML section
+     *                                 of the message, typically an atom entry or
+     *                                 feed.
+     * @param  string $filePath        The path to the file that constitutes the binary
+     *                                 part of the message.
+     * @param  string $fileContentType The valid internet media type of the file.
      * @throws Zend_Gdata_App_IOException If the file cannot be read or does
      *         not exist. Also if mbstring.func_overload has been set > 1.
      */
     public function __construct($xmlString = null, $filePath = null,
-        $fileContentType = null)
-    {
+        $fileContentType = null
+    ) {
         if (!file_exists($filePath) || !is_readable($filePath)) {
-            require_once 'Zend/Gdata/App/IOException.php';
-            throw new Zend_Gdata_App_IOException('File to be uploaded at ' .
-                $filePath . ' does not exist or is not readable.');
+            include_once 'Zend/Gdata/App/IOException.php';
+            throw new Zend_Gdata_App_IOException(
+                'File to be uploaded at ' .
+                $filePath . ' does not exist or is not readable.'
+            );
         }
 
-        $this->_fileHandle = fopen($filePath, 'rb', TRUE);
-        $this->_boundaryString = '=_' . md5(microtime(1) . rand(1,20));
+        $this->_fileHandle = fopen($filePath, 'rb', true);
+        $this->_boundaryString = '=_' . md5(microtime(1) . rand(1, 20));
         $entry = $this->wrapEntry($xmlString, $fileContentType);
         $closingBoundary = new Zend_Gdata_MimeBodyString("\r\n--{$this->_boundaryString}--\r\n");
         $file = new Zend_Gdata_MimeFile($this->_fileHandle);
@@ -124,27 +128,27 @@ class Zend_Gdata_MediaMimeStream
     /**
      * Read a specific chunk of the the MIME multipart message.
      *
-     * @param integer $bufferSize The size of the chunk that is to be read,
-     *                            must be lower than MAX_BUFFER_SIZE.
+     * @param  integer $bufferSize The size of the chunk that is to be read,
+     *                             must be lower than MAX_BUFFER_SIZE.
      * @return string A corresponding piece of the message. This could be
      *                binary or regular text.
      */
     public function read($bytesRequested)
     {
         if($this->_currentPart >= count($this->_parts)) {
-          return FALSE;
+            return false;
         }
 
         $activePart = $this->_parts[$this->_currentPart];
         $buffer = $activePart->read($bytesRequested);
 
         while(strlen($buffer) < $bytesRequested) {
-          $this->_currentPart += 1;
-          $nextBuffer = $this->read($bytesRequested - strlen($buffer));
-          if($nextBuffer === FALSE) {
-            break;
-          }
-          $buffer .= $nextBuffer;
+            $this->_currentPart += 1;
+            $nextBuffer = $this->read($bytesRequested - strlen($buffer));
+            if($nextBuffer === false) {
+                break;
+            }
+            $buffer .= $nextBuffer;
         }
 
         return $buffer;

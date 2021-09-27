@@ -74,7 +74,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
     /**
      * Constructor
      *
-     * @param array $options
+     * @param  array $options
      * @return void
      */
     public function __construct($options = array())
@@ -121,7 +121,8 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
         // TODO: support $usePathStyleUri and $retryPolicy
         try {
             $this->_storageClient = new Zend_Service_WindowsAzure_Storage_Table(
-                    $host, $options[self::ACCOUNT_NAME], $options[self::ACCOUNT_KEY]);
+                $host, $options[self::ACCOUNT_NAME], $options[self::ACCOUNT_KEY]
+            );
             // Parse other options
             if (! empty($options[self::PROXY_HOST])) {
                 $proxyHost = $options[self::PROXY_HOST];
@@ -204,7 +205,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
     /**
      * List collections.
      *
-     * @param  array  $options
+     * @param  array $options
      * @return array
      */
     public function listCollections($options = null)
@@ -226,7 +227,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
     /**
      * Create suitable document from array of fields
      *
-     * @param  array $document
+     * @param  array       $document
      * @param  null|string $collectionName Collection to which this document belongs
      * @return Zend_Cloud_DocumentService_Document
      */
@@ -258,7 +259,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
     /**
      * List all documents in a collection
      *
-     * @param  string $collectionName
+     * @param  string     $collectionName
      * @param  null|array $options
      * @return Zend_Cloud_DocumentService_DocumentSet
      */
@@ -272,7 +273,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
      * Insert document
      *
      * @param  array|Zend_Cloud_DocumentService_Document $document
-     * @param  array                         $options
+     * @param  array                                     $options
      * @return boolean
      */
     public function insertDocument($collectionName, $document, $options = null)
@@ -306,7 +307,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
      * The new document replaces the existing document.
      *
      * @param  Zend_Cloud_DocumentService_Document $document
-     * @param  array                         $options
+     * @param  array                               $options
      * @return boolean
      */
     public function replaceDocument($collectionName, $document, $options = null)
@@ -339,10 +340,10 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
      *
      * The new document is merged the existing document.
      *
-     * @param  string $collectionName
-     * @param  mixed|Zend_Cloud_DocumentService_Document $documentId Document identifier or document contaiing updates
+     * @param  string                                                                           $collectionName
+     * @param  mixed|Zend_Cloud_DocumentService_Document                                        $documentId     Document identifier or document contaiing updates
      * @param  null|array|Zend_Cloud_DocumentService_Document Fields to update (or new fields))
-     * @param  array $options
+     * @param  array                                                                            $options
      * @return boolean
      */
     public function updateDocument($collectionName, $documentId, $fieldset = null, $options = null)
@@ -382,8 +383,8 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
     /**
      * Delete document.
      *
-     * @param  mixed  $document Document ID or Document object.
-     * @param  array  $options
+     * @param  mixed $document Document ID or Document object.
+     * @param  array $options
      * @return void
      */
     public function deleteDocument($collectionName, $documentId, $options = null)
@@ -411,8 +412,8 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
      * Fetch single document by ID
      *
      * @param  string $collectionName Collection name
-     * @param  mixed $documentId Document ID, adapter-dependent
-     * @param  array $options
+     * @param  mixed  $documentId     Document ID, adapter-dependent
+     * @param  array  $options
      * @return Zend_Cloud_DocumentService_Document
      */
     public function fetchDocument($collectionName, $documentId, $options = null)
@@ -434,9 +435,9 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
      * Query for documents stored in the document service. If a string is passed in
      * $query, the query string will be passed directly to the service.
      *
-     * @param  string $collectionName Collection name
+     * @param  string                                                       $collectionName Collection name
      * @param  string|Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query $query
-     * @param  array $options
+     * @param  array                                                        $options
      * @return array Zend_Cloud_DocumentService_DocumentSet
      */
     public function query($collectionName, $query, $options = null)
@@ -473,7 +474,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
     {
         $queryClass = $this->getQueryClass();
         if (!class_exists($queryClass)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($queryClass);
         }
 
@@ -554,7 +555,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
      * - otherwise, it's invalid
      *
      * @param  array|string $documentId
-     * @param  null|string $collectionName
+     * @param  null|string  $collectionName
      * @return array
      * @throws Zend_Cloud_DocumentService_Exception
      */

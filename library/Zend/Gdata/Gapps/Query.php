@@ -24,12 +24,12 @@
 /**
  * Zend_Gdata_Query
  */
-require_once('Zend/Gdata/Query.php');
+require_once 'Zend/Gdata/Query.php';
 
 /**
  * Zend_Gdata_Gapps
  */
-require_once('Zend/Gdata/Gapps.php');
+require_once 'Zend/Gdata/Gapps.php';
 
 /**
  * Assists in constructing queries for Google Apps entries. This class
@@ -37,7 +37,7 @@ require_once('Zend/Gdata/Gapps.php');
  *
  * This class should never be instantiated directly. Instead, instantiate a
  * class which inherits from this class.
-  *
+ *
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps
@@ -56,7 +56,7 @@ abstract class Zend_Gdata_Gapps_Query extends Zend_Gdata_Query
      * Create a new instance.
      *
      * @param string $domain (optional) The Google Apps-hosted domain to use
-     *          when constructing query URIs.
+     *                       when constructing query URIs.
      */
     public function __construct($domain = null)
     {
@@ -85,7 +85,7 @@ abstract class Zend_Gdata_Gapps_Query extends Zend_Gdata_Query
      * domain, such as 'foo.example.com'. If no domain is set, null will be
      * returned.
      *
-     * @see setDomain
+     * @see    setDomain
      * @return string The domain to be used for this session, or null if not
      *          set.
      */
@@ -99,23 +99,24 @@ abstract class Zend_Gdata_Gapps_Query extends Zend_Gdata_Query
      * on the current domain. The current domain can be temporarily
      * overridden by providing a fully qualified domain as $domain.
      *
-     * @see setDomain
+     * @see   setDomain
      * @param string $domain (optional) A fully-qualified domain to use
-     *          instead of the default domain for this service instance.
+     *                       instead of the default domain for this service instance.
      */
-     public function getBaseUrl($domain = null)
-     {
-         if ($domain !== null) {
-             return Zend_Gdata_Gapps::APPS_BASE_FEED_URI . '/' . $domain;
-         }
-         else if ($this->_domain !== null) {
-             return Zend_Gdata_Gapps::APPS_BASE_FEED_URI . '/' . $this->_domain;
-         }
-         else {
-             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-             throw new Zend_Gdata_App_InvalidArgumentException(
-                 'Domain must be specified.');
-         }
-     }
+    public function getBaseUrl($domain = null)
+    {
+        if ($domain !== null) {
+            return Zend_Gdata_Gapps::APPS_BASE_FEED_URI . '/' . $domain;
+        }
+        else if ($this->_domain !== null) {
+            return Zend_Gdata_Gapps::APPS_BASE_FEED_URI . '/' . $this->_domain;
+        }
+        else {
+            include_once 'Zend/Gdata/App/InvalidArgumentException.php';
+            throw new Zend_Gdata_App_InvalidArgumentException(
+                'Domain must be specified.'
+            );
+        }
+    }
 
 }

@@ -201,7 +201,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     protected array $_filters = array();
     
     /**
-     * @param string $id
+     * @param  string $id
      * @return Zend_Gdata_Analytics_DataQuery
      */
     public function setProfileId($id)
@@ -219,7 +219,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     }
 
     /**
-     * @param string $dimension
+     * @param  string $dimension
      * @return Zend_Gdata_Analytics_DataQuery
      */
     public function addDimension($dimension)
@@ -229,7 +229,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     }
 
     /**
-     * @param string $metric
+     * @param  string $metric
      * @return Zend_Gdata_Analytics_DataQuery
      */
     public function addMetric($metric)
@@ -255,7 +255,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     }
 
     /**
-     * @param string $dimension
+     * @param  string $dimension
      * @return Zend_Gdata_Analytics_DataQuery
      */
     public function removeDimension($dimension)
@@ -264,7 +264,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
         return $this;
     }
     /**
-     * @param string $metric
+     * @param  string $metric
      * @return Zend_Gdata_Analytics_DataQuery
      */
     public function removeMetric($metric)
@@ -273,7 +273,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
         return $this;
     }
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Analytics_DataQuery
      */
     public function setStartDate($date)
@@ -282,7 +282,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
         return $this;
     }
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Analytics_DataQuery
      */
     public function setEndDate($date)
@@ -292,7 +292,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     }
     
     /**
-     * @param string $filter
+     * @param  string $filter
      * @return Zend_Gdata_Analytics_DataQuery
      */
     public function addFilter($filter)
@@ -302,7 +302,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     }
     
     /**
-     * @param string $filter
+     * @param  string $filter
      * @return Zend_Gdata_Analytics_DataQuery
      */
     public function addOrFilter($filter)
@@ -312,8 +312,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     }
     
     /**
-     * @param string $sort
-     * @param boolean[optional] $descending
+     * @param  string            $sort
+     * @param  boolean[optional] $descending
      * @return Zend_Gdata_Analytics_DataQuery
      */
     public function addSort($sort, $descending=false)
@@ -333,7 +333,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     }
     
     /**
-     * @param string $segment
+     * @param  string $segment
      * @return Zend_Gdata_Analytics_DataQuery
      */
     public function setSegment($segment)

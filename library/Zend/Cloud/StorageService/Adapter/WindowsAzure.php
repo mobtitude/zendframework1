@@ -22,7 +22,6 @@ require_once 'Zend/Service/WindowsAzure/Storage/Blob.php';
 require_once 'Zend/Cloud/StorageService/Exception.php';
 
 /**
- *
  * Windows Azure Blob Service abstraction
  *
  * @category   Zend
@@ -45,12 +44,16 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     const RETURN_PATHNAME   = 'return_path';
     const RETURN_OPENMODE   = 'return_openmode';
 
-    /** return types  for fetch */
+    /**
+ * return types  for fetch 
+*/
     const RETURN_PATH   = 1;   // return filename
     const RETURN_STRING = 2; // return data as string
     const RETURN_STREAM = 3; // return PHP stream
 
-    /** return types  for list */
+    /**
+ * return types  for list 
+*/
     const RETURN_LIST  = 1;   // return native list
     const RETURN_NAMES = 2;  // return only names
 
@@ -71,7 +74,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     /**
      * Creates a new Zend_Cloud_Storage_WindowsAzure instance
      *
-     * @param array|Zend_Config  $options   Options for the Zend_Cloud_Storage_WindowsAzure instance
+     * @param array|Zend_Config $options Options for the Zend_Cloud_Storage_WindowsAzure instance
      */
     public function __construct($options = array())
     {
@@ -97,8 +100,10 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
             throw new Zend_Cloud_StorageService_Exception('No Windows Azure account key provided.');
         }
 
-        $this->_storageClient = new Zend_Service_WindowsAzure_Storage_Blob($host,
-             $options[self::ACCOUNT_NAME], $options[self::ACCOUNT_KEY]);
+        $this->_storageClient = new Zend_Service_WindowsAzure_Storage_Blob(
+            $host,
+            $options[self::ACCOUNT_NAME], $options[self::ACCOUNT_KEY]
+        );
 
         // Parse other options
         if (!empty($options[self::PROXY_HOST])) {
@@ -126,7 +131,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
      * Get an item from the storage service.
      *
      * @param  string $path
-     * @param  array $options
+     * @param  array  $options
      * @return mixed
      */
     public function fetchItem($path, $options = null)
@@ -181,9 +186,10 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
      * Store an item in the storage service.
      * WARNING: This operation overwrites any item that is located at
      * $destinationPath.
-     * @param string $destinationPath
-     * @param mixed  $data
-     * @param  array $options
+     *
+     * @param  string $destinationPath
+     * @param  mixed  $data
+     * @param  array  $options
      * @return boolean
      */
     public function storeItem($destinationPath, $data, $options = null)
@@ -192,7 +198,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
         $temporaryFilePath       = '';
         $removeTemporaryFilePath = false;
 
-        if (is_resource($data))    {
+        if (is_resource($data)) {
             $temporaryFilePath = tempnam('', 'azr');
             $fpDestination     = fopen($temporaryFilePath, 'w');
 
@@ -302,10 +308,9 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     /**
      * Rename an item in the storage service to a given name.
      *
-     *
      * @param  string $path
      * @param  string $name
-     * @param  array $options
+     * @param  array  $options
      * @return void
      */
     public function renameItem($path, $name, $options = null)
@@ -318,9 +323,8 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
      *
      * The $path must be a directory
      *
-     *
-     * @param  string $path Must be a directory
-     * @param  array $options
+     * @param  string $path    Must be a directory
+     * @param  array  $options
      * @return array A list of item names
      */
     public function listItems($path, $options = null)
@@ -384,7 +388,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
      * $destinationPath.
      *
      * @param  string $destinationPath
-     * @param  array $options
+     * @param  array  $options
      * @return void
      */
     public function storeMetadata($destinationPath, $metadata, $options = null)
@@ -402,7 +406,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
      * Delete a key/value array of metadata at the given path.
      *
      * @param  string $path
-     * @param  array $options
+     * @param  array  $options
      * @return void
      */
     public function deleteMetadata($path, $options = null)
@@ -432,6 +436,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
 
     /**
      * Get the concrete adapter.
+     *
      * @return Zend_Service_Azure_Storage_Blob
      */
     public function getClient()

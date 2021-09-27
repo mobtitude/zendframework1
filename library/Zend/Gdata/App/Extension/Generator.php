@@ -85,7 +85,7 @@ class Zend_Gdata_App_Extension_Generator extends Zend_Gdata_App_Extension
     }
 
     /**
-     * @param Zend_Gdata_App_Extension_Uri $value
+     * @param  Zend_Gdata_App_Extension_Uri $value
      * @return Zend_Gdata_App_Entry Provides a fluent interface
      */
     public function setUri($value)
@@ -103,7 +103,7 @@ class Zend_Gdata_App_Extension_Generator extends Zend_Gdata_App_Extension
     }
 
     /**
-     * @param Zend_Gdata_App_Extension_Version $value
+     * @param  Zend_Gdata_App_Extension_Version $value
      * @return Zend_Gdata_App_Entry Provides a fluent interface
      */
     public function setVersion($value)

@@ -12,30 +12,38 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Oauth
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
-/** Zend_Oauth */
+/**
+ * Zend_Oauth 
+ */
 require_once 'Zend/Oauth.php';
 
-/** Zend_Http_Client */
+/**
+ * Zend_Http_Client 
+*/
 require_once 'Zend/Http/Client.php';
 
-/** Zend_Oauth_Http_Utility */
+/**
+ * Zend_Oauth_Http_Utility 
+*/
 require_once 'Zend/Oauth/Http/Utility.php';
 
-/** Zend_Oauth_Config */
+/**
+ * Zend_Oauth_Config 
+*/
 require_once 'Zend/Oauth/Config.php';
 
 /**
- * @category   Zend
- * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Oauth
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Oauth_Client extends Zend_Http_Client
 {
@@ -75,8 +83,9 @@ class Zend_Oauth_Client extends Zend_Http_Client
         if ($config instanceof Zend_Config && !isset($config->rfc3986_strict)) {
             $config                   = $config->toArray();
             $config['rfc3986_strict'] = true;
-        } else if (null === $config ||
-                   (is_array($config) && !isset($config['rfc3986_strict']))) {
+        } else if (null === $config 
+            || (is_array($config) && !isset($config['rfc3986_strict']))
+        ) {
             $config['rfc3986_strict'] = true;
         }
         parent::__construct($uri, $config);
@@ -89,10 +98,10 @@ class Zend_Oauth_Client extends Zend_Http_Client
         }
     }
 
-   /**
+    /**
      * Load the connection adapter
      *
-     * @param Zend_Http_Client_Adapter_Interface $adapter
+     * @param  Zend_Http_Client_Adapter_Interface $adapter
      * @return void
      */
     public function setAdapter($adapter)
@@ -108,7 +117,7 @@ class Zend_Oauth_Client extends Zend_Http_Client
      * Set the streamingRequest variable which controls whether we are
      * sending the raw (already encoded) POST data from a stream source.
      *
-     * @param boolean $value The value to set.
+     * @param  boolean $value The value to set.
      * @return void
      */
     public function setStreamingRequest($value)
@@ -139,8 +148,10 @@ class Zend_Oauth_Client extends Zend_Http_Client
     protected function _prepareBody()
     {
         if($this->_streamingRequest) {
-            $this->setHeaders(self::CONTENT_LENGTH,
-                $this->raw_post_data->getTotalSize());
+            $this->setHeaders(
+                self::CONTENT_LENGTH,
+                $this->raw_post_data->getTotalSize()
+            );
             return $this->raw_post_data;
         }
         else {
@@ -166,8 +177,8 @@ class Zend_Oauth_Client extends Zend_Http_Client
      * caching the entire body into memory. It is a wrapper around
      * Zend_Http_Client::setRawData().
      *
-     * @param string $data The request data
-     * @param string $enctype The encoding type
+     * @param  string $data    The request data
+     * @param  string $enctype The encoding type
      * @return Zend_Http_Client
      */
     public function setRawDataStream($data, $enctype = null)
@@ -244,7 +255,7 @@ class Zend_Oauth_Client extends Zend_Http_Client
             $this->setHeaders('Authorization', $oauthHeaderValue);
         } elseif ($requestScheme == Zend_Oauth::REQUEST_SCHEME_POSTBODY) {
             if ($requestMethod == self::GET) {
-                require_once 'Zend/Oauth/Exception.php';
+                include_once 'Zend/Oauth/Exception.php';
                 throw new Zend_Oauth_Exception(
                     'The client is configured to'
                     . ' pass OAuth parameters through a POST body but request method'
@@ -281,7 +292,7 @@ class Zend_Oauth_Client extends Zend_Http_Client
             $this->getUri()->setQuery($query);
             $this->paramsGet = array();
         } else {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Invalid request scheme: ' . $requestScheme);
         }
     }
@@ -310,14 +321,14 @@ class Zend_Oauth_Client extends Zend_Http_Client
      * as it's API.
      *
      * @param  string $method
-     * @param  array $args
+     * @param  array  $args
      * @return mixed
      * @throws Zend_Oauth_Exception if method does not exist in config object
      */
     public function __call($method, array $args)
     {
         if (!method_exists($this->_config, $method)) {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Method does not exist: ' . $method);
         }
         return call_user_func_array(array($this->_config,$method), $args);

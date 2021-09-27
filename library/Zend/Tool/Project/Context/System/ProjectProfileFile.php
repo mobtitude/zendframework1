@@ -46,10 +46,10 @@ require_once 'Zend/Tool/Project/Profile/FileParser/Xml.php';
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_System_ProjectProfileFile
     extends Zend_Tool_Project_Context_Filesystem_File
@@ -77,7 +77,7 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
     /**
      * setProfile()
      *
-     * @param Zend_Tool_Project_Profile $profile
+     * @param  Zend_Tool_Project_Profile $profile
      * @return Zend_Tool_Project_Context_System_ProjectProfileFile
      */
     public function setProfile($profile)

@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_View_Helper_HtmlElement */
+/**
+ * Zend_View_Helper_HtmlElement 
+ */
 require_once 'Zend/View/Helper/HtmlElement.php';
 
 /**
@@ -31,7 +33,7 @@ require_once 'Zend/View/Helper/HtmlElement.php';
  * @subpackage View
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-  */
+ */
 abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
 {
     /**
@@ -41,12 +43,14 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
 
     /**
      * Dijit being used
+     *
      * @var string
      */
     protected $_dijit;
 
     /**
      * Element type
+     *
      * @var string
      */
     protected $_elementType;
@@ -58,6 +62,7 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
 
     /**
      * Dojo module to use
+     *
      * @var string
      */
     protected $_module;
@@ -139,10 +144,10 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
     /**
      * Create a layout container
      *
-     * @param  int $id
-     * @param  string $content
-     * @param  array $params
-     * @param  array $attribs
+     * @param  int         $id
+     * @param  string      $content
+     * @param  array       $params
+     * @param  array       $attribs
      * @param  string|null $dijit
      * @return string
      */
@@ -162,10 +167,10 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
     /**
      * Create HTML representation of a dijit form element
      *
-     * @param  string $id
-     * @param  string $value
-     * @param  array $params
-     * @param  array $attribs
+     * @param  string      $id
+     * @param  string      $value
+     * @param  array       $params
+     * @param  array       $attribs
      * @param  string|null $dijit
      * @return string
      */
@@ -191,10 +196,10 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
      *
      * Also sets up requires
      *
-     * @param  array $attribs
-     * @param  array $params
+     * @param  array  $attribs
+     * @param  array  $params
      * @param  string $type
-     * @param  string $dijit Dijit type to use (otherwise, pull from $_dijit)
+     * @param  string $dijit   Dijit type to use (otherwise, pull from $_dijit)
      * @return array
      */
     protected function _prepareDijit(array $attribs, array $params, $type, $dijit = null)
@@ -202,25 +207,25 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
         $this->dojo->requireModule($this->_module);
 
         switch ($type) {
-            case 'layout':
-                $stripParams = array('id');
-                break;
-            case 'element':
-                $stripParams = array('id', 'name', 'value', 'type');
-                foreach (array('checked', 'disabled', 'readonly') as $attrib) {
-                    if (array_key_exists($attrib, $attribs)) {
-                        if ($attribs[$attrib]) {
-                            $attribs[$attrib] = $attrib;
-                        } else {
-                            unset($attribs[$attrib]);
-                        }
+        case 'layout':
+            $stripParams = array('id');
+            break;
+        case 'element':
+            $stripParams = array('id', 'name', 'value', 'type');
+            foreach (array('checked', 'disabled', 'readonly') as $attrib) {
+                if (array_key_exists($attrib, $attribs)) {
+                    if ($attribs[$attrib]) {
+                        $attribs[$attrib] = $attrib;
+                    } else {
+                        unset($attribs[$attrib]);
                     }
                 }
-                break;
-            case 'textarea':
-                $stripParams = array('id', 'name', 'type', 'degrade');
-                break;
-            default:
+            }
+            break;
+        case 'textarea':
+            $stripParams = array('id', 'name', 'type', 'degrade');
+            break;
+        default:
         }
 
         foreach ($stripParams as $param) {
@@ -232,7 +237,7 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
         // Normalize constraints, if present
         foreach ($this->_jsonParams as $param) {
             if (array_key_exists($param, $params)) {
-                require_once 'Zend/Json.php';
+                include_once 'Zend/Json.php';
 
                 if (is_array($params[$param])) {
                     $values = array();
@@ -274,7 +279,7 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
      *
      * @param  string $dijit
      * @param  string $id
-     * @param  array $params
+     * @param  array  $params
      * @return void
      */
     protected function _createDijit($dijit, $id, array $params)
@@ -289,7 +294,7 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
     /**
      * Cast a boolean to a string value
      *
-     * @param  mixed $item
+     * @param  mixed  $item
      * @param  string $key
      * @return void
      */
@@ -304,7 +309,7 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
     /**
      * Render a hidden element to hold a value
      *
-     * @param  string $id
+     * @param  string           $id
      * @param  string|int|float $value
      * @return string
      */

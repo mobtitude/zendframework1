@@ -66,7 +66,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
      * Constructor
      *
      * @param  array|Zend_Config $options
-     * @param  Zend_Queue|null $queue
+     * @param  Zend_Queue|null   $queue
      * @return void
      */
     public function __construct($options, Zend_Queue $queue = null)
@@ -79,24 +79,29 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
         }
 
         if (!is_bool($this->_options['options'][Zend_Db_Select::FOR_UPDATE])) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Options array item: Zend_Db_Select::FOR_UPDATE must be boolean');
         }
 
         if (isset($this->_options['dbAdapter'])
-            && $this->_options['dbAdapter'] instanceof Zend_Db_Adapter_Abstract) {
+            && $this->_options['dbAdapter'] instanceof Zend_Db_Adapter_Abstract
+        ) {
             $db = $this->_options['dbAdapter'];
         } else {
             $db = $this->_initDbAdapter();
         }
 
-        $this->_queueTable = new Zend_Queue_Adapter_Db_Queue(array(
+        $this->_queueTable = new Zend_Queue_Adapter_Db_Queue(
+            array(
             'db' => $db,
-        ));
+            )
+        );
 
-        $this->_messageTable = new Zend_Queue_Adapter_Db_Message(array(
+        $this->_messageTable = new Zend_Queue_Adapter_Db_Message(
+            array(
             'db' => $db,
-        ));
+            )
+        );
 
     }
 
@@ -112,27 +117,27 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
     {
         $options = &$this->_options['driverOptions'];
         if (!array_key_exists('type', $options)) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception("Configuration array must have a key for 'type' for the database type to use");
         }
 
         if (!array_key_exists('host', $options)) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception("Configuration array must have a key for 'host' for the host to use");
         }
 
         if (!array_key_exists('username', $options)) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception("Configuration array must have a key for 'username' for the username to use");
         }
 
         if (!array_key_exists('password', $options)) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception("Configuration array must have a key for 'password' for the password to use");
         }
 
         if (!array_key_exists('dbname', $options)) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception("Configuration array must have a key for 'dbname' for the database to use");
         }
 
@@ -142,7 +147,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
         try {
             $db = Zend_Db::factory($type, $options);
         } catch (Zend_Db_Exception $e) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Error connecting to database: ' . $e->getMessage(), $e->getCode(), $e);
         }
 
@@ -205,7 +210,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
                 return true;
             }
         } catch (Exception $e) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
@@ -217,7 +222,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
      *
      * Returns false if the queue is not found, true if the queue exists
      *
-     * @param  string  $name queue name
+     * @param  string $name queue name
      * @return boolean
      * @throws Zend_Queue_Exception - database error
      */
@@ -236,7 +241,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
             try {
                 $queue->delete();
             } catch (Exception $e) {
-                require_once 'Zend/Queue/Exception.php';
+                include_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
@@ -289,14 +294,14 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
         $db    = $this->_messageTable->getAdapter();
         $query = $db->select();
         $query->from($info['name'], array(new Zend_Db_Expr('COUNT(1)')))
-              ->where('queue_id=?', $this->getQueueId($queue->getName()));
+            ->where('queue_id=?', $this->getQueueId($queue->getName()));
 
         // return count results
         return (int) $db->fetchOne($query);
     }
 
     /********************************************************************
-    * Messsage management functions
+     * Messsage management functions
      *********************************************************************/
 
     /**
@@ -325,7 +330,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
         }
 
         if (!$this->isExists($queue->getName())) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Queue does not exist:' . $queue->getName());
         }
 
@@ -339,7 +344,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
         try {
             $msg->save();
         } catch (Exception $e) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
@@ -350,7 +355,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
 
         $classname = $queue->getMessageClass();
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
         return new $classname($options);
@@ -359,8 +364,8 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
     /**
      * Get messages in the queue
      *
-     * @param  integer    $maxMessages  Maximum number of messages to return
-     * @param  integer    $timeout      Visibility timeout for these messages
+     * @param  integer    $maxMessages Maximum number of messages to return
+     * @param  integer    $timeout     Visibility timeout for these messages
      * @param  Zend_Queue $queue
      * @return Zend_Queue_Message_Iterator
      * @throws Zend_Queue_Exception - database error
@@ -384,7 +389,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
 
         // start transaction handling
         try {
-            if ( $maxMessages > 0 ) { // ZF-7666 LIMIT 0 clause not included.
+            if ($maxMessages > 0 ) { // ZF-7666 LIMIT 0 clause not included.
                 $db->beginTransaction();
 
                 $query = $db->select();
@@ -393,9 +398,9 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
                     $query->forUpdate();
                 }
                 $query->from($info['name'], array('*'))
-                      ->where('queue_id=?', $this->getQueueId($queue->getName()))
-                      ->where('handle IS NULL OR timeout+' . (int)$timeout . ' < ' . (int)$microtime)
-                      ->limit($maxMessages);
+                    ->where('queue_id=?', $this->getQueueId($queue->getName()))
+                    ->where('handle IS NULL OR timeout+' . (int)$timeout . ' < ' . (int)$microtime)
+                    ->limit($maxMessages);
 
                 foreach ($db->fetchAll($query) as $data) {
                     // setup our changes to the message
@@ -424,7 +429,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
         } catch (Exception $e) {
             $db->rollBack();
 
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
@@ -436,7 +441,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
 
         $classname = $queue->getMessageSetClass();
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
         return new $classname($options);
@@ -499,7 +504,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
      *
      * Returns the queue's row identifier.
      *
-     * @param  string       $name
+     * @param  string $name
      * @return integer|null
      * @throws Zend_Queue_Exception
      */
@@ -511,12 +516,12 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
 
         $query = $this->_queueTable->select();
         $query->from($this->_queueTable, array('queue_id'))
-              ->where('queue_name=?', $name);
+            ->where('queue_name=?', $name);
 
         $queue = $this->_queueTable->fetchRow($query);
 
         if ($queue === null) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Queue does not exist: ' . $name);
         }
 

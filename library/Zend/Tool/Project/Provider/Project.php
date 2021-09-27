@@ -26,10 +26,10 @@
 require_once 'Zend/Tool/Project/Provider/Abstract.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Provider_Project
     extends Zend_Tool_Project_Provider_Abstract
@@ -54,7 +54,7 @@ class Zend_Tool_Project_Provider_Project
             if (!file_exists($path)) {
                 $created = mkdir($path);
                 if (!$created) {
-                    require_once 'Zend/Tool/Framework/Client/Exception.php';
+                    include_once 'Zend/Tool/Framework/Client/Exception.php';
                     throw new Zend_Tool_Framework_Client_Exception('Could not create requested project directory \'' . $path . '\'');
                 }
             }
@@ -64,7 +64,7 @@ class Zend_Tool_Project_Provider_Project
         $profile = $this->_loadProfile(self::NO_PROFILE_RETURN_FALSE, $path);
 
         if ($profile !== false) {
-            require_once 'Zend/Tool/Framework/Client/Exception.php';
+            include_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('A project already exists here');
         }
 
@@ -83,10 +83,12 @@ class Zend_Tool_Project_Provider_Project
             $profileData = $this->_getDefaultProfile();
         }
 
-        $newProfile = new Zend_Tool_Project_Profile(array(
+        $newProfile = new Zend_Tool_Project_Profile(
+            array(
             'projectDirectory' => $path,
             'profileData' => $profileData
-            ));
+            )
+        );
 
         $newProfile->loadFromData();
 
@@ -96,7 +98,8 @@ class Zend_Tool_Project_Provider_Project
         $response->appendContent('Note: ', array('separator' => false, 'color' => 'yellow'));
         $response->appendContent(
             'This command created a web project, '
-            . 'for more information setting up your VHOST, please see docs/README');
+            . 'for more information setting up your VHOST, please see docs/README'
+        );
 
         if (!Zend_Tool_Project_Provider_Test::isPHPUnitAvailable()) {
             $response->appendContent('Testing Note: ', array('separator' => false, 'color' => 'yellow'));

@@ -21,13 +21,19 @@
  */
 
 
-/** Internally used classes */
+/**
+ * Internally used classes 
+ */
 
-/** Zend_Pdf_Image */
+/**
+ * Zend_Pdf_Image 
+ */
 require_once 'Zend/Pdf/Image.php';
 
 
-/** Zend_Pdf_FileParser */
+/**
+ * Zend_Pdf_FileParser 
+*/
 require_once 'Zend/Pdf/FileParser.php';
 
 /**
@@ -50,7 +56,7 @@ abstract class Zend_Pdf_FileParser_Image extends Zend_Pdf_FileParser
      *
      * Validates the data source and enables debug logging if so configured.
      *
-     * @param Zend_Pdf_FileParserDataSource $dataSource
+     * @param  Zend_Pdf_FileParserDataSource $dataSource
      * @throws Zend_Pdf_Exception
      */
     public function __construct(Zend_Pdf_FileParserDataSource $dataSource)

@@ -26,10 +26,10 @@
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Zf_BootstrapFile extends Zend_Tool_Project_Context_Filesystem_File
 {
@@ -78,14 +78,18 @@ class Zend_Tool_Project_Context_Zf_BootstrapFile extends Zend_Tool_Project_Conte
     public function getContents()
     {
 
-        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+        $codeGenFile = new Zend_CodeGenerator_Php_File(
+            array(
             'classes' => array(
-                new Zend_CodeGenerator_Php_Class(array(
+                new Zend_CodeGenerator_Php_Class(
+                    array(
                     'name' => 'Bootstrap',
                     'extendedClass' => 'Zend_Application_Bootstrap_Bootstrap',
-                    )),
+                    )
+                ),
                 )
-            ));
+            )
+        );
 
         return $codeGenFile->generate();
     }
@@ -101,7 +105,7 @@ class Zend_Tool_Project_Context_Zf_BootstrapFile extends Zend_Tool_Project_Conte
                 $this->_applicationInstance = new Zend_Application(
                     'development',
                     $applicationOptions
-                    );
+                );
             }
         }
 

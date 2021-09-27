@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Controller
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Controller
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -29,8 +29,8 @@ require_once 'Zend/Controller/Request/Http.php';
  *
  * HTTP request object for use with Zend_Controller family.
  *
- * @uses Zend_Controller_Request_Http
- * @package Zend_Controller
+ * @uses       Zend_Controller_Request_Http
+ * @package    Zend_Controller
  * @subpackage Request
  */
 class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
@@ -47,6 +47,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
 
     /**
      * Raw POST body
+     *
      * @var string|null
      */
     protected $_rawBody;
@@ -123,7 +124,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
      * Set a cookie
      *
      * @param  string $key
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return Zend_Controller_Request_HttpTestCase
      */
     public function setCookie($key, $value)
@@ -135,7 +136,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
     /**
      * Set multiple cookies at once
      *
-     * @param array $cookies
+     * @param  array $cookies
      * @return void
      */
     public function setCookies(array $cookies)
@@ -167,7 +168,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
     {
         $type = strtoupper(trim((string) $type));
         if (!in_array($type, $this->_validMethodTypes)) {
-            require_once 'Zend/Controller/Exception.php';
+            include_once 'Zend/Controller/Exception.php';
             throw new Zend_Controller_Exception('Invalid request method specified');
         }
         $this->_method = $type;
@@ -216,7 +217,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
      * Get request header
      *
      * @param  string $header
-     * @param  mixed $default
+     * @param  mixed  $default
      * @return string|null
      */
     public function getHeader($header, $default = null)

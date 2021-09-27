@@ -56,6 +56,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
 
     /**
      * Class to utilize for new query objects
+     *
      * @var string
      */
     protected string $_queryClass = 'Zend_Cloud_DocumentService_Adapter_SimpleDb_Query';
@@ -132,7 +133,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * List collections.
      *
-     * @param  array  $options
+     * @param  array $options
      * @return array
      */
     public function listCollections($options = null)
@@ -152,7 +153,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
      *
      * Returns a key/value array of document names to document objects.
      *
-     * @param  string $collectionName Name of collection for which to list documents
+     * @param  string     $collectionName Name of collection for which to list documents
      * @param  array|null $options
      * @return Zend_Cloud_DocumentService_DocumentSet
      */
@@ -166,9 +167,9 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Insert document
      *
-     * @param  string $collectionName Collection into which to insert document
+     * @param  string                                    $collectionName Collection into which to insert document
      * @param  array|Zend_Cloud_DocumentService_Document $document
-     * @param  array $options
+     * @param  array                                     $options
      * @return void
      */
     public function insertDocument($collectionName, $document, $options = null)
@@ -195,9 +196,9 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Replace an existing document with a new version
      *
-     * @param  string $collectionName
+     * @param  string                                    $collectionName
      * @param  array|Zend_Cloud_DocumentService_Document $document
-     * @param  array $options
+     * @param  array                                     $options
      * @return void
      */
     public function replaceDocument($collectionName, $document, $options = null)
@@ -228,10 +229,10 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
      * specific attributes ("attr" => true) instead of replacing them.
      * By default, attributes are replaced.
      *
-     * @param  string $collectionName
-     * @param  mixed|Zend_Cloud_DocumentService_Document $documentId Document ID, adapter-dependent
-     * @param  array|Zend_Cloud_DocumentService_Document $fieldset Set of fields to update
-     * @param  array                   $options
+     * @param  string                                    $collectionName
+     * @param  mixed|Zend_Cloud_DocumentService_Document $documentId     Document ID, adapter-dependent
+     * @param  array|Zend_Cloud_DocumentService_Document $fieldset       Set of fields to update
+     * @param  array                                     $options
      * @return boolean
      */
     public function updateDocument($collectionName, $documentId, $fieldset = null, $options = null)
@@ -280,7 +281,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
      * Delete document.
      *
      * @param  string $collectionName Collection from which to delete document
-     * @param  mixed  $document Document ID or Document object.
+     * @param  mixed  $document       Document ID or Document object.
      * @param  array  $options
      * @return boolean
      */
@@ -301,8 +302,8 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
      * Fetch single document by ID
      *
      * @param  string $collectionName Collection name
-     * @param  mixed $documentId Document ID, adapter-dependent
-     * @param  array $options
+     * @param  mixed  $documentId     Document ID, adapter-dependent
+     * @param  array  $options
      * @return Zend_Cloud_DocumentService_Document
      */
     public function fetchDocument($collectionName, $documentId, $options = null)
@@ -324,7 +325,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
      *
      * @param  string $collectionName Collection name
      * @param  string $query
-     * @param  array $options
+     * @param  array  $options
      * @return array Zend_Cloud_DocumentService_DocumentSet
      */
     public function query($collectionName, $query, $options = null)
@@ -355,7 +356,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     {
         $queryClass = $this->getQueryClass();
         if (!class_exists($queryClass)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($queryClass);
         }
 
@@ -382,8 +383,8 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Convert array of key-value pairs to array of Amazon attributes
      *
-     * @param string $name
-     * @param array $attributes
+     * @param  string $name
+     * @param  array  $attributes
      * @return array
      */
     protected function _makeAttributes($name, $attributes)
@@ -398,7 +399,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Convert array of Amazon attributes to array of key-value pairs
      *
-     * @param array $attributes
+     * @param  array $attributes
      * @return array
      */
     protected function _resolveAttributes($attributes, $returnDocument = false)
@@ -426,7 +427,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Create suitable document from array of fields
      *
-     * @param array $document
+     * @param  array $document
      * @return Zend_Cloud_DocumentService_Document
      */
     protected function _getDocumentFromArray($document)
@@ -451,7 +452,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
      * Create a DocumentSet from a SimpleDb resultset
      *
      * @param  Zend_Service_Amazon_SimpleDb_Page $resultSet
-     * @param  bool $returnDocs
+     * @param  bool                              $returnDocs
      * @return Zend_Cloud_DocumentService_DocumentSet
      */
     protected function _getDocumentSetFromResultSet(Zend_Service_Amazon_SimpleDb_Page $resultSet, $returnDocs = true)

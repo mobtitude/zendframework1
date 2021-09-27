@@ -39,6 +39,7 @@ class Zend_Gdata_Spreadsheets_WorksheetFeed extends Zend_Gdata_Feed
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_WorksheetFeed object.
+     *
      * @param DOMElement $element (optional) The DOMElement on whick to base this element.
      */
     public function __construct($element = null)

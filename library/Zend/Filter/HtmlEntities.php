@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Filter
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -25,10 +25,10 @@
 require_once 'Zend/Filter/Interface.php';
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Filter
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
 {
@@ -53,7 +53,7 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
      * Sets filter options
      *
      * @param  integer|array $quoteStyle
-     * @param  string  $charSet
+     * @param  string        $charSet
      * @return void
      */
     public function __construct($options = array())
@@ -173,7 +173,7 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
     /**
      * Sets the doubleQuote option
      *
-     * @param boolean $doubleQuote
+     * @param  boolean $doubleQuote
      * @return Zend_Filter_HtmlEntities Provides a fluent interface
      */
     public function setDoubleQuote($doubleQuote)
@@ -196,14 +196,14 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
         $filtered = htmlentities((string) $value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());
         if (strlen((string) $value) && !strlen($filtered)) {
             if (!function_exists('iconv')) {
-                require_once 'Zend/Filter/Exception.php';
+                include_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception('Encoding mismatch has resulted in htmlentities errors');
             }
             $enc      = $this->getEncoding();
             $value    = iconv('', $enc . '//IGNORE', (string) $value);
             $filtered = htmlentities($value, $this->getQuoteStyle(), $enc, $this->getDoubleQuote());
             if (!strlen($filtered)) {
-                require_once 'Zend/Filter/Exception.php';
+                include_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception('Encoding mismatch has resulted in htmlentities errors');
             }
         }

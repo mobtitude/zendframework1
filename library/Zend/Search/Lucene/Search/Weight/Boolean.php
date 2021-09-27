@@ -21,7 +21,9 @@
  */
 
 
-/** Zend_Search_Lucene_Search_Weight */
+/**
+ * Zend_Search_Lucene_Search_Weight 
+ */
 require_once 'Zend/Search/Lucene/Search/Weight.php';
 
 
@@ -60,8 +62,8 @@ class Zend_Search_Lucene_Search_Weight_Boolean extends Zend_Search_Lucene_Search
      * @param Zend_Search_Lucene_Interface    $reader
      */
     public function __construct(Zend_Search_Lucene_Search_Query $query,
-                                Zend_Search_Lucene_Interface    $reader)
-    {
+        Zend_Search_Lucene_Interface    $reader
+    ) {
         $this->_query   = $query;
         $this->_reader  = $reader;
         $this->_weights = array();

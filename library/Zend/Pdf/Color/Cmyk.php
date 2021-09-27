@@ -12,27 +12,31 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
-/** Internally used classes */
+/**
+ * Internally used classes 
+ */
 require_once 'Zend/Pdf/Element/Numeric.php';
 
 
-/** Zend_Pdf_Color */
+/**
+ * Zend_Pdf_Color 
+*/
 require_once 'Zend/Pdf/Color.php';
 
 /**
  * CMYK color implementation
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Color_Cmyk extends Zend_Pdf_Color
 {
@@ -71,17 +75,25 @@ class Zend_Pdf_Color_Cmyk extends Zend_Pdf_Color
      */
     public function __construct($c, $m, $y, $k)
     {
-        if ($c < 0) { $c = 0; }
-        if ($c > 1) { $c = 1; }
+        if ($c < 0) { $c = 0; 
+        }
+        if ($c > 1) { $c = 1; 
+        }
 
-        if ($m < 0) { $m = 0; }
-        if ($m > 1) { $m = 1; }
+        if ($m < 0) { $m = 0; 
+        }
+        if ($m > 1) { $m = 1; 
+        }
 
-        if ($y < 0) { $y = 0; }
-        if ($y > 1) { $y = 1; }
+        if ($y < 0) { $y = 0; 
+        }
+        if ($y > 1) { $y = 1; 
+        }
 
-        if ($k < 0) { $k = 0; }
-        if ($k > 1) { $k = 1; }
+        if ($k < 0) { $k = 0; 
+        }
+        if ($k > 1) { $k = 1; 
+        }
 
         $this->_c = new Zend_Pdf_Element_Numeric($c);
         $this->_m = new Zend_Pdf_Element_Numeric($m);
@@ -94,7 +106,7 @@ class Zend_Pdf_Color_Cmyk extends Zend_Pdf_Color
      * to switch color.
      * Color set instructions differ for stroking and nonstroking operations.
      *
-     * @param boolean $stroking
+     * @param  boolean $stroking
      * @return string
      */
     public function instructions($stroking)

@@ -36,6 +36,7 @@ class Zend_Service_StrikeIron
 {
     /**
      * Options to pass to Zend_Service_StrikeIron_Base constructor
+     *
      * @param array
      */
     protected array $_options;
@@ -43,7 +44,7 @@ class Zend_Service_StrikeIron
     /**
      * Class constructor
      *
-     * @param array  $options  Options to pass to Zend_Service_StrikeIron_Base constructor
+     * @param array $options Options to pass to Zend_Service_StrikeIron_Base constructor
      */
     public function __construct($options = array())
     {
@@ -54,7 +55,7 @@ class Zend_Service_StrikeIron
      * Factory method to return a preconfigured Zend_Service_StrikeIron_*
      * instance.
      *
-     * @param  null|string  $options  Service options
+     * @param  null|string $options Service options
      * @return object       Zend_Service_StrikeIron_* instance
      * @throws Zend_Service_StrikeIron_Exception
      */
@@ -69,7 +70,7 @@ class Zend_Service_StrikeIron
 
         try {
             if (!class_exists($class)) {
-                require_once 'Zend/Loader.php';
+                include_once 'Zend/Loader.php';
                 @Zend_Loader::loadClass($class);
             }
             if (!class_exists($class, false)) {
@@ -80,7 +81,7 @@ class Zend_Service_StrikeIron
             /**
              * @see Zend_Service_StrikeIron_Exception
              */
-            require_once 'Zend/Service/StrikeIron/Exception.php';
+            include_once 'Zend/Service/StrikeIron/Exception.php';
             throw new Zend_Service_StrikeIron_Exception($msg, $e->getCode(), $e);
         }
 

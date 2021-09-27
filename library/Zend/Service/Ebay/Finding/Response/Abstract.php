@@ -119,7 +119,7 @@ abstract class Zend_Service_Ebay_Finding_Response_Abstract extends Zend_Service_
             /**
              * @see Zend_Service_Ebay_Finding_Error_Message
              */
-            require_once 'Zend/Service/Ebay/Finding/Error/Message.php';
+            include_once 'Zend/Service/Ebay/Finding/Error/Message.php';
             $this->errorMessage = new Zend_Service_Ebay_Finding_Error_Message($node);
         }
     }

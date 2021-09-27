@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_Cmap */
+/**
+ * Zend_Pdf_Cmap 
+ */
 require_once 'Zend/Pdf/Cmap.php';
 
 
@@ -38,7 +40,9 @@ require_once 'Zend/Pdf/Cmap.php';
  */
 class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
 {
-  /**** Instance Variables ****/
+    /****
+     * Instance Variables 
+     ****/
     /**
      * The starting character code covered by this table.
      */
@@ -56,10 +60,12 @@ class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
 
 
 
-  /**** Public Interface ****/
+    /****
+     * Public Interface 
+     ****/
 
 
-  /* Concrete Class Implementation */
+    /* Concrete Class Implementation */
 
     /**
      * Returns an array of glyph numbers corresponding to the Unicode characters.
@@ -69,7 +75,7 @@ class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
      *
      * See also {@link glyphNumberForCharacter()}.
      *
-     * @param array $characterCodes Array of Unicode character codes (code points).
+     * @param  array $characterCodes Array of Unicode character codes (code points).
      * @return array Array of glyph numbers.
      */
     public function glyphNumbersForCharacters($characterCodes)
@@ -98,7 +104,7 @@ class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
      * See also {@link glyphNumbersForCharacters()} which is optimized for bulk
      * operations.
      *
-     * @param integer $characterCode Unicode character code (code point).
+     * @param  integer $characterCode Unicode character code (code point).
      * @return integer Glyph number.
      */
     public function glyphNumberForCharacter($characterCode)
@@ -135,7 +141,7 @@ class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
      * glyph for each character code).
      *
      * @internal
-     * @return array Array representing <Unicode character code> => <glyph number> pairs.
+     * @return   array Array representing <Unicode character code> => <glyph number> pairs.
      */
     public function getCoveredCharactersGlyphs()
     {
@@ -148,7 +154,7 @@ class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
     }
 
 
-  /* Object Lifecycle */
+    /* Object Lifecycle */
 
     /**
      * Object constructor
@@ -156,7 +162,7 @@ class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
      * Parses the raw binary table data. Throws an exception if the table is
      * malformed.
      *
-     * @param string $cmapData Raw binary cmap table data.
+     * @param  string $cmapData Raw binary cmap table data.
      * @throws Zend_Pdf_Exception
      */
     public function __construct($cmapData)
@@ -165,25 +171,31 @@ class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
          */
         $actualLength = strlen($cmapData);
         if ($actualLength < 9) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Insufficient table data',
-                                         Zend_Pdf_Exception::CMAP_TABLE_DATA_TOO_SMALL);
+            include_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception(
+                'Insufficient table data',
+                Zend_Pdf_Exception::CMAP_TABLE_DATA_TOO_SMALL
+            );
         }
 
         /* Sanity check: Make sure this is right data for this table type.
          */
         $type = $this->_extractUInt2($cmapData, 0);
         if ($type != Zend_Pdf_Cmap::TYPE_TRIMMED_TABLE) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Wrong cmap table type',
-                                         Zend_Pdf_Exception::CMAP_WRONG_TABLE_TYPE);
+            include_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception(
+                'Wrong cmap table type',
+                Zend_Pdf_Exception::CMAP_WRONG_TABLE_TYPE
+            );
         }
 
         $length = $this->_extractUInt2($cmapData, 2);
         if ($length != $actualLength) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception("Table length ($length) does not match actual length ($actualLength)",
-                                         Zend_Pdf_Exception::CMAP_WRONG_TABLE_LENGTH);
+            include_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception(
+                "Table length ($length) does not match actual length ($actualLength)",
+                Zend_Pdf_Exception::CMAP_WRONG_TABLE_LENGTH
+            );
         }
 
         /* Mapping tables should be language-independent. The font may not work
@@ -201,9 +213,11 @@ class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
         $entryCount = $this->_extractUInt2($cmapData, 8);
         $expectedCount = ($length - 10) >> 1;
         if ($entryCount != $expectedCount) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception("Entry count is wrong; expected: $expectedCount; actual: $entryCount",
-                                         Zend_Pdf_Exception::CMAP_WRONG_ENTRY_COUNT);
+            include_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception(
+                "Entry count is wrong; expected: $expectedCount; actual: $entryCount",
+                Zend_Pdf_Exception::CMAP_WRONG_ENTRY_COUNT
+            );
         }
 
         $this->_endCode = $this->_startCode + $entryCount - 1;
@@ -217,9 +231,11 @@ class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
          * of the table.
          */
         if ($offset != $length) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception("Ending offset ($offset) does not match length ($length)",
-                                         Zend_Pdf_Exception::CMAP_FINAL_OFFSET_NOT_LENGTH);
+            include_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception(
+                "Ending offset ($offset) does not match length ($length)",
+                Zend_Pdf_Exception::CMAP_FINAL_OFFSET_NOT_LENGTH
+            );
         }
     }
 

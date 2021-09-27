@@ -12,18 +12,18 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Feed_Writer
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Feed_Writer
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Writer
 {
@@ -79,7 +79,7 @@ class Zend_Feed_Writer
     /**
      * Set plugin loader for use with Extensions
      *
-     * @param  Zend_Loader_PluginLoader_Interface
+     * @param Zend_Loader_PluginLoader_Interface
      */
     public static function setPluginLoader(Zend_Loader_PluginLoader_Interface $loader)
     {
@@ -89,15 +89,17 @@ class Zend_Feed_Writer
     /**
      * Get plugin loader for use with Extensions
      *
-     * @return  Zend_Loader_PluginLoader_Interface
+     * @return Zend_Loader_PluginLoader_Interface
      */
     public static function getPluginLoader()
     {
         if (!isset(self::$_pluginLoader)) {
-            require_once 'Zend/Loader/PluginLoader.php';
-            self::$_pluginLoader = new Zend_Loader_PluginLoader(array(
+            include_once 'Zend/Loader/PluginLoader.php';
+            self::$_pluginLoader = new Zend_Loader_PluginLoader(
+                array(
                 'Zend_Feed_Writer_Extension_' => 'Zend/Feed/Writer/Extension/',
-            ));
+                )
+            );
         }
         return self::$_pluginLoader;
     }
@@ -181,9 +183,11 @@ class Zend_Feed_Writer
             && !self::getPluginLoader()->isLoaded($feedRendererName)
             && !self::getPluginLoader()->isLoaded($entryRendererName)
         ) {
-            require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Could not load extension: ' . $name
-                . 'using Plugin Loader. Check prefix paths are configured and extension exists.');
+            include_once 'Zend/Feed/Exception.php';
+            throw new Zend_Feed_Exception(
+                'Could not load extension: ' . $name
+                . 'using Plugin Loader. Check prefix paths are configured and extension exists.'
+            );
         }
     }
 

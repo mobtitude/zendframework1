@@ -45,10 +45,11 @@ class Zend_Amf_Parse_Resource_MysqlResult
     /**
      * Parse resource into array
      *
-     * @param resource $resource
+     * @param  resource $resource
      * @return array
      */
-    public function parse($resource) {
+    public function parse($resource)
+    {
         $result = array();
         $fieldcnt = mysql_num_fields($resource);
         $fields_transform = array();
@@ -61,7 +62,7 @@ class Zend_Amf_Parse_Resource_MysqlResult
 
         while($row = mysql_fetch_object($resource)) {
             foreach($fields_transform as $fieldname => $fieldtype) {
-               settype($row->$fieldname, $fieldtype);
+                settype($row->$fieldname, $fieldtype);
             }
             $result[] = $row;
         }

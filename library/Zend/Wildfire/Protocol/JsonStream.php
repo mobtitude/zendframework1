@@ -20,13 +20,19 @@
  * @version    $Id$
  */
 
-/** Zend_Wildfire_Plugin_Interface */
+/**
+ * Zend_Wildfire_Plugin_Interface 
+ */
 require_once 'Zend/Wildfire/Plugin/Interface.php';
 
-/** Zend_Wildfire_Channel_Interface */
+/**
+ * Zend_Wildfire_Channel_Interface 
+*/
 require_once 'Zend/Wildfire/Channel/Interface.php';
 
-/** Zend_Json */
+/**
+ * Zend_Json 
+*/
 require_once 'Zend/Json.php';
 
 /**
@@ -58,12 +64,12 @@ class Zend_Wildfire_Protocol_JsonStream
     /**
      * Register a plugin that uses this protocol
      *
-     * @param Zend_Wildfire_Plugin_Interface $plugin The plugin to be registered
+     * @param  Zend_Wildfire_Plugin_Interface $plugin The plugin to be registered
      * @return boolean Returns TRUE if plugin was registered, false if it was already registered
      */
     public function registerPlugin(Zend_Wildfire_Plugin_Interface $plugin)
     {
-        if (in_array($plugin,$this->_plugins)) {
+        if (in_array($plugin, $this->_plugins)) {
             return false;
         }
         $this->_plugins[] = $plugin;
@@ -73,9 +79,9 @@ class Zend_Wildfire_Protocol_JsonStream
     /**
      * Record a message with the given data in the given structure
      *
-     * @param Zend_Wildfire_Plugin_Interface $plugin The plugin recording the message
-     * @param string $structure The structure to be used for the data
-     * @param array $data The data to be recorded
+     * @param  Zend_Wildfire_Plugin_Interface $plugin    The plugin recording the message
+     * @param  string                         $structure The structure to be used for the data
+     * @param  array                          $data      The data to be recorded
      * @return boolean Returns TRUE if message was recorded
      */
     public function recordMessage(Zend_Wildfire_Plugin_Interface $plugin, $structure, $data)
@@ -97,7 +103,7 @@ class Zend_Wildfire_Protocol_JsonStream
     /**
      * Remove all qued messages
      *
-     * @param Zend_Wildfire_Plugin_Interface $plugin The plugin for which to clear messages
+     * @param  Zend_Wildfire_Plugin_Interface $plugin The plugin for which to clear messages
      * @return boolean Returns TRUE if messages were present
      */
     public function clearMessages(Zend_Wildfire_Plugin_Interface $plugin)
@@ -138,7 +144,7 @@ class Zend_Wildfire_Protocol_JsonStream
     /**
      * Use the JSON encoding scheme for the value specified
      *
-     * @param mixed $value The value to be encoded
+     * @param  mixed $value The value to be encoded
      * @return string  The encoded value
      */
     protected function _encode($value)
@@ -149,14 +155,14 @@ class Zend_Wildfire_Protocol_JsonStream
     /**
      * Retrieves all formatted data ready to be sent by the channel.
      *
-     * @param Zend_Wildfire_Channel_Interface $channel The instance of the channel that will be transmitting the data
+     * @param  Zend_Wildfire_Channel_Interface $channel The instance of the channel that will be transmitting the data
      * @return mixed Returns the data to be sent by the channel.
      * @throws Zend_Wildfire_Exception
      */
     public function getPayload(Zend_Wildfire_Channel_Interface $channel)
     {
         if (!$channel instanceof Zend_Wildfire_Channel_HttpHeaders) {
-            require_once 'Zend/Wildfire/Exception.php';
+            include_once 'Zend/Wildfire/Exception.php';
             throw new Zend_Wildfire_Exception('The '.get_class($channel).' channel is not supported by the '.get_class($this).' protocol.');
         }
 
@@ -189,9 +195,9 @@ class Zend_Wildfire_Protocol_JsonStream
 
                 foreach ($messages as $message) {
 
-                    $parts = explode("\n",chunk_split($message, 5000, "\n"));
+                    $parts = explode("\n", chunk_split($message, 5000, "\n"));
 
-                    for ($i=0 ; $i<count($parts) ; $i++) {
+                    for ($i=0 ; $i<count($parts); $i++) {
 
                         $part = $parts[$i];
                         if ($part) {
@@ -215,7 +221,7 @@ class Zend_Wildfire_Protocol_JsonStream
                             $message_index++;
 
                             if ($message_index > 99999) {
-                                require_once 'Zend/Wildfire/Exception.php';
+                                include_once 'Zend/Wildfire/Exception.php';
                                 throw new Zend_Wildfire_Exception('Maximum number (99,999) of messages reached!');
                             }
                         }

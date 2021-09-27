@@ -88,8 +88,8 @@ abstract class Zend_Http_UserAgent_AbstractDevice
      * Constructor
      *
      * @param  null|string|array $userAgent If array, restores from serialized version
-     * @param  array $server
-     * @param  array $config
+     * @param  array             $server
+     * @param  array             $config
      * @return void
      */
     public function __construct($userAgent = null, array $server = array(), array $config = array())
@@ -203,8 +203,8 @@ abstract class Zend_Http_UserAgent_AbstractDevice
      * Set a feature for the current browser/device.
      *
      * @param  string $feature The feature to set.
-     * @param  string $value (option) feature value.
-     * @param  string $group (option) Group to associate with the feature
+     * @param  string $value   (option) feature value.
+     * @param  string $group   (option) Group to associate with the feature
      * @return Zend_Http_UserAgent_AbstractDevice
      */
     public function setFeature($feature, $value = false, $group = '')
@@ -219,7 +219,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
     /**
      * Affects a feature to a group
      *
-     * @param  string $group Group name
+     * @param  string $group   Group name
      * @param  string $feature Feature name
      * @return Zend_Http_UserAgent_AbstractDevice
      */
@@ -447,7 +447,9 @@ abstract class Zend_Http_UserAgent_AbstractDevice
             }
         }
 
-        /** Security level */
+        /**
+ * Security level 
+*/
         $security = array(
             'N' => 'no security',
             'U' => 'strong security',
@@ -498,13 +500,15 @@ abstract class Zend_Http_UserAgent_AbstractDevice
                 $result['browser_version'] = '??';
             }
         } elseif ($product == 'mozilla' && isset($result['browser_version'])
-                  && $result['browser_version'] < 5.0
+            && $result['browser_version'] < 5.0
         ) {
             // handles the real Mozilla (or old Netscape if version < 5.0)
             $result['browser_name'] = 'Netscape';
         }
 
-        /** windows */
+        /**
+ * windows 
+*/
         if ($result['browser_name'] == 'MSIE') {
             $result['browser_engine'] = 'MSIE';
             $result['browser_name']   = 'Internet Explorer';
@@ -640,10 +644,13 @@ abstract class Zend_Http_UserAgent_AbstractDevice
 
                     // exception : if the last one is 'Red Hat' or 'Debian' =>
                     // use rv: to find browser_version */
-                    if (in_array($result['others']['detail'][$last][1], array(
+                    if (in_array(
+                        $result['others']['detail'][$last][1], array(
                         'Debian',
                         'Hat',
-                    ))) {
+                        )
+                    )
+                    ) {
                         $searchRV = true;
                     }
                     $result['browser_name']    = $result['others']['detail'][$last][1];
@@ -694,7 +701,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
                 // Opera X.XX
                 if (isset($result['others']['detail'][1][1])) {
                     $result['browser_version'] = $result['others']['detail'][1][1];
-                // Opera/X.XX
+                    // Opera/X.XX
                 } elseif (isset($result['others']['detail'][0][2])) {
                     $result['browser_version'] = $result['others']['detail'][0][2];
                 }
@@ -759,7 +766,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
         $config = $config[$browserType]['features'];
 
         if (empty($config['classname'])) {
-            require_once 'Zend/Http/UserAgent/Exception.php';
+            include_once 'Zend/Http/UserAgent/Exception.php';
             throw new Zend_Http_UserAgent_Exception('The ' . $this->getType() . ' features adapter must have a "classname" config parameter defined');
         }
 
@@ -768,12 +775,12 @@ abstract class Zend_Http_UserAgent_AbstractDevice
             if (isset($config['path'])) {
                 $path = $config['path'];
             } else {
-                require_once 'Zend/Http/UserAgent/Exception.php';
+                include_once 'Zend/Http/UserAgent/Exception.php';
                 throw new Zend_Http_UserAgent_Exception('The ' . $this->getType() . ' features adapter must have a "path" config parameter defined');
             }
 
-            if (false === include_once ($path)) {
-                require_once 'Zend/Http/UserAgent/Exception.php';
+            if (false === include_once $path) {
+                include_once 'Zend/Http/UserAgent/Exception.php';
                 throw new Zend_Http_UserAgent_Exception('The ' . $this->getType() . ' features adapter path that does not exist');
             }
         }
@@ -966,7 +973,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
      * Match a user agent string against a list of signatures
      *
      * @param  string $userAgent
-     * @param  array $signatures
+     * @param  array  $signatures
      * @return bool
      */
     protected static function _matchAgentAgainstSignatures($userAgent, $signatures)

@@ -36,10 +36,10 @@ require_once 'Zend/Reflection/File.php';
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Context_Interface
 {
@@ -67,7 +67,7 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
         $this->_resource->setAppendable(false);
         $this->_controllerResource = $this->_resource->getParentResource();
         if (!$this->_controllerResource->getContext() instanceof Zend_Tool_Project_Context_Zf_ControllerFile) {
-            require_once 'Zend/Tool/Project/Context/Exception.php';
+            include_once 'Zend/Tool/Project/Context/Exception.php';
             throw new Zend_Tool_Project_Context_Exception('ActionMethod must be a sub resource of a ControllerFile');
         }
         // make the ControllerFile node appendable so we can tack on the actionMethod.
@@ -112,7 +112,7 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
     /**
      * setResource()
      *
-     * @param Zend_Tool_Project_Profile_Resource $resource
+     * @param  Zend_Tool_Project_Profile_Resource $resource
      * @return Zend_Tool_Project_Context_Zf_ActionMethod
      */
     public function setResource(Zend_Tool_Project_Profile_Resource $resource)
@@ -124,7 +124,7 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
     /**
      * setActionName()
      *
-     * @param string $actionName
+     * @param  string $actionName
      * @return Zend_Tool_Project_Context_Zf_ActionMethod
      */
     public function setActionName($actionName)
@@ -151,11 +151,11 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
     public function create()
     {
         if (self::createActionMethod($this->_controllerPath, $this->_actionName) === false) {
-            require_once 'Zend/Tool/Project/Context/Exception.php';
+            include_once 'Zend/Tool/Project/Context/Exception.php';
             throw new Zend_Tool_Project_Context_Exception(
                 'Could not create action within controller ' . $this->_controllerPath
                 . ' with action name ' . $this->_actionName
-                );
+            );
         }
         return $this;
     }
@@ -174,9 +174,9 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
     /**
      * createAcionMethod()
      *
-     * @param string $controllerPath
-     * @param string $actionName
-     * @param string $body
+     * @param  string $controllerPath
+     * @param  string $actionName
+     * @param  string $body
      * @return true
      */
     public static function createActionMethod($controllerPath, $actionName, $body = '        // action body')
@@ -186,10 +186,12 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
         }
 
         $controllerCodeGenFile = Zend_CodeGenerator_Php_File::fromReflectedFileName($controllerPath, true, true);
-        $controllerCodeGenFile->getClass()->setMethod(array(
+        $controllerCodeGenFile->getClass()->setMethod(
+            array(
             'name' => $actionName . 'Action',
             'body' => $body
-            ));
+            )
+        );
 
         file_put_contents($controllerPath, $controllerCodeGenFile->generate());
         return true;
@@ -198,8 +200,8 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
     /**
      * hasActionMethod()
      *
-     * @param string $controllerPath
-     * @param string $actionName
+     * @param  string $controllerPath
+     * @param  string $actionName
      * @return bool
      */
     public static function hasActionMethod($controllerPath, $actionName)

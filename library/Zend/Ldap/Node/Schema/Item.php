@@ -102,7 +102,7 @@ abstract class Zend_Ldap_Node_Schema_Item implements ArrayAccess, Countable
      * This method is needed for a full implementation of ArrayAccess
      *
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return null
      * @throws BadMethodCallException
      */

@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Mobile_Push_Message_Mpns **/
+/**
+ * Zend_Mobile_Push_Message_Mpns 
+ **/
 require_once 'Zend/Mobile/Push/Message/Mpns.php';
 
 /**
@@ -90,7 +92,7 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Background Image
      *
-     * @param string $bgImg
+     * @param  string $bgImg
      * @return Zend_Mobile_Push_Message_Mpns_Tile
      * @throws Zend_Mobile_Push_Message_Exception
      */
@@ -116,7 +118,7 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Count
      *
-     * @param int $count
+     * @param  int $count
      * @return Zend_Mobile_Push_Message_Mpns_Tile
      * @throws Zend_Mobile_Push_Message_Exception
      */
@@ -142,7 +144,7 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Title
      *
-     * @param string $title
+     * @param  string $title
      * @return Zend_Mobile_Push_Message_Mpns_Tile
      * @throws Zend_Mobile_Push_Message_Exception
      */
@@ -168,7 +170,7 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Back Background Image
      *
-     * @param string $bgImg
+     * @param  string $bgImg
      * @return Zend_Mobile_Push_Message_Mpns_Tile
      * @throws Zend_Mobile_Push_Message_Exception
      */
@@ -194,7 +196,7 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Back Title
      *
-     * @param string $title
+     * @param  string $title
      * @return Zend_Mobile_Push_Message_Mpns_Tile
      * @throws Zend_Mobile_Push_Message_Exception
      */
@@ -220,7 +222,7 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Back Content
      * 
-     * @param string $content
+     * @param  string $content
      * @return Zend_Mobile_Push_Message_Mpns_Tile
      * @throws Zend_Mobile_Push_Message_Exception
      */
@@ -245,7 +247,7 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Tile Id
      *
-     * @param string $tileId
+     * @param  string $tileId
      * @return Zend_Mobile_Push_Message_Mpns_Tile
      * @throws Zend_Mobile_Push_Message_Exception
      */
@@ -274,17 +276,20 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Delay
      *
-     * @param int $delay
+     * @param  int $delay
      * @return Zend_Mobile_Push_Message_Mpns_Tile
      * @throws Zend_Mobile_Push_Message_Exception
      */
     public function setDelay($delay)
     {
-        if (!in_array($delay, array(
+        if (!in_array(
+            $delay, array(
             self::DELAY_IMMEDIATE,
             self::DELAY_450S,
             self::DELAY_900S
-        ))) {
+            )
+        )
+        ) {
             throw new Zend_Mobile_Push_Message_Exception('$delay must be one of the DELAY_* constants');
         }
         $this->_delay = $delay;

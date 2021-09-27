@@ -12,19 +12,19 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Auth
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Auth
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 
 /**
- * @category   Zend
- * @package    Zend_Auth
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Auth
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Auth
 {
@@ -44,7 +44,8 @@ class Zend_Auth
      * @return void
      */
     protected function __construct()
-    {}
+    {
+    }
 
     /**
      * Singleton pattern implementation makes "clone" unavailable
@@ -52,7 +53,8 @@ class Zend_Auth
      * @return void
      */
     protected function __clone()
-    {}
+    {
+    }
 
     /**
      * Returns an instance of Zend_Auth
@@ -83,7 +85,7 @@ class Zend_Auth
             /**
              * @see Zend_Auth_Storage_Session
              */
-            require_once 'Zend/Auth/Storage/Session.php';
+            include_once 'Zend/Auth/Storage/Session.php';
             $this->setStorage(new Zend_Auth_Storage_Session());
         }
 

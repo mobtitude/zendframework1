@@ -12,18 +12,18 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Json
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
- * @category   Zend
- * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Json
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Json_Server_Error
 {
@@ -53,6 +53,7 @@ class Zend_Json_Server_Error
 
     /**
      * Error data
+     *
      * @var mixed
      */
     protected $_data;
@@ -66,15 +67,15 @@ class Zend_Json_Server_Error
      * Constructor
      *
      * @param  string $message
-     * @param  int $code
-     * @param  mixed $data
+     * @param  int    $code
+     * @param  mixed  $data
      * @return void
      */
     public function __construct($message = null, $code = -32000, $data = null)
     {
         $this->setMessage($message)
-             ->setCode($code)
-             ->setData($data);
+            ->setCode($code)
+            ->setData($data);
     }
 
     /**
@@ -178,7 +179,7 @@ class Zend_Json_Server_Error
      */
     public function toJson()
     {
-        require_once 'Zend/Json.php';
+        include_once 'Zend/Json.php';
         return Zend_Json::encode($this->toArray());
     }
 

@@ -150,7 +150,7 @@ class Zend_Mail_Storage_Folder implements RecursiveIterator
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception("no subfolder named $name");
         }
 
@@ -160,8 +160,8 @@ class Zend_Mail_Storage_Folder implements RecursiveIterator
     /**
      * add or replace subfolder named $name
      *
-     * @param string $name local name of subfolder
-     * @param Zend_Mail_Storage_Folder $folder instance for new subfolder
+     * @param  string                   $name   local name of subfolder
+     * @param  Zend_Mail_Storage_Folder $folder instance for new subfolder
      * @return null
      */
     public function __set($name, Zend_Mail_Storage_Folder $folder)
@@ -172,7 +172,7 @@ class Zend_Mail_Storage_Folder implements RecursiveIterator
     /**
      * remove subfolder named $name
      *
-     * @param string $name local name of subfolder
+     * @param  string $name local name of subfolder
      * @return null
      */
     public function __unset($name)

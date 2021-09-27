@@ -46,7 +46,7 @@ class Zend_Gdata_DublinCore_Extension_Identifier extends Zend_Gdata_Extension
      * An unambiguous reference to the resource within a given context
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($value = null)
     {

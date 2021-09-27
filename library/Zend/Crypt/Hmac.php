@@ -29,12 +29,12 @@ require_once 'Zend/Crypt.php';
  * PHP implementation of the RFC 2104 Hash based Message Authentication Code
  * algorithm.
  *
- * @todo  Patch for refactoring failed tests (key block sizes >80 using internal algo)
- * @todo       Check if mhash() is a required alternative (will be PECL-only soon)
- * @category   Zend
- * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @todo      Patch for refactoring failed tests (key block sizes >80 using internal algo)
+ * @todo      Check if mhash() is a required alternative (will be PECL-only soon)
+ * @category  Zend
+ * @package   Zend_Crypt
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Crypt_Hmac extends Zend_Crypt
 {
@@ -73,10 +73,10 @@ class Zend_Crypt_Hmac extends Zend_Crypt
      * algorithm, the data to compute MAC of, and an output format of String,
      * Binary notation or BTWOC.
      *
-     * @param string $key
-     * @param string $hash
-     * @param string $data
-     * @param string $output
+     * @param  string $key
+     * @param  string $hash
+     * @param  string $data
+     * @param  string $output
      * @throws Zend_Crypt_Hmac_Exception
      * @return string
      */
@@ -84,7 +84,7 @@ class Zend_Crypt_Hmac extends Zend_Crypt
     {
         // set the key
         if (!isset($key) || empty($key)) {
-            require_once 'Zend/Crypt/Hmac/Exception.php';
+            include_once 'Zend/Crypt/Hmac/Exception.php';
             throw new Zend_Crypt_Hmac_Exception('provided key is null or empty');
         }
         self::$_key = $key;
@@ -99,14 +99,14 @@ class Zend_Crypt_Hmac extends Zend_Crypt
     /**
      * Setter for the hash method.
      *
-     * @param string $hash
+     * @param  string $hash
      * @throws Zend_Crypt_Hmac_Exception
      * @return Zend_Crypt_Hmac
      */
     protected static function _setHashAlgorithm($hash)
     {
         if (!isset($hash) || empty($hash)) {
-            require_once 'Zend/Crypt/Hmac/Exception.php';
+            include_once 'Zend/Crypt/Hmac/Exception.php';
             throw new Zend_Crypt_Hmac_Exception('provided hash string is null or empty');
         }
 
@@ -122,7 +122,7 @@ class Zend_Crypt_Hmac extends Zend_Crypt
         }
 
         if ($hashSupported === false) {
-            require_once 'Zend/Crypt/Hmac/Exception.php';
+            include_once 'Zend/Crypt/Hmac/Exception.php';
             throw new Zend_Crypt_Hmac_Exception('hash algorithm provided is not supported on this PHP installation; please enable the hash or mhash extensions');
         }
         self::$_hashAlgorithm = $hash;
@@ -131,9 +131,9 @@ class Zend_Crypt_Hmac extends Zend_Crypt
     /**
      * Perform HMAC and return the keyed data
      *
-     * @param string $data
-     * @param string $output
-     * @param bool $internal Option to not use hash() functions for testing
+     * @param  string $data
+     * @param  string $output
+     * @param  bool   $internal Option to not use hash() functions for testing
      * @return string
      */
     protected static function _hash($data, $output = self::STRING, $internal = false)
@@ -159,7 +159,7 @@ class Zend_Crypt_Hmac extends Zend_Crypt
      * we need to make a small detour to get the correct integer matching our
      * algorithm's name.
      *
-     * @param string $hashAlgorithm
+     * @param  string $hashAlgorithm
      * @return integer
      */
     protected static function _getMhashDefinition($hashAlgorithm)

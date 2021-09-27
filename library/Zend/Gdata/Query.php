@@ -116,8 +116,8 @@ class Zend_Gdata_Query
     }
 
     /**
-     * @param string $name
-     * @param string $value
+     * @param  string $name
+     * @param  string $value
      * @return Zend_Gdata_Query Provides a fluent interface
      */
     public function setParam($name, $value)
@@ -135,7 +135,7 @@ class Zend_Gdata_Query
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Query Provides a fluent interface
      */
     public function setAlt($value)
@@ -149,7 +149,7 @@ class Zend_Gdata_Query
     }
 
     /**
-     * @param int $value
+     * @param  int $value
      * @return Zend_Gdata_Query Provides a fluent interface
      */
     public function setMaxResults($value)
@@ -163,7 +163,7 @@ class Zend_Gdata_Query
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Query Provides a fluent interface
      */
     public function setQuery($value)
@@ -177,7 +177,7 @@ class Zend_Gdata_Query
     }
 
     /**
-     * @param int $value
+     * @param  int $value
      * @return Zend_Gdata_Query Provides a fluent interface
      */
     public function setStartIndex($value)
@@ -191,7 +191,7 @@ class Zend_Gdata_Query
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Query Provides a fluent interface
      */
     public function setUpdatedMax($value)
@@ -205,7 +205,7 @@ class Zend_Gdata_Query
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Query Provides a fluent interface
      */
     public function setUpdatedMin($value)
@@ -219,7 +219,7 @@ class Zend_Gdata_Query
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Query Provides a fluent interface
      */
     public function setPublishedMax($value)
@@ -233,7 +233,7 @@ class Zend_Gdata_Query
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Query Provides a fluent interface
      */
     public function setPublishedMin($value)
@@ -247,7 +247,7 @@ class Zend_Gdata_Query
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Query Provides a fluent interface
      */
     public function setAuthor($value)
@@ -369,7 +369,7 @@ class Zend_Gdata_Query
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Query Provides a fluent interface
      */
     public function setCategory($value)
@@ -393,7 +393,7 @@ class Zend_Gdata_Query
         if (method_exists($this, $method)) {
             return call_user_func(array(&$this, $method));
         } else {
-            require_once 'Zend/Gdata/App/Exception.php';
+            include_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('Property ' . $name . '  does not exist');
         }
     }
@@ -404,7 +404,7 @@ class Zend_Gdata_Query
         if (method_exists($this, $method)) {
             return call_user_func(array(&$this, $method), $val);
         } else {
-            require_once 'Zend/Gdata/App/Exception.php';
+            include_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('Property ' . $name . '  does not exist');
         }
     }

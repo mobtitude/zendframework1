@@ -42,6 +42,7 @@ class Zend_Application_Bootstrap_Bootstrap
 {
     /**
      * Application resource namespace
+     *
      * @var false|string
      */
     protected $_appNamespace = false;
@@ -56,7 +57,7 @@ class Zend_Application_Bootstrap_Bootstrap
      *
      * Ensure FrontController resource is registered
      *
-     * @param  Zend_Application|Zend_Application_Bootstrap_Bootstrapper $application
+     * @param Zend_Application|Zend_Application_Bootstrap_Bootstrapper $application
      */
     public function __construct($application)
     {

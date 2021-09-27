@@ -71,12 +71,14 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
 
     /**
      * protocol handler
+     *
      * @var null|Zend_Mail_Protocol_Imap
      */
     protected $_protocol;
 
     /**
      * name of current folder
+     *
      * @var string
      */
     protected $_currentFolder = '';
@@ -116,7 +118,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('No selected folder to count');
         }
 
@@ -139,7 +141,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
     /**
      * get a list of messages with number and size
      *
-     * @param int $id number of message
+     * @param  int $id number of message
      * @return int|array size of given message of list with all messages as array(num => size)
      * @throws Zend_Mail_Protocol_Exception
      */
@@ -154,7 +156,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
     /**
      * Fetch a message
      *
-     * @param int $id number of message
+     * @param  int $id number of message
      * @return Zend_Mail_Message
      * @throws Zend_Mail_Protocol_Exception
      */
@@ -189,7 +191,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('not implemented');
         }
 
@@ -213,7 +215,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('not implemented');
         }
 
@@ -250,7 +252,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
                 /**
                  * @see Zend_Mail_Storage_Exception
                  */
-                require_once 'Zend/Mail/Storage/Exception.php';
+                include_once 'Zend/Mail/Storage/Exception.php';
                 throw new Zend_Mail_Storage_Exception('cannot select INBOX, is this a valid transport?', 0, $e);
             }
             return;
@@ -260,7 +262,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('need at least user in params');
         }
 
@@ -275,7 +277,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('cannot login, user or password wrong');
         }
         $this->selectFolder(isset($params->folder) ? $params->folder : 'INBOX');
@@ -305,7 +307,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('could not do nothing');
         }
     }
@@ -315,9 +317,9 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
      * you should be careful and use a uniqueid as parameter if possible to
      * identify the message.
      *
-     * @param   int $id number of message
-     * @return  null
-     * @throws  Zend_Mail_Storage_Exception
+     * @param  int $id number of message
+     * @return null
+     * @throws Zend_Mail_Storage_Exception
      */
     public function removeMessage($id)
     {
@@ -325,7 +327,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('cannot set deleted flag');
         }
         // TODO: expunge here or at close? we can handle an error here better and are more fail safe
@@ -333,7 +335,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('message marked as deleted, but could not expunge');
         }
     }
@@ -343,7 +345,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
      *
      * if storage does not support unique ids it's the same as the message number
      *
-     * @param int|null $id message number
+     * @param  int|null $id message number
      * @return array|string message number for given message or all messages as array
      * @throws Zend_Mail_Storage_Exception
      */
@@ -362,7 +364,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
      * I.e. if you have a webmailer that supports deleting messages you should use unique ids
      * as parameter and use this method to translate it to message number right before calling removeMessage()
      *
-     * @param string $id unique id
+     * @param  string $id unique id
      * @return int message number
      * @throws Zend_Mail_Storage_Exception
      */
@@ -379,7 +381,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
         /**
          * @see Zend_Mail_Storage_Exception
          */
-        require_once 'Zend/Mail/Storage/Exception.php';
+        include_once 'Zend/Mail/Storage/Exception.php';
         throw new Zend_Mail_Storage_Exception('unique id not found');
     }
 
@@ -399,7 +401,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('folder not found');
         }
 
@@ -437,7 +439,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
                 /**
                  * @see Zend_Mail_Storage_Exception
                  */
-                require_once 'Zend/Mail/Storage/Exception.php';
+                include_once 'Zend/Mail/Storage/Exception.php';
                 throw new Zend_Mail_Storage_Exception('error while constructing folder tree');
             }
         }
@@ -463,7 +465,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('cannot change folder, maybe it does not exist');
         }
     }
@@ -506,7 +508,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('cannot create folder');
         }
     }
@@ -514,7 +516,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
     /**
      * remove a folder
      *
-     * @param  string|Zend_Mail_Storage_Folder $name      name or instance of folder
+     * @param  string|Zend_Mail_Storage_Folder $name name or instance of folder
      * @return null
      * @throws Zend_Mail_Storage_Exception
      */
@@ -528,7 +530,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('cannot delete folder');
         }
     }
@@ -553,7 +555,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('cannot rename folder');
         }
     }
@@ -582,7 +584,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('cannot create message, please check if the folder exists and your flags');
         }
     }
@@ -601,7 +603,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('cannot copy message, does the folder exist?');
         }
     }
@@ -616,7 +618,8 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
      * @return null
      * @throws Zend_Mail_Storage_Exception
      */
-    public function moveMessage($id, $folder) {
+    public function moveMessage($id, $folder)
+    {
         $this->copyMessage($id, $folder);
         $this->removeMessage($id);
     }
@@ -636,7 +639,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             /**
              * @see Zend_Mail_Storage_Exception
              */
-            require_once 'Zend/Mail/Storage/Exception.php';
+            include_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('cannot set flags, have you tried to set the recent flag or special chars?');
         }
     }

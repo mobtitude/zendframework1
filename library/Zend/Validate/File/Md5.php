@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  * @version   $Id$
  */
@@ -29,7 +29,7 @@ require_once 'Zend/Validate/File/Hash.php';
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_Md5 extends Zend_Validate_File_Hash
@@ -73,7 +73,7 @@ class Zend_Validate_File_Md5 extends Zend_Validate_File_Hash
         } elseif (is_scalar($options)) {
             $options = array('hash1' => $options);
         } elseif (!is_array($options)) {
-            require_once 'Zend/Validate/Exception.php';
+            include_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid options to validator provided');
         }
 
@@ -160,7 +160,7 @@ class Zend_Validate_File_Md5 extends Zend_Validate_File_Hash
     public function isValid($value, $file = null)
     {
         // Is file readable ?
-        require_once 'Zend/Loader.php';
+        include_once 'Zend/Loader.php';
         if (!Zend_Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }

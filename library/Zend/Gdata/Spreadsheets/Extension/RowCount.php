@@ -48,6 +48,7 @@ class Zend_Gdata_Spreadsheets_Extension_RowCount extends Zend_Gdata_Extension
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_Extension_RowCount object.
+     *
      * @param string $text (optional) The text content of the element.
      */
     public function __construct($text = null)

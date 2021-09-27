@@ -137,11 +137,11 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      *
      * Implements {@link Zend_View_Helper_Navigation_Interface::setContainer()}.
      *
-     * @param  Zend_Navigation_Container $container        [optional] container
-     *                                                     to operate on.
-     *                                                     Default is null,
-     *                                                     meaning container
-     *                                                     will be reset.
+     * @param  Zend_Navigation_Container $container [optional] container
+     *                                              to operate on.
+     *                                              Default is null,
+     *                                              meaning container
+     *                                              will be reset.
      * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface,
      *                                                     returns self
      */
@@ -170,7 +170,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     {
         if (null === $this->_container) {
             // try to fetch from registry first
-            require_once 'Zend/Registry.php';
+            include_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Navigation')) {
                 $nav = Zend_Registry::get('Zend_Navigation');
                 if ($nav instanceof Zend_Navigation_Container) {
@@ -179,7 +179,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
             }
 
             // nothing found in registry, create new container
-            require_once 'Zend/Navigation.php';
+            include_once 'Zend/Navigation.php';
             $this->_container = new Zend_Navigation();
         }
 
@@ -189,10 +189,10 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     /**
      * Sets the minimum depth a page must have to be included when rendering
      *
-     * @param  int $minDepth                               [optional] minimum
-     *                                                     depth. Default is
-     *                                                     null, which sets
-     *                                                     no minimum depth.
+     * @param  int $minDepth [optional] minimum
+     *                       depth. Default is
+     *                       null, which sets
+     *                       no minimum depth.
      * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface,
      *                                                     returns self
      */
@@ -222,10 +222,10 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     /**
      * Sets the maximum depth a page can have to be included when rendering
      *
-     * @param  int $maxDepth                               [optional] maximum
-     *                                                     depth. Default is
-     *                                                     null, which sets no
-     *                                                     maximum depth.
+     * @param  int $maxDepth [optional] maximum
+     *                       depth. Default is
+     *                       null, which sets
+     *                       no maximum depth.
      * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface,
      *                                                     returns self
      */
@@ -253,8 +253,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      * Set the indentation string for using in {@link render()}, optionally a
      * number of spaces to indent with
      *
-     * @param  string|int $indent                          indentation string or
-     *                                                     number of spaces
+     * @param  string|int $indent indentation string or
+     *                            number of spaces
      * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface,
      *                                                     returns self
      */
@@ -298,9 +298,9 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     /**
      * Sets whether HTML/XML output should be formatted
      *
-     * @param  bool $formatOutput                   [optional] whether output
-     *                                              should be formatted. Default
-     *                                              is true.
+     * @param bool $formatOutput [optional] whether output
+     *                           should be formatted.
+     *                           Default is true.
      *
      * @return Zend_View_Helper_Navigation_Sitemap  fluent interface, returns
      *                                              self
@@ -325,8 +325,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     /**
      * Sets prefix for IDs when they are normalized
      *
-     * @param   string $prefix                              Prefix for IDs
-     * @return  Zend_View_Helper_Navigation_HelperAbstract  fluent interface, returns self
+     * @param  string $prefix Prefix for IDs
+     * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface, returns self
      */
     public function setPrefixForId($prefix)
     {
@@ -347,8 +347,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
         if (null === $this->_prefixForId) {
             $prefix             = get_class($this);
             $this->_prefixForId = strtolower(
-                    trim(substr($prefix, strrpos($prefix, '_')), '_')
-                ) . '-';
+                trim(substr($prefix, strrpos($prefix, '_')), '_')
+            ) . '-';
         }
 
         return $this->_prefixForId;
@@ -371,21 +371,23 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      *
      * Implements {@link Zend_View_Helper_Navigation_Helper::setTranslator()}.
      *
-     * @param  mixed $translator                           [optional] translator.
-     *                                                     Expects an object of
-     *                                                     type
-     *                                                     {@link Zend_Translate_Adapter}
-     *                                                     or {@link Zend_Translate},
-     *                                                     or null. Default is
-     *                                                     null, which sets no
-     *                                                     translator.
+     * @param  mixed $translator [optional] translator.
+     *                           Expects an object of
+     *                           type {@link
+     *                           Zend_Translate_Adapter}
+     *                           or {@link
+     *                           Zend_Translate}, or
+     *                           null. Default is null,
+     *                           which sets no
+     *                           translator.
      * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface,
      *                                                     returns self
      */
     public function setTranslator($translator = null)
     {
-        if (null == $translator ||
-            $translator instanceof Zend_Translate_Adapter) {
+        if (null == $translator 
+            || $translator instanceof Zend_Translate_Adapter
+        ) {
             $this->_translator = $translator;
         } elseif ($translator instanceof Zend_Translate) {
             $this->_translator = $translator->getAdapter();
@@ -404,7 +406,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     public function getTranslator()
     {
         if (null === $this->_translator) {
-            require_once 'Zend/Registry.php';
+            include_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Translate')) {
                 $this->setTranslator(Zend_Registry::get('Zend_Translate'));
             }
@@ -418,8 +420,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      *
      * Implements {@link Zend_View_Helper_Navigation_Helper::setAcl()}.
      *
-     * @param  Zend_Acl $acl                               [optional] ACL object.
-     *                                                     Default is null.
+     * @param  Zend_Acl $acl [optional] ACL object.
+     *                       Default is null.
      * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface,
      *                                                     returns self
      */
@@ -451,29 +453,34 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      *
      * Implements {@link Zend_View_Helper_Navigation_Helper::setRole()}.
      *
-     * @param  mixed $role                                 [optional] role to
-     *                                                     set. Expects a string,
-     *                                                     an instance of type
-     *                                                     {@link Zend_Acl_Role_Interface},
-     *                                                     or null. Default is
-     *                                                     null, which will set
-     *                                                     no role.
+     * @param  mixed $role [optional] role to
+     *                     set. Expects a
+     *                     string, an
+     *                     instance of type
+     *                     {@link
+     *                     Zend_Acl_Role_Interface},
+     *                     or null. Default
+     *                     is null, which
+     *                     will set no role.
      * @throws Zend_View_Exception                         if $role is invalid
      * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface,
      *                                                     returns self
      */
     public function setRole($role = null)
     {
-        if (null === $role || is_string($role) ||
-            $role instanceof Zend_Acl_Role_Interface) {
+        if (null === $role || is_string($role) 
+            || $role instanceof Zend_Acl_Role_Interface
+        ) {
             $this->_role = $role;
         } else {
-            require_once 'Zend/View/Exception.php';
-            $e = new Zend_View_Exception(sprintf(
-                '$role must be a string, null, or an instance of '
-                .  'Zend_Acl_Role_Interface; %s given',
-                gettype($role)
-            ));
+            include_once 'Zend/View/Exception.php';
+            $e = new Zend_View_Exception(
+                sprintf(
+                    '$role must be a string, null, or an instance of '
+                    .  'Zend_Acl_Role_Interface; %s given',
+                    gettype($role)
+                )
+            );
             $e->setView($this->view);
             throw $e;
         }
@@ -503,9 +510,9 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      *
      * Implements {@link Zend_View_Helper_Navigation_Helper::setUseAcl()}.
      *
-     * @param  bool $useAcl                                [optional] whether ACL
-     *                                                     should be used.
-     *                                                     Default is true.
+     * @param  bool $useAcl [optional] whether ACL
+     *                      should be used.
+     *                      Default is true.
      * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface,
      *                                                     returns self
      */
@@ -540,7 +547,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     /**
      * Render invisible items?
      *
-     * @param  bool $renderInvisible                       [optional] boolean flag
+     * @param  bool $renderInvisible [optional] boolean flag
      * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface
      *                                                     returns self
      */
@@ -555,9 +562,10 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      *
      * Implements {@link Zend_View_Helper_Navigation_Helper::setUseTranslator()}.
      *
-     * @param  bool $useTranslator                         [optional] whether
-     *                                                     translator should be
-     *                                                     used. Default is true.
+     * @param  bool $useTranslator [optional] whether
+     *                             translator should
+     *                             be used. Default
+     *                             is true.
      * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface,
      *                                                     returns self
      */
@@ -584,16 +592,17 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     /**
      * Magic overload: Proxy calls to the navigation container
      *
-     * @param  string $method             method name in container
-     * @param  array  $arguments          [optional] arguments to pass
+     * @param  string $method    method name in container
+     * @param  array  $arguments [optional] arguments to pass
      * @return mixed                      returns what the container returns
      * @throws Zend_Navigation_Exception  if method does not exist in container
      */
     public function __call($method, array $arguments = array())
     {
         return call_user_func_array(
-                array($this->getContainer(), $method),
-                $arguments);
+            array($this->getContainer(), $method),
+            $arguments
+        );
     }
 
     /**
@@ -622,28 +631,28 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     /**
      * Finds the deepest active page in the given container
      *
-     * @param  Zend_Navigation_Container $container  container to search
-     * @param  int|null                  $minDepth   [optional] minimum depth
-     *                                               required for page to be
-     *                                               valid. Default is to use
-     *                                               {@link getMinDepth()}. A
-     *                                               null value means no minimum
-     *                                               depth required.
-     * @param  int|null                  $minDepth   [optional] maximum depth
-     *                                               a page can have to be
-     *                                               valid. Default is to use
-     *                                               {@link getMaxDepth()}. A
-     *                                               null value means no maximum
-     *                                               depth required.
+     * @param  Zend_Navigation_Container $container container to search
+     * @param  int|null                  $minDepth  [optional] minimum depth
+     *                                              required for page to be
+     *                                              valid. Default is to use
+     *                                              {@link getMinDepth()}. A
+     *                                              null value means no
+     *                                              minimum depth required.
+     * @param  int|null                  $minDepth  [optional] maximum depth
+     *                                              a page can have to be
+     *                                              valid. Default is to use
+     *                                              {@link getMaxDepth()}. A
+     *                                              null value means no
+     *                                              maximum depth required.
      * @return array                                 an associative array with
      *                                               the values 'depth' and
      *                                               'page', or an empty array
      *                                               if not found
      */
     public function findActive(Zend_Navigation_Container $container,
-                               $minDepth = null,
-                               $maxDepth = -1)
-    {
+        $minDepth = null,
+        $maxDepth = -1
+    ) {
         if (!is_int($minDepth)) {
             $minDepth = $this->getMinDepth();
         }
@@ -653,8 +662,10 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
 
         $found  = null;
         $foundDepth = -1;
-        $iterator = new RecursiveIteratorIterator($container,
-                RecursiveIteratorIterator::CHILD_FIRST);
+        $iterator = new RecursiveIteratorIterator(
+            $container,
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
 
         foreach ($iterator as $page) {
             $currDepth = $iterator->getDepth();
@@ -743,7 +754,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     /**
      * Returns an HTML string containing an 'a' element for the given page
      *
-     * @param  Zend_Navigation_Page $page  page to generate HTML for
+     * @param  Zend_Navigation_Page $page page to generate HTML for
      * @return string                      HTML string for the given page
      */
     public function htmlify(Zend_Navigation_Page $page)
@@ -795,7 +806,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      *   will not be accepted if it is the descendant of a non-accepted page.
      *
      * @param  Zend_Navigation_Page $page      page to check
-     * @param  bool                $recursive  [optional] if true, page will not
+     * @param  bool                 $recursive [optional] if true, page will not
      *                                         be accepted if it is the
      *                                         descendant of a page that is not
      *                                         accepted. Default is true.
@@ -833,7 +844,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      *   if the ACL allows access to it using the helper's role
      * - If page has no resource or privilege, page is accepted
      *
-     * @param  Zend_Navigation_Page $page  page to check
+     * @param  Zend_Navigation_Page $page page to check
      * @return bool                        whether page is accepted by ACL
      */
     protected function _acceptAcl(Zend_Navigation_Page $page)
@@ -877,8 +888,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      *
      * Overloads {@link Zend_View_Helper_HtmlElement::_htmlAttribs()}.
      *
-     * @param  array $attribs  an array where each key-value pair is converted
-     *                         to an attribute name and value
+     * @param  array $attribs an array where each key-value pair is converted
+     *                        to an attribute name and value
      * @return string          an attribute string
      */
     protected function _htmlAttribs($attribs)
@@ -898,7 +909,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      *
      * Extends {@link Zend_View_Helper_HtmlElement::_normalizeId()}.
      *
-     * @param  string $value    ID
+     * @param  string $value ID
      * @return string           Normalized ID
      */
     protected function _normalizeId($value)
@@ -919,8 +930,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     /**
      * Sets default ACL to use if another ACL is not explicitly set
      *
-     * @param  Zend_Acl $acl  [optional] ACL object. Default is null, which
-     *                        sets no ACL object.
+     * @param  Zend_Acl $acl [optional] ACL object. Default is null, which
+     *                       sets no ACL object.
      * @return void
      */
     public static function setDefaultAcl(Zend_Acl $acl = null)
@@ -932,22 +943,22 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      * Sets default ACL role(s) to use when iterating pages if not explicitly
      * set later with {@link setRole()}
      *
-     * @param  mixed $role               [optional] role to set. Expects null,
-     *                                   string, or an instance of
-     *                                   {@link Zend_Acl_Role_Interface}.
-     *                                   Default is null, which sets no default
-     *                                   role.
+     * @param  mixed $role [optional] role to set. Expects null,
+     *                     string, or an instance of {@link
+     *                     Zend_Acl_Role_Interface}. Default is
+     *                     null, which sets no default role.
      * @throws Zend_View_Exception       if role is invalid
      * @return void
      */
     public static function setDefaultRole($role = null)
     {
-        if (null === $role ||
-            is_string($role) ||
-            $role instanceof Zend_Acl_Role_Interface) {
+        if (null === $role 
+            || is_string($role) 
+            || $role instanceof Zend_Acl_Role_Interface
+        ) {
             self::$_defaultRole = $role;
         } else {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             throw new Zend_View_Exception(
                 '$role must be null|string|Zend_Acl_Role_Interface'
             );

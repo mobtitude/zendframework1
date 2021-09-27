@@ -55,13 +55,14 @@ class Zend_Gdata_Extension_RecurrenceException extends Zend_Gdata_Extension
 
     /**
      * Constructs a new Zend_Gdata_Extension_RecurrenceException object.
-     * @param bool $specialized (optional) Whether this is a specialized exception or not.
+     *
+     * @param bool                                                                                    $specialized (optional) Whether this is a specialized exception or not.
      * @param Zend_Gdata_EntryLink (optional) An Event entry with details about the exception.
      * @param Zend_Gdata_OriginalEvent (optional) The origianl recurrent event this is an exeption to.
      */
     public function __construct($specialized = null, $entryLink = null,
-            $originalEvent = null)
-    {
+        $originalEvent = null
+    ) {
         parent::__construct();
         $this->_specialized = $specialized;
         $this->_entryLink = $entryLink;
@@ -74,7 +75,7 @@ class Zend_Gdata_Extension_RecurrenceException extends Zend_Gdata_Extension
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -104,15 +105,15 @@ class Zend_Gdata_Extension_RecurrenceException extends Zend_Gdata_Extension
     {
         switch ($attribute->localName) {
         case 'specialized':
-            if ($attribute->nodeValue == "true") {
-                $this->_specialized = true;
-            }
-            else if ($attribute->nodeValue == "false") {
-                $this->_specialized = false;
-            }
-            else {
-                throw new Zend_Gdata_App_InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
-            }
+        if ($attribute->nodeValue == "true") {
+            $this->_specialized = true;
+        }
+        else if ($attribute->nodeValue == "false") {
+            $this->_specialized = false;
+        }
+        else {
+            throw new Zend_Gdata_App_InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
+        }
             break;
         default:
             parent::takeAttributeFromDOM($attribute);
@@ -158,7 +159,7 @@ class Zend_Gdata_Extension_RecurrenceException extends Zend_Gdata_Extension
     /**
      * Set the value for this element's Specialized attribute.
      *
-     * @param bool $value The desired value for this attribute.
+     * @param  bool $value The desired value for this attribute.
      * @return Zend_Gdata_Extension_RecurrenceException The element being modified.
      */
     public function setSpecialized($value)
@@ -180,7 +181,7 @@ class Zend_Gdata_Extension_RecurrenceException extends Zend_Gdata_Extension
     /**
      * Set the value for this element's EntryLink attribute.
      *
-     * @param Zend_Gdata_Extension_EntryLink $value The desired value for this attribute.
+     * @param  Zend_Gdata_Extension_EntryLink $value The desired value for this attribute.
      * @return Zend_Gdata_Extension_RecurrenceException The element being modified.
      */
     public function setEntryLink($value)
@@ -202,7 +203,7 @@ class Zend_Gdata_Extension_RecurrenceException extends Zend_Gdata_Extension
     /**
      * Set the value for this element's Specialized attribute.
      *
-     * @param Zend_Gdata_Extension_OriginalEvent $value The desired value for this attribute.
+     * @param  Zend_Gdata_Extension_OriginalEvent $value The desired value for this attribute.
      * @return Zend_Gdata_Extension_RecurrenceException The element being modified.
      */
     public function setOriginalEvent($value)

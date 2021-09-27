@@ -50,13 +50,13 @@ class Zend_Service_Rackspace_Servers_SharedIpGroupList implements Countable, Ite
      * Construct
      *
      * @param  Zend_Service_Rackspace_Servers $service
-     * @param  array $list
+     * @param  array                          $list
      * @return void
      */
     public function __construct($service,$list = array())
     {
         if (!($service instanceof Zend_Service_Rackspace_Servers) || !is_array($list)) {
-            require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+            include_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception("You must pass a Zend_Service_Rackspace_Servers object and an array");
         }
         $this->service= $service;
@@ -71,7 +71,7 @@ class Zend_Service_Rackspace_Servers_SharedIpGroupList implements Countable, Ite
     private function constructFromArray(array $list)
     {
         foreach ($list as $share) {
-            $this->addSharedIpGroup(new Zend_Service_Rackspace_Servers_SharedIpGroup($this->service,$share));
+            $this->addSharedIpGroup(new Zend_Service_Rackspace_Servers_SharedIpGroup($this->service, $share));
         }
     }
     /**
@@ -80,7 +80,7 @@ class Zend_Service_Rackspace_Servers_SharedIpGroupList implements Countable, Ite
      * @param  Zend_Service_Rackspace_Servers_SharedIpGroup $shared
      * @return Zend_Service_Rackspace_Servers_SharedIpGroupList
      */
-    protected function addSharedIpGroup (Zend_Service_Rackspace_Servers_SharedIpGroup $share)
+    protected function addSharedIpGroup(Zend_Service_Rackspace_Servers_SharedIpGroup $share)
     {
         $this->shared[] = $share;
         return $this;
@@ -174,8 +174,8 @@ class Zend_Service_Rackspace_Servers_SharedIpGroupList implements Countable, Ite
      *
      * Implement ArrayAccess::offsetExists()
      *
-     * @param   int     $offset
-     * @return  boolean
+     * @param  int $offset
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -186,16 +186,16 @@ class Zend_Service_Rackspace_Servers_SharedIpGroupList implements Countable, Ite
      *
      * Implement ArrayAccess::offsetGet()
      *
-     * @param   int  $offset
-     * @throws  Zend_Service_Rackspace_Servers_Exception
-     * @return  Zend_Service_Rackspace_Servers_SharedIpGroup
+     * @param  int $offset
+     * @throws Zend_Service_Rackspace_Servers_Exception
+     * @return Zend_Service_Rackspace_Servers_SharedIpGroup
      */
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
             return $this->shared[$offset];
         } else {
-            require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+            include_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception('Illegal index');
         }
     }
@@ -205,13 +205,13 @@ class Zend_Service_Rackspace_Servers_SharedIpGroupList implements Countable, Ite
      *
      * Implement ArrayAccess::offsetSet()
      *
-     * @param   int     $offset
-     * @param   string  $value
-     * @throws  Zend_Service_Rackspace_Servers_Exception
+     * @param  int    $offset
+     * @param  string $value
+     * @throws Zend_Service_Rackspace_Servers_Exception
      */
     public function offsetSet($offset, $value)
     {
-        require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+        include_once 'Zend/Service/Rackspace/Servers/Exception.php';
         throw new Zend_Service_Rackspace_Servers_Exception('You are trying to set read-only property');
     }
 
@@ -225,7 +225,7 @@ class Zend_Service_Rackspace_Servers_SharedIpGroupList implements Countable, Ite
      */
     public function offsetUnset($offset)
     {
-        require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+        include_once 'Zend/Service/Rackspace/Servers/Exception.php';
         throw new Zend_Service_Rackspace_Servers_Exception('You are trying to unset read-only property');
     }
 }

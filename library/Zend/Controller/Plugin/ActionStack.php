@@ -19,10 +19,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Plugin_Abstract */
+/**
+ * Zend_Controller_Plugin_Abstract 
+ */
 require_once 'Zend/Controller/Plugin/Abstract.php';
 
-/** Zend_Registry */
+/**
+ * Zend_Registry 
+*/
 require_once 'Zend/Registry.php';
 
 /**
@@ -65,7 +69,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
      * Constructor
      *
      * @param  Zend_Registry $registry
-     * @param  string $key
+     * @param  string        $key
      * @return void
      */
     public function __construct(Zend_Registry $registry = null, $key = null)
@@ -131,8 +135,8 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
     /**
      *  Set clearRequestParams flag
      *
-     *  @param  bool $clearRequestParams
-     *  @return Zend_Controller_Plugin_ActionStack
+     * @param  bool $clearRequestParams
+     * @return Zend_Controller_Plugin_ActionStack
      */
     public function setClearRequestParams($clearRequestParams)
     {
@@ -204,7 +208,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
         $this->_saveStack($stack);
 
         if (!$next instanceof Zend_Controller_Request_Abstract) {
-            require_once 'Zend/Controller/Exception.php';
+            include_once 'Zend/Controller/Exception.php';
             throw new Zend_Controller_Exception('ArrayStack should only contain request objects');
         }
         $action = $next->getActionName();
@@ -267,9 +271,9 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
         }
 
         $request->setModuleName($next->getModuleName())
-                ->setControllerName($next->getControllerName())
-                ->setActionName($next->getActionName())
-                ->setParams($next->getParams())
-                ->setDispatched(false);
+            ->setControllerName($next->getControllerName())
+            ->setActionName($next->getActionName())
+            ->setParams($next->getParams())
+            ->setDispatched(false);
     }
 }

@@ -64,7 +64,7 @@ class Zend_Queue_Message_PlatformJob extends Zend_Queue_Message
     {
         if (isset($options['data'])) {
             if (!($options['data'] instanceof ZendApi_Job)) {
-                require_once 'Zend/Queue/Exception.php';
+                include_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception('Data must be an instance of ZendApi_Job');
             }
             $this->_job = $options['data'];
@@ -73,7 +73,7 @@ class Zend_Queue_Message_PlatformJob extends Zend_Queue_Message
             parent::__construct($options);
 
             if (!isset($options['script'])) {
-                require_once 'Zend/Queue/Exception.php';
+                include_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception('The script is mandatory data');
             }
 
@@ -146,7 +146,8 @@ class Zend_Queue_Message_PlatformJob extends Zend_Queue_Message
      *
      * @return void
      */
-    protected function _setJobProperties() {
+    protected function _setJobProperties()
+    {
 
         if (isset($this->_data['script'])) {
             $this->_job->setScript($this->_data['script']);
@@ -176,7 +177,7 @@ class Zend_Queue_Message_PlatformJob extends Zend_Queue_Message
             $endTime = isset($this->_data['end_time']) ? $this->_data['end_time'] : null;
             $this->_job->setRecurrenceData($this->_data['interval'], $endTime);
         } elseif (isset($this->_data['interval']) && ($this->_data['interval'] === '')) {
-            $this->_job->setRecurrenceData(0,0);
+            $this->_job->setRecurrenceData(0, 0);
         }
 
         if (isset($this->_data['scheduled_time'])) {

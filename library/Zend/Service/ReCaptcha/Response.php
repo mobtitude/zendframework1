@@ -49,8 +49,8 @@ class Zend_Service_ReCaptcha_Response
     /**
      * Class constructor used to construct a response
      *
-     * @param string $status
-     * @param string $errorCode
+     * @param string             $status
+     * @param string             $errorCode
      * @param Zend_Http_Response $httpResponse If this is set the content will override $status and $errorCode
      */
     public function __construct($status = null, $errorCode = null, Zend_Http_Response $httpResponse = null)
@@ -71,7 +71,7 @@ class Zend_Service_ReCaptcha_Response
     /**
      * Set the status
      *
-     * @param string $status
+     * @param  string $status
      * @return Zend_Service_ReCaptcha_Response
      */
     public function setStatus($status)
@@ -108,7 +108,7 @@ class Zend_Service_ReCaptcha_Response
     /**
      * Set the error code
      *
-     * @param string $errorCode
+     * @param  string $errorCode
      * @return Zend_Service_ReCaptcha_Response
      */
     public function setErrorCode($errorCode)
@@ -131,7 +131,7 @@ class Zend_Service_ReCaptcha_Response
     /**
      * Populate this instance based on a Zend_Http_Response object
      *
-     * @param Zend_Http_Response $response
+     * @param  Zend_Http_Response $response
      * @return Zend_Service_ReCaptcha_Response
      */
     public function setFromHttpResponse(Zend_Http_Response $response)

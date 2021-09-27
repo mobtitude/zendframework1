@@ -19,10 +19,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @see Zend_Captcha_Base */
+/**
+ * @see Zend_Captcha_Base 
+ */
 require_once 'Zend/Captcha/Base.php';
 
-/** @see Zend_Service_ReCaptcha */
+/**
+ * @see Zend_Service_ReCaptcha 
+*/
 require_once 'Zend/Service/ReCaptcha.php';
 
 /**
@@ -41,13 +45,16 @@ require_once 'Zend/Service/ReCaptcha.php';
  */
 class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
 {
-    /**@+
+    /**
+     * @+
      * ReCaptcha Field names
      * @var string
      */
     protected string $_CHALLENGE = 'recaptcha_challenge_field';
     protected string $_RESPONSE  = 'recaptcha_response_field';
-    /**@-*/
+    /**
+     * @-
+     */
 
     /**
      * Recaptcha service object
@@ -66,16 +73,20 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
      */
     protected array $_serviceOptions = array();
 
-    /**#@+
+    /**
+* #@+
      * Error codes
      */
     const MISSING_VALUE = 'missingValue';
     const ERR_CAPTCHA   = 'errCaptcha';
     const BAD_CAPTCHA   = 'badCaptcha';
-    /**#@-*/
+    /**
+     * #@-
+     */
 
     /**
      * Error messages
+     *
      * @var array
      */
     protected array $_messageTemplates = array(
@@ -107,7 +118,7 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
     /**
      * Set ReCaptcha Private key
      *
-     * @param string $privkey
+     * @param  string $privkey
      * @return Zend_Captcha_ReCaptcha
      */
     public function setPrivkey($privkey)
@@ -119,7 +130,7 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
     /**
      * Set ReCaptcha public key
      *
-     * @param string $pubkey
+     * @param  string $pubkey
      * @return Zend_Captcha_ReCaptcha
      */
     public function setPubkey($pubkey)
@@ -178,7 +189,7 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
      * goes for any service options (distinct from service params)
      *
      * @param  string $key
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return Zend_Captcha_ReCaptcha
      */
     public function setOption($key, $value)
@@ -198,7 +209,7 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
     /**
      * Generate captcha
      *
-     * @see Zend_Form_Captcha_Adapter::generate()
+     * @see    Zend_Form_Captcha_Adapter::generate()
      * @return string
      */
     public function generate()
@@ -252,7 +263,7 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
      * Render captcha
      *
      * @param  Zend_View_Interface $view
-     * @param  mixed $element
+     * @param  mixed               $element
      * @return string
      */
     public function render(Zend_View_Interface $view = null, $element = null)

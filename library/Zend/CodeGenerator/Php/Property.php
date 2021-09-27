@@ -31,10 +31,10 @@ require_once 'Zend/CodeGenerator/Php/Member/Abstract.php';
 require_once 'Zend/CodeGenerator/Php/Property/DefaultValue.php';
 
 /**
- * @category   Zend
- * @package    Zend_CodeGenerator
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_CodeGenerator
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abstract
 {
@@ -49,7 +49,7 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
     /**
      * fromReflection()
      *
-     * @param Zend_Reflection_Property $reflectionProperty
+     * @param  Zend_Reflection_Property $reflectionProperty
      * @return Zend_CodeGenerator_Php_Property
      */
     public static function fromReflection(Zend_Reflection_Property $reflectionProperty)
@@ -86,7 +86,7 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
     /**
      * setConst()
      *
-     * @param bool $const
+     * @param  bool $const
      * @return Zend_CodeGenerator_Php_Property
      */
     public function setConst($const)
@@ -108,7 +108,7 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
     /**
      * setDefaultValue()
      *
-     * @param Zend_CodeGenerator_Php_Property_DefaultValue|string|array $defaultValue
+     * @param  Zend_CodeGenerator_Php_Property_DefaultValue|string|array $defaultValue
      * @return Zend_CodeGenerator_Php_Property
      */
     public function setDefaultValue($defaultValue)
@@ -116,7 +116,8 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
         // if it looks like
         if (is_array($defaultValue)
             && array_key_exists('value', $defaultValue)
-            && array_key_exists('type', $defaultValue)) {
+            && array_key_exists('type', $defaultValue)
+        ) {
             $defaultValue = new Zend_CodeGenerator_Php_Property_DefaultValue($defaultValue);
         }
 
@@ -157,9 +158,11 @@ class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abst
 
         if ($this->isConst()) {
             if ($defaultValue != null && !$defaultValue->isValidConstantType()) {
-                require_once 'Zend/CodeGenerator/Php/Exception.php';
-                throw new Zend_CodeGenerator_Php_Exception('The property ' . $this->_name . ' is said to be '
-                    . 'constant but does not have a valid constant value.');
+                include_once 'Zend/CodeGenerator/Php/Exception.php';
+                throw new Zend_CodeGenerator_Php_Exception(
+                    'The property ' . $this->_name . ' is said to be '
+                    . 'constant but does not have a valid constant value.'
+                );
             }
             $output .= $this->_indentation . 'const ' . $name . ' = '
                 . (($defaultValue !== null) ? $defaultValue->generate() : 'null;');

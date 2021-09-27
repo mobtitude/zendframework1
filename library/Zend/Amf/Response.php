@@ -12,28 +12,34 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Amf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
-/** @see Zend_Amf_Constants */
+/**
+ * @see Zend_Amf_Constants 
+ */
 require_once 'Zend/Amf/Constants.php';
 
-/** @see Zend_Amf_Parse_OutputStream */
+/**
+ * @see Zend_Amf_Parse_OutputStream 
+*/
 require_once 'Zend/Amf/Parse/OutputStream.php';
 
-/** @see Zend_Amf_Parse_Amf0_Serializer */
+/**
+ * @see Zend_Amf_Parse_Amf0_Serializer 
+*/
 require_once 'Zend/Amf/Parse/Amf0/Serializer.php';
 
 /**
  * Handles converting the PHP object ready for response back into AMF
  *
- * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Amf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Amf_Response
 {

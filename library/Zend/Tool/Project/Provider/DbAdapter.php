@@ -31,10 +31,10 @@ require_once 'Zend/Tool/Project/Provider/Abstract.php';
 require_once 'Zend/Tool/Framework/Provider/Interactable.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Provider_DbAdapter
     extends Zend_Tool_Project_Provider_Abstract
@@ -75,8 +75,8 @@ class Zend_Tool_Project_Provider_DbAdapter
 
         if ($dsn) {
             $this->_configureViaDSN($dsn);
-        //} elseif ($interactivelyPrompt) {
-        //    $this->_promptForConfig();
+            //} elseif ($interactivelyPrompt) {
+            //    $this->_promptForConfig();
         } else {
             $this->_registry->getResponse()->appendContent('Nothing to do!');
         }
@@ -89,9 +89,10 @@ class Zend_Tool_Project_Provider_DbAdapter
         $dsnVars = array();
 
         if (strpos($dsn, '=') === false) {
-            throw new Zend_Tool_Project_Provider_Exception('At least one name value pair is expected, typcially '
+            throw new Zend_Tool_Project_Provider_Exception(
+                'At least one name value pair is expected, typcially '
                 . 'in the format of "adapter=Mysqli&username=uname&password=mypass&dbname=mydb"'
-                );
+            );
         }
 
         parse_str($dsn, $dsnVars);
@@ -119,15 +120,17 @@ class Zend_Tool_Project_Provider_DbAdapter
         $response = $this->_registry->getResponse();
 
         if ($isPretend) {
-            $response->appendContent('A db configuration for the ' . $this->_sectionName
+            $response->appendContent(
+                'A db configuration for the ' . $this->_sectionName
                 . ' section would be written to the application config file with the following contents: '
-                );
+            );
             $response->appendContent($applicationConfig->getContents());
         } else {
             $applicationConfig->create();
-            $response->appendContent('A db configuration for the ' . $this->_sectionName
+            $response->appendContent(
+                'A db configuration for the ' . $this->_sectionName
                 . ' section has been written to the application config file.'
-                );
+            );
         }
     }
 

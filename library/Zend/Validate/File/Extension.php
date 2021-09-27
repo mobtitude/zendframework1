@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  * @version   $Id$
  */
@@ -29,7 +29,7 @@ require_once 'Zend/Validate/Abstract.php';
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_Extension extends Zend_Validate_Abstract
@@ -176,14 +176,14 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
      * Returns true if and only if the fileextension of $value is included in the
      * set extension list
      *
-     * @param  string  $value Real file to check for extension
-     * @param  array   $file  File data from Zend_File_Transfer
+     * @param  string $value Real file to check for extension
+     * @param  array  $file  File data from Zend_File_Transfer
      * @return boolean
      */
     public function isValid($value, $file = null)
     {
         // Is file readable ?
-        require_once 'Zend/Loader.php';
+        include_once 'Zend/Loader.php';
         if (!Zend_Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }

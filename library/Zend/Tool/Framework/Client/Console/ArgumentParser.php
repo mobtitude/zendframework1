@@ -31,10 +31,10 @@ require_once 'Zend/Console/Getopt.php';
 require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Framework_Registry_EnabledInterface
 {
@@ -42,15 +42,17 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
     protected ?\Zend_Tool_Framework_Registry_Interface $_registry = null;
 
     /**
-       * Holds the manifest repository taken from the registry.
-       */
-      protected ?\Zend_Tool_Framework_Manifest_Repository $_manifestRepository = null;
+     * Holds the manifest repository taken from the registry.
+     */
+    protected ?\Zend_Tool_Framework_Manifest_Repository $_manifestRepository = null;
 
     protected ?\Zend_Tool_Framework_Client_Request $_request = null;
 
     protected ?\Zend_Tool_Framework_Client_Response $_response = null;
 
-    /**#@+
+    /**
+     * #@+
+     *
      * @var array
      */
     protected ?array $_argumentsOriginal = null;
@@ -64,7 +66,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
     /**
      * setArguments
      *
-     * @param array $arguments
+     * @param  array $arguments
      * @return Zend_Tool_Framework_Client_Console_ArgumentParser
      */
     public function setArguments(Array $arguments)
@@ -76,7 +78,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
     /**
      * setRegistry()
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
+     * @param  Zend_Tool_Framework_Registry_Interface $registry
      * @return Zend_Tool_Framework_Client_Console_ArgumentParser
      */
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
@@ -101,7 +103,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
     {
 
         if ($this->_request == null || $this->_response == null) {
-            require_once 'Zend/Tool/Framework/Client/Exception.php';
+            include_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('The client registry must have both a request and response registered.');
         }
 
@@ -147,7 +149,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
             $helpResponseOptions = array_merge(
                 $helpResponseOptions,
                 array('actionName' => $this->_request->getActionName())
-                );
+            );
         }
 
         /* @TODO Action Parameter Requirements */
@@ -179,14 +181,14 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
             $helpResponseOptions = array_merge(
                 $helpResponseOptions,
                 array('providerName' => $this->_request->getProviderName())
-                );
+            );
         }
 
         if ($this->_helpKnownSpecialty) {
             $helpResponseOptions = array_merge(
                 $helpResponseOptions,
                 array('specialtyName' => $this->_request->getSpecialtyName())
-                );
+            );
         }
 
         // if there are arguments on the command line, lets process them as provider options
@@ -200,10 +202,12 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
             if ($this->_help) {
                 $this->_createHelpResponse($helpResponseOptions);
             } else {
-                $this->_createHelpResponse(array_merge(
-                    $helpResponseOptions,
-                    array('error' => 'Unknown arguments left on the command line: ' . implode(' ', $this->_argumentsWorking))
-                    ));
+                $this->_createHelpResponse(
+                    array_merge(
+                        $helpResponseOptions,
+                        array('error' => 'Unknown arguments left on the command line: ' . implode(' ', $this->_argumentsWorking))
+                    )
+                );
             }
             return;
         }
@@ -287,7 +291,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
 
         // if no action, handle error
         if (!$actionMetadata) {
-            require_once 'Zend/Tool/Framework/Client/Exception.php';
+            include_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('Action \'' . $consoleActionName . '\' is not a valid action.');
         }
 
@@ -339,10 +343,10 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
         }
 
         if (!$providerMetadata) {
-            require_once 'Zend/Tool/Framework/Client/Exception.php';
+            include_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception(
                 'Provider \'' . $consoleProviderFull . '\' is not a valid provider.'
-                );
+            );
         }
 
         $this->_helpKnownProvider = true;
@@ -371,10 +375,10 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
         }
 
         if (!$providerSpecialtyMetadata) {
-            require_once 'Zend/Tool/Framework/Client/Exception.php';
+            include_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception(
                 'Provider \'' . $consoleSpecialtyName . '\' is not a valid specialty.'
-                );
+            );
         }
 
         $this->_helpKnownSpecialty = true;
@@ -404,11 +408,11 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
 
         $actionableMethodLongParamsMetadata = $this->_manifestRepository->getMetadata(
             array_merge($searchParams, array('name' => 'actionableMethodLongParams'))
-            );
+        );
 
         $actionableMethodShortParamsMetadata = $this->_manifestRepository->getMetadata(
             array_merge($searchParams, array('name' => 'actionableMethodShortParams'))
-            );
+        );
 
         $paramNameShortValues = $actionableMethodShortParamsMetadata->getValue();
 
@@ -500,7 +504,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
      */
     protected function _createHelpResponse($options = array())
     {
-        require_once 'Zend/Tool/Framework/Client/Console/HelpSystem.php';
+        include_once 'Zend/Tool/Framework/Client/Console/HelpSystem.php';
         $helpSystem = new Zend_Tool_Framework_Client_Console_HelpSystem();
         $helpSystem->setRegistry($this->_registry);
 

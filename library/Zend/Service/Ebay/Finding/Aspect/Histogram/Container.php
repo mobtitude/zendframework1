@@ -97,7 +97,7 @@ class Zend_Service_Ebay_Finding_Aspect_Histogram_Container extends Zend_Service_
             /**
              * @see Zend_Service_Ebay_Finding_Aspect_Set
              */
-            require_once 'Zend/Service/Ebay/Finding/Aspect/Set.php';
+            include_once 'Zend/Service/Ebay/Finding/Aspect/Set.php';
             $this->aspect = new Zend_Service_Ebay_Finding_Aspect_Set($nodes);
         }
     }

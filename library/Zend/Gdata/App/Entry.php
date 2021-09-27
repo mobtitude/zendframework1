@@ -179,22 +179,25 @@ class Zend_Gdata_App_Entry extends Zend_Gdata_App_FeedEntryParent
     /**
      * Uploads changes in this entry to the server using Zend_Gdata_App
      *
-     * @param string|null $uri The URI to send requests to, or null if $data
-     *        contains the URI.
-     * @param string|null $className The name of the class that should we
-     *        deserializing the server response. If null, then
-     *        'Zend_Gdata_App_Entry' will be used.
-     * @param array $extraHeaders Extra headers to add to the request, as an
-     *        array of string-based key/value pairs.
+     * @param  string|null $uri          The URI to send requests to, or null if $data
+     *                                   contains the URI.
+     * @param  string|null $className    The name of the class that should we
+     *                                   deserializing the server response.
+     *                                   If null, then 'Zend_Gdata_App_Entry'
+     *                                   will be used.
+     * @param  array       $extraHeaders Extra headers to add to the request, as an
+     *                                   array of string-based key/value pairs.
      * @return Zend_Gdata_App_Entry The updated entry.
      * @throws Zend_Gdata_App_Exception
      */
     public function save($uri = null, $className = null, $extraHeaders = array())
     {
-        return $this->getService()->updateEntry($this,
-                                                $uri,
-                                                $className,
-                                                $extraHeaders);
+        return $this->getService()->updateEntry(
+            $this,
+            $uri,
+            $className,
+            $extraHeaders
+        );
     }
 
     /**
@@ -215,13 +218,13 @@ class Zend_Gdata_App_Entry extends Zend_Gdata_App_FeedEntryParent
      * by the server, or null if no changes exist. This does not
      * modify the current entry instance.
      *
-     * @param string|null The URI to send requests to, or null if $data
+     * @param  string|null The URI to send requests to, or null if            $data
      *        contains the URI.
-     * @param string|null The name of the class that should we deserializing
+     * @param  string|null The name of the class that should we deserializing
      *        the server response. If null, then 'Zend_Gdata_App_Entry' will
      *        be used.
-     * @param array $extraHeaders Extra headers to add to the request, as an
-     *        array of string-based key/value pairs.
+     * @param  array                                                          $extraHeaders Extra headers to add to the request, as an
+     *                                                                                      array of string-based key/value pairs.
      * @return mixed A new instance of the current entry with updated data, or
      *         null if the server reports that no changes have been made.
      * @throws Zend_Gdata_App_Exception
@@ -242,8 +245,9 @@ class Zend_Gdata_App_Entry extends Zend_Gdata_App_FeedEntryParent
         // Append ETag, if present (Gdata v2 and above, only) and doesn't
         // conflict with existing headers
         if ($this->_etag != null
-                && !array_key_exists('If-Match', $extraHeaders)
-                && !array_key_exists('If-None-Match', $extraHeaders)) {
+            && !array_key_exists('If-Match', $extraHeaders)
+            && !array_key_exists('If-None-Match', $extraHeaders)
+        ) {
             $extraHeaders['If-None-Match'] = $this->_etag;
         }
 
@@ -253,8 +257,9 @@ class Zend_Gdata_App_Entry extends Zend_Gdata_App_FeedEntryParent
         try {
             $result = $this->service->importUrl($uri, $className, $extraHeaders);
         } catch (Zend_Gdata_App_HttpException $e) {
-            if ($e->getResponse()->getStatus() != '304')
+            if ($e->getResponse()->getStatus() != '304') {
                 throw $e;
+            }
         }
 
         return $result;
@@ -273,7 +278,7 @@ class Zend_Gdata_App_Entry extends Zend_Gdata_App_FeedEntryParent
     /**
      * Sets the value of the atom:content element
      *
-     * @param Zend_Gdata_App_Extension_Content $value
+     * @param  Zend_Gdata_App_Extension_Content $value
      * @return Zend_Gdata_App_Entry Provides a fluent interface
      */
     public function setContent($value)
@@ -297,7 +302,7 @@ class Zend_Gdata_App_Entry extends Zend_Gdata_App_FeedEntryParent
      * Sets the value of the atom:published element
      * This represents the publishing date for an entry
      *
-     * @param Zend_Gdata_App_Extension_Published $value
+     * @param  Zend_Gdata_App_Extension_Published $value
      * @return Zend_Gdata_App_Entry Provides a fluent interface
      */
     public function setPublished($value)
@@ -319,7 +324,7 @@ class Zend_Gdata_App_Entry extends Zend_Gdata_App_FeedEntryParent
     /**
      * Sets the value of the atom:source element
      *
-     * @param Zend_Gdata_App_Extension_Source $value
+     * @param  Zend_Gdata_App_Extension_Source $value
      * @return Zend_Gdata_App_Entry Provides a fluent interface
      */
     public function setSource($value)
@@ -343,7 +348,7 @@ class Zend_Gdata_App_Entry extends Zend_Gdata_App_FeedEntryParent
      * Sets the value of the atom:summary element
      * This represents a textual summary of this entry's content
      *
-     * @param Zend_Gdata_App_Extension_Summary $value
+     * @param  Zend_Gdata_App_Extension_Summary $value
      * @return Zend_Gdata_App_Entry Provides a fluent interface
      */
     public function setSummary($value)
@@ -365,7 +370,7 @@ class Zend_Gdata_App_Entry extends Zend_Gdata_App_FeedEntryParent
     /**
      * Sets the value of the app:control element
      *
-     * @param Zend_Gdata_App_Extension_Control $value
+     * @param  Zend_Gdata_App_Extension_Control $value
      * @return Zend_Gdata_App_Entry Provides a fluent interface
      */
     public function setControl($value)

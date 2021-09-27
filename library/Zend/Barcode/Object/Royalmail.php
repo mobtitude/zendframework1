@@ -33,10 +33,10 @@ require_once 'Zend/Validate/Barcode.php';
 /**
  * Class for generate Royal maim barcode
  *
- * @category   Zend
- * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Barcode
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Barcode_Object_Royalmail extends Zend_Barcode_Object_ObjectAbstract
 {
@@ -77,6 +77,7 @@ class Zend_Barcode_Object_Royalmail extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Default options for Postnet barcode
+     *
      * @return void
      */
     protected function _getDefaultOptions()
@@ -90,6 +91,7 @@ class Zend_Barcode_Object_Royalmail extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Width of the barcode (in pixels)
+     *
      * @return integer
      */
     protected function _calculateBarcodeWidth()
@@ -103,13 +105,16 @@ class Zend_Barcode_Object_Royalmail extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Partial check of interleaved Postnet barcode
+     *
      * @return void
      */
     protected function _checkParams()
-    {}
+    {
+    }
 
     /**
      * Prepare array to draw barcode
+     *
      * @return array
      */
     protected function _prepareBarcode()

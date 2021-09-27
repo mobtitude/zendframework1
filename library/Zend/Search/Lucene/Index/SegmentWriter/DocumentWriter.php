@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_Index_SegmentWriter */
+/**
+ * Zend_Search_Lucene_Index_SegmentWriter 
+ */
 require_once 'Zend/Search/Lucene/Index/SegmentWriter.php';
 
 /**
@@ -48,7 +50,7 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
      * Object constructor.
      *
      * @param Zend_Search_Lucene_Storage_Directory $directory
-     * @param string $name
+     * @param string                               $name
      */
     public function __construct(Zend_Search_Lucene_Storage_Directory $directory, $name)
     {
@@ -62,13 +64,15 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
     /**
      * Adds a document to this segment.
      *
-     * @param Zend_Search_Lucene_Document $document
+     * @param  Zend_Search_Lucene_Document $document
      * @throws Zend_Search_Lucene_Exception
      */
     public function addDocument(Zend_Search_Lucene_Document $document)
     {
-        /** Zend_Search_Lucene_Search_Similarity */
-        require_once 'Zend/Search/Lucene/Search/Similarity.php';
+        /**
+ * Zend_Search_Lucene_Search_Similarity 
+*/
+        include_once 'Zend/Search/Lucene/Search/Similarity.php';
 
         $storedFields = array();
         $docNorms     = array();
@@ -81,14 +85,16 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                 /**
                  * @todo term vector storing support
                  */
-                require_once 'Zend/Search/Lucene/Exception.php';
+                include_once 'Zend/Search/Lucene/Exception.php';
                 throw new Zend_Search_Lucene_Exception('Store term vector functionality is not supported yet.');
             }
 
             if ($field->isIndexed) {
                 if ($field->isTokenized) {
-                    /** Zend_Search_Lucene_Analysis_Analyzer */
-                    require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
+                    /**
+ * Zend_Search_Lucene_Analysis_Analyzer 
+*/
+                    include_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
 
                     $analyzer = Zend_Search_Lucene_Analysis_Analyzer::getDefault();
                     $analyzer->setInput($field->value, $field->encoding);
@@ -119,10 +125,16 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                         $field = clone($field);
                         $field->isIndexed = $field->isTokenized = false;
                     } else {
-                        $docNorms[$field->name] = chr($similarity->encodeNorm( $similarity->lengthNorm($field->name,
-                                                                                                       $tokenCounter)*
+                        $docNorms[$field->name] = chr(
+                            $similarity->encodeNorm(
+                                $similarity->lengthNorm(
+                                    $field->name,
+                                    $tokenCounter
+                                )*
                                                                                $document->boost*
-                                                                               $field->boost ));
+                                $field->boost 
+                            )
+                        );
                     }
                 } else if (($fieldUtf8Value = $field->getUtf8Value()) == '') {
                     // Field contains empty value. Treat it as non-indexed and non-tokenized
@@ -143,9 +155,13 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                     }
                     $this->_termDocs[$termKey][$this->_docCount][] = 0; // position
 
-                    $docNorms[$field->name] = chr($similarity->encodeNorm( $similarity->lengthNorm($field->name, 1)*
+                    $docNorms[$field->name] = chr(
+                        $similarity->encodeNorm(
+                            $similarity->lengthNorm($field->name, 1)*
                                                                            $document->boost*
-                                                                           $field->boost ));
+                            $field->boost 
+                        )
+                    );
                 }
             }
 
@@ -162,14 +178,16 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
             }
 
             if (!isset($this->_norms[$fieldName])) {
-                $this->_norms[$fieldName] = str_repeat(chr($similarity->encodeNorm( $similarity->lengthNorm($fieldName, 0) )),
-                                                       $this->_docCount);
+                $this->_norms[$fieldName] = str_repeat(
+                    chr($similarity->encodeNorm($similarity->lengthNorm($fieldName, 0))),
+                    $this->_docCount
+                );
             }
 
-            if (isset($docNorms[$fieldName])){
+            if (isset($docNorms[$fieldName])) {
                 $this->_norms[$fieldName] .= $docNorms[$fieldName];
             } else {
-                $this->_norms[$fieldName] .= chr($similarity->encodeNorm( $similarity->lengthNorm($fieldName, 0) ));
+                $this->_norms[$fieldName] .= chr($similarity->encodeNorm($similarity->lengthNorm($fieldName, 0)));
             }
         }
 
@@ -210,16 +228,20 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
 
         $this->_generateCFS();
 
-        /** Zend_Search_Lucene_Index_SegmentInfo */
-        require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
+        /**
+ * Zend_Search_Lucene_Index_SegmentInfo 
+*/
+        include_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
 
-        return new Zend_Search_Lucene_Index_SegmentInfo($this->_directory,
-                                                        $this->_name,
-                                                        $this->_docCount,
-                                                        -1,
-                                                        null,
-                                                        true,
-                                                        true);
+        return new Zend_Search_Lucene_Index_SegmentInfo(
+            $this->_directory,
+            $this->_name,
+            $this->_docCount,
+            -1,
+            null,
+            true,
+            true
+        );
     }
 
 }

@@ -88,21 +88,21 @@ class Zend_Service_Rackspace_Servers_Server
      * Constructor
      *
      * @param  Zend_Service_Rackspace_Servers $service
-     * @param  array $data
+     * @param  array                          $data
      * @return void
      */
     public function __construct($service, $data)
     {
         if (!($service instanceof Zend_Service_Rackspace_Servers) || !is_array($data)) {
-            require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+            include_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception(self::ERROR_PARAM_CONSTRUCT);
         }
         if (!array_key_exists('name', $data)) {
-            require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+            include_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception(self::ERROR_PARAM_NO_NAME);
         }
         if (!array_key_exists('id', $data)) {
-            require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+            include_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception(self::ERROR_PARAM_NO_ID);
         }
         $this->service = $service;
@@ -246,7 +246,7 @@ class Zend_Service_Rackspace_Servers_Server
      *
      * If $key is empty return the array of metadata
      *
-     * @param string $key
+     * @param  string $key
      * @return array|string
      */
     public function getMetadata($key=null)
@@ -259,7 +259,7 @@ class Zend_Service_Rackspace_Servers_Server
     /**
      * Change the name of the server
      * 
-     * @param string $name
+     * @param  string $name
      * @return boolean 
      */
     public function changeName($name) 
@@ -274,7 +274,7 @@ class Zend_Service_Rackspace_Servers_Server
     /**
      * Change the admin password of the server
      * 
-     * @param string $password
+     * @param  string $password
      * @return boolean 
      */
     public function changePassword($password)
@@ -293,7 +293,7 @@ class Zend_Service_Rackspace_Servers_Server
      */
     public function reboot($hard=false)
     {
-        return $this->service->rebootServer($this->id,$hard);
+        return $this->service->rebootServer($this->id, $hard);
     }
     /**
      * To Array

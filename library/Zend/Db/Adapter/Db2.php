@@ -18,7 +18,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
- *
  */
 
 /**
@@ -38,9 +37,9 @@ require_once 'Zend/Db/Statement/Db2.php';
 
 
 /**
- * @package    Zend_Db
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Db
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
@@ -127,7 +126,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Db2_Exception
              */
-            require_once 'Zend/Db/Adapter/Db2/Exception.php';
+            include_once 'Zend/Db/Adapter/Db2/Exception.php';
             throw new Zend_Db_Adapter_Db2_Exception('The IBM DB2 extension is required for this adapter but the extension is not loaded');
         }
 
@@ -192,7 +191,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Db2_Exception
              */
-            require_once 'Zend/Db/Adapter/Db2/Exception.php';
+            include_once 'Zend/Db/Adapter/Db2/Exception.php';
             throw new Zend_Db_Adapter_Db2_Exception(db2_conn_errormsg(), db2_conn_error());
         }
     }
@@ -224,7 +223,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
     /**
      * Returns an SQL statement for preparation.
      *
-     * @param string $sql The SQL statement with placeholders.
+     * @param  string $sql The SQL statement with placeholders.
      * @return Zend_Db_Statement_Db2
      */
     public function prepare($sql)
@@ -232,7 +231,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
         $this->_connect();
         $stmtClass = $this->_defaultStmtClass;
         if (!class_exists($stmtClass)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($stmtClass);
         }
         $stmt = new $stmtClass($this, $sql);
@@ -251,23 +250,23 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
     }
 
     /**
-     * @param integer $mode
+     * @param  integer $mode
      * @return void
      */
     public function _setExecuteMode($mode)
     {
         switch ($mode) {
-            case DB2_AUTOCOMMIT_OFF:
-            case DB2_AUTOCOMMIT_ON:
-                $this->_execute_mode = $mode;
-                db2_autocommit($this->_connection, $mode);
-                break;
-            default:
-                /**
-                 * @see Zend_Db_Adapter_Db2_Exception
-                 */
-                require_once 'Zend/Db/Adapter/Db2/Exception.php';
-                throw new Zend_Db_Adapter_Db2_Exception("execution mode not supported");
+        case DB2_AUTOCOMMIT_OFF:
+        case DB2_AUTOCOMMIT_ON:
+            $this->_execute_mode = $mode;
+            db2_autocommit($this->_connection, $mode);
+            break;
+        default:
+            /**
+             * @see Zend_Db_Adapter_Db2_Exception
+             */
+            include_once 'Zend/Db/Adapter/Db2/Exception.php';
+            throw new Zend_Db_Adapter_Db2_Exception("execution mode not supported");
                 break;
         }
     }
@@ -275,7 +274,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
     /**
      * Quote a raw string.
      *
-     * @param string $value     Raw string
+     * @param  string $value Raw string
      * @return string           Quoted string
      */
     protected function _quote($value)
@@ -314,7 +313,8 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
 
     /**
      * Returns a list of the tables in the database.
-     * @param string $schema OPTIONAL
+     *
+     * @param  string $schema OPTIONAL
      * @return array
      */
     public function listTables($schema = null)
@@ -369,8 +369,8 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
      * PRIMARY_POSITION => integer; position of column in primary key
      * IDENTITY         => integer; true if column is auto-generated with unique values
      *
-     * @param string $tableName
-     * @param string $schemaName OPTIONAL
+     * @param  string $tableName
+     * @param  string $schemaName OPTIONAL
      * @return array
      */
     public function describeTable($tableName, $schemaName = null)
@@ -399,7 +399,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
                 . $this->quoteInto('UPPER(c.tabname) = UPPER(?)', $tableName);
 
             if ($schemaName) {
-               $sql .= $this->quoteInto(' AND UPPER(c.tabschema) = UPPER(?)', $schemaName);
+                $sql .= $this->quoteInto(' AND UPPER(c.tabschema) = UPPER(?)', $schemaName);
             }
 
             $sql .= " ORDER BY c.colno";
@@ -494,7 +494,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
      * This is supported only on RDBMS brands that support sequences
      * (e.g. Oracle, PostgreSQL, DB2).  Other RDBMS brands return null.
      *
-     * @param string $sequenceName
+     * @param  string $sequenceName
      * @return string
      */
     public function lastSequenceId($sequenceName)
@@ -518,7 +518,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
      * This is supported only on RDBMS brands that support sequences
      * (e.g. Oracle, PostgreSQL, DB2).  Other RDBMS brands return null.
      *
-     * @param string $sequenceName
+     * @param  string $sequenceName
      * @return string
      */
     public function nextSequenceId($sequenceName)
@@ -542,9 +542,9 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
      * The IDENTITY_VAL_LOCAL() function gives the last generated identity value
      * in the current process, even if it was for a GENERATED column.
      *
-     * @param string $tableName OPTIONAL
-     * @param string $primaryKey OPTIONAL
-     * @param string $idType OPTIONAL used for i5 platform to define sequence/idenity unique value
+     * @param  string $tableName  OPTIONAL
+     * @param  string $primaryKey OPTIONAL
+     * @param  string $idType     OPTIONAL used for i5 platform to define sequence/idenity unique value
      * @return string
      */
 
@@ -591,10 +591,11 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Db2_Exception
              */
-            require_once 'Zend/Db/Adapter/Db2/Exception.php';
+            include_once 'Zend/Db/Adapter/Db2/Exception.php';
             throw new Zend_Db_Adapter_Db2_Exception(
                 db2_conn_errormsg($this->_connection),
-                db2_conn_error($this->_connection));
+                db2_conn_error($this->_connection)
+            );
         }
 
         $this->_setExecuteMode(DB2_AUTOCOMMIT_ON);
@@ -611,10 +612,11 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Db2_Exception
              */
-            require_once 'Zend/Db/Adapter/Db2/Exception.php';
+            include_once 'Zend/Db/Adapter/Db2/Exception.php';
             throw new Zend_Db_Adapter_Db2_Exception(
                 db2_conn_errormsg($this->_connection),
-                db2_conn_error($this->_connection));
+                db2_conn_error($this->_connection)
+            );
         }
         $this->_setExecuteMode(DB2_AUTOCOMMIT_ON);
     }
@@ -622,32 +624,32 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
     /**
      * Set the fetch mode.
      *
-     * @param integer $mode
+     * @param  integer $mode
      * @return void
      * @throws Zend_Db_Adapter_Db2_Exception
      */
     public function setFetchMode($mode)
     {
         switch ($mode) {
-            case Zend_Db::FETCH_NUM:   // seq array
-            case Zend_Db::FETCH_ASSOC: // assoc array
-            case Zend_Db::FETCH_BOTH:  // seq+assoc array
-            case Zend_Db::FETCH_OBJ:   // object
-                $this->_fetchMode = $mode;
+        case Zend_Db::FETCH_NUM:   // seq array
+        case Zend_Db::FETCH_ASSOC: // assoc array
+        case Zend_Db::FETCH_BOTH:  // seq+assoc array
+        case Zend_Db::FETCH_OBJ:   // object
+            $this->_fetchMode = $mode;
+            break;
+        case Zend_Db::FETCH_BOUND:   // bound to PHP variable
+            /**
+             * @see Zend_Db_Adapter_Db2_Exception
+             */
+            include_once 'Zend/Db/Adapter/Db2/Exception.php';
+            throw new Zend_Db_Adapter_Db2_Exception('FETCH_BOUND is not supported yet');
                 break;
-            case Zend_Db::FETCH_BOUND:   // bound to PHP variable
-                /**
-                 * @see Zend_Db_Adapter_Db2_Exception
-                 */
-                require_once 'Zend/Db/Adapter/Db2/Exception.php';
-                throw new Zend_Db_Adapter_Db2_Exception('FETCH_BOUND is not supported yet');
-                break;
-            default:
-                /**
-                 * @see Zend_Db_Adapter_Db2_Exception
-                 */
-                require_once 'Zend/Db/Adapter/Db2/Exception.php';
-                throw new Zend_Db_Adapter_Db2_Exception("Invalid fetch mode '$mode' specified");
+        default:
+            /**
+             * @see Zend_Db_Adapter_Db2_Exception
+             */
+            include_once 'Zend/Db/Adapter/Db2/Exception.php';
+            throw new Zend_Db_Adapter_Db2_Exception("Invalid fetch mode '$mode' specified");
                 break;
         }
     }
@@ -655,9 +657,9 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
     /**
      * Adds an adapter-specific LIMIT clause to the SELECT statement.
      *
-     * @param string $sql
-     * @param integer $count
-     * @param integer $offset OPTIONAL
+     * @param  string  $sql
+     * @param  integer $count
+     * @param  integer $offset OPTIONAL
      * @return string
      */
     public function limit($sql, $count, $offset = 0)
@@ -667,7 +669,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Db2_Exception
              */
-            require_once 'Zend/Db/Adapter/Db2/Exception.php';
+            include_once 'Zend/Db/Adapter/Db2/Exception.php';
             throw new Zend_Db_Adapter_Db2_Exception("LIMIT argument count=$count is not valid");
         }
 
@@ -676,7 +678,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
             /**
              * @see Zend_Db_Adapter_Db2_Exception
              */
-            require_once 'Zend/Db/Adapter/Db2/Exception.php';
+            include_once 'Zend/Db/Adapter/Db2/Exception.php';
             throw new Zend_Db_Adapter_Db2_Exception("LIMIT argument offset=$offset is not valid");
         }
 
@@ -705,7 +707,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
     /**
      * Check if the adapter supports real SQL parameters.
      *
-     * @param string $type 'positional' or 'named'
+     * @param  string $type 'positional' or 'named'
      * @return bool
      */
     public function supportsParameters($type)
@@ -756,7 +758,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
      * Check the connection parameters according to verify
      * type of used OS
      *
-     *  @return void
+     * @return void
      */
     protected function _determineI5()
     {
@@ -764,7 +766,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
         $this->_isI5 = (php_uname('s') == 'OS400') ? true : false;
 
         // if this is set, then us it
-        if (isset($this->_config['os'])){
+        if (isset($this->_config['os'])) {
             if (strtolower($this->_config['os']) === 'i5') {
                 $this->_isI5 = true;
             } else {
@@ -799,7 +801,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
             while ($schema = db2_fetch_assoc($schemaStatement)) {
                 if ($schema['TABLE_SCHEM'] !== null) {
                     // list of the tables which belongs to the selected library
-                    $tablesStatement = db2_tables($this->_connection, NULL, $schema['TABLE_SCHEM']);
+                    $tablesStatement = db2_tables($this->_connection, null, $schema['TABLE_SCHEM']);
                     if (is_resource($tablesStatement)) {
                         while ($rowTables = db2_fetch_assoc($tablesStatement) ) {
                             if ($rowTables['TABLE_NAME'] !== null) {
@@ -823,7 +825,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
             return $value;
         }
 
-        if (strtoupper($idType) === 'S'){
+        if (strtoupper($idType) === 'S') {
             //check i5_lib option
             $sequenceName = $objectName;
             return $this->lastSequenceId($sequenceName);

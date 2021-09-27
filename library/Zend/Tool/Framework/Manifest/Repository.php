@@ -26,10 +26,10 @@
 require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Manifest_Repository
     implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
@@ -47,7 +47,7 @@ class Zend_Tool_Framework_Manifest_Repository
     /**
      * setRegistry()
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
+     * @param  Zend_Tool_Framework_Registry_Interface $registry
      * @return unknown
      */
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
@@ -59,7 +59,7 @@ class Zend_Tool_Framework_Manifest_Repository
     /**
      * addManifest() - Add a manifest for later processing
      *
-     * @param Zend_Tool_Framework_Manifest_Interface $manifest
+     * @param  Zend_Tool_Framework_Manifest_Interface $manifest
      * @return Zend_Tool_Framework_Manifest_Repository
      */
     public function addManifest(Zend_Tool_Framework_Manifest_Interface $manifest)
@@ -96,11 +96,11 @@ class Zend_Tool_Framework_Manifest_Repository
                 }
 
                 if (!$provider instanceof Zend_Tool_Framework_Provider_Interface) {
-                    require_once 'Zend/Tool/Framework/Manifest/Exception.php';
+                    include_once 'Zend/Tool/Framework/Manifest/Exception.php';
                     throw new Zend_Tool_Framework_Manifest_Exception(
                         'A provider provided by the ' . get_class($manifest)
                         . ' does not implement Zend_Tool_Framework_Provider_Interface'
-                        );
+                    );
                 }
                 if (!$providerRepository->hasProvider($provider, false)) {
                     $providerRepository->addProvider($provider);
@@ -144,7 +144,7 @@ class Zend_Tool_Framework_Manifest_Repository
     /**
      * addMetadata() - add a metadata peice by peice
      *
-     * @param Zend_Tool_Framework_Manifest_Metadata $metadata
+     * @param  Zend_Tool_Framework_Manifest_Metadata $metadata
      * @return Zend_Tool_Framework_Manifest_Repository
      */
     public function addMetadata(Zend_Tool_Framework_Metadata_Interface $metadata)
@@ -173,16 +173,16 @@ class Zend_Tool_Framework_Manifest_Repository
                 foreach ($metadatas as $metadata) {
                     if (is_array($metadata)) {
                         if (!class_exists('Zend_Tool_Framework_Metadata_Dynamic')) {
-                            require_once 'Zend/Tool/Framework/Metadata/Dynamic.php';
+                            include_once 'Zend/Tool/Framework/Metadata/Dynamic.php';
                         }
                         $metadata = new Zend_Tool_Framework_Metadata_Dynamic($metadata);
                     }
 
                     if (!$metadata instanceof Zend_Tool_Framework_Metadata_Interface) {
-                        require_once 'Zend/Tool/Framework/Manifest/Exception.php';
+                        include_once 'Zend/Tool/Framework/Manifest/Exception.php';
                         throw new Zend_Tool_Framework_Manifest_Exception(
                             'A Zend_Tool_Framework_Metadata_Interface object was not found in manifest ' . get_class($manifest)
-                            );
+                        );
                     }
 
                     $this->addMetadata($metadata);
@@ -203,8 +203,8 @@ class Zend_Tool_Framework_Manifest_Repository
      *          'actionName' => 'show'
      *          ));
      *
-     * @param array $searchProperties
-     * @param bool $includeNonExistentProperties
+     * @param  array $searchProperties
+     * @param  bool  $includeNonExistentProperties
      * @return Zend_Tool_Framework_Manifest_Metadata[]
      */
     public function getMetadatas(Array $searchProperties = array(), $includeNonExistentProperties = true)
@@ -245,8 +245,8 @@ class Zend_Tool_Framework_Manifest_Repository
      * getMetadata() - This will proxy to getMetadatas(), but will only return a single metadata.  This method
      * should be used in situations where the search criteria is known to only find a single metadata object
      *
-     * @param array $searchProperties
-     * @param bool $includeNonExistentProperties
+     * @param  array $searchProperties
+     * @param  bool  $includeNonExistentProperties
      * @return Zend_Tool_Framework_Manifest_Metadata
      */
     public function getMetadata(Array $searchProperties = array(), $includeNonExistentProperties = true)

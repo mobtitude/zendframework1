@@ -74,15 +74,15 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
 
     /**
      * Adapter constructor, currently empty. Config is set using setConfig()
-     *
      */
     public function __construct()
-    { }
+    { 
+    }
 
     /**
      * Set the nextRequestWillFail flag
      *
-     * @param boolean $flag
+     * @param  boolean $flag
      * @return Zend_Http_Client_Adapter_Test
      */
     public function setNextRequestWillFail($flag)
@@ -103,7 +103,7 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
             $config = $config->toArray();
 
         } elseif (! is_array($config)) {
-            require_once 'Zend/Http/Client/Adapter/Exception.php';
+            include_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception(
                 'Array or Zend_Config object expected, got ' . gettype($config)
             );
@@ -118,17 +118,17 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
     /**
      * Connect to the remote server
      *
-     * @param string  $host
-     * @param int     $port
-     * @param boolean $secure
-     * @param int     $timeout
+     * @param  string  $host
+     * @param  int     $port
+     * @param  boolean $secure
+     * @param  int     $timeout
      * @throws Zend_Http_Client_Adapter_Exception
      */
     public function connect($host, $port = 80, $secure = false)
     {
         if ($this->_nextRequestWillFail) {
             $this->_nextRequestWillFail = false;
-            require_once 'Zend/Http/Client/Adapter/Exception.php';
+            include_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Request failed');
         }
     }
@@ -136,11 +136,11 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
     /**
      * Send request to the remote server
      *
-     * @param string        $method
-     * @param Zend_Uri_Http $uri
-     * @param string        $http_ver
-     * @param array         $headers
-     * @param string        $body
+     * @param  string        $method
+     * @param  Zend_Uri_Http $uri
+     * @param  string        $http_ver
+     * @param  array         $headers
+     * @param  string        $body
      * @return string Request as string
      */
     public function write($method, $uri, $http_ver = '1.1', $headers = array(), $body = '')
@@ -150,10 +150,12 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
 
         // Build request headers
         $path = $uri->getPath();
-        if ($uri->getQuery()) $path .= '?' . $uri->getQuery();
+        if ($uri->getQuery()) { $path .= '?' . $uri->getQuery();
+        }
         $request = "{$method} {$path} HTTP/{$http_ver}\r\n";
         foreach ($headers as $k => $v) {
-            if (is_string($k)) $v = ucfirst($k) . ": $v";
+            if (is_string($k)) { $v = ucfirst($k) . ": $v";
+            }
             $request .= "$v\r\n";
         }
 
@@ -180,10 +182,10 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
 
     /**
      * Close the connection (dummy)
-     *
      */
     public function close()
-    { }
+    { 
+    }
 
     /**
      * Set the HTTP response(s) to be returned by this adapter
@@ -203,11 +205,11 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
     /**
      * Add another response to the response buffer.
      *
-     * @param string Zend_Http_Response|$response
+     * @param string Zend_Http_Response| $response
      */
     public function addResponse($response)
     {
-         if ($response instanceof Zend_Http_Response) {
+        if ($response instanceof Zend_Http_Response) {
             $response = $response->asString("\r\n");
         }
 
@@ -223,9 +225,10 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
     public function setResponseIndex($index)
     {
         if ($index < 0 || $index >= count($this->responses)) {
-            require_once 'Zend/Http/Client/Adapter/Exception.php';
+            include_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception(
-                'Index out of range of response buffer size');
+                'Index out of range of response buffer size'
+            );
         }
         $this->responseIndex = $index;
     }

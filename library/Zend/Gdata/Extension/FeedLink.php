@@ -51,8 +51,8 @@ class Zend_Gdata_Extension_FeedLink extends Zend_Gdata_Extension
     protected $_feed = null;
 
     public function __construct($href = null, $rel = null,
-            $countHint = null, $readOnly = null, $feed = null)
-    {
+        $countHint = null, $readOnly = null, $feed = null
+    ) {
         parent::__construct();
         $this->_countHint = $countHint;
         $this->_href = $href;
@@ -86,11 +86,11 @@ class Zend_Gdata_Extension_FeedLink extends Zend_Gdata_Extension
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('atom') . ':' . 'feed';
-                $feed = new Zend_Gdata_Feed();
-                $feed->transferFromDOM($child);
-                $this->_feed = $feed;
-                break;
+        case $this->lookupNamespace('atom') . ':' . 'feed';
+            $feed = new Zend_Gdata_Feed();
+            $feed->transferFromDOM($child);
+            $this->_feed = $feed;
+            break;
         default:
             parent::takeChildFromDOM($child);
             break;

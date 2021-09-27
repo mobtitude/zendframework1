@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Json
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -25,19 +25,22 @@
 require_once 'Zend/Server/Abstract.php';
 
 /**
- * @category   Zend
- * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Json
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Json_Server extends Zend_Server_Abstract
 {
-    /**#@+
+    /**
+* #@+
      * Version Constants
      */
     const VERSION_1 = '1.0';
     const VERSION_2 = '2.0';
-    /**#@-*/
+    /**
+     * #@-
+     */
     /**
      * Flag: whether or not to auto-emit the response
      */
@@ -76,19 +79,19 @@ class Zend_Json_Server extends Zend_Server_Abstract
     /**
      * Attach a function or callback to the server
      *
-     * @param  string|array $function Valid PHP callback
-     * @param  string $namespace  Ignored
+     * @param  string|array $function  Valid PHP callback
+     * @param  string       $namespace Ignored
      * @return Zend_Json_Server
      */
     public function addFunction($function, $namespace = '')
     {
         if (!is_string($function) && (!is_array($function) || (2 > count($function)))) {
-            require_once 'Zend/Json/Server/Exception.php';
+            include_once 'Zend/Json/Server/Exception.php';
             throw new Zend_Json_Server_Exception('Unable to attach function; invalid');
         }
 
         if (!is_callable($function)) {
-            require_once 'Zend/Json/Server/Exception.php';
+            include_once 'Zend/Json/Server/Exception.php';
             throw new Zend_Json_Server_Exception('Unable to attach function; does not exist');
         }
 
@@ -98,7 +101,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
             $argv = array_slice($argv, 2);
         }
 
-        require_once 'Zend/Server/Reflection.php';
+        include_once 'Zend/Server/Reflection.php';
         if (is_string($function)) {
             $method = Zend_Server_Reflection::reflectFunction($function, $argv, $namespace);
         } else {
@@ -130,7 +133,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
      *
      * @param  string $class
      * @param  string $namespace Ignored
-     * @param  mixed $argv Ignored
+     * @param  mixed  $argv      Ignored
      * @return Zend_Json_Server
      */
     public function setClass($class, $namespace = '', $argv = null)
@@ -141,7 +144,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
             $argv = array_slice($argv, 3);
         }
 
-        require_once 'Zend/Server/Reflection.php';
+        include_once 'Zend/Server/Reflection.php';
         $reflection = Zend_Server_Reflection::reflectClass($class, $argv, $namespace);
 
         foreach ($reflection->getMethods() as $method) {
@@ -155,12 +158,12 @@ class Zend_Json_Server extends Zend_Server_Abstract
      * Indicate fault response
      *
      * @param  string $fault
-     * @param  int $code
+     * @param  int    $code
      * @return false
      */
     public function fault($fault = null, $code = 404, $data = null)
     {
-        require_once 'Zend/Json/Server/Error.php';
+        include_once 'Zend/Json/Server/Error.php';
         $error = new Zend_Json_Server_Error($fault, $code, $data);
         $this->getResponse()->setError($error);
         return $error;
@@ -175,7 +178,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
     public function handle($request = false)
     {
         if ((false !== $request) && (!$request instanceof Zend_Json_Server_Request)) {
-            require_once 'Zend/Json/Server/Exception.php';
+            include_once 'Zend/Json/Server/Exception.php';
             throw new Zend_Json_Server_Exception('Invalid request type provided; cannot handle');
         } elseif ($request) {
             $this->setRequest($request);
@@ -206,7 +209,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
     public function loadFunctions($definition)
     {
         if (!is_array($definition) && (!$definition instanceof Zend_Server_Definition)) {
-            require_once 'Zend/Json/Server/Exception.php';
+            include_once 'Zend/Json/Server/Exception.php';
             throw new Zend_Json_Server_Exception('Invalid definition provided to loadFunctions()');
         }
 
@@ -240,7 +243,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
     public function getRequest()
     {
         if (null === ($request = $this->_request)) {
-            require_once 'Zend/Json/Server/Request/Http.php';
+            include_once 'Zend/Json/Server/Request/Http.php';
             $this->setRequest(new Zend_Json_Server_Request_Http());
         }
         return $this->_request;
@@ -266,7 +269,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
     public function getResponse()
     {
         if (null === ($response = $this->_response)) {
-            require_once 'Zend/Json/Server/Response/Http.php';
+            include_once 'Zend/Json/Server/Response/Http.php';
             $this->setResponse(new Zend_Json_Server_Response_Http());
         }
         return $this->_response;
@@ -299,7 +302,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
      * Overload to accessors of SMD object
      *
      * @param  string $method
-     * @param  array $args
+     * @param  array  $args
      * @return mixed
      */
     public function __call($method, $args)
@@ -326,7 +329,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
     public function getServiceMap()
     {
         if (null === $this->_serviceMap) {
-            require_once 'Zend/Json/Server/Smd.php';
+            include_once 'Zend/Json/Server/Smd.php';
             $this->_serviceMap = new Zend_Json_Server_Smd();
         }
         return $this->_serviceMap;
@@ -473,7 +476,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
     {
         if (null === $this->_smdMethods) {
             $this->_smdMethods = array();
-            require_once 'Zend/Json/Server/Smd.php';
+            include_once 'Zend/Json/Server/Smd.php';
             $methods = get_class_methods('Zend_Json_Server_Smd');
             foreach ($methods as $key => $method) {
                 if (!preg_match('/^(set|get)/', $method)) {
@@ -521,11 +524,11 @@ class Zend_Json_Server extends Zend_Server_Abstract
         }
 
         //Make sure named parameters are passed in correct order
-        if ( is_string( key( $params ) ) ) {
+        if (is_string(key($params)) ) {
 
             $callback = $invocable->getCallback();
             if ('function' == $callback->getType()) {
-                $reflection = new ReflectionFunction( $callback->getFunction() );
+                $reflection = new ReflectionFunction($callback->getFunction());
                 $refParams  = $reflection->getParameters();
             } else {
 
@@ -538,9 +541,9 @@ class Zend_Json_Server extends Zend_Server_Abstract
 
             $orderedParams = array();
             foreach( $reflection->getParameters() as $refParam ) {
-                if( isset( $params[ $refParam->getName() ] ) ) {
+                if(isset($params[ $refParam->getName() ]) ) {
                     $orderedParams[ $refParam->getName() ] = $params[ $refParam->getName() ];
-                } elseif( $refParam->isOptional() ) {
+                } elseif($refParam->isOptional() ) {
                     $orderedParams[ $refParam->getName() ] = $refParam->getDefaultValue();
                 } else {
                     throw new Zend_Server_Exception(

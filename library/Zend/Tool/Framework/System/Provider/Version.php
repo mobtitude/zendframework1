@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 require_once 'Zend/Tool/Framework/Registry.php';
@@ -26,10 +26,10 @@ require_once 'Zend/Version.php';
 /**
  * Version Provider
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_System_Provider_Version
     implements Zend_Tool_Framework_Provider_Interface, Zend_Tool_Framework_Registry_EnabledInterface
@@ -52,8 +52,8 @@ class Zend_Tool_Framework_System_Provider_Version
     /**
      * Show Action
      *
-     * @param string $mode The mode switch can be one of: major, minor, or mini (default)
-     * @param bool $nameIncluded
+     * @param string $mode         The mode switch can be one of: major, minor, or mini (default)
+     * @param bool   $nameIncluded
      */
     public function show($mode = self::MODE_MINI, $nameIncluded = true)
     {
@@ -61,12 +61,12 @@ class Zend_Tool_Framework_System_Provider_Version
         $versionInfo = $this->_splitVersion();
 
         switch($mode) {
-            case self::MODE_MINOR:
+        case self::MODE_MINOR:
                 unset($versionInfo['mini']);
-                break;
-            case self::MODE_MAJOR:
-                unset($versionInfo['mini'], $versionInfo['minor']);
-                break;
+            break;
+        case self::MODE_MAJOR:
+            unset($versionInfo['mini'], $versionInfo['minor']);
+            break;
         }
 
         $output = implode('.', $versionInfo);

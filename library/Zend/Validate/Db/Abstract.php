@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Validate
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -27,11 +27,11 @@ require_once 'Zend/Validate/Abstract.php';
 /**
  * Class for Database record validation
  *
- * @category   Zend
- * @package    Zend_Validate
- * @uses       Zend_Validate_Abstract
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Validate
+ * @uses      Zend_Validate_Abstract
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
 {
@@ -84,7 +84,7 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
      * 'exclude' => An optional where clause or field/value pair to exclude from the query
      * 'adapter' => An optional database adapter to use
      *
-     * @param array|Zend_Config $options Options to use for this validator
+     * @param  array|Zend_Config $options Options to use for this validator
      * @throws Zend_Validate_Exception
      */
     public function __construct($options)
@@ -111,12 +111,12 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
         }
 
         if (!array_key_exists('table', $options) && !array_key_exists('schema', $options)) {
-            require_once 'Zend/Validate/Exception.php';
+            include_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Table or Schema option missing!');
         }
 
         if (!array_key_exists('field', $options)) {
-            require_once 'Zend/Validate/Exception.php';
+            include_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Field option missing!');
         }
 
@@ -152,7 +152,7 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
         if ($this->_adapter === null) {
             $this->_adapter = Zend_Db_Table_Abstract::getDefaultAdapter();
             if (null === $this->_adapter) {
-                require_once 'Zend/Validate/Exception.php';
+                include_once 'Zend/Validate/Exception.php';
                 throw new Zend_Validate_Exception('No database adapter present');
             }
         }
@@ -169,7 +169,7 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
     public function setAdapter($adapter)
     {
         if (!($adapter instanceof Zend_Db_Adapter_Abstract)) {
-            require_once 'Zend/Validate/Exception.php';
+            include_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Adapter option must be a database adapter!');
         }
 
@@ -190,7 +190,7 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
     /**
      * Sets a new exclude clause
      *
-     * @param string|array $exclude
+     * @param  string|array $exclude
      * @return Zend_Validate_Db_Abstract
      */
     public function setExclude($exclude)
@@ -212,7 +212,7 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
     /**
      * Sets a new field
      *
-     * @param string $field
+     * @param  string $field
      * @return Zend_Validate_Db_Abstract
      */
     public function setField($field)
@@ -234,7 +234,7 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
     /**
      * Sets a new table
      *
-     * @param string $table
+     * @param  string $table
      * @return Zend_Validate_Db_Abstract
      */
     public function setTable($table)
@@ -256,7 +256,7 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
     /**
      * Sets a new schema
      *
-     * @param string $schema
+     * @param  string $schema
      * @return Zend_Validate_Db_Abstract
      */
     public function setSchema($schema)
@@ -268,15 +268,17 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
     /**
      * Sets the select object to be used by the validator
      *
-     * @param Zend_Db_Select $select
+     * @param  Zend_Db_Select $select
      * @throws Zend_Validate_Exception
      * @return Zend_Validate_Db_Abstract
      */
     public function setSelect($select)
     {
         if (!$select instanceof Zend_Db_Select) {
-            throw new Zend_Validate_Exception('Select option must be a valid ' .
-                                              'Zend_Db_Select object');
+            throw new Zend_Validate_Exception(
+                'Select option must be a valid ' .
+                'Zend_Db_Select object'
+            );
         }
         $this->_select = $select;
         return $this;
@@ -307,7 +309,7 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
             if ($this->_exclude !== null) {
                 if (is_array($this->_exclude)) {
                     $select->where(
-                          $db->quoteIdentifier($this->_exclude['field'], true) .
+                        $db->quoteIdentifier($this->_exclude['field'], true) .
                             ' != ?', $this->_exclude['value']
                     );
                 } else {
@@ -336,7 +338,7 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
             $select,
             array('value' => $value), // this should work whether db supports positional or named params
             Zend_Db::FETCH_ASSOC
-            );
+        );
 
         return $result;
     }

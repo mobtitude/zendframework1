@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Filter
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 
@@ -27,10 +27,10 @@ require_once 'Zend/Filter/Interface.php';
 
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Filter
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_StripTags implements Zend_Filter_Interface
 {
@@ -79,8 +79,9 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if ((!is_array($options)) || (is_array($options) && !array_key_exists('allowTags', $options) &&
-            !array_key_exists('allowAttribs', $options) && !array_key_exists('allowComments', $options))) {
+        } else if ((!is_array($options)) || (is_array($options) && !array_key_exists('allowTags', $options) 
+            && !array_key_exists('allowAttribs', $options) && !array_key_exists('allowComments', $options))
+        ) {
             $options = func_get_args();
             $temp['allowTags'] = array_shift($options);
             if (!empty($options)) {
@@ -113,7 +114,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
      * This setting is now deprecated and ignored internally.
      *
      * @deprecated
-     * @return bool
+     * @return     bool
      */
     public function getCommentsAllowed()
     {
@@ -126,13 +127,13 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
      * This setting is now deprecated and ignored internally.
      *
      * @deprecated
-     * @param  boolean $commentsAllowed
-     * @return Zend_Filter_StripTags Provides a fluent interface
+     * @param      boolean $commentsAllowed
+     * @return     Zend_Filter_StripTags Provides a fluent interface
      */
     public function setCommentsAllowed($commentsAllowed)
     {
-       $this->commentsAllowed = (boolean) $commentsAllowed;
-       return $this;
+        $this->commentsAllowed = (boolean) $commentsAllowed;
+        return $this;
     }
 
     /**
@@ -327,7 +328,8 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
 
                 // If the attribute is not allowed, then remove it entirely
                 if (!array_key_exists($attributeName, $this->_tagsAllowed[$tagName])
-                    && !array_key_exists($attributeName, $this->_attributesAllowed)) {
+                    && !array_key_exists($attributeName, $this->_attributesAllowed)
+                ) {
                     continue;
                 }
                 // Add the attribute to the accumulator

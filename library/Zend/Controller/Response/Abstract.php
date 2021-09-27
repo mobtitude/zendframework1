@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Controller
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Controller
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -24,7 +24,7 @@
  *
  * Base class for Zend_Controller responses
  *
- * @package Zend_Controller
+ * @package    Zend_Controller
  * @subpackage Response
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -38,6 +38,7 @@ abstract class Zend_Controller_Response_Abstract
 
     /**
      * Exception stack
+     *
      * @var Exception
      */
     protected $_exceptions = array();
@@ -54,6 +55,7 @@ abstract class Zend_Controller_Response_Abstract
 
     /**
      * HTTP response code to use in headers
+     *
      * @var int
      */
     protected $_httpResponseCode = 200;
@@ -99,9 +101,9 @@ abstract class Zend_Controller_Response_Abstract
      * If $replace is true, replaces any headers already defined with that
      * $name.
      *
-     * @param string $name
-     * @param string $value
-     * @param boolean $replace
+     * @param  string  $name
+     * @param  string  $value
+     * @param  boolean $replace
      * @return Zend_Controller_Response_Abstract
      */
     public function setHeader($name, $value, $replace = false)
@@ -133,15 +135,15 @@ abstract class Zend_Controller_Response_Abstract
      * Sets Location header and response code. Forces replacement of any prior
      * redirects.
      *
-     * @param string $url
-     * @param int $code
+     * @param  string $url
+     * @param  int    $code
      * @return Zend_Controller_Response_Abstract
      */
     public function setRedirect($url, $code = 302)
     {
         $this->canSendHeaders(true);
         $this->setHeader('Location', $url, true)
-             ->setHttpResponseCode($code);
+            ->setHttpResponseCode($code);
 
         return $this;
     }
@@ -204,7 +206,7 @@ abstract class Zend_Controller_Response_Abstract
      *
      * Allows setting non key => value headers, such as status codes
      *
-     * @param string $value
+     * @param  string $value
      * @return Zend_Controller_Response_Abstract
      */
     public function setRawHeader($value)
@@ -266,19 +268,19 @@ abstract class Zend_Controller_Response_Abstract
     public function clearAllHeaders()
     {
         return $this->clearHeaders()
-                    ->clearRawHeaders();
+            ->clearRawHeaders();
     }
 
     /**
      * Set HTTP response code to use with headers
      *
-     * @param int $code
+     * @param  int $code
      * @return Zend_Controller_Response_Abstract
      */
     public function setHttpResponseCode($code)
     {
         if (!is_int($code) || (100 > $code) || (599 < $code)) {
-            require_once 'Zend/Controller/Response/Exception.php';
+            include_once 'Zend/Controller/Response/Exception.php';
             throw new Zend_Controller_Response_Exception('Invalid HTTP response code');
         }
 
@@ -305,7 +307,7 @@ abstract class Zend_Controller_Response_Abstract
     /**
      * Can we send headers?
      *
-     * @param boolean $throw Whether or not to throw an exception if headers have been sent; defaults to false
+     * @param  boolean $throw Whether or not to throw an exception if headers have been sent; defaults to false
      * @return boolean
      * @throws Zend_Controller_Response_Exception
      */
@@ -313,7 +315,7 @@ abstract class Zend_Controller_Response_Abstract
     {
         $ok = headers_sent($file, $line);
         if ($ok && $throw && $this->headersSentThrowsException) {
-            require_once 'Zend/Controller/Response/Exception.php';
+            include_once 'Zend/Controller/Response/Exception.php';
             throw new Zend_Controller_Response_Exception('Cannot send headers; headers already sent in ' . $file . ', line ' . $line);
         }
 
@@ -375,8 +377,8 @@ abstract class Zend_Controller_Response_Abstract
      * If $name is a string, sets the named segment in the body array to
      * $content.
      *
-     * @param string $content
-     * @param null|string $name
+     * @param  string      $content
+     * @param  null|string $name
      * @return Zend_Controller_Response_Abstract
      */
     public function setBody($content, $name = null)
@@ -393,8 +395,8 @@ abstract class Zend_Controller_Response_Abstract
     /**
      * Append content to the body content
      *
-     * @param string $content
-     * @param null|string $name
+     * @param  string      $content
+     * @param  null|string $name
      * @return Zend_Controller_Response_Abstract
      */
     public function appendBody($content, $name = null)
@@ -448,7 +450,7 @@ abstract class Zend_Controller_Response_Abstract
      * $spec is a string and matches a named segment, returns the contents of
      * that segment; otherwise, returns null.
      *
-     * @param boolean $spec
+     * @param  boolean $spec
      * @return string|array|null
      */
     public function getBody($spec = false)
@@ -472,14 +474,14 @@ abstract class Zend_Controller_Response_Abstract
      * If segment already exists, replaces with $content and places at end of
      * array.
      *
-     * @param string $name
-     * @param string $content
+     * @param  string $name
+     * @param  string $content
      * @return Zend_Controller_Response_Abstract
      */
     public function append($name, $content)
     {
         if (!is_string($name)) {
-            require_once 'Zend/Controller/Response/Exception.php';
+            include_once 'Zend/Controller/Response/Exception.php';
             throw new Zend_Controller_Response_Exception('Invalid body segment key ("' . gettype($name) . '")');
         }
 
@@ -496,14 +498,14 @@ abstract class Zend_Controller_Response_Abstract
      * If segment already exists, replaces with $content and places at top of
      * array.
      *
-     * @param string $name
-     * @param string $content
+     * @param  string $name
+     * @param  string $content
      * @return void
      */
     public function prepend($name, $content)
     {
         if (!is_string($name)) {
-            require_once 'Zend/Controller/Response/Exception.php';
+            include_once 'Zend/Controller/Response/Exception.php';
             throw new Zend_Controller_Response_Exception('Invalid body segment key ("' . gettype($name) . '")');
         }
 
@@ -520,22 +522,22 @@ abstract class Zend_Controller_Response_Abstract
     /**
      * Insert a named segment into the body content array
      *
-     * @param  string $name
-     * @param  string $content
-     * @param  string $parent
-     * @param  boolean $before Whether to insert the new segment before or
-     * after the parent. Defaults to false (after)
+     * @param  string  $name
+     * @param  string  $content
+     * @param  string  $parent
+     * @param  boolean $before  Whether to insert the new segment before or
+     *                          after the parent. Defaults to false (after)
      * @return Zend_Controller_Response_Abstract
      */
     public function insert($name, $content, $parent = null, $before = false)
     {
         if (!is_string($name)) {
-            require_once 'Zend/Controller/Response/Exception.php';
+            include_once 'Zend/Controller/Response/Exception.php';
             throw new Zend_Controller_Response_Exception('Invalid body segment key ("' . gettype($name) . '")');
         }
 
         if ((null !== $parent) && !is_string($parent)) {
-            require_once 'Zend/Controller/Response/Exception.php';
+            include_once 'Zend/Controller/Response/Exception.php';
             throw new Zend_Controller_Response_Exception('Invalid body segment parent key ("' . gettype($parent) . '")');
         }
 
@@ -585,7 +587,7 @@ abstract class Zend_Controller_Response_Abstract
     /**
      * Register an exception with the response
      *
-     * @param Exception $e
+     * @param  Exception $e
      * @return Zend_Controller_Response_Abstract
      */
     public function setException(Exception $e)
@@ -713,7 +715,7 @@ abstract class Zend_Controller_Response_Abstract
     /**
      * Retrieve all exceptions of a given code
      *
-     * @param mixed $code
+     * @param  mixed $code
      * @return void
      */
     public function getExceptionByCode($code)
@@ -739,7 +741,7 @@ abstract class Zend_Controller_Response_Abstract
      * If called with no arguments or a null argument, returns the value of the
      * flag; otherwise, sets it and returns the current value.
      *
-     * @param boolean $flag Optional
+     * @param  boolean $flag Optional
      * @return boolean
      */
     public function renderExceptions($flag = null)

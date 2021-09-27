@@ -26,10 +26,10 @@
 require_once 'Zend/Tool/Framework/Client/Response/ContentDecorator/Interface.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
     implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
@@ -50,7 +50,7 @@ class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
     /**
      * setSeparator()
      *
-     * @param string $separator
+     * @param  string $separator
      * @return Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
      */
     public function setSeparator($separator)

@@ -59,8 +59,8 @@ class Zend_Gdata_Media_Extension_MediaText extends Zend_Gdata_Extension
      * @param string $end
      */
     public function __construct($text = null, $type = null, $lang = null,
-            $start = null, $end = null)
-    {
+        $start = null, $end = null
+    ) {
         $this->registerAllNamespaces(Zend_Gdata_Media::$namespaces);
         parent::__construct();
         $this->_text = $text;
@@ -76,7 +76,7 @@ class Zend_Gdata_Media_Extension_MediaText extends Zend_Gdata_Extension
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -134,7 +134,7 @@ class Zend_Gdata_Media_Extension_MediaText extends Zend_Gdata_Extension
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Media_Extension_MediaText Provides a fluent interface
      */
     public function setType($value)
@@ -152,7 +152,7 @@ class Zend_Gdata_Media_Extension_MediaText extends Zend_Gdata_Extension
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Media_Extension_MediaText Provides a fluent interface
      */
     public function setLang($value)
@@ -170,7 +170,7 @@ class Zend_Gdata_Media_Extension_MediaText extends Zend_Gdata_Extension
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Media_Extension_MediaText Provides a fluent interface
      */
     public function setStart($value)
@@ -188,7 +188,7 @@ class Zend_Gdata_Media_Extension_MediaText extends Zend_Gdata_Extension
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Media_Extension_MediaText Provides a fluent interface
      */
     public function setEnd($value)

@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Validate
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -25,10 +25,10 @@
 require_once 'Zend/Validate/Abstract.php';
 
 /**
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Validate
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_InArray extends Zend_Validate_Abstract
 {
@@ -59,7 +59,7 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
     /**
      * Sets validator options
      *
-     * @param array|Zend_Config $options Validator options
+     * @param  array|Zend_Config $options Validator options
      * @throws Zend_Validate_Exception
      */
     public function __construct($options)
@@ -67,7 +67,7 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
-            require_once 'Zend/Validate/Exception.php';
+            include_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Array expected as parameter');
         } else {
             $count = func_num_args();

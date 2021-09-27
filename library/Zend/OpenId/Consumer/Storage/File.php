@@ -46,7 +46,7 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
     /**
      * Constructs storage object and creates storage directory
      *
-     * @param string $dir directory name to store data files in
+     * @param  string $dir directory name to store data files in
      * @throws Zend_OpenId_Exception
      */
     public function __construct($dir = null)
@@ -71,40 +71,44 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
                 /**
                  * @see Zend_OpenId_Exception
                  */
-                require_once 'Zend/OpenId/Exception.php';
+                include_once 'Zend/OpenId/Exception.php';
                 throw new Zend_OpenId_Exception(
                     'Cannot access storage directory ' . $dir,
-                    Zend_OpenId_Exception::ERROR_STORAGE);
+                    Zend_OpenId_Exception::ERROR_STORAGE
+                );
             }
         }
         if (($f = fopen($this->_dir.'/assoc.lock', 'w+')) === null) {
             /**
              * @see Zend_OpenId_Exception
              */
-            require_once 'Zend/OpenId/Exception.php';
+            include_once 'Zend/OpenId/Exception.php';
             throw new Zend_OpenId_Exception(
                 'Cannot create a lock file in the directory ' . $dir,
-                Zend_OpenId_Exception::ERROR_STORAGE);
+                Zend_OpenId_Exception::ERROR_STORAGE
+            );
         }
         fclose($f);
         if (($f = fopen($this->_dir.'/discovery.lock', 'w+')) === null) {
             /**
              * @see Zend_OpenId_Exception
              */
-            require_once 'Zend/OpenId/Exception.php';
+            include_once 'Zend/OpenId/Exception.php';
             throw new Zend_OpenId_Exception(
                 'Cannot create a lock file in the directory ' . $dir,
-                Zend_OpenId_Exception::ERROR_STORAGE);
+                Zend_OpenId_Exception::ERROR_STORAGE
+            );
         }
         fclose($f);
         if (($f = fopen($this->_dir.'/nonce.lock', 'w+')) === null) {
             /**
              * @see Zend_OpenId_Exception
              */
-            require_once 'Zend/OpenId/Exception.php';
+            include_once 'Zend/OpenId/Exception.php';
             throw new Zend_OpenId_Exception(
                 'Cannot create a lock file in the directory ' . $dir,
-                Zend_OpenId_Exception::ERROR_STORAGE);
+                Zend_OpenId_Exception::ERROR_STORAGE
+            );
         }
         fclose($f);
     }
@@ -112,11 +116,11 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
     /**
      * Stores information about association identified by $url/$handle
      *
-     * @param string $url OpenID server URL
-     * @param string $handle assiciation handle
-     * @param string $macFunc HMAC function (sha1 or sha256)
-     * @param string $secret shared secret
-     * @param long $expires expiration UNIX time
+     * @param  string $url     OpenID server URL
+     * @param  string $handle  assiciation handle
+     * @param  string $macFunc HMAC function (sha1 or sha256)
+     * @param  string $secret  shared secret
+     * @param  long   $expires expiration UNIX time
      * @return bool
      */
     public function addAssociation($url, $handle, $macFunc, $secret, $expires)
@@ -170,11 +174,11 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
      * Returns true if given association found and not expired and false
      * otherwise
      *
-     * @param string $url OpenID server URL
-     * @param string &$handle assiciation handle
-     * @param string &$macFunc HMAC function (sha1 or sha256)
-     * @param string &$secret shared secret
-     * @param long &$expires expiration UNIX time
+     * @param  string $url      OpenID server URL
+     * @param  string &$handle  assiciation handle
+     * @param  string &$macFunc HMAC function (sha1 or sha256)
+     * @param  string &$secret  shared secret
+     * @param  long   &$expires expiration UNIX time
      * @return bool
      */
     public function getAssociation($url, &$handle, &$macFunc, &$secret, &$expires)
@@ -223,11 +227,11 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
      * Returns true if given association found and not expired and false
      * otherwise
      *
-     * @param string $handle assiciation handle
-     * @param string &$url OpenID server URL
-     * @param string &$macFunc HMAC function (sha1 or sha256)
-     * @param string &$secret shared secret
-     * @param long &$expires expiration UNIX time
+     * @param  string $handle   assiciation handle
+     * @param  string &$url     OpenID server URL
+     * @param  string &$macFunc HMAC function (sha1 or sha256)
+     * @param  string &$secret  shared secret
+     * @param  long   &$expires expiration UNIX time
      * @return bool
      */
     public function getAssociationByHandle($handle, &$url, &$macFunc, &$secret, &$expires)
@@ -274,7 +278,7 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
     /**
      * Deletes association identified by $url
      *
-     * @param string $url OpenID server URL
+     * @param  string $url OpenID server URL
      * @return bool
      */
     public function delAssociation($url)
@@ -318,11 +322,11 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
     /**
      * Stores information discovered from identity $id
      *
-     * @param string $id identity
-     * @param string $realId discovered real identity URL
-     * @param string $server discovered OpenID server URL
-     * @param float $version discovered OpenID protocol version
-     * @param long $expires expiration UNIX time
+     * @param  string $id      identity
+     * @param  string $realId  discovered real identity URL
+     * @param  string $server  discovered OpenID server URL
+     * @param  float  $version discovered OpenID protocol version
+     * @param  long   $expires expiration UNIX time
      * @return bool
      */
     public function addDiscoveryInfo($id, $realId, $server, $version, $expires)
@@ -357,11 +361,11 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
      * Gets information discovered from identity $id
      * Returns true if such information exists and false otherwise
      *
-     * @param string $id identity
-     * @param string &$realId discovered real identity URL
-     * @param string &$server discovered OpenID server URL
-     * @param float &$version discovered OpenID protocol version
-     * @param long &$expires expiration UNIX time
+     * @param  string $id       identity
+     * @param  string &$realId  discovered real identity URL
+     * @param  string &$server  discovered OpenID server URL
+     * @param  float  &$version discovered OpenID protocol version
+     * @param  long   &$expires expiration UNIX time
      * @return bool
      */
     public function getDiscoveryInfo($id, &$realId, &$server, &$version, &$expires)
@@ -406,7 +410,7 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
     /**
      * Removes cached information discovered from identity $id
      *
-     * @param string $id identity
+     * @param  string $id identity
      * @return bool
      */
     public function delDiscoveryInfo($id)
@@ -433,8 +437,8 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
     /**
      * The function checks the uniqueness of openid.response_nonce
      *
-     * @param string $provider openid.openid_op_endpoint field from authentication response
-     * @param  string $nonce openid.response_nonce field from authentication response
+     * @param  string $provider openid.openid_op_endpoint field from authentication response
+     * @param  string $nonce    openid.response_nonce field from authentication response
      * @return bool
      */
     public function isUniqueNonce($provider, $nonce)

@@ -24,7 +24,7 @@
 /**
  * @see Zend_Gdata_Gapps_Query
  */
-require_once('Zend/Gdata/Gapps/Query.php');
+require_once 'Zend/Gdata/Gapps/Query.php';
 
 /**
  * Assists in constructing queries for Google Apps email list recipient
@@ -52,16 +52,16 @@ class Zend_Gdata_Gapps_EmailListRecipientQuery extends Zend_Gdata_Gapps_Query
     /**
      * Create a new instance.
      *
-     * @param string $domain (optional) The Google Apps-hosted domain to use
-     *          when constructing query URIs.
-     * @param string $emailListName (optional) Value for the emailListName
-     *          property.
+     * @param string $domain         (optional) The Google Apps-hosted domain to use
+     *                               when constructing query URIs.
+     * @param string $emailListName  (optional) Value for the emailListName
+     *                               property.
      * @param string $startRecipient (optional) Value for the
-     *          startRecipient property.
+     *                               startRecipient property.
      */
     public function __construct($domain = null, $emailListName = null,
-            $startRecipient = null)
-    {
+        $startRecipient = null
+    ) {
         parent::__construct($domain);
         $this->setEmailListName($emailListName);
         $this->setStartRecipient($startRecipient);
@@ -73,19 +73,19 @@ class Zend_Gdata_Gapps_EmailListRecipientQuery extends Zend_Gdata_Gapps_Query
      * null to disable filtering by list name.
      *
      * @param string $value The email list name to filter search results by,
-     *          or null to disable.
+     *                      or null to disable.
      */
-     public function setEmailListName($value)
-     {
-         $this->_emailListName = $value;
-     }
+    public function setEmailListName($value)
+    {
+        $this->_emailListName = $value;
+    }
 
     /**
      * Get the email list name to query for. If no name is set, null will be
      * returned.
      *
      * @param string $value The email list name to filter search results by,
-     *          or null if disabled.
+     *                      or null if disabled.
      */
     public function getEmailListName()
     {
@@ -97,7 +97,7 @@ class Zend_Gdata_Gapps_EmailListRecipientQuery extends Zend_Gdata_Gapps_Query
      * a list of email list recipients.
      *
      * @param string $value The first recipient to be returned, or null to
-     *              disable.
+     *                      disable.
      */
     public function setStartRecipient($value)
     {
@@ -139,9 +139,10 @@ class Zend_Gdata_Gapps_EmailListRecipientQuery extends Zend_Gdata_Gapps_Query
         if ($this->_emailListName !== null) {
             $uri .= '/' . $this->_emailListName;
         } else {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
+            include_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'EmailListName must not be null');
+                'EmailListName must not be null'
+            );
         }
         $uri .= Zend_Gdata_Gapps::APPS_EMAIL_LIST_RECIPIENT_POSTFIX . '/';
         $uri .= $this->getQueryString();

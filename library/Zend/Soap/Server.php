@@ -24,10 +24,14 @@
  */
 require_once 'Zend/Server/Interface.php';
 
-/** @see Zend_Xml_Security */
+/**
+ * @see Zend_Xml_Security 
+*/
 require_once 'Zend/Xml/Security.php';
 
-/** @see Zend_Xml_Exception */
+/**
+ * @see Zend_Xml_Exception 
+*/
 require_once 'Zend/Xml/Exception.php';
 
 /**
@@ -45,12 +49,14 @@ class Zend_Soap_Server implements Zend_Server_Interface
 {
     /**
      * Actor URI
+     *
      * @var string URI
      */
     protected ?string $_actor = null;
 
     /**
      * Class registered with this server
+     *
      * @var string
      */
     protected $_class;
@@ -102,6 +108,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
     /**
      * Functions registered with this server; may be either an array or the SOAP_FUNCTIONS_ALL
      * constant
+     *
      * @var array|int
      */
     protected $_functions = array();
@@ -113,12 +120,14 @@ class Zend_Soap_Server implements Zend_Server_Interface
 
     /**
      * Request XML
+     *
      * @var string
      */
     protected $_request;
 
     /**
      * Response XML
+     *
      * @var string
      */
     protected $_response;
@@ -141,6 +150,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
 
     /**
      * URI namespace for SOAP server
+     *
      * @var string URI
      */
     protected ?string $_uri = null;
@@ -155,14 +165,14 @@ class Zend_Soap_Server implements Zend_Server_Interface
      * If $wsdl is provided, it is passed on to {@link setWsdl()}; if any
      * options are specified, they are passed on to {@link setOptions()}.
      *
-     * @param string $wsdl
-     * @param array $options
+     * @param  string $wsdl
+     * @param  array  $options
      * @return void
      */
     public function __construct($wsdl = null, array $options = null)
     {
         if (!extension_loaded('soap')) {
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('SOAP extension is not loaded.');
         }
 
@@ -191,39 +201,39 @@ class Zend_Soap_Server implements Zend_Server_Interface
 
         foreach ($options as $key => $value) {
             switch ($key) {
-                case 'actor':
+            case 'actor':
                     $this->setActor($value);
-                    break;
+                break;
                 case 'classmap':
-                case 'classMap':
+            case 'classMap':
                     $this->setClassmap($value);
-                    break;
-                case 'encoding':
+                break;
+            case 'encoding':
                     $this->setEncoding($value);
-                    break;
+                break;
                 case 'soapVersion':
-                case 'soap_version':
+            case 'soap_version':
                     $this->setSoapVersion($value);
-                    break;
-                case 'uri':
+                break;
+            case 'uri':
                     $this->setUri($value);
-                    break;
-                case 'wsdl':
+                break;
+            case 'wsdl':
                     $this->setWsdl($value);
-                    break;
-                case 'featues':
-                    trigger_error(__METHOD__ . ': the option "featues" is deprecated as of 1.10.x and will be removed with 2.0.0; use "features" instead', E_USER_NOTICE);
-                case 'features':
-                    $this->setSoapFeatures($value);
-                    break;
-                case 'cache_wsdl':
-                    $this->setWsdlCache($value);
-                    break;
-                case 'wsi_compliant':
-                    $this->setWsiCompliant($value);
-                    break;
-                default:
-                    break;
+                break;
+            case 'featues':
+                trigger_error(__METHOD__ . ': the option "featues" is deprecated as of 1.10.x and will be removed with 2.0.0; use "features" instead', E_USER_NOTICE);
+            case 'features':
+                $this->setSoapFeatures($value);
+                break;
+            case 'cache_wsdl':
+                $this->setWsdlCache($value);
+                break;
+            case 'wsi_compliant':
+                $this->setWsiCompliant($value);
+                break;
+            default:
+                break;
             }
         }
 
@@ -304,7 +314,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
     public function setEncoding($encoding)
     {
         if (!is_string($encoding)) {
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('Invalid encoding specified');
         }
 
@@ -332,7 +342,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
     public function setSoapVersion($version)
     {
         if (!in_array($version, array(SOAP_1_1, SOAP_1_2))) {
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('Invalid soap version specified');
         }
 
@@ -361,7 +371,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
     {
         $scheme = parse_url($urn, PHP_URL_SCHEME);
         if ($scheme === false || $scheme === null) {
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('Invalid URN');
         }
 
@@ -432,7 +442,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
             /**
              * @see Zend_Soap_Server_Exception
              */
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('Classmap must be an array');
         }
         foreach ($classmap as $type => $class) {
@@ -440,7 +450,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
                 /**
                  * @see Zend_Soap_Server_Exception
                  */
-                require_once 'Zend/Soap/Server/Exception.php';
+                include_once 'Zend/Soap/Server/Exception.php';
                 throw new Zend_Soap_Server_Exception('Invalid class in class map');
             }
         }
@@ -462,7 +472,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
     /**
      * Set wsdl
      *
-     * @param string $wsdl  URI or path to a WSDL
+     * @param  string $wsdl URI or path to a WSDL
      * @return Zend_Soap_Server
      */
     public function setWsdl($wsdl)
@@ -506,7 +516,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
     /**
      * Set the SOAP Wsdl Caching Options
      *
-     * @param string|int|boolean $caching
+     * @param  string|int|boolean $caching
      * @return Zend_Soap_Server
      */
     public function setWsdlCache($options)
@@ -526,9 +536,9 @@ class Zend_Soap_Server implements Zend_Server_Interface
     /**
      * Attach a function as a server method
      *
-     * @param array|string $function Function name, array of function names to attach,
-     * or SOAP_FUNCTIONS_ALL to attach all functions
-     * @param  string $namespace Ignored
+     * @param  array|string $function  Function name, array of function names to attach,
+     *                                 or SOAP_FUNCTIONS_ALL to attach all functions
+     * @param  string       $namespace Ignored
      * @return Zend_Soap_Server
      * @throws Zend_Soap_Server_Exception on invalid functions
      */
@@ -544,7 +554,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
                 if (is_string($func) && function_exists($func)) {
                     $this->_functions[] = $func;
                 } else {
-                    require_once 'Zend/Soap/Server/Exception.php';
+                    include_once 'Zend/Soap/Server/Exception.php';
                     throw new Zend_Soap_Server_Exception('One or more invalid functions specified in array');
                 }
             }
@@ -554,7 +564,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
         } elseif ($function == SOAP_FUNCTIONS_ALL) {
             $this->_functions = SOAP_FUNCTIONS_ALL;
         } else {
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('Invalid function specified');
         }
 
@@ -573,7 +583,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
      *
      * See {@link setObject()} to set preconfigured object instances as request handlers.
      *
-     * @param string $class Class Name which executes SOAP Requests at endpoint.
+     * @param  string $class Class Name which executes SOAP Requests at endpoint.
      * @return Zend_Soap_Server
      * @throws Zend_Soap_Server_Exception if called more than once, or if class
      * does not exist
@@ -581,17 +591,17 @@ class Zend_Soap_Server implements Zend_Server_Interface
     public function setClass($class, $namespace = '', $argv = null)
     {
         if (isset($this->_class)) {
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('A class has already been registered with this soap server instance');
         }
 
         if (!is_string($class)) {
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('Invalid class argument (' . gettype($class) . ')');
         }
 
         if (!class_exists($class)) {
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('Class "' . $class . '" does not exist');
         }
 
@@ -610,23 +620,23 @@ class Zend_Soap_Server implements Zend_Server_Interface
      *
      * Accepts an instanciated object to use when handling requests.
      *
-     * @param object $object
+     * @param  object $object
      * @return Zend_Soap_Server
      */
     public function setObject($object)
     {
         if(!is_object($object)) {
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('Invalid object argument ('.gettype($object).')');
         }
 
         if(isset($this->_object)) {
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('An object has already been registered with this soap server instance');
         }
 
         if ($this->_wsiCompliant) {
-            require_once 'Zend/Soap/Server/Proxy.php';
+            include_once 'Zend/Soap/Server/Proxy.php';
             $this->_object = new Zend_Soap_Server_Proxy($object);
         } else {
             $this->_object = $object;
@@ -660,26 +670,26 @@ class Zend_Soap_Server implements Zend_Server_Interface
     /**
      * Unimplemented: Load server definition
      *
-     * @param array $array
+     * @param  array $array
      * @return void
      * @throws Zend_Soap_Server_Exception Unimplemented
      */
     public function loadFunctions($definition)
     {
-        require_once 'Zend/Soap/Server/Exception.php';
+        include_once 'Zend/Soap/Server/Exception.php';
         throw new Zend_Soap_Server_Exception('Unimplemented');
     }
 
     /**
      * Set server persistence
      *
-     * @param int $mode
+     * @param  int $mode
      * @return Zend_Soap_Server
      */
     public function setPersistence($mode)
     {
         if (!in_array($mode, array(SOAP_PERSISTENCE_SESSION, SOAP_PERSISTENCE_REQUEST))) {
-            require_once 'Zend/Soap/Server/Exception.php';
+            include_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('Invalid persistence mode specified');
         }
 
@@ -707,7 +717,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
      * - stdClass; if so, calls __toString() and verifies XML
      * - string; if so, verifies XML
      *
-     * @param DOMDocument|DOMNode|SimpleXMLElement|stdClass|string $request
+     * @param  DOMDocument|DOMNode|SimpleXMLElement|stdClass|string $request
      * @return Zend_Soap_Server
      */
     protected function _setRequest($request)
@@ -728,11 +738,11 @@ class Zend_Soap_Server implements Zend_Server_Interface
             $dom = new DOMDocument();
             try {
                 if(strlen($xml) == 0 || (!$dom = Zend_Xml_Security::scan($xml, $dom))) {
-                    require_once 'Zend/Soap/Server/Exception.php';
+                    include_once 'Zend/Soap/Server/Exception.php';
                     throw new Zend_Soap_Server_Exception('Invalid XML');
                 }
             } catch (Zend_Xml_Exception $e) {
-                require_once 'Zend/Soap/Server/Exception.php';
+                include_once 'Zend/Soap/Server/Exception.php';
                 throw new Zend_Soap_Server_Exception(
                     $e->getMessage()
                 );
@@ -760,7 +770,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
      *
      * The response is always available via {@link getResponse()}.
      *
-     * @param boolean $flag
+     * @param  boolean $flag
      * @return Zend_Soap_Server
      */
     public function setReturnResponse($flag)
@@ -811,7 +821,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
             $args = $this->_classArgs;
             array_unshift($args, $this->_class);
             if ($this->_wsiCompliant) {
-                require_once 'Zend/Soap/Server/Proxy.php';
+                include_once 'Zend/Soap/Server/Proxy.php';
                 array_unshift($args, 'Zend_Soap_Server_Proxy');
             } 
             call_user_func_array(array($server, 'setClass'), $args);
@@ -844,7 +854,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
      * If no request is passed, pulls request using php:://input (for
      * cross-platform compatability purposes).
      *
-     * @param DOMDocument|DOMNode|SimpleXMLElement|stdClass|string $request Optional request
+     * @param  DOMDocument|DOMNode|SimpleXMLElement|stdClass|string $request Optional request
      * @return void|string
      */
     public function handle($request = null)
@@ -860,7 +870,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
         /**
          * @see Zend_Soap_Server_Exception
          */
-        require_once 'Zend/Soap/Server/Exception.php';
+        include_once 'Zend/Soap/Server/Exception.php';
         try {
             $this->_setRequest($request);
         } catch (Zend_Soap_Server_Exception $e) {
@@ -963,7 +973,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
      *
      * @link   http://www.w3.org/TR/soap12-part1/#faultcodes
      * @param  string|Exception $fault
-     * @param  string $code SOAP Fault Codes
+     * @param  string           $code  SOAP Fault Codes
      * @return SoapFault
      */
     public function fault($fault = null, $code = "Receiver")
@@ -997,11 +1007,11 @@ class Zend_Soap_Server implements Zend_Server_Interface
     /**
      * Throw PHP errors as SoapFaults
      *
-     * @param int $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param int $errline
-     * @param array $errcontext
+     * @param  int    $errno
+     * @param  string $errstr
+     * @param  string $errfile
+     * @param  int    $errline
+     * @param  array  $errcontext
      * @return void
      * @throws SoapFault
      */

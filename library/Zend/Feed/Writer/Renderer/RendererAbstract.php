@@ -12,24 +12,28 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Feed_Writer
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
-/** @see Zend_Feed_Writer */
+/**
+ * @see Zend_Feed_Writer 
+ */
 require_once 'Zend/Feed/Writer.php';
 
-/** @see Zend_Version */
+/**
+ * @see Zend_Version 
+*/
 require_once 'Zend/Version.php';
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Feed_Writer
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Writer_Renderer_RendererAbstract
 {
@@ -146,7 +150,7 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
     public function ignoreExceptions($bool = true)
     {
         if (!is_bool($bool)) {
-            require_once 'Zend/Feed/Exception.php';
+            include_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
         }
         $this->_ignoreExceptions = $bool;

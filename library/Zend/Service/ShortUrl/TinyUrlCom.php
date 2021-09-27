@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Service_ShortUrl
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: $
+ * @category  Zend
+ * @package   Zend_Service_ShortUrl
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id: $
  */
 
 /**
@@ -27,10 +27,10 @@ require_once 'Zend/Service/ShortUrl/AbstractShortener.php';
 /**
  * TinyUrl.com API implementation
  *
- * @category   Zend
- * @package    Zend_Service_ShortUrl
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Service_ShortUrl
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_ShortUrl_TinyUrlCom extends Zend_Service_ShortUrl_AbstractShortener
 {
@@ -44,7 +44,7 @@ class Zend_Service_ShortUrl_TinyUrlCom extends Zend_Service_ShortUrl_AbstractSho
     /**
      * This function shortens long url
      *
-     * @param string $url URL to Shorten
+     * @param  string $url URL to Shorten
      * @throws Zend_Service_ShortUrl_Exception When URL is not valid
      * @return string New URL
      */
@@ -65,7 +65,7 @@ class Zend_Service_ShortUrl_TinyUrlCom extends Zend_Service_ShortUrl_AbstractSho
     /**
      * Reveals target for short URL
      *
-     * @param string $shortenedUrl URL to reveal target of
+     * @param  string $shortenedUrl URL to reveal target of
      * @throws Zend_Service_ShortUrl_Exception When URL is not valid or is not shortened by this service
      * @return string
      */
@@ -80,13 +80,13 @@ class Zend_Service_ShortUrl_TinyUrlCom extends Zend_Service_ShortUrl_AbstractSho
         $this->setHttpClient(new Zend_Http_Client());
 
         $this->getHttpClient()
-             ->setCookie('preview', 1)
-             ->setUri($shortenedUrl);
+            ->setCookie('preview', 1)
+            ->setUri($shortenedUrl);
 
         //get response
         $response = $this->getHttpClient()->request();
 
-        require_once 'Zend/Dom/Query.php';
+        include_once 'Zend/Dom/Query.php';
         $dom = new Zend_Dom_Query($response->getBody());
 
         //find the redirect url link

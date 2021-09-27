@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Xhtml */
+/**
+ * Zend_Form_Element_Xhtml 
+ */
 require_once 'Zend/Form/Element/Xhtml.php';
 
 /**
@@ -41,6 +43,7 @@ class Zend_Form_Element_Checkbox extends Zend_Form_Element_Xhtml
 
     /**
      * Use formCheckbox view helper by default
+     *
      * @var string
      */
     public $helper = 'formCheckbox';
@@ -65,6 +68,7 @@ class Zend_Form_Element_Checkbox extends Zend_Form_Element_Xhtml
 
     /**
      * Current value
+     *
      * @var string 0 or 1
      */
     protected $_value = '0';
@@ -107,7 +111,6 @@ class Zend_Form_Element_Checkbox extends Zend_Form_Element_Xhtml
      *
      * Any other value causes the unchecked value to be set as the current
      * value, and the checked flag to be set as false.
-     *
      *
      * @param  mixed $value
      * @return Zend_Form_Element_Checkbox

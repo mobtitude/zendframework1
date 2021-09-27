@@ -12,14 +12,16 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
-/** Internally used classes */
+/**
+ * Internally used classes 
+ */
 require_once 'Zend/Pdf/Element.php';
 require_once 'Zend/Pdf/Element/Array.php';
 require_once 'Zend/Pdf/Element/String/Binary.php';
@@ -37,16 +39,18 @@ require_once 'Zend/Pdf/Canvas/Abstract.php';
 /**
  * PDF Page
  *
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
 {
-  /**** Class Constants ****/
+    /****
+ * Class Constants 
+****/
 
 
-  /* Page Sizes */
+    /* Page Sizes */
 
     /**
      * Size representing an A4 page in portrait (tall) orientation.
@@ -69,7 +73,7 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
     const SIZE_LETTER_LANDSCAPE  = '792:612:';
 
 
-  /* Shape Drawing */
+    /* Shape Drawing */
 
     /**
      * Stroke the path only. Do not fill.
@@ -87,7 +91,7 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
     const SHAPE_DRAW_FILL_AND_STROKE = 2;
 
 
-  /* Shape Filling Methods */
+    /* Shape Filling Methods */
 
     /**
      * Fill the path using the non-zero winding rule.
@@ -100,7 +104,7 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
     const FILL_METHOD_EVEN_ODD        = 1;
 
 
-  /* Line Dash Types */
+    /* Line Dash Types */
 
     /**
      * Solid line dash.
@@ -167,37 +171,35 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
      * new Zend_Pdf_Page(numeric $width, numeric $height, Zend_Pdf_ElementFactory_Interface $factory = null);
      * ---------------------------------------------------------
      *
-     *
-     * @param mixed $param1
-     * @param mixed $param2
-     * @param mixed $param3
+     * @param  mixed $param1
+     * @param  mixed $param2
+     * @param  mixed $param3
      * @throws Zend_Pdf_Exception
      */
     public function __construct($param1, $param2 = null, $param3 = null)
     {
-        if (($param1 instanceof Zend_Pdf_Element_Reference ||
-             $param1 instanceof Zend_Pdf_Element_Object
-            ) &&
-            $param2 instanceof Zend_Pdf_ElementFactory_Interface &&
-            $param3 === null
-           ) {
+        if (($param1 instanceof Zend_Pdf_Element_Reference 
+            || $param1 instanceof Zend_Pdf_Element_Object) 
+            && $param2 instanceof Zend_Pdf_ElementFactory_Interface 
+            && $param3 === null
+        ) {
             switch ($param1->getType()) {
-                case Zend_Pdf_Element::TYPE_DICTIONARY:
+            case Zend_Pdf_Element::TYPE_DICTIONARY:
                     $this->_dictionary = $param1;
-                    $this->_objFactory = $param2;
-                    $this->_attached   = true;
-                    $this->_safeGS     = false;
-                    return;
+                $this->_objFactory = $param2;
+                $this->_attached   = true;
+                $this->_safeGS     = false;
+                return;
                     break;
 
-                case Zend_Pdf_Element::TYPE_NULL:
+            case Zend_Pdf_Element::TYPE_NULL:
                     $this->_objFactory = $param2;
-                    $pageWidth = $pageHeight = 0;
-                    break;
+                $pageWidth = $pageHeight = 0;
+                break;
 
-                default:
-                    require_once 'Zend/Pdf/Exception.php';
-                    throw new Zend_Pdf_Exception('Unrecognized object type.');
+            default:
+                    include_once 'Zend/Pdf/Exception.php';
+                throw new Zend_Pdf_Exception('Unrecognized object type.');
                     break;
 
             }
@@ -232,33 +234,36 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
             }
 
             return;
-        } else if (is_string($param1) &&
-                   ($param2 === null || $param2 instanceof Zend_Pdf_ElementFactory_Interface) &&
-                   $param3 === null) {
+        } else if (is_string($param1) 
+            && ($param2 === null || $param2 instanceof Zend_Pdf_ElementFactory_Interface) 
+            && $param3 === null
+        ) {
             if ($param2 !== null) {
                 $this->_objFactory = $param2;
             } else {
-                require_once 'Zend/Pdf/ElementFactory.php';
+                include_once 'Zend/Pdf/ElementFactory.php';
                 $this->_objFactory = Zend_Pdf_ElementFactory::createFactory(1);
             }
             $this->_attached   = false;
-            $this->_safeGS     = true; /** New page created. That's users App responsibility to track GS changes */
+            $this->_safeGS     = true; /**
+ * New page created. That's users App responsibility to track GS changes 
+*/
 
             switch (strtolower($param1)) {
-                case 'a4':
-                    $param1 = Zend_Pdf_Page::SIZE_A4;
-                    break;
-                case 'a4-landscape':
-                    $param1 = Zend_Pdf_Page::SIZE_A4_LANDSCAPE;
-                    break;
-                case 'letter':
-                    $param1 = Zend_Pdf_Page::SIZE_LETTER;
-                    break;
-                case 'letter-landscape':
-                    $param1 = Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE;
-                    break;
-                default:
-                    // should be in "x:y" or "x:y:" form
+            case 'a4':
+                $param1 = Zend_Pdf_Page::SIZE_A4;
+                break;
+            case 'a4-landscape':
+                $param1 = Zend_Pdf_Page::SIZE_A4_LANDSCAPE;
+                break;
+            case 'letter':
+                $param1 = Zend_Pdf_Page::SIZE_LETTER;
+                break;
+            case 'letter-landscape':
+                $param1 = Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE;
+                break;
+            default:
+                // should be in "x:y" or "x:y:" form
             }
 
             $pageDim = explode(':', $param1);
@@ -270,35 +275,38 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
                  * @todo support of user defined pagesize notations, like:
                  *       "210x297mm", "595x842", "8.5x11in", "612x792"
                  */
-                require_once 'Zend/Pdf/Exception.php';
+                include_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Wrong pagesize notation.');
             }
             /**
              * @todo support of pagesize recalculation to "default user space units"
              */
 
-        } else if (is_numeric($param1) && is_numeric($param2) &&
-                   ($param3 === null || $param3 instanceof Zend_Pdf_ElementFactory_Interface)) {
+        } else if (is_numeric($param1) && is_numeric($param2) 
+            && ($param3 === null || $param3 instanceof Zend_Pdf_ElementFactory_Interface)
+        ) {
             if ($param3 !== null) {
                 $this->_objFactory = $param3;
             } else {
-                require_once 'Zend/Pdf/ElementFactory.php';
+                include_once 'Zend/Pdf/ElementFactory.php';
                 $this->_objFactory = Zend_Pdf_ElementFactory::createFactory(1);
             }
 
             $this->_attached = false;
-            $this->_safeGS   = true; /** New page created. That's users App responsibility to track GS changes */
+            $this->_safeGS   = true; /**
+ * New page created. That's users App responsibility to track GS changes 
+*/
             $pageWidth  = $param1;
             $pageHeight = $param2;
 
         } else {
-            require_once 'Zend/Pdf/Exception.php';
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Unrecognized method signature, wrong number of arguments or wrong argument types.');
         }
 
         $this->_dictionary = $this->_objFactory->newObject(new Zend_Pdf_Element_Dictionary());
         $this->_dictionary->Type         = new Zend_Pdf_Element_Name('Page');
-        require_once 'Zend/Pdf.php';
+        include_once 'Zend/Pdf.php';
         $this->_dictionary->LastModified = new Zend_Pdf_Element_String(Zend_Pdf::pdfDate());
         $this->_dictionary->Resources    = new Zend_Pdf_Element_Dictionary();
         $this->_dictionary->MediaBox     = new Zend_Pdf_Element_Array();
@@ -318,8 +326,8 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
      * Allowed types: 'ExtGState', 'ColorSpace', 'Pattern', 'Shading',
      * 'XObject', 'Font', 'Properties'
      *
-     * @param string $type
-     * @param Zend_Pdf_Resource $resource
+     * @param  string            $type
+     * @param  Zend_Pdf_Resource $resource
      * @return string
      */
     protected function _attachResource($type, Zend_Pdf_Resource $resource)
@@ -403,7 +411,7 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
      * Allowed procedure set names: 'PDF', 'Text', 'ImageB', 'ImageC', 'ImageI'
      *
      * @internal
-     * @return array
+     * @return   array
      */
     public function getResources()
     {
@@ -435,11 +443,13 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
      * It has to be returned as a PDF stream object to make it reusable.
      *
      * @internal
-     * @returns Zend_Pdf_Resource_ContentStream
+     * @returns  Zend_Pdf_Resource_ContentStream
      */
     public function getContents()
     {
-        /** @todo implementation */
+        /**
+ * @todo implementation 
+*/
     }
 
     /**
@@ -478,9 +488,11 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
         // results of clonePage() operation (other resources are still shared)
         $dictionary = new Zend_Pdf_Element_Dictionary();
         foreach ($this->_dictionary->getKeys() as $key) {
-            $dictionary->$key = $this->_dictionary->$key->makeClone($factory->getFactory(),
-                                                                        $processed,
-                                                                        Zend_Pdf_Element::CLONE_MODE_SKIP_PAGES);
+            $dictionary->$key = $this->_dictionary->$key->makeClone(
+                $factory->getFactory(),
+                $processed,
+                Zend_Pdf_Element::CLONE_MODE_SKIP_PAGES
+            );
         }
 
         $this->_dictionary = $factory->newObject($dictionary);
@@ -495,9 +507,9 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
      * so it can be used within other docs.
      *
      * @internal
-     * @param Zend_Pdf_ElementFactory_Interface $factory
-     * @param array $processed
-     * @return Zend_Pdf_Page
+     * @param    Zend_Pdf_ElementFactory_Interface $factory
+     * @param    array                             $processed
+     * @return   Zend_Pdf_Page
      */
     public function clonePage($factory, &$processed)
     {
@@ -506,9 +518,11 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
         // results of clonePage() operation (other resources are still shared)
         $dictionary = new Zend_Pdf_Element_Dictionary();
         foreach ($this->_dictionary->getKeys() as $key) {
-            $dictionary->$key = $this->_dictionary->$key->makeClone($factory->getFactory(),
-                                                                        $processed,
-                                                                        Zend_Pdf_Element::CLONE_MODE_SKIP_PAGES);
+            $dictionary->$key = $this->_dictionary->$key->makeClone(
+                $factory->getFactory(),
+                $processed,
+                Zend_Pdf_Element::CLONE_MODE_SKIP_PAGES
+            );
         }
 
         $clonedPage = new Zend_Pdf_Page($factory->newObject($dictionary), $factory);
@@ -521,7 +535,7 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
      * Retrive PDF file reference to the page
      *
      * @internal
-     * @return Zend_Pdf_Element_Dictionary
+     * @return   Zend_Pdf_Element_Dictionary
      */
     public function getPageDictionary()
     {
@@ -538,7 +552,7 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
     public function flush()
     {
         if ($this->_saveCount != 0) {
-            require_once 'Zend/Pdf/Exception.php';
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Saved graphics state is not restored');
         }
 
@@ -592,7 +606,7 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
      *
      * @todo Don't forget to close all current graphics operations (like path drawing)
      *
-     * @param Zend_Pdf_ElementFactory_Interface $objFactory
+     * @param  Zend_Pdf_ElementFactory_Interface $objFactory
      * @throws Zend_Pdf_Exception
      */
     public function render(Zend_Pdf_ElementFactory_Interface $objFactory)
@@ -605,7 +619,7 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
         }
 
         if ($this->_attached) {
-            require_once 'Zend/Pdf/Exception.php';
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Page is attached to other documen. Use clone $page to get it context free.');
         } else {
             $objFactory->attach($this->_objFactory);
@@ -620,7 +634,7 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
      * returns array of Zend_Pdf_Element_Dictionary objects
      *
      * @internal
-     * @return array
+     * @return   array
      */
     public function extractResources()
     {
@@ -649,9 +663,10 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
         foreach ($fontResources->getKeys() as $fontResourceName) {
             $fontDictionary = $fontResources->$fontResourceName;
 
-            if (! ($fontDictionary instanceof Zend_Pdf_Element_Reference  ||
-                   $fontDictionary instanceof Zend_Pdf_Element_Object) ) {
-                require_once 'Zend/Pdf/Exception.php';
+            if (! ($fontDictionary instanceof Zend_Pdf_Element_Reference  
+                || $fontDictionary instanceof Zend_Pdf_Element_Object) 
+            ) {
+                include_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Font dictionary has to be an indirect object or object reference.');
             }
 
@@ -659,10 +674,10 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
         }
 
         $fonts = array();
-        require_once 'Zend/Pdf/Exception.php';
+        include_once 'Zend/Pdf/Exception.php';
         foreach ($fontResourcesUnique as $resourceId => $fontDictionary) {
             try {
-                require_once 'Zend/Pdf/Resource/Font/Extracted.php';
+                include_once 'Zend/Pdf/Resource/Font/Extracted.php';
                 // Try to extract font
                 $extractedFont = new Zend_Pdf_Resource_Font_Extracted($fontDictionary);
 
@@ -696,13 +711,14 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
 
         $fontResourcesUnique = array();
 
-        require_once 'Zend/Pdf/Exception.php';
+        include_once 'Zend/Pdf/Exception.php';
         foreach ($fontResources->getKeys() as $fontResourceName) {
             $fontDictionary = $fontResources->$fontResourceName;
 
-            if (! ($fontDictionary instanceof Zend_Pdf_Element_Reference  ||
-                   $fontDictionary instanceof Zend_Pdf_Element_Object) ) {
-                require_once 'Zend/Pdf/Exception.php';
+            if (! ($fontDictionary instanceof Zend_Pdf_Element_Reference  
+                || $fontDictionary instanceof Zend_Pdf_Element_Object) 
+            ) {
+                include_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Font dictionary has to be an indirect object or object reference.');
             }
 
@@ -720,7 +736,7 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
 
             try {
                 // Try to extract font
-                require_once 'Zend/Pdf/Resource/Font/Extracted.php';
+                include_once 'Zend/Pdf/Resource/Font/Extracted.php';
                 return new Zend_Pdf_Resource_Font_Extracted($fontDictionary);
             } catch (Zend_Pdf_Exception $e) {
                 if ($e->getMessage() != 'Unsupported font type.') {
@@ -736,14 +752,15 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
 
     /**
      *
-     * @param Zend_Pdf_Annotation $annotation
+     * @param  Zend_Pdf_Annotation $annotation
      * @return Zend_Pdf_Page
      */
     public function attachAnnotation(Zend_Pdf_Annotation $annotation)
     {
         $annotationDictionary = $annotation->getResource();
-        if (!$annotationDictionary instanceof Zend_Pdf_Element_Object  &&
-            !$annotationDictionary instanceof Zend_Pdf_Element_Reference) {
+        if (!$annotationDictionary instanceof Zend_Pdf_Element_Object  
+            && !$annotationDictionary instanceof Zend_Pdf_Element_Reference
+        ) {
             $annotationDictionary = $this->_objFactory->newObject($annotationDictionary);
         }
 

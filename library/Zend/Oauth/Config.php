@@ -12,27 +12,33 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Oauth
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
-/** Zend_Oauth */
+/**
+ * Zend_Oauth 
+ */
 require_once 'Zend/Oauth.php';
 
-/** Zend_Uri */
+/**
+ * Zend_Uri 
+*/
 require_once 'Zend/Uri.php';
 
-/** Zend_Oauth_Config_Interface */
+/**
+ * Zend_Oauth_Config_Interface 
+*/
 require_once 'Zend/Oauth/Config/ConfigInterface.php';
 
 /**
- * @category   Zend
- * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Oauth
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
 {
@@ -152,48 +158,48 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         foreach ($options as $key => $value) {
             switch ($key) {
-                case 'consumerKey':
+            case 'consumerKey':
                     $this->setConsumerKey($value);
-                    break;
-                case 'consumerSecret':
+                break;
+            case 'consumerSecret':
                     $this->setConsumerSecret($value);
-                    break;
-                case 'signatureMethod':
+                break;
+            case 'signatureMethod':
                     $this->setSignatureMethod($value);
-                    break;
-                case 'version':
+                break;
+            case 'version':
                     $this->setVersion($value);
-                    break;
-                case 'callbackUrl':
+                break;
+            case 'callbackUrl':
                     $this->setCallbackUrl($value);
-                    break;
-                case 'siteUrl':
+                break;
+            case 'siteUrl':
                     $this->setSiteUrl($value);
-                    break;
-                case 'requestTokenUrl':
+                break;
+            case 'requestTokenUrl':
                     $this->setRequestTokenUrl($value);
-                    break;
-                case 'accessTokenUrl':
+                break;
+            case 'accessTokenUrl':
                     $this->setAccessTokenUrl($value);
-                    break;
-                case 'userAuthorizationUrl':
+                break;
+            case 'userAuthorizationUrl':
                     $this->setUserAuthorizationUrl($value);
-                    break;
-                case 'authorizeUrl':
+                break;
+            case 'authorizeUrl':
                     $this->setAuthorizeUrl($value);
-                    break;
-                case 'requestMethod':
+                break;
+            case 'requestMethod':
                     $this->setRequestMethod($value);
-                    break;
-                case 'rsaPrivateKey':
-                    $this->setRsaPrivateKey($value);
-                    break;
-                case 'rsaPublicKey':
-                    $this->setRsaPublicKey($value);
-                    break;
-                case 'realm':
-                    $this->setRealm($value);
-                    break;
+                break;
+            case 'rsaPrivateKey':
+                $this->setRsaPrivateKey($value);
+                break;
+            case 'rsaPublicKey':
+                $this->setRsaPublicKey($value);
+                break;
+            case 'realm':
+                $this->setRealm($value);
+                break;
             }
         }
         if (isset($options['requestScheme'])) {
@@ -263,14 +269,18 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setSignatureMethod($method)
     {
         $method = strtoupper($method);
-        if (!in_array($method, array(
+        if (!in_array(
+            $method, array(
                 'HMAC-SHA1', 'HMAC-SHA256', 'RSA-SHA1', 'PLAINTEXT'
-            ))
+            )
+        )
         ) {
-            require_once 'Zend/Oauth/Exception.php';
-            throw new Zend_Oauth_Exception('Unsupported signature method: '
+            include_once 'Zend/Oauth/Exception.php';
+            throw new Zend_Oauth_Exception(
+                'Unsupported signature method: '
                 . $method
-                . '. Supported are HMAC-SHA1, RSA-SHA1, PLAINTEXT and HMAC-SHA256');
+                . '. Supported are HMAC-SHA1, RSA-SHA1, PLAINTEXT and HMAC-SHA256'
+            );
         }
         $this->_signatureMethod = $method;;
         return $this;
@@ -296,13 +306,15 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setRequestScheme($scheme)
     {
         $scheme = strtolower($scheme);
-        if (!in_array($scheme, array(
+        if (!in_array(
+            $scheme, array(
                 Zend_Oauth::REQUEST_SCHEME_HEADER,
                 Zend_Oauth::REQUEST_SCHEME_POSTBODY,
                 Zend_Oauth::REQUEST_SCHEME_QUERYSTRING,
-            ))
+            )
+        )
         ) {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $scheme . '\' is an unsupported request scheme'
             );
@@ -310,7 +322,7 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         if ($scheme == Zend_Oauth::REQUEST_SCHEME_POSTBODY
             && $this->getRequestMethod() == Zend_Oauth::GET
         ) {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 'Cannot set POSTBODY request method if HTTP method set to GET'
             );
@@ -361,7 +373,7 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setCallbackUrl($url)
     {
         if (!Zend_Uri::check($url) && $url !== 'oob') {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $url . '\' is not a valid URI'
             );
@@ -390,7 +402,7 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setSiteUrl($url)
     {
         if (!Zend_Uri::check($url)) {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $url . '\' is not a valid URI'
             );
@@ -419,7 +431,7 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setRequestTokenUrl($url)
     {
         if (!Zend_Uri::check($url)) {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $url . '\' is not a valid URI'
             );
@@ -454,7 +466,7 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setAccessTokenUrl($url)
     {
         if (!Zend_Uri::check($url)) {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $url . '\' is not a valid URI'
             );
@@ -501,7 +513,7 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setAuthorizeUrl($url)
     {
         if (!Zend_Uri::check($url)) {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $url . '\' is not a valid URI'
             );
@@ -546,15 +558,17 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setRequestMethod($method)
     {
         $method = strtoupper($method);
-        if (!in_array($method, array(
+        if (!in_array(
+            $method, array(
                 Zend_Oauth::GET,
                 Zend_Oauth::POST,
                 Zend_Oauth::PUT,
                 Zend_Oauth::DELETE,
                 Zend_Oauth::OPTIONS,
-            ))
+            )
+        )
         ) {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Invalid method: ' . $method);
         }
         $this->_requestMethod = $method;

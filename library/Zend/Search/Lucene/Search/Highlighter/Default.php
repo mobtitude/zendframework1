@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** @see Zend_Search_Lucene_Search_Highlighter_Interface */
+/**
+ * @see Zend_Search_Lucene_Search_Highlighter_Interface 
+ */
 require_once 'Zend/Search/Lucene/Search/Highlighter/Interface.php';
 /**
  * @category   Zend
@@ -75,7 +77,7 @@ class Zend_Search_Lucene_Search_Highlighter_Default implements Zend_Search_Lucen
     /**
      * Highlight specified words
      *
-     * @param string|array $words  Words to highlight. They could be organized using the array or string.
+     * @param string|array $words Words to highlight. They could be organized using the array or string.
      */
     public function highlight($words)
     {

@@ -94,11 +94,11 @@ class Zend_Gdata_Extension_OriginalEvent extends Zend_Gdata_Extension
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('gd') . ':' . 'when';
-                $when = new Zend_Gdata_Extension_When();
-                $when->transferFromDOM($child);
-                $this->_when = $when;
-                break;
+        case $this->lookupNamespace('gd') . ':' . 'when';
+            $when = new Zend_Gdata_Extension_When();
+            $when->transferFromDOM($child);
+            $this->_when = $when;
+            break;
         default:
             parent::takeChildFromDOM($child);
             break;

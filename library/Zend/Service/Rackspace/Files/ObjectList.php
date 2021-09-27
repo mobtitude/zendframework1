@@ -62,15 +62,15 @@ class Zend_Service_Rackspace_Files_ObjectList implements Countable, Iterator, Ar
     public function __construct($service,$list,$container)
     {
         if (!($service instanceof Zend_Service_Rackspace_Files)) {
-            require_once 'Zend/Service/Rackspace/Files/Exception.php';
+            include_once 'Zend/Service/Rackspace/Files/Exception.php';
             throw new Zend_Service_Rackspace_Files_Exception("You must pass a Zend_Service_Rackspace_Files object");
         }
         if (!is_array($list)) {
-            require_once 'Zend/Service/Rackspace/Files/Exception.php';
+            include_once 'Zend/Service/Rackspace/Files/Exception.php';
             throw new Zend_Service_Rackspace_Files_Exception("You must pass an array of data objects");
         }
         if (empty($container)) {
-            require_once 'Zend/Service/Rackspace/Files/Exception.php';
+            include_once 'Zend/Service/Rackspace/Files/Exception.php';
             throw new Zend_Service_Rackspace_Files_Exception("You must pass the container of the object list");
         }
         $this->service= $service;
@@ -87,7 +87,7 @@ class Zend_Service_Rackspace_Files_ObjectList implements Countable, Iterator, Ar
     {
         foreach ($list as $obj) {
             $obj['container']= $this->container;
-            $this->_addObject(new Zend_Service_Rackspace_Files_Object($this->service,$obj));
+            $this->_addObject(new Zend_Service_Rackspace_Files_Object($this->service, $obj));
         }
     }
     /**
@@ -96,7 +96,7 @@ class Zend_Service_Rackspace_Files_ObjectList implements Countable, Iterator, Ar
      * @param  Zend_Service_Rackspace_Files_Object $obj
      * @return Zend_Service_Rackspace_Files_ObjectList
      */
-    protected function _addObject (Zend_Service_Rackspace_Files_Object $obj)
+    protected function _addObject(Zend_Service_Rackspace_Files_Object $obj)
     {
         $this->objects[] = $obj;
         return $this;
@@ -177,8 +177,8 @@ class Zend_Service_Rackspace_Files_ObjectList implements Countable, Iterator, Ar
      *
      * Implement ArrayAccess::offsetExists()
      *
-     * @param   int     $offset
-     * @return  bool
+     * @param  int $offset
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -189,16 +189,16 @@ class Zend_Service_Rackspace_Files_ObjectList implements Countable, Iterator, Ar
      *
      * Implement ArrayAccess::offsetGet()
      *
-     * @param   int     $offset
-     * @throws  Zend_Service_Rackspace_Files_Exception
-     * @return  Zend_Service_Rackspace_Files_Object
+     * @param  int $offset
+     * @throws Zend_Service_Rackspace_Files_Exception
+     * @return Zend_Service_Rackspace_Files_Object
      */
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
             return $this->objects[$offset];
         } else {
-            require_once 'Zend/Service/Rackspace/Files/Exception.php';
+            include_once 'Zend/Service/Rackspace/Files/Exception.php';
             throw new Zend_Service_Rackspace_Files_Exception('Illegal index');
         }
     }
@@ -208,13 +208,13 @@ class Zend_Service_Rackspace_Files_ObjectList implements Countable, Iterator, Ar
      *
      * Implement ArrayAccess::offsetSet()
      *
-     * @param   int     $offset
-     * @param   string  $value
-     * @throws  Zend_Service_Rackspace_Files_Exception
+     * @param  int    $offset
+     * @param  string $value
+     * @throws Zend_Service_Rackspace_Files_Exception
      */
     public function offsetSet($offset, $value)
     {
-        require_once 'Zend/Service/Rackspace/Files/Exception.php';
+        include_once 'Zend/Service/Rackspace/Files/Exception.php';
         throw new Zend_Service_Rackspace_Files_Exception('You are trying to set read-only property');
     }
 
@@ -223,12 +223,12 @@ class Zend_Service_Rackspace_Files_ObjectList implements Countable, Iterator, Ar
      *
      * Implement ArrayAccess::offsetUnset()
      *
-     * @param   int     $offset
-     * @throws  Zend_Service_Rackspace_Files_Exception
+     * @param  int $offset
+     * @throws Zend_Service_Rackspace_Files_Exception
      */
     public function offsetUnset($offset)
     {
-        require_once 'Zend/Service/Rackspace/Files/Exception.php';
+        include_once 'Zend/Service/Rackspace/Files/Exception.php';
         throw new Zend_Service_Rackspace_Files_Exception('You are trying to unset read-only property');
     }
 }

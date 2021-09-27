@@ -32,11 +32,14 @@
 class Zend_Cloud_DocumentService_Document
     implements ArrayAccess, IteratorAggregate, Countable
 {
-    /** key in document denoting identifier */
+    /**
+ * key in document denoting identifier 
+*/
     const KEY_FIELD = '_id';
 
     /**
      * ID of this document.
+     *
      * @var mixed
      */
     protected $_id;
@@ -53,13 +56,13 @@ class Zend_Cloud_DocumentService_Document
      * then that field's value will be used as the document identifier.
      *
      * @param  array $fields
-     * @param  mixed $id Document identifier
+     * @param  mixed $id     Document identifier
      * @return void
      */
     public function __construct($fields, $id = null)
     {
         if (!is_array($fields) && !$fields instanceof ArrayAccess) {
-            require_once 'Zend/Cloud/DocumentService/Exception.php';
+            include_once 'Zend/Cloud/DocumentService/Exception.php';
             throw new Zend_Cloud_DocumentService_Exception('Fields must be an array or implement ArrayAccess');
         }
 
@@ -122,7 +125,7 @@ class Zend_Cloud_DocumentService_Document
      * Set field by name.
      *
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return Zend_Cloud_DocumentService_Document
      */
     public function setField($name, $value)
@@ -146,7 +149,7 @@ class Zend_Cloud_DocumentService_Document
      * Overloading: set field
      *
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return void
      */
     public function __set($name, $value)
@@ -180,7 +183,7 @@ class Zend_Cloud_DocumentService_Document
      * ArrayAccess: set field to value
      *
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return void
      */
     public function offsetSet($name, $value)
@@ -205,7 +208,7 @@ class Zend_Cloud_DocumentService_Document
      * Overloading: retrieve and set fields by name
      *
      * @param  string $name
-     * @param  mixed $args
+     * @param  mixed  $args
      * @return mixed
      */
     public function __call($name, $args)
@@ -221,7 +224,7 @@ class Zend_Cloud_DocumentService_Document
             return $this->setField($option, $args[0]);
         }
 
-        require_once 'Zend/Cloud/OperationNotAvailableException.php';
+        include_once 'Zend/Cloud/OperationNotAvailableException.php';
         throw new Zend_Cloud_OperationNotAvailableException("Unknown operation $name");
     }
 

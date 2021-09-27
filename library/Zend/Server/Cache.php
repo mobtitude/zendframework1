@@ -12,20 +12,20 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Server
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
  * Zend_Server_Cache: cache server definitions
  *
- * @category   Zend
- * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Server
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Server_Cache
 {
@@ -43,15 +43,15 @@ class Zend_Server_Cache
      * Returns false on any error (typically, inability to write to file), true
      * on success.
      *
-     * @param  string $filename
+     * @param  string                $filename
      * @param  Zend_Server_Interface $server
      * @return bool
      */
     public static function save($filename, Zend_Server_Interface $server)
     {
         if (!is_string($filename)
-            || (!file_exists($filename) && !is_writable(dirname($filename))))
-        {
+            || (!file_exists($filename) && !is_writable(dirname($filename)))
+        ) {
             return false;
         }
 
@@ -102,7 +102,7 @@ class Zend_Server_Cache
      * echo $response;
      * </code>
      *
-     * @param  string $filename
+     * @param  string                $filename
      * @param  Zend_Server_Interface $server
      * @return bool
      */
@@ -110,8 +110,8 @@ class Zend_Server_Cache
     {
         if (!is_string($filename)
             || !file_exists($filename)
-            || !is_readable($filename))
-        {
+            || !is_readable($filename)
+        ) {
             return false;
         }
 

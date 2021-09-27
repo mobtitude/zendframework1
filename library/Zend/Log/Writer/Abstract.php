@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_Log_Filter_Priority */
+/**
+ * Zend_Log_Filter_Priority 
+ */
 require_once 'Zend/Log/Filter/Priority.php';
 
 /**
@@ -58,8 +60,10 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
         }
 
         if (!$filter instanceof Zend_Log_Filter_Interface) {
-            /** @see Zend_Log_Exception */
-            require_once 'Zend/Log/Exception.php';
+            /**
+ * @see Zend_Log_Exception 
+*/
+            include_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception('Invalid filter provided');
         }
 
@@ -75,7 +79,9 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
      */
     public function write($event)
     {
-        /** @var Zend_Log_Filter_Interface $filter */
+        /**
+ * @var Zend_Log_Filter_Interface $filter 
+*/
         foreach ($this->_filters as $filter) {
             if (!$filter->accept($event)) {
                 return;
@@ -104,7 +110,8 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
      * @return void
      */
     public function shutdown()
-    {}
+    {
+    }
 
     /**
      * Write a message to the log.
@@ -128,7 +135,7 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
         }
 
         if (!is_array($config)) {
-            require_once 'Zend/Log/Exception.php';
+            include_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception(
                 'Configuration must be an array or instance of Zend_Config'
             );

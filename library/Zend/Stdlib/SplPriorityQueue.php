@@ -12,10 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Stdlib
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
@@ -121,13 +121,15 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
                 throw new OutOfBoundsException('Cannot iterate SplPriorityQueue; no elements present');
             }
 
-if (!is_array($this->preparedQueue)) {
-    throw new DomainException(sprintf(
-        "Queue was prepared, but is empty?\n    PreparedQueue: %s\n    Internal Queue: %s\n",
-        var_export($this->preparedQueue, 1),
-        var_export($this->queue, 1)
-    ));
-}
+            if (!is_array($this->preparedQueue)) {
+                throw new DomainException(
+                    sprintf(
+                        "Queue was prepared, but is empty?\n    PreparedQueue: %s\n    Internal Queue: %s\n",
+                        var_export($this->preparedQueue, 1),
+                        var_export($this->queue, 1)
+                    )
+                );
+            }
 
             $return      = array_shift($this->preparedQueue);
             $priority    = $return['priority'];
@@ -138,13 +140,13 @@ if (!is_array($this->preparedQueue)) {
             unset($this->queue[$priorityKey][$key]);
 
             switch ($this->extractFlags) {
-                case self::EXTR_DATA:
-                    return $return['data'];
-                case self::EXTR_PRIORITY:
-                    return $return['priority'];
-                case self::EXTR_BOTH:
-                default:
-                    return $return;
+            case self::EXTR_DATA:
+                return $return['data'];
+            case self::EXTR_PRIORITY:
+                return $return['priority'];
+            case self::EXTR_BOTH:
+            default:
+                return $return;
             };
         }
 
@@ -179,13 +181,13 @@ if (!is_array($this->preparedQueue)) {
             $this->count--;
 
             switch ($this->extractFlags) {
-                case self::EXTR_DATA:
-                    return $return['data'];
-                case self::EXTR_PRIORITY:
-                    return $return['priority'];
-                case self::EXTR_BOTH:
-                default:
-                    return $return;
+            case self::EXTR_DATA:
+                return $return['data'];
+            case self::EXTR_PRIORITY:
+                return $return['priority'];
+            case self::EXTR_BOTH:
+            default:
+                return $return;
             };
         }
 
@@ -376,10 +378,10 @@ if (!is_array($this->preparedQueue)) {
  * Also, provides predictable heap order for datums added with the same priority
  * (i.e., they will be emitted in the same order they are enqueued).
  *
- * @category   Zend
- * @package    Zend_Stdlib
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Stdlib
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializable
 {

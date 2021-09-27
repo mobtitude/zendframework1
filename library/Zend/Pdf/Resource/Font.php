@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_Resource */
+/**
+ * Zend_Pdf_Resource 
+ */
 require_once 'Zend/Pdf/Resource.php';
 
 /**
@@ -49,7 +51,9 @@ require_once 'Zend/Pdf/Font.php';
  */
 abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
 {
-  /**** Instance Variables ****/
+    /****
+     * Instance Variables 
+     ****/
     /**
      * The type of font. Use TYPE_ constants defined in {@link Zend_Pdf_Font}.
      */
@@ -117,14 +121,15 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
 
 
 
-  /**** Public Interface ****/
+    /****
+     * Public Interface 
+     ****/
 
 
-  /* Object Lifecycle */
+    /* Object Lifecycle */
 
     /**
      * Object constructor.
-     *
      */
     public function __construct()
     {
@@ -133,7 +138,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
     }
 
 
-  /* Object Magic Methods */
+    /* Object Magic Methods */
 
     /**
      * Returns the full name of the font in the encoding method of the current
@@ -148,7 +153,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
     }
 
 
-  /* Accessors */
+    /* Accessors */
 
     /**
      * Returns the type of font.
@@ -199,11 +204,13 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
      * All names are stored internally as Unicode strings, using UTF-16BE
      * encoding. You may optionally supply a different resulting character set.
      *
-     * @param integer $nameType Type of name requested.
-     * @param mixed $language Preferred language (string) or array of languages
-     *   in preferred order. Use the ISO 639 standard 2-letter language codes.
-     * @param string $characterSet (optional) Desired resulting character set.
-     *   You may use any character set supported by {@link iconv()};
+     * @param  integer $nameType     Type of name requested.
+     * @param  mixed   $language     Preferred language (string) or array of languages
+     *                               in preferred order. Use the ISO 639 standard
+     *                               2-letter language codes.
+     * @param  string  $characterSet (optional) Desired resulting character set.
+     *                               You may use any character set supported by
+     *                               {@link iconv()};
      * @return string
      */
     public function getFontName($nameType, $language, $characterSet = null)
@@ -396,7 +403,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
     }
 
 
-  /* Information and Conversion Methods */
+    /* Information and Conversion Methods */
 
     /**
      * Returns an array of glyph numbers corresponding to the Unicode characters.
@@ -406,7 +413,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
      *
      * See also {@link glyphNumberForCharacter()}.
      *
-     * @param array $characterCodes Array of Unicode character codes (code points).
+     * @param  array $characterCodes Array of Unicode character codes (code points).
      * @return array Array of glyph numbers.
      */
     abstract public function glyphNumbersForCharacters($characterCodes);
@@ -420,7 +427,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
      * See also {@link glyphNumbersForCharacters()} which is optimized for bulk
      * operations.
      *
-     * @param integer $characterCode Unicode character code (code point).
+     * @param  integer $characterCode Unicode character code (code point).
      * @return integer Glyph number.
      */
     abstract public function glyphNumberForCharacter($characterCode);
@@ -438,9 +445,9 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
      * and line breaks, so it is rare that you will get back a full 1.0 score.
      * The resulting value should be considered informational only.
      *
-     * @param string $string
-     * @param string $charEncoding (optional) Character encoding of source text.
-     *   If omitted, uses 'current locale'.
+     * @param  string $string
+     * @param  string $charEncoding (optional) Character encoding of source text.
+     *                              If omitted, uses 'current locale'.
      * @return float
      */
     abstract public function getCoveredPercentage($string, $charEncoding = '');
@@ -453,7 +460,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
      *
      * See also {@link widthForGlyph()}.
      *
-     * @param array $glyphNumbers Array of glyph numbers.
+     * @param  array $glyphNumbers Array of glyph numbers.
      * @return array Array of glyph widths (integers).
      * @throws Zend_Pdf_Exception
      */
@@ -464,7 +471,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
      *
      * Like {@link widthsForGlyphs()} but used for one glyph at a time.
      *
-     * @param integer $glyphNumber
+     * @param  integer $glyphNumber
      * @return integer
      * @throws Zend_Pdf_Exception
      */
@@ -475,8 +482,8 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
      *
      * The method is used to prepare string for text drawing operators
      *
-     * @param string $string
-     * @param string $charEncoding Character encoding of source text.
+     * @param  string $string
+     * @param  string $charEncoding Character encoding of source text.
      * @return string
      */
     abstract public function encodeString($string, $charEncoding);
@@ -486,23 +493,25 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
      *
      * The method is used to convert strings retrieved from existing content streams
      *
-     * @param string $string
-     * @param string $charEncoding Character encoding of resulting text.
+     * @param  string $string
+     * @param  string $charEncoding Character encoding of resulting text.
      * @return string
      */
     abstract public function decodeString($string, $charEncoding);
 
 
 
-  /**** Internal Methods ****/
+    /****
+     * Internal Methods 
+     ****/
 
 
     /**
      * If the font's glyph space is not 1000 units per em, converts the value.
      *
      * @internal
-     * @param integer $value
-     * @return integer
+     * @param    integer $value
+     * @return   integer
      */
     public function toEmSpace($value)
     {

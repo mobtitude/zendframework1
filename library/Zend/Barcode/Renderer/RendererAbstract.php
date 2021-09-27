@@ -23,10 +23,10 @@
 /**
  * Class for rendering the barcode
  *
- * @category   Zend
- * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Barcode
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Barcode_Renderer_RendererAbstract
 {
@@ -47,36 +47,42 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Offset of the barcode from the top of the rendering resource
+     *
      * @var integer
      */
     protected $_topOffset = 0;
 
     /**
      * Offset of the barcode from the left of the rendering resource
+     *
      * @var integer
      */
     protected $_leftOffset = 0;
 
     /**
      * Horizontal position of the barcode in the rendering resource
+     *
      * @var integer
      */
     protected $_horizontalPosition = 'left';
 
     /**
      * Vertical position of the barcode in the rendering resource
+     *
      * @var integer
      */
     protected $_verticalPosition = 'top';
 
     /**
      * Module size rendering
+     *
      * @var float
      */
     protected $_moduleSize = 1;
 
     /**
      * Barcode object
+     *
      * @var Zend_Barcode_Object_ObjectAbstract
      */
     protected $_barcode;
@@ -89,7 +95,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Constructor
      *
-     * @param array|Zend_Config $options
+     * @param  array|Zend_Config $options
      * @return Zend_Barcode_Renderer_RendererAbstract
      */
     public function __construct($options = null)
@@ -100,14 +106,17 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
         if (is_array($options)) {
             $this->setOptions($options);
         }
-        $this->_type = strtolower(substr(
-            get_class($this),
-            strlen($this->_rendererNamespace) + 1
-        ));
+        $this->_type = strtolower(
+            substr(
+                get_class($this),
+                strlen($this->_rendererNamespace) + 1
+            )
+        );
     }
 
     /**
      * Set renderer state from options array
+     *
      * @param  array $options
      * @return Zend_Renderer_Object
      */
@@ -124,7 +133,8 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Set renderer state from config object
-     * @param Zend_Config $config
+     *
+     * @param  Zend_Config $config
      * @return Zend_Renderer_Object
      */
     public function setConfig(Zend_Config $config)
@@ -135,7 +145,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Set renderer namespace for autoloading
      *
-     * @param string $namespace
+     * @param  string $namespace
      * @return Zend_Renderer_Object
      */
     public function setRendererNamespace($namespace)
@@ -156,6 +166,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Retrieve renderer type
+     *
      * @return string
      */
     public function getType()
@@ -165,14 +176,15 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Manually adjust top position
-     * @param integer $value
+     *
+     * @param  integer $value
      * @return Zend_Barcode_Renderer
      * @throws Zend_Barcode_Renderer_Exception
      */
     public function setTopOffset($value)
     {
         if (!is_numeric($value) || intval($value) < 0) {
-            require_once 'Zend/Barcode/Renderer/Exception.php';
+            include_once 'Zend/Barcode/Renderer/Exception.php';
             throw new Zend_Barcode_Renderer_Exception(
                 'Vertical position must be greater than or equals 0'
             );
@@ -183,6 +195,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Retrieve vertical adjustment
+     *
      * @return integer
      */
     public function getTopOffset()
@@ -192,14 +205,15 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Manually adjust left position
-     * @param integer $value
+     *
+     * @param  integer $value
      * @return Zend_Barcode_Renderer
      * @throws Zend_Barcode_Renderer_Exception
      */
     public function setLeftOffset($value)
     {
         if (!is_numeric($value) || intval($value) < 0) {
-            require_once 'Zend/Barcode/Renderer/Exception.php';
+            include_once 'Zend/Barcode/Renderer/Exception.php';
             throw new Zend_Barcode_Renderer_Exception(
                 'Horizontal position must be greater than or equals 0'
             );
@@ -210,6 +224,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Retrieve vertical adjustment
+     *
      * @return integer
      */
     public function getLeftOffset()
@@ -220,7 +235,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Activate/Deactivate the automatic rendering of exception
      *
-     * @param boolean $value
+     * @param  boolean $value
      * @return $this
      */
     public function setAutomaticRenderError($value)
@@ -232,14 +247,14 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Horizontal position of the barcode in the rendering resource
      *
-     * @param string $value
+     * @param  string $value
      * @return Zend_Barcode_Renderer
      * @throws Zend_Barcode_Renderer_Exception
      */
     public function setHorizontalPosition($value)
     {
         if (!in_array($value, array('left' , 'center' , 'right'))) {
-            require_once 'Zend/Barcode/Renderer/Exception.php';
+            include_once 'Zend/Barcode/Renderer/Exception.php';
             throw new Zend_Barcode_Renderer_Exception(
                 "Invalid barcode position provided must be 'left', 'center' or 'right'"
             );
@@ -250,6 +265,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Horizontal position of the barcode in the rendering resource
+     *
      * @return string
      */
     public function getHorizontalPosition()
@@ -260,14 +276,14 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Vertical position of the barcode in the rendering resource
      *
-     * @param string $value
+     * @param  string $value
      * @return self
      * @throws Zend_Barcode_Renderer_Exception
      */
     public function setVerticalPosition($value)
     {
         if (!in_array($value, array('top' , 'middle' , 'bottom'))) {
-            require_once 'Zend/Barcode/Renderer/Exception.php';
+            include_once 'Zend/Barcode/Renderer/Exception.php';
             throw new Zend_Barcode_Renderer_Exception(
                 "Invalid barcode position provided must be 'top', 'middle' or 'bottom'"
             );
@@ -278,6 +294,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Vertical position of the barcode in the rendering resource
+     *
      * @return string
      */
     public function getVerticalPosition()
@@ -287,14 +304,15 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Set the size of a module
-     * @param float $value
+     *
+     * @param  float $value
      * @return Zend_Barcode_Renderer
      * @throws Zend_Barcode_Renderer_Exception
      */
     public function setModuleSize($value)
     {
         if (!is_numeric($value) || floatval($value) <= 0) {
-            require_once 'Zend/Barcode/Renderer/Exception.php';
+            include_once 'Zend/Barcode/Renderer/Exception.php';
             throw new Zend_Barcode_Renderer_Exception(
                 'Float size must be greater than 0'
             );
@@ -306,6 +324,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Set the size of a module
+     *
      * @return float
      */
     public function getModuleSize()
@@ -315,6 +334,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Retrieve the automatic rendering of exception
+     *
      * @return boolean
      */
     public function getAutomaticRenderError()
@@ -325,14 +345,14 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     /**
      * Set the barcode object
      *
-     * @param Zend_Barcode_Object $barcode
+     * @param  Zend_Barcode_Object $barcode
      * @return Zend_Barcode_Renderer
      * @throws Zend_Barcode_Renderer_Exception
      */
     public function setBarcode($barcode)
     {
         if (!$barcode instanceof Zend_Barcode_Object_ObjectAbstract) {
-            require_once 'Zend/Barcode/Renderer/Exception.php';
+            include_once 'Zend/Barcode/Renderer/Exception.php';
             throw new Zend_Barcode_Renderer_Exception(
                 'Invalid barcode object provided to setBarcode()'
             );
@@ -343,6 +363,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Retrieve the barcode object
+     *
      * @return Zend_Barcode_Object
      */
     public function getBarcode()
@@ -352,6 +373,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Checking of parameters after all settings
+     *
      * @return boolean
      */
     public function checkParams()
@@ -363,6 +385,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Check if a barcode object is correctly provided
+     *
      * @return void
      * @throws Zend_Barcode_Renderer_Exception
      */
@@ -372,7 +395,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
             /**
              * @see Zend_Barcode_Renderer_Exception
              */
-            require_once 'Zend/Barcode/Renderer/Exception.php';
+            include_once 'Zend/Barcode/Renderer/Exception.php';
             throw new Zend_Barcode_Renderer_Exception(
                 'No barcode object provided'
             );
@@ -383,8 +406,8 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
      * Calculate the left and top offset of the barcode in the
      * rendering support
      *
-     * @param float $supportHeight
-     * @param float $supportWidth
+     * @param  float $supportHeight
+     * @param  float $supportWidth
      * @return void
      */
     protected function _adjustPosition($supportHeight, $supportWidth)
@@ -392,33 +415,35 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
         $barcodeHeight = $this->_barcode->getHeight(true) * $this->_moduleSize;
         if ($barcodeHeight != $supportHeight && $this->_topOffset == 0) {
             switch ($this->_verticalPosition) {
-                case 'middle':
+            case 'middle':
                     $this->_topOffset = floor(
-                            ($supportHeight - $barcodeHeight) / 2);
-                    break;
-                case 'bottom':
-                    $this->_topOffset = $supportHeight - $barcodeHeight;
-                    break;
-                case 'top':
-                default:
-                    $this->_topOffset = 0;
-                    break;
+                        ($supportHeight - $barcodeHeight) / 2
+                    );
+                break;
+            case 'bottom':
+                $this->_topOffset = $supportHeight - $barcodeHeight;
+                break;
+            case 'top':
+            default:
+                $this->_topOffset = 0;
+                break;
             }
         }
         $barcodeWidth = $this->_barcode->getWidth(true) * $this->_moduleSize;
         if ($barcodeWidth != $supportWidth && $this->_leftOffset == 0) {
             switch ($this->_horizontalPosition) {
-                case 'center':
-                    $this->_leftOffset = floor(
-                            ($supportWidth - $barcodeWidth) / 2);
-                    break;
-                case 'right':
-                    $this->_leftOffset = $supportWidth - $barcodeWidth;
-                    break;
-                case 'left':
-                default:
-                    $this->_leftOffset = 0;
-                    break;
+            case 'center':
+                $this->_leftOffset = floor(
+                    ($supportWidth - $barcodeWidth) / 2
+                );
+                break;
+            case 'right':
+                $this->_leftOffset = $supportWidth - $barcodeWidth;
+                break;
+            case 'left':
+            default:
+                $this->_leftOffset = 0;
+                break;
             }
         }
     }
@@ -469,57 +494,61 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
         $instructionList = $this->_barcode->draw();
         foreach ($instructionList as $instruction) {
             switch ($instruction['type']) {
-                case 'polygon':
-                    $this->_drawPolygon(
-                        $instruction['points'],
-                        $instruction['color'],
-                        $instruction['filled']
-                    );
-                    break;
-                case 'text': //$text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
-                    $this->_drawText(
-                        $instruction['text'],
-                        $instruction['size'],
-                        $instruction['position'],
-                        $instruction['font'],
-                        $instruction['color'],
-                        $instruction['alignment'],
-                        $instruction['orientation']
-                    );
-                    break;
-                default:
-                    /**
-                     * @see Zend_Barcode_Renderer_Exception
-                     */
-                    require_once 'Zend/Barcode/Renderer/Exception.php';
-                    throw new Zend_Barcode_Renderer_Exception(
-                        'Unknown drawing command'
-                    );
+            case 'polygon':
+                $this->_drawPolygon(
+                    $instruction['points'],
+                    $instruction['color'],
+                    $instruction['filled']
+                );
+                break;
+            case 'text': //$text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
+                $this->_drawText(
+                    $instruction['text'],
+                    $instruction['size'],
+                    $instruction['position'],
+                    $instruction['font'],
+                    $instruction['color'],
+                    $instruction['alignment'],
+                    $instruction['orientation']
+                );
+                break;
+            default:
+                /**
+                 * @see Zend_Barcode_Renderer_Exception
+                 */
+                include_once 'Zend/Barcode/Renderer/Exception.php';
+                throw new Zend_Barcode_Renderer_Exception(
+                    'Unknown drawing command'
+                );
             }
         }
     }
 
     /**
      * Checking of parameters after all settings
+     *
      * @return void
      */
     abstract protected function _checkParams();
 
     /**
      * Render the resource by sending headers and drawed resource
+     *
      * @return mixed
      */
     abstract public function render();
 
     /**
      * Initialize the rendering resource
+     *
      * @return void
      */
     abstract protected function _initRenderer();
 
     /**
      * Draw a polygon in the rendering resource
-     * @param array $points
+     *
+     * @param array   $points
      * @param integer $color
      * @param boolean $filled
      */

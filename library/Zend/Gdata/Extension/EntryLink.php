@@ -50,8 +50,8 @@ class Zend_Gdata_Extension_EntryLink extends Zend_Gdata_Extension
     protected $_entry = null;
 
     public function __construct($href = null, $rel = null,
-            $readOnly = null, $entry = null)
-    {
+        $readOnly = null, $entry = null
+    ) {
         parent::__construct();
         $this->_href = $href;
         $this->_readOnly = $readOnly;
@@ -81,11 +81,11 @@ class Zend_Gdata_Extension_EntryLink extends Zend_Gdata_Extension
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('atom') . ':' . 'entry';
-                $entry = new Zend_Gdata_Entry();
-                $entry->transferFromDOM($child);
-                $this->_entry = $entry;
-                break;
+        case $this->lookupNamespace('atom') . ':' . 'entry';
+            $entry = new Zend_Gdata_Entry();
+            $entry->transferFromDOM($child);
+            $this->_entry = $entry;
+            break;
         default:
             parent::takeChildFromDOM($child);
             break;

@@ -51,6 +51,7 @@ class Zend_Gdata_Spreadsheets_ListFeed extends Zend_Gdata_Feed
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_ListFeed object.
+     *
      * @param DOMElement $element An existing XML element on which to base this new object.
      */
     public function __construct($element = null)

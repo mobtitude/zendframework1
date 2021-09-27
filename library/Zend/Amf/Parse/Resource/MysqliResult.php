@@ -98,10 +98,11 @@ class Zend_Amf_Parse_Resource_MysqliResult
     /**
      * Parse resource into array
      *
-     * @param resource $resource
+     * @param  resource $resource
      * @return array
      */
-    public function parse($resource) {
+    public function parse($resource)
+    {
 
         $result = array();
         $fieldcnt = mysqli_num_fields($resource);
@@ -119,7 +120,7 @@ class Zend_Amf_Parse_Resource_MysqliResult
 
         while($row = mysqli_fetch_assoc($resource)) {
             foreach($fields_transform as $fieldname => $fieldtype) {
-               settype($row[$fieldname], $fieldtype);
+                settype($row[$fieldname], $fieldtype);
             }
             $result[] = $row;
         }

@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Abstract */
+/**
+ * Zend_Form_Decorator_Abstract 
+ */
 require_once 'Zend/Form/Decorator/Abstract.php';
 
 /**
@@ -50,6 +52,7 @@ class Zend_Form_Decorator_Description extends Zend_Form_Decorator_Abstract
 
     /**
      * Default placement: append
+     *
      * @var string
      */
     protected ?string $_placement = 'APPEND';
@@ -180,14 +183,14 @@ class Zend_Form_Decorator_Description extends Zend_Form_Decorator_Abstract
         }
 
         if (!empty($tag)) {
-            require_once 'Zend/Form/Decorator/HtmlTag.php';
+            include_once 'Zend/Form/Decorator/HtmlTag.php';
             $options['tag'] = $tag;
             $decorator = new Zend_Form_Decorator_HtmlTag($options);
             $description = $decorator->render($description);
         }
 
         switch ($placement) {
-            case self::PREPEND:
+        case self::PREPEND:
                 return $description . $separator . $content;
             case self::APPEND:
             default:

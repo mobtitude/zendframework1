@@ -41,55 +41,64 @@ abstract class Zend_Mail_Transport_Abstract
 {
     /**
      * Mail body
+     *
      * @access public
      */
     public string $body = '';
 
     /**
      * MIME boundary
+     *
      * @access public
      */
     public string $boundary = '';
 
     /**
      * Mail header string
+     *
      * @access public
      */
     public string $header = '';
 
     /**
      * Array of message headers
+     *
      * @access protected
      */
     protected array $_headers = array();
 
     /**
      * Message is a multipart message
+     *
      * @access protected
      */
     protected bool $_isMultipart = false;
 
     /**
      * Zend_Mail object
-     * @var false|Zend_Mail
+     *
+     * @var    false|Zend_Mail
      * @access protected
      */
     protected $_mail = false;
 
     /**
      * Array of message parts
+     *
      * @access protected
      */
     protected array $_parts = array();
 
     /**
      * Recipients string
+     *
      * @access public
      */
     public string $recipients = '';
 
     /**
      * EOL character string used by transport
+     *
      * @access public
      */
     public string $EOL = "\r\n";
@@ -113,7 +122,7 @@ abstract class Zend_Mail_Transport_Abstract
      * Content-Type of either multipart/alternative or multipart/mixed depending
      * on the mail parts present in the {@link $_mail Zend_Mail object} present.
      *
-     * @param string $boundary
+     * @param  string $boundary
      * @return array
      */
     protected function _getHeaders($boundary)
@@ -147,9 +156,9 @@ abstract class Zend_Mail_Transport_Abstract
     /**
      * Prepend header name to header value
      *
-     * @param string $item
-     * @param string $key
-     * @param string $prefix
+     * @param  string $item
+     * @param  string $key
+     * @param  string $prefix
      * @static
      * @access protected
      * @return void
@@ -164,7 +173,7 @@ abstract class Zend_Mail_Transport_Abstract
      *
      * Prepares and generates {@link $header} based on the headers provided.
      *
-     * @param mixed $headers
+     * @param  mixed $headers
      * @access protected
      * @return void
      * @throws Zend_Mail_Transport_Exception if any header lines exceed 998
@@ -176,7 +185,7 @@ abstract class Zend_Mail_Transport_Abstract
             /**
              * @see Zend_Mail_Transport_Exception
              */
-            require_once 'Zend/Mail/Transport/Exception.php';
+            include_once 'Zend/Mail/Transport/Exception.php';
             throw new Zend_Mail_Transport_Exception('Missing Zend_Mail object in _mail property');
         }
 
@@ -205,7 +214,7 @@ abstract class Zend_Mail_Transport_Abstract
             /**
              * @see Zend_Mail_Transport_Exception
              */
-            require_once 'Zend/Mail/Transport/Exception.php';
+            include_once 'Zend/Mail/Transport/Exception.php';
             throw new Zend_Mail_Exception('At least one mail header line is too long');
         }
     }
@@ -225,8 +234,8 @@ abstract class Zend_Mail_Transport_Abstract
     protected function _buildBody()
     {
         if (($text = $this->_mail->getBodyText())
-            && ($html = $this->_mail->getBodyHtml()))
-        {
+            && ($html = $this->_mail->getBodyHtml())
+        ) {
             // Generate unique boundary for multipart/alternative
             $mime = new Zend_Mime(null);
             $boundaryLine = $mime->boundaryLine($this->EOL);
@@ -272,7 +281,7 @@ abstract class Zend_Mail_Transport_Abstract
             /**
              * @see Zend_Mail_Transport_Exception
              */
-            require_once 'Zend/Mail/Transport/Exception.php';
+            include_once 'Zend/Mail/Transport/Exception.php';
             throw new Zend_Mail_Transport_Exception('No body specified');
         }
 
@@ -311,7 +320,7 @@ abstract class Zend_Mail_Transport_Abstract
             /**
              * @see Zend_Mail_Transport_Exception
              */
-            require_once 'Zend/Mail/Transport/Exception.php';
+            include_once 'Zend/Mail/Transport/Exception.php';
             throw new Zend_Mail_Transport_Exception('Empty mail cannot be sent');
         }
 

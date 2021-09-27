@@ -47,9 +47,9 @@ class Zend_Gdata_Books_Extension_Review extends Zend_Gdata_Extension
      * Constructor for Zend_Gdata_Books_Extension_Review which
      * User-provided review
      *
-     * @param string|null $lang Review language.
-     * @param string|null $type Type of text construct (typically text, html,
-     *        or xhtml).
+     * @param string|null $lang  Review language.
+     * @param string|null $type  Type of text construct (typically text, html,
+     *                           or xhtml).
      * @param string|null $value Text content of the review.
      */
     public function __construct($lang = null, $type = null, $value = null)
@@ -67,7 +67,7 @@ class Zend_Gdata_Books_Extension_Review extends Zend_Gdata_Extension
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistance.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -126,7 +126,7 @@ class Zend_Gdata_Books_Extension_Review extends Zend_Gdata_Extension
     /**
      * Sets the language of link title
      *
-     * @param string $lang language of link title
+     * @param  string $lang language of link title
      * @return Zend_Gdata_Books_Extension_Review Provides a fluent interface
      */
     public function setLang($lang)
@@ -138,7 +138,7 @@ class Zend_Gdata_Books_Extension_Review extends Zend_Gdata_Extension
     /**
      * Sets the type of text construct (typically 'text', 'html' or 'xhtml')
      *
-     * @param string $type type of text construct (typically 'text', 'html' or 'xhtml')
+     * @param  string $type type of text construct (typically 'text', 'html' or 'xhtml')
      * @return Zend_Gdata_Books_Extension_Review Provides a fluent interface
      */
     public function setType($type)

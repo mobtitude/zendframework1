@@ -137,9 +137,9 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      * This method will compare the page properties against the request object
      * that is found in the front controller.
      *
-     * @param  bool $recursive  [optional] whether page should be considered
-     *                          active if any child pages are active. Default is
-     *                          false.
+     * @param  bool $recursive [optional] whether page should be considered
+     *                         active if any child pages are active.
+     *                         Default is false.
      * @return bool             whether page should be considered active or not
      */
     public function isActive($recursive = false)
@@ -190,8 +190,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
                 }
             }
 
-            if (count(array_intersect_assoc($reqParams, $myParams)) ==
-                count($myParams)
+            if (count(array_intersect_assoc($reqParams, $myParams)) ==count($myParams)
             ) {
                 $this->_active = true;
 
@@ -248,7 +247,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
         $scheme = $this->getScheme();
         if (null !== $scheme) {
             if (null === self::$_schemeHelper) {
-                require_once 'Zend/View/Helper/ServerUrl.php';
+                include_once 'Zend/View/Helper/ServerUrl.php';
                 self::$_schemeHelper = new Zend_View_Helper_ServerUrl();
             }
 
@@ -269,14 +268,14 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  string $action             action name
+     * @param  string $action action name
      * @return Zend_Navigation_Page_Mvc   fluent interface, returns self
      * @throws Zend_Navigation_Exception  if invalid $action is given
      */
     public function setAction($action)
     {
         if (null !== $action && !is_string($action)) {
-            require_once 'Zend/Navigation/Exception.php';
+            include_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
                 'Invalid argument: $action must be a string or null'
             );
@@ -305,14 +304,14 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  string|null $controller    controller name
+     * @param  string|null $controller controller name
      * @return Zend_Navigation_Page_Mvc   fluent interface, returns self
      * @throws Zend_Navigation_Exception  if invalid controller name is given
      */
     public function setController($controller)
     {
         if (null !== $controller && !is_string($controller)) {
-            require_once 'Zend/Navigation/Exception.php';
+            include_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
                 'Invalid argument: $controller must be a string or null'
             );
@@ -341,14 +340,14 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  string|null $module        module name
+     * @param  string|null $module module name
      * @return Zend_Navigation_Page_Mvc   fluent interface, returns self
      * @throws Zend_Navigation_Exception  if invalid module name is given
      */
     public function setModule($module)
     {
         if (null !== $module && !is_string($module)) {
-            require_once 'Zend/Navigation/Exception.php';
+            include_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
                 'Invalid argument: $module must be a string or null'
             );
@@ -380,9 +379,10 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  array|null $params           [optional] paramters as array
-     *                                      ('name' => 'value'). Default is null
-     *                                      which clears all params.
+     * @param  array|null $params [optional] paramters as array
+     *                            ('name' => 'value'). Default
+     *                            is null which clears all
+     *                            params.
      * @return Zend_Navigation_Page_Mvc     fluent interface, returns self
      */
     public function setParams(array $params = null)
@@ -403,8 +403,8 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  string $name                 parameter name
-     * @param  mixed $value                 parameter value
+     * @param  string $name  parameter name
+     * @param  mixed  $value parameter value
      * @return Zend_Navigation_Page_Mvc     fluent interface, returns self
      */
     public function setParam($name, $value)
@@ -424,7 +424,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  array $params                paramters as array ('name' => 'value')
+     * @param  array $params paramters as array ('name' => 'value')
      * @return Zend_Navigation_Page_Mvc     fluent interface, returns self
      */
     public function addParams(array $params)
@@ -507,14 +507,14 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  string $route              route name to use when assembling URL
+     * @param  string $route route name to use when assembling URL
      * @return Zend_Navigation_Page_Mvc   fluent interface, returns self
      * @throws Zend_Navigation_Exception  if invalid $route is given
      */
     public function setRoute($route)
     {
         if (null !== $route && (!is_string($route) || strlen($route) < 1)) {
-            require_once 'Zend/Navigation/Exception.php';
+            include_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
                 'Invalid argument: $route must be a non-empty string or null'
             );
@@ -543,8 +543,8 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  bool $resetParams         whether params should be reset when
-     *                                   assembling URL
+     * @param  bool $resetParams whether params should be reset when
+     *                           assembling URL
      * @return Zend_Navigation_Page_Mvc  fluent interface, returns self
      */
     public function setResetParams($resetParams)
@@ -572,7 +572,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param $encodeUrl
+     * @param  $encodeUrl
      * @return Zend_Navigation_Page_Mvc fluent interface, returns self
      */
     public function setEncodeUrl($encodeUrl)
@@ -600,14 +600,14 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  string|null $scheme        scheme
+     * @param  string|null $scheme scheme
      * @throws Zend_Navigation_Exception
      * @return Zend_Navigation_Page_Mvc   fluent interface, returns self
      */
     public function setScheme($scheme)
     {
         if (null !== $scheme && !is_string($scheme)) {
-            require_once 'Zend/Navigation/Exception.php';
+            include_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
                 'Invalid argument: $scheme must be a string or null'
             );
@@ -634,7 +634,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  Zend_Controller_Action_Helper_Url $uh  URL helper
+     * @param  Zend_Controller_Action_Helper_Url $uh URL helper
      * @return void
      */
     public static function setUrlHelper(Zend_Controller_Action_Helper_Url $uh)
@@ -647,7 +647,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      *
      * @see getHref()
      *
-     * @param  Zend_View_Helper_ServerUrl $sh   scheme helper
+     * @param  Zend_View_Helper_ServerUrl $sh scheme helper
      * @return void
      */
     public static function setSchemeHelper(Zend_View_Helper_ServerUrl $sh)

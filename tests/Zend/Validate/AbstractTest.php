@@ -24,13 +24,19 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Validate_AbstractTest::main');
 }
 
-/** Zend_Validate_Abstract */
+/**
+ * Zend_Validate_Abstract 
+*/
 require_once 'Zend/Validate/Abstract.php';
 
-/** Zend_Translate */
+/**
+ * Zend_Translate 
+*/
 require_once 'Zend/Translate.php';
 
-/** Zend_Registry */
+/**
+ * Zend_Registry 
+*/
 require_once 'Zend/Registry.php';
 
 /**
@@ -250,16 +256,18 @@ class Zend_Validate_AbstractTest extends PHPUnit_Framework_TestCase
     {
         $messages = $this->validator->getMessageTemplates();
         $this->assertEquals(
-            array('fooMessage' => '%value% was passed'), $messages);
+            array('fooMessage' => '%value% was passed'), $messages
+        );
 
         $this->assertEquals(
             array(
-                Zend_Validate_AbstractTest_Concrete::FOO_MESSAGE => '%value% was passed'), $messages);
+            Zend_Validate_AbstractTest_Concrete::FOO_MESSAGE => '%value% was passed'), $messages
+        );
     }
 
     public function testMaximumErrorMessageLength()
     {
-        require_once 'Zend/Validate.php';
+        include_once 'Zend/Validate.php';
         $this->assertEquals(-1, Zend_Validate::getMessageLength());
         Zend_Validate_Abstract::setMessageLength(10);
         $this->assertEquals(10, Zend_Validate::getMessageLength());

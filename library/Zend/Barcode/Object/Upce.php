@@ -33,10 +33,10 @@ require_once 'Zend/Validate/Barcode.php';
 /**
  * Class for generate UpcA barcode
  *
- * @category   Zend
- * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Barcode
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
 {
@@ -68,6 +68,7 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
 
     /**
      * Default options for Postnet barcode
+     *
      * @return void
      */
     protected function _getDefaultOptions()
@@ -79,6 +80,7 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
 
     /**
      * Retrieve text to encode
+     *
      * @return string
      */
     public function getText()
@@ -92,6 +94,7 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
 
     /**
      * Width of the barcode (in pixels)
+     *
      * @return integer
      */
     protected function _calculateBarcodeWidth()
@@ -105,6 +108,7 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
 
     /**
      * Prepare array to draw barcode
+     *
      * @return array
      */
     protected function _prepareBarcode()
@@ -144,6 +148,7 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
 
     /**
      * Partial function to draw text
+     *
      * @return void
      */
     protected function _drawText()
@@ -171,14 +176,14 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
                     - $this->_orientation
                 );
                 switch ($i) {
-                    case 0:
-                        $factor = 3;
-                        break;
-                    case 6:
-                        $factor = 5;
-                        break;
-                    default:
-                        $factor = 0;
+                case 0:
+                    $factor = 3;
+                    break;
+                case 6:
+                    $factor = 5;
+                    break;
+                default:
+                    $factor = 0;
                 }
                 $leftPosition = $leftPosition + $characterWidth + ($factor * $this->_barThinWidth * $this->_factor);
             }
@@ -189,16 +194,18 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
      * Particular validation for Upce barcode objects
      * (to suppress checksum character substitution)
      *
-     * @param string $value
-     * @param array  $options
+     * @param  string $value
+     * @param  array  $options
      * @throws Zend_Barcode_Object_Exception
      */
     protected function _validateText($value, $options = array())
     {
-        $validator = new Zend_Validate_Barcode(array(
+        $validator = new Zend_Validate_Barcode(
+            array(
             'adapter'  => 'upce',
             'checksum' => false,
-        ));
+            )
+        );
 
         $value = $this->_addLeadingZeros($value, true);
 
@@ -208,7 +215,7 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
             /**
              * @see Zend_Barcode_Object_Exception
              */
-            require_once 'Zend/Barcode/Object/Exception.php';
+            include_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception($message);
         }
     }

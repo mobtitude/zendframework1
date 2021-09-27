@@ -12,13 +12,15 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Form
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_ViewHelper */
+/**
+ * Zend_Form_Decorator_ViewHelper 
+ */
 require_once 'Zend/Form/Decorator/ViewHelper.php';
 
 /**
@@ -49,6 +51,7 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
 
     /**
      * Element types that represent buttons
+     *
      * @var array
      */
     protected array $_buttonTypes = array(
@@ -85,7 +88,7 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
      * Set a single dijit option parameter
      *
      * @param  string $key
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return Zend_Dojo_Form_Decorator_DijitContainer
      */
     public function setDijitParam($key, $value)
@@ -150,7 +153,7 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
         $element = $this->getElement();
         $view = $element->getView();
         if (null === $view) {
-            require_once 'Zend/Form/Decorator/Exception.php';
+            include_once 'Zend/Form/Decorator/Exception.php';
             throw new Zend_Form_Decorator_Exception('DijitElement decorator cannot render without a registered view object');
         }
 
@@ -180,12 +183,12 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
 
         $elementContent = $view->$helper($name, $value, $dijitParams, $attribs, $options);
         switch ($this->getPlacement()) {
-            case self::APPEND:
+        case self::APPEND:
                 return $content . $separator . $elementContent;
-            case self::PREPEND:
-                return $elementContent . $separator . $content;
-            default:
-                return $elementContent;
+        case self::PREPEND:
+            return $elementContent . $separator . $content;
+        default:
+            return $elementContent;
         }
     }
 }

@@ -89,8 +89,8 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * Create Amazon SimpleDB client.
      *
-     * @param string $accessKey       Override the default Access Key
-     * @param string $secretKey       Override the default Secret Key
+     * @param string $accessKey Override the default Access Key
+     * @param string $secretKey Override the default Secret Key
      */
     public function __construct($accessKey, $secretKey)
     {
@@ -101,7 +101,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * Set SimpleDB endpoint to use
      *
-     * @param string|Zend_Uri_Http $endpoint
+     * @param  string|Zend_Uri_Http $endpoint
      * @throws Zend_Service_Amazon_SimpleDb_Exception
      * @throws Zend_Uri_Exception
      * @return Zend_Service_Amazon_SimpleDb
@@ -112,7 +112,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
             $endpoint = Zend_Uri::factory($endpoint);
         }
         if(!$endpoint->valid()) {
-            require_once 'Zend/Service/Amazon/SimpleDb/Exception.php';
+            include_once 'Zend/Service/Amazon/SimpleDb/Exception.php';
             throw new Zend_Service_Amazon_SimpleDb_Exception("Invalid endpoint supplied");
         }
         $this->_endpoint = $endpoint;
@@ -132,9 +132,9 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * Get attributes API method
      *
-     * @param string      $domainName Domain name within database
-     * @param string      $itemName
-     * @param string|null $attributeName
+     * @param  string      $domainName    Domain name within database
+     * @param  string      $itemName
+     * @param  string|null $attributeName
      * @throws Zend_Service_Amazon_SimpleDb_Exception
      * @return array
      */
@@ -181,10 +181,10 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * Push attributes
      *
-     * @param  string $domainName
-     * @param  string $itemName
+     * @param  string            $domainName
+     * @param  string            $itemName
      * @param  array|Traversable $attributes
-     * @param  array $replace
+     * @param  array             $replace
      * @return void
      */
     public function putAttributes(
@@ -217,9 +217,9 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * Add many attributes at once
      *
-     * @param  array $items
+     * @param  array  $items
      * @param  string $domainName
-     * @param  array $replace
+     * @param  array  $replace
      * @return void
      */
     public function batchPutAttributes($items, $domainName, array $replace = array())
@@ -259,7 +259,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
      *
      * @param  string $domainName
      * @param  string $itemName
-     * @param  array $attributes
+     * @param  array  $attributes
      * @return void
      */
     public function deleteAttributes($domainName, $itemName, array $attributes = array())
@@ -286,8 +286,8 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * List domains
      *
-     * @param int $maxNumberOfDomains
-     * @param int $nextToken
+     * @param  int $maxNumberOfDomains
+     * @param  int $nextToken
      * @return array              0 or more domain names
      */
     public function listDomains($maxNumberOfDomains = 100, $nextToken = null)
@@ -317,7 +317,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * Retrieve domain metadata
      *
-     * @param string $domainName Name of the domain for which metadata will be requested
+     * @param  string $domainName Name of the domain for which metadata will be requested
      * @return array Key/value array of metadatum names and values.
      */
     public function domainMetadata($domainName)
@@ -342,7 +342,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * Create a new domain
      *
-     * @param string $domainName Valid domain name of the domain to create
+     * @param  string $domainName Valid domain name of the domain to create
      * @return boolean True if successful, false if not
      */
     public function createDomain($domainName)
@@ -357,7 +357,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * Delete a domain
      *
-     * @param string $domainName Valid domain name of the domain to delete
+     * @param  string $domainName Valid domain name of the domain to delete
      * @return boolean True if successful, false if not
      */
     public function deleteDomain($domainName)
@@ -372,7 +372,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * Select items from the database
      *
-     * @param  string $selectExpression
+     * @param  string      $selectExpression
      * @param  null|string $nextToken
      * @return Zend_Service_Amazon_SimpleDb_Page
      */
@@ -414,7 +414,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
      *
      * Wraps it in ''
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     public function quote($value)
@@ -440,10 +440,10 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
         return "`$name`";
     }
 
-   /**
+    /**
      * Sends a HTTP request to the SimpleDB service using Zend_Http_Client
      *
-     * @param array $params         List of parameters to send with the request
+     * @param  array $params List of parameters to send with the request
      * @return Zend_Service_Amazon_SimpleDb_Response
      * @throws Zend_Service_Amazon_SimpleDb_Exception
      */
@@ -462,9 +462,11 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
             $request = self::getHttpClient();
             $request->resetParameters();
 
-            $request->setConfig(array(
+            $request->setConfig(
+                array(
                 'timeout' => $this->_httpTimeout
-            ));
+                )
+            );
 
 
             $request->setUri($this->getEndpoint());
@@ -529,7 +531,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
      *    values before constructing this string. Do not use any separator
      *    characters when appending strings.
      *
-     * @param array $parameters the parameters for which to get the signature.
+     * @param  array $parameters the parameters for which to get the signature.
      * @return string the signed data.
      */
     protected function _signParameters(array $parameters)
@@ -551,7 +553,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
 
         $data .= implode('&', $arrData);
 
-        require_once 'Zend/Crypt/Hmac.php';
+        include_once 'Zend/Crypt/Hmac.php';
         $hmac = Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Zend_Crypt_Hmac::BINARY);
 
         return base64_encode($hmac);
@@ -560,8 +562,8 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * Checks for errors responses from Amazon
      *
-     * @param Zend_Service_Amazon_SimpleDb_Response $response the response object to
-     *                                                   check.
+     * @param  Zend_Service_Amazon_SimpleDb_Response $response the response object to
+     *                                                         check.
      * @throws Zend_Service_Amazon_SimpleDb_Exception if one or more errors are
      *         returned from Amazon.
      */

@@ -62,7 +62,7 @@ class Zend_Gdata_Media_Extension_MediaHash extends Zend_Gdata_Extension
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -80,7 +80,7 @@ class Zend_Gdata_Media_Extension_MediaHash extends Zend_Gdata_Extension
      * instance members.  If no mapping is defined, the name and value are
      * stored in an array.
      *
-     * @param DOMNode $attribute The DOMNode attribute needed to be handled
+     * @param  DOMNode $attribute The DOMNode attribute needed to be handled
      * @throws Zend_Gdata_App_InvalidArgumentException
      */
     protected function takeAttributeFromDOM($attribute)
@@ -103,7 +103,7 @@ class Zend_Gdata_Media_Extension_MediaHash extends Zend_Gdata_Extension
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Media_Extension_MediaHash Provides a fluent interface
      */
     public function setAlgo($value)

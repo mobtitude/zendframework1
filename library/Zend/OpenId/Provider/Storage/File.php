@@ -46,7 +46,7 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
     /**
      * Constructs storage object and creates storage directory
      *
-     * @param string $dir directory name to store data files in
+     * @param  string $dir directory name to store data files in
      * @throws Zend_OpenId_Exception
      */
     public function __construct($dir = null)
@@ -70,19 +70,22 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
             if (!@mkdir($this->_dir, 0700, 1)) {
                 throw new Zend_OpenId_Exception(
                     "Cannot access storage directory $dir",
-                    Zend_OpenId_Exception::ERROR_STORAGE);
+                    Zend_OpenId_Exception::ERROR_STORAGE
+                );
             }
         }
         if (($f = fopen($this->_dir.'/assoc.lock', 'w+')) === null) {
             throw new Zend_OpenId_Exception(
                 'Cannot create a lock file in the directory ' . $dir,
-                Zend_OpenId_Exception::ERROR_STORAGE);
+                Zend_OpenId_Exception::ERROR_STORAGE
+            );
         }
         fclose($f);
         if (($f = fopen($this->_dir.'/user.lock', 'w+')) === null) {
             throw new Zend_OpenId_Exception(
                 'Cannot create a lock file in the directory ' . $dir,
-                Zend_OpenId_Exception::ERROR_STORAGE);
+                Zend_OpenId_Exception::ERROR_STORAGE
+            );
         }
         fclose($f);
     }
@@ -90,10 +93,10 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
     /**
      * Stores information about session identified by $handle
      *
-     * @param string $handle assiciation handle
-     * @param string $macFunc HMAC function (sha1 or sha256)
-     * @param string $secret shared secret
-     * @param string $expires expiration UNIX time
+     * @param  string $handle  assiciation handle
+     * @param  string $macFunc HMAC function (sha1 or sha256)
+     * @param  string $secret  shared secret
+     * @param  string $expires expiration UNIX time
      * @return bool
      */
     public function addAssociation($handle, $macFunc, $secret, $expires)
@@ -129,10 +132,10 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
      * Returns true if given association found and not expired and false
      * otherwise
      *
-     * @param string $handle assiciation handle
-     * @param string &$macFunc HMAC function (sha1 or sha256)
-     * @param string &$secret shared secret
-     * @param string &$expires expiration UNIX time
+     * @param  string $handle   assiciation handle
+     * @param  string &$macFunc HMAC function (sha1 or sha256)
+     * @param  string &$secret  shared secret
+     * @param  string &$expires expiration UNIX time
      * @return bool
      */
     public function getAssociation($handle, &$macFunc, &$secret, &$expires)
@@ -177,7 +180,7 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
     /**
      * Removes information about association identified by $handle
      *
-     * @param string $handle assiciation handle
+     * @param  string $handle assiciation handle
      * @return bool
      */
     public function delAssociation($handle)
@@ -206,8 +209,8 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
      * Returns true in case of success and false if user with given $id already
      * exists
      *
-     * @param string $id user identity URL
-     * @param string $password encoded user password
+     * @param  string $id       user identity URL
+     * @param  string $password encoded user password
      * @return bool
      */
     public function addUser($id, $password)
@@ -241,7 +244,7 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
     /**
      * Returns true if user with given $id exists and false otherwise
      *
-     * @param string $id user identity URL
+     * @param  string $id user identity URL
      * @return bool
      */
     public function hasUser($id)
@@ -281,8 +284,8 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
     /**
      * Verify if user with given $id exists and has specified $password
      *
-     * @param string $id user identity URL
-     * @param string $password user password
+     * @param  string $id       user identity URL
+     * @param  string $password user password
      * @return bool
      */
     public function checkUser($id, $password)
@@ -322,7 +325,7 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
     /**
      * Removes information abou specified user
      *
-     * @param string $id user identity URL
+     * @param  string $id user identity URL
      * @return bool
      */
     public function delUser($id)
@@ -350,7 +353,7 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
      * Returns array of all trusted/untrusted sites for given user identified
      * by $id
      *
-     * @param string $id user identity URL
+     * @param  string $id user identity URL
      * @return array
      */
     public function getTrustedSites($id)
@@ -390,9 +393,9 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
     /**
      * Stores information about trusted/untrusted site for given user
      *
-     * @param string $id user identity URL
-     * @param string $site site URL
-     * @param mixed $trusted trust data from extension or just a boolean value
+     * @param  string $id      user identity URL
+     * @param  string $site    site URL
+     * @param  mixed  $trusted trust data from extension or just a boolean value
      * @return bool
      */
     public function addSite($id, $site, $trusted)

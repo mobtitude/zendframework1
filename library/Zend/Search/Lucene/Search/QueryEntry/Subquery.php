@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_Search_QueryEntry */
+/**
+ * Zend_Search_Lucene_Search_QueryEntry 
+ */
 require_once 'Zend/Search/Lucene/Search/QueryEntry.php';
 
 /**
@@ -50,12 +52,12 @@ class Zend_Search_Lucene_Search_QueryEntry_Subquery extends Zend_Search_Lucene_S
     /**
      * Process modifier ('~')
      *
-     * @param mixed $parameter
+     * @param  mixed $parameter
      * @throws Zend_Search_Lucene_Search_QueryParserException
      */
     public function processFuzzyProximityModifier($parameter = null)
     {
-        require_once 'Zend/Search/Lucene/Search/QueryParserException.php';
+        include_once 'Zend/Search/Lucene/Search/QueryParserException.php';
         throw new Zend_Search_Lucene_Search_QueryParserException('\'~\' sign must follow term or phrase');
     }
 
@@ -63,7 +65,7 @@ class Zend_Search_Lucene_Search_QueryEntry_Subquery extends Zend_Search_Lucene_S
     /**
      * Transform entry to a subquery
      *
-     * @param string $encoding
+     * @param  string $encoding
      * @return Zend_Search_Lucene_Search_Query
      */
     public function getQuery($encoding)

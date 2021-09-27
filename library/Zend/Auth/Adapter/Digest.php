@@ -59,10 +59,10 @@ class Zend_Auth_Adapter_Digest implements Zend_Auth_Adapter_Interface
     /**
      * Sets adapter options
      *
-     * @param  mixed $filename
-     * @param  mixed $realm
-     * @param  mixed $username
-     * @param  mixed $password
+     * @param mixed $filename
+     * @param mixed $realm
+     * @param mixed $username
+     * @param mixed $password
      */
     public function __construct($filename = null, $realm = null, $username = null, $password = null)
     {
@@ -177,7 +177,7 @@ class Zend_Auth_Adapter_Digest implements Zend_Auth_Adapter_Interface
                 /**
                  * @see Zend_Auth_Adapter_Exception
                  */
-                require_once 'Zend/Auth/Adapter/Exception.php';
+                include_once 'Zend/Auth/Adapter/Exception.php';
                 throw new Zend_Auth_Adapter_Exception("Option '$optionRequired' must be set before authentication");
             }
         }
@@ -186,7 +186,7 @@ class Zend_Auth_Adapter_Digest implements Zend_Auth_Adapter_Interface
             /**
              * @see Zend_Auth_Adapter_Exception
              */
-            require_once 'Zend/Auth/Adapter/Exception.php';
+            include_once 'Zend/Auth/Adapter/Exception.php';
             throw new Zend_Auth_Adapter_Exception("Cannot open '$this->_filename' for reading");
         }
 
@@ -225,8 +225,8 @@ class Zend_Auth_Adapter_Digest implements Zend_Auth_Adapter_Interface
      * attempting to iteratively guess the unknown string (e.g. password) being
      * compared against.
      *
-     * @param string $a
-     * @param string $b
+     * @param  string $a
+     * @param  string $b
      * @return bool
      */
     protected function _secureStringCompare($a, $b)

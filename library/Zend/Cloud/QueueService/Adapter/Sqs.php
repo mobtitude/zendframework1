@@ -88,14 +88,14 @@ class Zend_Cloud_QueueService_Adapter_Sqs
     }
 
      /**
-     * Create a queue. Returns the ID of the created queue (typically the URL).
-     * It may take some time to create the queue. Check your vendor's
-     * documentation for details.
-     *
-     * @param  string $name
-     * @param  array  $options
-     * @return string Queue ID (typically URL)
-     */
+      * Create a queue. Returns the ID of the created queue (typically the URL).
+      * It may take some time to create the queue. Check your vendor's
+      * documentation for details.
+      *
+      * @param  string $name
+      * @param  array  $options
+      * @return string Queue ID (typically URL)
+      */
     public function createQueue($name, $options = null)
     {
         try {
@@ -113,7 +113,7 @@ class Zend_Cloud_QueueService_Adapter_Sqs
      * @return boolean true if successful, false otherwise
      */
     public function deleteQueue($queueId, $options = null)
-{
+    {
         try {
             return $this->_sqs->delete($queueId);
         } catch(Zend_Service_Amazon_Exception $e) {
@@ -171,7 +171,7 @@ class Zend_Cloud_QueueService_Adapter_Sqs
     public function storeQueueMetadata($queueId, $metadata, $options = null)
     {
         // TODO Add support for SetQueueAttributes to client library
-        require_once 'Zend/Cloud/OperationNotAvailableException.php';
+        include_once 'Zend/Cloud/OperationNotAvailableException.php';
         throw new Zend_Cloud_OperationNotAvailableException('Amazon SQS doesn\'t currently support storing metadata');
     }
 
@@ -214,7 +214,7 @@ class Zend_Cloud_QueueService_Adapter_Sqs
      * Create Zend_Cloud_QueueService_Message array for
      * Sqs messages.
      *
-     * @param array $messages
+     * @param  array $messages
      * @return Zend_Cloud_QueueService_Message[]
      */
     protected function _makeMessages($messages)
@@ -231,9 +231,9 @@ class Zend_Cloud_QueueService_Adapter_Sqs
     /**
      * Delete the specified message from the specified queue.
      *
-     * @param  string $queueId
+     * @param  string                          $queueId
      * @param  Zend_Cloud_QueueService_Message $message
-     * @param  array  $options
+     * @param  array                           $options
      * @return void
      */
     public function deleteMessage($queueId, $message, $options = null)
@@ -253,7 +253,7 @@ class Zend_Cloud_QueueService_Adapter_Sqs
      * Peek at the messages from the specified queue without removing them.
      *
      * @param  string $queueId
-     * @param  int $num How many messages
+     * @param  int    $num     How many messages
      * @param  array  $options
      * @return Zend_Cloud_QueueService_Message[]
      */
@@ -268,6 +268,7 @@ class Zend_Cloud_QueueService_Adapter_Sqs
 
     /**
      * Get SQS implementation
+     *
      * @return Zend_Service_Amazon_Sqs
      */
     public function getClient()

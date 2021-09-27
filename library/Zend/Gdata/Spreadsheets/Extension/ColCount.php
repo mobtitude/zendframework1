@@ -48,6 +48,7 @@ class Zend_Gdata_Spreadsheets_Extension_ColCount extends Zend_Gdata_Extension
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_Extension_ColCount element.
+     *
      * @param string $text (optional) Text contents of the element.
      */
     public function __construct($text = null)

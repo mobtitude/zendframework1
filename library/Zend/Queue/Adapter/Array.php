@@ -42,7 +42,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
      * Constructor
      *
      * @param  array|Zend_Config $options
-     * @param  Zend_Queue|null $queue
+     * @param  Zend_Queue|null   $queue
      * @return void
      */
     public function __construct($options, Zend_Queue $queue = null)
@@ -51,7 +51,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
     }
 
     /********************************************************************
-    * Queue management functions
+     * Queue management functions
      *********************************************************************/
 
     /**
@@ -99,7 +99,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
      *
      * Returns false if the queue is not found, true if the queue exists
      *
-     * @param  string  $name queue name
+     * @param  string $name queue name
      * @return boolean
      */
     public function delete($name)
@@ -143,7 +143,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
             /**
              * @see Zend_Queue_Exception
              */
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Queue does not exist');
         }
 
@@ -151,7 +151,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
     }
 
     /********************************************************************
-    * Messsage management functions
+     * Messsage management functions
      *********************************************************************/
 
     /**
@@ -169,7 +169,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
         }
 
         if (!$this->isExists($queue->getName())) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Queue does not exist:' . $queue->getName());
         }
 
@@ -193,7 +193,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
 
         $classname = $queue->getMessageClass();
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
         return new $classname($options);
@@ -202,8 +202,8 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
     /**
      * Get messages in the queue
      *
-     * @param  integer    $maxMessages  Maximum number of messages to return
-     * @param  integer    $timeout      Visibility timeout for these messages
+     * @param  integer    $maxMessages Maximum number of messages to return
+     * @param  integer    $timeout     Visibility timeout for these messages
      * @param  Zend_Queue $queue
      * @return Zend_Queue_Message_Iterator
      */
@@ -252,7 +252,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
 
         $classname = $queue->getMessageSetClass();
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
         return new $classname($options);
@@ -311,7 +311,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
     }
 
     /********************************************************************
-    * Functions that are not part of the Zend_Queue_Adapter_Abstract
+     * Functions that are not part of the Zend_Queue_Adapter_Abstract
      *********************************************************************/
 
     /**
@@ -341,7 +341,7 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
      * sets the underlying _data array
      * $queue->getAdapter()->setData($data);
      *
-     * @param array $data
+     * @param  array $data
      * @return $this;
      */
     public function setData($data)

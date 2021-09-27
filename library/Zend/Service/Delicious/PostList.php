@@ -237,8 +237,8 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
      *
      * Implement ArrayAccess::offsetExists()
      *
-     * @param   int     $offset
-     * @return  bool
+     * @param  int $offset
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -250,9 +250,9 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
      *
      * Implement ArrayAccess::offsetGet()
      *
-     * @param   int     $offset
-     * @throws  OutOfBoundsException
-     * @return  Zend_Service_Delicious_SimplePost
+     * @param  int $offset
+     * @throws OutOfBoundsException
+     * @return Zend_Service_Delicious_SimplePost
      */
     public function offsetGet($offset)
     {
@@ -268,16 +268,16 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
      *
      * Implement ArrayAccess::offsetSet()
      *
-     * @param   int     $offset
-     * @param   string  $value
-     * @throws  Zend_Service_Delicious_Exception
+     * @param  int    $offset
+     * @param  string $value
+     * @throws Zend_Service_Delicious_Exception
      */
     public function offsetSet($offset, $value)
     {
         /**
          * @see Zend_Service_Delicious_Exception
          */
-        require_once 'Zend/Service/Delicious/Exception.php';
+        include_once 'Zend/Service/Delicious/Exception.php';
         throw new Zend_Service_Delicious_Exception('You are trying to set read-only property');
     }
 
@@ -286,15 +286,15 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
      *
      * Implement ArrayAccess::offsetUnset()
      *
-     * @param   int     $offset
-     * @throws  Zend_Service_Delicious_Exception
+     * @param  int $offset
+     * @throws Zend_Service_Delicious_Exception
      */
     public function offsetUnset($offset)
     {
         /**
          * @see Zend_Service_Delicious_Exception
          */
-        require_once 'Zend/Service/Delicious/Exception.php';
+        include_once 'Zend/Service/Delicious/Exception.php';
         throw new Zend_Service_Delicious_Exception('You are trying to unset read-only property');
     }
 }

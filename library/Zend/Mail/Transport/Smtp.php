@@ -52,7 +52,8 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
 {
     /**
      * EOL character string used by transport
-     * @var string
+     *
+     * @var    string
      * @access public
      */
     public string $EOL = "\n";
@@ -102,7 +103,7 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
     /**
      * Constructor.
      *
-     * @param  string $host OPTIONAL (Default: 127.0.0.1)
+     * @param  string     $host   OPTIONAL (Default: 127.0.0.1)
      * @param  array|null $config OPTIONAL (Default: null)
      * @return void
      *
@@ -174,7 +175,7 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
      * developer to add a custom adapter if required before mail is sent.
      *
      * @return void
-     * @todo Rename this to sendMail, it's a public method...
+     * @todo   Rename this to sendMail, it's a public method...
      */
     public function _sendMail()
     {
@@ -186,7 +187,7 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
                 $connectionClass .= '_Auth_' . ucwords($this->_auth);
             }
             if (!class_exists($connectionClass)) {
-                require_once 'Zend/Loader.php';
+                include_once 'Zend/Loader.php';
                 Zend_Loader::loadClass($connectionClass);
             }
             $this->setConnection(new $connectionClass($this->_host, $this->_port, $this->_config));
@@ -214,10 +215,10 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
      *
      * Some SMTP servers do not strip BCC headers. Most clients do it themselves as do we.
      *
-     * @access  protected
-     * @param   array $headers
-     * @return  void
-     * @throws  Zend_Transport_Exception
+     * @access protected
+     * @param  array $headers
+     * @return void
+     * @throws Zend_Transport_Exception
      */
     protected function _prepareHeaders($headers)
     {
@@ -225,7 +226,7 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
             /**
              * @see Zend_Mail_Transport_Exception
              */
-            require_once 'Zend/Mail/Transport/Exception.php';
+            include_once 'Zend/Mail/Transport/Exception.php';
             throw new Zend_Mail_Transport_Exception('_prepareHeaders requires a registered Zend_Mail object');
         }
 

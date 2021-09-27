@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Validate
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -30,10 +30,10 @@ require_once 'Zend/Validate/Abstract.php';
 require_once 'Zend/Loader.php';
 
 /**
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Validate
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_Barcode extends Zend_Validate_Abstract
 {
@@ -99,7 +99,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
             if (array_key_exists('adapter', $adapter)) {
                 $adapter = $adapter['adapter'];
             } else {
-                require_once 'Zend/Validate/Exception.php';
+                include_once 'Zend/Validate/Exception.php';
                 throw new Zend_Validate_Exception("Missing option 'adapter'");
             }
         }
@@ -124,14 +124,14 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
      * Sets a new barcode adapter
      *
      * @param  string|Zend_Validate_Barcode $adapter Barcode adapter to use
-     * @param  array  $options Options for this adapter
+     * @param  array                        $options Options for this adapter
      * @return $this
      * @throws Zend_Validate_Exception
      */
     public function setAdapter($adapter, $options = null)
     {
         $adapter = ucfirst(strtolower($adapter));
-        require_once 'Zend/Loader.php';
+        include_once 'Zend/Loader.php';
         if (Zend_Loader::isReadable('Zend/Validate/Barcode/' . $adapter. '.php')) {
             $adapter = 'Zend_Validate_Barcode_' . $adapter;
         }
@@ -142,7 +142,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
 
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Zend_Validate_Barcode_AdapterInterface) {
-            require_once 'Zend/Validate/Exception.php';
+            include_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception(
                 "Adapter " . $adapter . " does not implement Zend_Validate_Barcode_AdapterInterface"
             );

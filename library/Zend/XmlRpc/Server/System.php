@@ -60,14 +60,14 @@ class Zend_XmlRpc_Server_System
     /**
      * Display help message for an XMLRPC method
      *
-     * @param string $method
+     * @param  string $method
      * @return string
      */
     public function methodHelp($method)
     {
         $table = $this->_server->getDispatchTable();
         if (!$table->hasMethod($method)) {
-            require_once 'Zend/XmlRpc/Server/Exception.php';
+            include_once 'Zend/XmlRpc/Server/Exception.php';
             throw new Zend_XmlRpc_Server_Exception('Method "' . $method . '" does not exist', 640);
         }
 
@@ -77,14 +77,14 @@ class Zend_XmlRpc_Server_System
     /**
      * Return a method signature
      *
-     * @param string $method
+     * @param  string $method
      * @return array
      */
     public function methodSignature($method)
     {
         $table = $this->_server->getDispatchTable();
         if (!$table->hasMethod($method)) {
-            require_once 'Zend/XmlRpc/Server/Exception.php';
+            include_once 'Zend/XmlRpc/Server/Exception.php';
             throw new Zend_XmlRpc_Server_Exception('Method "' . $method . '" does not exist', 640);
         }
         $method = $table->getMethod($method)->toArray();
@@ -104,7 +104,7 @@ class Zend_XmlRpc_Server_System
      * returned by the method. If an error occurs for a given method, returns a
      * struct with a fault response.
      *
-     * @see http://www.xmlrpc.com/discuss/msgReader$1208
+     * @see    http://www.xmlrpc.com/discuss/msgReader$1208
      * @param  array $methods
      * @return array
      */

@@ -56,7 +56,7 @@ class Zend_Service_Rackspace_Files_ContainerList implements Countable, Iterator,
     public function __construct($service,$list = array())
     {
         if (!($service instanceof Zend_Service_Rackspace_Files ) || !is_array($list)) {
-            require_once 'Zend/Service/Rackspace/Files/Exception.php';
+            include_once 'Zend/Service/Rackspace/Files/Exception.php';
             throw new Zend_Service_Rackspace_Files_Exception("You must pass a Zend_Service_Rackspace_Files_Exception object and an array");
         }
         $this->service= $service;
@@ -71,7 +71,7 @@ class Zend_Service_Rackspace_Files_ContainerList implements Countable, Iterator,
     private function _constructFromArray(array $list)
     {
         foreach ($list as $container) {
-            $this->_addObject(new Zend_Service_Rackspace_Files_Container($this->service,$container));
+            $this->_addObject(new Zend_Service_Rackspace_Files_Container($this->service, $container));
         }
     }
     /**
@@ -80,7 +80,7 @@ class Zend_Service_Rackspace_Files_ContainerList implements Countable, Iterator,
      * @param  Zend_Service_Rackspace_Files_Container $obj
      * @return Zend_Service_Rackspace_Files_ContainerList
      */
-    protected function _addObject (Zend_Service_Rackspace_Files_Container $obj)
+    protected function _addObject(Zend_Service_Rackspace_Files_Container $obj)
     {
         $this->objects[] = $obj;
         return $this;
@@ -161,8 +161,8 @@ class Zend_Service_Rackspace_Files_ContainerList implements Countable, Iterator,
      *
      * Implement ArrayAccess::offsetExists()
      *
-     * @param   int     $offset
-     * @return  bool
+     * @param  int $offset
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -173,16 +173,16 @@ class Zend_Service_Rackspace_Files_ContainerList implements Countable, Iterator,
      *
      * Implement ArrayAccess::offsetGet()
      *
-     * @param   int     $offset
-     * @throws  Zend_Service_Rackspace_Files_Exception
-     * @return  Zend_Service_Rackspace_Files_Container
+     * @param  int $offset
+     * @throws Zend_Service_Rackspace_Files_Exception
+     * @return Zend_Service_Rackspace_Files_Container
      */
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
             return $this->objects[$offset];
         } else {
-            require_once 'Zend/Service/Rackspace/Files/Exception.php';
+            include_once 'Zend/Service/Rackspace/Files/Exception.php';
             throw new Zend_Service_Rackspace_Files_Exception('Illegal index');
         }
     }
@@ -192,13 +192,13 @@ class Zend_Service_Rackspace_Files_ContainerList implements Countable, Iterator,
      *
      * Implement ArrayAccess::offsetSet()
      *
-     * @param   int     $offset
-     * @param   string  $value
-     * @throws  Zend_Service_Rackspace_Files_Exception
+     * @param  int    $offset
+     * @param  string $value
+     * @throws Zend_Service_Rackspace_Files_Exception
      */
     public function offsetSet($offset, $value)
     {
-        require_once 'Zend/Service/Rackspace/Files/Exception.php';
+        include_once 'Zend/Service/Rackspace/Files/Exception.php';
         throw new Zend_Service_Rackspace_Files_Exception('You are trying to set read-only property');
     }
 
@@ -207,12 +207,12 @@ class Zend_Service_Rackspace_Files_ContainerList implements Countable, Iterator,
      *
      * Implement ArrayAccess::offsetUnset()
      *
-     * @param   int     $offset
-     * @throws  Zend_Service_Rackspace_Files_Exception
+     * @param  int $offset
+     * @throws Zend_Service_Rackspace_Files_Exception
      */
     public function offsetUnset($offset)
     {
-        require_once 'Zend/Service/Rackspace/Files/Exception.php';
+        include_once 'Zend/Service/Rackspace/Files/Exception.php';
         throw new Zend_Service_Rackspace_Files_Exception('You are trying to unset read-only property');
     }
 }

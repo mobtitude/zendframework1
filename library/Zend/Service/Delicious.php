@@ -47,7 +47,9 @@ require_once 'Zend/Service/Delicious/Post.php';
  */
 require_once 'Zend/Service/Delicious/PostList.php';
 
-/** @see Zend_Xml_Security */
+/**
+ * @see Zend_Xml_Security 
+*/
 require_once 'Zend/Xml/Security.php';
 
 /**
@@ -154,7 +156,7 @@ class Zend_Service_Delicious
             /**
              * @see Zend_Service_Delicious_Exception
              */
-            require_once 'Zend/Service/Delicious/Exception.php';
+            include_once 'Zend/Service/Delicious/Exception.php';
             throw new Zend_Service_Delicious_Exception('del.icio.us web service has returned something odd!');
         }
     }
@@ -453,11 +455,11 @@ class Zend_Service_Delicious
     /**
      * Handles all GET requests to a web service
      *
-     * @param   string $path  Path
-     * @param   array  $parms Array of GET parameters
-     * @param   string $type  Type of a request ("xml"|"json")
-     * @return  mixed  decoded response from web service
-     * @throws  Zend_Service_Delicious_Exception
+     * @param  string $path  Path
+     * @param  array  $parms Array of GET parameters
+     * @param  string $type  Type of a request ("xml"|"json")
+     * @return mixed  decoded response from web service
+     * @throws Zend_Service_Delicious_Exception
      */
     public function makeRequest($path, array $parms = array(), $type = 'xml')
     {
@@ -471,19 +473,19 @@ class Zend_Service_Delicious
         $this->_rest->getHttpClient()->setAuth($this->_authUname, $this->_authPass);
 
         switch ($type) {
-            case 'xml':
+        case 'xml':
                 $this->_rest->setUri(self::API_URI);
-                break;
-            case 'json':
+            break;
+        case 'json':
                 $parms['raw'] = true;
-                $this->_rest->setUri(self::JSON_URI);
-                break;
-            default:
-                /**
-                 * @see Zend_Service_Delicious_Exception
-                 */
-                require_once 'Zend/Service/Delicious/Exception.php';
-                throw new Zend_Service_Delicious_Exception('Unknown request type');
+            $this->_rest->setUri(self::JSON_URI);
+            break;
+        default:
+            /**
+             * @see Zend_Service_Delicious_Exception
+             */
+            include_once 'Zend/Service/Delicious/Exception.php';
+            throw new Zend_Service_Delicious_Exception('Unknown request type');
         }
 
         self::$_lastRequestTime = microtime(true);
@@ -493,40 +495,40 @@ class Zend_Service_Delicious
             /**
              * @see Zend_Service_Delicious_Exception
              */
-            require_once 'Zend/Service/Delicious/Exception.php';
+            include_once 'Zend/Service/Delicious/Exception.php';
             throw new Zend_Service_Delicious_Exception("Http client reported an error: '{$response->getMessage()}'");
         }
 
         $responseBody = $response->getBody();
 
         switch ($type) {
-            case 'xml':
-                $dom = new DOMDocument() ;
+        case 'xml':
+            $dom = new DOMDocument();
     
-                if (!$dom = @Zend_Xml_Security::scan($responseBody, $dom)) {
-                    /**
-                     * @see Zend_Service_Delicious_Exception
-                     */
-                    require_once 'Zend/Service/Delicious/Exception.php';
-                    throw new Zend_Service_Delicious_Exception('XML Error');
-                }
+            if (!$dom = @Zend_Xml_Security::scan($responseBody, $dom)) {
+                /**
+                 * @see Zend_Service_Delicious_Exception
+                 */
+                include_once 'Zend/Service/Delicious/Exception.php';
+                throw new Zend_Service_Delicious_Exception('XML Error');
+            }
 
-                return $dom;
-            case 'json':
-                return Zend_Json_Decoder::decode($responseBody);
+            return $dom;
+        case 'json':
+            return Zend_Json_Decoder::decode($responseBody);
         }
     }
 
     /**
      * Transform XML string to array
      *
-     * @param   DOMDocument $response
-     * @param   string      $root     Name of root tag
-     * @param   string      $child    Name of children tags
-     * @param   string      $attKey   Attribute of child tag to be used as a key
-     * @param   string      $attValue Attribute of child tag to be used as a value
-     * @return  array
-     * @throws  Zend_Service_Delicious_Exception
+     * @param  DOMDocument $response
+     * @param  string      $root     Name of root tag
+     * @param  string      $child    Name of children tags
+     * @param  string      $attKey   Attribute of child tag to be used as a key
+     * @param  string      $attValue Attribute of child tag to be used as a value
+     * @return array
+     * @throws Zend_Service_Delicious_Exception
      */
     private static function _xmlResponseToArray(DOMDocument $response, $root, $child, $attKey, $attValue)
     {
@@ -546,7 +548,7 @@ class Zend_Service_Delicious
             /**
              * @see Zend_Service_Delicious_Exception
              */
-            require_once 'Zend/Service/Delicious/Exception.php';
+            include_once 'Zend/Service/Delicious/Exception.php';
             throw new Zend_Service_Delicious_Exception('del.icio.us web service has returned something odd!');
         }
 
@@ -556,9 +558,9 @@ class Zend_Service_Delicious
     /**
      * Constructs Zend_Service_Delicious_PostList from XML response
      *
-     * @param   DOMDocument $response
-     * @return  Zend_Service_Delicious_PostList
-     * @throws  Zend_Service_Delicious_Exception
+     * @param  DOMDocument $response
+     * @return Zend_Service_Delicious_PostList
+     * @throws Zend_Service_Delicious_Exception
      */
     private function _parseXmlPostList(DOMDocument $response)
     {
@@ -570,7 +572,7 @@ class Zend_Service_Delicious
             /**
              * @see Zend_Service_Delicious_Exception
              */
-            require_once 'Zend/Service/Delicious/Exception.php';
+            include_once 'Zend/Service/Delicious/Exception.php';
             throw new Zend_Service_Delicious_Exception('del.icio.us web service has returned something odd!');
         }
     }
@@ -578,9 +580,9 @@ class Zend_Service_Delicious
     /**
      * Evaluates XML response
      *
-     * @param   DOMDocument $response
-     * @return  void
-     * @throws  Zend_Service_Delicious_Exception
+     * @param  DOMDocument $response
+     * @return void
+     * @throws Zend_Service_Delicious_Exception
      */
     private static function _evalXmlResult(DOMDocument $response)
     {
@@ -598,14 +600,14 @@ class Zend_Service_Delicious
                 /**
                  * @see Zend_Service_Delicious_Exception
                  */
-                require_once 'Zend/Service/Delicious/Exception.php';
+                include_once 'Zend/Service/Delicious/Exception.php';
                 throw new Zend_Service_Delicious_Exception("del.icio.us web service: '{$strResponse}'");
             }
         } else {
             /**
              * @see Zend_Service_Delicious_Exception
              */
-            require_once 'Zend/Service/Delicious/Exception.php';
+            include_once 'Zend/Service/Delicious/Exception.php';
             throw new Zend_Service_Delicious_Exception('del.icio.us web service has returned something odd!');
         }
     }

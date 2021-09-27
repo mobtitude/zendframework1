@@ -105,7 +105,7 @@ class Zend_Service_Yahoo_Result
             /**
              * @see Zend_Service_Yahoo_Image
              */
-            require_once 'Zend/Service/Yahoo/Image.php';
+            include_once 'Zend/Service/Yahoo/Image.php';
             $this->Thumbnail = new Zend_Service_Yahoo_Image($node->item(0), $this->_namespace);
         } else {
             $this->Thumbnail = null;

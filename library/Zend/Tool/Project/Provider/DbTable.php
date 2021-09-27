@@ -21,10 +21,10 @@
  */
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Provider_DbTable
     extends Zend_Tool_Project_Provider_Abstract
@@ -51,7 +51,7 @@ class Zend_Tool_Project_Provider_DbTable
             throw new Zend_Tool_Project_Provider_Exception(
                 'A models directory was not found' .
                 (($moduleName) ? ' for module ' . $moduleName . '.' : '.')
-                );
+            );
         }
 
         if (!($dbTableDirectory = $modelsDirectory->search('DbTableDirectory'))) {
@@ -76,7 +76,8 @@ class Zend_Tool_Project_Provider_DbTable
         $modelsDirectory = $profile->search($profileSearchParams);
 
         if (!($modelsDirectory instanceof Zend_Tool_Project_Profile_Resource)
-            || !($dbTableDirectory = $modelsDirectory->search('DbTableDirectory'))) {
+            || !($dbTableDirectory = $modelsDirectory->search('DbTableDirectory'))
+        ) {
             return false;
         }
 
@@ -119,7 +120,7 @@ class Zend_Tool_Project_Provider_DbTable
                     . ' used with other providers is "' . $name . '";'
                     . ' not "' . $originalName . '" as supplied',
                 array('color' => array('yellow'))
-                );
+            );
         }
 
         try {
@@ -141,8 +142,8 @@ class Zend_Tool_Project_Provider_DbTable
     }
 
     /**
-     * @param string $module        Module name action should be applied to.
-     * @param bool $forceOverwrite  Whether should force overwriting previous classes generated
+     * @param  string $module         Module name action should be applied to.
+     * @param  bool   $forceOverwrite Whether should force overwriting previous classes generated
      * @return void 
      */
     public function createFromDatabase($module = null, $forceOverwrite = false)
@@ -173,7 +174,7 @@ class Zend_Tool_Project_Provider_DbTable
                 throw new Zend_Tool_Project_Provider_Exception(
                     'This DbTable resource already exists, if you wish to overwrite it, '
                     . 'pass the "forceOverwrite" flag to this provider.'
-                    );
+                );
             }
 
             $tableResources[] = self::createResource(
@@ -181,7 +182,7 @@ class Zend_Tool_Project_Provider_DbTable
                 $dbTableName,
                 $actualTableName,
                 $module
-                );
+            );
         }
 
         if (count($tableResources) == 0) {

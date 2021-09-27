@@ -12,10 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_EventManager
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 require_once 'Zend/Stdlib/CallbackHandler.php';
@@ -27,10 +27,10 @@ require_once 'Zend/Stdlib/PriorityQueue.php';
  * Use the EventManager when you want to create a per-instance notification 
  * system for your objects.
  *
- * @category   Zend
- * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_EventManager
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_EventManager_GlobalEventManager
 {
@@ -63,9 +63,9 @@ class Zend_EventManager_GlobalEventManager
     /**
      * Trigger an event
      * 
-     * @param  string $event 
+     * @param  string        $event 
      * @param  object|string $context 
-     * @param  array|object $argv 
+     * @param  array|object  $argv 
      * @return Zend_EventManager_ResponseCollection
      */
     public static function trigger($event, $context, $argv = array())
@@ -77,10 +77,10 @@ class Zend_EventManager_GlobalEventManager
      * Trigger listeenrs until return value of one causes a callback to evaluate 
      * to true.
      * 
-     * @param  string $event 
+     * @param  string        $event 
      * @param  string|object $context 
-     * @param  array|object $argv 
-     * @param  callback $callback 
+     * @param  array|object  $argv 
+     * @param  callback      $callback 
      * @return Zend_EventManager_ResponseCollection
      */
     public static function triggerUntil($event, $context, $argv, $callback)
@@ -91,9 +91,9 @@ class Zend_EventManager_GlobalEventManager
     /**
      * Attach a listener to an event
      * 
-     * @param  string $event 
+     * @param  string   $event 
      * @param  callback $callback 
-     * @param  int $priority 
+     * @param  int      $priority 
      * @return Zend_Stdlib_CallbackHandler
      */
     public static function attach($event, $callback, $priority = 1)

@@ -12,13 +12,15 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Form
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Abstract */
+/**
+ * Zend_Form_Decorator_Abstract 
+ */
 require_once 'Zend/Form/Decorator/Abstract.php';
 
 /**
@@ -221,7 +223,7 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
 
         $view = $element->getView();
         if (null === $view) {
-            require_once 'Zend/Form/Decorator/Exception.php';
+            include_once 'Zend/Form/Decorator/Exception.php';
             throw new Zend_Form_Decorator_Exception('ViewHelper decorator cannot render without a registered view object');
         }
 
@@ -255,12 +257,12 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
         }
 
         switch ($this->getPlacement()) {
-            case self::APPEND:
+        case self::APPEND:
                 return $content . $separator . $elementContent;
-            case self::PREPEND:
-                return $elementContent . $separator . $content;
-            default:
-                return $elementContent;
+        case self::PREPEND:
+            return $elementContent . $separator . $content;
+        default:
+            return $elementContent;
         }
     }
 }

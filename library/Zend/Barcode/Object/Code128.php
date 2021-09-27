@@ -33,16 +33,17 @@ require_once 'Zend/Validate/Barcode.php';
 /**
  * Class for generate Code128 barcode
  *
- * @category   Zend
- * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Barcode
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
 {
     /**
      * Drawing of checksum
      * (even if it's sometime optional, most of time it's required)
+     *
      * @var boolean
      */
     protected bool $_withChecksum = true;
@@ -179,6 +180,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Width of the barcode (in pixels)
+     *
      * @return integer
      */
     protected function _calculateBarcodeWidth()
@@ -199,6 +201,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Partial check of code128 barcode
+     *
      * @return void
      */
     protected function _checkParams()
@@ -207,6 +210,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Prepare array to draw barcode
+     *
      * @return array
      */
     protected function _prepareBarcode()
@@ -234,21 +238,22 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
     /**
      * Checks if the next $length chars of $string starting at $pos are numeric.
      * Returns false if the end of the string is reached.
-     * @param string $string String to search
-     * @param int    $pos Starting position
-     * @param int    $length Length to search
+     *
+     * @param  string $string String to search
+     * @param  int    $pos    Starting position
+     * @param  int    $length Length to search
      * @return bool
      */
     protected static function _isDigit($string, $pos, $length = 2)
     {
         if ($pos + $length > strlen($string)) {
-           return false;
+            return false;
         }
 
         for ($i = $pos; $i < $pos + $length; $i++) {
-              if (!is_numeric($string[$i])) {
-                  return false;
-              }
+            if (!is_numeric($string[$i])) {
+                return false;
+            }
         }
         return true;
     }
@@ -256,7 +261,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
     /**
      * Convert string to barcode string
      *
-     * @param $string
+     * @param  $string
      * @return array
      */
     protected function _convertToBarcodeChars($string)
@@ -280,7 +285,8 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
             $code = null;
 
             if (self::_isDigit($string, $pos, 4) && $currentCharset != 'C'
-             || self::_isDigit($string, $pos, 2) && $currentCharset == 'C') {
+                || self::_isDigit($string, $pos, 2) && $currentCharset == 'C'
+            ) {
                 /**
                  * Switch to C if the next 4 chars are numeric or stay C if the next 2
                  * chars are numeric
@@ -295,7 +301,8 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
                     $currentCharset = 'C';
                 }
             } else if (in_array($char, $this->_charSets['B']) && $currentCharset != 'B'
-                  && !(in_array($char, $this->_charSets['A']) && $currentCharset == 'A')) {
+                && !(in_array($char, $this->_charSets['A']) && $currentCharset == 'A')
+            ) {
                 /**
                  * Switch to B as B contains the char and B is not the current charset.
                  */
@@ -307,7 +314,8 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
                 $result[] = $code;
                 $currentCharset = 'B';
             } else if (array_key_exists($char, $this->_charSets['A']) && $currentCharset != 'A'
-                  && !(array_key_exists($char, $this->_charSets['B']) && $currentCharset == 'B')) {
+                && !(array_key_exists($char, $this->_charSets['B']) && $currentCharset == 'B')
+            ) {
                 /**
                  * Switch to C as C contains the char and C is not the current charset.
                  */
@@ -335,7 +343,8 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Set text to encode
-     * @param string $value
+     *
+     * @param  string $value
      * @return Zend_Barcode_Object
      */
     public function setText($value)
@@ -346,6 +355,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Retrieve text to encode
+     *
      * @return string
      */
     public function getText()
@@ -379,8 +389,8 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
     /**
      * Standard validation for most of barcode objects
      *
-     * @param string $value
-     * @param array  $options
+     * @param  string $value
+     * @param  array  $options
      * @return bool
      */
     protected function _validateText($value, $options = array())

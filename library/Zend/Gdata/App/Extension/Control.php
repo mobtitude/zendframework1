@@ -86,7 +86,7 @@ class Zend_Gdata_App_Extension_Control extends Zend_Gdata_App_Extension
     }
 
     /**
-     * @param Zend_Gdata_App_Extension_Draft $value
+     * @param  Zend_Gdata_App_Extension_Draft $value
      * @return Zend_Gdata_App_Entry Provides a fluent interface
      */
     public function setDraft($value)

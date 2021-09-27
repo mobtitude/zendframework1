@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Loader_Autoloader_Interface */
+/**
+ * Zend_Loader_Autoloader_Interface 
+ */
 require_once 'Zend/Loader/Autoloader/Interface.php';
 
 /**
@@ -71,7 +73,7 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
             $options = $options->toArray();
         }
         if (!is_array($options)) {
-            require_once 'Zend/Loader/Exception.php';
+            include_once 'Zend/Loader/Exception.php';
             throw new Zend_Loader_Exception('Options must be passed to resource loader constructor');
         }
 
@@ -81,14 +83,14 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
         if ((null === $namespace)
             || (null === $this->getBasePath())
         ) {
-            require_once 'Zend/Loader/Exception.php';
+            include_once 'Zend/Loader/Exception.php';
             throw new Zend_Loader_Exception('Resource loader requires both a namespace and a base path for initialization');
         }
 
         if (!empty($namespace)) {
             $namespace .= '_';
         }
-        require_once 'Zend/Loader/Autoloader.php';
+        include_once 'Zend/Loader/Autoloader.php';
         Zend_Loader_Autoloader::getInstance()->unshiftAutoloader($this, $namespace);
     }
 
@@ -108,7 +110,7 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
      * </code>
      *
      * @param  string $method
-     * @param  array $args
+     * @param  array  $args
      * @return mixed
      * @throws Zend_Loader_Exception if method not beginning with 'get' or not matching a valid resource type is called
      */
@@ -117,25 +119,25 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
         if ('get' == substr($method, 0, 3)) {
             $type  = strtolower(substr($method, 3));
             if (!$this->hasResourceType($type)) {
-                require_once 'Zend/Loader/Exception.php';
+                include_once 'Zend/Loader/Exception.php';
                 throw new Zend_Loader_Exception("Invalid resource type $type; cannot load resource");
             }
             if (empty($args)) {
-                require_once 'Zend/Loader/Exception.php';
+                include_once 'Zend/Loader/Exception.php';
                 throw new Zend_Loader_Exception("Cannot load resources; no resource specified");
             }
             $resource = array_shift($args);
             return $this->load($resource, $type);
         }
 
-        require_once 'Zend/Loader/Exception.php';
+        include_once 'Zend/Loader/Exception.php';
         throw new Zend_Loader_Exception("Method '$method' is not supported");
     }
 
     /**
      * Helper method to calculate the correct class path
      *
-     * @param string $class
+     * @param  string $class
      * @return False if not matched other wise the correct path
      */
     public function getClassPath($class)
@@ -274,8 +276,8 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
     /**
      * Add resource type
      *
-     * @param  string $type identifier for the resource type being loaded
-     * @param  string $path path relative to resource base path containing the resource types
+     * @param  string      $type      identifier for the resource type being loaded
+     * @param  string      $path      path relative to resource base path containing the resource types
      * @param  null|string $namespace sub-component namespace to append to base namespace that qualifies this resource type
      * @return Zend_Loader_Autoloader_Resource
      */
@@ -284,7 +286,7 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
         $type = strtolower($type);
         if (!isset($this->_resourceTypes[$type])) {
             if (null === $namespace) {
-                require_once 'Zend/Loader/Exception.php';
+                include_once 'Zend/Loader/Exception.php';
                 throw new Zend_Loader_Exception('Initial definition of a resource type must include a namespace');
             }
             $namespaceTopLevel = $this->getNamespace();
@@ -294,7 +296,7 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
             );
         }
         if (!is_string($path)) {
-            require_once 'Zend/Loader/Exception.php';
+            include_once 'Zend/Loader/Exception.php';
             throw new Zend_Loader_Exception('Invalid path specification provided; must be string');
         }
         $this->_resourceTypes[$type]['path'] = $this->getBasePath() . '/' . rtrim($path, '\/');
@@ -334,11 +336,11 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
     {
         foreach ($types as $type => $spec) {
             if (!is_array($spec)) {
-                require_once 'Zend/Loader/Exception.php';
+                include_once 'Zend/Loader/Exception.php';
                 throw new Zend_Loader_Exception('addResourceTypes() expects an array of arrays');
             }
             if (!isset($spec['path'])) {
-                require_once 'Zend/Loader/Exception.php';
+                include_once 'Zend/Loader/Exception.php';
                 throw new Zend_Loader_Exception('addResourceTypes() expects each array to include a paths element');
             }
             $paths  = $spec['path'];
@@ -454,12 +456,12 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
         if (null === $type) {
             $type = $this->getDefaultResourceType();
             if (empty($type)) {
-                require_once 'Zend/Loader/Exception.php';
+                include_once 'Zend/Loader/Exception.php';
                 throw new Zend_Loader_Exception('No resource type specified');
             }
         }
         if (!$this->hasResourceType($type)) {
-            require_once 'Zend/Loader/Exception.php';
+            include_once 'Zend/Loader/Exception.php';
             throw new Zend_Loader_Exception('Invalid resource type specified');
         }
         $namespace = $this->_resourceTypes[$type]['namespace'];

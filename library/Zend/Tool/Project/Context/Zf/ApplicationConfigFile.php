@@ -31,10 +31,10 @@ require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Project_Context_Filesystem_File
 {
@@ -108,10 +108,10 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
     /**
      * addStringItem()
      *
-     * @param string $key
-     * @param string $value
-     * @param string $section
-     * @param bool   $quoteValue
+     * @param  string $key
+     * @param  string $value
+     * @param  string $section
+     * @param  bool   $quoteValue
      * @return Zend_Tool_Project_Context_Zf_ApplicationConfigFile
      */
     public function addStringItem($key, $value, $section = 'production', $quoteValue = true)
@@ -142,7 +142,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
                 if (isset($contentLines[$contentLineIndex + 1][0]) && $contentLines[$contentLineIndex + 1][0] == '[') {
                     $newLines[] = $key . ' = ' . $value;
                     $insideSection = null;
-                } else if (!isset($contentLines[$contentLineIndex + 1])){
+                } else if (!isset($contentLines[$contentLineIndex + 1])) {
                     $newLines[] = $key . ' = ' . $value;
                     $insideSection = null;
                 }
@@ -155,9 +155,9 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
 
     /**
      *
-     * @param array $item
-     * @param string $section
-     * @param bool $quoteValue
+     * @param  array  $item
+     * @param  string $section
+     * @param  bool   $quoteValue
      * @return Zend_Tool_Project_Context_Zf_ApplicationConfigFile
      */
     public function addItem($item, $section = 'production', $quoteValue = true)
@@ -169,7 +169,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
         $rii = new RecursiveIteratorIterator(
             new RecursiveArrayIterator($item),
             RecursiveIteratorIterator::SELF_FIRST
-            );
+        );
 
         $lastDepth = 0;
 
@@ -229,7 +229,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
         $rii = new RecursiveIteratorIterator(
             new RecursiveArrayIterator($item),
             RecursiveIteratorIterator::SELF_FIRST
-            );
+        );
 
         $lastDepth = 0;
 

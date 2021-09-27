@@ -26,7 +26,9 @@
  */
 require_once 'Zend/Gdata/App/Util.php';
 
-/** @see Zend_Xml_Security */
+/**
+ * @see Zend_Xml_Security 
+*/
 require_once 'Zend/Xml/Security.php';
 
 /**
@@ -81,20 +83,20 @@ abstract class Zend_Gdata_App_Base
     protected static array $_namespaceLookupCache = array();
 
     /**
-    * List of namespaces, as a three-dimensional array. The first dimension
-    * represents the namespace prefix, the second dimension represents the
-    * minimum major protocol version, and the third dimension is the minimum
-    * minor protocol version. Null keys are NOT allowed.
-    *
-    * When looking up a namespace for a given prefix, the greatest version
-    * number (both major and minor) which is less than the effective version
-    * should be used.
-    *
-    * @see lookupNamespace()
-    * @see registerNamespace()
-    * @see registerAllNamespaces()
-    */
-   protected array $_namespaces = array(
+     * List of namespaces, as a three-dimensional array. The first dimension
+     * represents the namespace prefix, the second dimension represents the
+     * minimum major protocol version, and the third dimension is the minimum
+     * minor protocol version. Null keys are NOT allowed.
+     *
+     * When looking up a namespace for a given prefix, the greatest version
+     * number (both major and minor) which is less than the effective version
+     * should be used.
+     *
+     * @see lookupNamespace()
+     * @see registerNamespace()
+     * @see registerAllNamespaces()
+     */
+    protected array $_namespaces = array(
         'atom'      => array(
             1 => array(
                 0 => 'http://www.w3.org/2005/Atom'
@@ -133,7 +135,7 @@ abstract class Zend_Gdata_App_Base
      * Sets the child text node of this element
      * This represents any raw text contained within the XML element
      *
-     * @param string $value Child text node
+     * @param  string $value Child text node
      * @return Zend_Gdata_App_Base Returns an object of the same type as 'this' to provide a fluent interface.
      */
     public function setText($value)
@@ -158,7 +160,7 @@ abstract class Zend_Gdata_App_Base
      * during the parsing of the XML.  This method can be used to add arbitrary
      * child XML elements to any data model class.
      *
-     * @param array $value All extension elements
+     * @param  array $value All extension elements
      * @return Zend_Gdata_App_Base Returns an object of the same type as 'this' to provide a fluent interface.
      */
     public function setExtensionElements($value)
@@ -187,7 +189,7 @@ abstract class Zend_Gdata_App_Base
      *     array('namespaceUri' => string, 'name' => string, 'value' => string);
      * This can be used to add arbitrary attributes to any data model element
      *
-     * @param array $value All extension attributes
+     * @param  array $value All extension attributes
      * @return Zend_Gdata_App_Base Returns an object of the same type as 'this' to provide a fluent interface.
      */
     public function setExtensionAttributes($value)
@@ -202,7 +204,7 @@ abstract class Zend_Gdata_App_Base
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -306,17 +308,17 @@ abstract class Zend_Gdata_App_Base
             $doc = @Zend_Xml_Security::scan($xml, $doc);
             @ini_restore('track_errors');
             if (!$doc) {
-                require_once 'Zend/Gdata/App/Exception.php';
+                include_once 'Zend/Gdata/App/Exception.php';
                 throw new Zend_Gdata_App_Exception("DOMDocument cannot parse XML: $php_errormsg");
             }
             $element = $doc->getElementsByTagName($this->_rootElement)->item(0);
             if (!$element) {
-                require_once 'Zend/Gdata/App/Exception.php';
+                include_once 'Zend/Gdata/App/Exception.php';
                 throw new Zend_Gdata_App_Exception('No root <' . $this->_rootElement . '> element');
             }
             $this->transferFromDOM($element);
         } else {
-            require_once 'Zend/Gdata/App/Exception.php';
+            include_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('XML passed to transferFromXML cannot be null');
         }
     }
@@ -364,23 +366,24 @@ abstract class Zend_Gdata_App_Base
      * available. Returns the prefix, unmodified, if it's not
      * registered.
      *
-     * @param string $prefix The namespace prefix to lookup.
-     * @param integer $majorVersion The major protocol version in effect.
-     *        Defaults to '1'.
-     * @param integer $minorVersion The minor protocol version in effect.
-     *        Defaults to null (use latest).
+     * @param  string  $prefix       The namespace prefix to lookup.
+     * @param  integer $majorVersion The major protocol version in effect.
+     *                               Defaults to '1'.
+     * @param  integer $minorVersion The minor protocol version in effect.
+     *                               Defaults to null (use latest).
      * @return string
      */
     public function lookupNamespace($prefix,
-                                    $majorVersion = 1,
-                                    $minorVersion = null)
-    {
+        $majorVersion = 1,
+        $minorVersion = null
+    ) {
         // Check for a memoized result
         $key = $prefix . ' ' .
                ($majorVersion === null ? 'NULL' : $majorVersion) .
                ' '. ($minorVersion === null ? 'NULL' : $minorVersion);
-        if (array_key_exists($key, self::$_namespaceLookupCache))
-          return self::$_namespaceLookupCache[$key];
+        if (array_key_exists($key, self::$_namespaceLookupCache)) {
+            return self::$_namespaceLookupCache[$key];
+        }
         // If no match, return the prefix by default
         $result = $prefix;
 
@@ -389,11 +392,13 @@ abstract class Zend_Gdata_App_Base
             // Major version search
             $nsData = $this->_namespaces[$prefix];
             $foundMajorV = Zend_Gdata_App_Util::findGreatestBoundedValue(
-                    $majorVersion, $nsData);
+                $majorVersion, $nsData
+            );
             // Minor version search
             $nsData = $nsData[$foundMajorV];
             $foundMinorV = Zend_Gdata_App_Util::findGreatestBoundedValue(
-                    $minorVersion, $nsData);
+                $minorVersion, $nsData
+            );
             // Extract NS
             $result = $nsData[$foundMinorV];
         }
@@ -417,19 +422,19 @@ abstract class Zend_Gdata_App_Base
      *          contradictory data to the namespace lookup table, you must
      *          call flushNamespaceLookupCache().
      *
-     * @param  string $prefix The namespace prefix
-     * @param  string $namespaceUri The full namespace URI
-     * @param integer $majorVersion The major protocol version in effect.
-     *        Defaults to '1'.
-     * @param integer $minorVersion The minor protocol version in effect.
-     *        Defaults to null (use latest).
+     * @param  string  $prefix       The namespace prefix
+     * @param  string  $namespaceUri The full namespace URI
+     * @param  integer $majorVersion The major protocol version in effect.
+     *                               Defaults to '1'.
+     * @param  integer $minorVersion The minor protocol version in effect.
+     *                               Defaults to null (use latest).
      * @return void
      */
     public function registerNamespace($prefix,
-                                      $namespaceUri,
-                                      $majorVersion = 1,
-                                      $minorVersion = 0)
-    {
+        $namespaceUri,
+        $majorVersion = 1,
+        $minorVersion = 0
+    ) {
         $this->_namespaces[$prefix][$majorVersion][$minorVersion] =
         $namespaceUri;
     }
@@ -453,14 +458,15 @@ abstract class Zend_Gdata_App_Base
      * namespace prefix, namespace URI, major protocol version,
      * minor protocol version and adds them with calls to ->registerNamespace()
      *
-     * @param array $namespaceArray An array of namespaces.
+     * @param  array $namespaceArray An array of namespaces.
      * @return void
      */
     public function registerAllNamespaces($namespaceArray)
     {
         foreach($namespaceArray as $namespace) {
                 $this->registerNamespace(
-                    $namespace[0], $namespace[1], $namespace[2], $namespace[3]);
+                    $namespace[0], $namespace[1], $namespace[2], $namespace[3]
+                );
         }
     }
 
@@ -482,9 +488,10 @@ abstract class Zend_Gdata_App_Base
         } else if (property_exists($this, "_${name}")) {
             return $this->{'_' . $name};
         } else {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
+            include_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Property ' . $name . ' does not exist');
+                'Property ' . $name . ' does not exist'
+            );
         }
     }
 
@@ -508,9 +515,10 @@ abstract class Zend_Gdata_App_Base
         } else if (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
             $this->{'_' . $name} = $val;
         } else {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
+            include_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Property ' . $name . '  does not exist');
+                'Property ' . $name . '  does not exist'
+            );
         }
     }
 
@@ -524,9 +532,10 @@ abstract class Zend_Gdata_App_Base
         $rc = new ReflectionClass(get_class($this));
         $privName = '_' . $name;
         if (!($rc->hasProperty($privName))) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
+            include_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Property ' . $name . ' does not exist');
+                'Property ' . $name . ' does not exist'
+            );
         } else {
             if (isset($this->{$privName})) {
                 if (is_array($this->{$privName})) {

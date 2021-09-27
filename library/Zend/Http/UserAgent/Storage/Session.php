@@ -83,11 +83,13 @@ class Zend_Http_UserAgent_Storage_Session implements Zend_Http_UserAgent_Storage
             $options = (array) $options;
         }
         if (null !== $options && !is_array($options)) {
-            require_once 'Zend/Http/UserAgent/Storage/Exception.php';
-            throw new Zend_Http_UserAgent_Storage_Exception(sprintf(
-                'Expected array or object options; "%s" provided',
-                gettype($options)
-            ));
+            include_once 'Zend/Http/UserAgent/Storage/Exception.php';
+            throw new Zend_Http_UserAgent_Storage_Exception(
+                sprintf(
+                    'Expected array or object options; "%s" provided',
+                    gettype($options)
+                )
+            );
         }
 
         // add '.' to prevent the message ''Session namespace must not start with a number'

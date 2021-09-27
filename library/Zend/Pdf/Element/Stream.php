@@ -12,28 +12,32 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 
-/** Internally used classes */
+/**
+ * Internally used classes 
+ */
 require_once 'Zend/Pdf.php';
 
 
-/** Zend_Pdf_Element */
+/**
+ * Zend_Pdf_Element 
+*/
 require_once 'Zend/Pdf/Element.php';
 
 /**
  * PDF file 'stream' element implementation
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Element_Stream extends Zend_Pdf_Element
 {
@@ -79,7 +83,6 @@ class Zend_Pdf_Element_Stream extends Zend_Pdf_Element
 
     /**
      * Clear stream
-     *
      */
     public function clear()
     {
@@ -105,9 +108,9 @@ class Zend_Pdf_Element_Stream extends Zend_Pdf_Element
     /**
      * Detach PDF object from the factory (if applicable), clone it and attach to new factory.
      *
-     * @param Zend_Pdf_ElementFactory $factory  The factory to attach
-     * @param array &$processed  List of already processed indirect objects, used to avoid objects duplication
-     * @param integer $mode  Cloning mode (defines filter for objects cloning)
+     * @param   Zend_Pdf_ElementFactory $factory    The factory to attach
+     * @param   array                   &$processed List of already processed indirect objects, used to avoid objects duplication
+     * @param   integer                 $mode       Cloning mode (defines filter for objects cloning)
      * @returns Zend_Pdf_Element
      */
     public function makeClone(Zend_Pdf_ElementFactory $factory, array &$processed, $mode)
@@ -118,7 +121,7 @@ class Zend_Pdf_Element_Stream extends Zend_Pdf_Element
     /**
      * Return object as string
      *
-     * @param Zend_Pdf_Factory $factory
+     * @param  Zend_Pdf_Factory $factory
      * @return string
      */
     public function toString($factory = null)

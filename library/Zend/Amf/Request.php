@@ -12,36 +12,46 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Amf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
-/** @see Zend_Amf_Parse_InputStream */
+/**
+ * @see Zend_Amf_Parse_InputStream 
+ */
 require_once 'Zend/Amf/Parse/InputStream.php';
 
-/** @see Zend_Amf_Parse_Amf0_Deserializer */
+/**
+ * @see Zend_Amf_Parse_Amf0_Deserializer 
+*/
 require_once 'Zend/Amf/Parse/Amf0/Deserializer.php';
 
-/** @see Zend_Amf_Constants */
+/**
+ * @see Zend_Amf_Constants 
+*/
 require_once 'Zend/Amf/Constants.php';
 
-/** @see Zend_Amf_Value_MessageHeader */
+/**
+ * @see Zend_Amf_Value_MessageHeader 
+*/
 require_once 'Zend/Amf/Value/MessageHeader.php';
 
-/** @see Zend_Amf_Value_MessageBody */
+/**
+ * @see Zend_Amf_Value_MessageBody 
+*/
 require_once 'Zend/Amf/Value/MessageBody.php';
 
 /**
  * Handle the incoming AMF request by deserializing the data to php object
  * types and storing the data for Zend_Amf_Server to handle for processing.
  *
- * @todo       Currently not checking if the object needs to be Type Mapped to a server object.
- * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @todo      Currently not checking if the object needs to be Type Mapped to a server object.
+ * @package   Zend_Amf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Amf_Request
 {
@@ -71,7 +81,8 @@ class Zend_Amf_Request
 
     /**
      * Time of the request
-     * @var  mixed
+     *
+     * @var mixed
      */
     protected $_time;
 
@@ -102,7 +113,7 @@ class Zend_Amf_Request
             && ($clientVersion != Zend_Amf_Constants::AMF3_OBJECT_ENCODING)
             && ($clientVersion != Zend_Amf_Constants::FMS_OBJECT_ENCODING)
         ) {
-            require_once 'Zend/Amf/Exception.php';
+            include_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Unknown Player Version ' . $clientVersion);
         }
 
@@ -144,7 +155,7 @@ class Zend_Amf_Request
         try {
             $data = $this->_deserializer->readTypeMarker();
         } catch (Exception $e) {
-            require_once 'Zend/Amf/Exception.php';
+            include_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Unable to parse ' . $name . ' header data: ' . $e->getMessage() . ' '. $e->getLine(), 0, $e);
         }
 
@@ -166,7 +177,7 @@ class Zend_Amf_Request
         try {
             $data = $this->_deserializer->readTypeMarker();
         } catch (Exception $e) {
-            require_once 'Zend/Amf/Exception.php';
+            include_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Unable to parse ' . $targetURI . ' body data ' . $e->getMessage(), 0, $e);
         }
 
@@ -177,7 +188,7 @@ class Zend_Amf_Request
              * an AMF0 array called Content. The following code gets the object
              * out of the content array and sets it as the message data.
              */
-            if(is_array($data) && $data[0] instanceof Zend_Amf_Value_Messaging_AbstractMessage){
+            if(is_array($data) && $data[0] instanceof Zend_Amf_Value_Messaging_AbstractMessage) {
                 $data = $data[0];
             }
 

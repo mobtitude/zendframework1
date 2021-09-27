@@ -38,17 +38,17 @@ class Zend_Cloud_Infrastructure_InstanceList implements Countable, Iterator, Arr
      * Constructor
      *
      * @param  Adapter $adapter
-     * @param  array $instances
+     * @param  array   $instances
      * @return void
      */
     public function __construct($adapter, array $instances = null)
     {
         if (!($adapter instanceof Zend_Cloud_Infrastructure_Adapter)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('You must pass a Zend_Cloud_Infrastructure_Adapter');
         }
         if (empty($instances)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('You must pass an array of Instances');
         }
 
@@ -65,7 +65,7 @@ class Zend_Cloud_Infrastructure_InstanceList implements Countable, Iterator, Arr
     protected function constructFromArray(array $list)
     {
         foreach ($list as $instance) {
-            $this->addInstance(new Zend_Cloud_Infrastructure_Instance($this->adapter,$instance));
+            $this->addInstance(new Zend_Cloud_Infrastructure_Instance($this->adapter, $instance));
         }
     }
 
@@ -182,7 +182,7 @@ class Zend_Cloud_Infrastructure_InstanceList implements Countable, Iterator, Arr
     public function offsetGet($offset)
     {
         if (!$this->offsetExists($offset)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('Illegal index');
         }
         return $this->instances[$offset];
@@ -193,13 +193,13 @@ class Zend_Cloud_Infrastructure_InstanceList implements Countable, Iterator, Arr
      *
      * Implement ArrayAccess::offsetSet()
      *
-     * @param   int     $offset
-     * @param   string  $value
-     * @throws  Zend_Cloud_Infrastructure_Exception
+     * @param  int    $offset
+     * @param  string $value
+     * @throws Zend_Cloud_Infrastructure_Exception
      */
     public function offsetSet($offset, $value)
     {
-        require_once 'Zend/Cloud/Infrastructure/Exception.php';
+        include_once 'Zend/Cloud/Infrastructure/Exception.php';
         throw new Zend_Cloud_Infrastructure_Exception('You are trying to set read-only property');
     }
 
@@ -208,12 +208,12 @@ class Zend_Cloud_Infrastructure_InstanceList implements Countable, Iterator, Arr
      *
      * Implement ArrayAccess::offsetUnset()
      *
-     * @param   int     $offset
-     * @throws  Zend_Cloud_Infrastructure_Exception
+     * @param  int $offset
+     * @throws Zend_Cloud_Infrastructure_Exception
      */
     public function offsetUnset($offset)
     {
-        require_once 'Zend/Cloud/Infrastructure/Exception.php';
+        include_once 'Zend/Cloud/Infrastructure/Exception.php';
         throw new Zend_Cloud_Infrastructure_Exception('You are trying to unset read-only property');
     }
 }

@@ -83,7 +83,7 @@ abstract class Zend_Service_Ebay_Abstract
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return boolean
      */
     public function hasOption($name)
@@ -119,7 +119,7 @@ abstract class Zend_Service_Ebay_Abstract
             /**
              * @see Zend_Service_Ebay_Exception
              */
-            require_once 'Zend/Service/Ebay/Exception.php';
+            include_once 'Zend/Service/Ebay/Exception.php';
             throw new Zend_Service_Ebay_Exception('Invalid options provided.');
         }
 
@@ -274,32 +274,32 @@ abstract class Zend_Service_Ebay_Abstract
     {
         switch ($type) {
             // cast for: boolean
-            case 'boolean':
-                $value = (string) $value == 'true';
-                break;
+        case 'boolean':
+            $value = (string) $value == 'true';
+            break;
 
             // cast for: Amount, decimal, double, float, MeasureType
-            case 'float':
-                $value = floatval((string) $value);
-                break;
+        case 'float':
+            $value = floatval((string) $value);
+            break;
 
             // cast for: int, long
             // integer type generates a string value, because 32 bit systems
             // have an integer range of -2147483648 to 2147483647
-            case 'integer':
-                // break intentionally omitted
+        case 'integer':
+            // break intentionally omitted
 
             // cast for: anyURI, base64Binary, dateTime, duration, string, token
-            case 'string':
-                $value = (string) $value;
-                break;
+        case 'string':
+            $value = (string) $value;
+            break;
 
-            default:
-                /**
-                 * @see Zend_Service_Ebay_Exception
-                 */
-                require_once 'Zend/Service/Ebay/Exception.php';
-                throw new Zend_Service_Ebay_Exception("Invalid type '{$type}'.");
+        default:
+            /**
+             * @see Zend_Service_Ebay_Exception
+             */
+            include_once 'Zend/Service/Ebay/Exception.php';
+            throw new Zend_Service_Ebay_Exception("Invalid type '{$type}'.");
         }
         return $value;
     }

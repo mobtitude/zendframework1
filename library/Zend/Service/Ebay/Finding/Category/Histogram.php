@@ -68,7 +68,7 @@ class Zend_Service_Ebay_Finding_Category_Histogram extends Zend_Service_Ebay_Fin
             /**
              * @see Zend_Service_Ebay_Finding_Category_Histogram_Set
              */
-            require_once 'Zend/Service/Ebay/Finding/Category/Histogram/Set.php';
+            include_once 'Zend/Service/Ebay/Finding/Category/Histogram/Set.php';
             $this->childCategoryHistogram = new Zend_Service_Ebay_Finding_Category_Histogram_Set($nodes);
         }
     }

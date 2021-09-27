@@ -70,14 +70,14 @@ class Zend_Gdata_Extension_Comments extends Zend_Gdata_Extension
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('gd') . ':' . 'feedLink';
-                $feedLink = new Zend_Gdata_Extension_FeedLink();
-                $feedLink->transferFromDOM($child);
-                $this->_feedLink = $feedLink;
-                break;
-            default:
+        case $this->lookupNamespace('gd') . ':' . 'feedLink';
+            $feedLink = new Zend_Gdata_Extension_FeedLink();
+            $feedLink->transferFromDOM($child);
+            $this->_feedLink = $feedLink;
+            break;
+        default:
                 parent::takeChildFromDOM($child);
-                break;
+            break;
         }
     }
 

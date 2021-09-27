@@ -38,10 +38,10 @@ require_once 'Zend/Tool/Framework/Manifest/Interface.php';
 require_once 'Zend/Tool/Framework/Provider/Interface.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Loader_BasicLoader
     implements Zend_Tool_Framework_Loader_Interface, Zend_Tool_Framework_Registry_EnabledInterface
@@ -71,7 +71,7 @@ class Zend_Tool_Framework_Loader_BasicLoader
      * setRegistry() - required by the enabled interface to get an instance of
      * the registry
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
+     * @param  Zend_Tool_Framework_Registry_Interface $registry
      * @return Zend_Tool_Framework_Loader_Abstract
      */
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)

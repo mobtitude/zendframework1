@@ -36,10 +36,10 @@ require_once 'Zend/Tool/Project/Context/Content/Engine/Phtml.php';
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Content_Engine
 {
@@ -66,9 +66,9 @@ class Zend_Tool_Project_Context_Content_Engine
     /**
      * getContent()
      *
-     * @param Zend_Tool_Project_Context_Interface $context
-     * @param string $methodName
-     * @param mixed $parameters
+     * @param  Zend_Tool_Project_Context_Interface $context
+     * @param  string                              $methodName
+     * @param  mixed                               $parameters
      * @return string
      */
     public function getContent(Zend_Tool_Project_Context_Interface $context, $methodName, $parameters)
