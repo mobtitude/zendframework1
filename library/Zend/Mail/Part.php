@@ -51,9 +51,8 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
 {
     /**
      * headers of part as array
-     * @var null|array
      */
-    protected $_headers;
+    protected ?array $_headers = null;
 
     /**
      * raw part body
@@ -63,45 +62,38 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
 
     /**
      * toplines as fetched with headers
-     * @var string
      */
-    protected $_topLines = '';
+    protected string $_topLines = '';
 
     /**
      * parts of multipart message
-     * @var array
      */
-    protected $_parts = array();
+    protected array $_parts = array();
 
     /**
      * count of parts of a multipart message
-     * @var null|int
      */
-    protected $_countParts;
+    protected ?int $_countParts = null;
 
     /**
      * current position of iterator
-     * @var int
      */
-    protected $_iterationPos = 1;
+    protected int $_iterationPos = 1;
 
     /**
      * mail handler, if late fetch is active
-     * @var null|Zend_Mail_Storage_Abstract
      */
-    protected $_mail;
+    protected ?\Zend_Mail_Storage_Abstract $_mail = null;
 
     /**
      * message number for mail handler
-     * @var int
      */
-    protected $_messageNum = 0;
+    protected int $_messageNum = 0;
     
     /**
-     * Class to use when creating message parts
-     * @var string 
+     * Class to use when creating message parts 
      */
-    protected $_partClass;
+    protected ?string $_partClass = null;
 
     /**
      * Public constructor

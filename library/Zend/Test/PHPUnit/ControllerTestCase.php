@@ -56,26 +56,16 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
      */
     protected $_frontController;
 
-    /**
-     * @var Zend_Dom_Query
-     */
-    protected $_query;
+    protected ?\Zend_Dom_Query $_query = null;
 
-    /**
-     * @var Zend_Controller_Request_Abstract
-     */
-    protected $_request;
+    protected ?\Zend_Controller_Request_HttpTestCase $_request = null;
 
-    /**
-     * @var Zend_Controller_Response_Abstract
-     */
-    protected $_response;
+    protected ?\Zend_Controller_Response_HttpTestCase $_response = null;
 
     /**
      * XPath namespaces
-     * @var array
      */
-    protected $_xpathNamespaces = array();
+    protected array $_xpathNamespaces = array();
 
     /**
      * Overloading: prevent overloading to special properties

@@ -41,13 +41,10 @@
 abstract class Zend_Pdf_FileParserDataSource
 {
   /**** Instance Variables ****/
-
-
     /**
      * Total size in bytes of the data source.
-     * @var integer
      */
-    protected $_size = 0;
+    protected int $_size = 0;
 
     /**
      * Byte offset of the current read position within the data source.

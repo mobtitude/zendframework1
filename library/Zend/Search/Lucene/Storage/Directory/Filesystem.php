@@ -38,26 +38,21 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
 {
     /**
      * Filesystem path to the directory
-     *
-     * @var string
      */
-    protected $_dirPath = null;
+    protected ?string $_dirPath = null;
 
     /**
      * Cache for Zend_Search_Lucene_Storage_File_Filesystem objects
      * Array: filename => Zend_Search_Lucene_Storage_File object
      *
-     * @var array
      * @throws Zend_Search_Lucene_Exception
      */
-    protected $_fileHandlers;
+    protected array $_fileHandlers;
 
     /**
      * Default file permissions
-     *
-     * @var integer
      */
-    protected static $_defaultFilePermissions = 0666;
+    protected static int $_defaultFilePermissions = 0666;
 
 
     /**

@@ -75,12 +75,12 @@ abstract class Zend_Gdata_App_FeedSourceParent extends Zend_Gdata_App_FeedEntryP
      *
      * @var string
      */
-    protected $_rootElement = null;
+    protected ?string $_rootElement = null;
 
-    protected $_generator = null;
-    protected $_icon = null;
-    protected $_logo = null;
-    protected $_subtitle = null;
+    protected ?\Zend_Gdata_App_Extension_Generator $_generator = null;
+    protected ?\Zend_Gdata_App_Extension_Icon $_icon = null;
+    protected ?\Zend_Gdata_App_Extension_Logo $_logo = null;
+    protected ?\Zend_Gdata_App_Extension_Subtitle $_subtitle = null;
 
     /**
      * Set the HTTP client instance

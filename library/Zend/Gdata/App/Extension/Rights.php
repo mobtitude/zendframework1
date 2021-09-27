@@ -38,7 +38,7 @@ require_once 'Zend/Gdata/App/Extension/Text.php';
 class Zend_Gdata_App_Extension_Rights extends Zend_Gdata_App_Extension_Text
 {
 
-    protected $_rootElement = 'rights';
+    protected ?string $_rootElement = 'rights';
 
     public function __construct($text = null)
     {

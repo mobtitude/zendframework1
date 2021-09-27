@@ -45,9 +45,8 @@ class Zend_Form_Decorator_Form extends Zend_Form_Decorator_Abstract
 {
     /**
      * Default view helper
-     * @var string
      */
-    protected $_helper = 'form';
+    protected string $_helper = 'form';
 
     /**
      * Set view helper for rendering form

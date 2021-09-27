@@ -59,18 +59,14 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
      * Placement; default to surround content
      * @var string
      */
-    protected $_placement = null;
+    protected ?string $_placement = null;
 
     /**
      * HTML tag to use
-     * @var string
      */
-    protected $_tag;
+    protected ?string $_tag = null;
 
-    /**
-     * @var Zend_Filter
-     */
-    protected $_tagFilter;
+    protected ?\Zend_Filter $_tagFilter = null;
 
     /**
      * Convert options to tag attributes

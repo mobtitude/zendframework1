@@ -29,9 +29,9 @@
  */
 class Zend_Service_Amazon_SimpleDb_Attribute
 {
-    protected $_itemName;
-    protected $_name;
-    protected $_values;
+    protected string $_itemName;
+    protected string $_name;
+    protected ?array $_values;
 
     /**
      * Constructor

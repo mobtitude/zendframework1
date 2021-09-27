@@ -38,7 +38,7 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Extension_Reminder extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'reminder';
+    protected ?string $_rootElement = 'reminder';
     protected $_absoluteTime = null;
     protected $_method = null;
     protected $_days = null;

@@ -41,10 +41,7 @@ class Zend_Application_Resource_Locale
 {
     const DEFAULT_REGISTRY_KEY = 'Zend_Locale';
 
-    /**
-     * @var Zend_Locale
-     */
-    protected $_locale;
+    protected ?\Zend_Locale $_locale = null;
 
     /**
      * Defined by Zend_Application_Resource_Resource

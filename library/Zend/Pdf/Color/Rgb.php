@@ -40,26 +40,20 @@ class Zend_Pdf_Color_Rgb extends Zend_Pdf_Color
     /**
      * Red level.
      * 0.0 (zero concentration) - 1.0 (maximum concentration)
-     *
-     * @var Zend_Pdf_Element_Numeric
      */
-    private $_r;
+    private \Zend_Pdf_Element_Numeric $_r;
 
     /**
      * Green level.
      * 0.0 (zero concentration) - 1.0 (maximum concentration)
-     *
-     * @var Zend_Pdf_Element_Numeric
      */
-    private $_g;
+    private \Zend_Pdf_Element_Numeric $_g;
 
     /**
      * Blue level.
      * 0.0 (zero concentration) - 1.0 (maximum concentration)
-     *
-     * @var Zend_Pdf_Element_Numeric
      */
-    private $_b;
+    private \Zend_Pdf_Element_Numeric $_b;
 
 
     /**

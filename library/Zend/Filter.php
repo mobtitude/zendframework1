@@ -38,17 +38,13 @@ class Zend_Filter implements Zend_Filter_Interface
 
     /**
      * Filter chain
-     *
-     * @var array
      */
-    protected $_filters = array();
+    protected array $_filters = array();
 
     /**
      * Default Namespaces
-     *
-     * @var array
      */
-    protected static $_defaultNamespaces = array();
+    protected static array $_defaultNamespaces = array();
 
     /**
      * Adds a filter to the chain

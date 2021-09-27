@@ -38,10 +38,8 @@ class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
     /**
      * Elements
      * Array of name => object tree entries
-     *
-     * @var array
      */
-    protected $_items = array();
+    protected array $_items = array();
 
     /**
      * Object constructor

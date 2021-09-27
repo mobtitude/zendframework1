@@ -44,10 +44,8 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
      * An instance of Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface used
      * to background save any verification tokens associated with a subscription
      * or other.
-     *
-     * @var Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface
      */
-    protected $_storage = null;
+    protected ?\Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface $_storage = null;
 
     /**
      * An instance of a class handling Http Responses. This is implemented in

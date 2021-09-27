@@ -35,10 +35,8 @@ class Zend_Mobile_Push_Test_ApnsProxy extends Zend_Mobile_Push_Apns
 {
     /**
      * Read Response
-     *
-     * @var string
      */
-    protected $_readResponse;
+    protected ?string $_readResponse = null;
 
     /**
      * Write Response

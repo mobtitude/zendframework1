@@ -57,10 +57,8 @@ class Zend_Gdata_Gapps_GroupEntry extends Zend_Gdata_Entry
     /**
      * <apps:property> element containing information about other items
      * relevant to this entry.
-     *
-     * @var Zend_Gdata_Gapps_Extension_Property
      */
-    protected $_property = array();
+    protected array $_property = array();
 
     /**
      * Create a new instance.

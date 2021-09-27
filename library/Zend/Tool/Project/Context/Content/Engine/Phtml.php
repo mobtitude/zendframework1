@@ -34,15 +34,9 @@
 class Zend_Tool_Project_Context_Content_Engine_Phtml
 {
 
-    /**
-     * @var Zend_Tool_Framework_Client_Storage
-     */
-    protected $_storage = null;
+    protected ?\Zend_Tool_Framework_Client_Storage $_storage = null;
 
-    /**
-     * @var string
-     */
-    protected $_contentPrefix = null;
+    protected ?string $_contentPrefix = null;
 
     /**
      * __construct()

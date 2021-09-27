@@ -34,15 +34,13 @@ class Zend_Server_Reflection_ReturnValue
 {
     /**
      * Return value type
-     * @var string
      */
-    protected $_type;
+    protected ?string $_type = null;
 
     /**
      * Return value description
-     * @var string
      */
-    protected $_description;
+    protected ?string $_description = null;
 
     /**
      * Constructor

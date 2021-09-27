@@ -29,45 +29,33 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
 {
     /**
      * Feed entry data
-     *
-     * @var array
      */
-    protected $_data = array();
+    protected array $_data = array();
 
     /**
      * DOM document object
-     *
-     * @var DOMDocument
      */
-    protected $_domDocument = null;
+    protected ?\DOMDocument $_domDocument = null;
 
     /**
      * Entry instance
-     *
-     * @var Zend_Feed_Entry_Abstract
      */
-    protected $_entry = null;
+    protected ?\DOMElement $_entry = null;
 
     /**
      * Pointer to the current entry
-     *
-     * @var int
      */
-    protected $_entryKey = 0;
+    protected int $_entryKey = 0;
 
     /**
      * XPath object
-     *
-     * @var DOMXPath
      */
-    protected $_xpath = null;
+    protected ?\DOMXPath $_xpath = null;
 
     /**
      * XPath query
-     *
-     * @var string
      */
-    protected $_xpathPrefix = '';
+    protected string $_xpathPrefix = '';
 
     /**
      * Constructor

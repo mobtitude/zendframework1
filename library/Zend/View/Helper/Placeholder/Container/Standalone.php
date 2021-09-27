@@ -36,15 +36,9 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 abstract class Zend_View_Helper_Placeholder_Container_Standalone extends Zend_View_Helper_Abstract implements IteratorAggregate, Countable, ArrayAccess
 {
-    /**
-     * @var Zend_View_Helper_Placeholder_Container_Abstract
-     */
-    protected $_container;
+    protected ?\Zend_View_Helper_Placeholder_Container_Abstract $_container = null;
 
-    /**
-     * @var Zend_View_Helper_Placeholder_Registry
-     */
-    protected $_registry;
+    protected ?\Zend_View_Helper_Placeholder_Registry $_registry = null;
 
     /**
      * Registry key under which container registers itself

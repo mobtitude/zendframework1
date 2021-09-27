@@ -39,10 +39,7 @@ require_once 'Zend/Application/Resource/ResourceAbstract.php';
 class Zend_Application_Resource_Layout
     extends Zend_Application_Resource_ResourceAbstract
 {
-    /**
-     * @var Zend_Layout
-     */
-    protected $_layout;
+    protected ?\Zend_Layout $_layout = null;
 
     /**
      * Defined by Zend_Application_Resource_Resource

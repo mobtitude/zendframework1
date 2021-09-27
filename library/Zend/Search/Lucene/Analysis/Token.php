@@ -32,24 +32,18 @@ class Zend_Search_Lucene_Analysis_Token
 {
     /**
      * The text of the term.
-     *
-     * @var string
      */
-    private $_termText;
+    private string $_termText;
 
     /**
      * Start in source text.
-     *
-     * @var integer
      */
-    private $_startOffset;
+    private int $_startOffset;
 
     /**
      * End in source text
-     *
-     * @var integer
      */
-    private $_endOffset;
+    private int $_endOffset;
 
     /**
      * The position of this token relative to the previous Token.
@@ -70,10 +64,8 @@ class Zend_Search_Lucene_Analysis_Token
      * also sets the increment to the number of stop words removed before each
      * non-stop word.  Then exact phrase queries will only match when the terms
      * occur with no intervening stop words.
-     *
-     * @var integer
      */
-    private $_positionIncrement;
+    private int $_positionIncrement;
 
 
     /**

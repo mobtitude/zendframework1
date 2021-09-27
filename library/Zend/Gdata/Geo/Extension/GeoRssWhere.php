@@ -49,15 +49,13 @@ require_once 'Zend/Gdata/Geo/Extension/GmlPoint.php';
 class Zend_Gdata_Geo_Extension_GeoRssWhere extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'georss';
-    protected $_rootElement = 'where';
+    protected string $_rootNamespace = 'georss';
+    protected ?string $_rootElement = 'where';
 
     /**
      * The point location for this geo element
-     *
-     * @var Zend_Gdata_Geo_Extension_GmlPoint
      */
-    protected $_point = null;
+    protected ?\Zend_Gdata_Geo_Extension_GmlPoint $_point = null;
 
     /**
      * Create a new instance.

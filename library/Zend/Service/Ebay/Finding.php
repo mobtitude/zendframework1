@@ -48,10 +48,7 @@ class Zend_Service_Ebay_Finding extends Zend_Service_Ebay_Abstract
     const XMLNS_FINDING = 'e';
     const XMLNS_MS      = 'ms';
 
-    /**
-     * @var array
-     */
-    protected static $_xmlNamespaces = array(
+    protected static array $_xmlNamespaces = array(
         self::XMLNS_FINDING => 'http://www.ebay.com/marketplace/search/v1/services',
         self::XMLNS_MS      => 'http://www.ebay.com/marketplace/services'
     );
@@ -60,7 +57,7 @@ class Zend_Service_Ebay_Finding extends Zend_Service_Ebay_Abstract
      *
      * @var array
      */
-    protected $_options = array(
+    protected array $_options = array(
         self::OPTION_GLOBAL_ID => 'EBAY-US'
     );
 

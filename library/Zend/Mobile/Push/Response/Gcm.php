@@ -39,33 +39,28 @@ class Zend_Mobile_Push_Response_Gcm
 
     /**
      * Multicast ID
-     * @var int
      */
-    protected $_id;
+    protected ?int $_id = null;
 
     /**
      * Success Count
-     * @var int
      */
-    protected $_successCnt;
+    protected ?int $_successCnt = null;
 
     /**
      * Failure Count
-     * @var int
      */
-    protected $_failureCnt;
+    protected ?int $_failureCnt = null;
 
     /**
      * Canonical registration id count
-     * @var int
      */
-    protected $_canonicalCnt;
+    protected ?int $_canonicalCnt = null;
 
     /**
      * Message
-     * @var Zend_Mobile_Push_Message_Gcm
      */
-    protected $_message;
+    protected ?\Zend_Mobile_Push_Message_Gcm $_message = null;
 
     /**
      * Results

@@ -40,25 +40,19 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Term extends Zend_Search_Luc
 {
     /**
      * word (query parser lexeme) to find.
-     *
-     * @var string
      */
-    private $_word;
+    private string $_word;
 
     /**
      * Word encoding (field name is always provided using UTF-8 encoding since it may be retrieved from index).
-     *
-     * @var string
      */
-    private $_encoding;
+    private string $_encoding;
 
 
     /**
      * Field name.
-     *
-     * @var string
      */
-    private $_field;
+    private string $_field;
 
     /**
      * Class constructor.  Create a new preprocessing object for prase query.

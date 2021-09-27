@@ -40,15 +40,14 @@ class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
 {
     /**
      * Array of headers
-     * @var array
      */
-    protected $_headers;
+    protected ?array $_headers = null;
 
     /**
      * Raw XML as received via request
      * @var string
      */
-    protected $_xml;
+    protected ?string $_xml;
 
     /**
      * Constructor

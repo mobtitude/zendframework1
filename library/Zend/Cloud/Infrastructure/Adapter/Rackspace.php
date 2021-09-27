@@ -35,10 +35,9 @@ class Zend_Cloud_Infrastructure_Adapter_Rackspace extends Zend_Cloud_Infrastruct
     const MONITOR_CPU_SAMPLES = 3;
     /**
      * Rackspace Servers Instance 
-     * 
-     * @var Zend_Service_Rackspace_Servers
+     *
      */
-    protected $rackspace;
+    protected ?\Zend_Service_Rackspace_Servers $rackspace = null;
     /**
      * Rackspace access user
      * 
@@ -53,23 +52,17 @@ class Zend_Cloud_Infrastructure_Adapter_Rackspace extends Zend_Cloud_Infrastruct
      */
     protected $accessKey;
     /**
-     * Rackspace Region
-     * 
-     * @var string 
+     * Rackspace Region 
      */
-    protected $region;
+    protected ?string $region = null;
     /**
-     * Flavors
-     * 
-     * @var array 
+     * Flavors 
      */
-    protected $flavors;
+    protected array $flavors;
     /**
-     * Map array between Rackspace and Infrastructure status
-     * 
-     * @var array 
+     * Map array between Rackspace and Infrastructure status 
      */
-    protected $mapStatus = array (
+    protected array $mapStatus = array (
         'ACTIVE'             => Zend_Cloud_Infrastructure_Instance::STATUS_RUNNING,
         'SUSPENDED'          => Zend_Cloud_Infrastructure_Instance::STATUS_STOPPED,
         'BUILD'              => Zend_Cloud_Infrastructure_Instance::STATUS_REBUILD,

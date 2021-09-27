@@ -43,7 +43,7 @@ require_once 'Zend/Gdata/Extension/FeedLink.php';
 class Zend_Gdata_Extension_Comments extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'comments';
+    protected ?string $_rootElement = 'comments';
     protected $_rel = null;
     protected $_feedLink = null;
 

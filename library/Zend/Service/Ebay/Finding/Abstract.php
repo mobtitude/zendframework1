@@ -39,20 +39,14 @@ require_once 'Zend/Service/Ebay/Finding.php';
  */
 abstract class Zend_Service_Ebay_Finding_Abstract
 {
-    /**
-     * @var DOMElement
-     */
-    protected $_dom;
+    protected \DOMElement $_dom;
 
     /**
      * @var DOMXPath
      */
     protected $_xPath;
 
-    /**
-     * @var array
-     */
-    protected $_attributes = array();
+    protected array $_attributes = array();
 
     /**
      * @param  DOMElement $dom

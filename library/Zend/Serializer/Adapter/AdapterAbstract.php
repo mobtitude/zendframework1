@@ -34,10 +34,8 @@ abstract class Zend_Serializer_Adapter_AdapterAbstract implements Zend_Serialize
 {
     /**
      * Serializer options
-     *
-     * @var array
      */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * Constructor

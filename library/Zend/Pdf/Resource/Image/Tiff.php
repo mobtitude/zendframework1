@@ -72,16 +72,16 @@ class Zend_Pdf_Resource_Image_Tiff extends Zend_Pdf_Resource_Image
 
     protected $_width;
     protected $_height;
-    protected $_imageProperties;
-    protected $_endianType;
-    protected $_fileSize;
+    protected array $_imageProperties;
+    protected ?int $_endianType = null;
+    protected int $_fileSize;
     protected $_bitsPerSample;
     protected $_compression;
-    protected $_filter;
+    protected ?string $_filter = null;
     protected $_colorCode;
-    protected $_whiteIsZero;
-    protected $_blackIsZero;
-    protected $_colorSpace;
+    protected ?bool $_whiteIsZero = null;
+    protected ?bool $_blackIsZero = null;
+    protected ?string $_colorSpace = null;
     protected $_imageDataOffset;
     protected $_imageDataLength;
 

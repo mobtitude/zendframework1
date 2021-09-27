@@ -27,10 +27,8 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
 {
     /**
      * XML encoding string
-     *
-     * @var string
      */
-    protected $_encoding;
+    protected string $_encoding;
 
     /**
      * Construct new instance of the generator

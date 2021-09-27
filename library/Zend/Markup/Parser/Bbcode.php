@@ -53,24 +53,18 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
 
     /**
      * Token tree
-     *
-     * @var Zend_Markup_TokenList
      */
-    protected $_tree;
+    protected ?\Zend_Markup_TokenList $_tree = null;
 
     /**
      * Current token
-     *
-     * @var Zend_Markup_Token
      */
-    protected $_current;
+    protected ?\Zend_Markup_Token $_current = null;
 
     /**
      * Source to tokenize
-     *
-     * @var string
      */
-    protected $_value = '';
+    protected string $_value = '';
 
     /**
      * Length of the value
@@ -81,38 +75,28 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
 
     /**
      * Current pointer
-     *
-     * @var int
      */
-    protected $_pointer = 0;
+    protected int $_pointer = 0;
 
     /**
      * The buffer
-     *
-     * @var string
      */
-    protected $_buffer = '';
+    protected string $_buffer = '';
 
     /**
      * Temporary tag storage
-     *
-     * @var array
      */
-    protected $_temp;
+    protected ?array $_temp = null;
 
     /**
      * Stoppers that we are searching for
-     *
-     * @var array
      */
-    protected $_searchedStoppers = array();
+    protected array $_searchedStoppers = array();
 
     /**
      * Tag information
-     *
-     * @var array
      */
-    protected $_tags = array(
+    protected array $_tags = array(
         'Zend_Markup_Root' => array(
             'type'     => self::TYPE_DEFAULT,
             'stoppers' => array(),
@@ -134,17 +118,13 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
 
     /**
      * Token array
-     *
-     * @var array
      */
-    protected $_tokens = array();
+    protected array $_tokens = array();
 
     /**
      * State
-     *
-     * @var int
      */
-    protected $_state = self::STATE_SCAN;
+    protected int $_state = self::STATE_SCAN;
 
 
     /**

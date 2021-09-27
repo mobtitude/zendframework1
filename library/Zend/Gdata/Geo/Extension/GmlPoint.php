@@ -49,15 +49,13 @@ require_once 'Zend/Gdata/Geo/Extension/GmlPos.php';
 class Zend_Gdata_Geo_Extension_GmlPoint extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gml';
-    protected $_rootElement = 'Point';
+    protected string $_rootNamespace = 'gml';
+    protected ?string $_rootElement = 'Point';
 
     /**
      * The position represented by this GmlPoint
-     *
-     * @var Zend_Gdata_Geo_Extension_GmlPos
      */
-    protected $_pos = null;
+    protected ?\Zend_Gdata_Geo_Extension_GmlPos $_pos = null;
 
     /**
      * Create a new instance.

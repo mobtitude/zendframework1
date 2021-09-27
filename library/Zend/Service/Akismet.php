@@ -46,33 +46,28 @@ class Zend_Service_Akismet extends Zend_Service_Abstract
 {
     /**
      * Akismet API key
-     * @var string
      */
-    protected $_apiKey;
+    protected ?string $_apiKey = null;
 
     /**
      * Blog URL
-     * @var string
      */
-    protected $_blogUrl;
+    protected ?string $_blogUrl = null;
 
     /**
      * Charset used for encoding
-     * @var string
      */
-    protected $_charset = 'UTF-8';
+    protected string $_charset = 'UTF-8';
 
     /**
      * TCP/IP port to use in requests
-     * @var int
      */
-    protected $_port = 80;
+    protected int $_port = 80;
 
     /**
      * User Agent string to send in requests
-     * @var string
      */
-    protected $_userAgent;
+    protected ?string $_userAgent = null;
 
     /**
      * Constructor

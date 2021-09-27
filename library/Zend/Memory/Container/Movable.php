@@ -38,24 +38,18 @@ require_once 'Zend/Memory/Value.php';
 class Zend_Memory_Container_Movable extends Zend_Memory_Container {
     /**
      * Internal object Id
-     *
-     * @var integer
      */
-    protected $_id;
+    protected int $_id;
 
     /**
      * Memory manager reference
-     *
-     * @var Zend_Memory_Manager
      */
-    private $_memManager;
+    private \Zend_Memory_Manager $_memManager;
 
     /**
      * Value object
-     *
-     * @var Zend_Memory_Value
      */
-    private $_value;
+    private ?\Zend_Memory_Value $_value = null;
 
     /** Value states */
     const LOADED   = 1;
@@ -64,10 +58,8 @@ class Zend_Memory_Container_Movable extends Zend_Memory_Container {
 
     /**
      * Value state (LOADED/SWAPPED/LOCKED)
-     *
-     * @var integer
      */
-    private $_state;
+    private int $_state;
 
     /**
      * Object constructor

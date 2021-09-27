@@ -36,39 +36,29 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
 {
 
     /**
-     * The Zend_Ldap context.
-     *
-     * @var Zend_Ldap
-     */
-    protected $_ldap = null;
+				 * The Zend_Ldap context.
+				 */
+				protected ?\Zend_Ldap $_ldap = null;
 
     /**
-     * The array of arrays of Zend_Ldap options passed to the constructor.
-     *
-     * @var array
-     */
-    protected $_options = null;
+				 * The array of arrays of Zend_Ldap options passed to the constructor.
+				 */
+				protected ?array $_options = null;
 
     /**
-     * The username of the account being authenticated.
-     *
-     * @var string
-     */
-    protected $_username = null;
+				 * The username of the account being authenticated.
+				 */
+				protected ?string $_username = null;
 
     /**
-     * The password of the account being authenticated.
-     *
-     * @var string
-     */
-    protected $_password = null;
+				 * The password of the account being authenticated.
+				 */
+				protected ?string $_password = null;
 
     /**
-     * The DN of the authenticated account. Used to retrieve the account entry on request.
-     *
-     * @var string
-     */
-    protected $_authenticatedDn = null;
+				 * The DN of the authenticated account. Used to retrieve the account entry on request.
+				 */
+				protected ?string $_authenticatedDn = null;
 
     /**
      * Constructor

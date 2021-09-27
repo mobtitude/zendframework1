@@ -47,15 +47,13 @@ class Zend_View_Helper_Placeholder_Registry
 
     /**
      * Default container class
-     * @var string
      */
-    protected $_containerClass = 'Zend_View_Helper_Placeholder_Container';
+    protected string $_containerClass = 'Zend_View_Helper_Placeholder_Container';
 
     /**
      * Placeholder containers
-     * @var array
      */
-    protected $_items = array();
+    protected array $_items = array();
 
     /**
      * Retrieve or create registry instnace

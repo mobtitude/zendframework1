@@ -33,24 +33,18 @@ class Zend_Service_Yahoo_Image
 {
     /**
      * Image URL
-     *
-     * @var string
      */
-    public $Url;
+    public \Zend_Uri $Url;
 
     /**
      * Image height in pixels
-     *
-     * @var int
      */
-    public $Height;
+    public int $Height;
 
     /**
      * Image width in pixels
-     *
-     * @var int
      */
-    public $Width;
+    public int $Width;
 
 
     /**

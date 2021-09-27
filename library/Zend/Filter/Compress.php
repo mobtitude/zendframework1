@@ -37,12 +37,12 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
     /**
      * Compression adapter
      */
-    protected $_adapter = 'Gz';
+    protected string $_adapter = 'Gz';
 
     /**
      * Compression adapter constructor options
      */
-    protected $_adapterOptions = array();
+    protected array $_adapterOptions = array();
 
     /**
      * Class constructor

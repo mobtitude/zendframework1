@@ -49,17 +49,13 @@ class Zend_Http_UserAgent_Storage_Session implements Zend_Http_UserAgent_Storage
 
     /**
      * Object to proxy $_SESSION storage
-     *
-     * @var Zend_Session_Namespace
      */
-    protected $_session;
+    protected \Zend_Session_Namespace $_session;
 
     /**
      * Session namespace
-     *
-     * @var mixed
      */
-    protected $_namespace;
+    protected string $_namespace;
 
     /**
      * Session object member

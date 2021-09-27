@@ -47,12 +47,12 @@ class Zend_Gdata_Spreadsheets_ListQuery extends Zend_Gdata_Query
 
     const SPREADSHEETS_LIST_FEED_URI = 'https://spreadsheets.google.com/feeds/list';
 
-    protected $_defaultFeedUri = self::SPREADSHEETS_LIST_FEED_URI;
-    protected $_visibility = 'private';
-    protected $_projection = 'full';
-    protected $_spreadsheetKey = null;
-    protected $_worksheetId = 'default';
-    protected $_rowId = null;
+    protected ?string $_defaultFeedUri = self::SPREADSHEETS_LIST_FEED_URI;
+    protected string $_visibility = 'private';
+    protected string $_projection = 'full';
+    protected ?string $_spreadsheetKey = null;
+    protected string $_worksheetId = 'default';
+    protected ?string $_rowId = null;
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_ListQuery object.

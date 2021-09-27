@@ -45,18 +45,15 @@ class Zend_Test_PHPUnit_Constraint_DomQuery34 extends PHPUnit_Framework_Constrai
     const ASSERT_CONTENT_COUNT_MIN= 'assertQueryCountMin';
     const ASSERT_CONTENT_COUNT_MAX= 'assertQueryCountMax';
     /**#@-*/
-
     /**
      * Current assertion type
-     * @var string
      */
-    protected $_assertType        = null;
+    protected ?string $_assertType        = null;
 
     /**
      * Available assertion types
-     * @var array
      */
-    protected $_assertTypes       = array(
+    protected array $_assertTypes       = array(
         self::ASSERT_QUERY,
         self::ASSERT_CONTENT_CONTAINS,
         self::ASSERT_CONTENT_REGEX,
@@ -73,27 +70,23 @@ class Zend_Test_PHPUnit_Constraint_DomQuery34 extends PHPUnit_Framework_Constrai
 
     /**
      * Whether or not assertion is negated
-     * @var bool
      */
-    protected $_negate            = false;
+    protected bool $_negate            = false;
 
     /**
      * CSS selector or XPath path to select against
-     * @var string
      */
-    protected $_path              = null;
+    protected ?string $_path              = null;
 
     /**
      * Whether or not to use XPath when querying
-     * @var bool
      */
-    protected $_useXpath          = false;
+    protected bool $_useXpath          = false;
 
     /**
      * XPath namespaces
-     * @var array
      */
-    protected $_xpathNamespaces = array();
+    protected array $_xpathNamespaces = array();
 
     /**
      * Constructor; setup constraint state
@@ -136,7 +129,7 @@ class Zend_Test_PHPUnit_Constraint_DomQuery34 extends PHPUnit_Framework_Constrai
      * @param  null|string Assertion type
      * @return bool
      */
-    public function evaluate($other, $assertType = null)
+    public function evaluate($other, $assertType = null, $returnResult = FALSE)
     {
         if (strstr($assertType, 'Not')) {
             $this->setNegate(true);

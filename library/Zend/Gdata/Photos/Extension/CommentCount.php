@@ -45,8 +45,8 @@ require_once 'Zend/Gdata/Photos.php';
 class Zend_Gdata_Photos_Extension_CommentCount extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gphoto';
-    protected $_rootElement = 'commentCount';
+    protected string $_rootNamespace = 'gphoto';
+    protected ?string $_rootElement = 'commentCount';
 
     /**
      * Constructs a new Zend_Gdata_Photos_Extension_CommentCount object.

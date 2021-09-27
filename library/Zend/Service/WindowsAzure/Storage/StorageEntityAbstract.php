@@ -31,11 +31,9 @@
 abstract class Zend_Service_WindowsAzure_Storage_StorageEntityAbstract
 {
     /**
-     * Data
-     * 
-     * @var array
-     */
-    protected $_data = null;
+				 * Data
+				 */
+				protected ?array $_data = null;
     
     /**
      * Magic overload for setting properties

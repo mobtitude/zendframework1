@@ -33,25 +33,16 @@ class Zend_Tool_Framework_Client_Response
      */
     protected $_callback = null;
 
-    /**
-     * @var array
-     */
-    protected $_content = array();
+    protected array $_content = array();
 
     /**
      * @var Zend_Tool_Framework_Exception
      */
     protected $_exception = null;
 
-    /**
-     * @var array
-     */
-    protected $_decorators = array();
+    protected array $_decorators = array();
 
-    /**
-     * @var array
-     */
-    protected $_defaultDecoratorOptions = array();
+    protected array $_defaultDecoratorOptions = array();
 
     /**
      * setContentCallback()

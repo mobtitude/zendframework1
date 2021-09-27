@@ -35,17 +35,13 @@ class Zend_Pdf_Trailer_Keeper extends Zend_Pdf_Trailer
 {
     /**
      * Reference context
-     *
-     * @var Zend_Pdf_Element_Reference_Context
      */
-    private $_context;
+    private \Zend_Pdf_Element_Reference_Context $_context;
 
     /**
      * Previous trailer
-     *
-     * @var Zend_Pdf_Trailer
      */
-    private $_prev;
+    private ?\Zend_Pdf_Trailer $_prev;
 
 
     /**

@@ -113,7 +113,7 @@ class Zend_Measure_Power extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ATTOWATT'                    => array('1.0e-18',           'aW'),
         'BTU_PER_HOUR'                => array('0.29307197',        'BTU/h'),
         'BTU_PER_MINUTE'              => array('17.5843182',        'BTU/m'),

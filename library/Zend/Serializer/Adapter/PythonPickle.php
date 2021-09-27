@@ -102,12 +102,12 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     /**
      * @var bool Whether or not the system is little-endian
      */
-    protected static $_isLittleEndian = null;
+    protected static ?bool $_isLittleEndian = null;
 
     /**
      * @var array Strings representing quotes
      */
-    protected static $_quoteString = array(
+    protected static array $_quoteString = array(
         '\\' => '\\\\',
         "\x00" => '\\x00', "\x01" => '\\x01', "\x02" => '\\x02', "\x03" => '\\x03',
         "\x04" => '\\x04', "\x05" => '\\x05', "\x06" => '\\x06', "\x07" => '\\x07',
@@ -123,19 +123,19 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     /**
      * @var array Default options
      */
-    protected $_options = array(
+    protected array $_options = array(
         'protocol'           => 0,
     );
 
     // process vars
     protected $_protocol           = 0;
-    protected $_binary             = false;
-    protected $_memo               = array();
-    protected $_pickle             = '';
+    protected bool $_binary             = false;
+    protected array $_memo               = array();
+    protected string $_pickle             = '';
     protected $_pickleLen          = 0;
     protected $_pos                = 0;
-    protected $_stack              = array();
-    protected $_marker             = null;
+    protected array $_stack              = array();
+    protected ?\stdClass $_marker             = null;
 
     /**
      * Constructor

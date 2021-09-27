@@ -31,42 +31,36 @@ class Zend_Dojo_BuildLayer
     /**
      * Flag: whether or not to consume JS aggregated in the dojo() view
      * helper when generate the module layer contents
-     * @var bool
      */
-    protected $_consumeJavascript = false;
+    protected bool $_consumeJavascript = false;
 
     /**
      * Flag: whether or not to consume dojo.addOnLoad events registered
      * with the dojo() view helper when generating the module layer file
      * contents
-     * @var bool
      */
-    protected $_consumeOnLoad = false;
+    protected bool $_consumeOnLoad = false;
 
     /**
      * Dojo view helper reference
-     * @var Zend_Dojo_View_Helper_Dojo_Container
      */
-    protected $_dojo;
+    protected ?\Zend_Dojo_View_Helper_Dojo_Container $_dojo = null;
 
     /**
      * Name of the custom layer to generate
-     * @var string
      */
-    protected $_layerName;
+    protected ?string $_layerName = null;
 
     /**
      * Path to the custom layer script relative to dojo.js (used when
      * creating the build profile)
-     * @var string
      */
-    protected $_layerScriptPath;
+    protected ?string $_layerScriptPath = null;
 
     /**
      * Build profile options
-     * @var array
      */
-    protected $_profileOptions = array(
+    protected array $_profileOptions = array(
         'action'        => 'release',
         'optimize'      => 'shrinksafe',
         'layerOptimize' => 'shrinksafe',
@@ -77,15 +71,13 @@ class Zend_Dojo_BuildLayer
 
     /**
      * Associative array of module/path pairs for the build profile
-     * @var array
      */
-    protected $_profilePrefixes = array();
+    protected array $_profilePrefixes = array();
 
     /**
      * Zend_View reference
-     * @var Zend_View_Interface
      */
-    protected $_view;
+    protected ?\Zend_View_Interface $_view = null;
 
     /**
      * Constructor

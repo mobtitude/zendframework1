@@ -36,17 +36,13 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
 
     /**
      * Routes
-     *
-     * @var array
      */
-    protected $_routes = array();
+    protected array $_routes = array();
 
     /**
      * Separators
-     *
-     * @var array
      */
-    protected $_separators = array();
+    protected array $_separators = array();
 
     /**
      * Instantiates route based on passed Zend_Config structure

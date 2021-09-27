@@ -58,7 +58,7 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'BINARY'      => array(2,  '⑵'),
         'TERNARY'     => array(3,  '⑶'),
         'QUATERNARY'  => array(4,  '⑷'),
@@ -76,10 +76,8 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
 
     /**
      * Definition of all roman signs
-     *
-     * @var array $_roman
      */
-    private static $_roman = array(
+    private static array $_roman = array(
         'I' => 1,
         'A' => 4,
         'V' => 5,
@@ -109,10 +107,8 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
 
     /**
      * Convertion table for roman signs
-     *
-     * @var array $_romanconvert
      */
-    private static $_romanconvert = array(
+    private static array $_romanconvert = array(
         '/_V/' => '/P/',
         '/_X/' => '/Q/',
         '/_L/' => '/R/',

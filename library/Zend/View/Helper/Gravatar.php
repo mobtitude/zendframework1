@@ -63,10 +63,8 @@ class Zend_View_Helper_Gravatar extends Zend_View_Helper_HtmlElement
 
     /**
      * Options
-     *
-     * @var array
      */
-    protected $_options = array(
+    protected array $_options = array(
         'img_size'    => 80,
         'default_img' => self::DEFAULT_MM,
         'rating'      => self::RATING_G,
@@ -75,17 +73,13 @@ class Zend_View_Helper_Gravatar extends Zend_View_Helper_HtmlElement
 
     /**
      * Email Adress
-     *
-     * @var string
      */
-    protected $_email;
+    protected ?string $_email = null;
 
     /**
      * Attributes for HTML image tag
-     *
-     * @var array
      */
-    protected $_attribs;
+    protected ?array $_attribs = null;
 
     /**
      * Returns an avatar from gravatar's service.

@@ -296,7 +296,7 @@ class Zend_Validate_AbstractTest_Concrete extends Zend_Validate_Abstract
 {
     const FOO_MESSAGE = 'fooMessage';
 
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         'fooMessage' => '%value% was passed',
     );
 

@@ -63,31 +63,23 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
 
     /**
      * Public key used when displaying the captcha
-     *
-     * @var string
      */
-    protected $_publicKey = null;
+    protected ?string $_publicKey = null;
 
     /**
      * Private key used when verifying user input
-     *
-     * @var string
      */
-    protected $_privateKey = null;
+    protected ?string $_privateKey = null;
 
     /**
      * Ip address used when verifying user input
-     *
-     * @var string
      */
-    protected $_ip = null;
+    protected ?string $_ip = null;
 
     /**
      * Parameters for the object
-     *
-     * @var array
      */
-    protected $_params = array(
+    protected array $_params = array(
         'ssl' => false, /* Use SSL or not when generating the recaptcha */
         'error' => null, /* The error message to display in the recaptcha */
         'xhtml' => false /* Enable XHTML output (this will not be XHTML Strict
@@ -99,10 +91,8 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
      * Options for tailoring reCaptcha
      *
      * See the different options on http://recaptcha.net/apidocs/captcha/client.html
-     *
-     * @var array
      */
-    protected $_options = array(
+    protected array $_options = array(
         'theme'               => 'red',
         'lang'                => 'en',
         'custom_translations' => array(),
@@ -110,10 +100,8 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
 
     /**
      * Response from the verify server
-     *
-     * @var Zend_Service_ReCaptcha_Response
      */
-    protected $_response = null;
+    protected ?\Zend_Service_ReCaptcha_Response $_response = null;
 
     /**
      * Class constructor

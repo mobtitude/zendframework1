@@ -38,15 +38,13 @@ class Zend_Server_Reflection_Node
 
     /**
      * Array of child nodes (if any)
-     * @var array
      */
-    protected $_children = array();
+    protected array $_children = array();
 
     /**
      * Parent node (if any)
-     * @var Zend_Server_Reflection_Node
      */
-    protected $_parent = null;
+    protected ?\Zend_Server_Reflection_Node $_parent = null;
 
     /**
      * Constructor

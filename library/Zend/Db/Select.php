@@ -111,19 +111,15 @@ class Zend_Db_Select
 
     /**
      * Zend_Db_Adapter_Abstract object.
-     *
-     * @var Zend_Db_Adapter_Abstract
      */
-    protected $_adapter;
+    protected \Zend_Db_Adapter_Abstract $_adapter;
 
     /**
      * The initial values for the $_parts array.
      * NOTE: It is important for the 'FOR_UPDATE' part to be last to ensure
      * meximum compatibility with database adapters.
-     *
-     * @var array
      */
-    protected static $_partsInit = array(
+    protected static array $_partsInit = array(
         self::DISTINCT     => false,
         self::COLUMNS      => array(),
         self::UNION        => array(),
@@ -139,10 +135,8 @@ class Zend_Db_Select
 
     /**
      * Specify legal join types.
-     *
-     * @var array
      */
-    protected static $_joinTypes = array(
+    protected static array $_joinTypes = array(
         self::INNER_JOIN,
         self::LEFT_JOIN,
         self::RIGHT_JOIN,
@@ -153,10 +147,8 @@ class Zend_Db_Select
 
     /**
      * Specify legal union types.
-     *
-     * @var array
      */
-    protected static $_unionTypes = array(
+    protected static array $_unionTypes = array(
         self::SQL_UNION,
         self::SQL_UNION_ALL
     );
@@ -164,17 +156,13 @@ class Zend_Db_Select
     /**
      * The component parts of a SELECT statement.
      * Initialized to the $_partsInit array in the constructor.
-     *
-     * @var array
      */
-    protected $_parts = array();
+    protected array $_parts = array();
 
     /**
      * Tracks which columns are being select from each table and join.
-     *
-     * @var array
      */
-    protected $_tableCols = array();
+    protected array $_tableCols = array();
 
     /**
      * Class constructor

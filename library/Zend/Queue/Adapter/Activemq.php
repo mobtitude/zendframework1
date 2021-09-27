@@ -55,10 +55,7 @@ class Zend_Queue_Adapter_Activemq extends Zend_Queue_Adapter_AdapterAbstract
      */
     private $_client = null;
 
-    /**
-     * @var array
-     */
-    private $_subscribed = array();
+    private array $_subscribed = array();
 
     /**
      * Constructor

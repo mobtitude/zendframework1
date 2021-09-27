@@ -38,7 +38,7 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_App_Extension_Email extends Zend_Gdata_App_Extension
 {
 
-    protected $_rootElement = 'email';
+    protected ?string $_rootElement = 'email';
 
     public function __construct($text = null)
     {

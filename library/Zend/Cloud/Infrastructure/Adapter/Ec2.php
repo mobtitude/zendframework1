@@ -44,24 +44,19 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
 
     /**
      * Ec2 Image
-     * 
-     * @var Ec2Image
      */
-    protected $ec2Image;
+    protected ?\Zend_Service_Amazon_Ec2_Image $ec2Image = null;
 
     /**
      * Ec2 Zone
-     * 
-     * @var Ec2Zone
      */
-    protected $ec2Zone;
+    protected ?\Zend_Service_Amazon_Ec2_AvailabilityZones $ec2Zone = null;
 
     /**
      * Ec2 Monitor 
-     * 
-     * @var Ec2Monitor
+     *
      */
-    protected $ec2Monitor;
+    protected ?\Zend_Service_Amazon_Ec2_CloudWatch $ec2Monitor = null;
 
     /**
      * AWS Access Key
@@ -85,11 +80,9 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
     protected $region;
 
     /**
-     * Map array between EC2 and Infrastructure status
-     * 
-     * @var array 
+     * Map array between EC2 and Infrastructure status 
      */
-    protected $mapStatus = array (
+    protected array $mapStatus = array (
         'running'       => Zend_Cloud_Infrastructure_Instance::STATUS_RUNNING,
         'terminated'    => Zend_Cloud_Infrastructure_Instance::STATUS_TERMINATED,
         'pending'       => Zend_Cloud_Infrastructure_Instance::STATUS_PENDING,
@@ -100,11 +93,9 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
     );
 
     /**
-     * Map monitor metrics between Infrastructure and EC2
-     * 
-     * @var array 
+     * Map monitor metrics between Infrastructure and EC2 
      */
-    protected $mapMetrics= array (
+    protected array $mapMetrics= array (
         Zend_Cloud_Infrastructure_Instance::MONITOR_CPU         => 'CPUUtilization',
         Zend_Cloud_Infrastructure_Instance::MONITOR_DISK_READ   => 'DiskReadBytes',
         Zend_Cloud_Infrastructure_Instance::MONITOR_DISK_WRITE  => 'DiskWriteBytes',

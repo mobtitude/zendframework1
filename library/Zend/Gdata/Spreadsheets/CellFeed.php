@@ -55,11 +55,9 @@ class Zend_Gdata_Spreadsheets_CellFeed extends Zend_Gdata_Feed
     protected $_entryClassName = 'Zend_Gdata_Spreadsheets_CellEntry';
 
     /**
-    * The classname for the feed.
-    *
-    * @var string
-    */
-    protected $_feedClassName = 'Zend_Gdata_Spreadsheets_CellFeed';
+     * The classname for the feed.
+     */
+    protected string $_feedClassName = 'Zend_Gdata_Spreadsheets_CellFeed';
 
     /**
     * The row count for the feed.

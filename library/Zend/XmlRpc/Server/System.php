@@ -31,10 +31,7 @@
  */
 class Zend_XmlRpc_Server_System
 {
-    /**
-     * @var Zend_XmlRpc_Server
-     */
-    protected $_server;
+    protected \Zend_XmlRpc_Server $_server;
 
     /**
      * Constructor

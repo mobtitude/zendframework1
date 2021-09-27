@@ -43,29 +43,23 @@ class Zend_Queue_Stomp_Frame
 
     /**
      * Headers for the frame
-     *
-     * @var array
      */
-    protected $_headers = array();
+    protected array $_headers = array();
 
     /**
      * The command for the frame
-     *
-     * @var string
      */
-    protected $_command = null;
+    protected ?string $_command = null;
 
     /**
      * The body of the frame
-     *
-     * @var string
      */
-    protected $_body = null;
+    protected ?string $_body = null;
 
     /**
      * Do the content-length automatically?
      */
-    protected $_autoContentLength = null;
+    protected ?bool $_autoContentLength = null;
 
     /**
      * Constructor

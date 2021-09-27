@@ -40,24 +40,19 @@ class Zend_Amf_Response
     /**
      * @var int Object encoding for response
      */
-    protected $_objectEncoding = 0;
+    protected int $_objectEncoding = 0;
 
     /**
      * Array of Zend_Amf_Value_MessageBody objects
-     * @var array
      */
-    protected $_bodies = array();
+    protected array $_bodies = array();
 
     /**
      * Array of Zend_Amf_Value_MessageHeader objects
-     * @var array
      */
-    protected $_headers = array();
+    protected array $_headers = array();
 
-    /**
-     * @var Zend_Amf_Parse_OutputStream
-     */
-    protected $_outputStream;
+    protected ?\Zend_Amf_Parse_OutputStream $_outputStream = null;
 
     /**
      * Instantiate new output stream and start serialization

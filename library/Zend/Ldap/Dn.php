@@ -35,24 +35,18 @@ class Zend_Ldap_Dn implements ArrayAccess
 
     /**
      * The default case fold to use
-     *
-     * @var string
      */
-    protected static $_defaultCaseFold = self::ATTR_CASEFOLD_NONE;
+    protected static string $_defaultCaseFold = self::ATTR_CASEFOLD_NONE;
 
     /**
      * The case fold used for this instance
-     *
-     * @var string
      */
-    protected $_caseFold;
+    protected ?string $_caseFold = null;
 
     /**
      * The DN data
-     *
-     * @var array
      */
-    protected $_dn;
+    protected array $_dn;
 
     /**
      * Creates a DN from an array or a string

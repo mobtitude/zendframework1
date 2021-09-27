@@ -31,12 +31,9 @@ class Zend_Tool_Project_Provider_DbTable
     implements Zend_Tool_Framework_Provider_Pretendable
 {
 
-    protected $_specialties = array('FromDatabase');
+    protected array $_specialties = array('FromDatabase');
 
-    /**
-     * @var Zend_Filter
-     */
-    protected $_nameFilter = null;
+    protected ?\Zend_Filter $_nameFilter = null;
 
     public static function createResource(Zend_Tool_Project_Profile $profile, $dbTableName, $actualTableName, $moduleName = null)
     {

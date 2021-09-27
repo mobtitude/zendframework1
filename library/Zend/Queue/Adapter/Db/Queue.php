@@ -37,12 +37,12 @@ class Zend_Queue_Adapter_Db_Queue extends Zend_Db_Table_Abstract
     /**
      * @var string
      */
-    protected $_name = 'queue';
+    protected ?string $_name = 'queue';
 
     /**
-     * @var string
+     * @var array
      */
-    protected $_primary = 'queue_id';
+    protected ?array $_primary = ['queue_id'];
 
     /**
      * @var mixed

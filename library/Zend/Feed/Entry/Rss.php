@@ -42,7 +42,7 @@ class Zend_Feed_Entry_Rss extends Zend_Feed_Entry_Abstract
      *
      * @var string
      */
-    protected $_rootElement = 'item';
+    protected string $_rootElement = 'item';
 
     /**
      * Overwrites parent::_get method to enable read access

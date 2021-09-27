@@ -38,7 +38,7 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_App_Extension_Name extends Zend_Gdata_App_Extension
 {
 
-    protected $_rootElement = 'name';
+    protected ?string $_rootElement = 'name';
 
     public function __construct($text = null)
     {

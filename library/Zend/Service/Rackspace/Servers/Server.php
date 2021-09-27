@@ -76,21 +76,14 @@ class Zend_Service_Rackspace_Servers_Server
      */
     protected $adminPass;
     /**
-     * Public and private IP addresses
-     * 
-     * @var array 
+     * Public and private IP addresses 
      */
-    protected $addresses = array();
-    /**
-     * @var array
-     */
-    protected $metadata = array();
+    protected array $addresses = array();
+    protected array $metadata = array();
     /**
      * The service that has created the server object
-     *
-     * @var Zend_Service_Rackspace_Servers
      */
-    protected $service;
+    protected \Zend_Service_Rackspace_Servers $service;
     /**
      * Constructor
      *

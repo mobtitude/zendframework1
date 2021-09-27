@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_TestsDirectory extends Zend_Tool_Project_Cont
     /**
      * @var string
      */
-    protected $_filesystemName = 'tests';
+    protected ?string $_filesystemName = 'tests';
 
     /**
      * getName()

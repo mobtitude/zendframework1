@@ -72,24 +72,18 @@ class Zend_Gdata_Feed extends Zend_Gdata_App_Feed
 
     /**
      * The openSearch:totalResults element
-     *
-     * @var Zend_Gdata_Extension_OpenSearchTotalResults|null
      */
-    protected $_totalResults = null;
+    protected ?\Zend_Gdata_Extension_OpenSearchTotalResults $_totalResults = null;
 
     /**
      * The openSearch:startIndex element
-     *
-     * @var Zend_Gdata_Extension_OpenSearchStartIndex|null
      */
-    protected $_startIndex = null;
+    protected ?\Zend_Gdata_Extension_OpenSearchStartIndex $_startIndex = null;
 
     /**
      * The openSearch:itemsPerPage element
-     *
-     * @var Zend_Gdata_Extension_OpenSearchItemsPerPage|null
      */
-    protected $_itemsPerPage = null;
+    protected ?\Zend_Gdata_Extension_OpenSearchItemsPerPage $_itemsPerPage = null;
 
     public function __construct($element = null)
     {

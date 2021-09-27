@@ -33,7 +33,7 @@ class Zend_Amf_Value_ByteArray
     /**
      * @var string ByteString Data
      */
-    protected $_data = '';
+    protected string $_data = '';
 
     /**
      * Create a ByteArray

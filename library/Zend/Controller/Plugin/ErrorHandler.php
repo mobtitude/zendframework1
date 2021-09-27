@@ -57,28 +57,24 @@ class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstrac
     const EXCEPTION_OTHER = 'EXCEPTION_OTHER';
 
     /**
-     * Module to use for errors; defaults to default module in dispatcher
-     * @var string
-     */
-    protected $_errorModule;
+				 * Module to use for errors; defaults to default module in dispatcher
+				 */
+				protected ?string $_errorModule = null;
 
     /**
-     * Controller to use for errors; defaults to 'error'
-     * @var string
-     */
-    protected $_errorController = 'error';
+				 * Controller to use for errors; defaults to 'error'
+				 */
+				protected string $_errorController = 'error';
 
     /**
-     * Action to use for errors; defaults to 'error'
-     * @var string
-     */
-    protected $_errorAction = 'error';
+				 * Action to use for errors; defaults to 'error'
+				 */
+				protected string $_errorAction = 'error';
 
     /**
-     * Flag; are we already inside the error handler loop?
-     * @var bool
-     */
-    protected $_isInsideErrorHandlerLoop = false;
+				 * Flag; are we already inside the error handler loop?
+				 */
+				protected bool $_isInsideErrorHandlerLoop = false;
 
     /**
      * Exception count logged at first invocation of plugin

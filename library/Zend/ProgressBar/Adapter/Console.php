@@ -76,54 +76,40 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
 
     /**
      * Width of the progressbar
-     *
-     * @var integer
      */
-    protected $_width = null;
+    protected ?int $_width = null;
 
     /**
      * Elements to display
-     *
-     * @var array
      */
-    protected $_elements = array(self::ELEMENT_PERCENT,
+    protected array $_elements = array(self::ELEMENT_PERCENT,
                                  self::ELEMENT_BAR,
                                  self::ELEMENT_ETA);
 
     /**
      * Which action to do at finish call
-     *
-     * @var string
      */
-    protected $_finishAction = self::FINISH_ACTION_EOL;
+    protected string $_finishAction = self::FINISH_ACTION_EOL;
 
     /**
      * Width of the bar element
-     *
-     * @var integer
      */
-    protected $_barWidth;
+    protected ?int $_barWidth = null;
 
     /**
      * Left character(s) within the bar
-     *
-     * @var string
      */
-    protected $_barLeftChar = '#';
+    protected string $_barLeftChar = '#';
 
     /**
      * Indicator character(s) within the bar
-     *
-     * @var string
      */
-    protected $_barIndicatorChar = '';
+    protected string $_barIndicatorChar = '';
 
     /**
      * Right character(s) within the bar
-     *
-     * @var string
      */
-    protected $_barRightChar = '-';
+    protected string $_barRightChar = '-';
 
     /**
      * Output-stream, when STDOUT is not defined (e.g. in CGI) or set manually
@@ -134,24 +120,18 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
 
     /**
      * Width of the text element
-     *
-     * @var string
      */
-    protected $_textWidth = 20;
+    protected int $_textWidth = 20;
 
     /**
      * Wether the output started yet or not
-     *
-     * @var boolean
      */
-    protected $_outputStarted = false;
+    protected bool $_outputStarted = false;
 
     /**
      * Charset of text element
-     *
-     * @var string
      */
-    protected $_charset = 'utf-8';
+    protected string $_charset = 'utf-8';
 
     /**
      * Defined by Zend_ProgressBar_Adapter

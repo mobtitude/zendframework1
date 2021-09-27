@@ -50,24 +50,18 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
 {
     /**
      * The classname for individual channel elements.
-     *
-     * @var string
      */
-    protected $_entryClassName = 'Zend_Feed_Entry_Rss';
+    protected string $_entryClassName = 'Zend_Feed_Entry_Rss';
 
     /**
      * The element name for individual channel elements (RSS <item>s).
-     *
-     * @var string
      */
-    protected $_entryElementName = 'item';
+    protected string $_entryElementName = 'item';
 
     /**
      * The default namespace for RSS channels.
-     *
-     * @var string
      */
-    protected $_defaultNamespace = 'rss';
+    protected string $_defaultNamespace = 'rss';
 
     /**
      * Override Zend_Feed_Abstract to set up the $_element and $_entries aliases.

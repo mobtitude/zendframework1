@@ -60,13 +60,10 @@ class Zend_View_Helper_Navigation_Links
     const RENDER_CUSTOM     = 0x8000;
     const RENDER_ALL        = 0xffff;
     /**#@+**/
-
     /**
      * Maps render constants to W3C link types
-     *
-     * @var array
      */
-    protected static $_RELATIONS = array(
+    protected static array $_RELATIONS = array(
         self::RENDER_ALTERNATE  => 'alternate',
         self::RENDER_STYLESHEET => 'stylesheet',
         self::RENDER_START      => 'start',
@@ -89,9 +86,8 @@ class Zend_View_Helper_Navigation_Links
      *
      * @see render()
      * @see setRenderFlag()
-     * @var int
      */
-    protected $_renderFlag = self::RENDER_ALL;
+    protected int $_renderFlag = self::RENDER_ALL;
 
     /**
      * Root container
@@ -100,10 +96,8 @@ class Zend_View_Helper_Navigation_Links
      * the {@link render()} method.
      *
      * @see _findRoot()
-     *
-     * @var Zend_Navigation_Container
      */
-    protected $_root;
+    protected ?\Zend_Navigation_Container $_root = null;
 
     /**
      * View helper entry point:

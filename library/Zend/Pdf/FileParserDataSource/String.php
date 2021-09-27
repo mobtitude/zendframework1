@@ -35,13 +35,10 @@ require_once 'Zend/Pdf/FileParserDataSource.php';
 class Zend_Pdf_FileParserDataSource_String extends Zend_Pdf_FileParserDataSource
 {
   /**** Instance Variables ****/
-
-
     /**
      * The string to parse.
-     * @var string
      */
-    protected $_string = '';
+    protected string $_string = '';
 
 
 

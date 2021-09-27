@@ -42,19 +42,15 @@ class Zend_View_Helper_FormTextarea extends Zend_View_Helper_FormElement
      * The default number of rows for a textarea.
      *
      * @access public
-     *
-     * @var int
      */
-    public $rows = 24;
+    public int $rows = 24;
 
     /**
      * The default number of columns for a textarea.
      *
      * @access public
-     *
-     * @var int
      */
-    public $cols = 80;
+    public int $cols = 80;
 
     /**
      * Generates a 'textarea' element.

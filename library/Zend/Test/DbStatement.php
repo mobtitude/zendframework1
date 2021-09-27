@@ -36,25 +36,16 @@ require_once "Zend/Db/Statement/Interface.php";
  */
 class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
 {
-    /**
-     * @var array
-     */
-    protected $_fetchStack = array();
+    protected array $_fetchStack = array();
 
     /**
      * @var int
      */
     protected $_columnCount = 0;
 
-    /**
-     * @var int
-     */
-    protected $_rowCount = 0;
+    protected int $_rowCount = 0;
 
-    /**
-     * @var Zend_Db_Profiler_Query
-     */
-    protected $_queryProfile = null;
+    protected ?\Zend_Db_Profiler_Query $_queryProfile = null;
 
     /**
      * Create a Select statement which returns the given array of rows.

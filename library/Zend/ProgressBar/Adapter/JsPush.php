@@ -41,17 +41,13 @@ class Zend_ProgressBar_Adapter_JsPush extends Zend_ProgressBar_Adapter
 {
     /**
      * Name of the JavaScript method to call on update
-     *
-     * @var string
      */
-    protected $_updateMethodName = 'Zend_ProgressBar_Update';
+    protected string $_updateMethodName = 'Zend_ProgressBar_Update';
 
     /**
      * Name of the JavaScript method to call on finish
-     *
-     * @var string
      */
-    protected $_finishMethodName;
+    protected ?string $_finishMethodName = null;
 
     /**
      * Set the update method name

@@ -32,27 +32,23 @@ class Zend_Mail_Storage_Folder implements RecursiveIterator
 {
     /**
      * subfolders of folder array(localName => Zend_Mail_Storage_Folder folder)
-     * @var array
      */
-    protected $_folders;
+    protected array $_folders;
 
     /**
      * local name (name of folder in parent folder)
-     * @var string
      */
-    protected $_localName;
+    protected string $_localName;
 
     /**
      * global name (absolute name of folder)
-     * @var string
      */
-    protected $_globalName;
+    protected string $_globalName;
 
     /**
      * folder is selectable if folder is able to hold messages, else it's just a parent folder
-     * @var bool
      */
-    protected $_selectable = true;
+    protected bool $_selectable = true;
 
     /**
      * create a new mail folder instance

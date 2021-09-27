@@ -29,10 +29,7 @@
  */
 abstract class Zend_Service_Ebay_Finding_Set_Abstract implements SeekableIterator, Countable
 {
-    /**
-     * @var DOMNodeList
-     */
-    protected $_nodes;
+    protected \DOMNodeList $_nodes;
 
     /**
      * @var integer

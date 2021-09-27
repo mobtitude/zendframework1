@@ -35,27 +35,23 @@ abstract class Zend_Oauth_Signature_SignatureAbstract
 {
     /**
      * Hash algorithm to use when generating signature
-     * @var string
      */
-    protected $_hashAlgorithm = null;
+    protected ?string $_hashAlgorithm = null;
 
     /**
      * Key to use when signing
-     * @var string
      */
-    protected $_key = null;
+    protected ?string $_key = null;
 
     /**
      * Consumer secret
-     * @var string
      */
-    protected $_consumerSecret = null;
+    protected ?string $_consumerSecret = null;
 
     /**
      * Token secret
-     * @var string
      */
-    protected $_tokenSecret = '';
+    protected string $_tokenSecret = '';
 
     /**
      * Constructor

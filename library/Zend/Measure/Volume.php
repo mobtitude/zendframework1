@@ -125,7 +125,7 @@ class Zend_Measure_Volume extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ACRE_FOOT'           => array('1233.48185532', 'ac ft'),
         'ACRE_FOOT_SURVEY'    => array('1233.489',      'ac ft'),
         'ACRE_INCH'           => array('102.79015461',  'ac in'),

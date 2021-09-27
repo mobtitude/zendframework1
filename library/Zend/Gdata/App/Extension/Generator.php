@@ -38,7 +38,7 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_App_Extension_Generator extends Zend_Gdata_App_Extension
 {
 
-    protected $_rootElement = 'generator';
+    protected ?string $_rootElement = 'generator';
     protected $_uri = null;
     protected $_version = null;
 

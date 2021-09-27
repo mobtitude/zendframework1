@@ -46,15 +46,14 @@ class Zend_Form_Decorator_File
 {
     /**
      * Attributes that should not be passed to helper
-     * @var array
      */
-    protected $_attribBlacklist = array('helper', 'placement', 'separator', 'value');
+    protected array $_attribBlacklist = array('helper', 'placement', 'separator', 'value');
 
     /**
      * Default placement: append
      * @var string
      */
-    protected $_placement = 'APPEND';
+    protected ?string $_placement = 'APPEND';
 
     /**
      * Get attributes to pass to file helper

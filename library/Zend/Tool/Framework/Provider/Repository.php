@@ -40,30 +40,24 @@ class Zend_Tool_Framework_Provider_Repository
     implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
 {
 
-    /**
-     * @var Zend_Tool_Framework_Registry
-     */
-    protected $_registry = null;
+    protected ?\Zend_Tool_Framework_Registry_Interface $_registry = null;
 
-    /**
-     * @var bool
-     */
-    protected $_processOnAdd = false;
+    protected bool $_processOnAdd = false;
 
     /**
      * @var Zend_Tool_Framework_Provider_Interface[]
      */
-    protected $_unprocessedProviders = array();
+    protected array $_unprocessedProviders = array();
 
     /**
      * @var Zend_Tool_Framework_Provider_Signature[]
      */
-    protected $_providerSignatures = array();
+    protected array $_providerSignatures = array();
 
     /**
      * @var array Array of Zend_Tool_Framework_Provider_Inteface
      */
-    protected $_providers = array();
+    protected array $_providers = array();
 
     /**
      * setRegistry()

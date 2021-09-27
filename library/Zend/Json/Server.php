@@ -38,46 +38,40 @@ class Zend_Json_Server extends Zend_Server_Abstract
     const VERSION_1 = '1.0';
     const VERSION_2 = '2.0';
     /**#@-*/
-
     /**
      * Flag: whether or not to auto-emit the response
-     * @var bool
      */
-    protected $_autoEmitResponse = true;
+    protected bool $_autoEmitResponse = true;
 
     /**
      * @var bool Flag; allow overwriting existing methods when creating server definition
      */
-    protected $_overwriteExistingMethods = true;
+    protected bool $_overwriteExistingMethods = true;
 
     /**
      * Request object
-     * @var Zend_Json_Server_Request
      */
-    protected $_request;
+    protected ?\Zend_Json_Server_Request $_request = null;
 
     /**
      * Response object
-     * @var Zend_Json_Server_Response
      */
-    protected $_response;
+    protected ?\Zend_Json_Server_Response $_response = null;
 
     /**
      * SMD object
-     * @var Zend_Json_Server_Smd
      */
-    protected $_serviceMap;
+    protected ?\Zend_Json_Server_Smd $_serviceMap = null;
 
     /**
      * SMD class accessors
-     * @var array
      */
-    protected $_smdMethods;
+    protected ?array $_smdMethods = null;
 
     /**
-     * @var Zend_Server_Description
+     * @var Zend_Server_Definition
      */
-    protected $_table;
+    protected Zend_Server_Definition $_table;
 
     /**
      * Attach a function or callback to the server

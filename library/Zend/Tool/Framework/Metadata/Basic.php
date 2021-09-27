@@ -51,7 +51,7 @@ class Zend_Tool_Framework_Metadata_Basic
      * @var string
      */
     protected $_type        = 'Basic';
-    protected $_name        = null;
+    protected ?string $_name        = null;
     protected $_value       = null;
     /**#@-*/
 

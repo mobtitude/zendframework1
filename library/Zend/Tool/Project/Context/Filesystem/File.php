@@ -41,7 +41,7 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
 
     protected $_fileOnlyContext = null;
 
-    protected $_filesystemName = null;
+    protected ?string $_filesystemName = null;
 
     protected $_content = null;
 

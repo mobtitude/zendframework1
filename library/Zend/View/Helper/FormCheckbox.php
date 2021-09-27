@@ -40,9 +40,8 @@ class Zend_View_Helper_FormCheckbox extends Zend_View_Helper_FormElement
 {
     /**
      * Default checked/unchecked options
-     * @var array
      */
-    protected static $_defaultCheckedOptions = array(
+    protected static array $_defaultCheckedOptions = array(
         'checkedValue'   => '1',
         'uncheckedValue' => '0'
     );

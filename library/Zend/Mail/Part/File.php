@@ -39,8 +39,8 @@ require_once 'Zend/Mail/Part.php';
  */
 class Zend_Mail_Part_File extends Zend_Mail_Part
 {
-    protected $_contentPos = array();
-    protected $_partPos = array();
+    protected array $_contentPos = array();
+    protected array $_partPos = array();
     protected $_fh;
 
     /**

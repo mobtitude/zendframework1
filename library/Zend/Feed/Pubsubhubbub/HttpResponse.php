@@ -34,17 +34,13 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
 {
     /**
      * The body of any response to the current callback request
-     *
-     * @var string
      */
-    protected $_body = '';
+    protected string $_body = '';
 
     /**
      * Array of headers. Each header is an array with keys 'name' and 'value'
-     *
-     * @var array
      */
-    protected $_headers = array();
+    protected array $_headers = array();
 
     /**
      * HTTP response code to use in headers

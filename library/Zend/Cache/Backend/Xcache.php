@@ -58,7 +58,7 @@ class Zend_Cache_Backend_Xcache extends Zend_Cache_Backend implements Zend_Cache
      *
      * @var array available options
      */
-    protected $_options = array(
+    protected array $_options = array(
         'user' => null,
         'password' => null
     );

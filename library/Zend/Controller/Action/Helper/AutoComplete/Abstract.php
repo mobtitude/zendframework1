@@ -39,10 +39,8 @@ abstract class Zend_Controller_Action_Helper_AutoComplete_Abstract extends Zend_
 {
     /**
      * Suppress exit when sendJson() called
-     *
-     * @var boolean
      */
-    public $suppressExit = false;
+    public bool $suppressExit = false;
 
     /**
      * Validate autocompletion data

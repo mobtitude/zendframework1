@@ -31,10 +31,8 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
 {
     /**
      * Current file name
-     * 
-     * @var string
      */
-    protected $_fileName = null;
+    protected ?string $_fileName = null;
     
     /**
      * Temporary file name
@@ -52,24 +50,18 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
     
     /**
      * Blob storage client
-     * 
-     * @var Zend_Service_WindowsAzure_Storage_Blob
      */
-    protected $_storageClient = null;
+    protected ?\Zend_Service_WindowsAzure_Storage_Blob $_storageClient = null;
     
     /**
      * Write mode?
-     * 
-     * @var boolean
      */
-    protected $_writeMode = false;
+    protected bool $_writeMode = false;
     
     /**
      * List of blobs
-     * 
-     * @var array
      */
-    protected $_blobs = null;
+    protected ?array $_blobs = null;
     
     /**
      * Retrieve storage client for this stream type

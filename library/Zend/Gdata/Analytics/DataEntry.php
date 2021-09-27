@@ -32,14 +32,8 @@ require_once 'Zend/Gdata/Entry.php';
  */
 class Zend_Gdata_Analytics_DataEntry extends Zend_Gdata_Entry
 {
-    /**
-     * @var array
-     */
-    protected $_dimensions = array();
-    /**
-     * @var array
-     */
-    protected $_metrics = array();
+    protected array $_dimensions = array();
+    protected array $_metrics = array();
 
     /**
      * @param DOMElement $element

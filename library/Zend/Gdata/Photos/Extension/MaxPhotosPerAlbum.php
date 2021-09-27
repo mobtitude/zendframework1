@@ -45,8 +45,8 @@ require_once 'Zend/Gdata/Photos.php';
 class Zend_Gdata_Photos_Extension_MaxPhotosPerAlbum extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gphoto';
-    protected $_rootElement = 'maxPhotosPerAlbum';
+    protected string $_rootNamespace = 'gphoto';
+    protected ?string $_rootElement = 'maxPhotosPerAlbum';
 
     /**
      * Constructs a new Zend_Gdata_Photos_Extension_MaxPhotosPerAlbum object.

@@ -35,7 +35,7 @@ class Zend_Serializer_Adapter_Igbinary extends Zend_Serializer_Adapter_AdapterAb
     /**
      * @var string Serialized null value
      */
-    private static $_serializedNull = null;
+    private static ?string $_serializedNull = null;
 
     /**
      * Constructor

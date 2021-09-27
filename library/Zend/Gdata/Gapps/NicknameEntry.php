@@ -64,17 +64,13 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
     /**
      * <apps:login> element used to hold information about the owner
      * of this nickname, including their username.
-     *
-     * @var Zend_Gdata_Gapps_Extension_Login
      */
-    protected $_login = null;
+    protected ?\Zend_Gdata_Gapps_Extension_Login $_login = null;
 
     /**
      * <apps:nickname> element used to hold the name of this nickname.
-     *
-     * @var Zend_Gdata_Gapps_Extension_Nickname
      */
-    protected $_nickname = null;
+    protected ?\Zend_Gdata_Gapps_Extension_Nickname $_nickname = null;
 
     /**
      * Create a new instance.

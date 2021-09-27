@@ -39,17 +39,13 @@ class Zend_Mime_Message
 {
     /**
      * The Zend_Mime_Parts of the message
-     *
-     * @var array
      */
-    protected $_parts = array();
+    protected array $_parts = array();
 
     /**
      * The Zend_Mime object for the message
-     *
-     * @var Zend_Mime|null
      */
-    protected $_mime = null;
+    protected ?\Zend_Mime $_mime = null;
 
     /**
      * Returns the list of all Zend_Mime_Parts in the message

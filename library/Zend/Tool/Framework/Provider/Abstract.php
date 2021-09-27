@@ -47,10 +47,7 @@ abstract class Zend_Tool_Framework_Provider_Abstract
     implements Zend_Tool_Framework_Provider_Interface, Zend_Tool_Framework_Registry_EnabledInterface
 {
 
-    /**
-     * @var Zend_Tool_Framework_Registry_Interface
-     */
-    protected $_registry = null;
+    protected ?\Zend_Tool_Framework_Registry_Interface $_registry = null;
 
     /**
      * setRegistry() - required by Zend_Tool_Framework_Registry_EnabledInterface

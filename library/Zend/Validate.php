@@ -34,32 +34,25 @@ class Zend_Validate implements Zend_Validate_Interface
 {
     /**
      * Validator chain
-     *
-     * @var array
      */
-    protected $_validators = array();
+    protected array $_validators = array();
 
     /**
      * Array of validation failure messages
-     *
-     * @var array
      */
-    protected $_messages = array();
+    protected array $_messages = array();
 
     /**
      * Default Namespaces
-     *
-     * @var array
      */
-    protected static $_defaultNamespaces = array();
+    protected static array $_defaultNamespaces = array();
 
     /**
      * Array of validation failure message codes
      *
-     * @var array
      * @deprecated Since 1.5.0
      */
-    protected $_errors = array();
+    protected array $_errors = array();
 
     /**
      * Adds a validator to the end of the chain

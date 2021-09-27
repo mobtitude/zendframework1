@@ -39,9 +39,8 @@ class Zend_Controller_Action_Helper_Json extends Zend_Controller_Action_Helper_A
 {
     /**
      * Suppress exit when sendJson() called
-     * @var boolean
      */
-    public $suppressExit = false;
+    public bool $suppressExit = false;
 
     /**
      * Create JSON response

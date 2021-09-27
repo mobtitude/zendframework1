@@ -54,22 +54,18 @@ abstract class Zend_Measure_Abstract
 
     /**
      * Original type for this unit
-     *
-     * @var string $_type
      */
-    protected $_type;
+    protected ?string $_type = null;
 
     /**
      * Locale identifier
-     *
-     * @var string $_locale
      */
-    protected $_locale = null;
+    protected ?string $_locale = null;
 
     /**
      * Unit types for this measurement
      */
-    protected $_units = array();
+    protected array $_units = array();
 
     /**
      * Zend_Measure_Abstract is an abstract class for the different measurement types

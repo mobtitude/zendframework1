@@ -58,9 +58,9 @@ class Zend_Gdata_Analytics_AccountEntry extends Zend_Gdata_Entry
     protected $_webPropertyId;
     protected $_currency;
     protected $_timezone;
-    protected $_tableId;
+    protected ?\Zend_Gdata_Analytics_Extension_TableId $_tableId = null;
     protected $_profileName;
-    protected $_goal;
+    protected ?\Zend_Gdata_Analytics_Extension_Goal $_goal = null;
 
     /**
      * @see Zend_Gdata_Entry::__construct()

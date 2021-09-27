@@ -49,17 +49,13 @@ class Zend_Config_Json extends Zend_Config
      *
      * Note: if you do not have constant names in quotations in your JSON
      * string, they may lead to syntax errors when parsing.
-     *
-     * @var bool
      */
-    protected $_ignoreConstants = false;
+    protected bool $_ignoreConstants = false;
 
     /**
      * Whether to skip extends or not
-     *
-     * @var boolean
      */
-    protected $_skipExtends = false;
+    protected bool $_skipExtends = false;
 
     /**
      * Loads the section $section from the config file encoded as JSON

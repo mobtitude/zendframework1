@@ -47,7 +47,7 @@ class Zend_Validate_File_ImageSize extends Zend_Validate_Abstract
     /**
      * @var array Error message template
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::WIDTH_TOO_BIG    => "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected",
         self::WIDTH_TOO_SMALL  => "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected",
         self::HEIGHT_TOO_BIG   => "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected",
@@ -59,7 +59,7 @@ class Zend_Validate_File_ImageSize extends Zend_Validate_Abstract
     /**
      * @var array Error message template variables
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'minwidth'  => '_minwidth',
         'maxwidth'  => '_maxwidth',
         'minheight' => '_minheight',
@@ -70,31 +70,23 @@ class Zend_Validate_File_ImageSize extends Zend_Validate_Abstract
 
     /**
      * Minimum image width
-     *
-     * @var integer
      */
-    protected $_minwidth;
+    protected ?int $_minwidth = null;
 
     /**
      * Maximum image width
-     *
-     * @var integer
      */
-    protected $_maxwidth;
+    protected ?int $_maxwidth = null;
 
     /**
      * Minimum image height
-     *
-     * @var integer
      */
-    protected $_minheight;
+    protected ?int $_minheight = null;
 
     /**
      * Maximum image height
-     *
-     * @var integer
      */
-    protected $_maxheight;
+    protected ?int $_maxheight = null;
 
     /**
      * Detected width

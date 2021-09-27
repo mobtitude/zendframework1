@@ -41,17 +41,13 @@ class Zend_Locale_Data
 {
     /**
      * Locale files
-     *
-     * @var array
      */
-    private static $_ldml = array();
+    private static array $_ldml = array();
 
     /**
      * List of values which are collected
-     *
-     * @var array
      */
-    private static $_list = array();
+    private static array $_list = array();
 
     /**
      * Internal cache for ldml values
@@ -69,10 +65,8 @@ class Zend_Locale_Data
 
     /**
      * Internal option, cache disabled
-     *
-     * @var boolean
      */
-    private static $_cacheDisabled = false;
+    private static bool $_cacheDisabled = false;
 
     /**
      * Read the content from locale

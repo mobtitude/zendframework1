@@ -112,38 +112,20 @@ require_once 'Zend/Gdata/Media/Extension/MediaTitle.php';
 class Zend_Gdata_Media_Extension_MediaGroup extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'group';
-    protected $_rootNamespace = 'media';
+    protected ?string $_rootElement = 'group';
+    protected string $_rootNamespace = 'media';
 
-    /**
-     * @var array
-     */
-    protected $_content = array();
+    protected array $_content = array();
 
-    /**
-     * @var array
-     */
-    protected $_category = array();
+    protected array $_category = array();
 
-    /**
-     * @var Zend_Gdata_Media_Extension_MediaCopyright
-     */
-    protected $_copyright = null;
+    protected ?\Zend_Gdata_Media_Extension_MediaCopyright $_copyright = null;
 
-    /**
-     * @var array
-     */
-    protected $_credit = array();
+    protected array $_credit = array();
 
-    /**
-     * @var Zend_Gdata_Media_Extension_MediaDescription
-     */
-    protected $_description = null;
+    protected ?\Zend_Gdata_Media_Extension_MediaDescription $_description = null;
 
-    /**
-     * @var array
-     */
-    protected $_hash = array();
+    protected array $_hash = array();
 
     /**
      * @var Zend_Gdata_Media_Extension_MediaKeywords

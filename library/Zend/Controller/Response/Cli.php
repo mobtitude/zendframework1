@@ -45,7 +45,7 @@ class Zend_Controller_Response_Cli extends Zend_Controller_Response_Abstract
      * @see canSendHeaders()
      * @var boolean
      */
-    public $headersSentThrowsException = false;
+    public bool $headersSentThrowsException = false;
 
 
     /**

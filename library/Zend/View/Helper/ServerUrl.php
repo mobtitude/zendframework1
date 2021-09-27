@@ -33,17 +33,13 @@ class Zend_View_Helper_ServerUrl
 {
     /**
      * Scheme
-     *
-     * @var string
      */
-    protected $_scheme;
+    protected ?string $_scheme = null;
 
     /**
      * Host (including port)
-     *
-     * @var string
      */
-    protected $_host;
+    protected ?string $_host = null;
 
     /**
      * Constructor

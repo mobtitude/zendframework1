@@ -33,10 +33,8 @@ class Zend_Service_Console_Command
 {
 	/**
 	 * The handler.
-	 *
-	 * @var array
 	 */
-	protected $_handler;
+	protected ?array $_handler = null;
 
 	/**
 	 * Gets the handler.
@@ -220,7 +218,7 @@ class Zend_Service_Console_Command
 
 			for ($hi = 0; $hi < count($handlers); $hi++) {
 				$handler = $handlers[$hi];
-				$handlerDescription = isset($handlerDescriptions[$hi]) ? $handlerDescriptions[$hi] : isset($handlerDescriptions[0]) ? $handlerDescriptions[0] : '';
+				$handlerDescription = (isset($handlerDescriptions[$hi]) ? $handlerDescriptions[$hi] : isset($handlerDescriptions[0])) ? $handlerDescriptions[0] : '';
 				$handlerDescription = str_replace('\r\n', "\r\n", $handlerDescription);
 				$handlerDescription = str_replace('\n', "\n", $handlerDescription);
 

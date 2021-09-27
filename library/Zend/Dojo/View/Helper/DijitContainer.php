@@ -36,15 +36,13 @@ abstract class Zend_Dojo_View_Helper_DijitContainer extends Zend_Dojo_View_Helpe
 {
     /**
      * Capture locks
-     * @var array
      */
-    protected $_captureLock = array();
+    protected array $_captureLock = array();
 
     /**
      * Metadata information to use with captured content
-     * @var array
      */
-    protected $_captureInfo = array();
+    protected array $_captureInfo = array();
 
     /**
      * Begin capturing content for layout container

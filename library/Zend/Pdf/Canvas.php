@@ -35,26 +35,20 @@ class Zend_Pdf_Canvas extends Zend_Pdf_Canvas_Abstract
      * Canvas procedure sets.
      *
      * Allowed values: 'PDF', 'Text', 'ImageB', 'ImageC', 'ImageI'.
-     *
-     * @var array
      */
-    protected $_procSet = array();
+    protected array $_procSet = array();
 
     /**
      * Canvas width expressed in default user space units (1/72 inch)
-     *
-     * @var float
      */
-    protected $_width;
+    protected float $_width;
 
     /**
      * Canvas height expressed in default user space units (1/72 inch)
-     *
-     * @var float
      */
-    protected $_height;
+    protected float $_height;
 
-    protected $_resources = array('Font'      => array(),
+    protected array $_resources = array('Font'      => array(),
                                   'XObject'   => array(),
                                   'ExtGState' => array());
 

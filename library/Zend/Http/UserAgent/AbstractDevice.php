@@ -49,31 +49,23 @@ abstract class Zend_Http_UserAgent_AbstractDevice
 
     /**
      * Configuration
-     *
-     * @var array
      */
-    protected $_config;
+    protected ?array $_config;
 
     /**
      * User Agent chain
-     *
-     * @var string
      */
-    protected $_userAgent;
+    protected ?string $_userAgent = null;
 
     /**
      * Server variable
-     *
-     * @var array
      */
-    protected $_server;
+    protected ?array $_server;
 
     /**
      * Image types
-     *
-     * @var array
      */
-    protected $_images = array(
+    protected array $_images = array(
         'jpeg',
         'gif',
         'png',
@@ -84,17 +76,13 @@ abstract class Zend_Http_UserAgent_AbstractDevice
 
     /**
      * Browser/Device features
-     *
-     * @var array
      */
-    protected $_aFeatures = array();
+    protected array $_aFeatures = array();
 
     /**
      * Browser/Device features groups
-     *
-     * @var array
      */
-    protected $_aGroup = array();
+    protected array $_aGroup = array();
 
     /**
      * Constructor

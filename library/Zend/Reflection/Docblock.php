@@ -32,10 +32,7 @@ require_once 'Zend/Reflection/Docblock/Tag.php';
  */
 class Zend_Reflection_Docblock implements Reflector
 {
-    /**
-     * @var Reflector
-     */
-    protected $_reflector = null;
+    protected ?\Reflector $_reflector = null;
 
     /**#@+
      * @var int
@@ -49,25 +46,13 @@ class Zend_Reflection_Docblock implements Reflector
      */
     protected $_docComment = null;
 
-    /**
-     * @var string
-     */
-    protected $_cleanDocComment = null;
+    protected ?string $_cleanDocComment = null;
 
-    /**
-     * @var string
-     */
-    protected $_longDescription = null;
+    protected ?string $_longDescription = null;
 
-    /**
-     * @var string
-     */
-    protected $_shortDescription = null;
+    protected ?string $_shortDescription = null;
 
-    /**
-     * @var array
-     */
-    protected $_tags = array();
+    protected array $_tags = array();
 
     /**
      * Export reflection

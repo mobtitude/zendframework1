@@ -44,20 +44,11 @@ require_once 'Zend/Reflection/File.php';
 class Zend_Tool_Project_Context_Zf_TestApplicationActionMethod implements Zend_Tool_Project_Context_Interface
 {
 
-    /**
-     * @var Zend_Tool_Project_Profile_Resource
-     */
-    protected $_resource = null;
+    protected ?\Zend_Tool_Project_Profile_Resource $_resource = null;
 
-    /**
-     * @var Zend_Tool_Project_Profile_Resource
-     */
-    protected $_testApplicationControllerResource = null;
+    protected ?\Zend_Tool_Project_Profile_Resource_Container $_testApplicationControllerResource = null;
 
-    /**
-     * @var string
-     */
-    protected $_testApplicationControllerPath = '';
+    protected string $_testApplicationControllerPath = '';
 
     /**
      * @var string
@@ -139,7 +130,7 @@ class Zend_Tool_Project_Context_Zf_TestApplicationActionMethod implements Zend_T
     public function create()
     {
         $file = $this->_testApplicationControllerPath;
-        
+
         if (!file_exists($file)) {
             require_once 'Zend/Tool/Project/Context/Exception.php';
             throw new Zend_Tool_Project_Context_Exception(
@@ -147,11 +138,11 @@ class Zend_Tool_Project_Context_Zf_TestApplicationActionMethod implements Zend_T
                 . ' with action name ' . $this->_forActionName
                 );
         }
-        
+
         $actionParam = $this->getForActionName();
         $controllerParam = $this->_resource->getParentResource()->getForControllerName();
         //$moduleParam = null;//
-        
+
         /* @var $controllerDirectoryResource Zend_Tool_Project_Profile_Resource */
         $controllerDirectoryResource = $this->_resource->getParentResource()->getParentResource();
         if ($controllerDirectoryResource->getParentResource()->getName() == 'TestApplicationModuleDirectory') {
@@ -159,8 +150,8 @@ class Zend_Tool_Project_Context_Zf_TestApplicationActionMethod implements Zend_T
         } else {
             $moduleParam = 'default';
         }
-        
-        
+
+
 
         if ($actionParam == 'index' && $controllerParam == 'Index' && $moduleParam == 'default') {
             $assert = '$this->assertQueryContentContains("div#welcome h3", "This is your project\'s main page");';
@@ -172,7 +163,7 @@ class Zend_Tool_Project_Context_Zf_TestApplicationActionMethod implements Zend_T
     );
 EOS;
         }
-        
+
         $codeGenFile = Zend_CodeGenerator_Php_File::fromReflectedFileName($file, true, true);
         $codeGenFile->getClass()->setMethod(array(
             'name' => 'test' . ucfirst($actionParam) . 'Action',
@@ -192,7 +183,7 @@ EOS
             ));
 
         file_put_contents($file, $codeGenFile->generate());
-        
+
         return $this;
     }
 

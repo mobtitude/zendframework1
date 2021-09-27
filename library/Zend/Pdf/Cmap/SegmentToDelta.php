@@ -39,63 +39,52 @@ require_once 'Zend/Pdf/Cmap.php';
 class Zend_Pdf_Cmap_SegmentToDelta extends Zend_Pdf_Cmap
 {
   /**** Instance Variables ****/
-
-
     /**
      * The number of segments in the table.
-     * @var integer
      */
-    protected $_segmentCount = 0;
+    protected int $_segmentCount = 0;
 
     /**
      * The size of the binary search range for segments.
-     * @var integer
      */
-    protected $_searchRange = 0;
+    protected int $_searchRange = 0;
 
     /**
      * The number of binary search steps required to cover the entire search
      * range.
-     * @var integer
      */
-    protected $_searchIterations = 0;
+    protected int $_searchIterations = 0;
 
     /**
      * Array of ending character codes for each segment.
-     * @var array
      */
-    protected $_segmentTableEndCodes = array();
+    protected array $_segmentTableEndCodes = array();
 
     /**
      * The ending character code for the segment at the end of the low search
      * range.
-     * @var integer
      */
-    protected $_searchRangeEndCode = 0;
+    protected int $_searchRangeEndCode = 0;
 
     /**
      * Array of starting character codes for each segment.
-     * @var array
      */
-    protected $_segmentTableStartCodes = array();
+    protected array $_segmentTableStartCodes = array();
 
     /**
      * Array of character code to glyph delta values for each segment.
-     * @var array
      */
-    protected $_segmentTableIdDeltas = array();
+    protected array $_segmentTableIdDeltas = array();
 
     /**
      * Array of offsets into the glyph index array for each segment.
-     * @var array
      */
-    protected $_segmentTableIdRangeOffsets = array();
+    protected array $_segmentTableIdRangeOffsets = array();
 
     /**
      * Glyph index array. Stores glyph numbers, used with range offset.
-     * @var array
      */
-    protected $_glyphIndexArray = array();
+    protected array $_glyphIndexArray = array();
 
 
 

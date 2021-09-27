@@ -39,22 +39,15 @@ class Zend_Feed
 
     /**
      * HTTP client object to use for retrieving feeds
-     *
-     * @var Zend_Http_Client
      */
-    protected static $_httpClient = null;
+    protected static ?\Zend_Http_Client $_httpClient = null;
 
     /**
      * Override HTTP PUT and DELETE request methods?
-     *
-     * @var boolean
      */
-    protected static $_httpMethodOverride = false;
+    protected static bool $_httpMethodOverride = false;
 
-    /**
-     * @var array
-     */
-    protected static $_namespaces = array(
+    protected static array $_namespaces = array(
         'opensearch' => 'http://a9.com/-/spec/opensearchrss/1.0/',
         'atom'       => 'http://www.w3.org/2005/Atom',
         'rss'        => 'http://blogs.law.harvard.edu/tech/rss',

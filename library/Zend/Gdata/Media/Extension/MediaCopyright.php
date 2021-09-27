@@ -38,13 +38,10 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_Media_Extension_MediaCopyright extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'copyright';
-    protected $_rootNamespace = 'media';
+    protected ?string $_rootElement = 'copyright';
+    protected string $_rootNamespace = 'media';
 
-    /**
-     * @var string
-     */
-    protected $_url = null;
+    protected ?string $_url = null;
 
     /**
      * @param string $text

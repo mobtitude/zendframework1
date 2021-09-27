@@ -38,10 +38,8 @@ class Zend_Soap_Wsdl_Strategy_Composite implements Zend_Soap_Wsdl_Strategy_Inter
 {
     /**
      * Typemap of Complex Type => Strategy pairs.
-     *
-     * @var array
      */
-    protected $_typeMap = array();
+    protected array $_typeMap = array();
 
     /**
      * Default Strategy of this composite
@@ -52,10 +50,8 @@ class Zend_Soap_Wsdl_Strategy_Composite implements Zend_Soap_Wsdl_Strategy_Inter
 
     /**
      * Context WSDL file that this composite serves
-     *
-     * @var Zend_Soap_Wsdl|null
      */
-    protected $_context;
+    protected ?\Zend_Soap_Wsdl $_context = null;
 
     /**
      * Construct Composite WSDL Strategy.

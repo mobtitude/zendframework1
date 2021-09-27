@@ -220,7 +220,7 @@ class Zend_Measure_Flow_Volume extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ACRE_FOOT_PER_DAY'           => array(array('' => '1233.48184', '/' => '86400'),      'ac ft/day'),
         'ACRE_FOOT_PER_HOUR'          => array(array('' => '1233.48184', '/' => '3600'),       'ac ft/h'),
         'ACRE_FOOT_PER_MINUTE'        => array(array('' => '1233.48184', '/' => '60'),         'ac ft/m'),

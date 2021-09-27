@@ -39,73 +39,53 @@ class Zend_Service_Yahoo_LocalResult extends Zend_Service_Yahoo_Result
 {
     /**
      * Street address of the result
-     *
-     * @var string
      */
-    public $Address;
+    public string $Address;
 
     /**
      * City in which the result resides
-     *
-     * @var string
      */
-    public $City;
+    public string $City;
 
     /**
      * State in which the result resides
-     *
-     * @var string
      */
-    public $State;
+    public string $State;
 
     /**
      * Phone number for the result
-     *
-     * @var string
      */
-    public $Phone;
+    public string $Phone;
 
     /**
      * User-submitted rating for the result
-     *
-     * @var string
      */
-    public $Rating;
+    public string $Rating;
 
     /**
      * The distance to the result from your specified location
-     *
-     * @var string
      */
-    public $Distance;
+    public string $Distance;
 
     /**
      * A URL of a map for the result
-     *
-     * @var string
      */
-    public $MapUrl;
+    public string $MapUrl;
 
     /**
      * The URL for the business website, if known
-     *
-     * @var string
      */
-    public $BusinessUrl;
+    public string $BusinessUrl;
 
     /**
      * The URL for linking to the business website, if known
-     *
-     * @var string
      */
-    public $BusinessClickUrl;
+    public string $BusinessClickUrl;
 
     /**
      * Local result namespace
-     *
-     * @var string
      */
-    protected $_namespace = 'urn:yahoo:lcl';
+    protected string $_namespace = 'urn:yahoo:lcl';
 
 
     /**

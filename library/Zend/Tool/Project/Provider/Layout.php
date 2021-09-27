@@ -36,7 +36,7 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
        /**
         * @var string Layout path
         */
-       protected $_layoutPath = 'APPLICATION_PATH "/layouts/scripts/"';
+       protected string $_layoutPath = 'APPLICATION_PATH "/layouts/scripts/"';
 
     public static function createResource(Zend_Tool_Project_Profile $profile, $layoutName = 'layout')
     {

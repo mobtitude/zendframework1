@@ -38,10 +38,8 @@ class Zend_Ldap_Filter_Not extends Zend_Ldap_Filter_Abstract
 {
     /**
      * The underlying filter.
-     *
-     * @var Zend_Ldap_Filter_Abstract
      */
-    private $_filter;
+    private \Zend_Ldap_Filter_Abstract $_filter;
 
     /**
      * Creates a Zend_Ldap_Filter_Not.

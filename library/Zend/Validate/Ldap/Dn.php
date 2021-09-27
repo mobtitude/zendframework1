@@ -40,7 +40,7 @@ class Zend_Validate_Ldap_Dn extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::MALFORMED => 'DN is malformed',
     );
     

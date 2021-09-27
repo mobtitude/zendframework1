@@ -40,13 +40,12 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
     /**
      * @var string Name of the class to be returned
      */
-    protected $_className = '';
+    protected string $_className = '';
 
     /**
      * An array of reference objects
-     * @var array
      */
-    protected $_referenceObjects = array();
+    protected array $_referenceObjects = array();
 
     /**
      * Determine type and serialize accordingly

@@ -56,26 +56,20 @@ class Zend_Feed_Writer
 
     /**
      * PluginLoader instance used by component
-     *
-     * @var Zend_Loader_PluginLoader_Interface
      */
-    protected static $_pluginLoader = null;
+    protected static ?\Zend_Loader_PluginLoader_Interface $_pluginLoader = null;
 
     /**
      * Path on which to search for Extension classes
-     *
-     * @var array
      */
-    protected static $_prefixPaths = array();
+    protected static array $_prefixPaths = array();
 
     /**
      * Array of registered extensions by class postfix (after the base class
      * name) across four categories - data containers and renderers for entry
      * and feed levels.
-     *
-     * @var array
      */
-    protected static $_extensions = array(
+    protected static array $_extensions = array(
         'entry'         => array(),
         'feed'          => array(),
         'entryRenderer' => array(),

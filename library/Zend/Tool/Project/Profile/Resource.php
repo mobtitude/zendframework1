@@ -41,21 +41,15 @@ require_once 'Zend/Tool/Project/Context/Repository.php';
 class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resource_Container
 {
 
-    /**
-     * @var Zend_Tool_Project_Profile
-     */
-    protected $_profile = null;
+    protected ?\Zend_Tool_Project_Profile $_profile = null;
 
-    /**
-     * @var Zend_Tool_Project_Profile_Resource
-     */
-    protected $_parentResource = null;
+    protected ?\Zend_Tool_Project_Profile_Resource $_parentResource = null;
 
     /**#@+
      * @var bool
      */
     protected $_deleted = false;
-    protected $_enabled = true;
+    protected bool $_enabled = true;
     /**#@-*/
 
     /**
@@ -68,10 +62,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
      */
     protected $_attributes = array();
 
-    /**
-     * @var bool
-     */
-    protected $_isContextInitialized = false;
+    protected bool $_isContextInitialized = false;
 
     /**
      * __construct()

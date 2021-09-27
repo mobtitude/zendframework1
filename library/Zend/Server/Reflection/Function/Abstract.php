@@ -52,25 +52,20 @@ require_once 'Zend/Server/Reflection/Prototype.php';
  */
 abstract class Zend_Server_Reflection_Function_Abstract
 {
-    /**
-     * @var ReflectionFunction
-     */
-    protected $_reflection;
+    protected \Reflector $_reflection;
 
     /**
      * Additional arguments to pass to method on invocation
-     * @var array
      */
-    protected $_argv = array();
+    protected array $_argv = array();
 
     /**
      * Used to store extra configuration for the method (typically done by the
      * server class, e.g., to indicate whether or not to instantiate a class).
      * Associative array; access is as properties via {@link __get()} and
      * {@link __set()}
-     * @var array
      */
-    protected $_config = array();
+    protected array $_config = array();
 
     /**
      * Declaring class (needed for when serialization occurs)
@@ -80,27 +75,24 @@ abstract class Zend_Server_Reflection_Function_Abstract
 
     /**
      * Function/method description
-     * @var string
      */
-    protected $_description = '';
+    protected string $_description = '';
 
     /**
      * Namespace with which to prefix function/method name
-     * @var string
      */
-    protected $_namespace;
+    protected ?string $_namespace = null;
 
     /**
      * Prototypes
-     * @var array
      */
-    protected $_prototypes = array();
+    protected array $_prototypes = array();
 
-    private $_return;
-    private $_returnDesc;
-    private $_paramDesc;
+    private ?array $_return = null;
+    private ?string $_returnDesc = null;
+    private ?array $_paramDesc = null;
     private $_sigParams;
-    private $_sigParamsDepth;
+    private ?int $_sigParamsDepth = null;
 
     /**
      * Constructor

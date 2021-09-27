@@ -50,22 +50,19 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
      * used message class, change it in an extened class to extend the returned message class
      * @var string
      */
-    protected $_messageClass = 'Zend_Mail_Message_File';
+    protected string $_messageClass = 'Zend_Mail_Message_File';
 
     /**
      * data of found message files in maildir dir
-     * @var array
      */
-    protected $_files = array();
+    protected array $_files = array();
 
     /**
      * known flag chars in filenames
      *
      * This list has to be in alphabetical order for setFlags()
-     *
-     * @var array
      */
-    protected static $_knownFlags = array('D' => Zend_Mail_Storage::FLAG_DRAFT,
+    protected static array $_knownFlags = array('D' => Zend_Mail_Storage::FLAG_DRAFT,
                                           'F' => Zend_Mail_Storage::FLAG_FLAGGED,
                                           'P' => Zend_Mail_Storage::FLAG_PASSED,
                                           'R' => Zend_Mail_Storage::FLAG_ANSWERED,

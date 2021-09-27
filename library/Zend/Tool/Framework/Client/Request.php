@@ -29,50 +29,23 @@
 class Zend_Tool_Framework_Client_Request
 {
 
-    /**
-     * @var string
-     */
-    protected $_providerName = null;
+    protected ?string $_providerName = null;
 
-    /**
-     * @var string
-     */
-    protected $_specialtyName = null;
+    protected ?string $_specialtyName = null;
 
-    /**
-     * @var string
-     */
-    protected $_actionName = null;
+    protected ?string $_actionName = null;
 
-    /**
-     * @var array
-     */
-    protected $_actionParameters = array();
+    protected array $_actionParameters = array();
 
-    /**
-     * @var array
-     */
-    protected $_providerParameters = array();
+    protected array $_providerParameters = array();
 
-    /**
-     * @var bool
-     */
-    protected $_isPretend = false;
+    protected bool $_isPretend = false;
 
-    /**
-     * @var bool
-     */
-    protected $_isDebug = false;
+    protected bool $_isDebug = false;
 
-    /**
-     * @var bool
-     */
-    protected $_isVerbose = false;
+    protected bool $_isVerbose = false;
 
-    /**
-     * @var bool
-     */
-    protected $_isDispatchable = true;
+    protected bool $_isDispatchable = true;
 
     /**
      * setProviderName()

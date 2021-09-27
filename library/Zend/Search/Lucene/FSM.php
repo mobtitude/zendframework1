@@ -40,10 +40,8 @@ abstract class Zend_Search_Lucene_FSM
 {
     /**
      * Machine States alphabet
-     *
-     * @var array
      */
-    private $_states = array();
+    private array $_states = array();
 
     /**
      * Current state
@@ -54,59 +52,47 @@ abstract class Zend_Search_Lucene_FSM
 
     /**
      * Input alphabet
-     *
-     * @var array
      */
-    private $_inputAphabet = array();
+    private array $_inputAphabet = array();
 
     /**
      * State transition table
      *
      * [sourceState][input] => targetState
-     *
-     * @var array
      */
-    private $_rules = array();
+    private array $_rules = array();
 
     /**
      * List of entry actions
      * Each action executes when entering the state
      *
      * [state] => action
-     *
-     * @var array
      */
-    private $_entryActions =  array();
+    private array $_entryActions =  array();
 
     /**
      * List of exit actions
      * Each action executes when exiting the state
      *
      * [state] => action
-     *
-     * @var array
      */
-    private $_exitActions =  array();
+    private array $_exitActions =  array();
 
     /**
      * List of input actions
      * Each action executes when entering the state
      *
      * [state][input] => action
-     *
-     * @var array
      */
-    private $_inputActions =  array();
+    private array $_inputActions =  array();
 
     /**
      * List of input actions
      * Each action executes when entering the state
      *
      * [state1][state2] => action
-     *
-     * @var array
      */
-    private $_transitionActions =  array();
+    private array $_transitionActions =  array();
 
     /**
      * Finite State machine constructor

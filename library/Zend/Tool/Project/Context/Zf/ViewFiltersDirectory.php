@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_ViewFiltersDirectory extends Zend_Tool_Projec
     /**
      * @var string
      */
-    protected $_filesystemName = 'filters';
+    protected ?string $_filesystemName = 'filters';
 
     /**
      * getName()

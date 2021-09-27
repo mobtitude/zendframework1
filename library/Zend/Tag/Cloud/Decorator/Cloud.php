@@ -32,10 +32,8 @@ abstract class Zend_Tag_Cloud_Decorator_Cloud
 {
     /**
      * Option keys to skip when calling setOptions()
-     *
-     * @var array
      */
-    protected $_skipOptions = array(
+    protected array $_skipOptions = array(
         'options',
         'config',
     );

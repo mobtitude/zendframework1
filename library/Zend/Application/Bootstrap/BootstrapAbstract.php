@@ -53,49 +53,38 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
     /**
      * @var array Internal resource methods (resource/method pairs)
      */
-    protected $_classResources;
+    protected ?array $_classResources = null;
 
     /**
      * @var object Resource container
      */
-    protected $_container;
+    protected ?object $_container = null;
 
-    /**
-     * @var string
-     */
-    protected $_environment;
+    protected ?string $_environment = null;
 
     /**
      * Flattened (lowercase) option keys used for lookups
-     *
-     * @var array
      */
-    protected $_optionKeys = array();
+    protected array $_optionKeys = array();
 
-    /**
-     * @var array
-     */
-    protected $_options = array();
+    protected array $_options = array();
 
-    /**
-     * @var Zend_Loader_PluginLoader_Interface
-     */
-    protected $_pluginLoader;
+    protected ?\Zend_Loader_PluginLoader_Interface $_pluginLoader = null;
 
     /**
      * @var array Class-based resource plugins
      */
-    protected $_pluginResources = array();
+    protected array $_pluginResources = array();
 
     /**
      * @var array Initializers that have been run
      */
-    protected $_run = array();
+    protected array $_run = array();
 
     /**
      * @var array Initializers that have been started but not yet completed (circular dependency detection)
      */
-    protected $_started = array();
+    protected array $_started = array();
 
     /**
      * Constructor

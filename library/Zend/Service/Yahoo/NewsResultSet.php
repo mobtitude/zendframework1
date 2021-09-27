@@ -45,10 +45,8 @@ class Zend_Service_Yahoo_NewsResultSet extends Zend_Service_Yahoo_ResultSet
 {
     /**
      * News result set namespace
-     *
-     * @var string
      */
-    protected $_namespace = 'urn:yahoo:yn';
+    protected string $_namespace = 'urn:yahoo:yn';
 
 
     /**

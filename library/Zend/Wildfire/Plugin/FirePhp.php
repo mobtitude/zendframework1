@@ -125,27 +125,23 @@ class Zend_Wildfire_Plugin_FirePhp implements Zend_Wildfire_Plugin_Interface
 
     /**
      * Flag indicating whether FirePHP should send messages to the user-agent.
-     * @var boolean
      */
-    protected $_enabled = true;
+    protected bool $_enabled = true;
 
     /**
      * The channel via which to send the encoded messages.
-     * @var Zend_Wildfire_Channel_Interface
      */
-    protected $_channel = null;
+    protected ?\Zend_Wildfire_Channel_HttpHeaders $_channel = null;
 
     /**
      * Messages that are buffered to be sent when protocol flushes
-     * @var array
      */
-    protected $_messages = array();
+    protected array $_messages = array();
 
     /**
      * Options for the object
-     * @var array
      */
-    protected $_options = array(
+    protected array $_options = array(
         'traceOffset' => 1, /* The offset in the trace which identifies the source of the message */
         'maxTraceDepth' => 99, /* Maximum depth for stack traces */
         'maxObjectDepth' => 10, /* The maximum depth to traverse objects when encoding */
@@ -155,15 +151,13 @@ class Zend_Wildfire_Plugin_FirePhp implements Zend_Wildfire_Plugin_Interface
 
     /**
      * Filters used to exclude object members when encoding
-     * @var array
      */
-    protected $_objectFilters = array();
+    protected array $_objectFilters = array();
 
     /**
      * A stack of objects used during encoding to detect recursion
-     * @var array
      */
-    protected $_objectStack = array();
+    protected array $_objectStack = array();
 
     /**
      * Create singleton instance.
@@ -742,7 +736,7 @@ class Zend_Wildfire_Plugin_FirePhp implements Zend_Wildfire_Plugin_Interface
 
                 $name = $raw_name = $just_name;
 
-                if ($name{0} == "\0") {
+                if ($name[0] == "\0") {
                     $parts = explode("\0", $name);
                     $name = $parts[2];
                 }

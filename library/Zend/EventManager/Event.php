@@ -36,7 +36,7 @@ class Zend_EventManager_Event implements Zend_EventManager_EventDescription
     /**
      * @var string Event name
      */
-    protected $name;
+    protected ?string $name = null;
 
     /**
      * @var string|object The event target
@@ -51,7 +51,7 @@ class Zend_EventManager_Event implements Zend_EventManager_EventDescription
     /**
      * @var bool Whether or not to stop propagation
      */
-    protected $stopPropagation = false;
+    protected bool $stopPropagation = false;
 
     /**
      * Constructor

@@ -41,10 +41,8 @@ abstract class Zend_Service_ShortUrl_AbstractShortener
 {
     /**
      * Base URI of the service
-     *
-     * @var string
      */
-    protected $_baseUri = null;
+    protected ?string $_baseUri = null;
 
 
     /**

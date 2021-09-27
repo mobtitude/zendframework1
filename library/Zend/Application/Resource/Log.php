@@ -39,10 +39,7 @@ require_once 'Zend/Application/Resource/ResourceAbstract.php';
 class Zend_Application_Resource_Log
     extends Zend_Application_Resource_ResourceAbstract
 {
-    /**
-     * @var Zend_Log
-     */
-    protected $_log;
+    protected ?\Zend_Log $_log = null;
 
     /**
      * Defined by Zend_Application_Resource_Resource

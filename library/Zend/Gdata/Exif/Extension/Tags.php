@@ -93,78 +93,58 @@ require_once 'Zend/Gdata/Exif/Extension/Time.php';
 class Zend_Gdata_Exif_Extension_Tags extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'exif';
-    protected $_rootElement = 'tags';
+    protected string $_rootNamespace = 'exif';
+    protected ?string $_rootElement = 'tags';
 
     /**
      * exif:distance value
-     *
-     * @var Zend_Gdata_Exif_Extension_Distance
      */
-    protected $_distance = null;
+    protected ?\Zend_Gdata_Exif_Extension_Distance $_distance = null;
 
     /**
      * exif:exposure value
-     *
-     * @var Zend_Gdata_Exif_Extension_Exposure
      */
-    protected $_exposure = null;
+    protected ?\Zend_Gdata_Exif_Extension_Exposure $_exposure = null;
 
     /**
      * exif:flash value
-     *
-     * @var Zend_Gdata_Exif_Extension_Flash
      */
-    protected $_flash = null;
+    protected ?\Zend_Gdata_Exif_Extension_Flash $_flash = null;
 
     /**
      * exif:focalLength value
-     *
-     * @var Zend_Gdata_Exif_Extension_FocalLength
      */
-    protected $_focalLength = null;
+    protected ?\Zend_Gdata_Exif_Extension_FocalLength $_focalLength = null;
 
     /**
      * exif:fStop value
-     *
-     * @var Zend_Gdata_Exif_Extension_FStop
      */
-    protected $_fStop = null;
+    protected ?\Zend_Gdata_Exif_Extension_FStop $_fStop = null;
 
     /**
      * exif:imageUniqueID value
-     *
-     * @var Zend_Gdata_Exif_Extension_ImageUniqueId
      */
-    protected $_imageUniqueId = null;
+    protected ?\Zend_Gdata_Exif_Extension_ImageUniqueId $_imageUniqueId = null;
 
     /**
      * exif:iso value
-     *
-     * @var Zend_Gdata_Exif_Extension_Iso
      */
-    protected $_iso = null;
+    protected ?\Zend_Gdata_Exif_Extension_Iso $_iso = null;
 
     /**
      * exif:make value
-     *
-     * @var Zend_Gdata_Exif_Extension_Make
      */
-    protected $_make = null;
+    protected ?\Zend_Gdata_Exif_Extension_Make $_make = null;
 
     /**
      * exif:model value
-     *
-     * @var Zend_Gdata_Exif_Extension_Model
      */
-    protected $_model = null;
+    protected ?\Zend_Gdata_Exif_Extension_Model $_model = null;
 
     /**
      * exif:time value
-     *
-     * @var Zend_Gdata_Exif_Extension_Time
      */
-    protected $_time = null;
+    protected ?\Zend_Gdata_Exif_Extension_Time $_time = null;
 
     /**
      * Constructs a new Zend_Gdata_Exif_Extension_Tags object.

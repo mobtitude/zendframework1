@@ -36,21 +36,17 @@ abstract class Zend_Navigation_Container implements RecursiveIterator, Countable
      *
      * @var Zend_Navigation_Page[]
      */
-    protected $_pages = array();
+    protected array $_pages = array();
 
     /**
      * An index that contains the order in which to iterate pages
-     *
-     * @var array
      */
-    protected $_index = array();
+    protected array $_index = array();
 
     /**
      * Whether index is dirty and needs to be re-arranged
-     *
-     * @var bool
      */
-    protected $_dirtyIndex = false;
+    protected bool $_dirtyIndex = false;
 
     // Internal methods:
 

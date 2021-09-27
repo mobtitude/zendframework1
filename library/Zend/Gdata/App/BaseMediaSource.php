@@ -40,10 +40,8 @@ abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSou
 
     /**
      * The content type for the attached file (example image/png)
-     *
-     * @var string
      */
-    protected $_contentType = null;
+    protected ?string $_contentType = null;
 
     /**
      * The slug header value representing the attached file title, or null if

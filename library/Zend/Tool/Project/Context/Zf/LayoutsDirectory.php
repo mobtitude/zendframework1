@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_LayoutsDirectory extends Zend_Tool_Project_Co
     /**
      * @var string
      */
-    protected $_filesystemName = 'layouts';
+    protected ?string $_filesystemName = 'layouts';
 
     /**
      * getName()

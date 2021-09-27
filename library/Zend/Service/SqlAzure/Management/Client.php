@@ -66,45 +66,33 @@ class Zend_Service_SqlAzure_Management_Client
 
 	/**
 	 * Current API version
-	 * 
-	 * @var string
 	 */
-	protected $_apiVersion = '1.0';
+	protected string $_apiVersion = '1.0';
 	
 	/**
 	 * Subscription ID
-	 *
-	 * @var string
 	 */
-	protected $_subscriptionId = '';
+	protected string $_subscriptionId = '';
 	
 	/**
 	 * Management certificate path (.PEM)
-	 *
-	 * @var string
 	 */
-	protected $_certificatePath = '';
+	protected string $_certificatePath = '';
 	
 	/**
 	 * Management certificate passphrase
-	 *
-	 * @var string
 	 */
-	protected $_certificatePassphrase = '';
+	protected string $_certificatePassphrase = '';
 	
 	/**
 	 * Zend_Http_Client channel used for communication with REST services
-	 * 
-	 * @var Zend_Http_Client
 	 */
-	protected $_httpClientChannel = null;	
+	protected ?\Zend_Http_Client $_httpClientChannel = null;	
 
 	/**
 	 * Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract instance
-	 * 
-	 * @var Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
 	 */
-	protected $_retryPolicy = null;
+	protected ?\Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $_retryPolicy = null;
 	
 	/**
 	 * Returns the last request ID

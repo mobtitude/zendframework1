@@ -43,28 +43,25 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::FALSE_EXTENSION => "File '%value%' has a false extension",
         self::NOT_FOUND       => "File '%value%' is not readable or does not exist",
     );
 
     /**
      * Internal list of extensions
-     * @var string
      */
-    protected $_extension = '';
+    protected ?string $_extension = '';
 
     /**
      * Validate case sensitive
-     *
-     * @var boolean
      */
-    protected $_case = false;
+    protected bool $_case = false;
 
     /**
      * @var array Error message template variables
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'extension' => '_extension'
     );
 

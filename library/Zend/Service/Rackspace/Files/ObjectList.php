@@ -41,15 +41,12 @@ class Zend_Service_Rackspace_Files_ObjectList implements Countable, Iterator, Ar
     /**
      * @var array of Zend_Service_Rackspace_Files_Object
      */
-    protected $objects = array();
+    protected array $objects = array();
     /**
      * @var int Iterator key
      */
-    protected $iteratorKey = 0;
-    /**
-     * @var RackspaceFiles
-     */
-    protected $service;
+    protected int $iteratorKey = 0;
+    protected \Zend_Service_Rackspace_Files $service;
     /**
      * The container name of the object list
      * 

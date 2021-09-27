@@ -43,21 +43,18 @@ require_once 'Zend/Gdata/Gapps.php';
 class Zend_Gdata_Gapps_Extension_Property extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'apps';
-    protected $_rootElement = 'property';
+    protected string $_rootNamespace = 'apps';
+    protected ?string $_rootElement = 'property';
 
     /**
      * The name of the property
-     *
-     * @var string
      */
-    protected $_name = null;
+    protected ?string $_name = null;
 
     /**
      * The value of the property
-     * @var string
      */
-    protected $_value = null;
+    protected ?string $_value = null;
 
     /**
      * Constructs a new Zend_Gdata_Gapps_Extension_Property object.

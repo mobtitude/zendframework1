@@ -45,42 +45,32 @@ class Zend_Memory_Manager
 {
     /**
      * Object storage backend
-     *
-     * @var Zend_Cache_Backend_Interface
      */
-    private $_backend = null;
+    private ?\Zend_Cache_Backend $_backend = null;
 
     /**
      * Memory grow limit.
      * Default value is 2/3 of memory_limit php.ini variable
      * Negative value means no limit
-     *
-     * @var integer
      */
-    private $_memoryLimit = -1;
+    private int $_memoryLimit = -1;
 
     /**
      * Minimum value size to be swapped.
      * Default value is 16K
      * Negative value means that memory objects are never swapped
-     *
-     * @var integer
      */
-    private $_minSize = 16384;
+    private int $_minSize = 16384;
 
     /**
      * Overall size of memory, used by values
-     *
-     * @var integer
      */
-    private $_memorySize = 0;
+    private int $_memorySize = 0;
 
     /**
      * Id for next Zend_Memory object
-     *
-     * @var integer
      */
-    private $_nextId = 0;
+    private int $_nextId = 0;
 
     /**
      * List of candidates to unload
@@ -91,10 +81,8 @@ class Zend_Memory_Manager
      *     <id> => <memory container object>,
      *     ...
      *      )
-     *
-     * @var array
      */
-    private $_unloadCandidates = array();
+    private array $_unloadCandidates = array();
 
     /**
      * List of object sizes.
@@ -102,10 +90,8 @@ class Zend_Memory_Manager
      * This list is used to calculate modification of object sizes
      *
      * array( <id> => <size>, ...)
-     *
-     * @var array
      */
-    private $_sizes = array();
+    private array $_sizes = array();
 
     /**
      * Last modified object
@@ -114,24 +100,18 @@ class Zend_Memory_Manager
      * Modification is not processed by memory manager until we do not switch to another
      * object.
      * So we have to trace only _first_ object modification and do nothing for others
-     *
-     * @var Zend_Memory_Container_Movable
      */
-    private $_lastModified = null;
+    private ?\Zend_Memory_Container_Movable $_lastModified = null;
 
     /**
      * Unique memory manager id
-     *
-     * @var integer
      */
-    private $_managerId;
+    private ?string $_managerId = null;
 
     /**
      * Tags array, used by backend to categorize stored values
-     *
-     * @var array
      */
-    private $_tags;
+    private ?array $_tags = null;
 
     /**
      * This function is intended to generate unique id, used by memory manager

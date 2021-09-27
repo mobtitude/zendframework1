@@ -38,13 +38,10 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_Media_Extension_MediaDescription extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'description';
-    protected $_rootNamespace = 'media';
+    protected ?string $_rootElement = 'description';
+    protected string $_rootNamespace = 'media';
 
-    /**
-     * @var string
-     */
-    protected $_type = null;
+    protected ?string $_type = null;
 
     /**
      * @param string $text

@@ -32,10 +32,8 @@ class Zend_Locale
     /**
      * List of locales that are no longer part of CLDR along with a
      * mapping to an appropriate alternative.
-     *
-     * @var array
      */
-    private static $_localeAliases = array(
+    private static array $_localeAliases = array(
         'az_AZ'  => 'az_Latn_AZ',
         'bs_BA'  => 'bs_Latn_BA',
         'ha_GH'  => 'ha_Latn_GH',
@@ -68,10 +66,8 @@ class Zend_Locale
 
     /**
      * Class wide Locale Constants
-     *
-     * @var array $_localeData
      */
-    private static $_localeData = array(
+    private static array $_localeData = array(
         'root'        => true,
         'aa'          => true,
         'aa_DJ'       => true,
@@ -789,10 +785,8 @@ class Zend_Locale
 
     /**
      * Class wide Locale Constants
-     *
-     * @var array $_territoryData
      */
-    private static $_territoryData = array(
+    private static array $_territoryData = array(
         'AD' => 'ca_AD',
         'AE' => 'ar_AE',
         'AF' => 'fa_AF',
@@ -1051,52 +1045,48 @@ class Zend_Locale
     /**
      * Defines if old behaviour should be supported
      * Old behaviour throws notices and will be deleted in future releases
-     *
-     * @var boolean
      */
-    public static $compatibilityMode = false;
+    public static bool $compatibilityMode = false;
 
     /**
      * Internal variable
-     *
-     * @var boolean
      */
-    private static $_breakChain = false;
+    private static bool $_breakChain = false;
 
     /**
      * Actual set locale
      *
      * @var string Locale
      */
-    protected $_locale;
+    protected ?string $_locale = null;
 
     /**
      * Automatic detected locale
      *
      * @var string Locales
      */
-    protected static $_auto;
+    protected static ?array $_auto = null;
 
     /**
      * Browser detected locale
      *
      * @var string Locales
      */
-    protected static $_browser;
+    protected static ?array $_browser = null;
 
     /**
      * Environment detected locale
      *
      * @var string Locales
      */
-    protected static $_environment;
+    protected static ?array $_environment = null;
 
     /**
      * Default locale
      *
      * @var string Locales
      */
-    protected static $_default = array('en' => true);
+    protected static array $_default = array('en' => true);
 
     /**
      * Generates a locale object

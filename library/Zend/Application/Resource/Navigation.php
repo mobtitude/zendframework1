@@ -42,10 +42,7 @@ class Zend_Application_Resource_Navigation
 {
     const DEFAULT_REGISTRY_KEY = 'Zend_Navigation';
 
-    /**
-     * @var Zend_Navigation
-     */
-    protected $_container;
+    protected ?\Zend_Navigation $_container = null;
 
     /**
      * Defined by Zend_Application_Resource_Resource

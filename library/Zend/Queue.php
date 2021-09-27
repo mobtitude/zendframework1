@@ -44,36 +44,26 @@ class Zend_Queue implements Countable
      */
     const NAME = 'name';
 
-    /**
-     * @var Zend_Queue_Adapter_AdapterInterface
-     */
-    protected $_adapter = null;
+    protected ?\Zend_Queue_Adapter_AdapterInterface $_adapter = null;
 
     /**
      * User-provided configuration
-     *
-     * @var array
      */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * Zend_Queue_Message class
      *
      * @var string
      */
-    protected $_messageClass = 'Zend_Queue_Message';
+    protected string $_messageClass = 'Zend_Queue_Message';
 
     /**
      * Zend_Queue_Message_Iterator class
-     *
-     * @var string
      */
-    protected $_messageSetClass = 'Zend_Queue_Message_Iterator';
+    protected string $_messageSetClass = 'Zend_Queue_Message_Iterator';
 
-    /**
-     * @var Zend_Log
-     */
-    protected $_logger = null;
+    protected ?\Zend_Log $_logger = null;
 
     /**
      * Constructor

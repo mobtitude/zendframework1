@@ -67,32 +67,24 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
 
     /**
      * List of recognized lexemes
-     *
-     * @var array
      */
-    private $_lexemes;
+    private ?array $_lexemes = null;
 
     /**
      * Query string (array of single- or non single-byte characters)
-     *
-     * @var array
      */
-    private $_queryString;
+    private ?array $_queryString = null;
 
     /**
      * Current position within a query string
      * Used to create appropriate error messages
-     *
-     * @var integer
      */
-    private $_queryStringPosition;
+    private ?int $_queryStringPosition = null;
 
     /**
      * Recognized part of current lexeme
-     *
-     * @var string
      */
-    private $_currentLexeme;
+    private ?string $_currentLexeme = null;
 
     public function __construct()
     {

@@ -42,20 +42,16 @@ require_once 'Zend/Pdf/FileParser.php';
 abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
 {
   /**** Instance Variables ****/
-
-
     /**
      * Array of parsed font properties. Used with {@link __get()} and
      * {@link __set()}.
-     * @var array
      */
-    private $_fontProperties = array();
+    private array $_fontProperties = array();
 
     /**
      * Flag indicating whether or not debug logging is active.
-     * @var boolean
      */
-    private $_debug = false;
+    private bool $_debug = false;
 
 
 

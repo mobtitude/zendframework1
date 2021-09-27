@@ -42,9 +42,8 @@ class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_Valida
 
     /**
      * Allowed numeric type formats
-     * @var array
      */
-    protected $_allowedTypes = array(
+    protected array $_allowedTypes = array(
         'decimal',
         'scientific',
         'percent',

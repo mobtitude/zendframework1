@@ -31,15 +31,9 @@
  */
 class Zend_Service_Amazon_EditorialReview
 {
-    /**
-     * @var string
-     */
-    public $Source;
+    public string $Source;
 
-    /**
-     * @var string
-     */
-    public $Content;
+    public string $Content;
 
     /**
      * Assigns values to properties relevant to EditorialReview

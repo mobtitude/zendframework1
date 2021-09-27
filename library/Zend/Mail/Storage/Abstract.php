@@ -32,9 +32,8 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
 {
     /**
      * class capabilities with default values
-     * @var array
      */
-    protected $_has = array('uniqueid'  => true,
+    protected array $_has = array('uniqueid'  => true,
                             'delete'    => false,
                             'create'    => false,
                             'top'       => false,
@@ -43,21 +42,18 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
 
     /**
      * current iteration position
-     * @var int
      */
-    protected $_iterationPos = 0;
+    protected int $_iterationPos = 0;
 
     /**
      * maximum iteration position (= message count)
-     * @var null|int
      */
-    protected $_iterationMax = null;
+    protected ?int $_iterationMax = null;
 
     /**
      * used message class, change it in an extened class to extend the returned message class
-     * @var string
      */
-    protected $_messageClass = 'Zend_Mail_Message';
+    protected string $_messageClass = 'Zend_Mail_Message';
 
     /**
      * Getter for has-properties. The standard has properties

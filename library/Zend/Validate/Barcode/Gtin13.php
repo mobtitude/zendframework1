@@ -42,7 +42,7 @@ class Zend_Validate_Barcode_Gtin13 extends Zend_Validate_Barcode_AdapterAbstract
      * Allowed barcode characters
      * @var string
      */
-    protected $_characters = '0123456789';
+    protected string $_characters = '0123456789';
 
     /**
      * Checksum function

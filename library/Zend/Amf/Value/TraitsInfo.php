@@ -33,17 +33,17 @@ class Zend_Amf_Value_TraitsInfo
     /**
      * @var string Class name
      */
-    protected $_className;
+    protected string $_className;
 
     /**
      * @var bool Whether or not this is a dynamic class
      */
-    protected $_dynamic;
+    protected bool $_dynamic;
 
     /**
      * @var bool Whether or not the class is externalizable
      */
-    protected $_externalizable;
+    protected bool $_externalizable;
 
     /**
      * @var array Class properties

@@ -36,17 +36,13 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 {
 	/**
 	 * Blob storage client
-	 * 
-	 * @var Zend_Service_WindowsAzure_Storage_Blob
 	 */
-	protected $_blobStorageClient = null;
+	protected ?\Zend_Service_WindowsAzure_Storage_Blob $_blobStorageClient = null;
 	
 	/**
 	 * Control container name
-	 * 
-	 * @var string
 	 */
-	protected $_controlContainer = '';
+	protected string $_controlContainer = '';
 
 	/**
 	 * Create a new instance of Zend_Service_WindowsAzure_Diagnostics_Manager

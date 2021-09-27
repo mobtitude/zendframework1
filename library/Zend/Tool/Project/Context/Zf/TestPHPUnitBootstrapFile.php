@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_TestPHPUnitBootstrapFile extends Zend_Tool_Pr
     /**
      * @var string
      */
-    protected $_filesystemName = 'bootstrap.php';
+    protected ?string $_filesystemName = 'bootstrap.php';
 
     /**
      * getName()

@@ -50,9 +50,8 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Page number in PDF resource
-     * @var integer
      */
-    protected $_page = 0;
+    protected int $_page = 0;
 
     /**
      * Module size rendering

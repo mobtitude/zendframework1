@@ -54,48 +54,40 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     const ENCTYPE_URLENCODED = 'application/x-www-form-urlencoded';
     const ENCTYPE_MULTIPART  = 'multipart/form-data';
     /**#@-*/
-
     /**
      * Form metadata and attributes
-     * @var array
      */
-    protected $_attribs = array();
+    protected array $_attribs = array();
 
     /**
      * Decorators for rendering
-     * @var array
      */
-    protected $_decorators = array();
+    protected array $_decorators = array();
 
     /**
      * Default display group class
-     * @var string
      */
-    protected $_defaultDisplayGroupClass = 'Zend_Form_DisplayGroup';
+    protected string $_defaultDisplayGroupClass = 'Zend_Form_DisplayGroup';
 
     /**
      * Form description
-     * @var string
      */
-    protected $_description;
+    protected ?string $_description = null;
 
     /**
      * Should we disable loading the default decorators?
-     * @var bool
      */
-    protected $_disableLoadDefaultDecorators = false;
+    protected bool $_disableLoadDefaultDecorators = false;
 
     /**
      * Display group prefix paths
-     * @var array
      */
-    protected $_displayGroupPrefixPaths = array();
+    protected array $_displayGroupPrefixPaths = array();
 
     /**
      * Groups of elements grouped for display purposes
-     * @var array
      */
-    protected $_displayGroups = array();
+    protected array $_displayGroups = array();
 
     /**
      * Global decorators to apply to all elements
@@ -105,15 +97,13 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 
     /**
      * Prefix paths to use when creating elements
-     * @var array
      */
-    protected $_elementPrefixPaths = array();
+    protected array $_elementPrefixPaths = array();
 
     /**
      * Form elements
-     * @var array
      */
-    protected $_elements = array();
+    protected array $_elements = array();
 
     /**
      * Array to which elements belong (if any)
@@ -123,27 +113,23 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 
     /**
      * Custom form-level error messages
-     * @var array
      */
-    protected $_errorMessages = array();
+    protected array $_errorMessages = array();
 
     /**
      * Are there errors in the form?
-     * @var bool
      */
-    protected $_errorsExist = false;
+    protected bool $_errorsExist = false;
 
     /**
      * Has the form been manually flagged as an error?
-     * @var bool
      */
-    protected $_errorsForced = false;
+    protected bool $_errorsForced = false;
 
     /**
      * Form order
-     * @var int|null
      */
-    protected $_formOrder;
+    protected ?int $_formOrder = null;
 
     /**
      * Whether or not form elements are members of an array
@@ -153,72 +139,54 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 
     /**
      * Form legend
-     * @var string
      */
-    protected $_legend;
+    protected ?string $_legend = null;
 
     /**
      * Plugin loaders
-     * @var array
      */
-    protected $_loaders = array();
+    protected array $_loaders = array();
 
     /**
      * Allowed form methods
-     * @var array
      */
-    protected $_methods = array('delete', 'get', 'post', 'put');
+    protected array $_methods = array('delete', 'get', 'post', 'put');
 
     /**
      * Order in which to display and iterate elements
-     * @var array
      */
-    protected $_order = array();
+    protected array $_order = array();
 
     /**
      * Whether internal order has been updated or not
-     * @var bool
      */
-    protected $_orderUpdated = false;
+    protected bool $_orderUpdated = false;
 
     /**
      * Sub form prefix paths
-     * @var array
      */
-    protected $_subFormPrefixPaths = array();
+    protected array $_subFormPrefixPaths = array();
 
     /**
      * Sub forms
-     * @var array
      */
-    protected $_subForms = array();
+    protected array $_subForms = array();
 
-    /**
-     * @var Zend_Translate
-     */
-    protected $_translator;
+    protected ?\Zend_Translate_Adapter $_translator = null;
 
     /**
      * Global default translation adapter
-     * @var Zend_Translate
      */
-    protected static $_translatorDefault;
+    protected static ?\Zend_Translate_Adapter $_translatorDefault = null;
 
     /**
      * is the translator disabled?
-     * @var bool
      */
-    protected $_translatorDisabled = false;
+    protected bool $_translatorDisabled = false;
 
-    /**
-     * @var Zend_View_Interface
-     */
-    protected $_view;
+    protected ?\Zend_View_Interface $_view = null;
 
-    /**
-     * @var bool
-     */
-    protected $_isRendered = false;
+    protected bool $_isRendered = false;
 
     /**
      * Constructor
@@ -1170,7 +1138,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 } else {
                     switch ($argc) {
                         case 0:
-                            continue;
+                            continue 2;
                         case (1 <= $argc):
                             $type = array_shift($spec);
                         case (2 <= $argc):
@@ -1687,7 +1655,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 $order = null;
                 switch ($argc) {
                     case 0:
-                        continue;
+                        continue 2;
                     case (1 <= $argc):
                         $subForm = array_shift($spec);
 

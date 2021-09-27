@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_PublicDirectory extends Zend_Tool_Project_Con
     /**
      * @var string
      */
-    protected $_filesystemName = 'public';
+    protected ?string $_filesystemName = 'public';
 
     /**
      * getName()

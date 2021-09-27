@@ -42,18 +42,14 @@ abstract class Zend_Controller_Router_Abstract implements Zend_Controller_Router
 
     /**
      * Front controller instance
-     *
-     * @var Zend_Controller_Front
      */
-    protected $_frontController;
+    protected ?\Zend_Controller_Front $_frontController = null;
 
     /**
      * Array of invocation parameters to use when instantiating action
      * controllers
-     *
-     * @var array
      */
-    protected $_invokeParams = array();
+    protected array $_invokeParams = array();
 
     /**
      * Constructor

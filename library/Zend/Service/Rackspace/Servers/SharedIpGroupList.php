@@ -40,15 +40,12 @@ class Zend_Service_Rackspace_Servers_SharedIpGroupList implements Countable, Ite
     /**
      * @var array of Zend_Service_Rackspace_Servers_SharedIpGroup
      */
-    protected $shared = array();
+    protected array $shared = array();
     /**
      * @var int Iterator key
      */
-    protected $iteratorKey = 0;
-    /**
-     * @var Zend_Service_Rackspace_Servers
-     */
-    protected $service;
+    protected int $iteratorKey = 0;
+    protected \Zend_Service_Rackspace_Servers $service;
     /**
      * Construct
      *

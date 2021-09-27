@@ -49,10 +49,8 @@ abstract class Zend_Gdata_Gapps_Query extends Zend_Gdata_Query
 
     /**
      * The domain which is being administered via the Provisioning API.
-     *
-     * @var string
      */
-    protected $_domain = null;
+    protected ?string $_domain = null;
 
     /**
      * Create a new instance.

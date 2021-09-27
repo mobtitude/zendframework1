@@ -43,24 +43,20 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::INVALID => "Invalid type given. String or integer expected",
         self::NO_ISBN => "'%value%' is not a valid ISBN number",
     );
 
     /**
      * Allowed type.
-     *
-     * @var string
      */
-    protected $_type = self::AUTO;
+    protected string $_type = self::AUTO;
 
     /**
      * Separator character.
-     *
-     * @var string
      */
-    protected $_separator = '';
+    protected string $_separator = '';
 
     /**
      * Set up options.
@@ -167,7 +163,7 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
                 $isbn10 = str_replace($this->_separator, '', $value);
                 $sum    = 0;
                 for ($i = 0; $i < 9; $i++) {
-                    $sum += (10 - $i) * $isbn10{$i};
+                    $sum += (10 - $i) * $isbn10[$i];
                 }
 
                 // checksum
@@ -185,9 +181,9 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
                 $sum    = 0;
                 for ($i = 0; $i < 12; $i++) {
                     if ($i % 2 == 0) {
-                        $sum += $isbn13{$i};
+                        $sum += $isbn13[$i];
                     } else {
-                        $sum += 3 * $isbn13{$i};
+                        $sum += 3 * $isbn13[$i];
                     }
                 }
                 // checksum

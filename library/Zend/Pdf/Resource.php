@@ -44,17 +44,13 @@ abstract class Zend_Pdf_Resource
      * Resource abstraction also cashes information about rendered PDF files and
      * doesn't duplicate resource description each time then Resource is rendered
      * (referenced).
-     *
-     * @var Zend_Pdf_ElementFactory_Interface
      */
-    protected $_objectFactory;
+    protected \Zend_Pdf_ElementFactory_Interface $_objectFactory;
 
     /**
      * Main resource object
-     *
-     * @var Zend_Pdf_Element_Object
      */
-    protected $_resource;
+    protected ?\Zend_Pdf_Element_Object $_resource;
 
     /**
      * Object constructor.

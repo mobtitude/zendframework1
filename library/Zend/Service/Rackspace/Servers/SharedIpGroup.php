@@ -41,17 +41,13 @@ class Zend_Service_Rackspace_Servers_SharedIpGroup
      */
     protected $id;
     /**
-     * Array of servers of the shared IP group
-     * 
-     * @var array 
+     * Array of servers of the shared IP group 
      */
-    protected $serversId = array();
+    protected array $serversId = array();
     /**
      * The service that has created the image object
-     *
-     * @var Zend_Service_Rackspace_Servers
      */
-    protected $service;
+    protected \Zend_Service_Rackspace_Servers $service;
     /**
      * Construct
      * 

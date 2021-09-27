@@ -47,16 +47,12 @@ class Zend_Ldap_Node_Schema_ActiveDirectory extends Zend_Ldap_Node_Schema
 {
     /**
      * The attribute Types
-     *
-     * @var array
      */
-    protected $_attributeTypes = array();
+    protected array $_attributeTypes = array();
     /**
      * The object classes
-     *
-     * @var array
      */
-    protected $_objectClasses = array();
+    protected array $_objectClasses = array();
 
     /**
      * Parses the schema

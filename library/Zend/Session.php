@@ -52,9 +52,8 @@ class Zend_Session extends Zend_Session_Abstract
      * Whether or not Zend_Session is being used with unit tests
      *
      * @internal
-     * @var bool
      */
-    public static $_unitTestEnabled = false;
+    public static bool $_unitTestEnabled = false;
 
     /**
      * $_throwStartupException
@@ -65,10 +64,8 @@ class Zend_Session extends Zend_Session_Abstract
 
     /**
      * Check whether or not the session was started
-     *
-     * @var bool
      */
-    private static $_sessionStarted = false;
+    private static bool $_sessionStarted = false;
 
     /**
      * Whether or not the session id has been regenerated this request.
@@ -77,20 +74,16 @@ class Zend_Session extends Zend_Session_Abstract
      * <0 - regenerate requested when session is started
      * 0  - do nothing
      * >0 - already called session_regenerate_id()
-     *
-     * @var int
      */
-    private static $_regenerateIdState = 0;
+    private static int $_regenerateIdState = 0;
 
     /**
      * Private list of php's ini values for ext/session
      * null values will default to the php.ini value, otherwise
      * the value below will overwrite the default ini value, unless
      * the user has set an option explicity with setOptions()
-     *
-     * @var array
      */
-    private static $_defaultOptions = array(
+    private static array $_defaultOptions = array(
         'save_path'                 => null,
         'name'                      => null, /* this should be set to a unique value for each application */
         'save_handler'              => null,
@@ -122,10 +115,8 @@ class Zend_Session extends Zend_Session_Abstract
      * List of options pertaining to Zend_Session that can be set by developers
      * using Zend_Session::setOptions(). This list intentionally duplicates
      * the individual declaration of static "class" variables by the same names.
-     *
-     * @var array
      */
-    private static $_localOptions = array(
+    private static array $_localOptions = array(
         'strict'                => '_strict',
         'remember_me_seconds'   => '_rememberMeSeconds',
         'throw_startup_exceptions' => '_throwStartupExceptions'
@@ -133,52 +124,37 @@ class Zend_Session extends Zend_Session_Abstract
 
     /**
      * Whether or not write close has been performed.
-     *
-     * @var bool
      */
-    private static $_writeClosed = false;
+    private static bool $_writeClosed = false;
 
     /**
      * Whether or not session id cookie has been deleted
-     *
-     * @var bool
      */
-    private static $_sessionCookieDeleted = false;
+    private static bool $_sessionCookieDeleted = false;
 
     /**
      * Whether or not session has been destroyed via session_destroy()
-     *
-     * @var bool
      */
-    private static $_destroyed = false;
+    private static bool $_destroyed = false;
 
     /**
      * Whether or not session must be initiated before usage
-     *
-     * @var bool
      */
-    private static $_strict = false;
+    private static bool $_strict = false;
 
     /**
      * Default number of seconds the session will be remembered for when asked to be remembered
-     *
-     * @var int
      */
-    private static $_rememberMeSeconds = 1209600; // 2 weeks
-
+    private static int $_rememberMeSeconds = 1209600; // 2 weeks
     /**
      * Whether the default options listed in Zend_Session::$_localOptions have been set
-     *
-     * @var bool
      */
-    private static $_defaultOptionsSet = false;
+    private static bool $_defaultOptionsSet = false;
 
     /**
      * A reference to the set session save handler
-     *
-     * @var Zend_Session_SaveHandler_Interface
      */
-    private static $_saveHandler = null;
+    private static ?\Zend_Session_SaveHandler_Interface $_saveHandler = null;
 
 
     /**

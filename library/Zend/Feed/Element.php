@@ -40,17 +40,11 @@ class Zend_Feed_Element implements ArrayAccess
     /**
      * @var string Character encoding to utilize
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
-    /**
-     * @var Zend_Feed_Element
-     */
-    protected $_parentElement;
+    protected ?\Zend_Feed_Element $_parentElement = null;
 
-    /**
-     * @var boolean
-     */
-    protected $_appended = true;
+    protected bool $_appended = true;
 
 
     /**

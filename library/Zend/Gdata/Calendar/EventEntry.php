@@ -65,8 +65,8 @@ class Zend_Gdata_Calendar_EventEntry extends Zend_Gdata_Kind_EventEntry
 
     protected $_entryClassName = 'Zend_Gdata_Calendar_EventEntry';
     protected $_sendEventNotifications = null;
-    protected $_timezone = null;
-    protected $_quickadd = null;
+    protected ?\Zend_Gdata_Calendar_Extension_Timezone $_timezone = null;
+    protected ?\Zend_Gdata_Calendar_Extension_QuickAdd $_quickadd = null;
 
     public function __construct($element = null)
     {

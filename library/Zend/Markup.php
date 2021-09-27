@@ -38,17 +38,13 @@ class Zend_Markup
 
     /**
      * The parser loader
-     *
-     * @var Zend_Loader_PluginLoader
      */
-    protected static $_parserLoader;
+    protected static ?\Zend_Loader_PluginLoader $_parserLoader = null;
 
     /**
      * The renderer loader
-     *
-     * @var Zend_Loader_PluginLoader
      */
-    protected static $_rendererLoader;
+    protected static ?\Zend_Loader_PluginLoader $_rendererLoader = null;
 
 
     /**

@@ -42,17 +42,13 @@ class Zend_Memory_Value implements ArrayAccess {
 
     /**
      * Container
-     *
-     * @var Zend_Memory_Container_Interface
      */
-    private $_container;
+    private \Zend_Memory_Container_Movable $_container;
 
     /**
      * Boolean flag which signals to trace value modifications
-     *
-     * @var boolean
      */
-    private $_trace;
+    private bool $_trace;
 
 
     /**

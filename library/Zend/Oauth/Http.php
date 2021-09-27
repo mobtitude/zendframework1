@@ -36,10 +36,8 @@ class Zend_Oauth_Http
     /**
      * Array of all custom service parameters to be sent in the HTTP request
      * in addition to the usual OAuth parameters.
-     *
-     * @var array
      */
-    protected $_parameters = array();
+    protected array $_parameters = array();
 
     /**
      * Reference to the Zend_Oauth_Consumer instance in use.
@@ -59,17 +57,13 @@ class Zend_Oauth_Http
 
     /**
      * Request Method for the HTTP Request.
-     *
-     * @var string
      */
-    protected $_preferredRequestMethod = Zend_Oauth::POST;
+    protected string $_preferredRequestMethod = Zend_Oauth::POST;
 
     /**
      * Instance of the general Zend_Oauth_Http_Utility class.
-     *
-     * @var Zend_Oauth_Http_Utility
      */
-    protected $_httpUtility = null;
+    protected ?\Zend_Oauth_Http_Utility $_httpUtility = null;
 
     /**
      * Constructor

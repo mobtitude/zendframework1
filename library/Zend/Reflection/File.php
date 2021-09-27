@@ -37,10 +37,7 @@ require_once 'Zend/Reflection/Function.php';
  */
 class Zend_Reflection_File implements Reflector
 {
-    /**
-     * @var string
-     */
-    protected $_filepath        = null;
+    protected ?string $_filepath        = null;
 
     /**
      * @var string
@@ -60,17 +57,17 @@ class Zend_Reflection_File implements Reflector
     /**
      * @var string[]
      */
-    protected $_requiredFiles   = array();
+    protected array $_requiredFiles   = array();
 
     /**
      * @var Zend_Reflection_Class[]
      */
-    protected $_classes         = array();
+    protected array $_classes         = array();
 
     /**
      * @var Zend_Reflection_Function[]
      */
-    protected $_functions       = array();
+    protected array $_functions       = array();
 
     /**
      * @var string
@@ -355,7 +352,7 @@ class Zend_Reflection_File implements Reflector
                 case T_DOLLAR_OPEN_CURLY_BRACES:
                 case T_CURLY_OPEN:
                     $embeddedVariableTrapped = true;
-                    continue;
+                    continue 2;
 
                 // Name of something
                 case T_STRING:
@@ -366,7 +363,7 @@ class Zend_Reflection_File implements Reflector
                         $this->_classes[] = $value;
                         $classTrapped = false;
                     }
-                    continue;
+                    continue 2;
 
                 // Required file names are T_CONSTANT_ENCAPSED_STRING
                 case T_CONSTANT_ENCAPSED_STRING:
@@ -374,7 +371,7 @@ class Zend_Reflection_File implements Reflector
                         $this->_requiredFiles[] = $value ."\n";
                         $requireTrapped = false;
                     }
-                    continue;
+                    continue 2;
 
                 // Functions
                 case T_FUNCTION:

@@ -39,42 +39,26 @@ require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
 class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Framework_Registry_EnabledInterface
 {
 
-    /**
-     * @var Zend_Tool_Framework_Registry_Interface
-     */
-    protected $_registry = null;
+    protected ?\Zend_Tool_Framework_Registry_Interface $_registry = null;
 
     /**
-     * Holds the manifest repository taken from the registry.
-     *
-     * @var Zend_Tool_Framework_Manifest_Repository
-     */
-      protected $_manifestRepository = null;
+       * Holds the manifest repository taken from the registry.
+       */
+      protected ?\Zend_Tool_Framework_Manifest_Repository $_manifestRepository = null;
 
-    /**
-     * @var Zend_Tool_Framework_Client_Request
-     */
-    protected $_request = null;
+    protected ?\Zend_Tool_Framework_Client_Request $_request = null;
 
-    /**
-     * @var Zend_Tool_Framework_Client_Response
-     */
-    protected $_response = null;
+    protected ?\Zend_Tool_Framework_Client_Response $_response = null;
 
     /**#@+
      * @var array
      */
-    protected $_argumentsOriginal = null;
-    protected $_argumentsWorking  = null;
-    /**#@-*/
-
-    /**
-     * @var bool
-     */
-    protected $_help = false;
-    protected $_helpKnownAction = false;
-    protected $_helpKnownProvider = false;
-    protected $_helpKnownSpecialty = false;
+    protected ?array $_argumentsOriginal = null;
+    protected ?array $_argumentsWorking  = null;
+    protected bool $_help = false;
+    protected bool $_helpKnownAction = false;
+    protected bool $_helpKnownProvider = false;
+    protected bool $_helpKnownSpecialty = false;
 
 
     /**

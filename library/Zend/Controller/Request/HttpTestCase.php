@@ -37,15 +37,13 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
 {
     /**
      * Request headers
-     * @var array
      */
-    protected $_headers = array();
+    protected array $_headers = array();
 
     /**
      * Request method
-     * @var string
      */
-    protected $_method = 'GET';
+    protected string $_method = 'GET';
 
     /**
      * Raw POST body
@@ -55,9 +53,8 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
 
     /**
      * Valid request method types
-     * @var array
      */
-    protected $_validMethodTypes = array(
+    protected array $_validMethodTypes = array(
         'DELETE',
         'GET',
         'HEAD',

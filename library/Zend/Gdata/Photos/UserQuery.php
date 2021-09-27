@@ -46,27 +46,21 @@ class Zend_Gdata_Photos_UserQuery extends Zend_Gdata_Query
     /**
      * Indicates the format of data returned in Atom feeds. Can be either
      * 'api' or 'base'. Default value is 'api'.
-     *
-     * @var string
      */
-    protected $_projection = 'api';
+    protected string $_projection = 'api';
 
     /**
      * Indicates whether to request a feed or entry in queries. Default
      * value is 'feed';
-     *
-     * @var string
      */
-    protected $_type = 'feed';
+    protected string $_type = 'feed';
 
     /**
      * A string which, if not null, indicates which user should
      * be retrieved by this query. If null, the default user will be used
      * instead.
-     *
-     * @var string
      */
-    protected $_user = Zend_Gdata_Photos::DEFAULT_USER;
+    protected string $_user = Zend_Gdata_Photos::DEFAULT_USER;
 
     /**
      * Create a new Query object with default values.

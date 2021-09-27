@@ -57,10 +57,8 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
 
     /**
      * Reference to the factory.
-     *
-     * @var Zend_Pdf_ElementFactory
      */
-    protected $_factory;
+    protected \Zend_Pdf_ElementFactory $_factory;
 
     /**
      * Object constructor

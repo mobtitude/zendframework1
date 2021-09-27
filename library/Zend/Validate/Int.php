@@ -43,12 +43,12 @@ class Zend_Validate_Int extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::INVALID => "Invalid type given. String or integer expected",
         self::NOT_INT => "'%value%' does not appear to be an integer",
     );
 
-    protected $_locale;
+    protected ?string $_locale = null;
 
     /**
      * Constructor for the integer validator

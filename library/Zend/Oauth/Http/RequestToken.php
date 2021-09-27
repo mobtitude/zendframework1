@@ -35,10 +35,8 @@ class Zend_Oauth_Http_RequestToken extends Zend_Oauth_Http
 {
     /**
      * Singleton instance if required of the HTTP client
-     *
-     * @var Zend_Http_Client
      */
-    protected $_httpClient = null;
+    protected ?\Zend_Http_Client $_httpClient = null;
 
     /**
      * Initiate a HTTP request to retrieve a Request Token.

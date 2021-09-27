@@ -48,7 +48,7 @@ class Zend_Tool_Project_Context_Zf_TestApplicationModuleDirectory extends Zend_T
     /**
      * @var string
      */
-    protected $_filesystemName = 'moduleDirectory';
+    protected ?string $_filesystemName = 'moduleDirectory';
 
     /**
      * init()

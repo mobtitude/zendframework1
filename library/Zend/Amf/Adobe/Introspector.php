@@ -45,22 +45,22 @@ class Zend_Amf_Adobe_Introspector
      *
      * @var array Introspector options
      */
-    protected $_options;
+    protected ?array $_options = null;
 
     /**
      * @var DOMElement DOM element to store types
      */
-    protected $_types;
+    protected ?\DOMElement $_types = null;
 
     /**
      * @var array Map of the known types
      */
-    protected $_typesMap = array();
+    protected array $_typesMap = array();
 
     /**
      * @var DOMDocument XML document to store data
      */
-    protected $_xml;
+    protected \DOMDocument $_xml;
 
     /**
      * Constructor

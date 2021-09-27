@@ -35,7 +35,7 @@ class Zend_Filter_File_Rename implements Zend_Filter_Interface
     /**
      * Internal array of array(source, target, overwrite)
      */
-    protected $_files = array();
+    protected array $_files = array();
 
     /**
      * Class constructor

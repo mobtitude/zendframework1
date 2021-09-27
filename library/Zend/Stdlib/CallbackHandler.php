@@ -39,15 +39,13 @@ class Zend_Stdlib_CallbackHandler
 
     /**
      * Did an error occur when testing the validity of the callback?
-     * @var bool
      */
-    protected $error = false;
+    protected bool $error = false;
 
     /**
      * Callback metadata, if any
-     * @var array
      */
-    protected $metadata;
+    protected array $metadata;
 
     /**
      * Constructor

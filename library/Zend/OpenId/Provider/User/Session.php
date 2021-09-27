@@ -45,10 +45,8 @@ class Zend_OpenId_Provider_User_Session extends Zend_OpenId_Provider_User
 {
     /**
      * Reference to an implementation of Zend_Session_Namespace object
-     *
-     * @var Zend_Session_Namespace $_session
      */
-    private $_session = null;
+    private ?\Zend_Session_Namespace $_session = null;
 
     /**
      * Creates Zend_OpenId_Provider_User_Session object with given session

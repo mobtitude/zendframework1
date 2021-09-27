@@ -134,10 +134,8 @@ class Zend_Pdf
      * Original properties set.
      *
      * Used for tracking properties changes
-     *
-     * @var array
      */
-    protected $_originalProperties = array();
+    protected array $_originalProperties = array();
 
     /**
      * Document level javascript
@@ -152,7 +150,7 @@ class Zend_Pdf
      *
      * @var array   - array of Zend_Pdf_Target objects
      */
-    protected $_namedTargets = array();
+    protected array $_namedTargets = array();
 
     /**
      * Document outlines
@@ -167,15 +165,13 @@ class Zend_Pdf
      *
      * @var array - array of Zend_Pdf_Outline objects
      */
-    protected $_originalOutlines = array();
+    protected array $_originalOutlines = array();
 
     /**
      * Original document outlines open elements count
      * Used to track outlines update
-     *
-     * @var integer
      */
-    protected $_originalOpenOutlinesCount = 0;
+    protected int $_originalOpenOutlinesCount = 0;
 
     /**
      * Pdf trailer (last or just created)
@@ -186,47 +182,37 @@ class Zend_Pdf
 
     /**
      * PDF objects factory.
-     *
-     * @var Zend_Pdf_ElementFactory_Interface
      */
-    protected $_objFactory = null;
+    protected ?\Zend_Pdf_ElementFactory_Interface $_objFactory = null;
 
     /**
      * Memory manager for stream objects
-     *
-     * @var Zend_Memory_Manager|null
      */
-    protected static $_memoryManager = null;
+    protected static ?\Zend_Memory_Manager $_memoryManager = null;
 
     /**
      * Pdf file parser.
      * It's not used, but has to be destroyed only with Zend_Pdf object
-     *
-     * @var Zend_Pdf_Parser
      */
-    protected $_parser;
+    protected ?\Zend_Pdf_Parser $_parser = null;
 
     /**
      * List of inheritable attributesfor pages tree
-     *
-     * @var array
      */
-    protected static $_inheritableAttributes = array('Resources', 'MediaBox', 'CropBox', 'Rotate');
+    protected static array $_inheritableAttributes = array('Resources', 'MediaBox', 'CropBox', 'Rotate');
 
     /**
      * List of form fields
      *
      * @var array - Associative array, key: name of form field, value: Zend_Pdf_Element
      */
-    protected $_formFields = array();
+    protected array $_formFields = array();
 
     /**
      * True if the object is a newly created PDF document (affects save() method behavior)
      * False otherwise
-     *
-     * @var boolean
      */
-    protected $_isNewDocument = true;
+    protected bool $_isNewDocument = true;
 
     /**
      * Request used memory manager
@@ -1077,18 +1063,14 @@ class Zend_Pdf
     /**
      * Pages collection hash:
      * <page dictionary object hash id> => Zend_Pdf_Page
-     *
-     * @var SplObjectStorage
      */
-    protected $_pageReferences = null;
+    protected ?array $_pageReferences = null;
 
     /**
      * Pages collection hash:
      * <page number> => Zend_Pdf_Page
-     *
-     * @var array
      */
-    protected $_pageNumbers = null;
+    protected ?array $_pageNumbers = null;
 
     /**
      * Refresh page collection hashes

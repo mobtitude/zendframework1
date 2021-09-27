@@ -47,7 +47,7 @@ class Zend_Tool_Project_Context_Zf_ModuleDirectory extends Zend_Tool_Project_Con
     /**
      * @var string
      */
-    protected $_filesystemName = 'moduleDirectory';
+    protected ?string $_filesystemName = 'moduleDirectory';
 
     /**
      * init()

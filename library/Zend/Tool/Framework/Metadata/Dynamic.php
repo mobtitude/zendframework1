@@ -40,25 +40,16 @@ class Zend_Tool_Framework_Metadata_Dynamic
     implements Zend_Tool_Framework_Metadata_Interface, Zend_Tool_Framework_Metadata_Attributable
 {
 
-    /**
-     * @var string
-     */
-    protected $_type = 'Dynamic';
+    protected string $_type = 'Dynamic';
 
-    /**
-     * @var string
-     */
-    protected $_name = null;
+    protected ?string $_name = null;
 
     /**
      * @var string
      */
     protected $_value = null;
 
-    /**
-     * @var array
-     */
-    protected $_dynamicAttributes = array();
+    protected array $_dynamicAttributes = array();
 
     public function __construct($options = array())
     {

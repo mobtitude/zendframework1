@@ -41,9 +41,8 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
 
     /**
      * Default placement: append
-     * @var string
      */
-    protected $_placement = 'APPEND';
+    protected ?string $_placement = 'APPEND';
 
     /**
      * @var Zend_Form_Element|Zend_Form
@@ -52,15 +51,13 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
 
     /**
      * Decorator options
-     * @var array
      */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * Separator between new content and old
-     * @var string
      */
-    protected $_separator = PHP_EOL;
+    protected string $_separator = PHP_EOL;
 
     /**
      * Constructor

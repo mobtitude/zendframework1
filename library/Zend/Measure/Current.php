@@ -70,7 +70,7 @@ class Zend_Measure_Current extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ABAMPERE'             => array('10',           'abampere'),
         'AMPERE'               => array('1',            'A'),
         'BIOT'                 => array('10',           'Bi'),

@@ -95,7 +95,7 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
      *
      * @var array available options
      */
-    protected $_options = array(
+    protected array $_options = array(
         'cache_dir' => null,
         'file_locking' => true,
         'read_control' => true,
@@ -109,10 +109,8 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
 
     /**
      * Array of metadatas (each item is an associative array)
-     *
-     * @var array
      */
-    protected $_metadatasArray = array();
+    protected array $_metadatasArray = array();
 
 
     /**

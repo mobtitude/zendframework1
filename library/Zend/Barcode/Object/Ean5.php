@@ -41,7 +41,7 @@ require_once 'Zend/Validate/Barcode.php';
 class Zend_Barcode_Object_Ean5 extends Zend_Barcode_Object_Ean13
 {
 
-    protected $_parities = array(
+    protected array $_parities = array(
         0 => array('B','B','A','A','A'),
         1 => array('B','A','B','A','A'),
         2 => array('B','A','A','B','A'),
@@ -124,7 +124,7 @@ class Zend_Barcode_Object_Ean5 extends Zend_Barcode_Object_Ean13
         $checksum = 0;
 
         for ($i = 0 ; $i < $this->_barcodeLength; $i ++) {
-            $checksum += intval($text{$i}) * ($i % 2 ? 9 : 3);
+            $checksum += (int)$text[$i] * ($i % 2 ? 9 : 3);
         }
 
         return ($checksum % 10);

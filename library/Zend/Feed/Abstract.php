@@ -47,17 +47,13 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
     /**
      * Current index on the collection of feed entries for the
      * Iterator implementation.
-     *
-     * @var integer
      */
-    protected $_entryIndex = 0;
+    protected int $_entryIndex = 0;
 
     /**
      * Cache of feed entries.
-     *
-     * @var array
      */
-    protected $_entries;
+    protected ?array $_entries = null;
 
     /**
      * Feed constructor

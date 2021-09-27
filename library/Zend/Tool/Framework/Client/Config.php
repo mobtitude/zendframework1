@@ -29,12 +29,9 @@
 class Zend_Tool_Framework_Client_Config
 {
 
-    protected $_configFilepath = null;
+    protected ?string $_configFilepath = null;
 
-    /**
-     * @var Zend_Config
-     */
-    protected $_config = null;
+    protected ?\Zend_Config $_config = null;
 
     /**
      * @param array $options

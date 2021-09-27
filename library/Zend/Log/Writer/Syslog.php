@@ -39,10 +39,8 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
 {
     /**
      * Maps Zend_Log priorities to PHP's syslog priorities
-     *
-     * @var array
      */
-    protected $_priorities = array(
+    protected array $_priorities = array(
         Zend_Log::EMERG  => LOG_EMERG,
         Zend_Log::ALERT  => LOG_ALERT,
         Zend_Log::CRIT   => LOG_CRIT,
@@ -62,17 +60,13 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
 
     /**
      * Last application name set by a syslog-writer instance
-     *
-     * @var string
      */
-    protected static $_lastApplication;
+    protected static ?string $_lastApplication = null;
 
     /**
      * Last facility name set by a syslog-writer instance
-     *
-     * @var string
      */
-    protected static $_lastFacility;
+    protected static ?int $_lastFacility = null;
 
     /**
      * Application name used by this syslog-writer instance
@@ -83,17 +77,13 @@ class Zend_Log_Writer_Syslog extends Zend_Log_Writer_Abstract
 
     /**
      * Facility used by this syslog-writer instance
-     *
-     * @var int
      */
-    protected $_facility = LOG_USER;
+    protected int $_facility = LOG_USER;
 
     /**
      * Types of program available to logging of message
-     *
-     * @var array
      */
-    protected $_validFacilities = array();
+    protected array $_validFacilities = array();
 
     /**
      * Class constructor

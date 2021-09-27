@@ -38,33 +38,29 @@ class Zend_Json_Server_Smd_Service
      * Service metadata
      * @var string
      */
-    protected $_envelope  = Zend_Json_Server_Smd::ENV_JSONRPC_1;
-    protected $_name;
+    protected string $_envelope  = Zend_Json_Server_Smd::ENV_JSONRPC_1;
+    protected ?string $_name = null;
     protected $_return;
-    protected $_target;
-    protected $_transport = 'POST';
+    protected ?string $_target = null;
+    protected string $_transport = 'POST';
     /**#@-*/
-
     /**
      * Allowed envelope types
-     * @var array
      */
-    protected $_envelopeTypes = array(
+    protected array $_envelopeTypes = array(
         Zend_Json_Server_Smd::ENV_JSONRPC_1,
         Zend_Json_Server_Smd::ENV_JSONRPC_2,
     );
 
     /**
      * Regex for names
-     * @var string
      */
-    protected $_nameRegex = '/^[a-z][a-z0-9._]+$/i';
+    protected string $_nameRegex = '/^[a-z][a-z0-9._]+$/i';
 
     /**
      * Parameter option types
-     * @var array
      */
-    protected $_paramOptionTypes = array(
+    protected array $_paramOptionTypes = array(
         'name'        => 'is_string',
         'optional'    => 'is_bool',
         'default'     => null,
@@ -73,15 +69,13 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Service params
-     * @var array
      */
-    protected $_params = array();
+    protected array $_params = array();
 
     /**
      * Mapping of parameter types to JSON-RPC types
-     * @var array
      */
-    protected $_paramMap = array(
+    protected array $_paramMap = array(
         'any'     => 'any',
         'arr'     => 'array',
         'array'   => 'array',
@@ -108,9 +102,8 @@ class Zend_Json_Server_Smd_Service
 
     /**
      * Allowed transport types
-     * @var array
      */
-    protected $_transportTypes = array(
+    protected array $_transportTypes = array(
         'POST',
     );
 

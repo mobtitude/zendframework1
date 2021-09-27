@@ -64,17 +64,13 @@ abstract class Zend_Pdf_Resource_Font_CidFont extends Zend_Pdf_Resource_Font
 
     /**
      * Array containing the widths of each character that have entries in used character map.
-     *
-     * @var array
      */
-    protected $_charWidths = null;
+    protected ?array $_charWidths = null;
 
     /**
      * Width for characters missed in the font
-     *
-     * @var integer
      */
-    protected $_missingCharWidth = 0;
+    protected int $_missingCharWidth = 0;
 
 
     /**

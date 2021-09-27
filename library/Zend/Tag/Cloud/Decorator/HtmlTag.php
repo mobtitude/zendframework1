@@ -47,44 +47,34 @@ class Zend_Tag_Cloud_Decorator_HtmlTag extends Zend_Tag_Cloud_Decorator_Tag
     /**
      * @var string Encoding to utilize
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
     /**
      * Unit for the fontsize
-     *
-     * @var string
      */
-    protected $_fontSizeUnit = 'px';
+    protected string $_fontSizeUnit = 'px';
 
     /**
      * Allowed fontsize units
-     *
-     * @var array
      */
-    protected $_alloweFontSizeUnits = array('em', 'ex', 'px', 'in', 'cm', 'mm', 'pt', 'pc', '%');
+    protected array $_alloweFontSizeUnits = array('em', 'ex', 'px', 'in', 'cm', 'mm', 'pt', 'pc', '%');
 
     /**
      * List of HTML tags
-     *
-     * @var array
      */
-    protected $_htmlTags = array(
+    protected array $_htmlTags = array(
         'li'
     );
 
     /**
      * Maximum fontsize
-     *
-     * @var integer
      */
-    protected $_maxFontSize = 20;
+    protected int $_maxFontSize = 20;
 
     /**
      * Minimum fontsize
-     *
-     * @var integer
      */
-    protected $_minFontSize = 10;
+    protected int $_minFontSize = 10;
 
     /**
      * Set a list of classes to use instead of fontsizes

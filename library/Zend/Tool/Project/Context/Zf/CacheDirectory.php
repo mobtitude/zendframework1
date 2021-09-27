@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_CacheDirectory extends Zend_Tool_Project_Cont
     /**
      * @var string
      */
-    protected $_filesystemName = 'cache';
+    protected ?string $_filesystemName = 'cache';
 
     /**
      * getName()

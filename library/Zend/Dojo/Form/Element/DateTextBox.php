@@ -42,9 +42,8 @@ class Zend_Dojo_Form_Element_DateTextBox extends Zend_Dojo_Form_Element_Validati
 
     /**
      * Allowed formatLength types
-     * @var array
      */
-    protected $_allowedFormatTypes = array(
+    protected array $_allowedFormatTypes = array(
         'long',
         'short',
         'medium',
@@ -53,9 +52,8 @@ class Zend_Dojo_Form_Element_DateTextBox extends Zend_Dojo_Form_Element_Validati
 
     /**
      * Allowed selector types
-     * @var array
      */
-    protected $_allowedSelectorTypes = array(
+    protected array $_allowedSelectorTypes = array(
         'time',
         'date',
     );

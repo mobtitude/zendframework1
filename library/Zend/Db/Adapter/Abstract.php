@@ -45,25 +45,19 @@ abstract class Zend_Db_Adapter_Abstract
 
     /**
      * User-provided configuration
-     *
-     * @var array
      */
-    protected $_config = array();
+    protected array $_config = array();
 
     /**
      * Fetch mode
-     *
-     * @var integer
      */
-    protected $_fetchMode = Zend_Db::FETCH_ASSOC;
+    protected int $_fetchMode = Zend_Db::FETCH_ASSOC;
 
     /**
      * Query profiler object, of type Zend_Db_Profiler
      * or a subclass of that.
-     *
-     * @var Zend_Db_Profiler
      */
-    protected $_profiler;
+    protected ?\Zend_Db_Profiler $_profiler = null;
 
     /**
      * Default class name for a DB statement.
@@ -74,10 +68,8 @@ abstract class Zend_Db_Adapter_Abstract
 
     /**
      * Default class name for the profiler object.
-     *
-     * @var string
      */
-    protected $_defaultProfilerClass = 'Zend_Db_Profiler';
+    protected string $_defaultProfilerClass = 'Zend_Db_Profiler';
 
     /**
      * Database connection
@@ -92,10 +84,8 @@ abstract class Zend_Db_Adapter_Abstract
      * Zend_Db::CASE_NATURAL (default)
      * Zend_Db::CASE_LOWER
      * Zend_Db::CASE_UPPER
-     *
-     * @var integer
      */
-    protected $_caseFolding = Zend_Db::CASE_NATURAL;
+    protected int $_caseFolding = Zend_Db::CASE_NATURAL;
 
     /**
      * Specifies whether the adapter automatically quotes identifiers.
@@ -103,10 +93,8 @@ abstract class Zend_Db_Adapter_Abstract
      * identifier quoting automatically.
      * If false, developer must quote identifiers themselves
      * by calling quoteIdentifier().
-     *
-     * @var bool
      */
-    protected $_autoQuoteIdentifiers = true;
+    protected bool $_autoQuoteIdentifiers = true;
 
     /**
      * Keys are UPPERCASE SQL datatypes or the constants
@@ -119,25 +107,21 @@ abstract class Zend_Db_Adapter_Abstract
      *
      * @var array Associative array of datatypes to values 0, 1, or 2.
      */
-    protected $_numericDataTypes = array(
+    protected array $_numericDataTypes = array(
         Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
         Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE
     );
 
     /** Weither or not that object can get serialized
-     *
-     * @var bool
      */
-    protected $_allowSerialization = true;
+    protected bool $_allowSerialization = true;
 
     /**
      * Weither or not the database should be reconnected
      * to that adapter when waking up
-     *
-     * @var bool
      */
-    protected $_autoReconnectOnUnserialize = false;
+    protected bool $_autoReconnectOnUnserialize = false;
 
     /**
      * Constructor.

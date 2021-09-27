@@ -40,10 +40,9 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
 {
     /**
      * Subject
-     * @var string
      * @access public
      */
-    public $subject = null;
+    public ?string $subject = null;
 
 
     /**
@@ -58,13 +57,12 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
      * @var string
      * @access public
      */
-    public $EOL = PHP_EOL;
+    public string $EOL = PHP_EOL;
 
     /**
      * error information
-     * @var string
      */
-    protected $_errstr;
+    protected ?string $_errstr = null;
 
     /**
      * Constructor.

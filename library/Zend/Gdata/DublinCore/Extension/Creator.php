@@ -38,8 +38,8 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_DublinCore_Extension_Creator extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'dc';
-    protected $_rootElement = 'creator';
+    protected string $_rootNamespace = 'dc';
+    protected ?string $_rootElement = 'creator';
 
     /**
      * Constructor for Zend_Gdata_DublinCore_Extension_Creator which

@@ -46,24 +46,20 @@ require_once 'Zend/Gdata/Gapps.php';
 class Zend_Gdata_Gapps_Extension_Login extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'apps';
-    protected $_rootElement = 'login';
+    protected string $_rootNamespace = 'apps';
+    protected ?string $_rootElement = 'login';
 
     /**
      * The username for this user. This is used as the user's email address
      * and when logging in to Google Apps-hosted services.
-     *
-     * @var string
      */
-    protected $_username = null;
+    protected ?string $_username = null;
 
     /**
      * The password for the user. May be in cleartext or as an SHA-1
      * digest, depending on the value of _hashFunctionName.
-     *
-     * @var string
      */
-    protected $_password = null;
+    protected ?string $_password = null;
 
     /**
      * Specifies whether the password stored in _password is in cleartext
@@ -72,18 +68,14 @@ class Zend_Gdata_Gapps_Extension_Login extends Zend_Gdata_Extension
      * this should be set to 'SHA-1'.
      *
      * At the time of writing, no other hash functions are supported
-     *
-     * @var string
      */
-    protected $_hashFunctionName = null;
+    protected ?string $_hashFunctionName = null;
 
     /**
      * True if the user has administrative rights for this domain, false
      * otherwise.
-     *
-     * @var boolean
      */
-    protected $_admin = null;
+    protected ?bool $_admin = null;
 
     /**
      * True if the user has agreed to the terms of service for Google Apps,
@@ -91,22 +83,18 @@ class Zend_Gdata_Gapps_Extension_Login extends Zend_Gdata_Extension
      *
      * @var boolean.
      */
-    protected $_agreedToTerms = null;
+    protected ?bool $_agreedToTerms = null;
 
     /**
      * True if this user has been suspended, false otherwise.
-     *
-     * @var boolean
      */
-    protected $_suspended = null;
+    protected ?bool $_suspended = null;
 
     /**
      * True if the user will be required to change their password at
      * their next login, false otherwise.
-     *
-     * @var boolean
      */
-    protected $_changePasswordAtNextLogin = null;
+    protected ?bool $_changePasswordAtNextLogin = null;
 
     /**
      * Constructs a new Zend_Gdata_Gapps_Extension_Login object.

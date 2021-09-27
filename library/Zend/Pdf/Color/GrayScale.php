@@ -40,10 +40,8 @@ class Zend_Pdf_Color_GrayScale extends Zend_Pdf_Color
     /**
      * GrayLevel.
      * 0.0 (black) - 1.0 (white)
-     *
-     * @var Zend_Pdf_Element_Numeric
      */
-    private $_grayLevel;
+    private \Zend_Pdf_Element_Numeric $_grayLevel;
 
     /**
      * Object constructor

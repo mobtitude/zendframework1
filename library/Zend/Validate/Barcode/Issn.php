@@ -42,7 +42,7 @@ class Zend_Validate_Barcode_Issn extends Zend_Validate_Barcode_AdapterAbstract
      * Allowed barcode characters
      * @var string
      */
-    protected $_characters = '0123456789X';
+    protected string $_characters = '0123456789X';
 
     /**
      * Checksum function

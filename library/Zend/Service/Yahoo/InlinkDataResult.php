@@ -38,10 +38,8 @@ class Zend_Service_Yahoo_InlinkDataResult extends Zend_Service_Yahoo_Result
 {
     /**
      * Web result namespace
-     *
-     * @var string
      */
-    protected $_namespace = 'urn:yahoo:srch';
+    protected string $_namespace = 'urn:yahoo:srch';
 
 
     /**

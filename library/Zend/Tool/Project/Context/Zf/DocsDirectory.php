@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_DocsDirectory extends Zend_Tool_Project_Conte
     /**
      * @var string
      */
-    protected $_filesystemName = 'docs';
+    protected ?string $_filesystemName = 'docs';
 
     /**
      * getName()

@@ -40,15 +40,14 @@ class Zend_Wildfire_Plugin_FirePhp_TableMessage extends Zend_Wildfire_Plugin_Fir
 {
     /**
      * The header of the table containing all columns
-     * @var array
      */
-    protected $_header = null;
+    protected ?array $_header = null;
 
     /**
      * The rows of the table
      * $var array
      */
-    protected $_rows = array();
+    protected array $_rows = array();
 
     /**
      * Constructor

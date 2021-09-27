@@ -35,17 +35,13 @@ class Zend_Log_Writer_Mock extends Zend_Log_Writer_Abstract
 {
     /**
      * array of log events
-     *
-     * @var array
      */
-    public $events = array();
+    public array $events = array();
 
     /**
      * shutdown called?
-     *
-     * @var boolean
      */
-    public $shutdown = false;
+    public bool $shutdown = false;
 
     /**
      * Write a message to the log.

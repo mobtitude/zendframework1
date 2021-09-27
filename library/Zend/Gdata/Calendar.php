@@ -63,14 +63,14 @@ class Zend_Gdata_Calendar extends Zend_Gdata
     const CALENDAR_EVENT_FEED_URI = 'https://www.google.com/calendar/feeds/default/private/full';
     const AUTH_SERVICE_NAME = 'cl';
 
-    protected $_defaultPostUri = self::CALENDAR_EVENT_FEED_URI;
+    protected ?string $_defaultPostUri = self::CALENDAR_EVENT_FEED_URI;
 
     /**
      * Namespaces used for Zend_Gdata_Calendar
      *
      * @var array
      */
-    public static $namespaces = array(
+    public static array $namespaces = array(
         array('gCal', 'http://schemas.google.com/gCal/2005', 1, 0)
     );
 

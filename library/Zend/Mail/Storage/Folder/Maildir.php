@@ -48,21 +48,18 @@ class Zend_Mail_Storage_Folder_Maildir extends Zend_Mail_Storage_Maildir impleme
 {
     /**
      * Zend_Mail_Storage_Folder root folder for folder structure
-     * @var Zend_Mail_Storage_Folder
      */
-    protected $_rootFolder;
+    protected ?\Zend_Mail_Storage_Folder $_rootFolder = null;
 
     /**
      * rootdir of folder structure
-     * @var string
      */
-    protected $_rootdir;
+    protected string $_rootdir;
 
     /**
      * name of current folder
-     * @var string
      */
-    protected $_currentFolder;
+    protected ?string $_currentFolder = null;
 
     /**
      * delim char for subfolders

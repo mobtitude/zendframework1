@@ -54,22 +54,16 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
     /**
      * @var array of reflected constants
      */
-    protected static $_constants = array();
+    protected static array $_constants = array();
 
     /**
      * @var mixed
      */
     protected $_value = null;
 
-    /**
-     * @var string
-     */
-    protected $_type  = self::TYPE_AUTO;
+    protected string $_type  = self::TYPE_AUTO;
 
-    /**
-     * @var int
-     */
-    protected $_arrayDepth = 1;
+    protected int $_arrayDepth = 1;
 
     /**
      * _init()

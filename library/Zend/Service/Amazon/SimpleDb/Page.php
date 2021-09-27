@@ -37,17 +37,13 @@ class Zend_Service_Amazon_SimpleDb_Page
 {
     /**
      * Page data
-     *
-     * @var string
      */
-    protected $_data;
+    protected ?string $_data = null;
 
     /**
      * Token identifying page
-     *
-     * @var string|null
      */
-    protected $_token;
+    protected ?string $_token = null;
 
     /**
      * Constructor

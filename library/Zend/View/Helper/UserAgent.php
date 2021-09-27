@@ -34,10 +34,8 @@ class Zend_View_Helper_UserAgent extends Zend_View_Helper_Abstract
 {
     /**
      * UserAgent instance
-     *
-     * @var Zend_Http_UserAgent
      */
-    protected $_userAgent = null;
+    protected ?\Zend_Http_UserAgent $_userAgent = null;
 
     /**
      * Helper method: retrieve or set UserAgent instance

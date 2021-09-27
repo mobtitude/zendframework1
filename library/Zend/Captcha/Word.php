@@ -42,10 +42,10 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
     /**#@+
      * @var array Character sets
      */
-    static public $V  = array("a", "e", "i", "o", "u", "y");
-    static public $VN = array("a", "e", "i", "o", "u", "y","2","3","4","5","6","7","8","9");
-    static public $C  = array("b","c","d","f","g","h","j","k","m","n","p","q","r","s","t","u","v","w","x","z");
-    static public $CN = array("b","c","d","f","g","h","j","k","m","n","p","q","r","s","t","u","v","w","x","z","2","3","4","5","6","7","8","9");
+    static public array $V  = array("a", "e", "i", "o", "u", "y");
+    static public array $VN = array("a", "e", "i", "o", "u", "y","2","3","4","5","6","7","8","9");
+    static public array $C  = array("b","c","d","f","g","h","j","k","m","n","p","q","r","s","t","u","v","w","x","z");
+    static public array $CN = array("b","c","d","f","g","h","j","k","m","n","p","q","r","s","t","u","v","w","x","z","2","3","4","5","6","7","8","9");
     /**#@-*/
 
     /**
@@ -71,17 +71,13 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
 
     /**
      * Class name for sessions
-     *
-     * @var string
      */
-    protected $_sessionClass = 'Zend_Session_Namespace';
+    protected string $_sessionClass = 'Zend_Session_Namespace';
 
     /**
      * Should the numbers be used or only letters
-     *
-     * @var boolean
      */
-    protected $_useNumbers = true;
+    protected bool $_useNumbers = true;
 
     /**
      * Should both cases be used or only lowercase
@@ -89,20 +85,15 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
      * @var boolean
      */
     // protected $_useCase = false;
-
     /**
      * Session lifetime for the captcha data
-     *
-     * @var integer
      */
-    protected $_timeout = 300;
+    protected int $_timeout = 300;
 
     /**
      * Should generate() keep session or create a new one?
-     *
-     * @var boolean
      */
-    protected $_keepSession = false;
+    protected bool $_keepSession = false;
 
     /**#@+
      * Error codes
@@ -116,7 +107,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
      * Error messages
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::MISSING_VALUE => 'Empty captcha value',
         self::MISSING_ID    => 'Captcha ID field is missing',
         self::BAD_CAPTCHA   => 'Captcha value is wrong',
@@ -124,10 +115,8 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
 
     /**
      * Length of the word to generate
-     *
-     * @var integer
      */
-    protected $_wordlen = 8;
+    protected int $_wordlen = 8;
 
     /**
      * Retrieve session class to utilize

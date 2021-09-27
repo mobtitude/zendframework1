@@ -41,11 +41,11 @@ require_once 'Zend/Xml/Exception.php';
 class Zend_Translate_Adapter_XmlTm extends Zend_Translate_Adapter {
     // Internal variables
     private $_file        = false;
-    private $_cleared     = array();
-    private $_lang        = null;
+    private array $_cleared     = array();
+    private ?string $_lang        = null;
     private $_content     = null;
     private $_tag         = null;
-    private $_data        = array();
+    private array $_data        = array();
 
     /**
      * Load translation data (XMLTM file reader)

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  php-qa:
+    image: psfoundation/code-quality
+    working_dir: /project
+    volumes:
+      - ./:/project
+      - ~/.ssh:/root/.ssh
+  builder:
+    image: psfoundation/webapp-builder:1.0.11-php7.4
+    working_dir: /project
+    volumes:
+      - ./:/project
+      - ~/.ssh:/root/.ssh

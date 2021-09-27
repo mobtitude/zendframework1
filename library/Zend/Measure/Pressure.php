@@ -144,7 +144,7 @@ class Zend_Measure_Pressure extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ATMOSPHERE'            => array('101325.01', 'atm'),
         'ATMOSPHERE_TECHNICAL'  => array('98066.5',   'atm'),
         'ATTOBAR'               => array('1.0e-13',   'ab'),

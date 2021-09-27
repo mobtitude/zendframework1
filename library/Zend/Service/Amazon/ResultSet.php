@@ -46,17 +46,13 @@ class Zend_Service_Amazon_ResultSet implements SeekableIterator
 
     /**
      * Amazon Web Service Return Document
-     *
-     * @var DOMDocument
      */
-    protected $_dom;
+    protected \DOMDocument $_dom;
 
     /**
      * XPath Object for $this->_dom
-     *
-     * @var DOMXPath
      */
-    protected $_xpath;
+    protected \DOMXPath $_xpath;
 
     /**
      * Current index for SeekableIterator

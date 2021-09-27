@@ -59,53 +59,46 @@ class Zend_Amf_Server implements Zend_Server_Interface
 {
     /**
      * Array of dispatchables
-     * @var array
      */
-    protected $_methods = array();
+    protected array $_methods = array();
 
     /**
      * Array of classes that can be called without being explicitly loaded
      *
      * Keys are class names.
-     *
-     * @var array
      */
-    protected $_classAllowed = array();
+    protected array $_classAllowed = array();
 
     /**
      * Loader for classes in added directories
-     * @var Zend_Loader_PluginLoader
      */
-    protected $_loader;
+    protected ?\Zend_Loader_PluginLoader $_loader = null;
 
     /**
      * @var bool Production flag; whether or not to return exception messages
      */
-    protected $_production = true;
+    protected bool $_production = true;
 
     /**
      * Request processed
-     * @var null|Zend_Amf_Request
      */
-    protected $_request = null;
+    protected ?\Zend_Amf_Request $_request = null;
 
     /**
      * Class to use for responses
-     * @var null|Zend_Amf_Response
      */
-    protected $_response;
+    protected ?\Zend_Amf_Response $_response = null;
 
     /**
      * Dispatch table of name => method pairs
-     * @var array
      */
-    protected $_table = array();
+    protected array $_table = array();
 
     /**
      *
      * @var bool session flag; whether or not to add a session to each response.
      */
-    protected $_session = false;
+    protected bool $_session = false;
 
     /**
      * Namespace allows all AMF calls to not clobber other PHP session variables
@@ -115,22 +108,17 @@ class Zend_Amf_Server implements Zend_Server_Interface
 
     /**
      * Set the default session.name if php_
-     * @var string
      */
-    protected $_sessionName = 'PHPSESSID';
+    protected string $_sessionName = 'PHPSESSID';
 
     /**
      * Authentication handler object
-     *
-     * @var Zend_Amf_Auth_Abstract
      */
-    protected $_auth;
+    protected ?\Zend_Amf_Auth_Abstract $_auth = null;
     /**
      * ACL handler object
-     *
-     * @var Zend_Acl
      */
-    protected $_acl;
+    protected ?\Zend_Acl $_acl = null;
     /**
      * The server constructor
      */

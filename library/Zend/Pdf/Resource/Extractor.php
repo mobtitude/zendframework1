@@ -51,17 +51,13 @@ class Zend_Pdf_Resource_Extractor
 {
     /**
      * PDF objects factory.
-     *
-     * @var Zend_Pdf_ElementFactory_Interface
      */
-    protected $_factory;
+    protected \Zend_Pdf_ElementFactory_Interface $_factory;
 
     /**
      * Reusable list of already processed objects
-     *
-     * @var array
      */
-    protected $_processed;
+    protected array $_processed;
 
     /**
      * Object constructor.

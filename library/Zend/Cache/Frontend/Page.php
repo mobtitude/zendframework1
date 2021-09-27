@@ -81,7 +81,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
      *
      * @var array options
      */
-    protected $_specificOptions = array(
+    protected array $_specificOptions = array(
         'http_conditional' => false,
         'debug_header' => false,
         'content_type_memorization' => false,
@@ -114,10 +114,8 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
 
     /**
      * If true, the page won't be cached
-     *
-     * @var boolean
      */
-    protected $_cancel = false;
+    protected bool $_cancel = false;
 
     /**
      * Constructor

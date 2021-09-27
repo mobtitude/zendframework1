@@ -39,16 +39,12 @@ abstract class Zend_Service_Rackspace_Abstract
     const MANAGEMENT_URL         = "X-Server-Management-Url";
     /**
      * Rackspace Key
-     *
-     * @var string
      */
-    protected $key;
+    protected ?string $key = null;
     /**
      * Rackspace account name
-     *
-     * @var string
      */
-    protected $user;
+    protected ?string $user = null;
     /**
      * Token of authentication
      *
@@ -57,20 +53,13 @@ abstract class Zend_Service_Rackspace_Abstract
     protected $token;
     /**
      * Authentication URL
-     *
-     * @var string
      */
-    protected $authUrl;
-    /**
-     * @var Zend_Http_Client
-     */
-    protected $httpClient;
+    protected ?string $authUrl = null;
+    protected ?\Zend_Http_Client $httpClient = null;
     /**
      * Error Msg
-     *
-     * @var string
      */
-    protected $errorMsg;
+    protected ?string $errorMsg = null;
     /**
      * HTTP error code
      *
@@ -97,10 +86,8 @@ abstract class Zend_Service_Rackspace_Abstract
     protected $managementUrl;
     /**
      * Do we use ServiceNet?
-     * 
-     * @var boolean
      */
-    protected $useServiceNet = false;
+    protected bool $useServiceNet = false;
     /**
      * Constructor
      *

@@ -50,17 +50,13 @@ abstract class Zend_Markup_Renderer_RendererAbstract
 
     /**
      * Tag info
-     *
-     * @var array
      */
-    protected $_markups = array();
+    protected array $_markups = array();
 
     /**
      * Parser
-     *
-     * @var Zend_Markup_Parser_ParserInterface
      */
-    protected $_parser;
+    protected ?\Zend_Markup_Parser_ParserInterface $_parser = null;
 
     /**
      * What filter to use
@@ -71,10 +67,8 @@ abstract class Zend_Markup_Renderer_RendererAbstract
 
     /**
      * Filter chain
-     *
-     * @var Zend_Filter
      */
-    protected $_defaultFilter;
+    protected ?\Zend_Filter_Interface $_defaultFilter = null;
 
     /**
      * The current group
@@ -85,31 +79,23 @@ abstract class Zend_Markup_Renderer_RendererAbstract
 
     /**
      * Groups definition
-     *
-     * @var array
      */
-    protected $_groups = array();
+    protected array $_groups = array();
 
     /**
      * Plugin loader for tags
-     *
-     * @var Zend_Loader_PluginLoader
      */
-    protected $_pluginLoader;
+    protected \Zend_Loader_PluginLoader $_pluginLoader;
 
     /**
      * The current token
-     *
-     * @var Zend_Markup_Token
      */
-    protected $_token;
+    protected ?\Zend_Markup_Token $_token = null;
 
     /**
      * Encoding
-     *
-     * @var string
      */
-    protected static $_encoding = 'UTF-8';
+    protected static string $_encoding = 'UTF-8';
 
 
     /**

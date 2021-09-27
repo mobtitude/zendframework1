@@ -35,17 +35,13 @@ class Zend_Service_Yahoo
 {
     /**
      * Yahoo Developer Application ID
-     *
-     * @var string
      */
-    public $appId;
+    public string $appId;
 
     /**
      * Reference to the REST client
-     *
-     * @var Zend_Rest_Client
      */
-    protected $_rest;
+    protected \Zend_Rest_Client $_rest;
 
 
     /**

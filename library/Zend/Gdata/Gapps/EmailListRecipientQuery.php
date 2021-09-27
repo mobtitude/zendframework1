@@ -46,10 +46,8 @@ class Zend_Gdata_Gapps_EmailListRecipientQuery extends Zend_Gdata_Gapps_Query
     /**
      * If not null, specifies the name of the email list which
      * should be requested by this query.
-     *
-     * @var string
      */
-    protected $_emailListName = null;
+    protected ?string $_emailListName = null;
 
     /**
      * Create a new instance.

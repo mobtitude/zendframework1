@@ -42,21 +42,18 @@ class Zend_Db_Profiler_Firebug extends Zend_Db_Profiler
 {
     /**
      * The original label for this profiler.
-     * @var string
      */
-    protected $_label = null;
+    protected ?string $_label = null;
 
     /**
      * The label template for this profiler
-     * @var string
      */
-    protected $_label_template = '%label% (%totalCount% @ %totalDuration% sec)';
+    protected string $_label_template = '%label% (%totalCount% @ %totalDuration% sec)';
 
     /**
      * The message envelope holding the profiling summary
-     * @var Zend_Wildfire_Plugin_FirePhp_TableMessage
      */
-    protected $_message = null;
+    protected ?\Zend_Wildfire_Plugin_FirePhp_TableMessage $_message = null;
 
     /**
      * The total time taken for all profiled queries.

@@ -39,12 +39,10 @@ class Zend_Queue_Stomp_Client_Connection
 {
     const READ_TIMEOUT_DEFAULT_USEC = 0; // 0 microseconds
     const READ_TIMEOUT_DEFAULT_SEC = 5; // 5 seconds
-
     /**
      * Connection options
-     * @var array
      */
-    protected $_options;
+    protected ?array $_options = null;
 
     /**
      * tcp/udp socket

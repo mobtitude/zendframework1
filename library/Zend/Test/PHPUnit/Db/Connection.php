@@ -45,24 +45,20 @@ class Zend_Test_PHPUnit_Db_Connection extends PHPUnit_Extensions_Database_DB_Def
 {
     /**
      * Zend_Db_Adapter_Abstract
-     *
-     * @var Zend_Db_Adapter_Abstract
      */
-    protected $_connection;
+    protected \Zend_Db_Adapter_Abstract $_connection;
 
     /**
      * Database Schema
-     *
-     * @var string $db
      */
-    protected $_schema;
+    protected string $_schema;
 
     /**
      * Metadata
      *
      * @param PHPUnit_Extensions_Database_DB_IMetaData $db
      */
-    protected $_metaData;
+    protected ?\Zend_Test_PHPUnit_Db_Metadata_Generic $_metaData = null;
 
     /**
      * Construct Connection based on Zend_Db_Adapter_Abstract

@@ -34,32 +34,24 @@ class Zend_Search_Lucene_Search_QueryEntry_Phrase extends Zend_Search_Lucene_Sea
 {
     /**
      * Phrase value
-     *
-     * @var string
      */
-    private $_phrase;
+    private string $_phrase;
 
     /**
      * Field
-     *
-     * @var string|null
      */
-    private $_field;
+    private string $_field;
 
 
     /**
      * Proximity phrase query
-     *
-     * @var boolean
      */
-    private $_proximityQuery = false;
+    private bool $_proximityQuery = false;
 
     /**
      * Words distance, used for proximiti queries
-     *
-     * @var integer
      */
-    private $_wordsDistance = 0;
+    private int $_wordsDistance = 0;
 
 
     /**

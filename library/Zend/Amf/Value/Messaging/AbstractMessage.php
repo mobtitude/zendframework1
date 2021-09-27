@@ -34,37 +34,37 @@ class Zend_Amf_Value_Messaging_AbstractMessage
     /**
      * @var string Client identifier
      */
-    public $clientId;
+    public string $clientId;
 
     /**
      * @var string Destination
      */
-    public $destination;
+    public string $destination;
 
     /**
      * @var string Message identifier
      */
-    public $messageId;
+    public string $messageId;
 
     /**
      * @var int Message timestamp
      */
-    public $timestamp;
+    public int $timestamp;
 
     /**
      * @var int Message TTL
      */
-    public $timeToLive;
+    public int $timeToLive;
 
     /**
      * @var object Message headers
      */
-    public $headers;
+    public object $headers;
 
     /**
      * @var string Message body
      */
-    public $body;
+    public string $body;
 
     /**
      * generate a unique id

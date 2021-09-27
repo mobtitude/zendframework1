@@ -28,10 +28,7 @@
  */
 class Zend_Application_Resource_UserAgent extends Zend_Application_Resource_ResourceAbstract
 {
-    /**
-     * @var Zend_Http_UserAgent
-     */
-    protected $_userAgent;
+    protected ?\Zend_Http_UserAgent $_userAgent = null;
     
     /**
      * Intialize resource

@@ -33,10 +33,7 @@ require_once 'Zend/Log/Formatter/Abstract.php';
  */
 class Zend_Log_Formatter_Simple extends Zend_Log_Formatter_Abstract
 {
-    /**
-     * @var string
-     */
-    protected $_format;
+    protected string $_format;
 
     const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message%';
 

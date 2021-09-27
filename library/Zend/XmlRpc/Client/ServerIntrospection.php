@@ -31,10 +31,7 @@
  */
 class Zend_XmlRpc_Client_ServerIntrospection
 {
-    /**
-     * @var Zend_XmlRpc_Client_ServerProxy
-     */
-    private $_system = null;
+    private ?\Zend_XmlRpc_Client_ServerProxy $_system = null;
 
 
     /**

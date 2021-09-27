@@ -72,33 +72,25 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
     /**
      * <apps:login> element containing information about this user's
      * account, including their username and permissions.
-     *
-     * @var Zend_Gdata_Gapps_Extension_Login
      */
-    protected $_login = null;
+    protected ?\Zend_Gdata_Gapps_Extension_Login $_login = null;
 
     /**
      * <apps:name> element containing the user's actual name.
-     *
-     * @var Zend_Gdata_Gapps_Extension_Name
      */
-    protected $_name = null;
+    protected ?\Zend_Gdata_Gapps_Extension_Name $_name = null;
 
     /**
      * <apps:quotq> element describing any storage quotas in place for
      * this user.
-     *
-     * @var Zend_Gdata_Gapps_Extension_Quota
      */
-    protected $_quota = null;
+    protected ?\Zend_Gdata_Gapps_Extension_Quota $_quota = null;
 
     /**
      * <gd:feedLink> element containing information about other feeds
      * relevant to this entry.
-     *
-     * @var Zend_Gdata_Extension_FeedLink
      */
-    protected $_feedLink = array();
+    protected array $_feedLink = array();
 
     /**
      * Create a new instance.

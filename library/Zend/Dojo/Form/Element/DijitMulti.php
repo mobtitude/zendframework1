@@ -38,9 +38,8 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
 {
     /**
      * Array of options for multi-item
-     * @var array
      */
-    public $options = array();
+    public array $options = array();
 
     /**
      * Flag: autoregister inArray validator?
@@ -56,9 +55,8 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
 
     /**
      * Which values are translated already?
-     * @var array
      */
-    protected $_translated = array();
+    protected array $_translated = array();
 
     /**
      * Retrieve separator

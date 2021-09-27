@@ -42,10 +42,8 @@ class Zend_Oauth
 
     /**
      * Singleton instance if required of the HTTP client
-     *
-     * @var Zend_Http_Client
      */
-    protected static $httpClient = null;
+    protected static ?\Zend_Http_Client $httpClient = null;
 
     /**
      * Allows the external environment to make Zend_Oauth use a specific

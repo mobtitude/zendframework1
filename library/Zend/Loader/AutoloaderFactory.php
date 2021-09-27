@@ -35,13 +35,13 @@ abstract class Zend_Loader_AutoloaderFactory
     /**
      * @var array All autoloaders registered using the factory
      */
-    protected static $loaders = array();
+    protected static array $loaders = array();
 
     /**
      * @var Zend_Loader_StandardAutoloader StandardAutoloader instance for resolving 
      * autoloader classes via the include_path
      */
-    protected static $standardAutoloader;
+    protected static ?\Zend_Loader_StandardAutoloader $standardAutoloader = null;
 
     /**
      * Factory for autoloaders

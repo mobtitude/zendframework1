@@ -37,45 +37,38 @@ class Zend_Layout
 
     /**
      * Key used to store content from 'default' named response segment
-     * @var string
      */
-    protected $_contentKey = 'content';
+    protected string $_contentKey = 'content';
 
     /**
      * Are layouts enabled?
-     * @var bool
      */
-    protected $_enabled = true;
+    protected bool $_enabled = true;
 
     /**
      * Helper class
-     * @var string
      */
-    protected $_helperClass = 'Zend_Layout_Controller_Action_Helper_Layout';
+    protected string $_helperClass = 'Zend_Layout_Controller_Action_Helper_Layout';
 
     /**
      * Inflector used to resolve layout script
-     * @var Zend_Filter_Inflector
      */
-    protected $_inflector;
+    protected ?\Zend_Filter_Inflector $_inflector = null;
 
     /**
      * Flag: is inflector enabled?
-     * @var bool
      */
-    protected $_inflectorEnabled = true;
+    protected bool $_inflectorEnabled = true;
 
     /**
      * Inflector target
-     * @var string
      */
-    protected $_inflectorTarget = ':script.:suffix';
+    protected string $_inflectorTarget = ':script.:suffix';
 
     /**
      * Layout view
-     * @var string
      */
-    protected $_layout = 'layout';
+    protected string $_layout = 'layout';
 
     /**
      * Layout view script path
@@ -84,42 +77,34 @@ class Zend_Layout
     protected $_viewScriptPath = null;
 
     protected $_viewBasePath = null;
-    protected $_viewBasePrefix = 'Layout_View';
+    protected string $_viewBasePrefix = 'Layout_View';
 
     /**
      * Flag: is MVC integration enabled?
-     * @var bool
      */
-    protected $_mvcEnabled = true;
+    protected bool $_mvcEnabled = true;
 
     /**
      * Instance registered with MVC, if any
-     * @var Zend_Layout
      */
-    protected static $_mvcInstance;
+    protected static ?\Zend_Layout $_mvcInstance = null;
 
     /**
      * Flag: is MVC successful action only flag set?
-     * @var bool
      */
-    protected $_mvcSuccessfulActionOnly = true;
+    protected bool $_mvcSuccessfulActionOnly = true;
 
     /**
      * Plugin class
-     * @var string
      */
-    protected $_pluginClass = 'Zend_Layout_Controller_Plugin_Layout';
+    protected string $_pluginClass = 'Zend_Layout_Controller_Plugin_Layout';
 
-    /**
-     * @var Zend_View_Interface
-     */
-    protected $_view;
+    protected ?\Zend_View_Interface $_view = null;
 
     /**
      * View script suffix for layout script
-     * @var string
      */
-    protected $_viewSuffix = 'phtml';
+    protected string $_viewSuffix = 'phtml';
 
     /**
      * Constructor

@@ -40,15 +40,9 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
      */
     protected $_frontController;
 
-    /**
-     * @var Zend_Layout
-     */
-    protected $_layout;
+    protected ?\Zend_Layout $_layout = null;
 
-    /**
-     * @var bool
-     */
-    protected $_isActionControllerSuccessful = false;
+    protected bool $_isActionControllerSuccessful = false;
 
     /**
      * Constructor

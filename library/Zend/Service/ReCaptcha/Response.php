@@ -35,20 +35,16 @@ class Zend_Service_ReCaptcha_Response
      * Status
      *
      * true if the response is valid or false otherwise
-     *
-     * @var boolean
      */
-    protected $_status = null;
+    protected ?bool $_status = null;
 
     /**
      * Error code
      *
      * The error code if the status is false. The different error codes can be found in the
      * recaptcha API docs.
-     *
-     * @var string
      */
-    protected $_errorCode = null;
+    protected ?string $_errorCode = null;
 
     /**
      * Class constructor used to construct a response

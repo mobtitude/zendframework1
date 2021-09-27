@@ -39,7 +39,7 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Extension_ExtendedProperty extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'extendedProperty';
+    protected ?string $_rootElement = 'extendedProperty';
     protected $_name = null;
     protected $_value = null;
 

@@ -44,17 +44,13 @@ class Zend_Amf_Adobe_Auth extends Zend_Amf_Auth_Abstract
 
     /**
      * ACL for authorization
-     *
-     * @var Zend_Acl
      */
-    protected $_acl;
+    protected \Zend_Acl $_acl;
 
     /**
      * Username/password array
-     *
-     * @var array
      */
-    protected $_users = array();
+    protected array $_users = array();
 
     /**
      * Create auth adapter

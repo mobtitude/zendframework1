@@ -44,7 +44,7 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::FALSE_TYPE   => "File '%value%' has a false mimetype of '%type%'",
         self::NOT_DETECTED => "The mimetype of file '%value%' could not be detected",
         self::NOT_READABLE => "File '%value%' is not readable or does not exist",
@@ -53,7 +53,7 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'type' => '_type'
     );
 
@@ -66,10 +66,8 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
      * Mimetypes
      *
      * If null, there is no mimetype
-     *
-     * @var string|null
      */
-    protected $_mimetype;
+    protected ?string $_mimetype = null;
 
     /**
      * Magicfile to use
@@ -87,9 +85,8 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
 
     /**
      * If no $_ENV['MAGIC'] is set, try and autodiscover it based on common locations
-     * @var array
      */
-    protected $_magicFiles = array(
+    protected array $_magicFiles = array(
         '/usr/share/misc/magic',
         '/usr/share/misc/magic.mime',
         '/usr/share/misc/magic.mgc',
@@ -103,23 +100,18 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
 
     /**
      * Indicates whether use of $_magicFiles should be attempted.
-     * @var boolean
      */
-    protected $_tryCommonMagicFiles = true;
+    protected bool $_tryCommonMagicFiles = true;
 
     /**
      * Option to allow header check
-     *
-     * @var boolean
      */
-    protected $_headerCheck = false;
+    protected bool $_headerCheck = false;
 
     /**
      * Holds error information returned by finfo_open
-     *
-     * @var array
      */
-    protected $_finfoError;
+    protected ?\ErrorException $_finfoError = null;
 
     /**
      * Sets validator options

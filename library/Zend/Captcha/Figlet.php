@@ -41,10 +41,8 @@ class Zend_Captcha_Figlet extends Zend_Captcha_Word
 {
     /**
      * Figlet text renderer
-     *
-     * @var Zend_Text_Figlet
      */
-    protected $_figlet;
+    protected \Zend_Text_Figlet $_figlet;
 
     /**
      * Constructor

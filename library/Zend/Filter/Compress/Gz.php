@@ -41,10 +41,8 @@ class Zend_Filter_Compress_Gz extends Zend_Filter_Compress_CompressAbstract
      *     'mode'     => Compression mode, can be 'compress', 'deflate'
      *     'archive'  => Archive to use
      * )
-     *
-     * @var array
      */
-    protected $_options = array(
+    protected array $_options = array(
         'level'   => 9,
         'mode'    => 'compress',
         'archive' => null,

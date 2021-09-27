@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_FormsDirectory extends Zend_Tool_Project_Cont
     /**
      * @var string
      */
-    protected $_filesystemName = 'forms';
+    protected ?string $_filesystemName = 'forms';
 
     /**
      * getName()

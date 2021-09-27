@@ -41,20 +41,16 @@ class Zend_Service_Ebay_Finding_Response_Histograms extends Zend_Service_Ebay_Fi
      * Aspect histograms are returned for categories that have been mapped to
      * domains only. In most cases, just leaf categories are mapped to domains,
      * but there are exceptions.
-     *
-     * @var Zend_Service_Ebay_Finding_Aspect_Histogram_Container
      */
-    public $aspectHistogramContainer;
+    public ?\Zend_Service_Ebay_Finding_Aspect_Histogram_Container $aspectHistogramContainer = null;
 
     /**
      * Response container for category histograms.
      *
      * This container is returned only when the specified category has children
      * categories.
-     *
-     * @var Zend_Service_Ebay_Finding_Category_Histogram_Container
      */
-    public $categoryHistogramContainer;
+    public ?\Zend_Service_Ebay_Finding_Category_Histogram_Container $categoryHistogramContainer = null;
 
     /**
      * @return void

@@ -49,17 +49,13 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
 {
     /**
      * Parameters array
-     *
-     * @var array
      */
-    protected $_config = array();
+    protected array $_config = array();
 
     /**
      * What host/port are we connected to?
-     *
-     * @var array
      */
-    protected $_connected_to = array(null, null);
+    protected array $_connected_to = array(null, null);
 
     /**
      * The curl session handle
@@ -70,10 +66,8 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
 
     /**
      * List of cURL options that should never be overwritten
-     *
-     * @var array
      */
-    protected $_invalidOverwritableCurlOptions;
+    protected array $_invalidOverwritableCurlOptions;
 
     /**
      * Response gotten from server

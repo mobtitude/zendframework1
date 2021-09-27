@@ -49,14 +49,11 @@ require_once 'Zend/Pdf/Resource/Font/Simple/Standard.php';
 class Zend_Pdf_Resource_Font_Simple_Standard_Symbol extends Zend_Pdf_Resource_Font_Simple_Standard
 {
   /**** Instance Variables ****/
-
-
     /**
      * Array for conversion from local encoding to special font encoding.
      * See {@link encodeString()}.
-     * @var array
      */
-    protected $_toFontEncoding = array(
+    protected array $_toFontEncoding = array(
             0x20 => "\x20",   0x21 => "\x21", 0x2200 => "\x22",   0x23 => "\x23",
           0x2203 => "\x24",   0x25 => "\x25",   0x26 => "\x26", 0x220b => "\x27",
             0x28 => "\x28",   0x29 => "\x29", 0x2217 => "\x2a",   0x2b => "\x2b",
@@ -109,9 +106,8 @@ class Zend_Pdf_Resource_Font_Simple_Standard_Symbol extends Zend_Pdf_Resource_Fo
     /**
      * Array for conversion from special font encoding to local encoding.
      * See {@link decodeString()}.
-     * @var array
      */
-    protected $_fromFontEncoding = array(
+    protected array $_fromFontEncoding = array(
             0x20 => "\x00\x20",   0x21 => "\x00\x21",   0x22 => "\x22\x00",
             0x23 => "\x00\x23",   0x24 => "\x22\x03",   0x25 => "\x00\x25",
             0x26 => "\x00\x26",   0x27 => "\x22\x0b",   0x28 => "\x00\x28",

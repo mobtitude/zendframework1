@@ -35,10 +35,7 @@ class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
     implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
 {
 
-    /**
-     * @var string
-     */
-    protected $_separator = PHP_EOL;
+    protected string $_separator = PHP_EOL;
 
     /**
      * getName() - name of the decorator

@@ -118,15 +118,13 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
 {
     /**
      * Character encoding
-     * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
     /**
      * Request processed
-     * @var null|Zend_XmlRpc_Request
      */
-    protected $_request = null;
+    protected ?\Zend_XmlRpc_Request $_request = null;
 
     /**
      * Class to use for responses; defaults to {@link Zend_XmlRpc_Response_Http}
@@ -138,13 +136,12 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      * Dispatch table of name => method pairs
      * @var Zend_Server_Definition
      */
-    protected $_table;
+    protected Zend_Server_Definition $_table;
 
     /**
      * PHP types => XML-RPC types
-     * @var array
      */
-    protected $_typeMap = array(
+    protected array $_typeMap = array(
         'i4'                         => 'i4',
         'int'                        => 'int',
         'integer'                    => 'int',
@@ -178,10 +175,8 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
 
     /**
      * Send arguments to all methods or just constructor?
-     *
-     * @var bool
      */
-    protected $_sendArgumentsToAllMethods = true;
+    protected bool $_sendArgumentsToAllMethods = true;
 
     /**
      * Constructor

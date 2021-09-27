@@ -49,14 +49,14 @@ class Zend_Feed_Entry_Atom extends Zend_Feed_Entry_Abstract
      *
      * @var string
      */
-    protected $_rootElement = 'entry';
+    protected string $_rootElement = 'entry';
 
     /**
      * Root namespace for Atom entries.
      *
      * @var string
      */
-    protected $_rootNamespace = 'atom';
+    protected ?string $_rootNamespace = 'atom';
 
 
     /**
@@ -103,7 +103,7 @@ class Zend_Feed_Entry_Atom extends Zend_Feed_Entry_Abstract
                 // Redirect
                 case 3:
                     $deleteUri = $response->getHeader('Location');
-                    continue;
+                    continue 2;
                 // Error
                 default:
                     /**

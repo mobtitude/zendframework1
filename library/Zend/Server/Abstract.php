@@ -61,7 +61,7 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
      * @deprecated
      * @var array List of PHP magic methods (lowercased)
      */
-    protected static $magic_methods = array(
+    protected static array $magic_methods = array(
         '__call',
         '__clone',
         '__construct',
@@ -79,12 +79,9 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
     /**
      * @var bool Flag; whether or not overwriting existing methods is allowed
      */
-    protected $_overwriteExistingMethods = false;
+    protected bool $_overwriteExistingMethods = false;
 
-    /**
-     * @var Zend_Server_Definition
-     */
-    protected $_table;
+    protected \Zend_Server_Definition $_table;
 
     /**
      * Constructor

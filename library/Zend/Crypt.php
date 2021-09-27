@@ -32,12 +32,9 @@ class Zend_Crypt
     const TYPE_HASH = 'hash';
     const TYPE_MHASH = 'mhash';
 
-    protected static $_type = null;
+    protected static ?string $_type = null;
 
-    /**
-     * @var array
-     */
-    protected static $_supportedAlgosOpenssl = array(
+    protected static array $_supportedAlgosOpenssl = array(
         'md2',
         'md4',
         'mdc2',
@@ -50,10 +47,7 @@ class Zend_Crypt
         'sha512'
     );
 
-    /**
-     * @var array
-     */
-    protected static $_supportedAlgosMhash = array(
+    protected static array $_supportedAlgosMhash = array(
         'adler32',
         'crc32',
         'crc32b',

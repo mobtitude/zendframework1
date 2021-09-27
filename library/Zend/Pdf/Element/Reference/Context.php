@@ -33,17 +33,13 @@ class Zend_Pdf_Element_Reference_Context
 {
     /**
      * PDF parser object.
-     *
-     * @var Zend_Pdf_StringParser
      */
-    private $_stringParser;
+    private \Zend_Pdf_StringParser $_stringParser;
 
     /**
      * Reference table
-     *
-     * @var Zend_Pdf_Element_Reference_Table
      */
-    private $_refTable;
+    private \Zend_Pdf_Element_Reference_Table $_refTable;
 
     /**
      * Object constructor

@@ -35,17 +35,13 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
 {
     /**
      * True if outline is open.
-     *
-     * @var boolean
      */
-    protected $_open = false;
+    protected bool $_open = false;
 
     /**
      * Array of child outlines (array of Zend_Pdf_Outline objects)
-     *
-     * @var array
      */
-    public $childOutlines = array();
+    public array $childOutlines = array();
 
 
     /**

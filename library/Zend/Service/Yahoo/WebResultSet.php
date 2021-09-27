@@ -45,10 +45,8 @@ class Zend_Service_Yahoo_WebResultSet extends Zend_Service_Yahoo_ResultSet
 {
     /**
      * Web result set namespace
-     *
-     * @var string
      */
-    protected $_namespace = 'urn:yahoo:srch';
+    protected string $_namespace = 'urn:yahoo:srch';
 
 
     /**

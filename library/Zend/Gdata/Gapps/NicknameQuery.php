@@ -46,10 +46,8 @@ class Zend_Gdata_Gapps_NicknameQuery extends Zend_Gdata_Gapps_Query
     /**
      * If not null, indicates the name of the nickname entry which
      * should be returned by this query.
-     *
-     * @var string
      */
-    protected $_nickname = null;
+    protected ?string $_nickname = null;
 
     /**
      * Create a new instance.

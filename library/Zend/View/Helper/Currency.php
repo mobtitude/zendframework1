@@ -35,10 +35,8 @@ class Zend_View_Helper_Currency extends Zend_View_Helper_Abstract
 {
     /**
      * Currency object
-     *
-     * @var Zend_Currency
      */
-    protected $_currency;
+    protected ?\Zend_Currency $_currency = null;
 
     /**
      * Constructor for manually handling

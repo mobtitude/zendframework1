@@ -51,24 +51,18 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
 
     /**
      * Namespace - which namespace this instance of zend-session is saving-to/getting-from
-     *
-     * @var string
      */
-    protected $_namespace = "Default";
+    protected string $_namespace = "Default";
 
     /**
      * Namespace locking mechanism
-     *
-     * @var array
      */
-    protected static $_namespaceLocks = array();
+    protected static array $_namespaceLocks = array();
 
     /**
      * Single instance namespace array to ensure data security.
-     *
-     * @var array
      */
-    protected static $_singleInstances = array();
+    protected static array $_singleInstances = array();
 
     /**
      * resetSingleInstance()

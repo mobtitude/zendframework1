@@ -30,10 +30,7 @@ require_once 'Zend/Oauth/Token.php';
  */
 class Zend_Oauth_Token_AuthorizedRequest extends Zend_Oauth_Token
 {
-    /**
-     * @var array
-     */
-    protected $_data = array();
+    protected ?array $_data = array();
 
     /**
      * Constructor

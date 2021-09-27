@@ -53,25 +53,20 @@ abstract class Zend_Pdf_FileParser
 
 
   /**** Instance Variables ****/
-
-
     /**
      * Flag indicating that the file has passed a cursory validation check.
-     * @var boolean
      */
-    protected $_isScreened = false;
+    protected bool $_isScreened = false;
 
     /**
      * Flag indicating that the file has been sucessfully parsed.
-     * @var boolean
      */
-    protected $_isParsed = false;
+    protected bool $_isParsed = false;
 
     /**
      * Object representing the data source to be parsed.
-     * @var Zend_Pdf_FileParserDataSource
      */
-    protected $_dataSource = null;
+    protected ?\Zend_Pdf_FileParserDataSource $_dataSource = null;
 
 
 

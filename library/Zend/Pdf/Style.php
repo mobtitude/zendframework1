@@ -35,35 +35,26 @@ class Zend_Pdf_Style
     /**
      * Fill color.
      * Used to fill geometric shapes or text.
-     *
-     * @var Zend_Pdf_Color|null
      */
-    private $_fillColor = null;
+    private ?\Zend_Pdf_Color $_fillColor = null;
 
     /**
      * Line color.
      * Current color, used for lines and font outlines.
-     *
-     * @var Zend_Pdf_Color|null
      */
-
-    private $_color;
+    private ?\Zend_Pdf_Color $_color = null;
 
     /**
      * Line width.
-     *
-     * @var Zend_Pdf_Element_Numeric
      */
-    private $_lineWidth;
+    private ?\Zend_Pdf_Element_Numeric $_lineWidth = null;
 
     /**
      * Array which describes line dashing pattern.
      * It's array of numeric:
      * array($on_length, $off_length, $on_length, $off_length, ...)
-     *
-     * @var array
      */
-    private $_lineDashingPattern;
+    private ?array $_lineDashingPattern = null;
 
     /**
      * Line dashing phase
@@ -74,17 +65,13 @@ class Zend_Pdf_Style
 
     /**
      * Current font
-     *
-     * @var Zend_Pdf_Resource_Font
      */
-    private $_font;
+    private ?\Zend_Pdf_Resource_Font $_font = null;
 
     /**
      * Font size
-     *
-     * @var float
      */
-    private $_fontSize;
+    private ?float $_fontSize = null;
 
 
 

@@ -40,7 +40,7 @@ class Zend_Captcha_Dumb extends Zend_Captcha_Word
      * CAPTCHA label
      * @type string
      */
-    protected $_label = 'Please type this word backwards';
+    protected string $_label = 'Please type this word backwards';
     
     /**
      * Set the label for the CAPTCHA

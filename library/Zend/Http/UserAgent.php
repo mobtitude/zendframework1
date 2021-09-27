@@ -68,29 +68,23 @@ class Zend_Http_UserAgent implements Serializable
 
     /**
      * Browser type
-     *
-     * @var string
      */
-    protected $_browserType;
+    protected ?string $_browserType = null;
 
     /**
      * Browser type class
      *
      * Map of browser types to classes.
-     *
-     * @var array
      */
-    protected $_browserTypeClass = array();
+    protected array $_browserTypeClass = array();
 
     /**
      * Array to store config
      *
      * Default values are provided to ensure specific keys are present at
      * instantiation.
-     *
-     * @var array
      */
-    protected $_config = array(
+    protected array $_config = array(
         'identification_sequence' => self::DEFAULT_IDENTIFICATION_SEQUENCE,
         'storage'                 => array(
             'adapter'             => self::DEFAULT_PERSISTENT_STORAGE_ADAPTER,
@@ -113,43 +107,33 @@ class Zend_Http_UserAgent implements Serializable
      * - User-Agent (defined in $_server)
      * - HTTP Accept value (defined in $_server)
      * - $_storage
-     *
-     * @var bool
      */
-    protected $_immutable = false;
+    protected bool $_immutable = false;
 
     /**
      * Plugin loaders
-     * @var array
      */
-    protected $_loaders = array();
+    protected array $_loaders = array();
 
     /**
      * Valid plugin loader types
-     * @var array
      */
-    protected $_loaderTypes = array('storage', 'device');
+    protected array $_loaderTypes = array('storage', 'device');
 
     /**
      * Trace of items matched to identify the browser type
-     *
-     * @var array
      */
-    protected $_matchLog = array();
+    protected array $_matchLog = array();
 
     /**
      * Server variable
-     *
-     * @var array
      */
-    protected $_server;
+    protected ?array $_server = null;
 
     /**
      * Persistent storage handler
-     *
-     * @var Zend_Http_UserAgent_Storage
      */
-    protected $_storage;
+    protected ?\Zend_Http_UserAgent_Storage $_storage = null;
 
     /**
      * Constructor

@@ -33,17 +33,13 @@ abstract class Zend_Cloud_Infrastructure_Adapter_AbstractAdapter implements Zend
 {
     /**
      * Store the last response from the adpter
-     * 
-     * @var array
      */
-    protected $adapterResult;
+    protected array $adapterResult;
     
     /**
      * Valid metrics for monitor
-     * 
-     * @var array
      */
-    protected $validMetrics = array(
+    protected array $validMetrics = array(
         Zend_Cloud_Infrastructure_Instance::MONITOR_CPU,
         Zend_Cloud_Infrastructure_Instance::MONITOR_RAM,
         Zend_Cloud_Infrastructure_Instance::MONITOR_DISK,

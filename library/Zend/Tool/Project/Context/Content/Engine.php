@@ -43,20 +43,11 @@ require_once 'Zend/Tool/Project/Context/Content/Engine/Phtml.php';
  */
 class Zend_Tool_Project_Context_Content_Engine
 {
-    /**
-     * @var Zend_Tool_Framework_Client_Storage
-     */
-    protected $_storage = null;
+    protected ?\Zend_Tool_Framework_Client_Storage $_storage = null;
 
-    /**
-     * @var string
-     */
-    protected $_keyInStorage = 'project/content';
+    protected string $_keyInStorage = 'project/content';
 
-    /**
-     * @var array
-     */
-    protected $_engines = array();
+    protected array $_engines = array();
 
     /**
      * __construct()

@@ -36,11 +36,9 @@ abstract class Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
     extends Zend_Service_WindowsAzure_Storage
 {	
     /**
-     * Current batch
-     * 
-     * @var Zend_Service_WindowsAzure_Storage_Batch
-     */
-    protected $_currentBatch = null;
+				 * Current batch
+				 */
+				protected ?\Zend_Service_WindowsAzure_Storage_Batch $_currentBatch = null;
     
     /**
      * Set current batch

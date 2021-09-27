@@ -38,7 +38,7 @@ class Zend_Serializer_Adapter_Json extends Zend_Serializer_Adapter_AdapterAbstra
     /**
      * @var array Default options
      */
-    protected $_options = array(
+    protected array $_options = array(
         'cycleCheck'           => false,
         'enableJsonExprFinder' => false,
         'objectDecodeType'     => Zend_Json::TYPE_ARRAY,

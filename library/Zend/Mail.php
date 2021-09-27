@@ -54,90 +54,75 @@ class Zend_Mail extends Zend_Mime_Message
     /**#@+
      * @access protected
      */
-
     /**
-     * @var Zend_Mail_Transport_Abstract
      * @static
      */
-    protected static $_defaultTransport = null;
+    protected static ?\Zend_Mail_Transport_Abstract $_defaultTransport = null;
 
     /**
-     * @var array
      * @static
      */
-    protected static $_defaultFrom;
+    protected static ?array $_defaultFrom = null;
 
     /**
-     * @var array
      * @static
      */
-    protected static $_defaultReplyTo;
+    protected static ?array $_defaultReplyTo = null;
 
     /**
      * Mail character set
-     * @var string
      */
-    protected $_charset = 'iso-8859-1';
+    protected string $_charset = 'iso-8859-1';
 
     /**
      * Mail headers
-     * @var array
      */
-    protected $_headers = array();
+    protected array $_headers = array();
 
     /**
      * Encoding of Mail headers
-     * @var string
      */
-    protected $_headerEncoding = Zend_Mime::ENCODING_QUOTEDPRINTABLE;
+    protected string $_headerEncoding = Zend_Mime::ENCODING_QUOTEDPRINTABLE;
 
     /**
      * From: address
-     * @var string
      */
-    protected $_from = null;
+    protected ?string $_from = null;
 
     /**
      * To: addresses
-     * @var array
      */
-    protected $_to = array();
+    protected array $_to = array();
 
     /**
      * Array of all recipients
-     * @var array
      */
-    protected $_recipients = array();
+    protected array $_recipients = array();
 
     /**
      * Reply-To header
-     * @var string
      */
-    protected $_replyTo = null;
+    protected ?string $_replyTo = null;
 
     /**
      * Return-Path header
-     * @var string
      */
-    protected $_returnPath = null;
+    protected ?string $_returnPath = null;
 
     /**
      * Subject: header
-     * @var string
      */
-    protected $_subject = null;
+    protected ?string $_subject = null;
 
     /**
      * Date: header
-     * @var string
      */
-    protected $_date = null;
+    protected ?string $_date = null;
 
     /**
      * Message-ID: header
-     * @var string
      */
-    protected $_messageId = null;
+    protected ?string $_messageId = null;
 
     /**
      * text/plain MIME part
@@ -153,23 +138,19 @@ class Zend_Mail extends Zend_Mime_Message
 
     /**
      * MIME boundary string
-     * @var string
      */
-    protected $_mimeBoundary = null;
+    protected ?string $_mimeBoundary = null;
 
     /**
      * Content type of the message
-     * @var string
      */
-    protected $_type = null;
+    protected ?string $_type = null;
 
     /**#@-*/
-
     /**
      * Flag: whether or not email has attachments
-     * @var boolean
      */
-    public $hasAttachments = false;
+    public bool $hasAttachments = false;
 
 
     /**

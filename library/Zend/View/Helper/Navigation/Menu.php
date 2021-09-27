@@ -39,52 +39,38 @@ class Zend_View_Helper_Navigation_Menu
 {
     /**
      * CSS class to use for the ul element
-     *
-     * @var string
      */
-    protected $_ulClass = 'navigation';
+    protected string $_ulClass = 'navigation';
 
     /**
      * Unique identifier (id) for the ul element
-     *
-     * @var string
      */
-    protected $_ulId = null;
+    protected ?string $_ulId = null;
 
     /**
      * CSS class to use for the active elements
-     *
-     * @var string
      */
-    protected $_activeClass = 'active';
+    protected string $_activeClass = 'active';
 
     /**
      * CSS class to use for the parent li element
-     *
-     * @var string
      */
-    protected $_parentClass = 'menu-parent';
+    protected string $_parentClass = 'menu-parent';
 
     /**
      * Whether parent li elements should be rendered with parent class
-     *
-     * @var bool
      */
-    protected $_renderParentClass = false;
+    protected bool $_renderParentClass = false;
 
     /**
      * Whether only active branch should be rendered
-     *
-     * @var bool
      */
-    protected $_onlyActiveBranch = false;
+    protected bool $_onlyActiveBranch = false;
 
     /**
      * Whether parents should be rendered when only rendering active branch
-     *
-     * @var bool
      */
-    protected $_renderParents = true;
+    protected bool $_renderParents = true;
 
     /**
      * Partial view script to use for rendering menu
@@ -95,24 +81,18 @@ class Zend_View_Helper_Navigation_Menu
 
     /**
      * Expand all sibling nodes of active branch nodes
-     *
-     * @var bool
      */
-    protected $_expandSiblingNodesOfActiveBranch = false;
+    protected bool $_expandSiblingNodesOfActiveBranch = false;
 
     /**
      * Adds CSS class from page to li element
-     *
-     * @var bool
      */
-    protected $_addPageClassToLi = false;
+    protected bool $_addPageClassToLi = false;
 
     /**
      * Inner indentation string
-     *
-     * @var string
      */
-    protected $_innerIndent = '    ';
+    protected string $_innerIndent = '    ';
     
     /**
      * View helper entry point:

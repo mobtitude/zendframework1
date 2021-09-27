@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_SearchIndexesDirectory extends Zend_Tool_Proj
     /**
      * @var string
      */
-    protected $_filesystemName = 'search-indexes';
+    protected ?string $_filesystemName = 'search-indexes';
 
     /**
      * getName()

@@ -30,17 +30,13 @@ class Zend_Config implements Countable, Iterator
 {
     /**
      * Whether in-memory modifications to configuration data are allowed
-     *
-     * @var boolean
      */
-    protected $_allowModifications;
+    protected bool $_allowModifications;
 
     /**
      * Iteration index
-     *
-     * @var integer
      */
-    protected $_index;
+    protected int $_index;
 
     /**
      * Number of elements in configuration data
@@ -51,18 +47,14 @@ class Zend_Config implements Countable, Iterator
 
     /**
      * Contains array of configuration data
-     *
-     * @var array
      */
-    protected $_data;
+    protected array $_data;
 
     /**
      * Used when unsetting values during iteration to ensure we do not skip
      * the next element
-     *
-     * @var boolean
      */
-    protected $_skipNextIteration;
+    protected ?bool $_skipNextIteration = null;
 
     /**
      * Contains which config file sections were loaded. This is null
@@ -76,19 +68,15 @@ class Zend_Config implements Countable, Iterator
     /**
      * This is used to track section inheritance. The keys are names of sections that
      * extend other sections, and the values are the extended sections.
-     *
-     * @var array
      */
-    protected $_extends = array();
+    protected array $_extends = array();
 
     /**
      * Load file error string.
      *
      * Is null if there was no error while file loading
-     *
-     * @var string
      */
-    protected $_loadFileErrorStr = null;
+    protected ?string $_loadFileErrorStr = null;
 
     /**
      * Zend_Config provides a property based interface to

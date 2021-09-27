@@ -44,16 +44,12 @@ class Zend_Ldap_Node_Schema_ObjectClass_OpenLdap extends Zend_Ldap_Node_Schema_I
 {
     /**
      * All inherited "MUST" attributes
-     *
-     * @var array
      */
-    protected $_inheritedMust = null;
+    protected ?array $_inheritedMust = null;
     /**
      * All inherited "MAY" attributes
-     *
-     * @var array
      */
-    protected $_inheritedMay = null;
+    protected ?array $_inheritedMay = null;
 
 
     /**

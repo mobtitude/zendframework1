@@ -48,9 +48,8 @@ class Zend_Test_PHPUnit_Constraint_Redirect34 extends PHPUnit_Framework_Constrai
 
     /**
      * Available assertion types
-     * @var array
      */
-    protected $_assertTypes     = array(
+    protected array $_assertTypes     = array(
         self::ASSERT_REDIRECT,
         self::ASSERT_REDIRECT_TO,
         self::ASSERT_REDIRECT_REGEX,
@@ -69,9 +68,8 @@ class Zend_Test_PHPUnit_Constraint_Redirect34 extends PHPUnit_Framework_Constrai
 
     /**
      * Whether or not assertion is negated
-     * @var bool
      */
-    protected $_negate            = false;
+    protected bool $_negate            = false;
 
     /**
      * Constructor; setup constraint state
@@ -100,7 +98,7 @@ class Zend_Test_PHPUnit_Constraint_Redirect34 extends PHPUnit_Framework_Constrai
      * @param  null|string Assertion type
      * @return bool
      */
-    public function evaluate($other, $assertType = null)
+    public function evaluate($other, $assertType = null, $returnResult = FALSE)
     {
         if (!$other instanceof Zend_Controller_Response_Abstract) {
             require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';

@@ -39,24 +39,18 @@ class Zend_Pdf_Parser
 {
     /**
      * String parser
-     *
-     * @var Zend_Pdf_StringParser
      */
-    private $_stringParser;
+    private ?\Zend_Pdf_StringParser $_stringParser = null;
 
     /**
      * Last PDF file trailer
-     *
-     * @var Zend_Pdf_Trailer_Keeper
      */
-    private $_trailer;
+    private \Zend_Pdf_Trailer_Keeper $_trailer;
 
     /**
      * PDF version specified in the file header
-     *
-     * @var string
      */
-    private $_pdfVersion;
+    private string $_pdfVersion;
 
 
     /**

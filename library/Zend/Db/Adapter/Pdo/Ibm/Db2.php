@@ -37,10 +37,7 @@ require_once 'Zend/Db/Statement/Pdo/Ibm.php';
  */
 class Zend_Db_Adapter_Pdo_Ibm_Db2
 {
-    /**
-     * @var Zend_Db_Adapter_Abstract
-     */
-    protected $_adapter = null;
+    protected ?\Zend_Db_Adapter_Abstract $_adapter = null;
 
     /**
      * Construct the data server class.

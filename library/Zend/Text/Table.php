@@ -46,66 +46,48 @@ class Zend_Text_Table
 
     /**
      * List of all column widths
-     *
-     * @var array
      */
-    protected $_columnWidths = null;
+    protected ?array $_columnWidths = null;
 
     /**
      * Rows of the table
-     *
-     * @var array
      */
-    protected $_rows = array();
+    protected array $_rows = array();
 
     /**
      * Auto separation mode
-     *
-     * @var integer
      */
-    protected $_autoSeparate = self::AUTO_SEPARATE_ALL;
+    protected int $_autoSeparate = self::AUTO_SEPARATE_ALL;
 
     /**
      * Padding for columns
-     *
-     * @var integer
      */
-    protected $_padding = 0;
+    protected int $_padding = 0;
 
     /**
      * Default column aligns for rows created by appendRow(array $data)
-     *
-     * @var array
      */
-    protected $_defaultColumnAligns = array();
+    protected array $_defaultColumnAligns = array();
 
     /**
      * Plugin loader for decorators
-     *
-     * @var string
      */
-    protected $_pluginLoader = null;
+    protected ?\Zend_Loader_PluginLoader $_pluginLoader = null;
 
     /**
      * Charset which is used for input by default
-     *
-     * @var string
      */
-    protected static $_inputCharset = 'utf-8';
+    protected static string $_inputCharset = 'utf-8';
 
     /**
      * Charset which is used internally
-     *
-     * @var string
      */
-    protected static $_outputCharset = 'utf-8';
+    protected static string $_outputCharset = 'utf-8';
 
     /**
      * Option keys to skip when calling setOptions()
-     *
-     * @var array
      */
-    protected $_skipOptions = array(
+    protected array $_skipOptions = array(
         'options',
         'config',
         'defaultColumnAlign',

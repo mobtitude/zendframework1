@@ -36,9 +36,8 @@ class Zend_Json_Server_Error
 
     /**
      * Allowed error codes
-     * @var array
      */
-    protected $_allowedCodes = array(
+    protected array $_allowedCodes = array(
         self::ERROR_PARSE,
         self::ERROR_INVALID_REQUEST,
         self::ERROR_INVALID_METHOD,
@@ -49,9 +48,8 @@ class Zend_Json_Server_Error
 
     /**
      * Current code
-     * @var int
      */
-    protected $_code = -32000;
+    protected int $_code = -32000;
 
     /**
      * Error data
@@ -61,9 +59,8 @@ class Zend_Json_Server_Error
 
     /**
      * Error message
-     * @var string
      */
-    protected $_message;
+    protected ?string $_message = null;
 
     /**
      * Constructor

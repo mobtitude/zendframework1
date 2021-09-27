@@ -45,16 +45,14 @@ require_once 'Zend/Gdata/Gapps.php';
 class Zend_Gdata_Gapps_Extension_EmailList extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'apps';
-    protected $_rootElement = 'emailList';
+    protected string $_rootNamespace = 'apps';
+    protected ?string $_rootElement = 'emailList';
 
     /**
      * The name of the email list. This name is used as the email address
      * for this list.
-     *
-     * @var string
      */
-    protected $_name = null;
+    protected ?string $_name = null;
 
     /**
      * Constructs a new Zend_Gdata_Gapps_Extension_EmailList object.

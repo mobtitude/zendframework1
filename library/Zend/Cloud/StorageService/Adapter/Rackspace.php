@@ -41,15 +41,13 @@ class Zend_Cloud_StorageService_Adapter_Rackspace
     
     /**
      * The Rackspace adapter
-     * @var Zend_Service_Rackspace_Files
      */
-    protected $_rackspace;
+    protected ?\Zend_Service_Rackspace_Files $_rackspace = null;
 
     /**
      * Container in which files are stored
-     * @var string
      */
-    protected $_container = 'default';
+    protected string $_container = 'default';
     
     /**
      * Constructor

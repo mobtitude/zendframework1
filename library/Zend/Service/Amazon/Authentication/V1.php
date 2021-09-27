@@ -41,12 +41,12 @@ class Zend_Service_Amazon_Authentication_V1 extends Zend_Service_Amazon_Authenti
     /**
      * Signature Version
      */
-    protected $_signatureVersion = '1';
+    protected string $_signatureVersion = '1';
 
     /**
      * Signature Encoding Method
      */
-    protected $_signatureMethod = 'HmacSHA256';
+    protected string $_signatureMethod = 'HmacSHA256';
 
     /**
      * Generate the required attributes for the signature

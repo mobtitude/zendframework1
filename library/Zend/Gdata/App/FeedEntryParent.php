@@ -87,24 +87,22 @@ abstract class Zend_Gdata_App_FeedEntryParent extends Zend_Gdata_App_Base
      *
      * @see setService(), getService()
      */
-    protected $_service = null;
+    protected ?\Zend_Gdata_App $_service = null;
 
     /**
      * The HTTP ETag associated with this entry. Used for optimistic
      * concurrency in protoco v2 or greater.
-     *
-     * @var string|null
      */
-    protected $_etag = NULL;
+    protected ?string $_etag = NULL;
 
     protected $_author = array();
-    protected $_category = array();
-    protected $_contributor = array();
-    protected $_id = null;
-    protected $_link = array();
-    protected $_rights = null;
-    protected $_title = null;
-    protected $_updated = null;
+    protected array $_category = array();
+    protected array $_contributor = array();
+    protected ?\Zend_Gdata_App_Extension_Id $_id = null;
+    protected array $_link = array();
+    protected ?\Zend_Gdata_App_Extension_Rights $_rights = null;
+    protected ?\Zend_Gdata_App_Extension_Title $_title = null;
+    protected ?\Zend_Gdata_App_Extension_Updated $_updated = null;
 
     /**
       * Indicates the major protocol version that should be used.
@@ -114,7 +112,7 @@ abstract class Zend_Gdata_App_FeedEntryParent extends Zend_Gdata_App_Base
       * @see setMajorProtocolVersion()
       * @see getMajorProtocolVersion()
       */
-    protected $_majorProtocolVersion = 1;
+    protected ?int $_majorProtocolVersion = 1;
 
     /**
       * Indicates the minor protocol version that should be used. Can be set

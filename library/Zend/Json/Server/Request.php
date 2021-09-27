@@ -31,39 +31,33 @@ class Zend_Json_Server_Request
 {
     /**
      * Request ID
-     * @var mixed
      */
-    protected $_id;
+    protected ?string $_id = null;
 
     /**
      * Flag
-     * @var bool
      */
-    protected $_isMethodError = false;
+    protected bool $_isMethodError = false;
 
     /**
      * Requested method
-     * @var string
      */
-    protected $_method;
+    protected ?string $_method = null;
 
     /**
      * Regex for method
-     * @var string
      */
-    protected $_methodRegex = '/^[a-z][a-z0-9_.]*$/i';
+    protected string $_methodRegex = '/^[a-z][a-z0-9_.]*$/i';
 
     /**
      * Request parameters
-     * @var array
      */
-    protected $_params = array();
+    protected array $_params = array();
 
     /**
      * JSON-RPC version of request
-     * @var string
      */
-    protected $_version = '1.0';
+    protected string $_version = '1.0';
 
     /**
      * Set request state

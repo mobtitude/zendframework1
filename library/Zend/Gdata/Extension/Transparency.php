@@ -38,7 +38,7 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Extension_Transparency extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'transparency';
+    protected ?string $_rootElement = 'transparency';
     protected $_value = null;
 
     /**

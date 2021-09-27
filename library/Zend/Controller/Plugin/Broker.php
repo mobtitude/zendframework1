@@ -34,11 +34,9 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
 {
 
     /**
-     * Array of instance of objects extending Zend_Controller_Plugin_Abstract
-     *
-     * @var array
-     */
-    protected $_plugins = array();
+				 * Array of instance of objects extending Zend_Controller_Plugin_Abstract
+				 */
+				protected array $_plugins = array();
 
 
     /**

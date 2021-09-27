@@ -33,143 +33,103 @@ class Zend_Service_Flickr_Result
 {
     /**
      * The photo's Flickr ID.
-     *
-     * @var string
      */
-    public $id;
+    public string $id;
 
     /**
      * The photo owner's NSID.
-     *
-     * @var string
      */
-    public $owner;
+    public string $owner;
 
     /**
      * A key used in URI construction.
-     *
-     * @var string
      */
-    public $secret;
+    public string $secret;
 
     /**
      * The servername to use for URI construction.
-     *
-     * @var string
      */
-    public $server;
+    public string $server;
 
     /**
      * The photo's title.
-     *
-     * @var string
      */
-    public $title;
+    public string $title;
 
     /**
      * Whether the photo is public.
-     *
-     * @var string
      */
-    public $ispublic;
+    public string $ispublic;
 
     /**
      * Whether the photo is visible to you because you are a friend of the owner.
-     *
-     * @var string
      */
-    public $isfriend;
+    public string $isfriend;
 
     /**
      * Whether the photo is visible to you because you are family of the owner.
-     *
-     * @var string
      */
-    public $isfamily;
+    public string $isfamily;
 
     /**
      * The license the photo is available under.
-     *
-     * @var string
      */
-    public $license;
+    public string $license;
 
     /**
      * The date the photo was uploaded.
-     *
-     * @var string
      */
-    public $dateupload;
+    public string $dateupload;
 
     /**
      * The date the photo was taken.
-     *
-     * @var string
      */
-    public $datetaken;
+    public string $datetaken;
 
     /**
      * The screenname of the owner.
-     *
-     * @var string
      */
-    public $ownername;
+    public string $ownername;
 
     /**
      * The server used in assembling icon URLs.
-     *
-     * @var string
      */
-    public $iconserver;
+    public string $iconserver;
 
     /**
      * A 75x75 pixel square thumbnail of the image.
-     *
-     * @var Zend_Service_Flickr_Image
      */
-    public $Square;
+    public \Zend_Service_Flickr_Image $Square;
 
     /**
      * A 100 pixel thumbnail of the image.
-     *
-     * @var Zend_Service_Flickr_Image
      */
-    public $Thumbnail;
+    public \Zend_Service_Flickr_Image $Thumbnail;
 
     /**
      * A 240 pixel version of the image.
-     *
-     * @var Zend_Service_Flickr_Image
      */
-    public $Small;
+    public \Zend_Service_Flickr_Image $Small;
 
     /**
      * A 500 pixel version of the image.
-     *
-     * @var Zend_Service_Flickr_Image
      */
-    public $Medium;
+    public \Zend_Service_Flickr_Image $Medium;
 
     /**
      * A 640 pixel version of the image.
-     *
-     * @var Zend_Service_Flickr_Image
      */
-    public $Large;
+    public \Zend_Service_Flickr_Image $Large;
 
     /**
      * The original image.
-     *
-     * @var Zend_Service_Flickr_Image
      */
-    public $Original;
+    public \Zend_Service_Flickr_Image $Original;
 
     /**
      * Original Zend_Service_Flickr object.
-     *
-     * @var Zend_Service_Flickr
      */
-    protected $_flickr;
+    protected \Zend_Service_Flickr $_flickr;
 
     /**
      * Parse the Flickr Result

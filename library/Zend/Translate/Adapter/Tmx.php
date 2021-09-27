@@ -41,13 +41,13 @@ require_once 'Zend/Xml/Exception.php';
 class Zend_Translate_Adapter_Tmx extends Zend_Translate_Adapter {
     // Internal variables
     private $_file    = false;
-    private $_useId   = true;
+    private bool $_useId   = true;
     private $_srclang = null;
     private $_tu      = null;
     private $_tuv     = null;
-    private $_seg     = null;
+    private ?bool $_seg     = null;
     private $_content = null;
-    private $_data    = array();
+    private array $_data    = array();
 
     /**
      * Load translation data (TMX file reader)

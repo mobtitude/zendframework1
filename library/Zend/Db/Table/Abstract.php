@@ -83,10 +83,8 @@ abstract class Zend_Db_Table_Abstract
 
     /**
      * Default Zend_Db_Adapter_Abstract object.
-     *
-     * @var Zend_Db_Adapter_Abstract
      */
-    protected static $_defaultDb;
+    protected static ?\Zend_Db_Adapter_Abstract $_defaultDb = null;
 
     /**
      * Optional Zend_Db_Table_Definition object
@@ -104,48 +102,36 @@ abstract class Zend_Db_Table_Abstract
 
     /**
      * Default cache for information provided by the adapter's describeTable() method.
-     *
-     * @var Zend_Cache_Core
      */
-    protected static $_defaultMetadataCache = null;
+    protected static ?\Zend_Cache_Core $_defaultMetadataCache = null;
 
     /**
      * Zend_Db_Adapter_Abstract object.
-     *
-     * @var Zend_Db_Adapter_Abstract
      */
-    protected $_db;
+    protected ?\Zend_Db_Adapter_Abstract $_db = null;
 
     /**
      * The schema name (default null means current schema)
-     *
-     * @var array
      */
-    protected $_schema = null;
+    protected ?string $_schema = null;
 
     /**
      * The table name.
-     *
-     * @var string
      */
-    protected $_name = null;
+    protected ?string $_name = null;
 
     /**
      * The table column names derived from Zend_Db_Adapter_Abstract::describeTable().
-     *
-     * @var array
      */
-    protected $_cols;
+    protected ?array $_cols = null;
 
     /**
      * The primary key column or columns.
      * A compound key should be declared as an array.
      * You may declare a single-column primary key
      * as a string.
-     *
-     * @var mixed
      */
-    protected $_primary = null;
+    protected ?array $_primary = null;
 
     /**
      * If your primary key is a compound key, and one of the columns uses
@@ -154,10 +140,8 @@ abstract class Zend_Db_Table_Abstract
      * Note this index is the position of the column in the primary key,
      * not the position of the column in the table.  The primary key
      * array is 1-based.
-     *
-     * @var integer
      */
-    protected $_identity = 1;
+    protected int $_identity = 1;
 
     /**
      * Define the logic for new values in the primary key.
@@ -169,37 +153,28 @@ abstract class Zend_Db_Table_Abstract
 
     /**
      * Information provided by the adapter's describeTable() method.
-     *
-     * @var array
      */
-    protected $_metadata = array();
+    protected array $_metadata = array();
 
     /**
      * Cache for information provided by the adapter's describeTable() method.
-     *
-     * @var Zend_Cache_Core
      */
-    protected $_metadataCache = null;
+    protected ?\Zend_Cache_Core $_metadataCache = null;
 
     /**
      * Flag: whether or not to cache metadata in the class
-     * @var bool
      */
-    protected $_metadataCacheInClass = true;
+    protected bool $_metadataCacheInClass = true;
 
     /**
      * Classname for row
-     *
-     * @var string
      */
-    protected $_rowClass = 'Zend_Db_Table_Row';
+    protected string $_rowClass = 'Zend_Db_Table_Row';
 
     /**
      * Classname for rowset
-     *
-     * @var string
      */
-    protected $_rowsetClass = 'Zend_Db_Table_Rowset';
+    protected string $_rowsetClass = 'Zend_Db_Table_Rowset';
 
     /**
      * Associative array map of declarative referential integrity rules.
@@ -216,24 +191,20 @@ abstract class Zend_Db_Table_Abstract
      * - onUpdate      = "cascade" means that an update of primary key values in
      *                   the parent table also causes an update of referencing
      *                   rows in the child table.
-     *
-     * @var array
      */
-    protected $_referenceMap = array();
+    protected array $_referenceMap = array();
 
     /**
      * Simple array of class names of tables that are "children" of the current
      * table, in other words tables that contain a foreign key to this one.
      * Array elements are not table names; they are class names of classes that
      * extend Zend_Db_Table_Abstract.
-     *
-     * @var array
      */
-    protected $_dependentTables = array();
+    protected array $_dependentTables = array();
 
 
-    protected $_defaultSource = self::DEFAULT_NONE;
-    protected $_defaultValues = array();
+    protected string $_defaultSource = self::DEFAULT_NONE;
+    protected array $_defaultValues = array();
 
     /**
      * Constructor.

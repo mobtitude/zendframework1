@@ -47,10 +47,7 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
      */
     protected $_stmt = null;
 
-    /**
-     * @var Zend_Db_Adapter_Abstract
-     */
-    protected $_adapter = null;
+    protected ?\Zend_Db_Adapter_Abstract $_adapter = null;
 
     /**
      * The current fetch mode.
@@ -61,24 +58,18 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
 
     /**
      * Attributes.
-     *
-     * @var array
      */
-    protected $_attribute = array();
+    protected array $_attribute = array();
 
     /**
      * Column result bindings.
-     *
-     * @var array
      */
-    protected $_bindColumn = array();
+    protected array $_bindColumn = array();
 
     /**
      * Query parameter bindings; covers bindParam() and bindValue().
-     *
-     * @var array
      */
-    protected $_bindParam = array();
+    protected array $_bindParam = array();
 
     /**
      * SQL string split into an array at placeholders.
@@ -89,15 +80,10 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
 
     /**
      * Parameter placeholders in the SQL string by position in the split array.
-     *
-     * @var array
      */
-    protected $_sqlParam = array();
+    protected array $_sqlParam = array();
 
-    /**
-     * @var Zend_Db_Profiler_Query
-     */
-    protected $_queryId = null;
+    protected ?int $_queryId = null;
 
     /**
      * Constructor for a statement.

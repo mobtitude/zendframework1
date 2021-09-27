@@ -38,42 +38,32 @@ class Zend_Search_Lucene_Document_Html extends Zend_Search_Lucene_Document
 {
     /**
      * List of document links
-     *
-     * @var array
      */
-    private $_links = array();
+    private array $_links = array();
 
     /**
      * List of document header links
-     *
-     * @var array
      */
-    private $_headerLinks = array();
+    private array $_headerLinks = array();
 
     /**
      * Stored DOM representation
-     *
-     * @var DOMDocument
      */
-    private $_doc;
+    private \DOMDocument $_doc;
 
     /**
      * Exclud nofollow links flag
      *
      * If true then links with rel='nofollow' attribute are not included into
      * document links.
-     *
-     * @var boolean
      */
-    private static $_excludeNoFollowLinks = false;
+    private static bool $_excludeNoFollowLinks = false;
 
     /**
      *
      * List of inline tags
-     *
-     * @var array
      */
-    private $_inlineTags = array('a', 'abbr', 'acronym', 'dfn', 'em', 'strong', 'code',
+    private array $_inlineTags = array('a', 'abbr', 'acronym', 'dfn', 'em', 'strong', 'code',
                                 'samp', 'kbd', 'var', 'b', 'i', 'big', 'small', 'strike',
                                 'tt', 'u', 'font', 'span', 'bdo', 'cite', 'del', 'ins',
                                 'q', 'sub', 'sup');

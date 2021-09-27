@@ -52,30 +52,21 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
      */
     protected $_docblock   = null;
 
-    /**
-     * @var bool
-     */
-    protected $_isAbstract = false;
+    protected bool $_isAbstract = false;
 
     /**
      * @var bool
      */
     protected $_isFinal    = false;
 
-    /**
-     * @var bool
-     */
-    protected $_isStatic   = false;
+    protected bool $_isStatic   = false;
 
     /**
      * @var const
      */
     protected $_visibility = self::VISIBILITY_PUBLIC;
 
-    /**
-     * @var string
-     */
-    protected $_name = null;
+    protected ?string $_name = null;
 
     /**
      * setDocblock() Set the docblock

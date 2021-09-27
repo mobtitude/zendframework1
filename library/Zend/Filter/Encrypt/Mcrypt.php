@@ -47,7 +47,7 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
      *     'modedirectory' => directory where to find the mode
      * )
      */
-    protected $_encryption = array(
+    protected array $_encryption = array(
         'key'                 => 'ZendFramework',
         'algorithm'           => 'blowfish',
         'algorithm_directory' => '',
@@ -64,7 +64,7 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
      */
     protected $_compression;
 
-    protected static $_srandCalled = false;
+    protected static bool $_srandCalled = false;
 
     /**
      * Class constructor

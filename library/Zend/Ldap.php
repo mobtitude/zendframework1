@@ -39,17 +39,13 @@ class Zend_Ldap
 
     /**
      * String used with ldap_connect for error handling purposes.
-     *
-     * @var string
      */
-    private $_connectString;
+    private ?string $_connectString = null;
 
     /**
      * The options used in connecting, binding, etc.
-     *
-     * @var array
      */
-    protected $_options = null;
+    protected ?array $_options = null;
 
     /**
      * The raw LDAP extension resource.
@@ -69,17 +65,13 @@ class Zend_Ldap
 
     /**
      * Caches the RootDSE
-     *
-     * @var Zend_Ldap_Node
      */
-    protected $_rootDse = null;
+    protected ?\Zend_Ldap_Node_RootDse $_rootDse = null;
 
     /**
      * Caches the schema
-     *
-     * @var Zend_Ldap_Node
      */
-    protected $_schema = null;
+    protected ?\Zend_Ldap_Node_Schema $_schema = null;
 
     /**
      * @deprecated will be removed, use {@see Zend_Ldap_Filter_Abstract::escapeValue()}

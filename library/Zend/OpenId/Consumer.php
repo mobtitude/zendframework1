@@ -56,7 +56,7 @@ class Zend_OpenId_Consumer
     /**
      * Parameters required for signature
      */
-    protected $_signParams = array('op_endpoint', 'return_to', 'response_nonce', 'assoc_handle');
+    protected array $_signParams = array('op_endpoint', 'return_to', 'response_nonce', 'assoc_handle');
 
     /**
      * Reference to an implementation of storage object
@@ -68,38 +68,28 @@ class Zend_OpenId_Consumer
     /**
      * Enables or disables consumer to use association with server based on
      * Diffie-Hellman key agreement
-     *
-     * @var Zend_OpenId_Consumer_Storage $_dumbMode
      */
-    protected $_dumbMode = false;
+    protected bool $_dumbMode = false;
 
     /**
      * Internal cache to prevent unnecessary access to storage
-     *
-     * @var array $_cache
      */
-    protected $_cache = array();
+    protected array $_cache = array();
 
     /**
      * HTTP client to make HTTP requests
-     *
-     * @var Zend_Http_Client $_httpClient
      */
-    private $_httpClient = null;
+    private ?\Zend_Http_Client $_httpClient = null;
 
     /**
      * HTTP session to store climed_id between requests
-     *
-     * @var Zend_Session_Namespace $_session
      */
-    private $_session = null;
+    private ?\Zend_Session_Namespace $_session = null;
 
     /**
      * Last error message for logi, check or verify failure
-     *
-     * @var string $_error
      */
-    private $_error = '';
+    private string $_error = '';
 
     /**
      * Constructs a Zend_OpenId_Consumer object with given $storage.

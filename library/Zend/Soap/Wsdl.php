@@ -53,7 +53,7 @@ class Zend_Soap_Wsdl
     /**
      * @var string URI where the WSDL will be available
      */
-    private $_uri;
+    private string $_uri;
 
     /**
      * @var DOMElement
@@ -62,15 +62,13 @@ class Zend_Soap_Wsdl
 
     /**
      * Types defined on schema
-     *
-     * @var array
      */
-    private $_includedTypes = array();
+    private array $_includedTypes = array();
 
     /**
      * Strategy for detection of complex types
      */
-    protected $_strategy = null;
+    protected ?\Zend_Soap_Wsdl_Strategy_Interface $_strategy = null;
 
 
     /**

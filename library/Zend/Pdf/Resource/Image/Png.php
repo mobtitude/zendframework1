@@ -62,7 +62,7 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
 
     protected $_width;
     protected $_height;
-    protected $_imageProperties;
+    protected array $_imageProperties;
 
     /**
      * Object constructor

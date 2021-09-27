@@ -38,10 +38,8 @@ class Zend_Ldap_Node_ChildrenIterator implements Iterator, Countable, RecursiveI
 {
     /**
      * An array of Zend_Ldap_Node objects
-     *
-     * @var array
      */
-    private $_data;
+    private array $_data;
 
     /**
      * Constructor.

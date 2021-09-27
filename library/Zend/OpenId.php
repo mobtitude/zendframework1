@@ -62,13 +62,13 @@ class Zend_OpenId
     /**
      * Allows enable/disable stoping execution of PHP script after redirect()
      */
-    static public $exitOnRedirect = true;
+    static public bool $exitOnRedirect = true;
 
     /**
      * Alternative request URL that can be used to override the default
      * selfUrl() response
      */
-    static public $selfUrl = null;
+    static public ?string $selfUrl = null;
 
     /**
      * Sets alternative request URL that can be used to override the default

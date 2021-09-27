@@ -38,52 +38,38 @@ class Zend_Markup_Token
 
     /**
      * Children of this token
-     *
-     * @var Zend_Markup_TokenList
      */
-    protected $_children;
+    protected ?\Zend_Markup_TokenList $_children = null;
 
     /**
      * The complete tag
-     *
-     * @var string
      */
-    protected $_tag;
+    protected string $_tag;
 
     /**
      * The tag's type
-     *
-     * @var string
      */
-    protected $_type;
+    protected string $_type;
 
     /**
      * Tag name
-     *
-     * @var string
      */
-    protected $_name = '';
+    protected string $_name = '';
 
     /**
      * Tag attributes
-     *
-     * @var array
      */
-    protected $_attributes = array();
+    protected array $_attributes = array();
 
     /**
      * The used tag stopper (empty when none is found)
-     *
-     * @var string
      */
-    protected $_stopper = '';
+    protected string $_stopper = '';
 
     /**
      * The parent token
-     *
-     * @var Zend_Markup_Token
      */
-    protected $_parent;
+    protected ?\Zend_Markup_Token $_parent;
 
 
     /**

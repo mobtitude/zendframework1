@@ -39,9 +39,9 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
 class Zend_Tool_Project_Context_Zf_ApplicationDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
 
-    protected $_filesystemName = 'application';
+    protected ?string $_filesystemName = 'application';
 
-    protected $_classNamePrefix = 'Application_';
+    protected string $_classNamePrefix = 'Application_';
 
     public function init()
     {

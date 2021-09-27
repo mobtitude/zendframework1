@@ -35,49 +35,32 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
 {
     /**
      * Extensions
-     * @var array
      */
-    protected $_extensions = array();
+    protected array $_extensions = array();
 
     /**
      * @var mixed
      */
     protected $_container = null;
 
-    /**
-     * @var DOMDocument
-     */
-    protected $_dom = null;
+    protected ?\DOMDocument $_dom = null;
 
-    /**
-     * @var bool
-     */
-    protected $_ignoreExceptions = false;
+    protected bool $_ignoreExceptions = false;
 
-    /**
-     * @var array
-     */
-    protected $_exceptions = array();
+    protected array $_exceptions = array();
 
     /**
      * Encoding of all text values
-     *
-     * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
     /**
      * Holds the value "atom" or "rss" depending on the feed type set when
      * when last exported.
-     *
-     * @var string
      */
-    protected $_type = null;
+    protected ?string $_type = null;
 
-    /**
-     * @var DOMElement
-     */
-    protected $_rootElement = null;
+    protected ?\DOMElement $_rootElement = null;
 
     /**
      * Constructor

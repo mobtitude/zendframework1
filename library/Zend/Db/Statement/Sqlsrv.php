@@ -40,17 +40,17 @@ class Zend_Db_Statement_Sqlsrv extends Zend_Db_Statement
     /**
      * The connection_stmt object original string.
      */
-    protected $_originalSQL;
+    protected ?string $_originalSQL = null;
 
     /**
      * Column names.
      */
-    protected $_keys;
+    protected ?array $_keys = null;
 
     /**
      * Query executed
      */
-    protected $_executed = false;
+    protected bool $_executed = false;
 
     /**
      * Prepares statement handle

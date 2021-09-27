@@ -38,18 +38,12 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_Media_Extension_MediaRestriction extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'restriction';
-    protected $_rootNamespace = 'media';
+    protected ?string $_rootElement = 'restriction';
+    protected string $_rootNamespace = 'media';
 
-    /**
-     * @var string
-     */
-    protected $_relationship = null;
+    protected ?string $_relationship = null;
 
-    /**
-     * @var string
-     */
-    protected $_type = null;
+    protected ?string $_type = null;
 
     /**
      * Constructs a new MediaRestriction element

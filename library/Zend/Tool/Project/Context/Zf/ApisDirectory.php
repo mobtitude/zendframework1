@@ -41,7 +41,7 @@ class Zend_Tool_Project_Context_Zf_ApisDirectory extends Zend_Tool_Project_Conte
     /**
      * @var string
      */
-    protected $_filesystemName = 'apis';
+    protected ?string $_filesystemName = 'apis';
 
     /**
      * getName()

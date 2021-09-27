@@ -35,38 +35,28 @@ class Zend_Tag_Cloud
 {
     /**
      * Decorator for the cloud
-     *
-     * @var Zend_Tag_Cloud_Decorator_Cloud
      */
-    protected $_cloudDecorator = null;
+    protected ?\Zend_Tag_Cloud_Decorator_Cloud $_cloudDecorator = null;
 
     /**
      * Decorator for the tags
-     *
-     * @var Zend_Tag_Cloud_Decorator_Tag
      */
-    protected $_tagDecorator = null;
+    protected ?\Zend_Tag_Cloud_Decorator_Tag $_tagDecorator = null;
 
     /**
      * List of all tags
-     *
-     * @var Zend_Tag_ItemList
      */
-    protected $_tags = null;
+    protected ?\Zend_Tag_ItemList $_tags = null;
 
     /**
      * Plugin loader for decorators
-     *
-     * @var Zend_Loader_PluginLoader
      */
-    protected $_pluginLoader = null;
+    protected ?\Zend_Loader_PluginLoader_Interface $_pluginLoader = null;
 
     /**
      * Option keys to skip when calling setOptions()
-     *
-     * @var array
      */
-    protected $_skipOptions = array(
+    protected array $_skipOptions = array(
         'options',
         'config',
     );

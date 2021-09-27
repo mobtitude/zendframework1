@@ -39,7 +39,7 @@ class Zend_Service_ShortUrl_TinyUrlCom extends Zend_Service_ShortUrl_AbstractSho
      *
      * @var string
      */
-    protected $_baseUri = 'http://tinyurl.com';
+    protected ?string $_baseUri = 'http://tinyurl.com';
 
     /**
      * This function shortens long url

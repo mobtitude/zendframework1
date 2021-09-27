@@ -34,8 +34,8 @@ require_once 'Zend/File/Transfer/Adapter/Abstract.php';
  */
 class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstract
 {
-    protected static $_callbackApc            = 'apc_fetch';
-    protected static $_callbackUploadProgress = 'uploadprogress_get_info';
+    protected static string $_callbackApc            = 'apc_fetch';
+    protected static string $_callbackUploadProgress = 'uploadprogress_get_info';
 
     /**
      * Constructor for Http File Transfers

@@ -47,7 +47,7 @@ class Zend_Tool_Project_Context_Zf_ModelFile extends Zend_Tool_Project_Context_Z
     /**
      * @var string
      */
-    protected $_filesystemName = 'modelName';
+    protected ?string $_filesystemName = 'modelName';
 
     /**
      * init()

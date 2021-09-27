@@ -38,20 +38,17 @@ require_once 'Zend/Registry.php';
  */
 class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
 {
-    /** @var Zend_Registry */
-    protected $_registry;
+    protected ?\Zend_Registry $_registry = null;
 
     /**
      * Registry key under which actions are stored
-     * @var string
      */
-    protected $_registryKey = 'Zend_Controller_Plugin_ActionStack';
+    protected string $_registryKey = 'Zend_Controller_Plugin_ActionStack';
 
     /**
      * Valid keys for stack items
-     * @var array
      */
-    protected $_validKeys = array(
+    protected array $_validKeys = array(
         'module',
         'controller',
         'action',
@@ -61,10 +58,8 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
     /**
      * Flag to determine whether request parameters are cleared between actions, or whether new parameters
      * are added to existing request parameters.
-     *
-     * @var Bool
      */
-    protected $_clearRequestParams = false;
+    protected bool $_clearRequestParams = false;
 
     /**
      * Constructor

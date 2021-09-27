@@ -45,8 +45,8 @@ require_once 'Zend/Gdata/Photos.php';
 class Zend_Gdata_Photos_Extension_AlbumId extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gphoto';
-    protected $_rootElement = 'albumid';
+    protected string $_rootNamespace = 'gphoto';
+    protected ?string $_rootElement = 'albumid';
 
     /**
      * Constructs a new Zend_Gdata_Photos_Extension_AlbumId object.

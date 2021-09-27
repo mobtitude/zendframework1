@@ -46,10 +46,8 @@ class Zend_Cloud_DocumentService_Query
 
     /**
      * Clause list
-     *
-     * @var array
      */
-    protected $_clauses = array();
+    protected array $_clauses = array();
 
     /**
      * Generic clause

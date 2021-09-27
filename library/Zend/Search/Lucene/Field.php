@@ -39,66 +39,48 @@ class Zend_Search_Lucene_Field
 {
     /**
      * Field name
-     *
-     * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * Field value
-     *
-     * @var boolean
      */
-    public $value;
+    public string $value;
 
     /**
      * Field is to be stored in the index for return with search hits.
-     *
-     * @var boolean
      */
-    public $isStored    = false;
+    public bool $isStored    = false;
 
     /**
      * Field is to be indexed, so that it may be searched on.
-     *
-     * @var boolean
      */
-    public $isIndexed   = true;
+    public bool $isIndexed   = true;
 
     /**
      * Field should be tokenized as text prior to indexing.
-     *
-     * @var boolean
      */
-    public $isTokenized = true;
+    public bool $isTokenized = true;
     /**
      * Field is stored as binary.
-     *
-     * @var boolean
      */
-    public $isBinary    = false;
+    public bool $isBinary    = false;
 
     /**
      * Field are stored as a term vector
-     *
-     * @var boolean
      */
-    public $storeTermVector = false;
+    public bool $storeTermVector = false;
 
     /**
      * Field boost factor
      * It's not stored directly in the index, but affects on normalization factor
-     *
-     * @var float
      */
-    public $boost = 1.0;
+    public float $boost = 1.0;
 
     /**
      * Field value encoding.
-     *
-     * @var string
      */
-    public $encoding;
+    public ?string $encoding;
 
     /**
      * Object constructor

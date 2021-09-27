@@ -34,10 +34,8 @@ class Zend_Pdf_ElementFactory_Proxy implements Zend_Pdf_ElementFactory_Interface
 {
     /**
      * Factory object
-     *
-     * @var Zend_Pdf_ElementFactory_Interface
      */
-    private $_factory;
+    private ?\Zend_Pdf_ElementFactory_Interface $_factory;
 
 
     /**

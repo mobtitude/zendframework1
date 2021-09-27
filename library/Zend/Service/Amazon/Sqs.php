@@ -55,19 +55,19 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
     /**
      * The API version to use
      */
-    protected $_sqsApiVersion = '2009-02-01';
+    protected string $_sqsApiVersion = '2009-02-01';
 
     /**
      * Signature Version
      */
-    protected $_sqsSignatureVersion = '2';
+    protected string $_sqsSignatureVersion = '2';
 
     /**
      * Signature Encoding Method
      */
-    protected $_sqsSignatureMethod = 'HmacSHA256';
+    protected string $_sqsSignatureMethod = 'HmacSHA256';
 
-    protected $_sqsEndpoints = array('us-east-1' => 'sqs.us-east-1.amazonaws.com',
+    protected array $_sqsEndpoints = array('us-east-1' => 'sqs.us-east-1.amazonaws.com',
                                      'us-west-1' => 'sqs.us-west-1.amazonaws.com',
                                      'eu-west-1' => 'sqs.eu-west-1.amazonaws.com',
                                      'ap-southeast-1' => 'sqs.ap-southeast-1.amazonaws.com',

@@ -34,25 +34,19 @@ class Zend_Search_Lucene_Search_QueryEntry_Term extends Zend_Search_Lucene_Searc
 {
     /**
      * Term value
-     *
-     * @var string
      */
-    private $_term;
+    private string $_term;
 
     /**
      * Field
-     *
-     * @var string|null
      */
-    private $_field;
+    private string $_field;
 
 
     /**
      * Fuzzy search query
-     *
-     * @var boolean
      */
-    private $_fuzzyQuery = false;
+    private bool $_fuzzyQuery = false;
 
     /**
      * Similarity

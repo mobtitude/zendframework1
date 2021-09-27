@@ -38,8 +38,8 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Extension_OpenSearchTotalResults extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'totalResults';
-    protected $_rootNamespace = 'openSearch';
+    protected ?string $_rootElement = 'totalResults';
+    protected string $_rootNamespace = 'openSearch';
 
     public function __construct($text = null)
     {

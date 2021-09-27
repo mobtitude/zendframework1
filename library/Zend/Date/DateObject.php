@@ -34,27 +34,27 @@ abstract class Zend_Date_DateObject {
     private   $_unixTimestamp;
     protected static $_cache         = null;
     protected static $_cacheTags     = false;
-    protected static $_defaultOffset = 0;
+    protected static int $_defaultOffset = 0;
 
     /**
      * active timezone
      */
-    private   $_timezone    = 'UTC';
-    private   $_offset      = 0;
+    private   string $_timezone    = 'UTC';
+    private   int $_offset      = 0;
     private   $_syncronised = 0;
 
     // turn off DST correction if UTC or GMT
-    protected $_dst         = true;
+    protected bool $_dst         = true;
 
     /**
      * Table of Monthdays
      */
-    private static $_monthTable = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+    private static array $_monthTable = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
 
     /**
      * Table of Years
      */
-    private static $_yearTable = array(
+    private static array $_yearTable = array(
         1970 => 0,            1960 => -315619200,   1950 => -631152000,
         1940 => -946771200,   1930 => -1262304000,  1920 => -1577923200,
         1910 => -1893456000,  1900 => -2208988800,  1890 => -2524521600,

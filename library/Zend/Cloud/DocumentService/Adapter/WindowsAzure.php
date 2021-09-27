@@ -56,23 +56,20 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
 
     /**
      * Azure  service instance.
-     *
-     * @var Zend_Service_WindowsAzure_Storage_Table
      */
-    protected $_storageClient;
+    protected ?\Zend_Service_WindowsAzure_Storage_Table $_storageClient = null;
 
     /**
      * Class to utilize for new query objects
      *
      * @var string
      */
-    protected $_queryClass = 'Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query';
+    protected string $_queryClass = 'Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query';
 
     /**
      * Partition key to use by default when constructing document identifiers
-     * @var string
      */
-    protected $_defaultPartitionKey;
+    protected ?string $_defaultPartitionKey = null;
 
     /**
      * Constructor

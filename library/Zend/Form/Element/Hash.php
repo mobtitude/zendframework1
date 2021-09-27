@@ -45,27 +45,20 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
 
     /**
      * Actual hash used.
-     *
-     * @var mixed
      */
-    protected $_hash;
+    protected ?string $_hash = null;
 
     /**
      * Salt for CSRF token
-     * @var string
      */
-    protected $_salt = 'salt';
+    protected string $_salt = 'salt';
 
-    /**
-     * @var Zend_Session_Namespace
-     */
-    protected $_session;
+    protected ?\Zend_Session_Namespace $_session = null;
 
     /**
      * TTL for CSRF token
-     * @var int
      */
-    protected $_timeout = 300;
+    protected int $_timeout = 300;
 
     /**
      * Constructor

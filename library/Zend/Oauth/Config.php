@@ -38,121 +38,91 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
 {
     /**
      * Signature method used when signing all parameters for an HTTP request
-     *
-     * @var string
      */
-    protected $_signatureMethod = 'HMAC-SHA1';
+    protected string $_signatureMethod = 'HMAC-SHA1';
 
     /**
      * Three request schemes are defined by OAuth, of which passing
      * all OAuth parameters by Header is preferred. The other two are
      * POST Body and Query String.
-     *
-     * @var string
      */
-    protected $_requestScheme = Zend_Oauth::REQUEST_SCHEME_HEADER;
+    protected string $_requestScheme = Zend_Oauth::REQUEST_SCHEME_HEADER;
 
     /**
      * Preferred request Method - one of GET or POST - which Zend_Oauth
      * will enforce as standard throughout the library. Generally a default
      * of POST works fine unless a Provider specifically requires otherwise.
-     *
-     * @var string
      */
-    protected $_requestMethod = Zend_Oauth::POST;
+    protected string $_requestMethod = Zend_Oauth::POST;
 
     /**
      * OAuth Version; This defaults to 1.0 - Must not be changed!
-     *
-     * @var string
      */
-    protected $_version = '1.0';
+    protected string $_version = '1.0';
 
     /**
      * This optional value is used to define where the user is redirected to
      * after authorizing a Request Token from an OAuth Providers website.
      * It's optional since a Provider may ask for this to be defined in advance
      * when registering a new application for a Consumer Key.
-     *
-     * @var string
      */
-    protected $_callbackUrl = null;
+    protected ?string $_callbackUrl = null;
 
     /**
      * The URL root to append default OAuth endpoint paths.
-     *
-     * @var string
      */
-    protected $_siteUrl = null;
+    protected ?string $_siteUrl = null;
 
     /**
      * The URL to which requests for a Request Token should be directed.
      * When absent, assumed siteUrl+'/request_token'
-     *
-     * @var string
      */
-    protected $_requestTokenUrl = null;
+    protected ?string $_requestTokenUrl = null;
 
     /**
      * The URL to which requests for an Access Token should be directed.
      * When absent, assumed siteUrl+'/access_token'
-     *
-     * @var string
      */
-    protected $_accessTokenUrl = null;
+    protected ?string $_accessTokenUrl = null;
 
     /**
      * The URL to which users should be redirected to authorize a Request Token.
      * When absent, assumed siteUrl+'/authorize'
-     *
-     * @var string
      */
-    protected $_authorizeUrl = null;
+    protected ?string $_authorizeUrl = null;
 
     /**
      * An OAuth application's Consumer Key.
-     *
-     * @var string
      */
-    protected $_consumerKey = null;
+    protected ?string $_consumerKey = null;
 
     /**
      * Every Consumer Key has a Consumer Secret unless you're in RSA-land.
-     *
-     * @var string
      */
-    protected $_consumerSecret = null;
+    protected ?string $_consumerSecret = null;
 
     /**
      * If relevant, a PEM encoded RSA private key encapsulated as a
      * Zend_Crypt_Rsa Key
-     *
-     * @var Zend_Crypt_Rsa_Key_Private
      */
-    protected $_rsaPrivateKey = null;
+    protected ?\Zend_Crypt_Rsa_Key_Private $_rsaPrivateKey = null;
 
     /**
      * If relevant, a PEM encoded RSA public key encapsulated as a
      * Zend_Crypt_Rsa Key
-     *
-     * @var Zend_Crypt_Rsa_Key_Public
      */
-    protected $_rsaPublicKey = null;
+    protected ?\Zend_Crypt_Rsa_Key_Public $_rsaPublicKey = null;
 
     /**
      * Generally this will nearly always be an Access Token represented as a
      * Zend_Oauth_Token_Access object.
-     *
-     * @var Zend_Oauth_Token
      */
-    protected $_token = null;
+    protected ?\Zend_Oauth_Token $_token = null;
     
     /**
      * Define the OAuth realm
-     * 
-     * @var string
      */
-    protected $_realm = null;
+    protected ?string $_realm = null;
 
     /**
      * Constructor; create a new object with an optional array|Zend_Config

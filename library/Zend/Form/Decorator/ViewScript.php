@@ -56,19 +56,17 @@ class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
      * Default placement: append
      * @var string
      */
-    protected $_placement = 'APPEND';
+    protected ?string $_placement = 'APPEND';
 
     /**
      * View script to render
-     * @var string
      */
-    protected $_viewScript;
+    protected ?string $_viewScript = null;
 
     /**
      * View script module
-     * @var string
      */
-    protected $_viewModule;
+    protected ?string $_viewModule = null;
 
     /**
      * Set view script

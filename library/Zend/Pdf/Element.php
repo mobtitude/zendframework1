@@ -40,10 +40,8 @@ abstract class Zend_Pdf_Element
 
     /**
      * Reference to the top level indirect object, which contains this element.
-     *
-     * @var Zend_Pdf_Element_Object
      */
-    private $_parentObject = null;
+    private ?\Zend_Pdf_Element_Object $_parentObject = null;
 
     /**
      * Return type of the element.

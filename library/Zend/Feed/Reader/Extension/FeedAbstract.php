@@ -45,10 +45,8 @@ abstract class Zend_Feed_Reader_Extension_FeedAbstract
 {
     /**
      * Parsed feed data
-     *
-     * @var array
      */
-    protected $_data = array();
+    protected array $_data = array();
 
     /**
      * Parsed feed data in the shape of a DOMDocument
@@ -59,10 +57,8 @@ abstract class Zend_Feed_Reader_Extension_FeedAbstract
 
     /**
      * The base XPath query used to retrieve feed data
-     *
-     * @var DOMXPath
      */
-    protected $_xpath = null;
+    protected ?\DOMXPath $_xpath = null;
 
     /**
      * The XPath prefix

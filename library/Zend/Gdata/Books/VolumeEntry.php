@@ -113,20 +113,20 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     const INFO_LINK_REL = 'http://schemas.google.com/books/2008/info';
     const ANNOTATION_LINK_REL = 'http://schemas.google.com/books/2008/annotation';
 
-    protected $_comments = null;
-    protected $_creators = array();
-    protected $_dates = array();
-    protected $_descriptions = array();
-    protected $_embeddability = null;
-    protected $_formats = array();
-    protected $_identifiers = array();
-    protected $_languages = array();
-    protected $_publishers = array();
-    protected $_rating = null;
-    protected $_review = null;
-    protected $_subjects = array();
-    protected $_titles = array();
-    protected $_viewability = null;
+    protected ?\Zend_Gdata_Extension_Comments $_comments = null;
+    protected array $_creators = array();
+    protected array $_dates = array();
+    protected array $_descriptions = array();
+    protected ?\Zend_Gdata_Books_Extension_Embeddability $_embeddability = null;
+    protected array $_formats = array();
+    protected array $_identifiers = array();
+    protected array $_languages = array();
+    protected array $_publishers = array();
+    protected ?\Zend_Gdata_Extension_Rating $_rating = null;
+    protected ?\Zend_Gdata_Books_Extension_Review $_review = null;
+    protected array $_subjects = array();
+    protected array $_titles = array();
+    protected ?\Zend_Gdata_Books_Extension_Viewability $_viewability = null;
 
     /**
      * Constructor for Zend_Gdata_Books_VolumeEntry which

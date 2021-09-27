@@ -113,7 +113,6 @@ class Zend_Amf_Value_Messaging_CommandMessage extends Zend_Amf_Value_Messaging_A
 
     /**
      * The operation to execute for messages of this type
-     * @var int
      */
-    public $operation = self::UNKNOWN_OPERATION;
+    public int $operation = self::UNKNOWN_OPERATION;
 }

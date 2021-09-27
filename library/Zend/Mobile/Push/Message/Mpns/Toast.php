@@ -44,24 +44,18 @@ class Zend_Mobile_Push_Message_Mpns_Toast extends Zend_Mobile_Push_Message_Mpns
 
     /**
      * Title
-     *
-     * @var string
      */
-    protected $_title;
+    protected ?string $_title = null;
 
     /**
      * Message
-     *
-     * @var string
      */
-    protected $_msg;
+    protected ?string $_msg = null;
 
     /**
      * Params
-     *
-     * @var string
      */
-    protected $_params;
+    protected ?string $_params = null;
 
     /**
      * Get Title

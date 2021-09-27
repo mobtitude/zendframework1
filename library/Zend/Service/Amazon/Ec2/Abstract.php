@@ -49,44 +49,42 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
     /**
      * The HTTP query server
      */
-    protected $_ec2Endpoint = 'ec2.amazonaws.com';
+    protected string $_ec2Endpoint = 'ec2.amazonaws.com';
 
     /**
      * The API version to use
      */
-    protected $_ec2ApiVersion = '2009-04-04';
+    protected string $_ec2ApiVersion = '2009-04-04';
 
     /**
      * Signature Version
      */
-    protected $_ec2SignatureVersion = '2';
+    protected string $_ec2SignatureVersion = '2';
 
     /**
      * Signature Encoding Method
      */
-    protected $_ec2SignatureMethod = 'HmacSHA256';
+    protected string $_ec2SignatureMethod = 'HmacSHA256';
 
     /**
      * Period after which HTTP request will timeout in seconds
      */
-    protected $_httpTimeout = 10;
+    protected int $_httpTimeout = 10;
 
     /**
      * @var string Amazon Region
      */
-    protected static $_defaultRegion = null;
+    protected static ?string $_defaultRegion = null;
 
     /**
      * @var string Amazon Region
      */
-    protected $_region;
+    protected string $_region;
 
     /**
      * An array that contains all the valid Amazon Ec2 Regions.
-     *
-     * @var array
      */
-    protected static $_validEc2Regions = array('eu-west-1', 'us-east-1');
+    protected static array $_validEc2Regions = array('eu-west-1', 'us-east-1');
 
     /**
      * Create Amazon client.

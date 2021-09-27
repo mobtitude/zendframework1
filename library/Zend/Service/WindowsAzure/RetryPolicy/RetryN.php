@@ -36,17 +36,13 @@ class Zend_Service_WindowsAzure_RetryPolicy_RetryN extends Zend_Service_WindowsA
 {
     /**
      * Number of retries
-     * 
-     * @var int
      */
-    protected $_retryCount = 1;
+    protected int $_retryCount = 1;
     
     /**
      * Interval between retries (in milliseconds)
-     * 
-     * @var int
      */
-    protected $_retryInterval = 0;
+    protected int $_retryInterval = 0;
     
     /**
      * Constructor

@@ -36,7 +36,7 @@ require_once 'Zend/Exception.php';
  */
 class Zend_View_Exception extends Zend_Exception
 {
-    protected $view = null;
+    protected ?\Zend_View_Interface $view = null;
 
     public function setView(Zend_View_Interface $view = null)
     {

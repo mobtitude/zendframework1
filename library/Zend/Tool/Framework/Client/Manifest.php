@@ -62,10 +62,7 @@ class Zend_Tool_Framework_Client_Manifest
                Zend_Tool_Framework_Manifest_MetadataManifestable
 {
 
-    /**
-     * @var Zend_Tool_Framework_Registry_Interface
-     */
-    protected $_registry = null;
+    protected ?\Zend_Tool_Framework_Registry_Interface $_registry = null;
 
     /**
      * setRegistry() - Required for the Zend_Tool_Framework_Registry_EnabledInterface interface

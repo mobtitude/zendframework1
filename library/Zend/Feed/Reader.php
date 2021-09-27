@@ -83,32 +83,26 @@ class Zend_Feed_Reader
 
     /**
      * Cache instance
-     *
-     * @var Zend_Cache_Core
      */
-    protected static $_cache = null;
+    protected static ?\Zend_Cache_Core $_cache = null;
 
     /**
      * HTTP client object to use for retrieving feeds
-     *
-     * @var Zend_Http_Client
      */
-    protected static $_httpClient = null;
+    protected static ?\Zend_Http_Client $_httpClient = null;
 
     /**
      * Override HTTP PUT and DELETE request methods?
-     *
-     * @var boolean
      */
-    protected static $_httpMethodOverride = false;
+    protected static bool $_httpMethodOverride = false;
 
-    protected static $_httpConditionalGet = false;
+    protected static bool $_httpConditionalGet = false;
 
-    protected static $_pluginLoader = null;
+    protected static ?\Zend_Loader_PluginLoader_Interface $_pluginLoader = null;
 
-    protected static $_prefixPaths = array();
+    protected static array $_prefixPaths = array();
 
-    protected static $_extensions = array(
+    protected static array $_extensions = array(
         'feed' => array(
             'DublinCore_Feed',
             'Atom_Feed'

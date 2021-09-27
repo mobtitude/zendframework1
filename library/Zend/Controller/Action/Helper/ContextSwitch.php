@@ -45,15 +45,13 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
 
     /**
      * Supported contexts
-     * @var array
      */
-    protected $_contexts = array();
+    protected array $_contexts = array();
 
     /**
      * JSON auto-serialization flag
-     * @var boolean
      */
-    protected $_autoJsonSerialization = true;
+    protected bool $_autoJsonSerialization = true;
 
     /**
      * Controller property key to utilize for context switching
@@ -63,9 +61,8 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
 
     /**
      * Request parameter containing requested context
-     * @var string
      */
-    protected $_contextParam = 'format';
+    protected string $_contextParam = 'format';
 
     /**
      * Current context
@@ -75,21 +72,18 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
 
     /**
      * Default context (xml)
-     * @var string
      */
-    protected $_defaultContext = 'xml';
+    protected string $_defaultContext = 'xml';
 
     /**
      * Whether or not to disable layouts when switching contexts
-     * @var boolean
      */
-    protected $_disableLayout = true;
+    protected bool $_disableLayout = true;
 
     /**
      * Methods that require special configuration
-     * @var array
      */
-    protected $_specialConfig = array(
+    protected array $_specialConfig = array(
         'setSuffix',
         'setHeaders',
         'setCallbacks',
@@ -97,9 +91,8 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
 
     /**
      * Methods that are not configurable via setOptions and setConfig
-     * @var array
      */
-    protected $_unconfigurable = array(
+    protected array $_unconfigurable = array(
         'setOptions',
         'setConfig',
         'setHeader',
@@ -109,16 +102,12 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
         'setActionContexts',
     );
 
-    /**
-     * @var Zend_Controller_Action_Helper_ViewRenderer
-     */
-    protected $_viewRenderer;
+    protected ?\Zend_Controller_Action_Helper_Abstract $_viewRenderer = null;
 
     /**
      * Original view suffix prior to detecting context switch
-     * @var string
      */
-    protected $_viewSuffixOrig;
+    protected ?string $_viewSuffixOrig = null;
 
     /**
      * Constructor

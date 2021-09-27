@@ -62,18 +62,14 @@ class Zend_Feed_Writer_Feed_FeedAbstract
 {
     /**
      * Contains all Feed level date to append in feed output
-     *
-     * @var array
      */
-    protected $_data = array();
+    protected array $_data = array();
 
     /**
      * Holds the value "atom" or "rss" depending on the feed type set when
      * when last exported.
-     *
-     * @var string
      */
-    protected $_type = null;
+    protected ?string $_type = null;
 
     /**
      * Constructor: Primarily triggers the registration of core extensions and

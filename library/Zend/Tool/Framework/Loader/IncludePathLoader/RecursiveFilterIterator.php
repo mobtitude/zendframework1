@@ -29,8 +29,8 @@
 class Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator extends RecursiveFilterIterator
 {
 
-    protected $_denyDirectoryPattern = null;
-    protected $_acceptFilePattern    = null;
+    protected ?string $_denyDirectoryPattern = null;
+    protected ?string $_acceptFilePattern    = null;
 
     /**
      * constructor

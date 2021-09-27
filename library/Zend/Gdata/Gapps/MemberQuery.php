@@ -45,18 +45,14 @@ class Zend_Gdata_Gapps_MemberQuery extends Zend_Gdata_Gapps_Query
 
     /**
      * If not null, specifies the group id
-     *
-     * @var string
      */
-    protected $_groupId = null;
+    protected ?string $_groupId = null;
 
     /**
      * If not null, specifies the member id of the user who should be
      * retrieved by this query.
-     *
-     * @var string
      */
-    protected $_memberId = null;
+    protected ?string $_memberId = null;
 
     /**
      * Create a new instance.

@@ -41,7 +41,7 @@ class Zend_Cache_Backend
      *
      * @var array directives
      */
-    protected $_directives = array(
+    protected array $_directives = array(
         'lifetime' => 3600,
         'logging'  => false,
         'logger'   => null
@@ -52,7 +52,7 @@ class Zend_Cache_Backend
      *
      * @var array available options
      */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * Constructor

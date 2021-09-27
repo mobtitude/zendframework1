@@ -46,15 +46,9 @@ require_once 'Zend/Tool/Framework/Provider/Interface.php';
 class Zend_Tool_Framework_Loader_BasicLoader
     implements Zend_Tool_Framework_Loader_Interface, Zend_Tool_Framework_Registry_EnabledInterface
 {
-    /**
-     * @var Zend_Tool_Framework_Repository_Interface
-     */
-    protected $_registry = null;
+    protected ?\Zend_Tool_Framework_Registry_Interface $_registry = null;
 
-    /**
-     * @var array
-     */
-    protected $_classesToLoad = array();
+    protected array $_classesToLoad = array();
 
     public function __construct($options = array())
     {

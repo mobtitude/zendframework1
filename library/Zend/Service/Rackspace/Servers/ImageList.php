@@ -40,11 +40,11 @@ class Zend_Service_Rackspace_Servers_ImageList implements Countable, Iterator, A
     /**
      * @var array of Zend_Service_Rackspace_Servers_Image
      */
-    protected $images = array();
+    protected array $images = array();
     /**
      * @var int Iterator key
      */
-    protected $iteratorKey = 0;
+    protected int $iteratorKey = 0;
     /**
      * @var Zend_Service_Rackspace_Servers
      */

@@ -46,10 +46,8 @@ class Zend_Pdf_Destination_Named extends Zend_Pdf_Destination
 {
     /**
      * Destination name
-     *
-     * @var Zend_Pdf_Element_Name|Zend_Pdf_Element_String
      */
-    protected $_nameElement;
+    protected \Zend_Pdf_Element $_nameElement;
 
     /**
      * Named destination object constructor

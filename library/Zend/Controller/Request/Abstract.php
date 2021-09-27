@@ -29,9 +29,8 @@ abstract class Zend_Controller_Request_Abstract
 {
     /**
      * Has the action been dispatched?
-     * @var boolean
      */
-    protected $_dispatched = false;
+    protected bool $_dispatched = false;
 
     /**
      * Module
@@ -41,9 +40,8 @@ abstract class Zend_Controller_Request_Abstract
 
     /**
      * Module key for retrieving module from params
-     * @var string
      */
-    protected $_moduleKey = 'module';
+    protected string $_moduleKey = 'module';
 
     /**
      * Controller
@@ -53,9 +51,8 @@ abstract class Zend_Controller_Request_Abstract
 
     /**
      * Controller key for retrieving controller from params
-     * @var string
      */
-    protected $_controllerKey = 'controller';
+    protected string $_controllerKey = 'controller';
 
     /**
      * Action
@@ -65,15 +62,13 @@ abstract class Zend_Controller_Request_Abstract
 
     /**
      * Action key for retrieving action from params
-     * @var string
      */
-    protected $_actionKey = 'action';
+    protected string $_actionKey = 'action';
 
     /**
      * Request parameters
-     * @var array
      */
-    protected $_params = array();
+    protected array $_params = array();
 
     /**
      * Retrieve the module name

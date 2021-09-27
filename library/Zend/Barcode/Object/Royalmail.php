@@ -47,9 +47,8 @@ class Zend_Barcode_Object_Royalmail extends Zend_Barcode_Object_ObjectAbstract
      * - 1 = Tracker and Ascender
      * - 2 = Tracker and Descender
      * - 3 = Tracker
-     * @var array
      */
-    protected $_codingMap = array(
+    protected array $_codingMap = array(
         '0' => '3300', '1' => '3210', '2' => '3201', '3' => '2310', '4' => '2301', '5' => '2211',
         '6' => '3120', '7' => '3030', '8' => '3021', '9' => '2130', 'A' => '2121', 'B' => '2031',
         'C' => '3102', 'D' => '3012', 'E' => '3003', 'F' => '2112', 'G' => '2103', 'H' => '2013',
@@ -58,7 +57,7 @@ class Zend_Barcode_Object_Royalmail extends Zend_Barcode_Object_ObjectAbstract
         'U' => '1122', 'V' => '1032', 'W' => '1023', 'X' => '0132', 'Y' => '0123', 'Z' => '0033'
     );
 
-    protected $_rows = array(
+    protected array $_rows = array(
         '0' => 1, '1' => 1, '2' => 1, '3' => 1, '4' => 1, '5' => 1,
         '6' => 2, '7' => 2, '8' => 2, '9' => 2, 'A' => 2, 'B' => 2,
         'C' => 3, 'D' => 3, 'E' => 3, 'F' => 3, 'G' => 3, 'H' => 3,
@@ -67,7 +66,7 @@ class Zend_Barcode_Object_Royalmail extends Zend_Barcode_Object_ObjectAbstract
         'U' => 0, 'V' => 0, 'W' => 0, 'X' => 0, 'Y' => 0, 'Z' => 0,
     );
 
-    protected $_columns = array(
+    protected array $_columns = array(
         '0' => 1, '1' => 2, '2' => 3, '3' => 4, '4' => 5, '5' => 0,
         '6' => 1, '7' => 2, '8' => 3, '9' => 4, 'A' => 5, 'B' => 0,
         'C' => 1, 'D' => 2, 'E' => 3, 'F' => 4, 'G' => 5, 'H' => 0,

@@ -48,7 +48,7 @@ class Zend_Form_Element_MultiCheckbox extends Zend_Form_Element_Multi
      * MultiCheckbox is an array of values by default
      * @var bool
      */
-    protected $_isArray = true;
+    protected bool $_isArray = true;
 
     /**
      * Load default decorators

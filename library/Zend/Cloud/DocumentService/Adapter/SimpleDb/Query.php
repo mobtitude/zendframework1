@@ -35,10 +35,7 @@ require_once 'Zend/Cloud/DocumentService/Query.php';
 class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
     extends Zend_Cloud_DocumentService_Query
 {
-    /**
-     * @var Zend_Cloud_DocumentService_Adapter_SimpleDb
-     */
-    protected $_adapter;
+    protected \Zend_Cloud_DocumentService_Adapter_SimpleDb $_adapter;
 
     /**
      * Constructor

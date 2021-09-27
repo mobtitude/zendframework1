@@ -100,10 +100,8 @@ class Zend_Uri_Http extends Zend_Uri
 
     /**
      * Regular expression grammar rules for validation; values added by constructor
-     *
-     * @var array
      */
-    protected $_regex = array();
+    protected array $_regex = array();
 
     /**
      * Constructor accepts a string $scheme (e.g., http, https) and a scheme-specific part of the URI

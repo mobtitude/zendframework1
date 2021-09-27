@@ -44,10 +44,8 @@ class Zend_Soap_Client_Local extends Zend_Soap_Client
 {
     /**
      * Server object
-     *
-     * @var Zend_Soap_Server
      */
-    protected $_server;
+    protected \Zend_Soap_Server $_server;
 
     /**
      * Local client constructor
@@ -84,7 +82,7 @@ class Zend_Soap_Client_Local extends Zend_Soap_Client
         ob_start();
         $this->_server->handle($request);
         $response = ob_get_clean();
- 
+
         if ($response === null || $response === '') {
             $serverResponse = $this->server->getResponse();
             if ($serverResponse !== null) {

@@ -40,8 +40,8 @@ require_once 'Zend/Gdata/Extension.php';
  */
 class Zend_Gdata_Media_Extension_MediaContent extends Zend_Gdata_Extension
 {
-    protected $_rootElement = 'content';
-    protected $_rootNamespace = 'media';
+    protected ?string $_rootElement = 'content';
+    protected string $_rootNamespace = 'media';
 
     /**
      * @var string

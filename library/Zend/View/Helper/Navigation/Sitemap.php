@@ -55,24 +55,18 @@ class Zend_View_Helper_Navigation_Sitemap
 
     /**
      * Whether the XML declaration should be included in XML output
-     *
-     * @var bool
      */
-    protected $_useXmlDeclaration = true;
+    protected bool $_useXmlDeclaration = true;
 
     /**
      * Whether sitemap should be validated using Zend_Validate_Sitemap_*
-     *
-     * @var bool
      */
-    protected $_useSitemapValidators = true;
+    protected bool $_useSitemapValidators = true;
 
     /**
      * Whether sitemap should be schema validated when generated
-     *
-     * @var bool
      */
-    protected $_useSchemaValidation = false;
+    protected bool $_useSchemaValidation = false;
 
     /**
      * Server url
@@ -253,10 +247,10 @@ class Zend_View_Helper_Navigation_Sitemap
     {
         $href = $page->getHref();
 
-        if (!isset($href{0})) {
+        if (!isset($href[0])) {
             // no href
             return '';
-        } elseif ($href{0} == '/') {
+        } elseif ($href[0] == '/') {
             // href is relative to root; use serverUrl helper
             $url = $this->getServerUrl() . $href;
         } elseif (preg_match('/^[a-z]+:/im', (string) $href)) {

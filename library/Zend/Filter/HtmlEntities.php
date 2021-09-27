@@ -34,17 +34,13 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
 {
     /**
      * Corresponds to the second htmlentities() argument
-     *
-     * @var integer
      */
-    protected $_quoteStyle;
+    protected ?int $_quoteStyle = null;
 
     /**
      * Corresponds to the third htmlentities() argument
-     *
-     * @var string
      */
-    protected $_encoding;
+    protected ?string $_encoding = null;
 
     /**
      * Corresponds to the forth htmlentities() argument

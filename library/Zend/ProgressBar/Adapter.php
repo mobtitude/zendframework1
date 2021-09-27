@@ -31,10 +31,8 @@ abstract class Zend_ProgressBar_Adapter
 {
     /**
      * Option keys to skip when calling setOptions()
-     *
-     * @var array
      */
-    protected $_skipOptions = array(
+    protected array $_skipOptions = array(
         'options',
         'config',
     );

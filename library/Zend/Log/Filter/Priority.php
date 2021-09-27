@@ -33,15 +33,9 @@ require_once 'Zend/Log/Filter/Abstract.php';
  */
 class Zend_Log_Filter_Priority extends Zend_Log_Filter_Abstract
 {
-    /**
-     * @var integer
-     */
-    protected $_priority;
+    protected int $_priority;
 
-    /**
-     * @var string
-     */
-    protected $_operator;
+    protected string $_operator;
 
     /**
      * Filter logging by $priority.  By default, it will accept any log

@@ -94,9 +94,9 @@ class Zend_Gdata_Photos_UserFeed extends Zend_Gdata_Feed
     protected $_gphotoNickname = null;
 
     protected $_entryClassName = 'Zend_Gdata_Photos_UserEntry';
-    protected $_feedClassName = 'Zend_Gdata_Photos_UserFeed';
+    protected string $_feedClassName = 'Zend_Gdata_Photos_UserFeed';
 
-    protected $_entryKindClassMapping = array(
+    protected array $_entryKindClassMapping = array(
         'http://schemas.google.com/photos/2007#album' => 'Zend_Gdata_Photos_AlbumEntry',
         'http://schemas.google.com/photos/2007#photo' => 'Zend_Gdata_Photos_PhotoEntry',
         'http://schemas.google.com/photos/2007#comment' => 'Zend_Gdata_Photos_CommentEntry',

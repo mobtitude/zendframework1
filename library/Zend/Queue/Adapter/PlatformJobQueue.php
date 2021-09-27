@@ -36,10 +36,7 @@ require_once 'Zend/Queue/Adapter/AdapterAbstract.php';
  */
 class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbstract
 {
-    /**
-     * @var ZendApi_JobQueue
-     */
-    protected $_zendQueue;
+    protected \ZendApi_Queue $_zendQueue;
 
     /**
      * Constructor

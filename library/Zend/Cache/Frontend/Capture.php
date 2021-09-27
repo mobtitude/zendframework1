@@ -37,15 +37,13 @@ class Zend_Cache_Frontend_Capture extends Zend_Cache_Core
 {
     /**
      * Page identifiers
-     * @var array
      */
-    protected $_idStack = array();
+    protected array $_idStack = array();
 
     /**
      * Tags
-     * @var array
      */
-    protected $_tags = array();
+    protected array $_tags = array();
 
     protected $_extension = null;
 

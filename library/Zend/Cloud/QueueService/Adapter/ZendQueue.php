@@ -40,15 +40,13 @@ class Zend_Cloud_QueueService_Adapter_ZendQueue
 
     /**
      * Storage client
-     *
-     * @var Zend_Queue
      */
-    protected $_queue = null;
+    protected ?\Zend_Queue $_queue = null;
 
     /**
      * @var array All queues
      */
-    protected $_queues = array();
+    protected array $_queues = array();
 
     /**
      * Constructor

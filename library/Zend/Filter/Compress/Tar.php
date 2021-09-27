@@ -40,10 +40,8 @@ class Zend_Filter_Compress_Tar extends Zend_Filter_Compress_CompressAbstract
      *     'archive'  => Archive to use
      *     'target'   => Target to write the files to
      * )
-     *
-     * @var array
      */
-    protected $_options = array(
+    protected array $_options = array(
         'archive'  => null,
         'target'   => '.',
         'mode'     => null,

@@ -36,10 +36,8 @@ abstract class Zend_Service_Abstract
 {
     /**
      * HTTP Client used to query all web services
-     *
-     * @var Zend_Http_Client
      */
-    protected static $_httpClient = null;
+    protected static ?\Zend_Http_Client $_httpClient = null;
 
 
     /**

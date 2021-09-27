@@ -54,10 +54,8 @@ class Zend_View_Helper_HtmlQuicktime extends Zend_View_Helper_HtmlObject
 
     /**
      * Default attributes
-     *
-     * @var array
      */
-    protected $_attribs = array('classid'  => self::ATTRIB_CLASSID,
+    protected array $_attribs = array('classid'  => self::ATTRIB_CLASSID,
                                 'codebase' => self::ATTRIB_CODEBASE);
 
     /**

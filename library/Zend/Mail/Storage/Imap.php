@@ -83,9 +83,8 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
 
     /**
      * imap flags to constants translation
-     * @var array
      */
-    protected static $_knownFlags = array('\Passed'   => Zend_Mail_Storage::FLAG_PASSED,
+    protected static array $_knownFlags = array('\Passed'   => Zend_Mail_Storage::FLAG_PASSED,
                                           '\Answered' => Zend_Mail_Storage::FLAG_ANSWERED,
                                           '\Seen'     => Zend_Mail_Storage::FLAG_SEEN,
                                           '\Unseen'   => Zend_Mail_Storage::FLAG_UNSEEN,
@@ -95,9 +94,8 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
 
     /**
      * map flags to search criterias
-     * @var array
      */
-    protected static $_searchFlags = array('\Recent'   => 'RECENT',
+    protected static array $_searchFlags = array('\Recent'   => 'RECENT',
                                            '\Answered' => 'ANSWERED',
                                            '\Seen'     => 'SEEN',
                                            '\Unseen'   => 'UNSEEN',

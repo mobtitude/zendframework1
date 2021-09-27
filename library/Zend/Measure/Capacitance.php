@@ -68,7 +68,7 @@ class Zend_Measure_Capacitance extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ABFARAD'              => array('1.0e+9',      'abfarad'),
         'AMPERE_PER_SECOND_VOLT' => array('1',         'A/sV'),
         'CENTIFARAD'           => array('0.01',        'cF'),

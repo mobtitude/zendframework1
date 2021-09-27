@@ -35,20 +35,14 @@ class Zend_Tool_Framework_Manifest_Repository
     implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
 {
 
-    /**
-     * @var Zend_Tool_Framework_Provider_Registry_Interface
-     */
-    protected $_registry = null;
+    protected ?\Zend_Tool_Framework_Registry_Interface $_registry = null;
 
-    /**
-     * @var array
-     */
-    protected $_manifests = array();
+    protected array $_manifests = array();
 
     /**
      * @var array Array of Zend_Tool_Framework_Metadata_Interface
      */
-    protected $_metadatas = array();
+    protected array $_metadatas = array();
 
     /**
      * setRegistry()

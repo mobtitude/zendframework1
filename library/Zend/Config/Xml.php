@@ -47,10 +47,8 @@ class Zend_Config_Xml extends Zend_Config
 
     /**
      * Whether to skip extends or not
-     *
-     * @var boolean
      */
-    protected $_skipExtends = false;
+    protected bool $_skipExtends = false;
 
     /**
      * Loads the section $section from the config file (or string $xml for

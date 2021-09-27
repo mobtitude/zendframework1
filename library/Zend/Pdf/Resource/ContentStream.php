@@ -42,10 +42,8 @@ class Zend_Pdf_Resource_ContentStream extends Zend_Pdf_Resource
 {
     /**
      * Buffered content
-     *
-     * @var string
      */
-    protected $_bufferedContent = '';
+    protected string $_bufferedContent = '';
 
     /**
      * Object constructor.

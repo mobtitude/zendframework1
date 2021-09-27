@@ -50,10 +50,8 @@ class Zend_Db_Expr
 {
     /**
      * Storage for the SQL expression.
-     *
-     * @var string
      */
-    protected $_expression;
+    protected string $_expression;
 
     /**
      * Instantiate an expression, which is just a string stored as

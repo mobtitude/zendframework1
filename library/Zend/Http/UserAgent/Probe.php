@@ -34,10 +34,8 @@ class Zend_Http_UserAgent_Probe extends Zend_Http_UserAgent_AbstractDevice
 {
     /**
      * User Agent Signatures
-     *
-     * @var array
      */
-    protected static $_uaSignatures = array(
+    protected static array $_uaSignatures = array(
         'witbe',
         'netvigie',
     );

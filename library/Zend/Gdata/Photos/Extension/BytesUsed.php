@@ -44,8 +44,8 @@ require_once 'Zend/Gdata/Photos.php';
 class Zend_Gdata_Photos_Extension_BytesUsed extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gphoto';
-    protected $_rootElement = 'bytesUsed';
+    protected string $_rootNamespace = 'gphoto';
+    protected ?string $_rootElement = 'bytesUsed';
 
     /**
      * Constructs a new Zend_Gdata_Photos_Extension_BytesUsed object.

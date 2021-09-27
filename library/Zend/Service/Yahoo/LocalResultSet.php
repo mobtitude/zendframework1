@@ -52,10 +52,8 @@ class Zend_Service_Yahoo_LocalResultSet extends Zend_Service_Yahoo_ResultSet
 
     /**
      * Local result set namespace
-     *
-     * @var string
      */
-    protected $_namespace = 'urn:yahoo:lcl';
+    protected string $_namespace = 'urn:yahoo:lcl';
 
 
     /**

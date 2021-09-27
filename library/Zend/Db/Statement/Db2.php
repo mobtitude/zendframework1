@@ -39,12 +39,12 @@ class Zend_Db_Statement_Db2 extends Zend_Db_Statement
     /**
      * Column names.
      */
-    protected $_keys;
+    protected ?array $_keys = null;
 
     /**
      * Fetched result values.
      */
-    protected $_values;
+    protected ?array $_values = null;
 
     /**
      * Prepare a statement handle.

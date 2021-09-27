@@ -65,7 +65,7 @@ class Zend_Measure_Acceleration extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'CENTIGAL'                     => array('0.0001',   'cgal'),
         'CENTIMETER_PER_SQUARE_SECOND' => array('0.01',     'cm/s²'),
         'DECIGAL'                      => array('0.001',    'dgal'),

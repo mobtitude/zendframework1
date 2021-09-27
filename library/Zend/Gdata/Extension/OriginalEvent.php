@@ -48,7 +48,7 @@ require_once 'Zend/Gdata/Extension/When.php';
 class Zend_Gdata_Extension_OriginalEvent extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'originalEvent';
+    protected ?string $_rootElement = 'originalEvent';
     protected $_id = null;
     protected $_href = null;
     protected $_when = null;

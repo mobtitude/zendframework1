@@ -33,10 +33,7 @@ require_once 'Zend/Log/Filter/Abstract.php';
  */
 class Zend_Log_Filter_Suppress extends Zend_Log_Filter_Abstract
 {
-    /**
-     * @var boolean
-     */
-    protected $_accept = true;
+    protected bool $_accept = true;
 
     /**
      * This is a simple boolean filter.

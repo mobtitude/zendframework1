@@ -44,27 +44,23 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
 {
     /**
      * Total number of objects in the referenceObject array
-     * @var int
      */
-    protected $_objectCount;
+    protected int $_objectCount;
 
     /**
      * An array of reference objects per amf body
-     * @var array
      */
-    protected $_referenceObjects = array();
+    protected array $_referenceObjects = array();
 
     /**
      * An array of reference strings per amf body
-     * @var array
      */
-    protected $_referenceStrings = array();
+    protected array $_referenceStrings = array();
 
     /**
      * An array of reference class definitions per body
-     * @var array
      */
-    protected $_referenceDefinitions = array();
+    protected array $_referenceDefinitions = array();
 
     /**
      * Read AMF markers and dispatch for deserialization

@@ -34,10 +34,8 @@ class Zend_Paginator_Adapter_Array implements Zend_Paginator_Adapter_Interface
 {
     /**
      * Array
-     *
-     * @var array
      */
-    protected $_array = null;
+    protected ?array $_array = null;
 
     /**
      * Item count

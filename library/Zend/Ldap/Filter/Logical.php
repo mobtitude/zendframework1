@@ -45,17 +45,13 @@ abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
 
     /**
      * All the sub-filters for this grouping filter.
-     *
-     * @var array
      */
-    private $_subfilters;
+    private array $_subfilters;
 
     /**
      * The grouping symbol.
-     *
-     * @var string
      */
-    private $_symbol;
+    private string $_symbol;
 
     /**
      * Creates a new grouping filter.

@@ -27,10 +27,7 @@
  */
 class Zend_File_PhpClassFile extends SplFileInfo
 {
-    /**
-     * @var array
-     */
-    protected $classes;
+    protected ?array $classes = null;
 
     /**
      * Get classes

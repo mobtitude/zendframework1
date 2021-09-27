@@ -34,10 +34,7 @@ require_once 'Zend/Tool/Framework/Action/Interface.php';
 class Zend_Tool_Framework_Action_Base implements Zend_Tool_Framework_Action_Interface
 {
 
-    /**
-     * @var string
-     */
-    protected $_name = null;
+    protected ?string $_name = null;
 
     /**
      * constructor -

@@ -48,7 +48,7 @@ class TestNamespace_StringEquals extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::NOT_EQUALS => 'Not all strings in the argument are equal'
     );
 

@@ -54,24 +54,18 @@ class Zend_Http_Header_SetCookie
 
     /**
      * Cookie name
-     *
-     * @var string
      */
-    protected $name = null;
+    protected ?string $name = null;
 
     /**
      * Cookie value
-     *
-     * @var string
      */
-    protected $value = null;
+    protected ?string $value = null;
 
     /**
      * Version
-     *
-     * @var integer
      */
-    protected $version = null;
+    protected ?int $version = null;
 
     /**
      * Max Age
@@ -89,29 +83,20 @@ class Zend_Http_Header_SetCookie
 
     /**
      * Cookie domain
-     *
-     * @var string
      */
-    protected $domain = null;
+    protected ?string $domain = null;
 
     /**
      * Cookie path
-     *
-     * @var string
      */
-    protected $path = null;
+    protected ?string $path = null;
 
     /**
      * Whether the cookie is secure or not
-     *
-     * @var boolean
      */
-    protected $secure = null;
+    protected ?bool $secure = null;
 
-    /**
-     * @var true
-     */
-    protected $httponly = null;
+    protected ?bool $httponly = null;
 
     /**
      * Generate a new Cookie object from a cookie string

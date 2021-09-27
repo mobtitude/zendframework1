@@ -36,9 +36,8 @@ abstract class Zend_Dojo_Form_Element_Dijit extends Zend_Form_Element
 {
     /**
      * Dijit parameters
-     * @var array
      */
-    public $dijitParams = array();
+    public array $dijitParams = array();
 
     /**
      * View helper to use

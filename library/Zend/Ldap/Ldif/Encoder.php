@@ -33,19 +33,14 @@ class Zend_Ldap_Ldif_Encoder
 {
     /**
      * Additional options used during encoding
-     *
-     * @var array
      */
-    protected $_options = array(
+    protected array $_options = array(
         'sort'    => true,
         'version' => 1,
         'wrap'    => 78
     );
 
-    /**
-     * @var boolean
-     */
-    protected $_versionWritten = false;
+    protected bool $_versionWritten = false;
 
     /**
      * Constructor.

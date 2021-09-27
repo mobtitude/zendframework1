@@ -39,7 +39,7 @@ class Zend_Service_Amazon_S3_Stream
     /**
      * @var boolean Write the buffer on fflush()?
      */
-    private $_writeBuffer = false;
+    private bool $_writeBuffer = false;
 
     /**
      * @var integer Current read/write position
@@ -54,7 +54,7 @@ class Zend_Service_Amazon_S3_Stream
     /**
      * @var string File name to interact with
      */
-    private $_objectName = null;
+    private ?string $_objectName = null;
 
     /**
      * @var string Current read/write buffer
@@ -66,10 +66,7 @@ class Zend_Service_Amazon_S3_Stream
      */
     private $_bucketList = array();
 
-    /**
-     * @var Zend_Service_Amazon_S3
-     */
-    private $_s3 = null;
+    private ?\Zend_Service_Amazon_S3 $_s3 = null;
 
     /**
      * Retrieve client for this stream type

@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_ModelsDirectory extends Zend_Tool_Project_Con
     /**
      * @var string
      */
-    protected $_filesystemName = 'models';
+    protected ?string $_filesystemName = 'models';
 
     /**
      * getName()

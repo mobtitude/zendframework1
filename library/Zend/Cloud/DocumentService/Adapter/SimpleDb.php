@@ -51,15 +51,14 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
 
     /**
      * SQS service instance.
-     * @var Zend_Service_Amazon_SimpleDb
      */
-    protected $_simpleDb;
+    protected \Zend_Service_Amazon_SimpleDb $_simpleDb;
 
     /**
      * Class to utilize for new query objects
      * @var string
      */
-    protected $_queryClass = 'Zend_Cloud_DocumentService_Adapter_SimpleDb_Query';
+    protected string $_queryClass = 'Zend_Cloud_DocumentService_Adapter_SimpleDb_Query';
 
     /**
      * Constructor

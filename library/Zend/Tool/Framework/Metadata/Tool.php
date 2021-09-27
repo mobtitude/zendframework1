@@ -43,17 +43,17 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
      * @var string
      */
     protected $_clientName    = null;
-    protected $_actionName    = null;
-    protected $_providerName  = null;
-    protected $_specialtyName = null;
+    protected ?string $_actionName    = null;
+    protected ?string $_providerName  = null;
+    protected ?string $_specialtyName = null;
     /**#@-*/
 
     /**#@+
      * @var string
      */
-    protected $_clientReference = null;
-    protected $_actionReference = null;
-    protected $_providerReference = null;
+    protected ?\Zend_Tool_Framework_Client_Abstract $_clientReference = null;
+    protected ?\Zend_Tool_Framework_Action_Interface $_actionReference = null;
+    protected ?\Zend_Tool_Framework_Provider_Interface $_providerReference = null;
     /**#@-*/
 
     public function setClientName($clientName)

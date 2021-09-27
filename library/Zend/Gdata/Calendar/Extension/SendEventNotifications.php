@@ -37,8 +37,8 @@ require_once 'Zend/Gdata/Extension.php';
  */
 class Zend_Gdata_Calendar_Extension_SendEventNotifications extends Zend_Gdata_Extension
 {
-    protected $_rootNamespace = 'gCal';
-    protected $_rootElement = 'sendEventNotifications';
+    protected string $_rootNamespace = 'gCal';
+    protected ?string $_rootElement = 'sendEventNotifications';
     protected $_value = null;
 
     /**

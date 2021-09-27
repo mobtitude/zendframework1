@@ -39,22 +39,22 @@ class Zend_Server_Method_Parameter
     /**
      * @var string Parameter description
      */
-    protected $_description = '';
+    protected string $_description = '';
 
     /**
      * @var string Parameter variable name
      */
-    protected $_name;
+    protected ?string $_name = null;
 
     /**
      * @var bool Is parameter optional?
      */
-    protected $_optional = false;
+    protected bool $_optional = false;
 
     /**
      * @var string Parameter type
      */
-    protected $_type = 'mixed';
+    protected string $_type = 'mixed';
 
     /**
      * Constructor

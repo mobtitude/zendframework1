@@ -52,7 +52,7 @@ class Zend_Validate_File_Upload extends Zend_Validate_Abstract
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::INI_SIZE       => "File '%value%' exceeds the defined ini size",
         self::FORM_SIZE      => "File '%value%' exceeds the defined form size",
         self::PARTIAL        => "File '%value%' was only partially uploaded",
@@ -67,9 +67,8 @@ class Zend_Validate_File_Upload extends Zend_Validate_Abstract
 
     /**
      * Internal array of files
-     * @var array
      */
-    protected $_files = array();
+    protected array $_files = array();
 
     /**
      * Sets validator options

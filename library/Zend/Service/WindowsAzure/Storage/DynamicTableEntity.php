@@ -36,10 +36,8 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
 {   
     /**
      * Dynamic properties
-     * 
-     * @var array
      */
-    protected $_dynamicProperties = array();
+    protected array $_dynamicProperties = array();
     
     /**
      * Magic overload for setting properties

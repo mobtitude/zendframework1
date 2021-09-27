@@ -42,40 +42,23 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
     /**
      * @var array Array of Zend_CodeGenerator_Php_File
      */
-    protected static $_fileCodeGenerators = array();
+    protected static array $_fileCodeGenerators = array();
 
     /**#@+
      * @var string
      */
-    protected static $_markerDocblock = '/* Zend_CodeGenerator_Php_File-DocblockMarker */';
-    protected static $_markerRequire = '/* Zend_CodeGenerator_Php_File-RequireMarker: {?} */';
-    protected static $_markerClass = '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */';
-    /**#@-*/
+    protected static string $_markerDocblock = '/* Zend_CodeGenerator_Php_File-DocblockMarker */';
+    protected static string $_markerRequire = '/* Zend_CodeGenerator_Php_File-RequireMarker: {?} */';
+    protected static string $_markerClass = '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */';
+    protected ?string $_filename = null;
 
-    /**
-     * @var string
-     */
-    protected $_filename = null;
+    protected ?\Zend_CodeGenerator_Php_Docblock $_docblock = null;
 
-    /**
-     * @var Zend_CodeGenerator_Php_Docblock
-     */
-    protected $_docblock = null;
+    protected array $_requiredFiles = array();
 
-    /**
-     * @var array
-     */
-    protected $_requiredFiles = array();
+    protected array $_classes = array();
 
-    /**
-     * @var array
-     */
-    protected $_classes = array();
-
-    /**
-     * @var string
-     */
-    protected $_body = null;
+    protected ?string $_body = null;
 
     public static function registerFileCodeGenerator(Zend_CodeGenerator_Php_File $fileCodeGenerator, $fileName = null)
     {

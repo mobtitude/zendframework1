@@ -41,12 +41,12 @@ require_once 'Zend/Xml/Exception.php';
 class Zend_Translate_Adapter_Tbx extends Zend_Translate_Adapter {
     // Internal variables
     private $_file        = false;
-    private $_cleared     = array();
+    private array $_cleared     = array();
     private $_langset     = null;
     private $_termentry   = null;
     private $_content     = null;
-    private $_term        = null;
-    private $_data        = array();
+    private ?bool $_term        = null;
+    private array $_data        = array();
 
     /**
      * Load translation data (TBX file reader)

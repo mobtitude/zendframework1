@@ -48,18 +48,14 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
     /**
      * Root XML element for entries. Subclasses must define this to a
      * non-null value.
-     *
-     * @var string
      */
-    protected $_rootElement;
+    protected string $_rootElement;
 
     /**
      * Root namespace for entries. Subclasses may define this to a
      * non-null value.
-     *
-     * @var string
      */
-    protected $_rootNamespace = null;
+    protected ?string $_rootNamespace = null;
 
 
     /**

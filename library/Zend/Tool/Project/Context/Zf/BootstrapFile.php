@@ -37,22 +37,13 @@ class Zend_Tool_Project_Context_Zf_BootstrapFile extends Zend_Tool_Project_Conte
     /**
      * @var string
      */
-    protected $_filesystemName = 'Bootstrap.php';
+    protected ?string $_filesystemName = 'Bootstrap.php';
 
-    /**
-     * @var Zend_Tool_Project_Profile_Resource
-     */
-    protected $_applicationConfigFile = null;
+    protected ?\Zend_Tool_Project_Profile_Resource $_applicationConfigFile = null;
 
-    /**
-     * @var Zend_Tool_Project_Profile_Resource
-     */
-    protected $_applicationDirectory = null;
+    protected ?\Zend_Tool_Project_Profile_Resource $_applicationDirectory = null;
 
-    /**
-     * @var Zend_Application
-     */
-    protected $_applicationInstance = null;
+    protected ?\Zend_Application $_applicationInstance = null;
 
 
     /**

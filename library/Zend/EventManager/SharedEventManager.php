@@ -37,9 +37,8 @@ class Zend_EventManager_SharedEventManager implements Zend_EventManager_SharedEv
 {
     /**
      * Identifiers with event connections
-     * @var array
      */
-    protected $identifiers = array();
+    protected array $identifiers = array();
 
     /**
      * Attach a listener to an event

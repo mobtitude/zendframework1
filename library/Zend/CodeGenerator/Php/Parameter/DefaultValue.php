@@ -31,10 +31,7 @@
  */
 class Zend_CodeGenerator_Php_Parameter_DefaultValue
 {
-    /**
-     * @var string
-     */
-    protected $_defaultValue = null;
+    protected ?string $_defaultValue = null;
 
     /**
      *

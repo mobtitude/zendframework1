@@ -42,17 +42,13 @@ class Zend_Log_Writer_Db extends Zend_Log_Writer_Abstract
 
     /**
      * Name of the log table in the database
-     *
-     * @var string
      */
-    protected $_table;
+    protected string $_table;
 
     /**
      * Relates database columns names to log data field keys.
-     *
-     * @var null|array
      */
-    protected $_columnMap;
+    protected ?array $_columnMap;
 
     /**
      * Class constructor

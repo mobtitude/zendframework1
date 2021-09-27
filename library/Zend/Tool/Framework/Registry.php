@@ -33,50 +33,23 @@ require_once 'Zend/Tool/Framework/Registry/Interface.php';
  */
 class Zend_Tool_Framework_Registry implements Zend_Tool_Framework_Registry_Interface
 {
-    /**
-     * @var Zend_Tool_Framework_Loader_Abstract
-     */
-    protected $_loader = null;
+    protected ?\Zend_Tool_Framework_Loader_Interface $_loader = null;
 
-    /**
-     * @var Zend_Tool_Framework_Client_Abstract
-     */
-    protected $_client = null;
+    protected ?\Zend_Tool_Framework_Client_Abstract $_client = null;
 
-    /**
-     * @var Zend_Tool_Framework_Client_Config
-     */
-    protected $_config = null;
+    protected ?\Zend_Tool_Framework_Client_Config $_config = null;
 
-    /**
-     * @var Zend_Tool_Framework_Client_Storage
-     */
-    protected $_storage = null;
+    protected ?\Zend_Tool_Framework_Client_Storage $_storage = null;
 
-    /**
-     * @var Zend_Tool_Framework_Action_Repository
-     */
-    protected $_actionRepository = null;
+    protected ?\Zend_Tool_Framework_Action_Repository $_actionRepository = null;
 
-    /**
-     * @var Zend_Tool_Framework_Provider_Repository
-     */
-    protected $_providerRepository = null;
+    protected ?\Zend_Tool_Framework_Provider_Repository $_providerRepository = null;
 
-    /**
-     * @var Zend_Tool_Framework_Manifest_Repository
-     */
-    protected $_manifestRepository = null;
+    protected ?\Zend_Tool_Framework_Manifest_Repository $_manifestRepository = null;
 
-    /**
-     * @var Zend_Tool_Framework_Client_Request
-     */
-    protected $_request = null;
+    protected ?\Zend_Tool_Framework_Client_Request $_request = null;
 
-    /**
-     * @var Zend_Tool_Framework_Client_Response
-     */
-    protected $_response = null;
+    protected ?\Zend_Tool_Framework_Client_Response $_response = null;
 
     /**
      * reset() - Reset all internal properties

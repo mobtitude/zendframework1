@@ -47,10 +47,8 @@ abstract class Zend_Search_Lucene_PriorityQueue
      * ...
      * [2*n + 1] - first child of [n]
      * [2*n + 2] - second child of [n]
-     *
-     * @var array
      */
-    private $_heap = array();
+    private array $_heap = array();
 
 
     /**

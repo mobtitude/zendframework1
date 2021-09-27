@@ -38,20 +38,11 @@ require_once 'Zend/CodeGenerator/Php/Docblock/Tag.php';
  */
 class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
 {
-    /**
-     * @var string
-     */
-    protected $_shortDescription = null;
+    protected ?string $_shortDescription = null;
 
-    /**
-     * @var string
-     */
-    protected $_longDescription = null;
+    protected ?string $_longDescription = null;
 
-    /**
-     * @var array
-     */
-    protected $_tags = array();
+    protected array $_tags = array();
 
     /**
      * @var string

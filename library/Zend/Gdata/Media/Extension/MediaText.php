@@ -38,28 +38,16 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_Media_Extension_MediaText extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'text';
-    protected $_rootNamespace = 'media';
+    protected ?string $_rootElement = 'text';
+    protected string $_rootNamespace = 'media';
 
-    /**
-     * @var string
-     */
-    protected $_type = null;
+    protected ?string $_type = null;
 
-    /**
-     * @var string
-     */
-    protected $_lang = null;
+    protected ?string $_lang = null;
 
-    /**
-     * @var string
-     */
-    protected $_start = null;
+    protected ?string $_start = null;
 
-    /**
-     * @var string
-     */
-    protected $_end = null;
+    protected ?string $_end = null;
 
     /**
      * Constructs a new MediaText element

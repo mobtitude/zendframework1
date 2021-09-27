@@ -34,10 +34,8 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
 {
     /**
      * Encoding for the input string
-     *
-     * @var string
      */
-    protected $_encoding = null;
+    protected ?string $_encoding = null;
 
     /**
      * Constructor

@@ -37,27 +37,27 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
     /**
      * @var string Base path to resource classes
      */
-    protected $_basePath;
+    protected ?string $_basePath = null;
 
     /**
      * @var array Components handled within this resource
      */
-    protected $_components = array();
+    protected array $_components = array();
 
     /**
      * @var string Default resource/component to use when using object registry
      */
-    protected $_defaultResourceType;
+    protected ?string $_defaultResourceType = null;
 
     /**
      * @var string Namespace of classes within this resource
      */
-    protected $_namespace;
+    protected ?string $_namespace = null;
 
     /**
      * @var array Available resource types handled by this resource autoloader
      */
-    protected $_resourceTypes = array();
+    protected array $_resourceTypes = array();
 
     /**
      * Constructor

@@ -54,17 +54,13 @@ class Zend_Db_Table_Select extends Zend_Db_Select
 
     /**
      * Table integrity override.
-     *
-     * @var array
      */
-    protected $_integrityCheck = true;
+    protected bool $_integrityCheck = true;
 
     /**
      * Table instance that created this select object
-     *
-     * @var Zend_Db_Table_Abstract
      */
-    protected $_table;
+    protected ?\Zend_Db_Table_Abstract $_table = null;
 
     /**
      * Class constructor

@@ -34,17 +34,13 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
 {
     /**
      * String that separates nesting levels of configuration data identifiers
-     *
-     * @var string
      */
-    protected $_nestSeparator = '.';
+    protected string $_nestSeparator = '.';
 
     /**
      * If true the ini string is rendered in the global namespace without sections.
-     *
-     * @var bool
      */
-    protected $_renderWithoutSections = false;
+    protected bool $_renderWithoutSections = false;
 
     /**
      * Set the nest separator

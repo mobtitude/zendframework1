@@ -55,35 +55,27 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
     /**
      * Token for AuthSub authentication.
      * If this token is set, AuthSub authentication is used.
-     *
-     * @var string
      */
-    private $_authSubToken = null;
+    private ?string $_authSubToken = null;
 
     /**
      * Token for ClientLogin authentication.
      * If only this token is set, ClientLogin authentication is used.
-     *
-     * @var string
      */
-    private $_clientLoginToken = null;
+    private ?string $_clientLoginToken = null;
 
     /**
      * Token for ClientLogin authentication.
      * If this token is set, and the AuthSub key is not set,
      * ClientLogin authentication is used
-     *
-     * @var string
      */
-    private $_clientLoginKey = null;
+    private ?string $_clientLoginKey = null;
 
     /**
      * True if this request is being made with data supplied by
      * a stream object instead of a raw encoded string.
-     *
-     * @var bool
      */
-    protected $_streamingRequest = null;
+    protected ?bool $_streamingRequest = null;
 
     /**
      * Sets the PEM formatted private key, as read from a file.

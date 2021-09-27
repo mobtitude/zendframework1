@@ -41,27 +41,23 @@ class Zend_Server_Reflection_Class
     /**
      * Optional configuration parameters; accessible via {@link __get} and
      * {@link __set()}
-     * @var array
      */
-    protected $_config = array();
+    protected array $_config = array();
 
     /**
      * Array of {@link Zend_Server_Reflection_Method}s
-     * @var array
      */
-    protected $_methods = array();
+    protected array $_methods = array();
 
     /**
      * Namespace
-     * @var string
      */
-    protected $_namespace = null;
+    protected ?string $_namespace = null;
 
     /**
      * ReflectionClass object
-     * @var ReflectionClass
      */
-    protected $_reflection;
+    protected \ReflectionClass $_reflection;
 
     /**
      * Constructor

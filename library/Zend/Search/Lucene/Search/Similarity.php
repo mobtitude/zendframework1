@@ -32,18 +32,14 @@ abstract class Zend_Search_Lucene_Search_Similarity
 {
     /**
      * The Similarity implementation used by default.
-     *
-     * @var Zend_Search_Lucene_Search_Similarity
      */
-    private static $_defaultImpl;
+    private static ?\Zend_Search_Lucene_Search_Similarity $_defaultImpl = null;
 
     /**
      * Cache of decoded bytes.
      * Array of floats
-     *
-     * @var array
      */
-    private static $_normTable = array( 0   => 0.0,
+    private static array $_normTable = array( 0   => 0.0,
                                         1   => 5.820766E-10,
                                         2   => 6.9849193E-10,
                                         3   => 8.1490725E-10,

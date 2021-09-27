@@ -52,17 +52,12 @@ require_once "Zend/Loader.php";
  */
 class Zend_Tool_Framework_System_Provider_Config extends Zend_Tool_Framework_Provider_Abstract
 {
-    /**
-     * @var array
-     */
-    protected $_levelCompleted = array();
+    protected array $_levelCompleted = array();
 
     /**
      * array of specialties handled by this provider
-     *
-     * @var array
      */
-    protected $_specialties = array('Manifest', 'Provider');
+    protected array $_specialties = array('Manifest', 'Provider');
 
     /**
      * @param string $type

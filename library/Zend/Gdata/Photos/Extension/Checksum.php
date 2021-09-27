@@ -45,8 +45,8 @@ require_once 'Zend/Gdata/Photos.php';
 class Zend_Gdata_Photos_Extension_Checksum extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gphoto';
-    protected $_rootElement = 'checksum';
+    protected string $_rootNamespace = 'gphoto';
+    protected ?string $_rootElement = 'checksum';
 
     /**
      * Constructs a new Zend_Gdata_Photos_Extension_Checksum object.

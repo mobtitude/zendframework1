@@ -38,9 +38,8 @@ class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
 {
     /**
      * Drawing of bearer bars
-     * @var boolean
      */
-    private $_withBearerBars = false;
+    private bool $_withBearerBars = false;
 
     /**
      * Default options for Code25interleaved barcode

@@ -58,17 +58,11 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
     /**
      * @var string
      */
-    protected $_filesystemName = 'view.phtml';
+    protected ?string $_filesystemName = 'view.phtml';
 
-    /**
-     * @var string
-     */
-    protected $_forActionName = null;
+    protected ?\Zend_Tool_Project_Profile_Resource_Container $_forActionName = null;
 
-    /**
-     * @var string
-     */
-    protected $_scriptName = null;
+    protected ?\Zend_Tool_Project_Profile_Resource_Container $_scriptName = null;
 
     /**
      * getName()

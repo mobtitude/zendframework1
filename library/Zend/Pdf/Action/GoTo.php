@@ -42,10 +42,8 @@ class Zend_Pdf_Action_GoTo extends Zend_Pdf_Action
 {
     /**
      * GoTo Action destination
-     *
-     * @var Zend_Pdf_Destination
      */
-    protected $_destination;
+    protected \Zend_Pdf_Destination $_destination;
 
 
     /**

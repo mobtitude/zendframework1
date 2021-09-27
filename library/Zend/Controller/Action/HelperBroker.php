@@ -41,22 +41,15 @@ class Zend_Controller_Action_HelperBroker
 {
     /**
      * $_actionController - ActionController reference
-     *
-     * @var Zend_Controller_Action
      */
-    protected $_actionController;
+    protected \Zend_Controller_Action $_actionController;
 
-    /**
-     * @var Zend_Loader_PluginLoader_Interface
-     */
-    protected static $_pluginLoader;
+    protected static ?\Zend_Loader_PluginLoader_Interface $_pluginLoader = null;
 
     /**
      * $_helpers - Helper array
-     *
-     * @var Zend_Controller_Action_HelperBroker_PriorityStack
      */
-    protected static $_stack = null;
+    protected static ?\Zend_Controller_Action_HelperBroker_PriorityStack $_stack = null;
 
     /**
      * Set PluginLoader for use with broker

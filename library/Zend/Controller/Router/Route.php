@@ -37,17 +37,13 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
 
     /**
      * Default translator
-     *
-     * @var Zend_Translate
      */
-    protected static $_defaultTranslator;
+    protected static ?\Zend_Translate $_defaultTranslator = null;
 
     /**
      * Translator
-     *
-     * @var Zend_Translate
      */
-    protected $_translator;
+    protected ?\Zend_Translate $_translator;
 
     /**
      * Default locale
@@ -65,80 +61,62 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
 
     /**
      * Wether this is a translated route or not
-     *
-     * @var boolean
      */
-    protected $_isTranslated = false;
+    protected bool $_isTranslated = false;
 
     /**
      * Translatable variables
-     *
-     * @var array
      */
-    protected $_translatable = array();
+    protected array $_translatable = array();
 
-    protected $_urlVariable = ':';
+    protected string $_urlVariable = ':';
 
-    protected $_urlDelimiter = self::URI_DELIMITER;
+    protected string $_urlDelimiter = self::URI_DELIMITER;
 
-    protected $_regexDelimiter = '#';
+    protected string $_regexDelimiter = '#';
 
     protected $_defaultRegex = null;
 
     /**
      * Holds names of all route's pattern variable names. Array index holds a position in URL.
-     *
-     * @var array
      */
-    protected $_variables = array();
+    protected array $_variables = array();
 
     /**
      * Holds Route patterns for all URL parts. In case of a variable it stores it's regex
      * requirement or null. In case of a static part, it holds only it's direct value.
      * In case of a wildcard, it stores an asterisk (*)
-     *
-     * @var array
      */
-    protected $_parts = array();
+    protected array $_parts = array();
 
     /**
      * Holds user submitted default values for route's variables. Name and value pairs.
-     *
-     * @var array
      */
-    protected $_defaults = array();
+    protected array $_defaults = array();
 
     /**
      * Holds user submitted regular expression patterns for route's variables' values.
      * Name and value pairs.
-     *
-     * @var array
      */
-    protected $_requirements = array();
+    protected array $_requirements = array();
 
     /**
      * Associative array filled on match() that holds matched path values
      * for given variable names.
-     *
-     * @var array
      */
-    protected $_values = array();
+    protected array $_values = array();
 
     /**
      * Associative array filled on match() that holds wildcard variable
      * names and values.
-     *
-     * @var array
      */
-    protected $_wildcardData = array();
+    protected array $_wildcardData = array();
 
     /**
      * Helper var that holds a count of route pattern's static parts
      * for validation
-     *
-     * @var int
      */
-    protected $_staticCount = 0;
+    protected int $_staticCount = 0;
 
     public function getVersion()
     {

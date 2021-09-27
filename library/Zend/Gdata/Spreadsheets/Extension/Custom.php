@@ -43,8 +43,8 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Spreadsheets_Extension_Custom extends Zend_Gdata_Extension
 {
     // custom elements have custom names.
-    protected $_rootElement = null; // The name of the column
-    protected $_rootNamespace = 'gsx';
+    protected ?string $_rootElement = null; // The name of the column
+    protected string $_rootNamespace = 'gsx';
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_Extension_Custom object.

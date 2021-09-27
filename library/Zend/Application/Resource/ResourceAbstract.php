@@ -39,24 +39,18 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
 {
     /**
      * Parent bootstrap
-     *
-     * @var Zend_Application_Bootstrap_Bootstrapper
      */
-    protected $_bootstrap;
+    protected ?\Zend_Application_Bootstrap_Bootstrapper $_bootstrap = null;
 
     /**
      * Options for the resource
-     *
-     * @var array
      */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * Option keys to skip when calling setOptions()
-     *
-     * @var array
      */
-    protected $_skipOptions = array(
+    protected array $_skipOptions = array(
         'options',
         'config',
     );

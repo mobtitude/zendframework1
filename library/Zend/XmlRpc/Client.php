@@ -78,16 +78,14 @@ class Zend_XmlRpc_Client
 {
     /**
      * Full address of the XML-RPC service
-     * @var string
      * @example http://time.xmlrpc.com/RPC2
      */
-    protected $_serverAddress;
+    protected string $_serverAddress;
 
     /**
      * HTTP Client to use for requests
-     * @var Zend_Http_Client
      */
-    protected $_httpClient = null;
+    protected ?\Zend_Http_Client $_httpClient = null;
 
     /**
      * Introspection object
@@ -97,27 +95,24 @@ class Zend_XmlRpc_Client
 
     /**
      * Request of the last method call
-     * @var Zend_XmlRpc_Request
      */
-    protected $_lastRequest = null;
+    protected ?\Zend_XmlRpc_Request $_lastRequest = null;
 
     /**
      * Response received from the last method call
-     * @var Zend_XmlRpc_Response
      */
-    protected $_lastResponse = null;
+    protected ?\Zend_XmlRpc_Response $_lastResponse = null;
 
     /**
      * Proxy object for more convenient method calls
      * @var array of Zend_XmlRpc_Client_ServerProxy
      */
-    protected $_proxyCache = array();
+    protected array $_proxyCache = array();
 
     /**
      * Flag for skipping system lookup
-     * @var bool
      */
-    protected $_skipSystemLookup = false;
+    protected bool $_skipSystemLookup = false;
 
     /**
      * Create a new XML-RPC client to a remote server

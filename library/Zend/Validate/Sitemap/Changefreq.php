@@ -50,17 +50,15 @@ class Zend_Validate_Sitemap_Changefreq extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::NOT_VALID => "'%value%' is not a valid sitemap changefreq",
         self::INVALID   => "Invalid type given. String expected",
     );
 
     /**
      * Valid change frequencies
-     *
-     * @var array
      */
-    protected $_changeFreqs = array(
+    protected array $_changeFreqs = array(
         'always',  'hourly', 'daily', 'weekly',
         'monthly', 'yearly', 'never'
     );

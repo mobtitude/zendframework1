@@ -44,25 +44,16 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
     /**
      * @var array Message templates
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::ERROR_NO_RECORD_FOUND => "No record matching '%value%' was found",
         self::ERROR_RECORD_FOUND    => "A record matching '%value%' was found",
     );
 
-    /**
-     * @var string
-     */
-    protected $_schema = null;
+    protected ?string $_schema = null;
 
-    /**
-     * @var string
-     */
-    protected $_table = '';
+    protected string $_table = '';
 
-    /**
-     * @var string
-     */
-    protected $_field = '';
+    protected string $_field = '';
 
     /**
      * @var mixed
@@ -71,16 +62,13 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
 
     /**
      * Database adapter to use. If null isValid() will use Zend_Db::getInstance instead
-     *
-     * @var unknown_type
      */
-    protected $_adapter = null;
+    protected ?\Zend_Db_Adapter_Abstract $_adapter = null;
 
     /**
      * Select object to use. can be set, or will be auto-generated
-     * @var Zend_Db_Select
      */
-    protected $_select;
+    protected ?\Zend_Db_Select $_select = null;
 
     /**
      * Provides basic configuration for use with Zend_Validate_Db Validators

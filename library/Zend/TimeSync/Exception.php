@@ -36,10 +36,8 @@ class Zend_TimeSync_Exception extends Zend_Exception
 {
     /**
      * Contains array of exceptions thrown in queried server
-     *
-     * @var array
      */
-    protected $_exceptions;
+    protected ?array $_exceptions = null;
 
     /**
      * Adds an exception to the exception list

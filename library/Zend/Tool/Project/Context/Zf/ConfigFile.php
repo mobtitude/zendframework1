@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_ConfigFile extends Zend_Tool_Project_Context_
     /**
      * @var string
      */
-    protected $_filesystemName = 'bootstrap.php';
+    protected ?string $_filesystemName = 'bootstrap.php';
 
     /**
      * getName()

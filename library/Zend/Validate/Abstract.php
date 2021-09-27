@@ -41,64 +41,51 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
 
     /**
      * Additional variables available for validation failure messages
-     *
-     * @var array
      */
-    protected $_messageVariables = array();
+    protected array $_messageVariables = array();
 
     /**
      * Validation failure message template definitions
-     *
-     * @var array
      */
-    protected $_messageTemplates = array();
+    protected array $_messageTemplates = array();
 
     /**
      * Array of validation failure messages
-     *
-     * @var array
      */
-    protected $_messages = array();
+    protected array $_messages = array();
 
     /**
      * Flag indidcating whether or not value should be obfuscated in error
      * messages
-     * @var bool
      */
-    protected $_obscureValue = false;
+    protected bool $_obscureValue = false;
 
     /**
      * Array of validation failure message codes
      *
-     * @var array
      * @deprecated Since 1.5.0
      */
-    protected $_errors = array();
+    protected array $_errors = array();
 
     /**
      * Translation object
-     * @var Zend_Translate
      */
-    protected $_translator;
+    protected ?\Zend_Translate_Adapter $_translator = null;
 
     /**
      * Default translation object for all validate objects
-     * @var Zend_Translate
      */
-    protected static $_defaultTranslator;
+    protected static ?\Zend_Translate_Adapter $_defaultTranslator = null;
 
     /**
      * Is translation disabled?
-     * @var Boolean
      */
-    protected $_translatorDisabled = false;
+    protected bool $_translatorDisabled = false;
 
     /**
      * Limits the maximum returned length of a error message
-     *
-     * @var Integer
      */
-    protected static $_messageLength = -1;
+    protected static int $_messageLength = -1;
 
     /**
      * Returns array of validation failure messages

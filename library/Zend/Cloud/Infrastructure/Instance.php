@@ -55,18 +55,14 @@ class Zend_Cloud_Infrastructure_Instance
     protected $adapter;
 
     /**
-     * Instance's attribute
-     * 
-     * @var array 
+     * Instance's attribute 
      */
-    protected $attributes;
+    protected array $attributes;
 
     /**
-     * Attributes required for an instance
-     * 
-     * @var array 
+     * Attributes required for an instance 
      */
-    protected $attributeRequired = array(
+    protected array $attributeRequired = array(
         self::INSTANCE_ID,
         self::INSTANCE_STATUS,
         self::INSTANCE_IMAGEID,

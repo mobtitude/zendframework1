@@ -49,17 +49,13 @@ class Zend_Gdata_App_CaptchaRequiredException extends Zend_Gdata_App_AuthExcepti
 
     /**
      * The token identifier from the server.
-     *
-     * @var string
      */
-    private $captchaToken;
+    private string $captchaToken;
 
     /**
      * The URL of the CAPTCHA image.
-     *
-     * @var string
      */
-    private $captchaUrl;
+    private string $captchaUrl;
 
     /**
      * Constructs the exception to handle a CAPTCHA required response.

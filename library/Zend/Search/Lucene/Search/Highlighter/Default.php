@@ -33,10 +33,8 @@ class Zend_Search_Lucene_Search_Highlighter_Default implements Zend_Search_Lucen
 {
     /**
      * List of colors for text highlighting
-     *
-     * @var array
      */
-    protected $_highlightColors = array('#66ffff', '#ff66ff', '#ffff66',
+    protected array $_highlightColors = array('#66ffff', '#ff66ff', '#ffff66',
                                         '#ff8888', '#88ff88', '#8888ff',
                                         '#88dddd', '#dd88dd', '#dddd88',
                                         '#aaddff', '#aaffdd', '#ddaaff',
@@ -46,17 +44,13 @@ class Zend_Search_Lucene_Search_Highlighter_Default implements Zend_Search_Lucen
      * Index of current color for highlighting
      *
      * Index is increased at each highlight() call, so terms matching different queries are highlighted using different colors.
-     *
-     * @var integer
      */
-    protected $_currentColorIndex = 0;
+    protected int $_currentColorIndex = 0;
 
     /**
      * HTML document for highlighting
-     *
-     * @var Zend_Search_Lucene_Document_Html
      */
-    protected $_doc;
+    protected ?\Zend_Search_Lucene_Document_Html $_doc = null;
 
     /**
      * Set document for highlighting.

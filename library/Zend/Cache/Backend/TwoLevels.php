@@ -82,7 +82,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      *
      * @var array available options
      */
-    protected $_options = array(
+    protected array $_options = array(
         'slow_backend' => 'File',
         'fast_backend' => 'Apc',
         'slow_backend_options' => array(),
@@ -112,10 +112,8 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
 
     /**
      * Cache for the fast backend filling percentage
-     *
-     * @var int
      */
-    protected $_fastBackendFillingPercentage = null;
+    protected ?int $_fastBackendFillingPercentage = null;
 
     /**
      * Constructor

@@ -40,25 +40,19 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Fuzzy extends Zend_Search_Lu
 {
     /**
      * word (query parser lexeme) to find.
-     *
-     * @var string
      */
-    private $_word;
+    private string $_word;
 
     /**
      * Word encoding (field name is always provided using UTF-8 encoding since it may be retrieved from index).
-     *
-     * @var string
      */
-    private $_encoding;
+    private string $_encoding;
 
 
     /**
      * Field name.
-     *
-     * @var string
      */
-    private $_field;
+    private string $_field;
 
     /**
      * A value between 0 and 1 to set the required similarity
@@ -66,10 +60,8 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Fuzzy extends Zend_Search_Lu
      *  _minimumSimilarity of 0.5 a term of the same length
      *  as the query term is considered similar to the query term if the edit distance
      *  between both terms is less than length(term)*0.5
-     *
-     * @var float
      */
-    private $_minimumSimilarity;
+    private float $_minimumSimilarity;
 
     /**
      * Class constructor.  Create a new preprocessing object for prase query.

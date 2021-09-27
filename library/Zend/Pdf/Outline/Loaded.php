@@ -46,17 +46,13 @@ class Zend_Pdf_Outline_Loaded extends Zend_Pdf_Outline
 {
     /**
      * Outline dictionary object
-     *
-     * @var Zend_Pdf_Element_Dictionary|Zend_Pdf_Element_Object|Zend_Pdf_Element_Reference
      */
-    protected $_outlineDictionary;
+    protected \Zend_Pdf_Element $_outlineDictionary;
 
     /**
      * original array of child outlines
-     *
-     * @var array
      */
-    protected $_originalChildOutlines = array();
+    protected array $_originalChildOutlines = array();
 
     /**
      * Get outline title.

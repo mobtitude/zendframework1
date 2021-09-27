@@ -73,60 +73,47 @@ require_once 'Zend/View.php';
  */
 class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_Helper_Abstract
 {
-    /**
-     * @var Zend_View_Interface
-     */
-    public $view;
+    public ?\Zend_View_Interface $view = null;
 
     /**
      * Word delimiters
-     * @var array
      */
-    protected $_delimiters;
+    protected array $_delimiters;
 
-    /**
-     * @var Zend_Filter_Inflector
-     */
-    protected $_inflector;
+    protected ?\Zend_Filter_Inflector $_inflector = null;
 
     /**
      * Inflector target
-     * @var string
      */
-    protected $_inflectorTarget = '';
+    protected string $_inflectorTarget = '';
 
     /**
      * Current module directory
-     * @var string
      */
-    protected $_moduleDir = '';
+    protected string $_moduleDir = '';
 
     /**
      * Whether or not to autorender using controller name as subdirectory;
      * global setting (not reset at next invocation)
-     * @var boolean
      */
-    protected $_neverController = false;
+    protected bool $_neverController = false;
 
     /**
      * Whether or not to autorender postDispatch; global setting (not reset at
      * next invocation)
-     * @var boolean
      */
-    protected $_neverRender     = false;
+    protected bool $_neverRender     = false;
 
     /**
      * Whether or not to use a controller name as a subdirectory when rendering
-     * @var boolean
      */
-    protected $_noController    = false;
+    protected bool $_noController    = false;
 
     /**
      * Whether or not to autorender postDispatch; per controller/action setting (reset
      * at next invocation)
-     * @var boolean
      */
-    protected $_noRender        = false;
+    protected bool $_noRender        = false;
 
     /**
      * Characters representing path delimiters in the controller
@@ -136,39 +123,33 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
     /**
      * Which named segment of the response to utilize
-     * @var string
      */
-    protected $_responseSegment = null;
+    protected ?string $_responseSegment = null;
 
     /**
      * Which action view script to render
-     * @var string
      */
-    protected $_scriptAction    = null;
+    protected ?string $_scriptAction    = null;
 
     /**
      * View object basePath
-     * @var string
      */
-    protected $_viewBasePathSpec = ':moduleDir/views';
+    protected string $_viewBasePathSpec = ':moduleDir/views';
 
     /**
      * View script path specification string
-     * @var string
      */
-    protected $_viewScriptPathSpec = ':controller/:action.:suffix';
+    protected string $_viewScriptPathSpec = ':controller/:action.:suffix';
 
     /**
      * View script path specification string, minus controller segment
-     * @var string
      */
-    protected $_viewScriptPathNoControllerSpec = ':action.:suffix';
+    protected string $_viewScriptPathNoControllerSpec = ':action.:suffix';
 
     /**
      * View script suffix
-     * @var string
      */
-    protected $_viewSuffix      = 'phtml';
+    protected string $_viewSuffix      = 'phtml';
 
     /**
      * Constructor

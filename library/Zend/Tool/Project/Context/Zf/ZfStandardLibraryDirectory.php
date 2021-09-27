@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_ZfStandardLibraryDirectory extends Zend_Tool_
     /**
      * @var string
      */
-    protected $_filesystemName = 'Zend';
+    protected ?string $_filesystemName = 'Zend';
 
     /**
      * getName()

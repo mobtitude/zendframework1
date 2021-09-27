@@ -44,7 +44,7 @@ class Zend_Gdata_Spreadsheets_CellEntry extends Zend_Gdata_Entry
 {
 
     protected $_entryClassName = 'Zend_Gdata_Spreadsheets_CellEntry';
-    protected $_cell;
+    protected ?\Zend_Gdata_Spreadsheets_Extension_Cell $_cell = null;
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_CellEntry object.

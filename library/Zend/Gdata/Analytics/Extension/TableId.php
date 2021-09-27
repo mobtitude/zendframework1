@@ -33,9 +33,9 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Analytics_Extension_TableId extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'ga';
-    protected $_rootElement = 'tableId';
-    protected $_value = null;
+    protected string $_rootNamespace = 'ga';
+    protected ?string $_rootElement = 'tableId';
+    protected ?string $_value = null;
 
     /**
      * Constructs a new Zend_Gdata_Calendar_Extension_Timezone object.

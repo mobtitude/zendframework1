@@ -49,11 +49,10 @@ class Zend_Cloud_StorageService_Adapter_S3
 
     /**
      * S3 service instance.
-     * @var Zend_Service_Amazon_S3
      */
-    protected $_s3;
+    protected ?\Zend_Service_Amazon_S3 $_s3 = null;
     protected $_defaultBucketName = null;
-    protected $_defaultBucketAsDomain = false;
+    protected bool $_defaultBucketAsDomain = false;
 
     /**
      * Constructor

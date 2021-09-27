@@ -36,10 +36,8 @@ class Zend_Acl_Role implements Zend_Acl_Role_Interface
 {
     /**
      * Unique id of Role
-     *
-     * @var string
      */
-    protected $_roleId;
+    protected string $_roleId;
 
     /**
      * Sets the Role identifier

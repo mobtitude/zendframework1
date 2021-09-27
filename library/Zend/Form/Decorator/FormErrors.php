@@ -40,9 +40,8 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
 {
     /**
      * Default values for markup options
-     * @var array
      */
-    protected $_defaults = array(
+    protected array $_defaults = array(
         'ignoreSubForms'          => false,
         'showCustomFormErrors'    => true,
         'onlyCustomFormErrors'    => false,
@@ -58,22 +57,20 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
      * Markup options
      * @var string
      */
-    protected $_ignoreSubForms;
-    protected $_showCustomFormErrors;
-    protected $_onlyCustomFormErrors;
-    protected $_markupElementLabelEnd;
-    protected $_markupElementLabelStart;
-    protected $_markupListEnd;
-    protected $_markupListItemEnd;
-    protected $_markupListItemStart;
-    protected $_markupListStart;
+    protected ?bool $_ignoreSubForms = null;
+    protected ?bool $_showCustomFormErrors = null;
+    protected ?bool $_onlyCustomFormErrors = null;
+    protected ?string $_markupElementLabelEnd = null;
+    protected ?string $_markupElementLabelStart = null;
+    protected ?string $_markupListEnd = null;
+    protected ?string $_markupListItemEnd = null;
+    protected ?string $_markupListItemStart = null;
+    protected ?string $_markupListStart = null;
     /**#@-*/
-
     /**
      * Whether or not to escape error label and error message
-     * @var bool
      */
-    protected $_escape;
+    protected ?bool $_escape = null;
 
     /**
      * Render errors

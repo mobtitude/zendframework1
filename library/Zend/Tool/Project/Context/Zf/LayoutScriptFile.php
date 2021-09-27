@@ -42,12 +42,9 @@ class Zend_Tool_Project_Context_Zf_LayoutScriptFile extends Zend_Tool_Project_Co
     /**
      * @var string
      */
-    protected $_filesystemName = 'layout.phtml';
+    protected ?string $_filesystemName = 'layout.phtml';
 
-    /**
-     * @var string
-     */
-    protected $_layoutName = null;
+    protected ?\Zend_Tool_Project_Profile_Resource_Container $_layoutName = null;
 
     /**
      * getName()

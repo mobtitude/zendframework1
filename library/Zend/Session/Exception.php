@@ -43,7 +43,7 @@ class Zend_Session_Exception extends Zend_Exception
      * @see http://framework.zend.com/issues/browse/ZF-1325
      * @var string PHP Error Message
      */
-    static public $sessionStartError = null;
+    static public ?string $sessionStartError = null;
 
     /**
      * handleSessionStartError() - interface for set_error_handler()

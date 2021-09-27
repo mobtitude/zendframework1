@@ -71,24 +71,18 @@ abstract class Zend_Search_Lucene_Analysis_Analyzer
 {
     /**
      * The Analyzer implementation used by default.
-     *
-     * @var Zend_Search_Lucene_Analysis_Analyzer
      */
-    private static $_defaultImpl;
+    private static ?\Zend_Search_Lucene_Analysis_Analyzer $_defaultImpl = null;
 
     /**
      * Input string
-     *
-     * @var string
      */
-    protected $_input = null;
+    protected ?string $_input = null;
 
     /**
      * Input string encoding
-     *
-     * @var string
      */
-    protected $_encoding = '';
+    protected string $_encoding = '';
 
     /**
      * Tokenize text to a terms

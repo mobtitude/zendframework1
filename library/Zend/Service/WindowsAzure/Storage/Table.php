@@ -58,10 +58,8 @@ class Zend_Service_WindowsAzure_Storage_Table
 	/**
 	 * Throw Zend_Service_WindowsAzure_Exception when a property is not specified in Windows Azure?
 	 * Defaults to true, making behaviour similar to Windows Azure StorageClient in .NET.
-	 * 
-	 * @var boolean
 	 */
-	protected $_throwExceptionOnMissingData = true;
+	protected bool $_throwExceptionOnMissingData = true;
 	
 	/**
 	 * Throw Zend_Service_WindowsAzure_Exception when a property is not specified in Windows Azure?

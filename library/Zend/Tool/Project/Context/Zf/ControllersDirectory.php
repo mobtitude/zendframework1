@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_ControllersDirectory extends Zend_Tool_Projec
     /**
      * @var string
      */
-    protected $_filesystemName = 'controllers';
+    protected ?string $_filesystemName = 'controllers';
 
     /**
      * getName()

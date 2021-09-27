@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_ViewHelpersDirectory extends Zend_Tool_Projec
     /**
      * @var string
      */
-    protected $_filesystemName = 'helpers';
+    protected ?string $_filesystemName = 'helpers';
 
     /**
      * getName()

@@ -43,18 +43,17 @@ class Zend_EventManager_EventManager implements Zend_EventManager_EventCollectio
      * Subscribed events and their listeners
      * @var array Array of Zend_Stdlib_PriorityQueue objects
      */
-    protected $events = array();
+    protected array $events = array();
 
     /**
      * @var string Class representing the event being emitted
      */
-    protected $eventClass = 'Zend_EventManager_Event';
+    protected string $eventClass = 'Zend_EventManager_Event';
 
     /**
      * Identifiers, used to pull static signals from StaticEventManager
-     * @var array
      */
-    protected $identifiers = array();
+    protected array $identifiers = array();
 
     /**
      * Static collections

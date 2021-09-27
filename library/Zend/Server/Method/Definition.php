@@ -31,35 +31,20 @@
  */
 class Zend_Server_Method_Definition
 {
-    /**
-     * @var Zend_Server_Method_Callback
-     */
-    protected $_callback;
+    protected ?\Zend_Server_Method_Callback $_callback = null;
 
-    /**
-     * @var array
-     */
-    protected $_invokeArguments = array();
+    protected array $_invokeArguments = array();
 
-    /**
-     * @var string
-     */
-    protected $_methodHelp = '';
+    protected string $_methodHelp = '';
 
-    /**
-     * @var string
-     */
-    protected $_name;
+    protected ?string $_name = null;
 
-    /**
-     * @var null|object
-     */
-    protected $_object;
+    protected ?object $_object = null;
 
     /**
      * @var array Array of Zend_Server_Method_Prototype objects
      */
-    protected $_prototypes = array();
+    protected array $_prototypes = array();
 
     /**
      * Constructor

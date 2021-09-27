@@ -38,17 +38,13 @@ class Zend_Controller_Router_Route_Static extends Zend_Controller_Router_Route_A
 
     /**
      * Route
-     *
-     * @var string|null
      */
-    protected $_route = null;
+    protected ?string $_route = null;
 
     /**
      * Default values for the route (ie. module, controller, action, params)
-     *
-     * @var array
      */
-    protected $_defaults = array();
+    protected array $_defaults = array();
 
     /**
      * Get the version of the route

@@ -36,17 +36,13 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
      * Term Dictionary
      * Array of the Zend_Search_Lucene_Index_Term objects
      * Corresponding Zend_Search_Lucene_Index_TermInfo object stored in the $_termDictionaryInfos
-     *
-     * @var array
      */
-    protected $_termDictionary;
+    protected array $_termDictionary;
 
     /**
      * Documents, which contain the term
-     *
-     * @var array
      */
-    protected $_termDocs;
+    protected array $_termDocs;
 
     /**
      * Object constructor.

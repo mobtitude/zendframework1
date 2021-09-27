@@ -36,24 +36,18 @@ class Zend_Config_Ini extends Zend_Config
 {
     /**
      * String that separates nesting levels of configuration data identifiers
-     *
-     * @var string
      */
-    protected $_nestSeparator = '.';
+    protected string $_nestSeparator = '.';
 
     /**
      * String that separates the parent section name
-     *
-     * @var string
      */
-    protected $_sectionSeparator = ':';
+    protected string $_sectionSeparator = ':';
 
     /**
      * Whether to skip extends or not
-     *
-     * @var boolean
      */
-    protected $_skipExtends = false;
+    protected bool $_skipExtends = false;
 
     /**
      * Loads the section $section from the config file $filename for

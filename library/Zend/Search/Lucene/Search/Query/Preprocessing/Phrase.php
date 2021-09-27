@@ -39,25 +39,19 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Phrase extends Zend_Search_L
 {
     /**
      * Phrase to find.
-     *
-     * @var string
      */
-    private $_phrase;
+    private string $_phrase;
 
     /**
      * Phrase encoding (field name is always provided using UTF-8 encoding since it may be retrieved from index).
-     *
-     * @var string
      */
-    private $_phraseEncoding;
+    private string $_phraseEncoding;
 
 
     /**
      * Field name.
-     *
-     * @var string
      */
-    private $_field;
+    private string $_field;
 
     /**
      * Sets the number of other words permitted between words in query phrase.
@@ -73,10 +67,8 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Phrase extends Zend_Search_L
      * results are sorted by exactness.
      *
      * The slop is zero by default, requiring exact matches.
-     *
-     * @var integer
      */
-    private $_slop;
+    private ?int $_slop = null;
 
     /**
      * Class constructor.  Create a new preprocessing object for prase query.

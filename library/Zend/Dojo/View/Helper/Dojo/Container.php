@@ -34,136 +34,112 @@ require_once 'Zend/Dojo.php';
  */
 class Zend_Dojo_View_Helper_Dojo_Container
 {
-    /**
-     * @var Zend_View_Interface
-     */
-    public $view;
+    public ?\Zend_View_Interface $view = null;
 
     /**
      * addOnLoad capture lock
-     * @var bool
      */
-    protected $_captureLock = false;
+    protected bool $_captureLock = false;
 
     /**
      * addOnLoad object on which to apply lambda
-     * @var string
      */
-    protected $_captureObj;
+    protected string $_captureObj;
 
     /**
      * Base CDN url to utilize
-     * @var string
      */
-    protected $_cdnBase = Zend_Dojo::CDN_BASE_GOOGLE;
+    protected string $_cdnBase = Zend_Dojo::CDN_BASE_GOOGLE;
 
     /**
      * Path segment following version string of CDN path
-     * @var string
      */
-    protected $_cdnDojoPath = Zend_Dojo::CDN_DOJO_PATH_GOOGLE;
+    protected string $_cdnDojoPath = Zend_Dojo::CDN_DOJO_PATH_GOOGLE;
 
     /**
      * Dojo version to use from CDN
-     * @var string
      */
-    protected $_cdnVersion = '1.5.0';
+    protected ?string $_cdnVersion = '1.5.0';
 
     /**
      * Has the dijit loader been registered?
-     * @var bool
      */
-    protected $_dijitLoaderRegistered = false;
+    protected bool $_dijitLoaderRegistered = false;
 
     /**
      * Registered programmatic dijits
-     * @var array
      */
-    protected $_dijits = array();
+    protected array $_dijits = array();
 
     /**
      * Dojo configuration
-     * @var array
      */
-    protected $_djConfig = array();
+    protected array $_djConfig = array();
 
     /**
      * Whether or not dojo is enabled
-     * @var bool
      */
-    protected $_enabled = false;
+    protected bool $_enabled = false;
 
     /**
      * Are we rendering as XHTML?
-     * @var bool
      */
-    protected $_isXhtml = false;
+    protected bool $_isXhtml = false;
 
     /**
      * Arbitrary javascript to include in dojo script
-     * @var array
      */
-    protected $_javascriptStatements = array();
+    protected array $_javascriptStatements = array();
 
     /**
      * Dojo layers (custom builds) to use
-     * @var array
      */
-    protected $_layers = array();
+    protected array $_layers = array();
 
     /**
      * Relative path to dojo
-     * @var string
      */
-    protected $_localPath = null;
+    protected ?string $_localPath = null;
 
     /**
      * Root of dojo where all dojo files are installed
-     * @var string
      */
-    protected $_localRelativePath = null;
+    protected ?string $_localRelativePath = null;
 
     /**
      * Modules to require
-     * @var array
      */
-    protected $_modules = array();
+    protected array $_modules = array();
 
     /**
      * Registered module paths
-     * @var array
      */
-    protected $_modulePaths = array();
+    protected array $_modulePaths = array();
 
     /**
      * Actions to perform on window load
-     * @var array
      */
-    protected $_onLoadActions = array();
+    protected array $_onLoadActions = array();
 
     /**
      * Register the Dojo stylesheet?
-     * @var bool
      */
-    protected $_registerDojoStylesheet = false;
+    protected bool $_registerDojoStylesheet = false;
 
     /**
      * Style sheet modules to load
-     * @var array
      */
-    protected $_stylesheetModules = array();
+    protected array $_stylesheetModules = array();
 
     /**
      * Local stylesheets
-     * @var array
      */
-    protected $_stylesheets = array();
+    protected array $_stylesheets = array();
 
     /**
      * Array of onLoad events specific to Zend_Dojo integration operations
-     * @var array
      */
-    protected $_zendLoadActions = array();
+    protected array $_zendLoadActions = array();
 
     /**
      * Set view object

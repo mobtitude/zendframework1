@@ -34,25 +34,19 @@ abstract class Zend_Session_Abstract
 {
     /**
      * Whether or not session permits writing (modification of $_SESSION[])
-     *
-     * @var bool
      */
-    protected static $_writable = false;
+    protected static bool $_writable = false;
 
     /**
      * Whether or not session permits reading (reading data in $_SESSION[])
-     *
-     * @var bool
      */
-    protected static $_readable = false;
+    protected static bool $_readable = false;
 
     /**
      * Since expiring data is handled at startup to avoid __destruct difficulties,
      * the data that will be expiring at end of this request is held here
-     *
-     * @var array
      */
-    protected static $_expiringData = array();
+    protected static array $_expiringData = array();
 
 
     /**

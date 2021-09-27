@@ -33,45 +33,33 @@ class Zend_Service_Yahoo_Result
 {
     /**
      * The title of the search entry
-     *
-     * @var string
      */
-    public $Title;
+    public string $Title;
 
     /**
      * The URL of the found object
-     *
-     * @var string
      */
-    public $Url;
+    public string $Url;
 
     /**
      * The URL for linking to the found object
-     *
-     * @var string
      */
-    public $ClickUrl;
+    public string $ClickUrl;
 
     /**
      * Result fields
-     *
-     * @var array
      */
-    protected $_fields;
+    protected array $_fields;
 
     /**
      * REST response fragment for the result
-     *
-     * @var DOMElement
      */
-    protected $_result;
+    protected \DOMElement $_result;
 
     /**
      * Object for XPath queries
-     *
-     * @var DOMXPath
      */
-    protected $_xpath;
+    protected \DOMXPath $_xpath;
 
 
     /**

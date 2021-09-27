@@ -42,9 +42,8 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
 {
     /**
      * Coding map
-     * @var array
      */
-    protected $_codingMap = array(
+    protected array $_codingMap = array(
         '0' => '000110100',
         '1' => '100100001',
         '2' => '001100001',

@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_TemporaryDirectory extends Zend_Tool_Project_
     /**
      * @var string
      */
-    protected $_filesystemName = 'temp';
+    protected ?string $_filesystemName = 'temp';
 
     /**
      * getName()

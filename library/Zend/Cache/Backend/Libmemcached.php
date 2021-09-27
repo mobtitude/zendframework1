@@ -71,7 +71,7 @@ class Zend_Cache_Backend_Libmemcached extends Zend_Cache_Backend implements Zend
      *
      * @var array available options
      */
-    protected $_options = array(
+    protected array $_options = array(
         'servers' => array(array(
             'host'   => self::DEFAULT_HOST,
             'port'   => self::DEFAULT_PORT,
@@ -85,7 +85,7 @@ class Zend_Cache_Backend_Libmemcached extends Zend_Cache_Backend implements Zend
      *
      * @var mixed memcached object
      */
-    protected $_memcache = null;
+    protected ?\Memcached $_memcache = null;
 
     /**
      * Constructor

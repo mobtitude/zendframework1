@@ -35,24 +35,18 @@ class Zend_Amf_Value_MessageHeader
 {
     /**
      * Name of the header
-     *
-     * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * Flag if the data has to be parsed on return
-     *
-     * @var boolean
      */
-    public $mustRead;
+    public bool $mustRead;
 
     /**
      * Length of the data field
-     *
-     * @var int
      */
-    public $length;
+    public ?int $length = null;
 
     /**
      * Data sent with the header name

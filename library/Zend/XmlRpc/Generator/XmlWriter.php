@@ -32,10 +32,8 @@ class Zend_XmlRpc_Generator_XmlWriter extends Zend_XmlRpc_Generator_GeneratorAbs
 {
     /**
      * XMLWriter instance
-     *
-     * @var XMLWriter
      */
-    protected $_xmlWriter;
+    protected ?\XMLWriter $_xmlWriter = null;
 
     /**
      * Initialized XMLWriter instance

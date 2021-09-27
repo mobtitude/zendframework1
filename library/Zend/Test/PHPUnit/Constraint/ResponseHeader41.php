@@ -40,18 +40,15 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
     const ASSERT_HEADER_CONTAINS = 'assertHeaderContains';
     const ASSERT_HEADER_REGEX    = 'assertHeaderRegex';
     /**#@-*/
-
     /**
      * Current assertion type
-     * @var string
      */
-    protected $_assertType      = null;
+    protected ?string $_assertType      = null;
 
     /**
      * Available assertion types
-     * @var array
      */
-    protected $_assertTypes     = array(
+    protected array $_assertTypes     = array(
         self::ASSERT_RESPONSE_CODE,
         self::ASSERT_HEADER,
         self::ASSERT_HEADER_CONTAINS,
@@ -61,12 +58,12 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
     /**
      * @var int Response code
      */
-    protected $_code              = 200;
+    protected int $_code              = 200;
     
     /**
      * @var int Actual response code
      */
-    protected $_actualCode        = null;
+    protected ?int $_actualCode        = null;
 
     /**
      * @var string Header
@@ -80,9 +77,8 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
 
     /**
      * Whether or not assertion is negated
-     * @var bool
      */
-    protected $_negate            = false;
+    protected bool $_negate            = false;
 
     /**
      * Constructor; setup constraint state

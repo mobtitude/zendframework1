@@ -28,12 +28,9 @@
 class Zend_Tool_Framework_Client_Interactive_InputHandler
 {
 
-    /**
-     * @var Zend_Tool_Framework_Client_Interactive_InputInterface
-     */
-    protected $_client = null;
+    protected ?\Zend_Tool_Framework_Client_Interactive_InputInterface $_client = null;
 
-    protected $_inputRequest = null;
+    protected ?\Zend_Tool_Framework_Client_Interactive_InputRequest $_inputRequest = null;
 
     public function setClient(Zend_Tool_Framework_Client_Interactive_InputInterface $client)
     {

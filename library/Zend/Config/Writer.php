@@ -29,19 +29,15 @@ abstract class Zend_Config_Writer
 {
     /**
      * Option keys to skip when calling setOptions()
-     *
-     * @var array
      */
-    protected $_skipOptions = array(
+    protected array $_skipOptions = array(
         'options'
     );
 
     /**
      * Config object to write
-     *
-     * @var Zend_Config
      */
-    protected $_config = null;
+    protected ?\Zend_Config $_config = null;
 
     /**
      * Create a new adapter

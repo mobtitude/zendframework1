@@ -23,19 +23,17 @@ class Zend_Cloud_Infrastructure_ImageList implements Countable, Iterator, ArrayA
     /**
      * @var array Array of Zend_Cloud_Infrastructure_Image
      */
-    protected $images = array();
+    protected array $images = array();
 
     /**
      * @var int Iterator key
      */
-    protected $iteratorKey = 0;
+    protected int $iteratorKey = 0;
 
     /**
      * The Image adapter (if exists)
-     * 
-     * @var object
      */
-    protected $adapter;
+    protected ?object $adapter;
 
     /**
      * Constructor

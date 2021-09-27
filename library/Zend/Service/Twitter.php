@@ -74,17 +74,12 @@ class Zend_Service_Twitter
      */
     const STATUS_MAX_CHARACTERS = 246;
 
-    /**
-     * @var array
-     */
-    protected $cookieJar;
+    protected ?\Zend_Http_CookieJar $cookieJar = null;
 
     /**
      * Date format for 'since' strings
-     *
-     * @var string
      */
-    protected $dateFormat = 'D, d M Y H:i:s T';
+    protected string $dateFormat = 'D, d M Y H:i:s T';
 
     /**
      * @var Zend_Http_Client
@@ -93,24 +88,18 @@ class Zend_Service_Twitter
 
     /**
      * Current method type (for method proxying)
-     *
-     * @var string
      */
-    protected $methodType;
+    protected ?string $methodType = null;
 
     /**
      * Oauth Consumer
-     *
-     * @var Zend_Oauth_Consumer
      */
-    protected $oauthConsumer = null;
+    protected ?\Zend_Oauth_Consumer $oauthConsumer = null;
 
     /**
      * Types of API methods
-     *
-     * @var array
      */
-    protected $methodTypes = array(
+    protected array $methodTypes = array(
         'account',
         'application',
         'blocks',
@@ -124,17 +113,13 @@ class Zend_Service_Twitter
 
     /**
      * Options passed to constructor
-     *
-     * @var array
      */
-    protected $options = array();
+    protected array $options = array();
 
     /**
      * Username
-     *
-     * @var string
      */
-    protected $username;
+    protected ?string $username = null;
 
     /**
      * Constructor

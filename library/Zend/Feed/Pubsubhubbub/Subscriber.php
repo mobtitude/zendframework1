@@ -39,34 +39,26 @@ class Zend_Feed_Pubsubhubbub_Subscriber
 {
     /**
      * An array of URLs for all Hub Servers to subscribe/unsubscribe.
-     *
-     * @var array
      */
-    protected $_hubUrls = array();
+    protected array $_hubUrls = array();
 
     /**
      * An array of optional parameters to be included in any
      * (un)subscribe requests.
-     *
-     * @var array
      */
-    protected $_parameters = array();
+    protected array $_parameters = array();
 
     /**
      * The URL of the topic (Rss or Atom feed) which is the subject of
      * our current intent to subscribe to/unsubscribe from updates from
      * the currently configured Hub Servers.
-     *
-     * @var string
      */
-    protected $_topicUrl = '';
+    protected string $_topicUrl = '';
 
     /**
      * The URL Hub Servers must use when communicating with this Subscriber
-     *
-     * @var string
      */
-    protected $_callbackUrl = '';
+    protected string $_callbackUrl = '';
 
     /**
      * The number of seconds for which the subscriber would like to have the
@@ -84,44 +76,34 @@ class Zend_Feed_Pubsubhubbub_Subscriber
      *
      * Zend_Feed_Pubsubhubbub_Subscriber will always send both modes, whose
      * order of occurance in the parameter list determines this preference.
-     *
-     * @var string
      */
-    protected $_preferredVerificationMode
+    protected string $_preferredVerificationMode
         = Zend_Feed_Pubsubhubbub::VERIFICATION_MODE_SYNC;
 
     /**
      * An array of any errors including keys for 'response', 'hubUrl'.
      * The response is the actual Zend_Http_Response object.
-     *
-     * @var array
      */
-    protected $_errors = array();
+    protected array $_errors = array();
 
     /**
      * An array of Hub Server URLs for Hubs operating at this time in
      * asynchronous verification mode.
-     *
-     * @var array
      */
-    protected $_asyncHubs = array();
+    protected array $_asyncHubs = array();
 
     /**
      * An instance of Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface used to background
      * save any verification tokens associated with a subscription or other.
-     *
-     * @var Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface
      */
-    protected $_storage = null;
+    protected ?\Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface $_storage = null;
 
     /**
      * An array of authentication credentials for HTTP Basic Authentication
      * if required by specific Hubs. The array is indexed by Hub Endpoint URI
      * and the value is a simple array of the username and password to apply.
-     *
-     * @var array
      */
-    protected $_authentications = array();
+    protected array $_authentications = array();
 
     /**
      * Tells the Subscriber to append any subscription identifier to the path
@@ -135,10 +117,8 @@ class Zend_Feed_Pubsubhubbub_Subscriber
      * require a route in the form "callback/:subkey" to allow the parameter be
      * retrieved from an action using the Zend_Controller_Action::_getParam()
      * method.
-     *
-     * @var string
      */
-    protected $_usePathParameter = false;
+    protected bool $_usePathParameter = false;
 
     /**
      * Constructor; accepts an array or Zend_Config instance to preset
@@ -860,7 +840,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
     /**
      * This is STRICTLY for testing purposes only...
      */
-    protected $_testStaticToken = null;
+    protected ?string $_testStaticToken = null;
 
     final public function setTestStaticToken($token)
     {

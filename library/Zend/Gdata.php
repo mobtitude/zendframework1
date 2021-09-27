@@ -56,14 +56,14 @@ class Zend_Gdata extends Zend_Gdata_App
      *
      * @var string
      */
-    protected $_defaultPostUri = null;
+    protected ?string $_defaultPostUri = null;
 
     /**
      * Packages to search for classes when using magic __call method, in order.
      *
      * @var array
      */
-    protected $_registeredPackages = array(
+    protected array $_registeredPackages = array(
             'Zend_Gdata_Kind',
             'Zend_Gdata_Extension',
             'Zend_Gdata',
@@ -72,10 +72,8 @@ class Zend_Gdata extends Zend_Gdata_App
 
     /**
      * Namespaces used for Gdata data
-     *
-     * @var array
      */
-    public static $namespaces = array(
+    public static array $namespaces = array(
         array('gd', 'http://schemas.google.com/g/2005', 1, 0),
         array('openSearch', 'http://a9.com/-/spec/opensearchrss/1.0/', 1, 0),
         array('openSearch', 'http://a9.com/-/spec/opensearch/1.1/', 2, 0),
@@ -87,14 +85,14 @@ class Zend_Gdata extends Zend_Gdata_App
      *
      * @var Zend_Gdata_HttpClient
      */
-    protected $_httpClient;
+    protected ?Zend_Http_Client $_httpClient;
 
     /**
      * Client object used to communicate in static context
      *
      * @var Zend_Gdata_HttpClient
      */
-    protected static $_staticHttpClient = null;
+    protected static ?Zend_Http_Client $_staticHttpClient = null;
 
     /**
      * Create Gdata object

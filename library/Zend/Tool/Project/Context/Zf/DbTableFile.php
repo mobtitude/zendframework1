@@ -34,9 +34,9 @@
 class Zend_Tool_Project_Context_Zf_DbTableFile extends Zend_Tool_Project_Context_Zf_AbstractClassFile
 {
 
-    protected $_dbTableName = null;
+    protected ?\Zend_Tool_Project_Profile_Resource_Container $_dbTableName = null;
 
-    protected $_actualTableName = null;
+    protected ?\Zend_Tool_Project_Profile_Resource_Container $_actualTableName = null;
 
     /**
      * getName()

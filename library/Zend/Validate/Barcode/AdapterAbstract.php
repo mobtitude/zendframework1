@@ -41,9 +41,8 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
 
     /**
      * Allowed barcode characters
-     * @var string
      */
-    protected $_characters;
+    protected string $_characters;
 
     /**
      * Callback to checksum function
@@ -53,9 +52,8 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
 
     /**
      * Is a checksum value included?
-     * @var boolean
      */
-    protected $_hasChecksum = true;
+    protected bool $_hasChecksum = true;
 
     /**
      * Checks the length of a barcode

@@ -38,7 +38,7 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_App_Extension_Link extends Zend_Gdata_App_Extension
 {
 
-    protected $_rootElement = 'link';
+    protected ?string $_rootElement = 'link';
     protected $_href = null;
     protected $_rel = null;
     protected $_type = null;

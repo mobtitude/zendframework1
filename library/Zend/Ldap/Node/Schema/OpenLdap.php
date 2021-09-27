@@ -47,34 +47,24 @@ class Zend_Ldap_Node_Schema_OpenLdap extends Zend_Ldap_Node_Schema
 {
     /**
      * The attribute Types
-     *
-     * @var array
      */
-    protected $_attributeTypes = null;
+    protected ?array $_attributeTypes = null;
     /**
      * The object classes
-     *
-     * @var array
      */
-    protected $_objectClasses = null;
+    protected ?array $_objectClasses = null;
     /**
      * The LDAP syntaxes
-     *
-     * @var array
      */
-    protected $_ldapSyntaxes = null;
+    protected ?array $_ldapSyntaxes = null;
     /**
      * The matching rules
-     *
-     * @var array
      */
-    protected $_matchingRules = null;
+    protected ?array $_matchingRules = null;
     /**
      * The matching rule use
-     *
-     * @var array
      */
-    protected $_matchingRuleUse = null;
+    protected ?array $_matchingRuleUse = null;
 
     /**
      * Parses the schema

@@ -39,9 +39,8 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 {
     /**
      * Class map cache file
-     * @var string
      */
-    protected static $_includeFileCache;
+    protected static ?string $_includeFileCache = null;
 
     /**
      * Class map cache file handler
@@ -51,52 +50,38 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 
     /**
      * Instance loaded plugin paths
-     *
-     * @var array
      */
-    protected $_loadedPluginPaths = array();
+    protected array $_loadedPluginPaths = array();
 
     /**
      * Instance loaded plugins
-     *
-     * @var array
      */
-    protected $_loadedPlugins = array();
+    protected array $_loadedPlugins = array();
 
     /**
      * Instance registry property
-     *
-     * @var array
      */
-    protected $_prefixToPaths = array();
+    protected array $_prefixToPaths = array();
 
     /**
      * Statically loaded plugin path mappings
-     *
-     * @var array
      */
-    protected static $_staticLoadedPluginPaths = array();
+    protected static array $_staticLoadedPluginPaths = array();
 
     /**
      * Statically loaded plugins
-     *
-     * @var array
      */
-    protected static $_staticLoadedPlugins = array();
+    protected static array $_staticLoadedPlugins = array();
 
     /**
      * Static registry property
-     *
-     * @var array
      */
-    protected static $_staticPrefixToPaths = array();
+    protected static array $_staticPrefixToPaths = array();
 
     /**
      * Whether to use a statically named registry for loading plugins
-     *
-     * @var string|null
      */
-    protected $_useStaticRegistry = null;
+    protected ?string $_useStaticRegistry = null;
 
     /**
      * Constructor

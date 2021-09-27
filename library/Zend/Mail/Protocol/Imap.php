@@ -43,9 +43,8 @@ class Zend_Mail_Protocol_Imap
 
     /**
      * counter for request tag
-     * @var int
      */
-    protected $_tagCount = 0;
+    protected int $_tagCount = 0;
 
     /**
      * Public constructor

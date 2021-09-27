@@ -41,9 +41,8 @@ class Zend_Wildfire_Plugin_FirePhp_Message
 
     /**
      * The label of the message
-     * @var string
      */
-    protected $_label = null;
+    protected ?string $_label = null;
 
     /**
      * The message value
@@ -53,15 +52,13 @@ class Zend_Wildfire_Plugin_FirePhp_Message
 
     /**
      * Flag indicating if message buffering is enabled
-     * @var boolean
      */
-    protected $_buffered = false;
+    protected bool $_buffered = false;
 
     /**
      * Flag indicating if message should be destroyed and not delivered
-     * @var boolean
      */
-    protected $_destroy = false;
+    protected bool $_destroy = false;
 
     /**
      * Random unique ID used to identify message in comparison operations
@@ -71,9 +68,8 @@ class Zend_Wildfire_Plugin_FirePhp_Message
 
     /**
      * Options for the object
-     * @var array
      */
-    protected $_options = array(
+    protected array $_options = array(
         'traceOffset' => null, /* The offset in the trace which identifies the source of the message */
         'includeLineNumbers' => null /* Whether to include line and file info for this message */
     );

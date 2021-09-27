@@ -42,10 +42,8 @@ class Zend_Service_Ebay_Finding_Category_Histogram extends Zend_Service_Ebay_Fin
      * Histograms return data on up to 10 children. Histograms are only a single
      * level deep. That is, a given category histogram contains only immediate
      * children.
-     *
-     * @var Zend_Service_Ebay_Finding_Category_Histogram_Set
      */
-    public $childCategoryHistogram;
+    public ?\Zend_Service_Ebay_Finding_Category_Histogram_Set $childCategoryHistogram = null;
 
     /**
      * The total number of items in the associated category that match the

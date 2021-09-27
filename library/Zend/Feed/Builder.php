@@ -54,21 +54,21 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
      *
      * @var $_data array
      */
-    private $_data;
+    private array $_data;
 
     /**
      * Header of the feed
      *
      * @var $_header Zend_Feed_Builder_Header
      */
-    private $_header;
+    private ?\Zend_Feed_Builder_Header $_header = null;
 
     /**
      * List of the entries of the feed
      *
      * @var $_entries array
      */
-    private $_entries = array();
+    private array $_entries = array();
 
     /**
      * Constructor. The $data array must conform to the following format:

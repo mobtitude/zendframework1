@@ -55,9 +55,8 @@ class Zend_Mail_Storage_Mbox extends Zend_Mail_Storage_Abstract
 
     /**
      * filename of mbox file for __wakeup
-     * @var string
      */
-    protected $_filename;
+    protected ?string $_filename = null;
 
     /**
      * modification date of mbox file for __wakeup
@@ -67,15 +66,14 @@ class Zend_Mail_Storage_Mbox extends Zend_Mail_Storage_Abstract
 
     /**
      * start and end position of messages as array('start' => start, 'seperator' => headersep, 'end' => end)
-     * @var array
      */
-    protected $_positions;
+    protected array $_positions;
 
     /**
      * used message class, change it in an extened class to extend the returned message class
      * @var string
      */
-    protected $_messageClass = 'Zend_Mail_Message_File';
+    protected string $_messageClass = 'Zend_Mail_Message_File';
 
     /**
      * Count messages all messages in current box

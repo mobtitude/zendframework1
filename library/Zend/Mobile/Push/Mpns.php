@@ -43,10 +43,8 @@ class Zend_Mobile_Push_Mpns extends Zend_Mobile_Push_Abstract
 {
     /**
      * Http Client
-     *
-     * @var Zend_Http_Client
      */
-    protected $_httpClient;
+    protected ?\Zend_Http_Client $_httpClient = null;
 
     /**
      * Get Http Client

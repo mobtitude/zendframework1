@@ -37,10 +37,8 @@ class Zend_Locale_Data_Translation
 {
     /**
      * Locale Translation for Full Named Locales
-     *
-     * @var array $localeTranslation
      */
-    public static $languageTranslation = array(
+    public static array $languageTranslation = array(
         'Afrikaans'         => 'af',
         'Albanian'          => 'sq',
         'Amharic'           => 'am',
@@ -175,7 +173,7 @@ class Zend_Locale_Data_Translation
         'Zulu'              => 'zu',
     );
 
-    public static $regionTranslation = array(
+    public static array $regionTranslation = array(
         'Albania'                    => 'AL',
         'Algeria'                    => 'DZ',
         'Argentina'                  => 'AR',

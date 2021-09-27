@@ -38,7 +38,7 @@ class Zend_Service_WindowsAzure_Log_Writer_WindowsAzure
     /**
      * @var Zend_Service_Log_Formatter_Interface
      */
-    protected $_formatter;
+    protected ?Zend_Log_Formatter_Interface $_formatter;
 
     /**
      * Connection to a windows Azure

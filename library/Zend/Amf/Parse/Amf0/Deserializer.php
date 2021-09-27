@@ -43,16 +43,13 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
 {
     /**
      * An array of objects used for recursively deserializing an object.
-     * @var array
      */
-    protected $_reference = array();
+    protected array $_reference = array();
 
     /**
      * If AMF3 serialization occurs, update to AMF0 0x03
-     *
-     * @var int
      */
-    protected $_objectEncoding = Zend_Amf_Constants::AMF0_OBJECT_ENCODING;
+    protected int $_objectEncoding = Zend_Amf_Constants::AMF0_OBJECT_ENCODING;
 
     /**
      * Read AMF markers and dispatch for deserialization

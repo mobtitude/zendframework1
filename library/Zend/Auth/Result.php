@@ -76,10 +76,8 @@ class Zend_Auth_Result
      * An array of string reasons why the authentication attempt was unsuccessful
      *
      * If authentication was successful, this should be an empty array.
-     *
-     * @var array
      */
-    protected $_messages;
+    protected array $_messages;
 
     /**
      * Sets the result code, identity, and failure messages

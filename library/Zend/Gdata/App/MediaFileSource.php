@@ -39,17 +39,15 @@ class Zend_Gdata_App_MediaFileSource extends Zend_Gdata_App_BaseMediaSource
 {
     /**
      * The filename which is represented
-     *
-     * @var string
      */
-    protected $_filename = null;
+    protected ?string $_filename = null;
 
     /**
      * The content type for the file attached (example image/png)
      *
      * @var string
      */
-    protected $_contentType = null;
+    protected ?string $_contentType = null;
 
     /**
      * Create a new Zend_Gdata_App_MediaFileSource object.

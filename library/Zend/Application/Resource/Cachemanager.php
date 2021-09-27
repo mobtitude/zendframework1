@@ -33,10 +33,7 @@ require_once 'Zend/Application/Resource/ResourceAbstract.php';
  */
 class Zend_Application_Resource_Cachemanager extends Zend_Application_Resource_ResourceAbstract
 {
-    /**
-     * @var Zend_Cache_Manager
-     */
-    protected $_manager = null;
+    protected ?\Zend_Cache_Manager $_manager = null;
 
     /**
      * Initialize Cache_Manager

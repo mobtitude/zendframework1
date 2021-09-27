@@ -36,7 +36,7 @@ class Zend_Locale_Format
 {
     const STANDARD   = 'auto';
 
-    private static $_options = array('date_format'   => null,
+    private static array $_options = array('date_format'   => null,
                                      'number_format' => null,
                                      'format_type'   => 'iso',
                                      'fix_date'      => false,

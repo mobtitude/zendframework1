@@ -68,17 +68,13 @@ implements Iterator, Countable
 
     /**
      * Contains all entry objects
-     *
-     * @var array
      */
-    protected $_entries = array();
+    protected array $_entries = array();
 
     /**
      * A pointer for the iterator to keep track of the entries array
-     *
-     * @var int
      */
-    protected $_entriesKey = 0;
+    protected int $_entriesKey = 0;
 
     /**
      * Creates a new Zend_Feed_Writer_Entry data container for use. This is NOT

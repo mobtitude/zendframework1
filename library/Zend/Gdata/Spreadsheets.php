@@ -106,7 +106,7 @@ class Zend_Gdata_Spreadsheets extends Zend_Gdata
      *
      * @var array
      */
-    public static $namespaces = array(
+    public static array $namespaces = array(
         array('gs', 'http://schemas.google.com/spreadsheets/2006', 1, 0),
         array(
             'gsx', 'http://schemas.google.com/spreadsheets/2006/extended', 1, 0)

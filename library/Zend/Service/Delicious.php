@@ -85,24 +85,18 @@ class Zend_Service_Delicious
 
     /**
      * Zend_Service_Rest instance
-     *
-     * @var Zend_Service_Rest
      */
-    protected $_rest;
+    protected \Zend_Rest_Client $_rest;
 
     /**
      * Username
-     *
-     * @var string
      */
-    protected $_authUname;
+    protected ?string $_authUname = null;
 
     /**
      * Password
-     *
-     * @var string
      */
-    protected $_authPass;
+    protected ?string $_authPass = null;
 
     /**
      * Microtime of last request

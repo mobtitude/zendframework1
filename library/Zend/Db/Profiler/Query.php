@@ -33,36 +33,25 @@ class Zend_Db_Profiler_Query
 
     /**
      * SQL query string or user comment, set by $query argument in constructor.
-     *
-     * @var string
      */
-    protected $_query = '';
+    protected string $_query = '';
 
     /**
      * One of the Zend_Db_Profiler constants for query type, set by $queryType argument in constructor.
-     *
-     * @var integer
      */
-    protected $_queryType = 0;
+    protected int $_queryType = 0;
 
     /**
      * Unix timestamp with microseconds when instantiated.
-     *
-     * @var float
      */
-    protected $_startedMicrotime = null;
+    protected ?float $_startedMicrotime = null;
 
     /**
      * Unix timestamp with microseconds when self::queryEnd() was called.
-     *
-     * @var integer
      */
-    protected $_endedMicrotime = null;
+    protected ?float $_endedMicrotime = null;
 
-    /**
-     * @var array
-     */
-    protected $_boundParams = array();
+    protected array $_boundParams = array();
 
     /**
      * @var array

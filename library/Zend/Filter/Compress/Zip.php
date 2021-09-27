@@ -41,10 +41,8 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
      *     'password' => Password to use
      *     'target'   => Target to write the files to
      * )
-     *
-     * @var array
      */
-    protected $_options = array(
+    protected array $_options = array(
         'archive' => null,
         'target'  => null,
     );
@@ -237,7 +235,7 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
             for ($i = 0; $i < $zip->numFiles; $i++) {
                 $statIndex = $zip->statIndex($i);
                 $currName = $statIndex['name'];
-                if (($currName{0} == '/') ||
+                if (($currName[0] == '/') ||
                     (substr($currName, 0, 2) == '..') ||
                     (substr($currName, 0, 4) == './..')
                     )

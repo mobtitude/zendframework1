@@ -47,7 +47,7 @@ class Zend_Tool_Project_Context_Zf_FormFile extends Zend_Tool_Project_Context_Zf
     /**
      * @var string
      */
-    protected $_filesystemName = 'formName';
+    protected ?string $_filesystemName = 'formName';
 
     /**
      * init()

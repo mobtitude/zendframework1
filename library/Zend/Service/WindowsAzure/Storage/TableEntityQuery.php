@@ -30,46 +30,34 @@
 class Zend_Service_WindowsAzure_Storage_TableEntityQuery
 {
     /**
-     * From
-     * 
-     * @var string
-     */
-	protected $_from  = '';
+	 * From
+	 */
+	protected string $_from  = '';
 	
 	/**
 	 * Where
-	 * 
-	 * @var array
 	 */
-	protected $_where = array();
+	protected array $_where = array();
 	
 	/**
 	 * Order by
-	 * 
-	 * @var array
 	 */
-	protected $_orderBy = array();
+	protected array $_orderBy = array();
 	
 	/**
 	 * Top
-	 * 
-	 * @var int
 	 */
-	protected $_top = null;
+	protected ?int $_top = null;
 	
 	/**
 	 * Partition key
-	 * 
-	 * @var string
 	 */
-	protected $_partitionKey = null;
+	protected ?string $_partitionKey = null;
 
 	/**
 	 * Row key
-	 * 
-	 * @var string
 	 */
-	protected $_rowKey = null;
+	protected ?string $_rowKey = null;
 	
 	/**
 	 * Select clause

@@ -38,69 +38,53 @@ class Zend_Pdf_ElementFactory implements Zend_Pdf_ElementFactory_Interface
      * Also contains new and removed objects
      *
      * Array: ojbectNumber => Zend_Pdf_Element_Object
-     *
-     * @var array
      */
-    private $_modifiedObjects = array();
+    private ?array $_modifiedObjects = array();
 
     /**
      * List of the removed objects
      *
      * Array: ojbectNumber => Zend_Pdf_Element_Object
-     *
-     * @var SplObjectStorage
      */
-    private $_removedObjects;
+    private ?\SplObjectStorage $_removedObjects = null;
 
     /**
      * List of registered objects.
      * Used for resources clean up when factory is destroyed.
      *
      * Array of Zend_Pdf_Element objects
-     *
-     * @var array
      */
-    private $_registeredObjects = array();
+    private ?array $_registeredObjects = array();
 
     /**
      * PDF object counter.
      * Actually it's an object number for new PDF object
-     *
-     * @var integer
      */
-    private $_objectCount;
+    private int $_objectCount;
 
 
     /**
      * List of the attached object factories.
      * Array of Zend_Pdf_ElementFactory_Interface objects
-     *
-     * @var array
      */
-    private $_attachedFactories = array();
+    private ?array $_attachedFactories = array();
 
 
     /**
      * Factory internal id
-     *
-     * @var integer
      */
-    private $_factoryId;
+    private int $_factoryId;
 
     /**
      * Identity, used for factory id generation
-     *
-     * @var integer
      */
-    private static $_identity = 0;
+    private static int $_identity = 0;
 
 
     /**
      * Internal cache to save calculated shifts
-     *
-     * @var array
      */
-    private $_shiftCalculationCache = array();
+    private array $_shiftCalculationCache = array();
 
 
     /**

@@ -35,9 +35,8 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
 {
     /**
      * List of authorized output format
-     * @var array
      */
-    protected $_allowedImageType = array(
+    protected array $_allowedImageType = array(
         'png',
         'jpeg',
         'gif',
@@ -45,9 +44,8 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Image format
-     * @var string
      */
-    protected $_imageType = 'png';
+    protected string $_imageType = 'png';
 
     /**
      * Resource for the image

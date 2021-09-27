@@ -38,9 +38,9 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Calendar_Extension_AccessLevel extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gCal';
-    protected $_rootElement = 'accesslevel';
-    protected $_value = null;
+    protected string $_rootNamespace = 'gCal';
+    protected ?string $_rootElement = 'accesslevel';
+    protected ?string $_value = null;
 
     /**
      * Constructs a new Zend_Gdata_Calendar_Extension_AccessLevel object.

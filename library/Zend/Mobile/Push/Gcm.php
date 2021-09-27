@@ -52,17 +52,13 @@ class Zend_Mobile_Push_Gcm extends Zend_Mobile_Push_Abstract
 
     /**
      * Http Client
-     *
-     * @var Zend_Http_Client
      */
-    protected $_httpClient;
+    protected ?\Zend_Http_Client $_httpClient = null;
 
     /**
      * API Key
-     *
-     * @var string
      */
-    protected $_apiKey;
+    protected ?string $_apiKey = null;
 
     /**
      * Get API Key

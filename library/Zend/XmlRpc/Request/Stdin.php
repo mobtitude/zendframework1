@@ -42,7 +42,7 @@ class Zend_XmlRpc_Request_Stdin extends Zend_XmlRpc_Request
      * Raw XML as received via request
      * @var string
      */
-    protected $_xml;
+    protected ?string $_xml;
 
     /**
      * Constructor

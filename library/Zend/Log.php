@@ -52,40 +52,28 @@ class Zend_Log
      * @var array of priorities where the keys are the
      * priority numbers and the values are the priority names
      */
-    protected $_priorities = array();
+    protected array $_priorities = array();
 
     /**
      * @var array of Zend_Log_Writer_Abstract
      */
-    protected $_writers = array();
+    protected array $_writers = array();
 
     /**
      * @var array of Zend_Log_Filter_Interface
      */
-    protected $_filters = array();
+    protected array $_filters = array();
 
     /**
      * @var array of extra log event
      */
-    protected $_extras = array();
+    protected array $_extras = array();
 
-    /**
-     *
-     * @var string
-     */
-    protected $_defaultWriterNamespace = 'Zend_Log_Writer';
+    protected string $_defaultWriterNamespace = 'Zend_Log_Writer';
 
-    /**
-     *
-     * @var string
-     */
-    protected $_defaultFilterNamespace = 'Zend_Log_Filter';
+    protected string $_defaultFilterNamespace = 'Zend_Log_Filter';
 
-    /**
-     *
-     * @var string
-     */
-    protected $_defaultFormatterNamespace = 'Zend_Log_Formatter';
+    protected string $_defaultFormatterNamespace = 'Zend_Log_Formatter';
 
     /**
      *
@@ -93,11 +81,7 @@ class Zend_Log
      */
     protected $_origErrorHandler       = null;
 
-    /**
-     *
-     * @var boolean
-     */
-    protected $_registeredErrorHandler = false;
+    protected bool $_registeredErrorHandler = false;
 
     /**
      *
@@ -105,11 +89,7 @@ class Zend_Log
      */
     protected $_errorHandlerMap        = false;
 
-    /**
-     *
-     * @var string
-     */
-    protected $_timestampFormat        = 'c';
+    protected string $_timestampFormat        = 'c';
 
     /**
      * Class constructor.  Create a new logger
