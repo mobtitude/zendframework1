@@ -55,10 +55,8 @@ class Zend_Text_Table_Column
 
     /**
      * Align of the column
-     *
-     * @var string
      */
-    protected $_align = self::ALIGN_LEFT;
+    protected string $_align = self::ALIGN_LEFT;
 
     /**
      * Colspan of the column
@@ -69,10 +67,8 @@ class Zend_Text_Table_Column
 
     /**
      * Allowed align parameters
-     *
-     * @var array
      */
-    protected $_allowedAligns = array(self::ALIGN_LEFT, self::ALIGN_CENTER, self::ALIGN_RIGHT);
+    protected array $_allowedAligns = array(self::ALIGN_LEFT, self::ALIGN_CENTER, self::ALIGN_RIGHT);
 
     /**
      * Create a column for a Zend_Text_Table_Row object.

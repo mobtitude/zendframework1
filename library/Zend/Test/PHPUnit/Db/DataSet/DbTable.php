@@ -39,35 +39,21 @@ class Zend_Test_PHPUnit_Db_DataSet_DbTable extends PHPUnit_Extensions_Database_D
 {
     /**
      * Zend_Db_Table object
-     *
-     * @var Zend_Db_Table_Abstract
      */
-    protected $_table = null;
+    protected ?\Zend_Db_Table_Abstract $_table = null;
 
-    /**
-     * @var array
-     */
-    protected $_columns = array();
+    protected array $_columns = array();
 
     /**
      * @var string
      */
     protected $_where = null;
 
-    /**
-     * @var string
-     */
-    protected $_orderBy = null;
+    protected ?string $_orderBy = null;
 
-    /**
-     * @var string
-     */
-    protected $_count = null;
+    protected ?int $_count = null;
 
-    /**
-     * @var int
-     */
-    protected $_offset = null;
+    protected ?int $_offset = null;
 
     /**
      * Construct Dataset Table from Zend_Db_Table object

@@ -36,10 +36,8 @@ class Zend_TimeSync_Sntp extends Zend_TimeSync_Protocol
 {
     /**
      * Port number for this timeserver
-     *
-     * @var integer
      */
-    protected $_port = 37;
+    protected int $_port = 37;
 
     /**
      * Socket delay

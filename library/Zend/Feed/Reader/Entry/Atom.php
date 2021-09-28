@@ -49,10 +49,8 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
 {
     /**
      * XPath query
-     *
-     * @var string
      */
-    protected $_xpathQuery = '';
+    protected string $_xpathQuery = '';
 
     /**
      * Constructor

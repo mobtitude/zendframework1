@@ -38,24 +38,18 @@ abstract class Zend_TimeSync_Protocol
 
     /**
      * Exceptions that might have occured
-     *
-     * @var array
      */
-    protected $_exceptions;
+    protected array $_exceptions;
 
     /**
      * Hostname for timeserver
-     *
-     * @var string
      */
-    protected $_timeserver;
+    protected string $_timeserver;
 
     /**
      * Holds information passed/returned from timeserver
-     *
-     * @var array
      */
-    protected $_info = array();
+    protected array $_info = array();
 
     /**
      * Abstract method that prepares the data to send to the timeserver

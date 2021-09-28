@@ -35,9 +35,8 @@ class Zend_Barcode_Exception extends Zend_Exception
 {
     /**
      * Is this exception renderable?
-     * @var bool
      */
-    protected $_isRenderable = true;
+    protected bool $_isRenderable = true;
 
     /**
      * Set renderable flag

@@ -36,10 +36,8 @@ class Zend_Filter_File_Encrypt extends Zend_Filter_Encrypt
 {
     /**
      * New filename to set
-     *
-     * @var string
      */
-    protected $_filename;
+    protected ?string $_filename = null;
 
     /**
      * Returns the new filename where the content will be stored

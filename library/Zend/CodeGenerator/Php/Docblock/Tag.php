@@ -34,20 +34,11 @@ require_once 'Zend/CodeGenerator/Php/Abstract.php';
 class Zend_CodeGenerator_Php_Docblock_Tag extends Zend_CodeGenerator_Php_Abstract
 {
 
-    /**
-     * @var Zend_Loader_PluginLoader
-     */
-    protected static $_pluginLoader = null;
+    protected static ?\Zend_Loader_PluginLoader $_pluginLoader = null;
 
-    /**
-     * @var string
-     */
-    protected $_name = null;
+    protected ?string $_name = null;
 
-    /**
-     * @var string
-     */
-    protected $_description = null;
+    protected ?string $_description = null;
 
     /**
      * fromReflection()

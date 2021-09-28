@@ -46,17 +46,15 @@ class Zend_Validate_Alnum extends Zend_Validate_Abstract
 
     /**
      * Alphanumeric filter used for validation
-     *
-     * @var Zend_Filter_Alnum
      */
-    protected static $_filter = null;
+    protected static ?\Zend_Filter_Alnum $_filter = null;
 
     /**
      * Validation failure message template definitions
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::INVALID      => "Invalid type given. String, integer or float expected",
         self::NOT_ALNUM    => "'%value%' contains characters which are non alphabetic and no digits",
         self::STRING_EMPTY => "'%value%' is an empty string",

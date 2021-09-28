@@ -39,10 +39,8 @@ class Zend_Search_Lucene_Search_Query_Wildcard extends Zend_Search_Lucene_Search
      *
      * Field has to be fully specified or has to be null
      * Text may contain '*' or '?' symbols
-     *
-     * @var Zend_Search_Lucene_Index_Term
      */
-    private $_pattern;
+    private \Zend_Search_Lucene_Index_Term $_pattern;
 
     /**
      * Matched terms.
@@ -52,17 +50,13 @@ class Zend_Search_Lucene_Search_Query_Wildcard extends Zend_Search_Lucene_Search
      * post-processing
      *
      * Array of Zend_Search_Lucene_Index_Term objects
-     *
-     * @var array
      */
-    private $_matches = null;
+    private ?array $_matches = null;
 
     /**
      * Minimum term prefix length (number of minimum non-wildcard characters)
-     *
-     * @var integer
      */
-    private static $_minPrefixLength = 3;
+    private static int $_minPrefixLength = 3;
 
     /**
      * Zend_Search_Lucene_Search_Query_Wildcard constructor.

@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_PublicScriptsDirectory extends Zend_Tool_Proj
     /**
      * @var string
      */
-    protected $_filesystemName = 'js';
+    protected ?string $_filesystemName = 'js';
 
     /**
      * getName()

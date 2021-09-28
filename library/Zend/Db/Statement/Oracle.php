@@ -40,20 +40,18 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
     /**
      * Column names.
      */
-    protected $_keys;
+    protected ?array $_keys = null;
 
     /**
      * Fetched result values.
      */
-    protected $_values;
+    protected ?array $_values = null;
 
     /**
      * Check if LOB field are returned as string
      * instead of OCI-Lob object
-     *
-     * @var boolean
      */
-    protected $_lobAsString = false;
+    protected bool $_lobAsString = false;
 
     /**
      * Activate/deactivate return of LOB as string

@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_TestLibraryDirectory extends Zend_Tool_Projec
     /**
      * @var string
      */
-    protected $_filesystemName = 'library';
+    protected ?string $_filesystemName = 'library';
 
     /**
      * getName()

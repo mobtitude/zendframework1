@@ -34,10 +34,8 @@ class Zend_Http_UserAgent_Offline extends Zend_Http_UserAgent_Desktop
 {
     /**
      * User Agent Signatures
-     *
-     * @var array
      */
-    protected static $_uaSignatures = array(
+    protected static array $_uaSignatures = array(
         'wget',
         'webzip',
         'webcopier',

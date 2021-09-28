@@ -31,17 +31,13 @@ class Zend_Text_Table_Row
 {
     /**
      * List of all columns
-     *
-     * @var array
      */
-    protected $_columns = array();
+    protected array $_columns = array();
 
     /**
      * Temporary stored column widths
-     *
-     * @var array
      */
-    protected $_columnWidths = null;
+    protected ?array $_columnWidths = null;
 
     /**
      * Create a new column and append it to the row

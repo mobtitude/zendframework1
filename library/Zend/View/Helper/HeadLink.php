@@ -45,10 +45,8 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
 {
     /**
      * $_validAttributes
-     *
-     * @var array
      */
-    protected $_itemKeys = array(
+    protected array $_itemKeys = array(
         'charset',
         'href',
         'hreflang',

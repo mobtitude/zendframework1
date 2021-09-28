@@ -40,7 +40,7 @@ class Zend_Service_StrikeIron_Base
      * Configuration options
      * @param array
      */
-    protected $_options = array('username' => null,
+    protected array $_options = array('username' => null,
                                 'password' => null,
                                 'client'   => null,
                                 'options'  => null,
@@ -51,7 +51,7 @@ class Zend_Service_StrikeIron_Base
      * Output headers returned by the last call to SOAPClient->__soapCall()
      * @param array
      */
-    protected $_outputHeaders = array();
+    protected array $_outputHeaders = array();
 
     /**
      * Class constructor

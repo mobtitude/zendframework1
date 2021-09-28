@@ -49,80 +49,57 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
 
     /**
      * Database Connection
-     *
-     * @var Zend_Db_Adapter_Abstract
      */
-    protected $_zendDb = null;
+    protected ?\Zend_Db_Adapter_Abstract $_zendDb = null;
 
-    /**
-     * @var Zend_Db_Select
-     */
-    protected $_dbSelect = null;
+    protected ?\Zend_Db_Select $_dbSelect = null;
 
     /**
      * $_tableName - the table name to check
-     *
-     * @var string
      */
-    protected $_tableName = null;
+    protected ?string $_tableName = null;
 
     /**
      * $_identityColumn - the column to use as the identity
-     *
-     * @var string
      */
-    protected $_identityColumn = null;
+    protected ?string $_identityColumn = null;
 
     /**
      * $_credentialColumns - columns to be used as the credentials
-     *
-     * @var string
      */
-    protected $_credentialColumn = null;
+    protected ?string $_credentialColumn = null;
 
     /**
      * $_identity - Identity value
-     *
-     * @var string
      */
-    protected $_identity = null;
+    protected ?string $_identity = null;
 
     /**
      * $_credential - Credential values
-     *
-     * @var string
      */
-    protected $_credential = null;
+    protected ?string $_credential = null;
 
     /**
      * $_credentialTreatment - Treatment applied to the credential, such as MD5() or PASSWORD()
-     *
-     * @var string
      */
-    protected $_credentialTreatment = null;
+    protected ?string $_credentialTreatment = null;
 
     /**
      * $_authenticateResultInfo
-     *
-     * @var array
      */
-    protected $_authenticateResultInfo = null;
+    protected ?array $_authenticateResultInfo = null;
 
     /**
      * $_resultRow - Results of database authentication query
-     *
-     * @var array
      */
-    protected $_resultRow = null;
+    protected ?array $_resultRow = null;
 
     /**
      * $_ambiguityIdentity - Flag to indicate same Identity can be used with
      * different credentials. Default is FALSE and need to be set to true to
      * allow ambiguity usage.
-     *
-     * @var boolean
      */
-    protected $_ambiguityIdentity = false;
+    protected bool $_ambiguityIdentity = false;
 
     /**
      * __construct() - Sets configuration options

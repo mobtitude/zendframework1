@@ -62,7 +62,7 @@ class Zend_Measure_Frequency extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ONE_PER_SECOND'        => array('1',             '1/s'),
         'CYCLE_PER_SECOND'      => array('1',             'cps'),
         'DEGREE_PER_HOUR'       => array(array('' => '1', '/' => '1296000'), '°/h'),

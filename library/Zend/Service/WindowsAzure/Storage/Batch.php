@@ -31,18 +31,14 @@
 class Zend_Service_WindowsAzure_Storage_Batch
 {	
     /**
-     * Storage client the batch is defined on
-     * 
-     * @var Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
-     */
-    protected $_storageClient = null;
+				 * Storage client the batch is defined on
+				 */
+				protected ?\Zend_Service_WindowsAzure_Storage_BatchStorageAbstract $_storageClient = null;
     
     /**
-     * For table storage?
-     * 
-     * @var boolean
-     */
-    protected $_forTableStorage = false;
+				 * For table storage?
+				 */
+				protected bool $_forTableStorage = false;
     
     /**
      * Base URL
@@ -52,18 +48,14 @@ class Zend_Service_WindowsAzure_Storage_Batch
     protected $_baseUrl;
     
     /**
-     * Pending operations
-     * 
-     * @var unknown_type
-     */
-    protected $_operations = array();
+				 * Pending operations
+				 */
+				protected array $_operations = array();
     
     /**
-     * Does the batch contain a single select?
-     * 
-     * @var boolean
-     */
-    protected $_isSingleSelect = false;
+				 * Does the batch contain a single select?
+				 */
+				protected bool $_isSingleSelect = false;
     
     /**
      * Creates a new Zend_Service_WindowsAzure_Storage_Batch
@@ -105,7 +97,7 @@ class Zend_Service_WindowsAzure_Storage_Batch
         unset($this->_operations);
         $this->_storageClient->setCurrentBatch(null);
         $this->_storageClient = null;
-        unset($this);
+//        unset($this);
     }
 
 	/**

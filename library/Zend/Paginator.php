@@ -52,125 +52,91 @@ class Zend_Paginator implements Countable, IteratorAggregate
 
     /**
      * Adapter plugin loader
-     *
-     * @var Zend_Loader_PluginLoader
      */
-    protected static $_adapterLoader = null;
+    protected static ?\Zend_Loader_PluginLoader $_adapterLoader = null;
 
     /**
      * Configuration file
-     *
-     * @var Zend_Config
      */
-    protected static $_config = null;
+    protected static ?\Zend_Config $_config = null;
 
     /**
      * Default scrolling style
-     *
-     * @var string
      */
-    protected static $_defaultScrollingStyle = 'Sliding';
+    protected static string $_defaultScrollingStyle = 'Sliding';
 
     /**
      * Default item count per page
-     *
-     * @var int
      */
-    protected static $_defaultItemCountPerPage = 10;
+    protected static int $_defaultItemCountPerPage = 10;
 
     /**
      * Default number of local pages (i.e., the number of discretes
      * page numbers that will be displayed, including the current
      * page number)
-     *
-     * @var int
      */
-    protected static $_defaultPageRange = 10;
+    protected static int $_defaultPageRange = 10;
 
     /**
      * Scrolling style plugin loader
-     *
-     * @var Zend_Loader_PluginLoader
      */
-    protected static $_scrollingStyleLoader = null;
+    protected static ?\Zend_Loader_PluginLoader $_scrollingStyleLoader = null;
 
     /**
      * Cache object
-     *
-     * @var Zend_Cache_Core
      */
-    protected static $_cache;
+    protected static ?\Zend_Cache_Core $_cache = null;
 
     /**
      * Enable or disable the cache by Zend_Paginator instance
-     *
-     * @var bool
      */
-    protected $_cacheEnabled = true;
+    protected bool $_cacheEnabled = true;
 
     /**
      * Adapter
-     *
-     * @var Zend_Paginator_Adapter_Interface
      */
-    protected $_adapter = null;
+    protected ?\Zend_Paginator_Adapter_Interface $_adapter = null;
 
     /**
      * Number of items in the current page
-     *
-     * @var integer
      */
-    protected $_currentItemCount = null;
+    protected ?int $_currentItemCount = null;
 
     /**
      * Current page items
-     *
-     * @var Traversable
      */
-    protected $_currentItems = null;
+    protected ?iterable $_currentItems = null;
 
     /**
      * Current page number (starting from 1)
-     *
-     * @var integer
      */
-    protected $_currentPageNumber = 1;
+    protected int $_currentPageNumber = 1;
 
     /**
      * Result filter
-     *
-     * @var Zend_Filter_Interface
      */
-    protected $_filter = null;
+    protected ?\Zend_Filter_Interface $_filter = null;
 
     /**
      * Number of items per page
-     *
-     * @var integer
      */
-    protected $_itemCountPerPage = null;
+    protected ?int $_itemCountPerPage = null;
 
     /**
      * Number of pages
-     *
-     * @var integer
      */
-    protected $_pageCount = null;
+    protected ?int $_pageCount = null;
 
     /**
      * Number of local pages (i.e., the number of discrete page numbers
      * that will be displayed, including the current page number)
-     *
-     * @var integer
      */
-    protected $_pageRange = null;
+    protected ?int $_pageRange = null;
 
     /**
      * Pages
-     *
-     * @var array
      */
-    protected $_pages = null;
+    protected ?\stdClass $_pages = null;
 
     /**
      * View instance used for self rendering

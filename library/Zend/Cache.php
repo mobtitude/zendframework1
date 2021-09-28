@@ -30,41 +30,33 @@ abstract class Zend_Cache
 
     /**
      * Standard frontends
-     *
-     * @var array
      */
-    public static $standardFrontends = array('Core', 'Output', 'Class', 'File', 'Function', 'Page');
+    public static array $standardFrontends = array('Core', 'Output', 'Class', 'File', 'Function', 'Page');
 
     /**
      * Standard backends
-     *
-     * @var array
      */
-    public static $standardBackends = array('File', 'Sqlite', 'Memcached', 'Libmemcached', 'Apc', 'ZendPlatform',
+    public static array $standardBackends = array('File', 'Sqlite', 'Memcached', 'Libmemcached', 'Apc', 'ZendPlatform',
                                             'Xcache', 'TwoLevels', 'WinCache', 'ZendServer_Disk', 'ZendServer_ShMem');
 
     /**
      * Standard backends which implement the ExtendedInterface
-     *
-     * @var array
      */
-    public static $standardExtendedBackends = array('File', 'Apc', 'TwoLevels', 'Memcached', 'Libmemcached', 'Sqlite', 'WinCache');
+    public static array $standardExtendedBackends = array('File', 'Apc', 'TwoLevels', 'Memcached', 'Libmemcached', 'Sqlite', 'WinCache');
 
     /**
      * Only for backward compatibility (may be removed in next major release)
      *
-     * @var array
      * @deprecated
      */
-    public static $availableFrontends = array('Core', 'Output', 'Class', 'File', 'Function', 'Page');
+    public static array $availableFrontends = array('Core', 'Output', 'Class', 'File', 'Function', 'Page');
 
     /**
      * Only for backward compatibility (may be removed in next major release)
      *
-     * @var array
      * @deprecated
      */
-    public static $availableBackends = array('File', 'Sqlite', 'Memcached', 'Libmemcached', 'Apc', 'ZendPlatform', 'Xcache', 'WinCache', 'TwoLevels');
+    public static array $availableBackends = array('File', 'Sqlite', 'Memcached', 'Libmemcached', 'Apc', 'ZendPlatform', 'Xcache', 'WinCache', 'TwoLevels');
 
     /**
      * Consts for clean() method

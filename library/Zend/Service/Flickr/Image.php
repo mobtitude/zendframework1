@@ -33,31 +33,23 @@ class Zend_Service_Flickr_Image
 {
     /**
      * The URI of the image
-     *
-     * @var string
      */
-    public $uri;
+    public string $uri;
 
     /**
      * The URI for linking to the photo on Flickr
-     *
-     * @var string
      */
-    public $clickUri;
+    public string $clickUri;
 
     /**
      * The height of the image in pixels
-     *
-     * @var string
      */
-    public $height;
+    public int $height;
 
     /**
      * The width of the image in pixels
-     *
-     * @var string
      */
-    public $width;
+    public int $width;
 
     /**
      * Parse given Flickr Image element

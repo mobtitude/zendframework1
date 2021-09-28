@@ -42,9 +42,8 @@ abstract class Zend_Dojo_View_Helper_Slider extends Zend_Dojo_View_Helper_Dijit
 
     /**
      * Required slider parameters
-     * @var array
      */
-    protected $_requiredParams = array('minimum', 'maximum', 'discreteValues');
+    protected array $_requiredParams = array('minimum', 'maximum', 'discreteValues');
 
     /**
      * Slider type -- vertical or horizontal

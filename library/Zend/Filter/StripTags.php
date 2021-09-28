@@ -47,28 +47,23 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
      * This setting is now deprecated, and ignored internally.
      *
      * @deprecated
-     * @var boolean
      */
-    public $commentsAllowed = false;
+    public bool $commentsAllowed = false;
 
     /**
      * Array of allowed tags and allowed attributes for each allowed tag
      *
      * Tags are stored in the array keys, and the array values are themselves
      * arrays of the attributes allowed for the corresponding tag.
-     *
-     * @var array
      */
-    protected $_tagsAllowed = array();
+    protected array $_tagsAllowed = array();
 
     /**
      * Array of allowed attributes for all allowed tags
      *
      * Attributes stored here are allowed for all of the allowed tags.
-     *
-     * @var array
      */
-    protected $_attributesAllowed = array();
+    protected array $_attributesAllowed = array();
 
     /**
      * Sets the filter options

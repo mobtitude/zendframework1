@@ -47,31 +47,23 @@ class Zend_Auth_Adapter_OpenId implements Zend_Auth_Adapter_Interface
 {
     /**
      * The identity value being authenticated
-     *
-     * @var string
      */
-    private $_id = null;
+    private ?string $_id = null;
 
     /**
      * Reference to an implementation of a storage object
-     *
-     * @var Zend_OpenId_Consumer_Storage
      */
-    private $_storage = null;
+    private ?\Zend_OpenId_Consumer_Storage $_storage = null;
 
     /**
      * The URL to redirect response from server to
-     *
-     * @var string
      */
-    private $_returnTo = null;
+    private ?string $_returnTo = null;
 
     /**
      * The HTTP URL to identify consumer on server
-     *
-     * @var string
      */
-    private $_root = null;
+    private ?string $_root = null;
 
     /**
      * Extension object or array of extensions objects
@@ -90,17 +82,13 @@ class Zend_Auth_Adapter_OpenId implements Zend_Auth_Adapter_Interface
     /**
      * Enables or disables interaction with user during authentication on
      * OpenID provider.
-     *
-     * @var bool
      */
-    private $_check_immediate = false;
+    private bool $_check_immediate = false;
 
     /**
      * HTTP client to make HTTP requests
-     *
-     * @var Zend_Http_Client $_httpClient
      */
-    private $_httpClient = null;
+    private ?\Zend_Http_Client $_httpClient = null;
 
     /**
      * Constructor

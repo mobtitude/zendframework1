@@ -39,34 +39,26 @@ class Zend_Pdf_Color_Cmyk extends Zend_Pdf_Color
     /**
      * Cyan level.
      * 0.0 (zero concentration) - 1.0 (maximum concentration)
-     *
-     * @var Zend_Pdf_Element_Numeric
      */
-    private $_c;
+    private \Zend_Pdf_Element_Numeric $_c;
 
     /**
      * Magenta level.
      * 0.0 (zero concentration) - 1.0 (maximum concentration)
-     *
-     * @var Zend_Pdf_Element_Numeric
      */
-    private $_m;
+    private \Zend_Pdf_Element_Numeric $_m;
 
     /**
      * Yellow level.
      * 0.0 (zero concentration) - 1.0 (maximum concentration)
-     *
-     * @var Zend_Pdf_Element_Numeric
      */
-    private $_y;
+    private \Zend_Pdf_Element_Numeric $_y;
 
     /**
      * Key (BlacK) level.
      * 0.0 (zero concentration) - 1.0 (maximum concentration)
-     *
-     * @var Zend_Pdf_Element_Numeric
      */
-    private $_k;
+    private \Zend_Pdf_Element_Numeric $_k;
 
 
     /**

@@ -37,10 +37,8 @@ class Zend_Filter_StringTrim implements Zend_Filter_Interface
      *
      * If this is null, then trim() is called with no specific character list,
      * and its default behavior will be invoked, trimming whitespace.
-     *
-     * @var string|null
      */
-    protected $_charList;
+    protected ?string $_charList = null;
 
     /**
      * Sets filter options

@@ -82,7 +82,7 @@ class Zend_Measure_Force extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ATTONEWTON'      => array('1.0e-18',     'aN'),
         'CENTINEWTON'     => array('0.01',        'cN'),
         'DECIGRAM_FORCE'  => array('0.000980665', 'dgf'),

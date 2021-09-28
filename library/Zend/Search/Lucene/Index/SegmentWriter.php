@@ -45,10 +45,8 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
      * faster, while larger values use less memory and make searching slightly
      * slower.  Searching is typically not dominated by dictionary lookup, so
      * tweaking this is rarely useful.
-     *
-     * @var integer
      */
-    public static $indexInterval = 128;
+    public static int $indexInterval = 128;
 
     /**
      * Expert: The fraction of TermDocs entries stored in skip tables.
@@ -60,10 +58,8 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
      * 0x7FFFFFFF indicates that we don't use skip data
      *
      * Note: not used in current implementation
-     *
-     * @var integer
      */
-    public static $skipInterval = 0x7FFFFFFF;
+    public static int $skipInterval = 0x7FFFFFFF;
 
     /**
      * Expert: The maximum number of skip levels. Smaller values result in
@@ -72,46 +68,34 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
      * 0 indicates that we don't use skip data
      *
      * Note: not used in current implementation
-     *
-     * @var integer
      */
-    public static $maxSkipLevels = 0;
+    public static int $maxSkipLevels = 0;
 
     /**
      * Number of docs in a segment
-     *
-     * @var integer
      */
-    protected $_docCount = 0;
+    protected int $_docCount = 0;
 
     /**
      * Segment name
-     *
-     * @var string
      */
-    protected $_name;
+    protected string $_name;
 
     /**
      * File system adapter.
-     *
-     * @var Zend_Search_Lucene_Storage_Directory
      */
-    protected $_directory;
+    protected \Zend_Search_Lucene_Storage_Directory $_directory;
 
     /**
      * List of the index files.
      * Used for automatic compound file generation
-     *
-     * @var unknown_type
      */
-    protected $_files = array();
+    protected array $_files = array();
 
     /**
      * Segment fields. Array of Zend_Search_Lucene_Index_FieldInfo objects for this segment
-     *
-     * @var array
      */
-    protected $_fields = array();
+    protected array $_fields = array();
 
     /**
      * Normalization factors.
@@ -120,25 +104,19 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
      * Each byte corresponds to an indexed document in a segment and
      * encodes normalization factor (float value, encoded by
      * Zend_Search_Lucene_Search_Similarity::encodeNorm())
-     *
-     * @var array
      */
-    protected $_norms = array();
+    protected array $_norms = array();
 
 
     /**
      * '.fdx'  file - Stored Fields, the field index.
-     *
-     * @var Zend_Search_Lucene_Storage_File
      */
-    protected $_fdxFile = null;
+    protected ?\Zend_Search_Lucene_Storage_File $_fdxFile = null;
 
     /**
      * '.fdt'  file - Stored Fields, the field data.
-     *
-     * @var Zend_Search_Lucene_Storage_File
      */
-    protected $_fdtFile = null;
+    protected ?\Zend_Search_Lucene_Storage_File $_fdtFile = null;
 
 
     /**
@@ -313,38 +291,28 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
 
     /**
      * Term Dictionary file
-     *
-     * @var Zend_Search_Lucene_Storage_File
      */
-    private $_tisFile = null;
+    private ?\Zend_Search_Lucene_Storage_File $_tisFile = null;
 
     /**
      * Term Dictionary index file
-     *
-     * @var Zend_Search_Lucene_Storage_File
      */
-    private $_tiiFile = null;
+    private ?\Zend_Search_Lucene_Storage_File $_tiiFile = null;
 
     /**
      * Frequencies file
-     *
-     * @var Zend_Search_Lucene_Storage_File
      */
-    private $_frqFile = null;
+    private ?\Zend_Search_Lucene_Storage_File $_frqFile = null;
 
     /**
      * Positions file
-     *
-     * @var Zend_Search_Lucene_Storage_File
      */
-    private $_prxFile = null;
+    private ?\Zend_Search_Lucene_Storage_File $_prxFile = null;
 
     /**
      * Number of written terms
-     *
-     * @var integer
      */
-    private $_termCount;
+    private ?int $_termCount = null;
 
 
     /**
@@ -377,10 +345,8 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
 
     /**
      * Last term dictionary file position
-     *
-     * @var integer
      */
-    private $_lastIndexPosition;
+    private ?int $_lastIndexPosition = null;
 
     /**
      * Create dicrionary, frequency and positions files and write necessary headers

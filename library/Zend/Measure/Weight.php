@@ -259,7 +259,7 @@ class Zend_Measure_Weight extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ARRATEL'               => array('0.5',            'arratel'),
         'ARTEL'                 => array('0.5',            'artel'),
         'ARROBA_PORTUGUESE'     => array('14.69',          'arroba'),

@@ -51,17 +51,13 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
 
     /**
      * The COUNT query
-     *
-     * @var Zend_Db_Select
      */
-    protected $_countSelect = null;
+    protected ?\Zend_Db_Select $_countSelect = null;
 
     /**
      * Database query
-     *
-     * @var Zend_Db_Select
      */
-    protected $_select = null;
+    protected ?\Zend_Db_Select $_select = null;
 
     /**
      * Total item count
@@ -73,10 +69,8 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
     /**
      * Identifies this adapter for caching purposes.  This value will remain constant for
      * the entire life of this adapter regardless of how many different pages are queried.
-     *
-     * @var string
      */
-    protected $_cacheIdentifier = null;
+    protected ?string $_cacheIdentifier = null;
 
     /**
      * Constructor.

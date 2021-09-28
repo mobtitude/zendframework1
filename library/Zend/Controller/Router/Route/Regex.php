@@ -43,10 +43,8 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
 
     /**
      * Default values for the route (ie. module, controller, action, params)
-     *
-     * @var array
      */
-    protected $_defaults = array();
+    protected array $_defaults = array();
 
     /**
      * Reverse
@@ -57,17 +55,13 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
 
     /**
      * Map
-     *
-     * @var array
      */
-    protected $_map = array();
+    protected array $_map = array();
 
     /**
      * Values
-     *
-     * @var array
      */
-    protected $_values = array();
+    protected array $_values = array();
 
     /**
      * Instantiates route based on passed Zend_Config structure

@@ -47,7 +47,7 @@ class Zend_Tool_Project_Context_Zf_TestLibraryNamespaceDirectory extends Zend_To
     /**
      * @var string
      */
-    protected $_filesystemName = 'library';
+    protected ?string $_filesystemName = 'library';
 
     /**
      * getName()

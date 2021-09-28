@@ -39,16 +39,14 @@ class Zend_Service_Amazon_SimpleDb_Response
     /**
      * XML namespace used for SimpleDB responses.
      */
-    protected $_xmlNamespace = 'http://sdb.amazonaws.com/doc/2009-04-15/';
+    protected string $_xmlNamespace = 'http://sdb.amazonaws.com/doc/2009-04-15/';
 
     /**
      * The original HTTP response
      *
      * This contains the response body and headers.
-     *
-     * @var Zend_Http_Response
      */
-    private $_httpResponse = null;
+    private ?\Zend_Http_Response $_httpResponse = null;
 
     /**
      * The response document object
@@ -66,17 +64,13 @@ class Zend_Service_Amazon_SimpleDb_Response
 
     /**
      * Last error code
-     *
-     * @var integer
      */
-    private $_errorCode = 0;
+    private int $_errorCode = 0;
 
     /**
      * Last error message
-     *
-     * @var string
      */
-    private $_errorMessage = '';
+    private string $_errorMessage = '';
 
     /**
      * Creates a new high-level SimpleDB response object

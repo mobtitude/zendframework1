@@ -49,9 +49,8 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
 
     /**
      * Element attributes
-     * @var array
      */
-    protected $_attribs;
+    protected ?array $_attribs = null;
 
     /**
      * Dijit option parameters

@@ -34,17 +34,17 @@ class Zend_Server_Method_Prototype
     /**
      * @var string Return type
      */
-    protected $_returnType = 'void';
+    protected string $_returnType = 'void';
 
     /**
      * @var array Map parameter names to parameter index
      */
-    protected $_parameterNameMap = array();
+    protected array $_parameterNameMap = array();
 
     /**
      * @var array Method parameters
      */
-    protected $_parameters = array();
+    protected array $_parameters = array();
 
     /**
      * Constructor

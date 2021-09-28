@@ -45,7 +45,7 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::TOO_BIG   => "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected",
         self::TOO_SMALL => "Minimum expected size for file '%value%' is '%min%' but '%size%' detected",
         self::NOT_FOUND => "File '%value%' is not readable or does not exist",
@@ -54,7 +54,7 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
     /**
      * @var array Error message template variables
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'min'  => '_min',
         'max'  => '_max',
         'size' => '_size',
@@ -84,10 +84,8 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
 
     /**
      * Use bytestring ?
-     *
-     * @var boolean
      */
-    protected $_useByteString = true;
+    protected bool $_useByteString = true;
 
     /**
      * Sets validator options

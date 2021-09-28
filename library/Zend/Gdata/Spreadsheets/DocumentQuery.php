@@ -47,12 +47,12 @@ class Zend_Gdata_Spreadsheets_DocumentQuery extends Zend_Gdata_Query
 
     const SPREADSHEETS_FEED_URI = 'https://spreadsheets.google.com/feeds';
 
-    protected $_defaultFeedUri = self::SPREADSHEETS_FEED_URI;
-    protected $_documentType;
+    protected ?string $_defaultFeedUri = self::SPREADSHEETS_FEED_URI;
+    protected ?string $_documentType = null;
     protected $_visibility = 'private';
-    protected $_projection = 'full';
-    protected $_spreadsheetKey = null;
-    protected $_worksheetId = null;
+    protected string $_projection = 'full';
+    protected ?string $_spreadsheetKey = null;
+    protected ?string $_worksheetId = null;
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_DocumentQuery object.

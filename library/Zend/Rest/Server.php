@@ -46,29 +46,28 @@ class Zend_Rest_Server implements Zend_Server_Interface
 {
     /**
      * Class Constructor Args
-     * @var array
      */
-    protected $_args = array();
+    protected array $_args = array();
 
     /**
      * @var string Encoding
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
     /**
      * @var array An array of Zend_Server_Reflect_Method
      */
-    protected $_functions = array();
+    protected array $_functions = array();
 
     /**
      * @var array Array of headers to send
      */
-    protected $_headers = array();
+    protected array $_headers = array();
 
     /**
      * @var array PHP's Magic Methods, these are ignored
      */
-    protected static $magicMethods = array(
+    protected static array $magicMethods = array(
         '__construct',
         '__destruct',
         '__get',
@@ -88,16 +87,13 @@ class Zend_Rest_Server implements Zend_Server_Interface
      */
     protected $_method;
 
-    /**
-     * @var Zend_Server_Reflection
-     */
-    protected $_reflection = null;
+    protected ?\Zend_Server_Reflection $_reflection = null;
 
     /**
      * Whether or not {@link handle()} should send output or return the response.
      * @var boolean Defaults to false
      */
-    protected $_returnResponse = false;
+    protected bool $_returnResponse = false;
 
     /**
      * Constructor

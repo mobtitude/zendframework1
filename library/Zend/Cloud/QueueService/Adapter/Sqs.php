@@ -47,9 +47,8 @@ class Zend_Cloud_QueueService_Adapter_Sqs
 
     /**
      * SQS service instance.
-     * @var Zend_Service_Amazon_Sqs
      */
-    protected $_sqs;
+    protected ?\Zend_Service_Amazon_Sqs $_sqs = null;
 
     /**
      * Constructor

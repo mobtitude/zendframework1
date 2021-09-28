@@ -44,31 +44,23 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
 {
     /**
      * $_messages - Messages from previous request
-     *
-     * @var array
      */
-    static protected $_messages = array();
+    static protected array $_messages = array();
 
     /**
      * $_session - Zend_Session storage object
-     *
-     * @var Zend_Session
      */
-    static protected $_session = null;
+    static protected ?\Zend_Session_Namespace $_session = null;
 
     /**
      * $_messageAdded - Wether a message has been previously added
-     *
-     * @var boolean
      */
-    static protected $_messageAdded = false;
+    static protected bool $_messageAdded = false;
 
     /**
      * $_namespace - Instance namespace, default is 'default'
-     *
-     * @var string
      */
-    protected $_namespace = 'default';
+    protected string $_namespace = 'default';
 
     /**
      * __construct() - Instance constructor, needed to get iterators, etc

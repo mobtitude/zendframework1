@@ -32,7 +32,7 @@ class Zend_Cloud_QueueService_MessageSet implements Countable, IteratorAggregate
     protected $_messageCount;
 
     /** @var ArrayAccess Messages */
-    protected $_messages;
+    protected \ArrayAccess $_messages;
 
     /**
      * Constructor

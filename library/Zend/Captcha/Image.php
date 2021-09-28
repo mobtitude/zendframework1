@@ -38,95 +38,69 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
 {
     /**
      * Directory for generated images
-     *
-     * @var string
      */
-    protected $_imgDir = "./images/captcha/";
+    protected string $_imgDir = "./images/captcha/";
 
     /**
      * URL for accessing images
-     *
-     * @var string
      */
-    protected $_imgUrl = "/images/captcha/";
+    protected string $_imgUrl = "/images/captcha/";
 
     /**
      * Image's alt tag content
-     *
-     * @var string
      */
-    protected $_imgAlt = "";
+    protected string $_imgAlt = "";
 
     /**
      * Image suffix (including dot)
-     *
-     * @var string
      */
-    protected $_suffix = ".png";
+    protected string $_suffix = ".png";
 
     /**
      * Image width
-     *
-     * @var int
      */
-    protected $_width = 200;
+    protected int $_width = 200;
 
     /**
      * Image height
-     *
-     * @var int
      */
-    protected $_height = 50;
+    protected int $_height = 50;
 
     /**
      * Font size
-     *
-     * @var int
      */
-    protected $_fsize = 24;
+    protected int $_fsize = 24;
 
     /**
      * Image font file
-     *
-     * @var string
      */
-    protected $_font;
+    protected ?string $_font = null;
 
     /**
      * Image to use as starting point
      * Default is blank image. If provided, should be PNG image.
-     *
-     * @var string
      */
-    protected $_startImage;
+    protected ?string $_startImage = null;
     /**
      * How frequently to execute garbage collection
-     *
-     * @var int
      */
-    protected $_gcFreq = 10;
+    protected int $_gcFreq = 10;
 
     /**
      * How long to keep generated images
-     *
-     * @var int
      */
-    protected $_expiration = 600;
+    protected int $_expiration = 600;
 
     /**
      * Number of noise dots on image
      * Used twice - before and after transform
-     *
-     * @var int
      */
-    protected $_dotNoiseLevel = 100;
+    protected int $_dotNoiseLevel = 100;
     /**
      * Number of noise lines on image
      * Used twice - before and after transform
-     *
-     * @var int
      */
-    protected $_lineNoiseLevel = 5;
+    protected int $_lineNoiseLevel = 5;
     /**
      * @return string
      */

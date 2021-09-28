@@ -77,62 +77,46 @@ class Zend_Gdata_App
 
     /**
      * Client object used to communicate
-     *
-     * @var Zend_Http_Client
      */
-    protected $_httpClient;
+    protected ?\Zend_Http_Client $_httpClient = null;
 
     /**
      * Client object used to communicate in static context
-     *
-     * @var Zend_Http_Client
      */
-    protected static $_staticHttpClient = null;
+    protected static ?\Zend_Http_Client $_staticHttpClient = null;
 
     /**
      * Override HTTP PUT and DELETE request methods?
-     *
-     * @var boolean
      */
-    protected static $_httpMethodOverride = false;
+    protected static bool $_httpMethodOverride = false;
 
     /**
      * Enable gzipped responses?
-     *
-     * @var boolean
      */
-    protected static $_gzipEnabled = false;
+    protected static bool $_gzipEnabled = false;
 
     /**
      * Use verbose exception messages.  In the case of HTTP errors,
      * use the body of the HTTP response in the exception message.
-     *
-     * @var boolean
      */
-    protected static $_verboseExceptionMessages = true;
+    protected static bool $_verboseExceptionMessages = true;
 
     /**
      * Default URI to which to POST.
-     *
-     * @var string
      */
-    protected $_defaultPostUri = null;
+    protected ?string $_defaultPostUri = null;
 
     /**
      * Packages to search for classes when using magic __call method, in order.
-     *
-     * @var array
      */
-    protected $_registeredPackages = array(
+    protected array $_registeredPackages = array(
             'Zend_Gdata_App_Extension',
             'Zend_Gdata_App');
 
     /**
      * Maximum number of redirects to follow during HTTP operations
-     *
-     * @var int
      */
-    protected static $_maxRedirects = 5;
+    protected static int $_maxRedirects = 5;
 
     /**
       * Indicates the major protocol version that should be used.
@@ -165,10 +149,8 @@ class Zend_Gdata_App
 
     /**
      * Whether we want to use XML to object mapping when fetching data.
-     *
-     * @var boolean
      */
-    protected $_useObjectMapping = true;
+    protected bool $_useObjectMapping = true;
 
     /**
      * Create Gdata object

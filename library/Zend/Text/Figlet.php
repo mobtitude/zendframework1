@@ -68,17 +68,13 @@ class Zend_Text_Figlet
 
     /**
      * Array containing all characters of the current font
-     *
-     * @var array
      */
-    protected $_charList = array();
+    protected array $_charList = array();
 
     /**
      * Indicates if a font was loaded yet
-     *
-     * @var boolean
      */
-    protected $_fontLoaded = false;
+    protected bool $_fontLoaded = false;
 
     /**
      * Latin-1 codes for German letters, respectively:
@@ -90,66 +86,48 @@ class Zend_Text_Figlet
      * LATIN SMALL LETTER O WITH DIAERESIS = o-umlaut
      * LATIN SMALL LETTER U WITH DIAERESIS = u-umlaut
      * LATIN SMALL LETTER SHARP S = ess-zed
-     *
-     * @var array
      */
-    protected $_germanChars = array(196, 214, 220, 228, 246, 252, 223);
+    protected array $_germanChars = array(196, 214, 220, 228, 246, 252, 223);
 
     /**
      * Output width, defaults to 80.
-     *
-     * @var integer
      */
-    protected $_outputWidth = 80;
+    protected int $_outputWidth = 80;
 
     /**
      * Hard blank character
-     *
-     * @var string
      */
-    protected $_hardBlank;
+    protected string $_hardBlank;
 
     /**
      * Height of the characters
-     *
-     * @var integer
      */
-    protected $_charHeight;
+    protected ?int $_charHeight = null;
 
     /**
      * Max length of any character
-     *
-     * @var integer
      */
-    protected $_maxLength;
+    protected ?int $_maxLength = null;
 
     /**
      * Smush mode
-     *
-     * @var integer
      */
-    protected $_smushMode = 0;
+    protected int $_smushMode = 0;
 
     /**
      * Smush defined by the font
-     *
-     * @var integer
      */
-    protected $_fontSmush = 0;
+    protected int $_fontSmush = 0;
 
     /**
      * Smush defined by the user
-     *
-     * @var integer
      */
-    protected $_userSmush = 0;
+    protected int $_userSmush = 0;
 
     /**
      * Wether to handle paragraphs || not
-     *
-     * @var boolean
      */
-    protected $_handleParagraphs = false;
+    protected bool $_handleParagraphs = false;
 
     /**
      * Justification for the text, according to $_outputWidth
@@ -173,24 +151,18 @@ class Zend_Text_Figlet
 
     /**
      * Override font file smush layout
-     *
-     * @var integer
      */
-    protected $_smushOverride = 0;
+    protected int $_smushOverride = 0;
 
     /**
      * Options of the current font
-     *
-     * @var array
      */
-    protected $_fontOptions = array();
+    protected array $_fontOptions = array();
 
     /**
      * Previous character width
-     *
-     * @var integer
      */
-    protected $_previousCharWidth = 0;
+    protected int $_previousCharWidth = 0;
 
     /**
      * Current character width
@@ -208,31 +180,23 @@ class Zend_Text_Figlet
 
     /**
      * Maxmimum outline length
-     *
-     * @var integer
      */
-    protected $_outlineLengthLimit = 0;
+    protected int $_outlineLengthLimit = 0;
 
     /**
      * In character line
-     *
-     * @var string
      */
-    protected $_inCharLine;
+    protected ?array $_inCharLine = null;
 
     /**
      * In character line length
-     *
-     * @var integer
      */
-    protected $_inCharLineLength = 0;
+    protected int $_inCharLineLength = 0;
 
     /**
      * Maximum in character line length
-     *
-     * @var integer
      */
-    protected $_inCharLineLengthLimit = 0;
+    protected int $_inCharLineLengthLimit = 0;
 
     /**
      * Current char
@@ -243,24 +207,18 @@ class Zend_Text_Figlet
 
     /**
      * Current output line
-     *
-     * @var array
      */
-    protected $_outputLine;
+    protected ?array $_outputLine = null;
 
     /**
      * Current output
-     *
-     * @var string
      */
-    protected $_output;
+    protected ?string $_output = null;
 
     /**
      * Option keys to skip when calling setOptions()
-     *
-     * @var array
      */
-    protected $_skipOptions = array(
+    protected array $_skipOptions = array(
         'options',
         'config',
     );

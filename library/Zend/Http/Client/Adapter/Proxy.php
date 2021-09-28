@@ -71,17 +71,13 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
 
     /**
      * Whether HTTPS CONNECT was already negotiated with the proxy or not
-     *
-     * @var boolean
      */
-    protected $negotiated = false;
+    protected bool $negotiated = false;
     
     /**
      * Stores the last CONNECT handshake request
-     * 
-     * @var string
      */
-    protected $connectHandshakeRequest;
+    protected ?string $connectHandshakeRequest = null;
 
     /**
      * Connect to the remote server

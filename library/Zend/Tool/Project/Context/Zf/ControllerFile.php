@@ -39,15 +39,12 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
      */
     protected $_controllerName = 'index';
 
-    /**
-     * @var string
-     */
-    protected $_moduleName = null;
+    protected ?\Zend_Tool_Project_Profile_Resource_Container $_moduleName = null;
 
     /**
      * @var string
      */
-    protected $_filesystemName = 'controllerName';
+    protected ?string $_filesystemName = 'controllerName';
 
     /**
      * init()

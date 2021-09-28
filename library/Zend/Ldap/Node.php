@@ -42,48 +42,34 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
 {
     /**
      * Holds the node's new DN if node is renamed.
-     *
-     * @var Zend_Ldap_Dn
      */
-    protected $_newDn;
+    protected ?\Zend_Ldap_Dn $_newDn = null;
     /**
      * Holds the node's orginal attributes (as loaded).
-     *
-     * @var array
      */
-    protected $_originalData;
+    protected ?array $_originalData = null;
     /**
      * This node will be added
-     *
-     * @var boolean
      */
-    protected $_new;
+    protected ?bool $_new = null;
     /**
      * This node will be deleted
-     *
-     * @var boolean
      */
-    protected $_delete;
+    protected ?bool $_delete = null;
     /**
      * Holds the connection to the LDAP server if in connected mode.
-     *
-     * @var Zend_Ldap
      */
-    protected $_ldap;
+    protected ?\Zend_Ldap $_ldap = null;
 
     /**
      * Holds an array of the current node's children.
-     *
-     * @var array
      */
-    protected $_children;
+    protected ?array $_children = null;
 
     /**
      * Controls iteration status
-     *
-     * @var boolean
      */
-    private $_iteratorRewind = false;
+    private bool $_iteratorRewind = false;
 
     /**
      * Constructor.

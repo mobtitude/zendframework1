@@ -45,10 +45,8 @@ class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
 {
     /**
      * PDO type.
-     *
-     * @var string
      */
-    protected $_pdoType = 'ibm';
+    protected string $_pdoType = 'ibm';
 
     /**
      * The IBM data server connected to
@@ -68,7 +66,7 @@ class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
      *
      * @var array Associative array of datatypes to values 0, 1, or 2.
      */
-    protected $_numericDataTypes = array(
+    protected array $_numericDataTypes = array(
                         Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
                         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
                         Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE,

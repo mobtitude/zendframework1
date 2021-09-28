@@ -47,7 +47,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
      * Actor URI
      * @var string URI
      */
-    protected $_actor;
+    protected ?string $_actor = null;
 
     /**
      * Class registered with this server
@@ -57,26 +57,23 @@ class Zend_Soap_Server implements Zend_Server_Interface
 
     /**
      * Arguments to pass to {@link $_class} constructor
-     * @var array
      */
-    protected $_classArgs = array();
+    protected array $_classArgs = array();
 
     /**
      * Object registered with this server
      */
-    protected $_object;
+    protected ?object $_object = null;
 
     /**
      * Array of SOAP type => PHP class pairings for handling return/incoming values
-     * @var array
      */
-    protected $_classmap;
+    protected ?array $_classmap = null;
 
     /**
      * Encoding
-     * @var string
      */
-    protected $_encoding;
+    protected ?string $_encoding = null;
 
     /**
      * SOAP Server Features
@@ -93,17 +90,14 @@ class Zend_Soap_Server implements Zend_Server_Interface
     protected $_wsdlCache;
 
     /**
-     * WS-I compliant
-     * 
-     * @var boolean 
+     * WS-I compliant 
      */
-    protected $_wsiCompliant;
+    protected ?bool $_wsiCompliant = null;
     
     /**
      * Registered fault exceptions
-     * @var array
      */
-    protected $_faultExceptions = array();
+    protected array $_faultExceptions = array();
 
     /**
      * Functions registered with this server; may be either an array or the SOAP_FUNCTIONS_ALL
@@ -114,9 +108,8 @@ class Zend_Soap_Server implements Zend_Server_Interface
 
     /**
      * Persistence mode; should be one of the SOAP persistence constants
-     * @var int
      */
-    protected $_persistence;
+    protected ?int $_persistence = null;
 
     /**
      * Request XML
@@ -133,27 +126,24 @@ class Zend_Soap_Server implements Zend_Server_Interface
     /**
      * Flag: whether or not {@link handle()} should return a response instead
      * of automatically emitting it.
-     * @var boolean
      */
-    protected $_returnResponse = false;
+    protected bool $_returnResponse = false;
 
     /**
      * SOAP version to use; SOAP_1_2 by default, to allow processing of headers
-     * @var int
      */
-    protected $_soapVersion = SOAP_1_2;
+    protected int $_soapVersion = SOAP_1_2;
 
     /**
      * URI or path to WSDL
-     * @var string
      */
-    protected $_wsdl;
+    protected ?string $_wsdl = null;
 
     /**
      * URI namespace for SOAP server
      * @var string URI
      */
-    protected $_uri;
+    protected ?string $_uri = null;
 
     /**
      * Constructor

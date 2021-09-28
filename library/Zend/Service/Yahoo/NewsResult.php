@@ -39,59 +39,43 @@ class Zend_Service_Yahoo_NewsResult extends Zend_Service_Yahoo_Result
 {
     /**
      * Sumamry text associated with the result article
-     *
-     * @var string
      */
-    public $Summary;
+    public string $Summary;
 
     /**
      * The company who distributed the article
-     *
-     * @var string
      */
-    public $NewsSource;
+    public string $NewsSource;
 
     /**
      * The URL for the company who distributed the article
-     *
-     * @var string
      */
-    public $NewsSourceUrl;
+    public string $NewsSourceUrl;
 
     /**
      * The language the article is in
-     *
-     * @var string
      */
-    public $Language;
+    public string $Language;
 
     /**
      * The date the article was published (in unix timestamp format)
-     *
-     * @var string
      */
-    public $PublishDate;
+    public string $PublishDate;
 
     /**
      * The date the article was modified (in unix timestamp format)
-     *
-     * @var string
      */
-    public $ModificationDate;
+    public string $ModificationDate;
 
     /**
      * The thubmnail image for the article, if it exists
-     *
-     * @var Zend_Service_Yahoo_Image
      */
-    public $Thumbnail;
+    public ?\Zend_Service_Yahoo_Image $Thumbnail = null;
 
     /**
      * News result namespace
-     *
-     * @var string
      */
-    protected $_namespace = 'urn:yahoo:yn';
+    protected string $_namespace = 'urn:yahoo:yn';
 
 
     /**

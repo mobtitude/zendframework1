@@ -39,7 +39,7 @@ class Zend_Pdf_Element_String_Binary extends Zend_Pdf_Element_String
      *
      * @var string
      */
-    public $value;
+    public string $value;
 
 
     /**

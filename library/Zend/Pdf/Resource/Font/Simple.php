@@ -63,9 +63,8 @@ abstract class Zend_Pdf_Resource_Font_Simple extends Zend_Pdf_Resource_Font
 {
     /**
      * Object representing the font's cmap (character to glyph map).
-     * @var Zend_Pdf_Cmap
      */
-    protected $_cmap = null;
+    protected ?\Zend_Pdf_Cmap $_cmap = null;
 
     /**
      * Array containing the widths of each of the glyphs contained in the font.
@@ -74,10 +73,8 @@ abstract class Zend_Pdf_Resource_Font_Simple extends Zend_Pdf_Resource_Font
      *
      * Font character map may contain gaps for actually used glyphs, nevertheless glyphWidths array
      * contains widths for all glyphs even they are unused.
-     *
-     * @var array
      */
-    protected $_glyphWidths = null;
+    protected ?array $_glyphWidths = null;
 
     /**
      * Width for glyphs missed in the font
@@ -87,10 +84,8 @@ abstract class Zend_Pdf_Resource_Font_Simple extends Zend_Pdf_Resource_Font
      * Adobe Font Metrics files doesn't also define metrics for "missed glyph".
      * We provide character width as "0" for this case, but actually it depends on PDF viewer
      * implementation.
-     *
-     * @var integer
      */
-    protected $_missingGlyphWidth = 0;
+    protected int $_missingGlyphWidth = 0;
 
 
     /**** Public Interface ****/

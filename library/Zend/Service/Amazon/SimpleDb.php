@@ -64,27 +64,27 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
     /**
      * The HTTP query server
      */
-    protected $_sdbEndpoint = 'sdb.amazonaws.com/';
+    protected string $_sdbEndpoint = 'sdb.amazonaws.com/';
 
     /**
      * Period after which HTTP request will timeout in seconds
      */
-    protected $_httpTimeout = 10;
+    protected int $_httpTimeout = 10;
 
     /**
      * The API version to use
      */
-    protected $_sdbApiVersion = '2009-04-15';
+    protected string $_sdbApiVersion = '2009-04-15';
 
     /**
      * Signature Version
      */
-    protected $_signatureVersion = '2';
+    protected string $_signatureVersion = '2';
 
     /**
      * Signature Encoding Method
      */
-    protected $_signatureMethod = 'HmacSHA256';
+    protected string $_signatureMethod = 'HmacSHA256';
 
     /**
      * Create Amazon SimpleDB client.

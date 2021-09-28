@@ -32,10 +32,7 @@ require_once 'Zend/Filter/Interface.php';
  */
 class Zend_Filter_RealPath implements Zend_Filter_Interface
 {
-    /**
-     * @var boolean $_pathExists
-     */
-    protected $_exists = true;
+    protected bool $_exists = true;
 
     /**
      * Class constructor

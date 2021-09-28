@@ -53,10 +53,8 @@ class Zend_Service_Ebay_Finding_Aspect_Histogram_Container extends Zend_Service_
      * listed; aspects provide a view into what is currently available on eBay.
      * Because of this, aspect values returned one day cannot be guaranteed to
      * be valid the next day.
-     *
-     * @var Zend_Service_Ebay_Finding_Aspect_Set
      */
-    public $aspect;
+    public ?\Zend_Service_Ebay_Finding_Aspect_Set $aspect = null;
 
     /**
      * A buy-side group of items, for example "Shoes.".

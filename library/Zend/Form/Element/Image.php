@@ -42,9 +42,8 @@ class Zend_Form_Element_Image extends Zend_Form_Element_Xhtml
 
     /**
      * Image source
-     * @var string
      */
-    public $src;
+    public ?string $src = null;
 
     /**
      * Image value

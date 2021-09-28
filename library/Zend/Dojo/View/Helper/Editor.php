@@ -50,7 +50,7 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
     /**
      * @var array Maps non-core plugin to module basename
      */
-    protected $_pluginsModules = array(
+    protected array $_pluginsModules = array(
         'createLink' => 'LinkDialog',
         'insertImage' => 'LinkDialog',
         'fontName' => 'FontChoice',
@@ -71,7 +71,7 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
      * JSON-encoded parameters
      * @var array
      */
-    protected $_jsonParams = array('captureEvents', 'events', 'plugins', 'extraPlugins');
+    protected array $_jsonParams = array('captureEvents', 'events', 'plugins', 'extraPlugins');
 
     /**
      * dijit.Editor

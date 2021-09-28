@@ -28,17 +28,12 @@
  */
 class Zend_Crypt_Rsa_Key implements Countable
 {
-    /**
-     * @var string
-     */
-    protected $_pemString = null;
+    protected ?string $_pemString = null;
 
     /**
      * Bits, key string and type of key
-     *
-     * @var array
      */
-    protected $_details = array();
+    protected array $_details = array();
 
     /**
      * Key Resource

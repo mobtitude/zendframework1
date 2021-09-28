@@ -40,9 +40,8 @@ class Zend_Search_Lucene_Analysis_TokenFilter_StopWords extends Zend_Search_Luce
 {
     /**
      * Stop Words
-     * @var array
      */
-    private $_stopSet;
+    private array $_stopSet;
 
     /**
      * Constructs new instance of this filter.

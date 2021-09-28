@@ -41,10 +41,8 @@ class Zend_Http_Response
     /**
      * List of all known HTTP response codes - used by responseCodeAsText() to
      * translate numeric codes to messages.
-     *
-     * @var array
      */
-    protected static $messages = array(
+    protected static array $messages = array(
         // Informational 1xx
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -100,39 +98,29 @@ class Zend_Http_Response
 
     /**
      * The HTTP version (1.0, 1.1)
-     *
-     * @var string
      */
-    protected $version;
+    protected string $version;
 
     /**
      * The HTTP response code
-     *
-     * @var int
      */
-    protected $code;
+    protected int $code;
 
     /**
      * The HTTP response code as string
      * (e.g. 'Not Found' for 404 or 'Internal Server Error' for 500)
-     *
-     * @var string
      */
-    protected $message;
+    protected ?string $message;
 
     /**
      * The HTTP response headers array
-     *
-     * @var array
      */
-    protected $headers = array();
+    protected array $headers = array();
 
     /**
      * The HTTP response body
-     *
-     * @var string
      */
-    protected $body;
+    protected ?string $body;
 
     /**
      * HTTP response constructor

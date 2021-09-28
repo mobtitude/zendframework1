@@ -39,24 +39,18 @@ class Zend_Service_Yahoo_WebResult extends Zend_Service_Yahoo_Result
 {
     /**
      * A summary of the result
-     *
-     * @var string
      */
-    public $Summary;
+    public string $Summary;
 
     /**
      * The file type of the result (text, html, pdf, etc.)
-     *
-     * @var string
      */
-    public $MimeType;
+    public string $MimeType;
 
     /**
      * The modification time of the result (as a unix timestamp)
-     *
-     * @var string
      */
-    public $ModificationDate;
+    public string $ModificationDate;
 
     /**
      * The URL for the Yahoo cache of this page, if it exists
@@ -74,10 +68,8 @@ class Zend_Service_Yahoo_WebResult extends Zend_Service_Yahoo_Result
 
     /**
      * Web result namespace
-     *
-     * @var string
      */
-    protected $_namespace = 'urn:yahoo:srch';
+    protected string $_namespace = 'urn:yahoo:srch';
 
 
     /**

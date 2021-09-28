@@ -33,24 +33,18 @@ class Zend_Service_Amazon_Image
 {
     /**
      * Image URL
-     *
-     * @var Zend_Uri
      */
-    public $Url;
+    public \Zend_Uri $Url;
 
     /**
      * Image height in pixels
-     *
-     * @var int
      */
-    public $Height;
+    public int $Height;
 
     /**
      * Image width in pixels
-     *
-     * @var int
      */
-    public $Width;
+    public int $Width;
 
     /**
      * Assigns values to properties relevant to Image

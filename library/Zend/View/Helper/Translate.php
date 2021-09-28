@@ -38,10 +38,8 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
 {
     /**
      * Translation object
-     *
-     * @var Zend_Translate_Adapter
      */
-    protected $_translator;
+    protected ?\Zend_Translate_Adapter $_translator = null;
 
     /**
      * Constructor for manually handling

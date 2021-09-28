@@ -38,10 +38,10 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Books_Extension_Review extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gbs';
-    protected $_rootElement = 'review';
-    protected $_lang = null;
-    protected $_type = null;
+    protected string $_rootNamespace = 'gbs';
+    protected ?string $_rootElement = 'review';
+    protected ?string $_lang = null;
+    protected ?string $_type = null;
 
     /**
      * Constructor for Zend_Gdata_Books_Extension_Review which

@@ -39,10 +39,8 @@ class Zend_Service_Flickr_ResultSet implements SeekableIterator
 {
     /**
      * Total number of available results
-     *
-     * @var int
      */
-    public $totalResultsAvailable;
+    public int $totalResultsAvailable;
 
     /**
      * Number of results in this result set
@@ -67,10 +65,8 @@ class Zend_Service_Flickr_ResultSet implements SeekableIterator
 
     /**
      * Reference to Zend_Service_Flickr object with which the request was made
-     *
-     * @var Zend_Service_Flickr
      */
-    private $_flickr;
+    private \Zend_Service_Flickr $_flickr;
 
     /**
      * Current index for the Iterator

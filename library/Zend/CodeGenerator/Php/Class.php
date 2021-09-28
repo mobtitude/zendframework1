@@ -54,30 +54,18 @@ require_once 'Zend/CodeGenerator/Php/Docblock.php';
 class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 {
 
-    /**
-     * @var Zend_CodeGenerator_Php_Docblock
-     */
-    protected $_docblock = null;
+    protected ?\Zend_CodeGenerator_Php_Docblock $_docblock = null;
 
-    /**
-     * @var string
-     */
-    protected $_name = null;
+    protected ?string $_name = null;
 
-    /**
-     * @var bool
-     */
-    protected $_isAbstract = false;
+    protected bool $_isAbstract = false;
 
-    /**
-     * @var string
-     */
-    protected $_extendedClass = null;
+    protected ?string $_extendedClass = null;
 
     /**
      * @var array Array of string names
      */
-    protected $_implementedInterfaces = array();
+    protected array $_implementedInterfaces = array();
 
     /**
      * @var array Array of properties

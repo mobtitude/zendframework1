@@ -90,42 +90,38 @@ class Zend_Service_SlideShare
      *
      * @var string The API key
      */
-    protected $_apiKey;
+    protected ?string $_apiKey = null;
 
     /**
      * The shared secret to use in requests
      *
      * @var string the Shared secret
      */
-    protected $_sharedSecret;
+    protected ?string $_sharedSecret = null;
 
     /**
      * The username to use in requests
      *
      * @var string the username
      */
-    protected $_username;
+    protected ?string $_username = null;
 
     /**
      * The password to use in requests
      *
      * @var string the password
      */
-    protected $_password;
+    protected ?string $_password = null;
 
     /**
      * The HTTP Client object to use to perform requests
-     *
-     * @var Zend_Http_Client
      */
-    protected $_httpclient;
+    protected \Zend_Http_Client $_httpclient;
 
     /**
      * The Cache object to use to perform caching
-     *
-     * @var Zend_Cache_Core
      */
-    protected $_cacheobject;
+    protected ?\Zend_Cache_Core $_cacheobject = null;
 
     /**
      * Sets the Zend_Http_Client object to use in requests. If not provided a

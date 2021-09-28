@@ -42,10 +42,8 @@ class Zend_Filter_Compress_Rar extends Zend_Filter_Compress_CompressAbstract
      *     'password' => Password to use
      *     'target'   => Target to write the files to
      * )
-     *
-     * @var array
      */
-    protected $_options = array(
+    protected array $_options = array(
         'callback' => null,
         'archive'  => null,
         'password' => null,

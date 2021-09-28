@@ -34,10 +34,8 @@ class Zend_Search_Lucene_Storage_File_Memory extends Zend_Search_Lucene_Storage_
 {
     /**
      * FileData
-     *
-     * @var string
      */
-    private $_data;
+    private string $_data;
 
     /**
      * File Position

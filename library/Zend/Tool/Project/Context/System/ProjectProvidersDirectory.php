@@ -55,7 +55,7 @@ class Zend_Tool_Project_Context_System_ProjectProvidersDirectory
     /**
      * @var string
      */
-    protected $_filesystemName = 'providers';
+    protected ?string $_filesystemName = 'providers';
 
     /**
      * getName()

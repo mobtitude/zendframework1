@@ -40,10 +40,8 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
 {
     /**
      * Path stack for script, helper, and filter directories.
-     *
-     * @var array
      */
-    private $_path = array(
+    private array $_path = array(
         'script' => array(),
         'helper' => array(),
         'filter' => array(),
@@ -51,93 +49,76 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
 
     /**
      * Script file name to execute
-     *
-     * @var string
      */
-    private $_file = null;
+    private ?string $_file = null;
 
     /**
      * Instances of helper objects.
-     *
-     * @var array
      */
-    private $_helper = array();
+    private array $_helper = array();
 
     /**
      * Map of helper => class pairs to help in determining helper class from
      * name
-     * @var array
      */
-    private $_helperLoaded = array();
+    private array $_helperLoaded = array();
 
     /**
      * Map of helper => classfile pairs to aid in determining helper classfile
-     * @var array
      */
-    private $_helperLoadedDir = array();
+    private array $_helperLoadedDir = array();
 
     /**
      * Stack of Zend_View_Filter names to apply as filters.
-     * @var array
      */
-    private $_filter = array();
+    private array $_filter = array();
 
     /**
      * Stack of Zend_View_Filter objects that have been loaded
-     * @var array
      */
-    private $_filterClass = array();
+    private array $_filterClass = array();
 
     /**
      * Map of filter => class pairs to help in determining filter class from
      * name
-     * @var array
      */
-    private $_filterLoaded = array();
+    private array $_filterLoaded = array();
 
     /**
      * Map of filter => classfile pairs to aid in determining filter classfile
-     * @var array
      */
-    private $_filterLoadedDir = array();
+    private array $_filterLoadedDir = array();
 
     /**
      * Callback for escaping.
-     *
-     * @var string
      */
-    private $_escape = 'htmlspecialchars';
+    private string $_escape = 'htmlspecialchars';
 
     /**
      * Encoding to use in escaping mechanisms; defaults to utf-8
-     * @var string
      */
-    private $_encoding = 'UTF-8';
+    private string $_encoding = 'UTF-8';
 
     /**
      * Flag indicating whether or not LFI protection for rendering view scripts is enabled
-     * @var bool
      */
-    private $_lfiProtectionOn = true;
+    private bool $_lfiProtectionOn = true;
 
     /**
      * Plugin loaders
-     * @var array
      */
-    private $_loaders = array();
+    private array $_loaders = array();
 
     /**
      * Plugin types
-     * @var array
      */
-    private $_loaderTypes = array('filter', 'helper');
+    private array $_loaderTypes = array('filter', 'helper');
 
     /**
      * Strict variables flag; when on, undefined variables accessed in the view
      * scripts will trigger notices
-     * @var boolean
      */
-    private $_strictVars = false;
+    private bool $_strictVars = false;
 
     /**
      * Constructor.

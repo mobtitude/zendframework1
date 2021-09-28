@@ -54,17 +54,13 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
 
     /**
      * User-provided options
-     *
-     * @var array
      */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * Internal array of queues to save on lookups
-     *
-     * @var array
      */
-    protected $_queues = array();
+    protected array $_queues = array();
 
     /**
      * Contains the Zend_Queue that this object

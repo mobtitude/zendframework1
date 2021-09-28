@@ -38,10 +38,8 @@ class Zend_Ldap_Filter_String extends Zend_Ldap_Filter_Abstract
 {
     /**
      * The filter.
-     *
-     * @var string
      */
-    protected $_filter;
+    protected string $_filter;
 
     /**
      * Creates a Zend_Ldap_Filter_String.

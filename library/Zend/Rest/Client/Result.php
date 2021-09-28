@@ -37,9 +37,8 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
 
     /**
      * error information
-     * @var string
      */
-    protected $_errstr;
+    protected ?string $_errstr = null;
 
     /**
      * Constructor

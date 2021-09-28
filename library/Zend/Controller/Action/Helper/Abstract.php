@@ -36,10 +36,8 @@ abstract class Zend_Controller_Action_Helper_Abstract
 {
     /**
      * $_actionController
-     *
-     * @var Zend_Controller_Action $_actionController
      */
-    protected $_actionController = null;
+    protected ?\Zend_Controller_Action $_actionController = null;
 
     /**
      * @var mixed $_frontController

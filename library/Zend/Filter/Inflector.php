@@ -40,30 +40,15 @@ require_once 'Zend/Loader/PluginLoader.php';
  */
 class Zend_Filter_Inflector implements Zend_Filter_Interface
 {
-    /**
-     * @var Zend_Loader_PluginLoader_Interface
-     */
-    protected $_pluginLoader = null;
+    protected ?\Zend_Loader_PluginLoader_Interface $_pluginLoader = null;
 
-    /**
-     * @var string
-     */
-    protected $_target = null;
+    protected ?string $_target = null;
 
-    /**
-     * @var bool
-     */
-    protected $_throwTargetExceptionsOn = true;
+    protected bool $_throwTargetExceptionsOn = true;
 
-    /**
-     * @var string
-     */
-    protected $_targetReplacementIdentifier = ':';
+    protected string $_targetReplacementIdentifier = ':';
 
-    /**
-     * @var array
-     */
-    protected $_rules = array();
+    protected array $_rules = array();
 
     /**
      * Constructor

@@ -41,9 +41,8 @@ class Zend_Amf_Value_MessageBody
     /**
      * A string describing which operation, function, or method
      * is to be remotley invoked.
-     * @var string
      */
-    protected $_targetUri = "";
+    protected string $_targetUri = "";
 
     /**
      * Universal Resource Identifier that uniquely targets the originator's
@@ -58,10 +57,8 @@ class Zend_Amf_Value_MessageBody
      * Since the server will use this field in the event of an error,
      * this field is required even if a successful server request would
      * not be expected to return a value to the client.
-     *
-     * @var string
      */
-    protected $_responseUri = "";
+    protected string $_responseUri = "";
 
     /**
      * Contains the actual data associated with the operation. It contains

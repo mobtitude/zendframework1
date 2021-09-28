@@ -34,10 +34,8 @@ class Zend_Http_UserAgent_Spam extends Zend_Http_UserAgent_AbstractDevice
 {
     /**
      * @todo User Agent Signatures
-     *
-     * @var array
      */
-    protected static $_uaSignatures = array(
+    protected static array $_uaSignatures = array(
         '',
     );
 

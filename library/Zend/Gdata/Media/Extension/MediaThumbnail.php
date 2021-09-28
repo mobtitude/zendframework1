@@ -38,13 +38,10 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_Media_Extension_MediaThumbnail extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'thumbnail';
-    protected $_rootNamespace = 'media';
+    protected ?string $_rootElement = 'thumbnail';
+    protected string $_rootNamespace = 'media';
 
-    /**
-     * @var string
-     */
-    protected $_url = null;
+    protected ?string $_url = null;
 
     /**
      * @var int
@@ -56,10 +53,7 @@ class Zend_Gdata_Media_Extension_MediaThumbnail extends Zend_Gdata_Extension
      */
     protected $_height = null;
 
-    /**
-     * @var string
-     */
-    protected $_time = null;
+    protected ?string $_time = null;
 
     /**
      * Constructs a new MediaThumbnail element

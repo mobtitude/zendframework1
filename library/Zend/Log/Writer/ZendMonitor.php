@@ -35,17 +35,13 @@ class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
 {
     /**
      * Is Zend Monitor enabled?
-     *
-     * @var boolean
      */
-    protected $_isEnabled = true;
+    protected bool $_isEnabled = true;
 
     /**
      * Is this for a Zend Server intance?
-     *
-     * @var boolean
      */
-    protected $_isZendServer = false;
+    protected bool $_isZendServer = false;
 
     /**
      * @return void

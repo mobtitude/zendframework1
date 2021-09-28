@@ -32,36 +32,24 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 {
     /**
      * Number of results
-     * @var int
      */
-    protected $_count;
+    protected int $_count;
 
     /**
      * CSS Selector query
-     * @var string
      */
-    protected $_cssQuery;
+    protected string $_cssQuery;
 
-    /**
-     * @var DOMDocument
-     */
-    protected $_document;
+    protected \DOMDocument $_document;
 
-    /**
-     * @var DOMNodeList
-     */
-    protected $_nodeList;
+    protected \DOMNodeList $_nodeList;
 
     /**
      * Current iterator position
-     * @var int
      */
-    protected $_position = 0;
+    protected int $_position = 0;
 
-    /**
-     * @var DOMXPath
-     */
-    protected $_xpath;
+    protected \DOMXPath $_xpath;
 
     /**
      * XPath query

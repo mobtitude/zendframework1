@@ -46,30 +46,28 @@ class Zend_Service_Delicious_Post extends Zend_Service_Delicious_SimplePost
 {
     /**
      * Service that has downloaded the post
-     *
-     * @var Zend_Service_Delicious
      */
-    protected $_service;
+    protected \Zend_Service_Delicious $_service;
 
     /**
      * @var int Number of people that have the same post
      */
-    protected $_others;
+    protected int $_others;
 
     /**
      * @var Zend_Date Post date
      */
-    protected $_date;
+    protected \Zend_Date $_date;
 
     /**
      * @var bool Post share
      */
-    protected $_shared = true;
+    protected bool $_shared = true;
 
     /**
      * @var string Post hash
      */
-    protected $_hash;
+    protected string $_hash;
 
     /**
      * Constructs a new del.icio.us post

@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_TestPHPUnitConfigFile extends Zend_Tool_Proje
     /**
      * @var string
      */
-    protected $_filesystemName = 'phpunit.xml';
+    protected ?string $_filesystemName = 'phpunit.xml';
 
     /**
      * getName()

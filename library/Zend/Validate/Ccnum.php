@@ -44,17 +44,15 @@ class Zend_Validate_Ccnum extends Zend_Validate_Abstract
 
     /**
      * Digits filter for input
-     *
-     * @var Zend_Filter_Digits
      */
-    protected static $_filter = null;
+    protected static ?\Zend_Filter_Digits $_filter = null;
 
     /**
      * Validation failure message template definitions
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::LENGTH   => "'%value%' must contain between 13 and 19 digits",
         self::CHECKSUM => "Luhn algorithm (mod-10 checksum) failed on '%value%'"
     );

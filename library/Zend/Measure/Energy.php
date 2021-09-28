@@ -145,7 +145,7 @@ class Zend_Measure_Energy extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ATTOJOULE'              => array('1.0e-18',           'aJ'),
         'BOARD_OF_TRADE_UNIT'    => array('3600000',           'BOTU'),
         'BTU'                    => array('1055.0559',         'Btu'),

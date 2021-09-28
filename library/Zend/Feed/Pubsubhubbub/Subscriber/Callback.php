@@ -45,27 +45,21 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
 {
     /**
      * Contains the content of any feeds sent as updates to the Callback URL
-     *
-     * @var string
      */
-    protected $_feedUpdate = null;
+    protected ?string $_feedUpdate = null;
 
     /**
      * Holds a manually set subscription key (i.e. identifies a unique
      * subscription) which is typical when it is not passed in the query string
      * but is part of the Callback URL path, requiring manual retrieval e.g.
      * using a route and the Zend_Controller_Action::_getParam() method.
-     *
-     * @var string
      */
-    protected $_subscriptionKey = null;
+    protected ?string $_subscriptionKey = null;
 
     /**
      * After verification, this is set to the verified subscription's data.
-     *
-     * @var array
      */
-    protected $_currentSubscriptionData = null;
+    protected ?array $_currentSubscriptionData = null;
 
     /**
      * Set a subscription key to use for the current callback request manually.

@@ -134,10 +134,8 @@ class Zend_Service_Ebay_Finding_Search_Item extends Zend_Service_Ebay_Finding_Ab
     /**
      * The format type of the listing, such as online auction, fixed price, or
      * advertisement.
-     *
-     * @var Zend_Service_Ebay_Finding_ListingInfo
      */
-    public $listingInfo;
+    public ?\Zend_Service_Ebay_Finding_ListingInfo $listingInfo = null;
 
     /**
      * Physical location of the item, as specified by the seller.
@@ -176,10 +174,8 @@ class Zend_Service_Ebay_Finding_Search_Item extends Zend_Service_Ebay_Finding_Ab
      * Details about the first (or only) category in which the item is listed.
      *
      * Note that items can be listed in more than a single category.
-     *
-     * @var Zend_Service_Ebay_Finding_Category
      */
-    public $primaryCategory;
+    public ?\Zend_Service_Ebay_Finding_Category $primaryCategory = null;
 
     /**
      * Unique identifier for the eBay catalog product with which the item was
@@ -210,45 +206,35 @@ class Zend_Service_Ebay_Finding_Search_Item extends Zend_Service_Ebay_Finding_Ab
      *
      * This element is not returned if the seller did not specify a secondary
      * category.
-     *
-     * @var Zend_Service_Ebay_Finding_Category
      */
-    public $secondaryCategory;
+    public ?\Zend_Service_Ebay_Finding_Category $secondaryCategory = null;
 
     /**
      * Information about the item's seller.
      *
      * Only returned if SellerInfo is specified in the outputSelector field in
      * the request.
-     *
-     * @var Zend_Service_Ebay_Finding_SellerInfo
      */
-    public $sellerInfo;
+    public ?\Zend_Service_Ebay_Finding_SellerInfo $sellerInfo = null;
 
     /**
      * Specifies the item's selling status with regards to eBay's processing
      * workflow.
-     *
-     * @var Zend_Service_Ebay_Finding_SellingStatus
      */
-    public $sellingStatus;
+    public ?\Zend_Service_Ebay_Finding_SellingStatus $sellingStatus = null;
 
     /**
      * Container for data about a listing's shipping details.
-     *
-     * @var Zend_Service_Ebay_Finding_ShippingInfo
      */
-    public $shippingInfo;
+    public ?\Zend_Service_Ebay_Finding_ShippingInfo $shippingInfo = null;
 
     /**
      * Information about the eBay store in which the item is listed.
      *
      * Only returned if the item is listed in a store and StoreInfo is specified
      * in the outputSelector field in the request.
-     *
-     * @var Zend_Service_Ebay_Finding_Storefront
      */
-    public $storeInfo;
+    public ?\Zend_Service_Ebay_Finding_Storefront $storeInfo = null;
 
     /**
      * Subtitle of the item.

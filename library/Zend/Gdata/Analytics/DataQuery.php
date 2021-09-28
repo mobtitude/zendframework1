@@ -37,7 +37,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     /**
      * The default URI used for feeds.
      */
-    protected $_defaultFeedUri = self::ANALYTICS_FEED_URI;
+    protected ?string $_defaultFeedUri = self::ANALYTICS_FEED_URI;
 
     // D1. Visitor
     const DIMENSION_BROWSER = 'ga:browser';
@@ -194,26 +194,11 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     const REGULAR ="=~";
     const REGULAR_NOT ="!~";
     
-    /**
-     * @var string
-     */
-    protected $_profileId;
-    /**
-     * @var array
-     */
-    protected $_dimensions = array();
-    /**
-     * @var array
-     */
-    protected $_metrics = array();
-    /**
-     * @var array
-     */
-    protected $_sort = array();
-    /**
-     * @var array
-     */
-    protected $_filters = array();
+    protected ?string $_profileId = null;
+    protected array $_dimensions = array();
+    protected array $_metrics = array();
+    protected array $_sort = array();
+    protected array $_filters = array();
     
     /**
      * @param string $id

@@ -45,21 +45,19 @@ class Zend_Form_Decorator_Description extends Zend_Form_Decorator_Abstract
 {
     /**
      * Whether or not to escape the description
-     * @var bool
      */
-    protected $_escape;
+    protected ?bool $_escape = null;
 
     /**
      * Default placement: append
      * @var string
      */
-    protected $_placement = 'APPEND';
+    protected ?string $_placement = 'APPEND';
 
     /**
      * HTML tag with which to surround description
-     * @var string
      */
-    protected $_tag;
+    protected ?string $_tag = null;
 
     /**
      * Set HTML tag with which to surround description

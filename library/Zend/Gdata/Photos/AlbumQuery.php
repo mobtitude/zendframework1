@@ -45,17 +45,13 @@ class Zend_Gdata_Photos_AlbumQuery extends Zend_Gdata_Photos_UserQuery
 
     /**
      * The name of the album to query for. Mutually exclusive with AlbumId.
-     *
-     * @var string
      */
-    protected $_albumName = null;
+    protected ?string $_albumName = null;
 
     /**
      * The ID of the album to query for. Mutually exclusive with AlbumName.
-     *
-     * @var string
      */
-    protected $_albumId = null;
+    protected ?string $_albumId = null;
 
     /**
      * Set the album name to query for. When set, this album's photographs

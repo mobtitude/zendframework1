@@ -41,38 +41,33 @@ abstract class Zend_Mail_Transport_Abstract
 {
     /**
      * Mail body
-     * @var string
      * @access public
      */
-    public $body = '';
+    public string $body = '';
 
     /**
      * MIME boundary
-     * @var string
      * @access public
      */
-    public $boundary = '';
+    public string $boundary = '';
 
     /**
      * Mail header string
-     * @var string
      * @access public
      */
-    public $header = '';
+    public string $header = '';
 
     /**
      * Array of message headers
-     * @var array
      * @access protected
      */
-    protected $_headers = array();
+    protected array $_headers = array();
 
     /**
      * Message is a multipart message
-     * @var boolean
      * @access protected
      */
-    protected $_isMultipart = false;
+    protected bool $_isMultipart = false;
 
     /**
      * Zend_Mail object
@@ -83,24 +78,21 @@ abstract class Zend_Mail_Transport_Abstract
 
     /**
      * Array of message parts
-     * @var array
      * @access protected
      */
-    protected $_parts = array();
+    protected array $_parts = array();
 
     /**
      * Recipients string
-     * @var string
      * @access public
      */
-    public $recipients = '';
+    public string $recipients = '';
 
     /**
      * EOL character string used by transport
-     * @var string
      * @access public
      */
-    public $EOL = "\r\n";
+    public string $EOL = "\r\n";
 
     /**
      * Send an email independent from the used transport

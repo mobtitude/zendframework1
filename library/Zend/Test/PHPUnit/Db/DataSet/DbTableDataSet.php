@@ -37,10 +37,7 @@ require_once "Zend/Test/PHPUnit/Db/DataSet/DbTable.php";
  */
 class Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet extends PHPUnit_Extensions_Database_DataSet_AbstractDataSet
 {
-    /**
-     * @var array
-     */
-    protected $tables = array();
+    protected array $tables = array();
 
     /**
      * Add a Table dataset representation by specifiying an arbitrary select query.

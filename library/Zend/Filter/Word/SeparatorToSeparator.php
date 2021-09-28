@@ -33,8 +33,8 @@ require_once 'Zend/Filter/PregReplace.php';
 class Zend_Filter_Word_SeparatorToSeparator extends Zend_Filter_PregReplace
 {
 
-    protected $_searchSeparator = null;
-    protected $_replacementSeparator = null;
+    protected ?string $_searchSeparator = null;
+    protected ?string $_replacementSeparator = null;
 
     /**
      * Constructor

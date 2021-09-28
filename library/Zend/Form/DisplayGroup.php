@@ -31,86 +31,67 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
 {
     /**
      * Group attributes
-     * @var array
      */
-    protected $_attribs = array();
+    protected array $_attribs = array();
 
     /**
      * Display group decorators
-     * @var array
      */
-    protected $_decorators = array();
+    protected array $_decorators = array();
 
     /**
      * Description
-     * @var string
      */
-    protected $_description;
+    protected ?string $_description = null;
 
     /**
      * Should we disable loading the default decorators?
-     * @var bool
      */
-    protected $_disableLoadDefaultDecorators = false;
+    protected bool $_disableLoadDefaultDecorators = false;
 
     /**
      * Element order
-     * @var array
      */
-    protected $_elementOrder = array();
+    protected array $_elementOrder = array();
 
     /**
      * Elements
-     * @var array
      */
-    protected $_elements = array();
+    protected array $_elements = array();
 
     /**
      * Form object to which the display group is currently registered
-     *
-     * @var Zend_Form
      */
-    protected $_form;
+    protected ?\Zend_Form $_form = null;
 
     /**
      * Whether or not a new element has been added to the group
-     * @var bool
      */
-    protected $_groupUpdated = false;
+    protected bool $_groupUpdated = false;
 
     /**
      * Plugin loader for decorators
-     * @var Zend_Loader_PluginLoader
      */
-    protected $_loader;
+    protected ?\Zend_Loader_PluginLoader $_loader = null;
 
     /**
      * Group name
-     * @var string
      */
-    protected $_name;
+    protected ?string $_name = null;
 
     /**
      * Group order
-     * @var int
      */
-    protected $_order;
+    protected ?int $_order = null;
 
-    /**
-     * @var Zend_Translate
-     */
-    protected $_translator;
+    protected ?\Zend_Translate_Adapter $_translator = null;
 
     /**
      * Is translation disabled?
-     * @var bool
      */
-    protected $_translatorDisabled = false;
+    protected bool $_translatorDisabled = false;
 
-    /**
-     * @var Zend_View_Interface
-     */
-    protected $_view;
+    protected ?\Zend_View_Interface $_view = null;
 
     /**
      * Constructor

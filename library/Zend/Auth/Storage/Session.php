@@ -54,10 +54,8 @@ class Zend_Auth_Storage_Session implements Zend_Auth_Storage_Interface
 
     /**
      * Object to proxy $_SESSION storage
-     *
-     * @var Zend_Session_Namespace
      */
-    protected $_session;
+    protected \Zend_Session_Namespace $_session;
 
     /**
      * Session namespace

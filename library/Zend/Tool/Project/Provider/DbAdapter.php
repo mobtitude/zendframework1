@@ -43,9 +43,9 @@ class Zend_Tool_Project_Provider_DbAdapter
 
     protected $_appConfigFilePath = null;
 
-    protected $_config = null;
+    protected ?\Zend_Config_Ini $_config = null;
 
-    protected $_sectionName = 'production';
+    protected string $_sectionName = 'production';
 
     public function configure($dsn = null, /* $interactivelyPrompt = false, */ $sectionName = 'production')
     {

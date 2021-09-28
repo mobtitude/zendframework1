@@ -50,20 +50,16 @@ class Zend_Pdf_Element_Object_Stream extends Zend_Pdf_Element_Object
 
     /**
      * Flag which signals, that stream is decoded
-     *
-     * @var boolean
      */
-    private $_streamDecoded;
+    private ?bool $_streamDecoded = null;
 
     /**
      * Stored original stream object dictionary.
      * Used to decode stream at access time.
      *
      * The only properties affecting decoding are sored here.
-     *
-     * @var array|null
      */
-    private $_initialDictionaryData = null;
+    private ?array $_initialDictionaryData = null;
 
     /**
      * Object constructor

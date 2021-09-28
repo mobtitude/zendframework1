@@ -36,16 +36,12 @@ require_once 'Zend/Queue/Message.php';
  */
 class Zend_Queue_Message_PlatformJob extends Zend_Queue_Message
 {
-    /**
-     * @var ZendApi_Job
-     */
-    protected $_job;
+    protected ?\ZendApi_Job $_job = null;
 
     /**
      * Job identifier
-     * @var string
      */
-    protected $_id = null;
+    protected ?string $_id = null;
 
     /**
      * Constructor

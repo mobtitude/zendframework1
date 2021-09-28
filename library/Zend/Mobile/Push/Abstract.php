@@ -40,10 +40,8 @@ abstract class Zend_Mobile_Push_Abstract implements Zend_Mobile_Push_Interface
 {
     /**
      * Is Connected
-     *
-     * @var boolean
      */
-    protected $_isConnected = false;
+    protected bool $_isConnected = false;
 
     /**
      * Connect to the Push Server

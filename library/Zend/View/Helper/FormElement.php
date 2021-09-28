@@ -36,10 +36,7 @@ require_once 'Zend/View/Helper/HtmlElement.php';
  */
 abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
 {
-    /**
-     * @var Zend_Translate_Adapter|null
-     */
-    protected $_translator;
+    protected ?\Zend_Translate_Adapter $_translator = null;
 
     /**
      * Get translator

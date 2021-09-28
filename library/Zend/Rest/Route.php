@@ -53,20 +53,15 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
 {
     /**
      * Specific Modules to receive RESTful routes
-     * @var array
      */
-    protected $_restfulModules = null;
+    protected ?array $_restfulModules = null;
 
     /**
      * Specific Modules=>Controllers to receive RESTful routes
-     * @var array
      */
-    protected $_restfulControllers = null;
+    protected ?array $_restfulControllers = null;
 
-    /**
-     * @var Zend_Controller_Front
-     */
-    protected $_front;
+    protected \Zend_Controller_Front $_front;
 
     /**
      * Constructor
@@ -241,7 +236,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      * @param bool $encode Weither to return urlencoded string
      * @return string Route path with user submitted parameters
      */
-    public function assemble($data = array(), $reset = false, $encode = true)
+    public function assemble($data = array(), $reset = false, $encode = true, $partial = false)
     {
         if (!$this->_keysSet) {
             if (null === $this->_request) {

@@ -38,8 +38,8 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Extension_AttendeeStatus extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'attendeeStatus';
-    protected $_value = null;
+    protected ?string $_rootElement = 'attendeeStatus';
+    protected ?string $_value = null;
 
     /**
      * Constructs a new Zend_Gdata_Extension_AttendeeStatus object.

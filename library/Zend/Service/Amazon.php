@@ -40,10 +40,8 @@ class Zend_Service_Amazon
 {
     /**
      * Amazon Web Services Access Key ID
-     *
-     * @var string
      */
-    public $appId;
+    public string $appId;
 
     /**
      * @var string
@@ -57,10 +55,8 @@ class Zend_Service_Amazon
 
     /**
      * List of Amazon Web Service base URLs, indexed by country code
-     *
-     * @var array
      */
-    protected $_baseUriList = array('US' => 'http://webservices.amazon.com',
+    protected array $_baseUriList = array('US' => 'http://webservices.amazon.com',
                                     'UK' => 'http://webservices.amazon.co.uk',
                                     'DE' => 'http://webservices.amazon.de',
                                     'JP' => 'http://webservices.amazon.co.jp',
@@ -69,10 +65,8 @@ class Zend_Service_Amazon
 
     /**
      * Reference to REST client object
-     *
-     * @var Zend_Rest_Client
      */
-    protected $_rest = null;
+    protected ?\Zend_Rest_Client $_rest = null;
 
 
     /**

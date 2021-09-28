@@ -42,10 +42,8 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
     /**
      * List of indices for searching.
      * Array of Zend_Search_Lucene_Interface objects
-     *
-     * @var array
      */
-    protected $_indices;
+    protected array $_indices;
 
     /**
      * Object constructor.
@@ -880,10 +878,8 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
 
     /**
      * Terms stream priority queue object
-     *
-     * @var Zend_Search_Lucene_TermStreamsPriorityQueue
      */
-    private $_termsStream = null;
+    private ?\Zend_Search_Lucene_TermStreamsPriorityQueue $_termsStream = null;
 
     /**
      * Reset terms stream.

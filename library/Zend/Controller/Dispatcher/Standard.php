@@ -43,15 +43,13 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
 
     /**
      * Current module (formatted)
-     * @var string
      */
-    protected $_curModule;
+    protected string $_curModule;
 
     /**
      * Controller directory(ies)
-     * @var array
      */
-    protected $_controllerDirectory = array();
+    protected array $_controllerDirectory = array();
 
     /**
      * Constructor: Set current module to default value

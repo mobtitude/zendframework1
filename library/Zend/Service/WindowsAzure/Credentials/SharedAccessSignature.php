@@ -34,11 +34,9 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
     extends Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 {
     /**
-     * Permission set
-     * 
-     * @var array
-     */
-    protected $_permissionSet = array();
+				 * Permission set
+				 */
+				protected array $_permissionSet = array();
     
 	/**
 	 * Creates a new Zend_Service_WindowsAzure_Credentials_SharedAccessSignature instance

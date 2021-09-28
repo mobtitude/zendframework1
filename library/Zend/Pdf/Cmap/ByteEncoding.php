@@ -42,14 +42,11 @@ require_once 'Zend/Pdf/Cmap.php';
 class Zend_Pdf_Cmap_ByteEncoding extends Zend_Pdf_Cmap
 {
   /**** Instance Variables ****/
-
-
     /**
      * Glyph index array. Stores the actual glyph numbers. The array keys are
      * the translated Unicode code points.
-     * @var array
      */
-    protected $_glyphIndexArray = array();
+    protected array $_glyphIndexArray = array();
 
 
 

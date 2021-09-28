@@ -46,10 +46,8 @@ abstract class Zend_Search_Lucene_Search_Query
 
     /**
      * Current highlight color
-     *
-     * @var integer
      */
-    private $_currentColorIndex = 0;
+    private int $_currentColorIndex = 0;
 
     /**
      * Gets the boost for this clause.  Documents matching

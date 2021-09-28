@@ -73,10 +73,8 @@ abstract class Zend_Service_Ebay_Finding_Response_Abstract extends Zend_Service_
      *
      * Not returned when the ack value is Success. Run-time errors are not
      * reported here.
-     *
-     * @var Zend_Service_Ebay_Finding_Error_Message
      */
-    public $errorMessage;
+    public ?\Zend_Service_Ebay_Finding_Error_Message $errorMessage = null;
 
     /**
      * This value represents the date and time when eBay processed the request.
@@ -100,15 +98,9 @@ abstract class Zend_Service_Ebay_Finding_Response_Abstract extends Zend_Service_
      */
     public $version;
 
-    /**
-     * @var string
-     */
-    protected $_operation;
+    protected ?string $_operation = null;
 
-    /**
-     * @var array
-     */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * @return void

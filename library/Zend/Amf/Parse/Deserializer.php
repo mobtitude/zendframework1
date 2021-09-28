@@ -37,10 +37,8 @@ abstract class Zend_Amf_Parse_Deserializer
 {
     /**
      * The raw string that represents the AMF request.
-     *
-     * @var Zend_Amf_Parse_InputStream
      */
-    protected $_stream;
+    protected \Zend_Amf_Parse_InputStream $_stream;
 
     /**
      * Constructor

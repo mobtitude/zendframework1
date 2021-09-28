@@ -51,9 +51,8 @@ class Zend_Wildfire_Channel_HttpHeaders extends Zend_Controller_Plugin_Abstract 
 {
     /**
      * The string to be used to prefix the headers.
-     * @var string
      */
-    protected static $_headerPrefix = 'X-WF-';
+    protected static string $_headerPrefix = 'X-WF-';
 
     /**
      * Singleton instance
@@ -63,15 +62,13 @@ class Zend_Wildfire_Channel_HttpHeaders extends Zend_Controller_Plugin_Abstract 
 
     /**
      * The index of the plugin in the controller dispatch loop plugin stack
-     * @var integer
      */
-    protected static $_controllerPluginStackIndex = 999;
+    protected static int $_controllerPluginStackIndex = 999;
 
     /**
      * The protocol instances for this channel
-     * @var array
      */
-    protected $_protocols = null;
+    protected ?array $_protocols = null;
 
     /**
      * Initialize singleton instance.

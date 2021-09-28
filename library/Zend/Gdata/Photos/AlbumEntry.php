@@ -122,10 +122,8 @@ class Zend_Gdata_Photos_AlbumEntry extends Zend_Gdata_Entry
 
     /**
      * gphoto:location element
-     *
-     * @var Zend_Gdata_Photos_Extension_Location
      */
-    protected $_gphotoLocation = null;
+    protected ?\Zend_Gdata_Photos_Extension_Location $_gphotoLocation = null;
 
     /**
      * gphoto:user element

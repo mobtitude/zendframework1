@@ -80,7 +80,7 @@ class Zend_Measure_Flow_Mass extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'CENTIGRAM_PER_DAY'    => array(array('' => '0.00001', '/' => '86400'),    'cg/day'),
         'CENTIGRAM_PER_HOUR'   => array(array('' => '0.00001', '/' => '3600'),     'cg/h'),
         'CENTIGRAM_PER_MINUTE' => array(array('' => '0.00001', '/' => '60'),       'cg/m'),

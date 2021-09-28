@@ -48,97 +48,81 @@ class Zend_Soap_Client
 {
     /**
      * Encoding
-     * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
     /**
      * Array of SOAP type => PHP class pairings for handling return/incoming values
-     * @var array
      */
-    protected $_classmap = null;
+    protected ?array $_classmap = null;
 
     /**
      * Registered fault exceptions
-     * @var array
      */
-    protected $_faultExceptions = array();
+    protected array $_faultExceptions = array();
 
     /**
      * SOAP version to use; SOAP_1_2 by default, to allow processing of headers
-     * @var int
      */
-    protected $_soapVersion = SOAP_1_2;
+    protected int $_soapVersion = SOAP_1_2;
 
     /** Set of other SoapClient options */
-    protected $_uri                 = null;
-    protected $_location            = null;
-    protected $_style               = null;
-    protected $_use                 = null;
-    protected $_login               = null;
-    protected $_password            = null;
-    protected $_proxy_host          = null;
-    protected $_proxy_port          = null;
-    protected $_proxy_login         = null;
+    protected ?string $_uri                 = null;
+    protected ?string $_location            = null;
+    protected ?int $_style               = null;
+    protected ?int $_use                 = null;
+    protected ?string $_login               = null;
+    protected ?string $_password            = null;
+    protected ?string $_proxy_host          = null;
+    protected ?int $_proxy_port          = null;
+    protected ?string $_proxy_login         = null;
     protected $_proxy_password      = null;
-    protected $_local_cert          = null;
-    protected $_passphrase          = null;
-    protected $_compression         = null;
+    protected ?string $_local_cert          = null;
+    protected ?string $_passphrase          = null;
+    protected ?int $_compression         = null;
     protected $_connection_timeout  = null;
     protected $_stream_context      = null;
     protected $_features            = null;
-    protected $_cache_wsdl          = null;
-    protected $_user_agent          = null;
-    protected $_exceptions          = null;
+    protected ?int $_cache_wsdl          = null;
+    protected ?string $_user_agent          = null;
+    protected ?bool $_exceptions          = null;
 
     /**
      * WSDL used to access server
      * It also defines Zend_Soap_Client working mode (WSDL vs non-WSDL)
-     *
-     * @var string
      */
-    protected $_wsdl = null;
+    protected ?string $_wsdl = null;
 
     /**
      * SoapClient object
-     *
-     * @var SoapClient
      */
-    protected $_soapClient;
+    protected ?\SoapClient $_soapClient = null;
 
     /**
      * Last invoked method
-     *
-     * @var string
      */
-    protected $_lastMethod = '';
+    protected string $_lastMethod = '';
 
     /**
      * SOAP request headers.
      *
      * Array of SoapHeader objects
-     *
-     * @var array
      */
-    protected $_soapInputHeaders = array();
+    protected array $_soapInputHeaders = array();
 
     /**
      * Permanent SOAP request headers (shared between requests).
      *
      * Array of SoapHeader objects
-     *
-     * @var array
      */
-    protected $_permanentSoapInputHeaders = array();
+    protected array $_permanentSoapInputHeaders = array();
 
     /**
      * Output SOAP headers.
      *
      * Array of SoapHeader objects
-     *
-     * @var array
      */
-    protected $_soapOutputHeaders = array();
+    protected array $_soapOutputHeaders = array();
 
     /**
      * Constructor

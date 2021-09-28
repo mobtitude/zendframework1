@@ -31,10 +31,7 @@
 class Zend_Tool_Project_Profile_Resource_SearchConstraints
 {
 
-    /**
-     * @var array
-     */
-    protected $_constraints = array();
+    protected array $_constraints = array();
 
     /**
      * __construct()

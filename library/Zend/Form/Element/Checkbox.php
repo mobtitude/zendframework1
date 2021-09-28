@@ -36,9 +36,8 @@ class Zend_Form_Element_Checkbox extends Zend_Form_Element_Xhtml
 {
     /**
      * Is the checkbox checked?
-     * @var bool
      */
-    public $checked = false;
+    public bool $checked = false;
 
     /**
      * Use formCheckbox view helper by default
@@ -48,24 +47,21 @@ class Zend_Form_Element_Checkbox extends Zend_Form_Element_Xhtml
 
     /**
      * Options that will be passed to the view helper
-     * @var array
      */
-    public $options = array(
+    public array $options = array(
         'checkedValue'   => '1',
         'uncheckedValue' => '0',
     );
 
     /**
      * Value when checked
-     * @var string
      */
-    protected $_checkedValue = '1';
+    protected string $_checkedValue = '1';
 
     /**
      * Value when not checked
-     * @var string
      */
-    protected $_uncheckedValue = '0';
+    protected string $_uncheckedValue = '0';
 
     /**
      * Current value

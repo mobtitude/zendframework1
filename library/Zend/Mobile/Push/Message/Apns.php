@@ -37,38 +37,28 @@ class Zend_Mobile_Push_Message_Apns extends Zend_Mobile_Push_Message_Abstract
 {
     /**
      * Badge Number
-     *
-     * @var int
      */
-    protected $_badge;
+    protected ?int $_badge = null;
 
     /**
      * Alert
-     *
-     * @var array
      */
-    protected $_alert  = array();
+    protected array $_alert  = array();
 
     /**
      * Expiration
-     *
-     * @var int
      */
-    protected $_expire;
+    protected ?int $_expire = null;
 
     /**
      * Sound
-     *
-     * @var string
      */
-    protected $_sound = 'default';
+    protected string $_sound = 'default';
 
     /**
      * Custom Data
-     *
-     * @var array
      */
-    protected $_custom = array();
+    protected array $_custom = array();
 
     /**
      * Get Alert

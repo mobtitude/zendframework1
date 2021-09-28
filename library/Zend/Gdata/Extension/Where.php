@@ -43,7 +43,7 @@ require_once 'Zend/Gdata/Extension/EntryLink.php';
 class Zend_Gdata_Extension_Where extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'where';
+    protected ?string $_rootElement = 'where';
     protected $_label = null;
     protected $_rel = null;
     protected $_valueString = null;

@@ -38,17 +38,13 @@ class Zend_XmlRpc_Value_DateTime extends Zend_XmlRpc_Value_Scalar
 {
     /**
      * PHP compatible format string for XML/RPC datetime values
-     *
-     * @var string
      */
-    protected $_phpFormatString = 'Ymd\\TH:i:s';
+    protected string $_phpFormatString = 'Ymd\\TH:i:s';
 
     /**
      * ISO compatible format string for XML/RPC datetime values
-     *
-     * @var string
      */
-    protected $_isoFormatString = 'yyyyMMddTHH:mm:ss';
+    protected string $_isoFormatString = 'yyyyMMddTHH:mm:ss';
 
     /**
      * Set the value of a dateTime.iso8601 native type

@@ -34,27 +34,27 @@ class Zend_Server_Method_Callback
     /**
      * @var string Class name for class method callback
      */
-    protected $_class;
+    protected ?string $_class = null;
 
     /**
      * @var string Function name for function callback
      */
-    protected $_function;
+    protected ?string $_function = null;
 
     /**
      * @var string Method name for class method callback
      */
-    protected $_method;
+    protected ?string $_method = null;
 
     /**
      * @var string Callback type
      */
-    protected $_type;
+    protected ?string $_type = null;
 
     /**
      * @var array Valid callback types
      */
-    protected $_types = array('function', 'static', 'instance');
+    protected array $_types = array('function', 'static', 'instance');
 
     /**
      * Constructor

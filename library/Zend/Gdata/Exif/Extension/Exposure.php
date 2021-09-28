@@ -43,8 +43,8 @@ require_once 'Zend/Gdata/Exif.php';
 class Zend_Gdata_Exif_Extension_Exposure extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'exif';
-    protected $_rootElement = 'exposure';
+    protected string $_rootNamespace = 'exif';
+    protected ?string $_rootElement = 'exposure';
 
     /**
      * Constructs a new Zend_Gdata_Exif_Extension_Exposure object.

@@ -32,11 +32,11 @@ require_once 'Zend/Tool/Project/Context/System/NotOverwritable.php';
 class Zend_Tool_Project_Context_Repository implements Countable
 {
 
-    protected static $_instance = null;
-    protected static $_isInitialized = false;
+    protected static ?\Zend_Tool_Project_Context_Repository $_instance = null;
+    protected static bool $_isInitialized = false;
 
-    protected $_shortContextNames = array();
-    protected $_contexts          = array();
+    protected array $_shortContextNames = array();
+    protected array $_contexts          = array();
 
     /**
      * Enter description here...

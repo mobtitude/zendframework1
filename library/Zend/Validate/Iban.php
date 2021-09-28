@@ -43,7 +43,7 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::NOTSUPPORTED => "Unknown country within the IBAN '%value%'",
         self::FALSEFORMAT  => "'%value%' has a false IBAN format",
         self::CHECKFAILED  => "'%value%' has failed the IBAN check",
@@ -58,10 +58,8 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
 
     /**
      * IBAN regexes by region
-     *
-     * @var array
      */
-    protected $_ibanregex = array(
+    protected array $_ibanregex = array(
         'AD' => '/^AD[0-9]{2}[0-9]{8}[A-Z0-9]{12}$/',
         'AE' => '/^AE[0-9]{2}[0-9]{3}[0-9]{16}$/',
         'AL' => '/^AL[0-9]{2}[0-9]{8}[A-Z0-9]{16}$/',

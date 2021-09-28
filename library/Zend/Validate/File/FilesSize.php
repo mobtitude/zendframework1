@@ -44,7 +44,7 @@ class Zend_Validate_File_FilesSize extends Zend_Validate_File_Size
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::TOO_BIG      => "All files in sum should have a maximum size of '%max%' but '%size%' were detected",
         self::TOO_SMALL    => "All files in sum should have a minimum size of '%min%' but '%size%' were detected",
         self::NOT_READABLE => "One or more files can not be read",
@@ -52,10 +52,8 @@ class Zend_Validate_File_FilesSize extends Zend_Validate_File_Size
 
     /**
      * Internal file array
-     *
-     * @var array
      */
-    protected $_files;
+    protected array $_files;
 
     /**
      * Sets validator options

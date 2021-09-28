@@ -50,33 +50,28 @@ abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObje
 
     /**
      * What text to prefix the placeholder with when rendering
-     * @var string
      */
-    protected $_prefix    = '';
+    protected string $_prefix    = '';
 
     /**
      * What text to append the placeholder with when rendering
-     * @var string
      */
-    protected $_postfix   = '';
+    protected string $_postfix   = '';
 
     /**
      * What string to use between individual items in the placeholder when rendering
-     * @var string
      */
-    protected $_separator = '';
+    protected string $_separator = '';
 
     /**
      * What string to use as the indentation of output, this will typically be spaces. Eg: '    '
-     * @var string
      */
-    protected $_indent = '';
+    protected string $_indent = '';
 
     /**
      * Whether or not we're already capturing for this given container
-     * @var bool
      */
-    protected $_captureLock = false;
+    protected bool $_captureLock = false;
 
     /**
      * What type of capture (overwrite (set), append, prepend) to use

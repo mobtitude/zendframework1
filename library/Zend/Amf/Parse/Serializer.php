@@ -32,17 +32,13 @@ abstract class Zend_Amf_Parse_Serializer
 {
     /**
      * Reference to the current output stream being constructed
-     *
-     * @var string
      */
-    protected $_stream;
+    protected \Zend_Amf_Parse_OutputStream $_stream;
 
     /**
      * str* functions overloaded using mbstring.func_overload
-     *
-     * @var bool
      */
-    protected $mbStringFunctionsOverloaded;
+    protected bool $mbStringFunctionsOverloaded;
 
     /**
      * Constructor

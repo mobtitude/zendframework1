@@ -48,39 +48,29 @@ abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
 {
     /**
      * Drawing instructions
-     *
-     * @var string
      */
-    protected $_contents = '';
+    protected string $_contents = '';
 
     /**
      * Current font
-     *
-     * @var Zend_Pdf_Resource_Font
      */
-    protected $_font = null;
+    protected ?\Zend_Pdf_Resource_Font $_font = null;
 
     /**
      * Current font size
-     *
-     * @var float
      */
-    protected $_fontSize;
+    protected ?float $_fontSize = null;
 
     /**
      * Current style
-     *
-     * @var Zend_Pdf_Style
      */
-    protected $_style = null;
+    protected ?\Zend_Pdf_Style $_style = null;
 
 
     /**
      * Counter for the "Save" operations
-     *
-     * @var integer
      */
-    protected $_saveCount = 0;
+    protected int $_saveCount = 0;
 
 
     /**

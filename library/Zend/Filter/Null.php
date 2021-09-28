@@ -39,7 +39,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
     const ZERO         = 16;
     const ALL          = 31;
 
-    protected $_constants = array(
+    protected array $_constants = array(
         self::BOOLEAN     => 'boolean',
         self::INTEGER     => 'integer',
         self::EMPTY_ARRAY => 'array',

@@ -39,10 +39,8 @@ abstract class Zend_Markup_Renderer_Html_HtmlAbstract implements Zend_Markup_Ren
 
     /**
      * The HTML renderer
-     *
-     * @var Zend_Markup_Renderer_Html
      */
-    protected $_renderer;
+    protected ?\Zend_Markup_Renderer_Html $_renderer = null;
 
 
     /**

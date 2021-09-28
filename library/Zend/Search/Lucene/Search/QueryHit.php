@@ -38,21 +38,18 @@ class Zend_Search_Lucene_Search_QueryHit
 
     /**
      * Object handle of the document associated with this hit
-     * @var Zend_Search_Lucene_Document
      */
-    protected $_document = null;
+    protected ?\Zend_Search_Lucene_Document $_document = null;
 
     /**
      * Number of the document in the index
-     * @var integer
      */
-    public $id;
+    public int $id;
 
     /**
      * Score of the hit
-     * @var float
      */
-    public $score;
+    public float $score;
 
 
     /**

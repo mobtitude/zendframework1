@@ -37,10 +37,8 @@ class Zend_Service_Ebay_Finding_Search_Result extends Zend_Service_Ebay_Finding_
 {
     /**
      * Container for the data of a single item that matches the search criteria.
-     *
-     * @var Zend_Service_Ebay_Finding_Search_Item_Set
      */
-    public $item;
+    public ?\Zend_Service_Ebay_Finding_Search_Item_Set $item = null;
 
     /**
      * @return void

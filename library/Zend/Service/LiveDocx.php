@@ -38,31 +38,27 @@ class Zend_Service_LiveDocx
 
     /**
      * SOAP client used to connect to LiveDocx service
-     * @var   Zend_Soap_Client
      * @since LiveDocx 1.0
      */
-    protected $_soapClient;
+    protected ?\Zend_Soap_Client $_soapClient = null;
 
     /**
      * WSDL of LiveDocx web service
-     * @var   string
      * @since LiveDocx 1.0
      */
-    protected $_wsdl;
+    protected ?string $_wsdl = null;
 
     /**
      * Array of credentials (username and password) to log into backend server
-     * @var   array
      * @since LiveDocx 1.2
      */
-    protected $_credentials;
+    protected array $_credentials;
 
     /**
      * Set to true, when session is logged into backend server
-     * @var   boolean
      * @since LiveDocx 1.2
      */
-    protected $_loggedIn;
+    protected bool $_loggedIn;
 
     /**
      * Constructor

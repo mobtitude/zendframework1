@@ -39,10 +39,8 @@ class Zend_Config_Writer_Json extends Zend_Config_Writer_FileAbstract
 {
     /**
      * If we need to pretty-print JSON data
-     *
-     * @var boolean
      */
-    protected $_prettyPrint = false;
+    protected bool $_prettyPrint = false;
 
     /**
      * Get prettyPrint flag

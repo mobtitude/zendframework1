@@ -37,33 +37,15 @@ class Zend_Gdata_Analytics_AccountQuery extends Zend_Gdata_Query
     /**
      * The default URI used for feeds.
      */
-    protected $_defaultFeedUri = self::ANALYTICS_FEED_URI;
+    protected ?string $_defaultFeedUri = self::ANALYTICS_FEED_URI;
     
-    /**
-     * @var string
-     */
-    protected $_accountId = '~all';
-    /**
-     * @var string
-     */
-    protected $_webpropertyId = '~all';
-    /**
-     * @var string
-     */
-    protected $_profileId = '~all';
+    protected string $_accountId = '~all';
+    protected string $_webpropertyId = '~all';
+    protected string $_profileId = '~all';
    
-    /**
-     * @var bool
-     */ 
-    protected $_webproperties = false;
-    /**
-     * @var bool
-     */
-    protected $_profiles = false;
-    /**
-     * @var bool
-     */
-    protected $_goals = false;
+    protected bool $_webproperties = false;
+    protected bool $_profiles = false;
+    protected bool $_goals = false;
     
     /**
      * @param string $accountId

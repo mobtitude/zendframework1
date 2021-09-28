@@ -48,32 +48,26 @@ class Zend_Amf_Request
     /**
      * @var int AMF client type (AMF0, AMF3)
      */
-    protected $_clientType = 0; // default AMF0
+    protected int $_clientType = 0; // default AMF0
 
     /**
      * @var array Message bodies
      */
-    protected $_bodies = array();
+    protected array $_bodies = array();
 
     /**
      * @var array Message headers
      */
-    protected $_headers = array();
+    protected array $_headers = array();
 
     /**
      * @var int Message encoding to use for objects in response
      */
     protected $_objectEncoding = 0;
 
-    /**
-     * @var Zend_Amf_Parse_InputStream
-     */
-    protected $_inputStream;
+    protected ?\Zend_Amf_Parse_InputStream $_inputStream = null;
 
-    /**
-     * @var Zend_Amf_Parse_AMF0_Deserializer
-     */
-    protected $_deserializer;
+    protected ?\Zend_Amf_Parse_Amf0_Deserializer $_deserializer = null;
 
     /**
      * Time of the request

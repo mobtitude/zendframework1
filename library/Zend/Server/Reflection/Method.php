@@ -44,9 +44,8 @@ class Zend_Server_Reflection_Method extends Zend_Server_Reflection_Function_Abst
 
     /**
      * Parent class reflection
-     * @var Zend_Server_Reflection_Class
      */
-    protected $_classReflection;
+    protected \Zend_Server_Reflection_Class $_classReflection;
 
     /**
      * Constructor

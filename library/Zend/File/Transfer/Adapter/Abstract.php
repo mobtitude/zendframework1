@@ -35,52 +35,37 @@ abstract class Zend_File_Transfer_Adapter_Abstract
     const FILTER    = 'FILTER';
     const VALIDATE  = 'VALIDATE';
     /**@-*/
-
     /**
      * Internal list of breaks
-     *
-     * @var array
      */
-    protected $_break = array();
+    protected array $_break = array();
 
     /**
      * Internal list of filters
-     *
-     * @var array
      */
-    protected $_filters = array();
+    protected array $_filters = array();
 
     /**
      * Plugin loaders for filter and validation chains
-     *
-     * @var array
      */
-    protected $_loaders = array();
+    protected array $_loaders = array();
 
     /**
      * Internal list of messages
-     *
-     * @var array
      */
-    protected $_messages = array();
+    protected array $_messages = array();
 
-    /**
-     * @var Zend_Translate
-     */
-    protected $_translator;
+    protected ?\Zend_Translate_Adapter $_translator = null;
 
     /**
      * Is translation disabled?
-     *
-     * @var bool
      */
-    protected $_translatorDisabled = false;
+    protected bool $_translatorDisabled = false;
 
     /**
      * Internal list of validators
-     * @var array
      */
-    protected $_validators = array();
+    protected array $_validators = array();
 
     /**
      * Internal list of files
@@ -95,10 +80,8 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      *         validators,      - Set validator names for this file
      *         files            - Set file names for this file
      *     ))
-     *
-     * @var array
      */
-    protected $_files = array();
+    protected array $_files = array();
 
     /**
      * TMP directory
@@ -109,7 +92,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
     /**
      * Available options for file transfers
      */
-    protected $_options = array(
+    protected array $_options = array(
         'ignoreNoFile'  => false,
         'useByteString' => true,
         'magicFile'     => null,

@@ -55,45 +55,38 @@ class Zend_XmlRpc_Request
 {
     /**
      * Request character encoding
-     * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
     /**
      * Method to call
-     * @var string
      */
-    protected $_method;
+    protected ?string $_method = null;
 
     /**
      * XML request
-     * @var string
      */
-    protected $_xml;
+    protected ?string $_xml = null;
 
     /**
      * Method parameters
-     * @var array
      */
-    protected $_params = array();
+    protected array $_params = array();
 
     /**
      * Fault object, if any
-     * @var Zend_XmlRpc_Fault
      */
-    protected $_fault = null;
+    protected ?\Zend_XmlRpc_Fault $_fault = null;
 
     /**
      * XML-RPC type for each param
-     * @var array
      */
-    protected $_types = array();
+    protected array $_types = array();
 
     /**
      * XML-RPC request params
-     * @var array
      */
-    protected $_xmlRpcParams = array();
+    protected array $_xmlRpcParams = array();
 
     /**
      * Create a new XML-RPC request

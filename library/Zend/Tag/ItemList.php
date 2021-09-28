@@ -35,10 +35,8 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
 {
     /**
      * Items in this list
-     *
-     * @var array
      */
-    protected $_items = array();
+    protected array $_items = array();
 
     /**
      * Count all items

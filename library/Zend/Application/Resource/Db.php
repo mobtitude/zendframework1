@@ -39,29 +39,20 @@ class Zend_Application_Resource_Db extends Zend_Application_Resource_ResourceAbs
 {
     /**
      * Adapter to use
-     *
-     * @var string
      */
-    protected $_adapter = null;
+    protected ?string $_adapter = null;
 
-    /**
-     * @var Zend_Db_Adapter_Abstract
-     */
-    protected $_db;
+    protected ?\Zend_Db_Adapter_Abstract $_db = null;
 
     /**
      * Parameters to use
-     *
-     * @var array
      */
-    protected $_params = array();
+    protected array $_params = array();
 
     /**
      * Wether to register the created adapter as default table adapter
-     *
-     * @var boolean
      */
-    protected $_isDefaultTableAdapter = true;
+    protected bool $_isDefaultTableAdapter = true;
 
     /**
      * Set the adapter

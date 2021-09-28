@@ -40,7 +40,7 @@ class Zend_Validate_Hex extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::INVALID => "Invalid type given. String expected",
         self::NOT_HEX => "'%value%' has not only hexadecimal digit characters",
     );

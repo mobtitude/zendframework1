@@ -63,7 +63,7 @@ class Zend_Cache_Frontend_File extends Zend_Cache_Core
      * - if set to false (default), an exception is thrown if there is a missing master file
      * @var array available options
      */
-    protected $_specificOptions = array(
+    protected array $_specificOptions = array(
         'master_file' => null,
         'master_files' => null,
         'master_files_mode' => 'OR',
@@ -74,10 +74,8 @@ class Zend_Cache_Frontend_File extends Zend_Cache_Core
      * Master file mtimes
      *
      * Array of int
-     *
-     * @var array
      */
-    private $_masterFile_mtimes = null;
+    private ?array $_masterFile_mtimes = null;
 
     /**
      * Constructor

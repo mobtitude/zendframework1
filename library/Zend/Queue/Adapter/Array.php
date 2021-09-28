@@ -36,10 +36,7 @@ require_once 'Zend/Queue/Adapter/AdapterAbstract.php';
  */
 class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
 {
-    /**
-     * @var array
-     */
-    protected $_data = array();
+    protected array $_data = array();
 
     /**
      * Constructor

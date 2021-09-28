@@ -48,52 +48,38 @@ class Zend_Http_Cookie
 {
     /**
      * Cookie name
-     *
-     * @var string
      */
-    protected $name;
+    protected ?string $name = null;
 
     /**
      * Cookie value
-     *
-     * @var string
      */
-    protected $value;
+    protected string $value;
 
     /**
      * Cookie expiry date
-     *
-     * @var int
      */
-    protected $expires;
+    protected ?int $expires = null;
 
     /**
      * Cookie domain
-     *
-     * @var string
      */
-    protected $domain;
+    protected ?string $domain = null;
 
     /**
      * Cookie path
-     *
-     * @var string
      */
-    protected $path;
+    protected string $path;
 
     /**
      * Whether the cookie is secure or not
-     *
-     * @var boolean
      */
-    protected $secure;
+    protected bool $secure;
 
     /**
      * Whether the cookie value has been encoded/decoded
-     *
-     * @var boolean
      */
-    protected $encodeValue;
+    protected ?bool $encodeValue = null;
 
     /**
      * Cookie object constructor

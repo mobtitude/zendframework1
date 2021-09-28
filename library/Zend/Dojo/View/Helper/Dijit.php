@@ -53,9 +53,8 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
 
     /**
      * Parameters that should be JSON encoded
-     * @var array
      */
-    protected $_jsonParams = array('constraints');
+    protected array $_jsonParams = array('constraints');
 
     /**
      * Dojo module to use
@@ -65,9 +64,8 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
 
     /**
      * Root node element type for layout elements
-     * @var string
      */
-    protected $_rootNode = 'div';
+    protected string $_rootNode = 'div';
 
     /**
      * Set view

@@ -32,21 +32,18 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
 {
     /**
      * Namespace of the renderer for autoloading
-     * @var string
      */
-    protected $_rendererNamespace = 'Zend_Barcode_Renderer';
+    protected string $_rendererNamespace = 'Zend_Barcode_Renderer';
 
     /**
      * Renderer type
-     * @var string
      */
-    protected $_type = null;
+    protected ?string $_type = null;
 
     /**
      * Activate/Deactivate the automatic rendering of exception
-     * @var boolean
      */
-    protected $_automaticRenderError = false;
+    protected bool $_automaticRenderError = false;
 
     /**
      * Offset of the barcode from the top of the rendering resource

@@ -35,7 +35,7 @@ require_once 'Zend/Translate/Adapter.php';
  */
 class Zend_Translate_Adapter_Csv extends Zend_Translate_Adapter
 {
-    private $_data    = array();
+    private array $_data    = array();
 
     /**
      * Generates the adapter

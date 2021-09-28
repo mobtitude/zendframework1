@@ -30,24 +30,18 @@ class Zend_Cloud_Infrastructure_Image
 
     /**
      * Image's attributes
-     * 
-     * @var array
      */
-    protected $attributes = array();
+    protected array $attributes = array();
 
     /**
      * The Image adapter (if exists)
-     * 
-     * @var object
      */
-    protected $adapter;
+    protected ?object $adapter;
 
     /**
      * Required attributes
-     * 
-     * @var array
      */
-    protected $attributeRequired = array(
+    protected array $attributeRequired = array(
         self::IMAGE_ID, 
         self::IMAGE_DESCRIPTION, 
         self::IMAGE_PLATFORM, 

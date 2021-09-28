@@ -37,10 +37,8 @@ class Zend_Service_Ebay_Finding_Error_Message extends Zend_Service_Ebay_Finding_
 {
     /**
      * A container for error details.
-     *
-     * @var Zend_Service_Ebay_Finding_Error_Data_Set
      */
-    public $error;
+    public ?\Zend_Service_Ebay_Finding_Error_Data_Set $error = null;
 
     /**
      * @return void

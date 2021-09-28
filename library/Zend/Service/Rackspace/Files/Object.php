@@ -25,10 +25,8 @@ class Zend_Service_Rackspace_Files_Object
 {
     /**
      * The service that has created the object
-     *
-     * @var Zend_Service_Rackspace_Files
      */
-    protected $service;
+    protected \Zend_Service_Rackspace_Files $service;
 
     /**
      * Name of the object

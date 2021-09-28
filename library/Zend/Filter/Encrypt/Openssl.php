@@ -42,7 +42,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
      *     'envelope' => resulting envelope keys
      * )
      */
-    protected $_keys = array(
+    protected array $_keys = array(
         'public'   => array(),
         'private'  => array(),
         'envelope' => array()
@@ -50,10 +50,8 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
 
     /**
      * Internal passphrase
-     *
-     * @var string
      */
-    protected $_passphrase;
+    protected ?string $_passphrase = null;
 
     /**
      * Internal compression
@@ -64,10 +62,8 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
 
     /**
      * Internal create package
-     *
-     * @var boolean
      */
-    protected $_package = false;
+    protected bool $_package = false;
 
     /**
      * Class constructor

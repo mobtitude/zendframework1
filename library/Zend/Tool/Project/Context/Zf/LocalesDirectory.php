@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_LocalesDirectory extends Zend_Tool_Project_Co
     /**
      * @var string
      */
-    protected $_filesystemName = 'locales';
+    protected ?string $_filesystemName = 'locales';
 
     /**
      * getName()

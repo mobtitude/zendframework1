@@ -36,22 +36,19 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
 {
     /**
      * HTTP status code for redirects
-     * @var int
      */
-    protected $_code = 302;
+    protected int $_code = 302;
 
     /**
      * Whether or not calls to _redirect() should exit script execution
-     * @var boolean
      */
-    protected $_exit = true;
+    protected bool $_exit = true;
 
     /**
      * Whether or not _redirect() should attempt to prepend the base URL to the
      * passed URL (if it's a relative URL)
-     * @var boolean
      */
-    protected $_prependBase = true;
+    protected bool $_prependBase = true;
 
     /**
      * Url to which to redirect
@@ -61,15 +58,13 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
 
     /**
      * Whether or not to use an absolute URI when redirecting
-     * @var boolean
      */
-    protected $_useAbsoluteUri = false;
+    protected bool $_useAbsoluteUri = false;
 
     /**
      * Whether or not to close the session before exiting
-     * @var boolean
      */
-    protected $_closeSessionOnExit = true;
+    protected bool $_closeSessionOnExit = true;
 
     /**
      * Retrieve HTTP status code to emit on {@link _redirect()} call

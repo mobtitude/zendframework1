@@ -37,84 +37,62 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
 
     /**
      * Host variable
-     *
-     * @var string
      */
-    protected $_hostVariable = ':';
+    protected string $_hostVariable = ':';
 
     /**
      * Regex delimiter
-     *
-     * @var string
      */
-    protected $_regexDelimiter = '#';
+    protected string $_regexDelimiter = '#';
 
     /**
      * Default regex string
-     *
-     * @var string|null
      */
-    protected $_defaultRegex = null;
+    protected ?string $_defaultRegex = null;
 
     /**
      * Holds names of all route's pattern variable names. Array index holds a position in host.
-     *
-     * @var array
      */
-    protected $_variables = array();
+    protected array $_variables = array();
 
     /**
      * Holds Route patterns for all host parts. In case of a variable it stores it's regex
      * requirement or null. In case of a static part, it holds only it's direct value.
-     *
-     * @var array
      */
-    protected $_parts = array();
+    protected array $_parts = array();
 
     /**
      * Holds user submitted default values for route's variables. Name and value pairs.
-     *
-     * @var array
      */
-    protected $_defaults = array();
+    protected array $_defaults = array();
 
     /**
      * Holds user submitted regular expression patterns for route's variables' values.
      * Name and value pairs.
-     *
-     * @var array
      */
-    protected $_requirements = array();
+    protected array $_requirements = array();
 
     /**
      * Default scheme
-     *
-     * @var string
      */
-    protected $_scheme = null;
+    protected ?string $_scheme = null;
 
     /**
      * Associative array filled on match() that holds matched path values
      * for given variable names.
-     *
-     * @var array
      */
-    protected $_values = array();
+    protected array $_values = array();
 
     /**
      * Current request object
-     *
-     * @var Zend_Controller_Request_Abstract
      */
-    protected $_request;
+    protected ?\Zend_Controller_Request_Abstract $_request = null;
 
     /**
      * Helper var that holds a count of route pattern's static parts
      * for validation
-     *
-     * @var int
      */
-    private $_staticCount = 0;
+    private int $_staticCount = 0;
 
     /**
      * Set the request object

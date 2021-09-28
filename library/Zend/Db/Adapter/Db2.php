@@ -62,7 +62,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
      *
      * @var array
      */
-    protected $_config = array(
+    protected array $_config = array(
         'dbname'       => null,
         'username'     => null,
         'password'     => null,
@@ -79,7 +79,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
      *
      * @var int execution flag (DB2_AUTOCOMMIT_ON or DB2_AUTOCOMMIT_OFF)
      */
-    protected $_execute_mode = DB2_AUTOCOMMIT_ON;
+    protected int $_execute_mode = DB2_AUTOCOMMIT_ON;
 
     /**
      * Default class name for a DB statement.
@@ -87,7 +87,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
      * @var string
      */
     protected $_defaultStmtClass = 'Zend_Db_Statement_Db2';
-    protected $_isI5 = false;
+    protected bool $_isI5 = false;
 
     /**
      * Keys are UPPERCASE SQL datatypes or the constants
@@ -100,7 +100,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
      *
      * @var array Associative array of datatypes to values 0, 1, or 2.
      */
-    protected $_numericDataTypes = array(
+    protected array $_numericDataTypes = array(
         Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
         Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE,

@@ -91,14 +91,10 @@ class Zend_Search_Lucene_Search_QueryToken
     const TC_PHRASE         = 1;   // Phrase (one or several quoted words)
     const TC_NUMBER         = 2;   // Nubers, which are used with syntax elements. Ex. roam~0.8
     const TC_SYNTAX_ELEMENT = 3;   // +  -  ( )  [ ]  { }  !  ||  && ~ ^
-
-
     /**
      * Token type.
-     *
-     * @var integer
      */
-    public $type;
+    public ?int $type = null;
 
     /**
      * Token text.
@@ -109,10 +105,8 @@ class Zend_Search_Lucene_Search_QueryToken
 
     /**
      * Token position within query.
-     *
-     * @var integer
      */
-    public $position;
+    public int $position;
 
 
     /**

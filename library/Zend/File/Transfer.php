@@ -36,10 +36,8 @@ class Zend_File_Transfer
 {
     /**
      * Array holding all directions
-     *
-     * @var array
      */
-    protected $_adapter = array();
+    protected array $_adapter = array();
 
     /**
      * Creates a file processing handler

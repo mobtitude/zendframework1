@@ -410,21 +410,17 @@ abstract class Zend_Pdf_Font
 
 
   /**** Class Variables ****/
-
-
     /**
      * Array whose keys are the unique PostScript names of instantiated fonts.
      * The values are the font objects themselves.
-     * @var array
      */
-    private static $_fontNames = array();
+    private static array $_fontNames = array();
 
     /**
      * Array whose keys are the md5 hash of the full paths on disk for parsed
      * fonts. The values are the font objects themselves.
-     * @var array
      */
-    private static $_fontFilePaths = array();
+    private static array $_fontFilePaths = array();
 
 
 

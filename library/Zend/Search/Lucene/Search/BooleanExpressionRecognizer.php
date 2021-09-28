@@ -49,10 +49,8 @@ class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_
 
     /**
      * NOT operator signal
-     *
-     * @var boolean
      */
-    private $_negativeLiteral = false;
+    private bool $_negativeLiteral = false;
 
     /**
      * Current literal
@@ -82,17 +80,13 @@ class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_
      *             ), // end of second conjuction
      *        ...
      *      ) // end of structure
-     *
-     * @var array
      */
-    private $_conjunctions = array();
+    private array $_conjunctions = array();
 
     /**
      * Current conjuction
-     *
-     * @var array
      */
-    private $_currentConjunction = array();
+    private array $_currentConjunction = array();
 
 
     /**

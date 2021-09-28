@@ -40,10 +40,7 @@ class Zend_Application_Resource_Translate extends Zend_Application_Resource_Reso
 {
     const DEFAULT_REGISTRY_KEY = 'Zend_Translate';
 
-    /**
-     * @var Zend_Translate
-     */
-    protected $_translate;
+    protected ?\Zend_Translate $_translate = null;
 
     /**
      * Defined by Zend_Application_Resource_Resource

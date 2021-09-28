@@ -97,18 +97,18 @@ require_once 'Zend/Gdata/Extension/EntryLink.php';
  */
 class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
 {
-    protected $_who = array();
-    protected $_when = array();
-    protected $_where = array();
+    protected array $_who = array();
+    protected array $_when = array();
+    protected array $_where = array();
     protected $_recurrence = null;
     protected $_eventStatus = null;
     protected $_comments = null;
     protected $_transparency = null;
     protected $_visibility = null;
-    protected $_recurrenceException = array();
-    protected $_extendedProperty = array();
-    protected $_originalEvent = null;
-    protected $_entryLink = null;
+    protected array $_recurrenceException = array();
+    protected array $_extendedProperty = array();
+    protected ?\Zend_Gdata_Extension_OriginalEvent $_originalEvent = null;
+    protected ?\Zend_Gdata_Extension_EntryLink $_entryLink = null;
 
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {

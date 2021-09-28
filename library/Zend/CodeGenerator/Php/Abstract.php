@@ -43,7 +43,7 @@ abstract class Zend_CodeGenerator_Php_Abstract extends Zend_CodeGenerator_Abstra
     /**
      * @var bool
      */
-    protected $_isSourceDirty = true;
+    protected bool $_isSourceDirty = true;
 
     /**
      * @var int|string

@@ -36,10 +36,8 @@ class Zend_Console_Getopt_Exception extends Zend_Exception
 {
     /**
      * Usage
-     *
-     * @var string
      */
-    protected $usage = '';
+    protected string $usage = '';
 
     /**
      * Constructor

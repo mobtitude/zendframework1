@@ -58,17 +58,13 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
 {
     /**
      * Associative array containing all configured db's
-     *
-     * @var array
      */
-    protected $_dbs = array();
+    protected array $_dbs = array();
 
     /**
      * An instance of the default db, if set
-     *
-     * @var null|Zend_Db_Adapter_Abstract
      */
-    protected $_defaultDb;
+    protected ?\Zend_Db_Adapter_Abstract $_defaultDb = null;
 
     /**
      * Initialize the Database Connections (instances of Zend_Db_Table_Abstract)

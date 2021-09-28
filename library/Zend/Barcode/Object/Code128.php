@@ -45,14 +45,11 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
      * (even if it's sometime optional, most of time it's required)
      * @var boolean
      */
-    protected $_withChecksum = true;
+    protected bool $_withChecksum = true;
 
-    /**
-     * @var array
-     */
-    protected $_convertedText = array();
+    protected array $_convertedText = array();
 
-    protected $_codingMap = array(
+    protected array $_codingMap = array(
                  0 => "11011001100",   1 => "11001101100",   2 => "11001100110",
                  3 => "10010011000",   4 => "10010001100",   5 => "10001001100",
                  6 => "10011001000",   7 => "10011000100",   8 => "10001100100",
@@ -92,10 +89,9 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
                106 => "1100011101011");
 
     /**
-    * Character sets ABC
-    * @var array
-    */
-    protected $_charSets = array(
+     * Character sets ABC
+     */
+    protected array $_charSets = array(
         'A' => array(
             ' ', '!', '"', '#', '$', '%', '&', "'",
             '(', ')', '*', '+', ',', '-', '.', '/',

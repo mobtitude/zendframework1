@@ -37,31 +37,26 @@ class Zend_Amf_Value_Messaging_ErrorMessage extends Zend_Amf_Value_Messaging_Ack
 {
     /**
      * Additional data with error
-     * @var object
      */
-    public $extendedData = null;
+    public ?object $extendedData = null;
 
     /**
      * Error code number
-     * @var string
      */
-    public $faultCode;
+    public string $faultCode;
 
     /**
      * Description as to the cause of the error
-     * @var string
      */
-    public $faultDetail;
+    public string $faultDetail;
 
     /**
      * Short description of error
-     * @var string
      */
-    public $faultString = '';
+    public string $faultString = '';
 
     /**
      * root cause of error
-     * @var object
      */
-    public $rootCause = null;
+    public ?object $rootCause = null;
 }

@@ -35,17 +35,17 @@
 class Zend_Locale_Math
 {
     // support unit testing without using bcmath functions
-    public static $_bcmathDisabled = false;
+    public static bool $_bcmathDisabled = false;
 
-    public static $add   = array('Zend_Locale_Math', 'Add');
-    public static $sub   = array('Zend_Locale_Math', 'Sub');
-    public static $pow   = array('Zend_Locale_Math', 'Pow');
-    public static $mul   = array('Zend_Locale_Math', 'Mul');
-    public static $div   = array('Zend_Locale_Math', 'Div');
-    public static $comp  = array('Zend_Locale_Math', 'Comp');
-    public static $sqrt  = array('Zend_Locale_Math', 'Sqrt');
-    public static $mod   = array('Zend_Locale_Math', 'Mod');
-    public static $scale = 'bcscale';
+    public static array $add   = array('Zend_Locale_Math', 'Add');
+    public static array $sub   = array('Zend_Locale_Math', 'Sub');
+    public static array $pow   = array('Zend_Locale_Math', 'Pow');
+    public static array $mul   = array('Zend_Locale_Math', 'Mul');
+    public static array $div   = array('Zend_Locale_Math', 'Div');
+    public static array $comp  = array('Zend_Locale_Math', 'Comp');
+    public static array $sqrt  = array('Zend_Locale_Math', 'Sqrt');
+    public static array $mod   = array('Zend_Locale_Math', 'Mod');
+    public static string $scale = 'bcscale';
 
     public static function isBcmathDisabled()
     {

@@ -44,7 +44,7 @@ class Zend_Validate_File_Count extends Zend_Validate_Abstract
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::TOO_MANY => "Too many files, maximum '%max%' are allowed but '%count%' are given",
         self::TOO_FEW  => "Too few files, minimum '%min%' are expected but '%count%' are given",
     );
@@ -52,7 +52,7 @@ class Zend_Validate_File_Count extends Zend_Validate_Abstract
     /**
      * @var array Error message template variables
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'min'   => '_min',
         'max'   => '_max',
         'count' => '_count'
@@ -62,32 +62,25 @@ class Zend_Validate_File_Count extends Zend_Validate_Abstract
      * Minimum file count
      *
      * If null, there is no minimum file count
-     *
-     * @var integer
      */
-    protected $_min;
+    protected ?int $_min = null;
 
     /**
      * Maximum file count
      *
      * If null, there is no maximum file count
-     *
-     * @var integer|null
      */
-    protected $_max;
+    protected ?int $_max = null;
 
     /**
      * Actual filecount
-     *
-     * @var integer
      */
-    protected $_count;
+    protected ?int $_count = null;
 
     /**
      * Internal file array
-     * @var array
      */
-    protected $_files;
+    protected ?array $_files = null;
 
     /**
      * Sets validator options

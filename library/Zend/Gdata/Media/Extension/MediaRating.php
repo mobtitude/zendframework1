@@ -38,13 +38,10 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_Media_Extension_MediaRating extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'rating';
-    protected $_rootNamespace = 'media';
+    protected ?string $_rootElement = 'rating';
+    protected string $_rootNamespace = 'media';
 
-    /**
-     * @var string
-     */
-    protected $_scheme = null;
+    protected ?string $_scheme = null;
 
     /**
      * Constructs a new MediaRating element

@@ -45,10 +45,8 @@ class Zend_Gdata_Photos_PhotoQuery extends Zend_Gdata_Photos_AlbumQuery
 
     /**
      * The ID of the photo to query for.
-     *
-     * @var string
      */
-    protected $_photoId = null;
+    protected ?string $_photoId = null;
 
     /**
      * Set the photo ID to query for. When set, this photo's comments/tags

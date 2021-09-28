@@ -39,7 +39,7 @@ class Zend_Service_ShortUrl_JdemCz extends Zend_Service_ShortUrl_AbstractShorten
      *
      * @var string
      */
-    protected $_baseUri = 'http://jdem.cz';
+    protected ?string $_baseUri = 'http://jdem.cz';
 
     /**
      * This function shortens long url

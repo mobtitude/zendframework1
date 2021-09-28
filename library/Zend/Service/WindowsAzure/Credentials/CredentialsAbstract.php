@@ -51,24 +51,18 @@ abstract class Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 
 	/**
 	 * Account name for Windows Azure
-	 *
-	 * @var string
 	 */
-	protected $_accountName = '';
+	protected string $_accountName = '';
 	
 	/**
 	 * Account key for Windows Azure
-	 *
-	 * @var string
 	 */
-	protected $_accountKey = '';
+	protected string $_accountKey = '';
 	
 	/**
 	 * Use path-style URI's
-	 *
-	 * @var boolean
 	 */
-	protected $_usePathStyleUri = false;
+	protected bool $_usePathStyleUri = false;
 	
 	/**
 	 * Creates a new Zend_Service_WindowsAzure_Credentials_CredentialsAbstract instance

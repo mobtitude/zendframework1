@@ -67,10 +67,8 @@ class Zend_Feed_Pubsubhubbub
 
     /**
      * Singleton instance if required of the HTTP client
-     *
-     * @var Zend_Http_Client
      */
-    protected static $httpClient = null;
+    protected static ?\Zend_Http_Client $httpClient = null;
 
     /**
      * Simple utility function which imports any feed URL and

@@ -41,17 +41,13 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
 
     /**
      * Column names.
-     *
-     * @var array
      */
-    protected $_keys;
+    protected ?array $_keys = null;
 
     /**
      * Fetched result values.
-     *
-     * @var array
      */
-    protected $_values;
+    protected ?array $_values = null;
 
     /**
      * @var array

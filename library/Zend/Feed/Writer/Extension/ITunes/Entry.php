@@ -29,17 +29,13 @@ class Zend_Feed_Writer_Extension_ITunes_Entry
 {
     /**
      * Array of Feed data for rendering by Extension's renderers
-     *
-     * @var array
      */
-    protected $_data = array();
+    protected array $_data = array();
 
     /**
      * Encoding of all text values
-     *
-     * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
     /**
      * Set feed encoding

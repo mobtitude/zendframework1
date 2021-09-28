@@ -37,12 +37,12 @@ class Zend_Queue_Adapter_Db_Message extends Zend_Db_Table_Abstract
     /**
      * @var string
      */
-    protected $_name = 'message';
+    protected ?string $_name = 'message';
 
     /**
-     * @var string
+     * @var array
      */
-    protected $_primary = 'message_id';
+    protected ?array $_primary = ['message_id'];
 
     /**
      * @var mixed

@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_DataDirectory extends Zend_Tool_Project_Conte
     /**
      * @var string
      */
-    protected $_filesystemName = 'data';
+    protected ?string $_filesystemName = 'data';
 
     /**
      * getName()

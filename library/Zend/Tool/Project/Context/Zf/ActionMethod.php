@@ -44,20 +44,11 @@ require_once 'Zend/Reflection/File.php';
 class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Context_Interface
 {
 
-    /**
-     * @var Zend_Tool_Project_Profile_Resource
-     */
-    protected $_resource = null;
+    protected ?\Zend_Tool_Project_Profile_Resource $_resource = null;
 
-    /**
-     * @var Zend_Tool_Project_Profile_Resource
-     */
-    protected $_controllerResource = null;
+    protected ?\Zend_Tool_Project_Profile_Resource_Container $_controllerResource = null;
 
-    /**
-     * @var string
-     */
-    protected $_controllerPath = '';
+    protected string $_controllerPath = '';
 
     /**
      * @var string

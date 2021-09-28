@@ -46,7 +46,7 @@ class Zend_Form_Element_Note extends Zend_Form_Element_Xhtml
      *
      * @var bool
      */
-    protected $_ignore = true;
+    protected bool $_ignore = true;
     
     /**
      * Validate element value (pseudo)

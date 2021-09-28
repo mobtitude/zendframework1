@@ -34,10 +34,7 @@ require_once 'Zend/Stdlib/PriorityQueue.php';
  */
 class Zend_EventManager_GlobalEventManager
 {
-    /**
-     * @var Zend_EventManager_EventCollection
-     */
-    protected static $events;
+    protected static ?\Zend_EventManager_EventCollection $events = null;
 
     /**
      * Set the event collection on which this will operate

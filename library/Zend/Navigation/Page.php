@@ -36,52 +36,40 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
 {
     /**
      * Page label
-     *
-     * @var string|null
      */
-    protected $_label;
+    protected ?string $_label = null;
 
     /**
      * Fragment identifier (anchor identifier)
-     * 
+     *
      * The fragment identifier (anchor identifier) pointing to an anchor within 
      * a resource that is subordinate to another, primary resource.
      * The fragment identifier introduced by a hash mark "#".
      * Example: http://www.example.org/foo.html#bar ("bar" is the fragment identifier)
-     * 
+     *
      * @link http://www.w3.org/TR/html401/intro/intro.html#fragment-uri
-     * 
-     * @var string|null
      */
-    protected $_fragment;
+    protected ?string $_fragment = null;
 
     /**
      * Page id
-     *
-     * @var string|null
      */
-    protected $_id;
+    protected ?string $_id = null;
 
     /**
      * Style class for this page (CSS)
-     *
-     * @var string|null
      */
-    protected $_class;
+    protected ?string $_class = null;
 
     /**
      * A more descriptive title for this page
-     *
-     * @var string|null
      */
-    protected $_title;
+    protected ?string $_title = null;
 
     /**
      * This page's target
-     *
-     * @var string|null
      */
-    protected $_target;
+    protected ?string $_target = null;
 
     /**
      * Accessibility key character
@@ -90,35 +78,27 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
      * single character from the document character set.
      *
      * @link http://www.w3.org/TR/html401/interact/forms.html#access-keys
-     *
-     * @var string|null
      */
-    protected $_accesskey;
+    protected ?string $_accesskey = null;
 
     /**
      * Forward links to other pages
      *
      * @link http://www.w3.org/TR/html4/struct/links.html#h-12.3.1
-     *
-     * @var array
      */
-    protected $_rel = array();
+    protected array $_rel = array();
 
     /**
      * Reverse links to other pages
      *
      * @link http://www.w3.org/TR/html4/struct/links.html#h-12.3.1
-     *
-     * @var array
      */
-    protected $_rev = array();
+    protected array $_rev = array();
 
     /**
      * Page order used by parent container
-     *
-     * @var int|null
      */
-    protected $_order;
+    protected ?int $_order = null;
 
     /**
      * ACL resource associated with this page
@@ -129,10 +109,8 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
 
     /**
      * ACL privilege associated with this page
-     *
-     * @var string|null
      */
-    protected $_privilege;
+    protected ?string $_privilege = null;
 
     /**
      * Whether this page should be considered active
@@ -143,38 +121,28 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
 
     /**
      * Whether this page should be considered visible
-     *
-     * @var bool
      */
-    protected $_visible = true;
+    protected bool $_visible = true;
 
     /**
      * Parent container
-     *
-     * @var Zend_Navigation_Container|null
      */
-    protected $_parent;
+    protected ?\Zend_Navigation_Container $_parent = null;
 
     /**
      * Custom page properties, used by __set(), __get() and __isset()
-     *
-     * @var array
      */
-    protected $_properties = array();
+    protected array $_properties = array();
 
     /**
      * Custom HTML attributes
-     *
-     * @var array
      */
-    protected $_customHtmlAttribs = array();
+    protected array $_customHtmlAttribs = array();
 
     /**
      * The type of page to use when it wasn't set
-     *
-     * @var string
      */
-    protected static $_defaultPageType;
+    protected static ?string $_defaultPageType = null;
 
     // Initialization:
 

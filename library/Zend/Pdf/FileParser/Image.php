@@ -42,10 +42,8 @@ abstract class Zend_Pdf_FileParser_Image extends Zend_Pdf_FileParser
 {
     /**
      * Image Type
-     *
-     * @var integer
      */
-    protected $imageType;
+    protected int $imageType;
 
     /**
      * Object constructor.

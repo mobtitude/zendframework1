@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_LayoutScriptsDirectory extends Zend_Tool_Proj
     /**
      * @var string
      */
-    protected $_filesystemName = 'scripts';
+    protected ?string $_filesystemName = 'scripts';
 
     /**
      * getName()

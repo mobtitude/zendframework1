@@ -39,18 +39,14 @@ class Zend_Search_Lucene_Search_Query_Phrase extends Zend_Search_Lucene_Search_Q
     /**
      * Terms to find.
      * Array of Zend_Search_Lucene_Index_Term objects.
-     *
-     * @var array
      */
-    private $_terms;
+    private ?array $_terms = null;
 
     /**
      * Term positions (relative positions of terms within the phrase).
      * Array of integers
-     *
-     * @var array
      */
-    private $_offsets;
+    private ?array $_offsets;
 
     /**
      * Sets the number of other words permitted between words in query phrase.
@@ -66,27 +62,21 @@ class Zend_Search_Lucene_Search_Query_Phrase extends Zend_Search_Lucene_Search_Q
      * results are sorted by exactness.
      *
      * The slop is zero by default, requiring exact matches.
-     *
-     * @var integer
      */
-    private $_slop;
+    private int $_slop;
 
     /**
      * Result vector.
-     *
-     * @var array
      */
-    private $_resVector = null;
+    private ?array $_resVector = null;
 
     /**
      * Terms positions vectors.
      * Array of Arrays:
      * term1Id => (docId => array( pos1, pos2, ... ), ...)
      * term2Id => (docId => array( pos1, pos2, ... ), ...)
-     *
-     * @var array
      */
-    private $_termsPositions = array();
+    private array $_termsPositions = array();
 
     /**
      * Class constructor.  Create a new prase query.

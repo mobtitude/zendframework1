@@ -49,15 +49,9 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
      */
     protected $_interactiveCallback = null;
 
-    /**
-     * @var bool
-     */
-    protected $_isInitialized = false;
+    protected bool $_isInitialized = false;
 
-    /**
-     * @var Zend_Log
-     */
-    protected $_debugLogger = null;
+    protected ?\Zend_Log $_debugLogger = null;
 
     public function __construct($options = array())
     {

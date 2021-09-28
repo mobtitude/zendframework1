@@ -43,17 +43,15 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::INVALID  => "Invalid type given. String or integer expected",
         self::NO_MATCH => "'%value%' does not appear to be a postal code",
     );
 
     /**
      * Locale to use
-     *
-     * @var string
      */
-    protected $_locale;
+    protected ?string $_locale = null;
 
     /**
      * Manual postal code format

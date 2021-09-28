@@ -39,66 +39,48 @@ class Zend_Service_Yahoo_VideoResult extends Zend_Service_Yahoo_Result
 {
     /**
      * Summary info for the video
-     *
-     * @var string
      */
-    public $Summary;
+    public string $Summary;
 
     /**
      * The URL of the webpage hosting the video
-     *
-     * @var string
      */
-    public $RefererUrl;
+    public string $RefererUrl;
 
     /**
      * The size of the files in bytes
-     *
-     * @var string
      */
-    public $FileSize;
+    public string $FileSize;
 
     /**
      * The type of file (bmp, gif, jpeg, etc.)
-     *
-     * @var string
      */
-    public $FileFormat;
+    public string $FileFormat;
 
     /**
      * The height of the video in pixels
-     *
-     * @var string
      */
-    public $Height;
+    public string $Height;
 
     /**
      * The width of the video in pixels
-     *
-     * @var string
      */
-    public $Width;
+    public string $Width;
 
     /**
      * The duration of the video in seconds
-     *
-     * @var string
      */
-    public $Duration;
+    public string $Duration;
 
     /**
      * The number of audio channels in the video
-     *
-     * @var string
      */
-    public $Channels;
+    public string $Channels;
 
     /**
      * Whether the video is streamed or not
-     *
-     * @var boolean
      */
-    public $Streaming;
+    public bool $Streaming;
 
     /**
      * The thubmnail video for the article, if it exists
@@ -109,10 +91,8 @@ class Zend_Service_Yahoo_VideoResult extends Zend_Service_Yahoo_Result
 
     /**
      * Video result namespace
-     *
-     * @var string
      */
-    protected $_namespace = 'urn:yahoo:srchmv';
+    protected string $_namespace = 'urn:yahoo:srchmv';
 
 
     /**

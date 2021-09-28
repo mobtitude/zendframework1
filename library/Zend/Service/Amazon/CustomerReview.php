@@ -31,40 +31,19 @@
  */
 class Zend_Service_Amazon_CustomerReview
 {
-    /**
-     * @var string
-     */
-    public $Rating;
+    public string $Rating;
 
-    /**
-     * @var string
-     */
-    public $HelpfulVotes;
+    public string $HelpfulVotes;
 
-    /**
-     * @var string
-     */
-    public $CustomerId;
+    public string $CustomerId;
 
-    /**
-     * @var string
-     */
-    public $TotalVotes;
+    public string $TotalVotes;
 
-    /**
-     * @var string
-     */
-    public $Date;
+    public string $Date;
 
-    /**
-     * @var string
-     */
-    public $Summary;
+    public string $Summary;
 
-    /**
-     * @var string
-     */
-    public $Content;
+    public string $Content;
 
     /**
      * Assigns values to properties relevant to CustomerReview

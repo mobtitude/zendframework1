@@ -39,14 +39,12 @@ class Zend_Tag_Cloud_Decorator_HtmlCloud extends Zend_Tag_Cloud_Decorator_Cloud
     /**
      * @var string Encoding to use
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
     /**
      * List of HTML tags
-     *
-     * @var array
      */
-    protected $_htmlTags = array(
+    protected array $_htmlTags = array(
         'ul' => array('class' => 'Zend_Tag_Cloud')
     );
 

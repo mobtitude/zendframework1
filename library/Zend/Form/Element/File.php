@@ -51,22 +51,22 @@ class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
     /**
      * @var boolean Already validated ?
      */
-    protected $_validated = false;
+    protected bool $_validated = false;
 
     /**
      * @var boolean Disable value to be equal to file content
      */
-    protected $_valueDisabled = false;
+    protected bool $_valueDisabled = false;
 
     /**
      * @var integer Internal multifile counter
      */
-    protected $_counter = 1;
+    protected int $_counter = 1;
 
     /**
      * @var integer Maximum file size for MAX_FILE_SIZE attribut of form
      */
-    protected static $_maxFileSize = -1;
+    protected static int $_maxFileSize = -1;
 
     /**
      * Load default decorators

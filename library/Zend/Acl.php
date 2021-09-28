@@ -80,17 +80,13 @@ class Zend_Acl
 
     /**
      * Role registry
-     *
-     * @var Zend_Acl_Role_Registry
      */
-    protected $_roleRegistry = null;
+    protected ?\Zend_Acl_Role_Registry $_roleRegistry = null;
 
     /**
      * Resource tree
-     *
-     * @var array
      */
-    protected $_resources = array();
+    protected array $_resources = array();
 
     /**
      * @var Zend_Acl_Role_Interface
@@ -102,17 +98,12 @@ class Zend_Acl
      */
     protected $_isAllowedResource = null;
 
-    /**
-     * @var String
-     */
-    protected $_isAllowedPrivilege = null;
+    protected ?string $_isAllowedPrivilege = null;
 
     /**
      * ACL rules; whitelist (deny everything to all) by default
-     *
-     * @var array
      */
-    protected $_rules = array(
+    protected array $_rules = array(
         'allResources' => array(
             'allRoles' => array(
                 'allPrivileges' => array(

@@ -46,7 +46,7 @@ class Zend_Cache_Backend_Static
      * Static backend options
      * @var array
      */
-    protected $_options = array(
+    protected array $_options = array(
         'public_dir'           => null,
         'sub_dir'              => 'html',
         'file_extension'       => '.html',
@@ -61,9 +61,8 @@ class Zend_Cache_Backend_Static
 
     /**
      * Cache for handling tags
-     * @var Zend_Cache_Core
      */
-    protected $_tagCache = null;
+    protected ?\Zend_Cache_Core $_tagCache = null;
 
     /**
      * Tagged items

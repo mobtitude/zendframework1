@@ -42,10 +42,8 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
 {
     /**
      * Action dictionary
-     *
-     * @var Zend_Pdf_Element_Dictionary|Zend_Pdf_Element_Object|Zend_Pdf_Element_Reference
      */
-    protected $_actionDictionary;
+    protected \Zend_Pdf_Element $_actionDictionary;
 
 
     /**
@@ -53,14 +51,14 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
      *
      * @var array  Array of Zend_Pdf_Action objects
      */
-    protected $_originalNextList;
+    protected array $_originalNextList;
 
     /**
      * A list of next actions in actions tree (used for actions chaining)
      *
      * @var array  Array of Zend_Pdf_Action objects
      */
-    public $next = array();
+    public array $next = array();
 
     /**
      * Object constructor

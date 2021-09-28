@@ -55,7 +55,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      *
      * @var array Available options
      */
-    protected $_options = array(
+    protected array $_options = array(
         'cache_db_complete_path' => null,
         'automatic_vacuum_factor' => 10
     );
@@ -69,10 +69,8 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
 
     /**
      * Boolean to store if the structure has benn checked or not
-     *
-     * @var boolean $_structureChecked
      */
-    private $_structureChecked = false;
+    private bool $_structureChecked = false;
 
     /**
      * Constructor

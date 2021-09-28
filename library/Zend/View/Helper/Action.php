@@ -33,25 +33,13 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
 {
-    /**
-     * @var string
-     */
-    public $defaultModule;
+    public string $defaultModule;
 
-    /**
-     * @var Zend_Controller_Dispatcher_Interface
-     */
-    public $dispatcher;
+    public \Zend_Controller_Dispatcher_Interface $dispatcher;
 
-    /**
-     * @var Zend_Controller_Request_Abstract
-     */
-    public $request;
+    public ?\Zend_Controller_Request_Abstract $request = null;
 
-    /**
-     * @var Zend_Controller_Response_Abstract
-     */
-    public $response;
+    public ?\Zend_Controller_Response_Abstract $response = null;
 
     /**
      * Constructor

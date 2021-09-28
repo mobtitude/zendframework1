@@ -35,34 +35,26 @@ class Zend_Feed_Pubsubhubbub_Publisher
     /**
      * An array of URLs for all Hub Servers used by the Publisher, and to
      * which all topic update notifications will be sent.
-     *
-     * @var array
      */
-    protected $_hubUrls = array();
+    protected array $_hubUrls = array();
 
     /**
      * An array of topic (Atom or RSS feed) URLs which have been updated and
      * whose updated status will be notified to all Hub Servers.
-     *
-     * @var array
      */
-    protected $_updatedTopicUrls = array();
+    protected array $_updatedTopicUrls = array();
 
     /**
      * An array of any errors including keys for 'response', 'hubUrl'.
      * The response is the actual Zend_Http_Response object.
-     *
-     * @var array
      */
-    protected $_errors = array();
+    protected array $_errors = array();
 
     /**
      * An array of topic (Atom or RSS feed) URLs which have been updated and
      * whose updated status will be notified to all Hub Servers.
-     *
-     * @var array
      */
-    protected $_parameters = array();
+    protected array $_parameters = array();
 
     /**
      * Constructor; accepts an array or Zend_Config instance to preset

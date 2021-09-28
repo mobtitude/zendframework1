@@ -40,10 +40,8 @@ class Zend_Auth_Adapter_Http_Resolver_File implements Zend_Auth_Adapter_Http_Res
 {
     /**
      * Path to credentials file
-     *
-     * @var string
      */
-    protected $_file;
+    protected ?string $_file = null;
 
     /**
      * Constructor

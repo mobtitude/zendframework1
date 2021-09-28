@@ -50,7 +50,7 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
      *
      * @var array
      */
-    protected $_config = array(
+    protected array $_config = array(
         'dbname'       => null,
         'username'     => null,
         'password'     => null,
@@ -58,17 +58,13 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
 
     /**
      * Last insert id from INSERT query
-     *
-     * @var int
      */
-    protected $_lastInsertId;
+    protected ?string $_lastInsertId = null;
 
     /**
      * Query used to fetch last insert id
-     *
-     * @var string
      */
-    protected $_lastInsertSQL = 'SELECT SCOPE_IDENTITY() as Current_Identity';
+    protected string $_lastInsertSQL = 'SELECT SCOPE_IDENTITY() as Current_Identity';
 
     /**
      * Keys are UPPERCASE SQL datatypes or the constants
@@ -81,7 +77,7 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
      *
      * @var array Associative array of datatypes to values 0, 1, or 2.
      */
-    protected $_numericDataTypes = array(
+    protected array $_numericDataTypes = array(
         Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
         Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE,

@@ -44,33 +44,33 @@ abstract class Zend_Gdata_App_Base
     /**
      * @var string The XML element name, including prefix if desired
      */
-    protected $_rootElement = null;
+    protected ?string $_rootElement = null;
 
     /**
      * @var string The XML namespace prefix
      */
-    protected $_rootNamespace = 'atom';
+    protected string $_rootNamespace = 'atom';
 
     /**
      * @var string The XML namespace URI - takes precedence over lookup up the
      * corresponding URI for $_rootNamespace
      */
-    protected $_rootNamespaceURI = null;
+    protected ?string $_rootNamespaceURI = null;
 
     /**
      * @var array Leftover elements which were not handled
      */
-    protected $_extensionElements = array();
+    protected array $_extensionElements = array();
 
     /**
      * @var array Leftover attributes which were not handled
      */
-    protected $_extensionAttributes = array();
+    protected array $_extensionAttributes = array();
 
     /**
      * @var string XML child text node content
      */
-    protected $_text = null;
+    protected ?string $_text = null;
 
     /**
      * @var array Memoized results from calls to lookupNamespace() to avoid
@@ -78,24 +78,23 @@ abstract class Zend_Gdata_App_Base
      *      form 'prefix-majorVersion-minorVersion', and the value is the
      *      output from getGreatestBoundedValue().
      */
-    protected static $_namespaceLookupCache = array();
+    protected static array $_namespaceLookupCache = array();
 
     /**
-     * List of namespaces, as a three-dimensional array. The first dimension
-     * represents the namespace prefix, the second dimension represents the
-     * minimum major protocol version, and the third dimension is the minimum
-     * minor protocol version. Null keys are NOT allowed.
-     *
-     * When looking up a namespace for a given prefix, the greatest version
-     * number (both major and minor) which is less than the effective version
-     * should be used.
-     *
-     * @see lookupNamespace()
-     * @see registerNamespace()
-     * @see registerAllNamespaces()
-     * @var array
-     */
-   protected $_namespaces = array(
+    * List of namespaces, as a three-dimensional array. The first dimension
+    * represents the namespace prefix, the second dimension represents the
+    * minimum major protocol version, and the third dimension is the minimum
+    * minor protocol version. Null keys are NOT allowed.
+    *
+    * When looking up a namespace for a given prefix, the greatest version
+    * number (both major and minor) which is less than the effective version
+    * should be used.
+    *
+    * @see lookupNamespace()
+    * @see registerNamespace()
+    * @see registerAllNamespaces()
+    */
+   protected array $_namespaces = array(
         'atom'      => array(
             1 => array(
                 0 => 'http://www.w3.org/2005/Atom'

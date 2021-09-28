@@ -35,7 +35,7 @@ class Zend_Serializer_Adapter_PhpSerialize extends Zend_Serializer_Adapter_Adapt
     /**
      *  @var null|string Serialized boolean false value
      */
-    private static $_serializedFalse = null;
+    private static ?string $_serializedFalse = null;
 
     /**
      * Constructor

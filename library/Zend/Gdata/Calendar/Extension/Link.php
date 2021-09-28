@@ -43,7 +43,7 @@ require_once 'Zend/Gdata/Calendar/Extension/WebContent.php';
 class Zend_Gdata_Calendar_Extension_Link extends Zend_Gdata_App_Extension_Link
 {
 
-    protected $_webContent = null;
+    protected ?\Zend_Gdata_Calendar_Extension_Webcontent $_webContent = null;
 
     /**
      * Constructs a new Zend_Gdata_Calendar_Extension_Link object.

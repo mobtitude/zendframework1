@@ -36,10 +36,8 @@ class Zend_Acl_Resource implements Zend_Acl_Resource_Interface
 {
     /**
      * Unique id of Resource
-     *
-     * @var string
      */
-    protected $_resourceId;
+    protected string $_resourceId;
 
     /**
      * Sets the Resource identifier

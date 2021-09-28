@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_LogsDirectory extends Zend_Tool_Project_Conte
     /**
      * @var string
      */
-    protected $_filesystemName = 'logs';
+    protected ?string $_filesystemName = 'logs';
 
     /**
      * getName()

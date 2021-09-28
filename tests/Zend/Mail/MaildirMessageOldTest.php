@@ -45,7 +45,7 @@ class Zend_Mail_Storage_Maildir_OldMessage extends Zend_Mail_Storage_Maildir
      * used message class
      * @var string
      */
-    protected $_messageClass = 'Zend_Mail_Message';
+    protected string $_messageClass = 'Zend_Mail_Message';
 }
 
 /**

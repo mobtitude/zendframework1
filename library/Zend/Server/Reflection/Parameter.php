@@ -32,28 +32,22 @@
  */
 class Zend_Server_Reflection_Parameter
 {
-    /**
-     * @var ReflectionParameter
-     */
-    protected $_reflection;
+    protected \ReflectionParameter $_reflection;
 
     /**
      * Parameter position
-     * @var int
      */
-    protected $_position;
+    protected ?int $_position = null;
 
     /**
      * Parameter type
-     * @var string
      */
-    protected $_type;
+    protected ?string $_type = null;
 
     /**
      * Parameter description
-     * @var string
      */
-    protected $_description;
+    protected ?string $_description = null;
 
     /**
      * Constructor

@@ -63,7 +63,7 @@ class Zend_Validate_CreditCard extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::CHECKSUM       => "'%value%' seems to contain an invalid checksum",
         self::CONTENT        => "'%value%' must contain only digits",
         self::INVALID        => "Invalid type given. String expected",
@@ -75,10 +75,8 @@ class Zend_Validate_CreditCard extends Zend_Validate_Abstract
 
     /**
      * List of allowed CCV lengths
-     *
-     * @var array
      */
-    protected $_cardLength = array(
+    protected array $_cardLength = array(
         self::AMERICAN_EXPRESS => array(15),
         self::DINERS_CLUB      => array(14),
         self::DINERS_CLUB_US   => array(16),
@@ -94,10 +92,8 @@ class Zend_Validate_CreditCard extends Zend_Validate_Abstract
 
     /**
      * List of accepted CCV provider tags
-     *
-     * @var array
      */
-    protected $_cardType = array(
+    protected array $_cardType = array(
         self::AMERICAN_EXPRESS => array('34', '37'),
         self::DINERS_CLUB      => array('300', '301', '302', '303', '304', '305', '36'),
         self::DINERS_CLUB_US   => array('54', '55'),
@@ -121,10 +117,8 @@ class Zend_Validate_CreditCard extends Zend_Validate_Abstract
 
     /**
      * CCIs which are accepted by validation
-     *
-     * @var array
      */
-    protected $_type = array();
+    protected array $_type = array();
 
     /**
      * Service callback for additional validation

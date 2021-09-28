@@ -41,17 +41,17 @@ require_once 'Zend/Xml/Exception.php';
 class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
     // Internal variables
     private $_file        = false;
-    private $_useId       = true;
-    private $_cleared     = array();
-    private $_transunit   = null;
+    private bool $_useId       = true;
+    private array $_cleared     = array();
+    private ?bool $_transunit   = null;
     private $_source      = null;
     private $_target      = null;
     private $_langId      = null;
     private $_scontent    = null;
     private $_tcontent    = null;
-    private $_stag        = false;
-    private $_ttag        = false;
-    private $_data        = array();
+    private bool $_stag        = false;
+    private bool $_ttag        = false;
+    private array $_data        = array();
 
     /**
      * Load translation data (XLIFF file reader)

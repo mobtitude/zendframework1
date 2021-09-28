@@ -39,10 +39,8 @@ class Zend_Service_Ebay_Finding_Aspect extends Zend_Service_Ebay_Finding_Abstrac
      * Container that returns the name of the respective aspect value and the
      * histogram (the number of available items) that share that item
      * characteristic.
-     *
-     * @var Zend_Service_Ebay_Finding_Aspect_Histogram_Value_Set
      */
-    public $valueHistogram;
+    public ?\Zend_Service_Ebay_Finding_Aspect_Histogram_Value_Set $valueHistogram = null;
 
     /**
      * @return void

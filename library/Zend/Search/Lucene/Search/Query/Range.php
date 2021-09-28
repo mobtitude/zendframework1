@@ -36,17 +36,13 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
 {
     /**
      * Lower term.
-     *
-     * @var Zend_Search_Lucene_Index_Term
      */
-    private $_lowerTerm;
+    private ?\Zend_Search_Lucene_Index_Term $_lowerTerm;
 
     /**
      * Upper term.
-     *
-     * @var Zend_Search_Lucene_Index_Term
      */
-    private $_upperTerm;
+    private ?\Zend_Search_Lucene_Index_Term $_upperTerm;
 
 
     /**
@@ -58,10 +54,8 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
 
     /**
      * Inclusive
-     *
-     * @var boolean
      */
-    private $_inclusive;
+    private bool $_inclusive;
 
     /**
      * Matched terms.
@@ -71,10 +65,8 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
      * post-processing
      *
      * Array of Zend_Search_Lucene_Index_Term objects
-     *
-     * @var array
      */
-    private $_matches = null;
+    private ?array $_matches = null;
 
 
     /**

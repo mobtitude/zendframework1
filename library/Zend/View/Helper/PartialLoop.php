@@ -37,9 +37,8 @@ class Zend_View_Helper_PartialLoop extends Zend_View_Helper_Partial
 
     /**
      * Marker to where the pointer is at in the loop
-     * @var integer
      */
-    protected $partialCounter = 0;
+    protected ?int $partialCounter = 0;
 
     /**
      * Renders a template fragment within a variable scope distinct from the

@@ -46,30 +46,15 @@ require_once 'Zend/Db/Profiler.php';
  */
 class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
 {
-    /**
-     * @var array
-     */
-    protected $_statementStack = array();
+    protected array $_statementStack = array();
 
-    /**
-     * @var boolean
-     */
-    protected $_connected = false;
+    protected bool $_connected = false;
 
-    /**
-     * @var array
-     */
-    protected $_listTables = array();
+    protected array $_listTables = array();
 
-    /**
-     * @var array
-     */
-    protected $_lastInsertIdStack = array();
+    protected array $_lastInsertIdStack = array();
 
-    /**
-     * @var array
-     */
-    protected $_describeTables = array();
+    protected array $_describeTables = array();
 
     /**
      * @var string

@@ -55,10 +55,8 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
     /**
      * What host/port are we connected to?
-     *
-     * @var array
      */
-    protected $connected_to = array(null, null);
+    protected array $connected_to = array(null, null);
 
     /**
      * Stream for storing output
@@ -82,10 +80,8 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
 
     /**
      * Request method - will be set by write() and might be used by read()
-     *
-     * @var string
      */
-    protected $method = null;
+    protected ?string $method = null;
 
     /**
      * Stream context

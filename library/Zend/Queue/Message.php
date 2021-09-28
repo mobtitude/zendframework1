@@ -33,26 +33,20 @@ class Zend_Queue_Message
 {
     /**
      * The data for the queue message
-     *
-     * @var array
      */
-    protected $_data = array();
+    protected array $_data = array();
 
      /**
      * Connected is true if we have a reference to a live
      * Zend_Queue_Adapter_Abstract object.
      * This is false after the Message has been deserialized.
-     *
-     * @var boolean
      */
-    protected $_connected = true;
+    protected bool $_connected = true;
 
     /**
      * Zend_Queue parent class or instance
-     *
-     * @var Zend_Queue
      */
-    protected $_queue = null;
+    protected ?\Zend_Queue $_queue = null;
 
     /**
      * Name of the class of the Zend_Queue

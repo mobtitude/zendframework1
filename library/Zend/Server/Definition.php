@@ -33,12 +33,12 @@ class Zend_Server_Definition implements Countable, Iterator
     /**
      * @var array Array of Zend_Server_Method_Definition objects
      */
-    protected $_methods = array();
+    protected array $_methods = array();
 
     /**
      * @var bool Whether or not overwriting existing methods is allowed
      */
-    protected $_overwriteExistingMethods = false;
+    protected bool $_overwriteExistingMethods = false;
 
     /**
      * Constructor

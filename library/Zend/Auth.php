@@ -30,17 +30,13 @@ class Zend_Auth
 {
     /**
      * Singleton instance
-     *
-     * @var Zend_Auth
      */
-    protected static $_instance = null;
+    protected static ?\Zend_Auth $_instance = null;
 
     /**
      * Persistent storage handler
-     *
-     * @var Zend_Auth_Storage_Interface
      */
-    protected $_storage = null;
+    protected ?\Zend_Auth_Storage_Interface $_storage = null;
 
     /**
      * Singleton pattern implementation makes "new" unavailable

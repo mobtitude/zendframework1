@@ -42,21 +42,19 @@ require_once 'Zend/Translate/Plural.php';
 abstract class Zend_Translate_Adapter {
     /**
      * Shows if locale detection is in automatic level
-     * @var boolean
      */
-    private $_automatic = true;
+    private bool $_automatic = true;
 
     /**
      * Internal value to see already routed languages
      * @var array()
      */
-    private $_routed = array();
+    private array $_routed = array();
 
     /**
      * Internal cache for all adapters
-     * @var Zend_Cache_Core
      */
-    protected static $_cache     = null;
+    protected static ?\Zend_Cache_Core $_cache     = null;
 
     /**
      * Internal value to remember if cache supports tags
@@ -112,9 +110,8 @@ abstract class Zend_Translate_Adapter {
 
     /**
      * Translation table
-     * @var array
      */
-    protected $_translate = array();
+    protected array $_translate = array();
 
     /**
      * Generates the adapter

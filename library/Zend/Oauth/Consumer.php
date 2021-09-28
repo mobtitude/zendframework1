@@ -48,26 +48,18 @@ require_once 'Zend/Oauth/Config.php';
  */
 class Zend_Oauth_Consumer extends Zend_Oauth
 {
-    public $switcheroo = false; // replace later when this works
-
+    public bool $switcheroo = false; // replace later when this works
     /**
      * Request Token retrieved from OAuth Provider
-     *
-     * @var Zend_Oauth_Token_Request
      */
-    protected $_requestToken = null;
+    protected ?\Zend_Oauth_Token_Request $_requestToken = null;
 
     /**
      * Access token retrieved from OAuth Provider
-     *
-     * @var Zend_Oauth_Token_Access
      */
-    protected $_accessToken = null;
+    protected ?\Zend_Oauth_Token_Access $_accessToken = null;
 
-    /**
-     * @var Zend_Oauth_Config
-     */
-    protected $_config = null;
+    protected ?\Zend_Oauth_Config $_config = null;
 
     /**
      * Constructor; create a new object with an optional array|Zend_Config

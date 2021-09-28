@@ -40,20 +40,14 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
     const DEFAULT_PORT = 22201;
     const EOL          = "\r\n";
 
-    /**
-     * @var Memcache
-     */
-    protected $_cache = null;
+    protected ?\Memcache $_cache = null;
 
     /**
      * @var string
      */
     protected $_host = null;
 
-    /**
-     * @var integer
-     */
-    protected $_port = null;
+    protected ?int $_port = null;
 
     /**
      * @var resource

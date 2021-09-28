@@ -49,16 +49,11 @@ class Zend_Json
     const TYPE_OBJECT = 0;
 
      /**
-      * To check the allowed nesting depth of the XML tree during xml2json conversion.
-      *
-      * @var int
-      */
-    public static $maxRecursionDepthAllowed=25;
-
-    /**
-     * @var bool
+     * To check the allowed nesting depth of the XML tree during xml2json conversion.
      */
-    public static $useBuiltinEncoderDecoder = false;
+    public static int $maxRecursionDepthAllowed=25;
+
+    public static bool $useBuiltinEncoderDecoder = false;
 
     /**
      * Decodes the given $encodedValue string which is

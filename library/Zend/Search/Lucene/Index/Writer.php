@@ -40,16 +40,13 @@ class Zend_Search_Lucene_Index_Writer
      *       temporary index files
      * @todo Directory lock processing
      */
-
     /**
      * Number of documents required before the buffered in-memory
      * documents are written into a new Segment
      *
      * Default value is 10
-     *
-     * @var integer
      */
-    public $maxBufferedDocs = 10;
+    public int $maxBufferedDocs = 10;
 
     /**
      * Largest number of documents ever merged by addDocument().
@@ -58,10 +55,8 @@ class Zend_Search_Lucene_Index_Writer
      * Larger values are best for batched indexing and speedier searches.
      *
      * Default value is PHP_INT_MAX
-     *
-     * @var integer
      */
-    public $maxMergeDocs = PHP_INT_MAX;
+    public int $maxMergeDocs = PHP_INT_MAX;
 
     /**
      * Determines how often segment indices are merged by addDocument().
@@ -78,47 +73,35 @@ class Zend_Search_Lucene_Index_Writer
      * and smaller values (< 10) for indices that are interactively maintained.
      *
      * Default value is 10
-     *
-     * @var integer
      */
-    public $mergeFactor = 10;
+    public int $mergeFactor = 10;
 
     /**
      * File system adapter.
-     *
-     * @var Zend_Search_Lucene_Storage_Directory
      */
-    private $_directory = null;
+    private ?\Zend_Search_Lucene_Storage_Directory $_directory = null;
 
 
     /**
      * Changes counter.
-     *
-     * @var integer
      */
-    private $_versionUpdate = 0;
+    private int $_versionUpdate = 0;
 
     /**
      * List of the segments, created by index writer
      * Array of Zend_Search_Lucene_Index_SegmentInfo objects
-     *
-     * @var array
      */
-    private $_newSegments = array();
+    private array $_newSegments = array();
 
     /**
      * List of segments to be deleted on commit
-     *
-     * @var array
      */
-    private $_segmentsToDelete = array();
+    private array $_segmentsToDelete = array();
 
     /**
      * Current segment to add documents
-     *
-     * @var Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter
      */
-    private $_currentSegment = null;
+    private ?\Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter $_currentSegment = null;
 
     /**
      * Array of Zend_Search_Lucene_Index_SegmentInfo objects for this index.
@@ -127,21 +110,17 @@ class Zend_Search_Lucene_Index_Writer
      *
      * @var array Zend_Search_Lucene_Index_SegmentInfo
      */
-    private $_segmentInfos;
+    private ?array $_segmentInfos = null;
 
     /**
      * Index target format version
-     *
-     * @var integer
      */
-    private $_targetFormatVersion;
+    private int $_targetFormatVersion;
 
     /**
      * List of indexfiles extensions
-     *
-     * @var array
      */
-    private static $_indexExtensions = array('.cfs' => '.cfs',
+    private static array $_indexExtensions = array('.cfs' => '.cfs',
                                              '.cfx' => '.cfx',
                                              '.fnm' => '.fnm',
                                              '.fdx' => '.fdx',

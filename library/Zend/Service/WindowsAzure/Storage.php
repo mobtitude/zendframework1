@@ -80,38 +80,28 @@ class Zend_Service_WindowsAzure_Storage
 	
 	/**
 	 * Current API version
-	 * 
-	 * @var string
 	 */
-	protected $_apiVersion = '2009-09-19';
+	protected string $_apiVersion = '2009-09-19';
 	
 	/**
 	 * Storage host name
-	 *
-	 * @var string
 	 */
-	protected $_host = '';
+	protected string $_host = '';
 	
 	/**
 	 * Account name for Windows Azure
-	 *
-	 * @var string
 	 */
-	protected $_accountName = '';
+	protected string $_accountName = '';
 	
 	/**
 	 * Account key for Windows Azure
-	 *
-	 * @var string
 	 */
-	protected $_accountKey = '';
+	protected string $_accountKey = '';
 	
 	/**
 	 * Use path-style URI's
-	 *
-	 * @var boolean
 	 */
-	protected $_usePathStyleUri = false;
+	protected bool $_usePathStyleUri = false;
 	
 	/**
 	 * Zend_Service_WindowsAzure_Credentials_CredentialsAbstract instance
@@ -122,45 +112,33 @@ class Zend_Service_WindowsAzure_Storage
 	
 	/**
 	 * Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract instance
-	 * 
-	 * @var Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
 	 */
-	protected $_retryPolicy = null;
+	protected ?\Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $_retryPolicy = null;
 	
 	/**
 	 * Zend_Http_Client channel used for communication with REST services
-	 * 
-	 * @var Zend_Http_Client
 	 */
-	protected $_httpClientChannel = null;
+	protected ?\Zend_Http_Client $_httpClientChannel = null;
 	
 	/**
 	 * Use proxy?
-	 * 
-	 * @var boolean
 	 */
-	protected $_useProxy = false;
+	protected bool $_useProxy = false;
 	
 	/**
 	 * Proxy url
-	 * 
-	 * @var string
 	 */
-	protected $_proxyUrl = '';
+	protected string $_proxyUrl = '';
 	
 	/**
 	 * Proxy port
-	 * 
-	 * @var int
 	 */
-	protected $_proxyPort = 80;
+	protected int $_proxyPort = 80;
 	
 	/**
 	 * Proxy credentials
-	 * 
-	 * @var string
 	 */
-	protected $_proxyCredentials = '';
+	protected string $_proxyCredentials = '';
 	
 	/**
 	 * Creates a new Zend_Service_WindowsAzure_Storage instance

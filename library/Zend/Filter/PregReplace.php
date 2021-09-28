@@ -46,10 +46,8 @@ class Zend_Filter_PregReplace implements Zend_Filter_Interface
 
     /**
      * Is unicode enabled?
-     *
-     * @var bool
      */
-    static protected $_unicodeSupportEnabled = null;
+    static protected ?bool $_unicodeSupportEnabled = null;
 
     /**
      * Is Unicode Support Enabled Utility function

@@ -40,10 +40,8 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
 
     /**
      * Directory name to store data files in
-     *
-     * @var string $_dir
      */
-    private $_dir;
+    private string $_dir;
 
     /**
      * Constructs storage object and creates storage directory

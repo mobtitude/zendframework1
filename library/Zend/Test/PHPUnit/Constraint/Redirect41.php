@@ -48,9 +48,8 @@ class Zend_Test_PHPUnit_Constraint_Redirect41 extends PHPUnit_Framework_Constrai
 
     /**
      * Available assertion types
-     * @var array
      */
-    protected $_assertTypes     = array(
+    protected array $_assertTypes     = array(
         self::ASSERT_REDIRECT,
         self::ASSERT_REDIRECT_TO,
         self::ASSERT_REDIRECT_REGEX,
@@ -69,9 +68,8 @@ class Zend_Test_PHPUnit_Constraint_Redirect41 extends PHPUnit_Framework_Constrai
 
     /**
      * Whether or not assertion is negated
-     * @var bool
      */
-    protected $_negate            = false;
+    protected bool $_negate            = false;
 
     /**
      * Constructor; setup constraint state

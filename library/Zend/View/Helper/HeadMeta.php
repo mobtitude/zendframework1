@@ -50,11 +50,10 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
 {
     /**
      * Types of attributes
-     * @var array
      */
-    protected $_typeKeys     = array('name', 'http-equiv', 'charset', 'property');
-    protected $_requiredKeys = array('content');
-    protected $_modifierKeys = array('lang', 'scheme');
+    protected array $_typeKeys     = array('name', 'http-equiv', 'charset', 'property');
+    protected array $_requiredKeys = array('content');
+    protected array $_modifierKeys = array('lang', 'scheme');
 
     /**
      * @var string registry key

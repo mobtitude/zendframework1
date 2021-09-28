@@ -39,24 +39,18 @@ class Zend_View_Helper_Cycle implements Iterator
 
     /**
      * Pointers
-     *
-     * @var array
      */
-    protected $_pointers = array(self::DEFAULT_NAME =>-1) ;
+    protected array $_pointers = array(self::DEFAULT_NAME =>-1) ;
 
     /**
      * Array of values
-     *
-     * @var array
      */
-    protected $_data = array(self::DEFAULT_NAME=>array());
+    protected array $_data = array(self::DEFAULT_NAME=>array());
 
     /**
      * Actual name of cycle
-     *
-     * @var string
      */
-    protected $_name = self::DEFAULT_NAME;
+    protected string $_name = self::DEFAULT_NAME;
 
     /**
      * Add elements to alternate

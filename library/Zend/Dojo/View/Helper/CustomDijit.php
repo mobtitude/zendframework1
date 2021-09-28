@@ -36,9 +36,8 @@ class Zend_Dojo_View_Helper_CustomDijit extends Zend_Dojo_View_Helper_DijitConta
 {
     /**
      * Default dojoType; set the value when extending
-     * @var string
      */
-    protected $_defaultDojoType;
+    protected string $_defaultDojoType;
 
     /**
      * Render a custom dijit

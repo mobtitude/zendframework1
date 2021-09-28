@@ -54,7 +54,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
      *
      * @var array
      */
-    protected $_groups = array(
+    protected array $_groups = array(
         'block'        => array('block', 'inline', 'block-empty', 'inline-empty', 'list'),
         'inline'       => array('inline', 'inline-empty'),
         'list'         => array('list-item'),
@@ -72,10 +72,8 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
 
     /**
      * Default attributes
-     *
-     * @var array
      */
-    protected static $_defaultAttributes = array(
+    protected static array $_defaultAttributes = array(
         'id'    => '',
         'class' => '',
         'style' => '',

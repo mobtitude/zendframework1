@@ -37,12 +37,12 @@ class Zend_Loader_Autoloader
     /**
      * @var Zend_Loader_Autoloader Singleton instance
      */
-    protected static $_instance;
+    protected static ?\Zend_Loader_Autoloader $_instance = null;
 
     /**
      * @var array Concrete autoloader callback implementations
      */
-    protected $_autoloaders = array();
+    protected array $_autoloaders = array();
 
     /**
      * @var array Default autoloader callback
@@ -52,17 +52,17 @@ class Zend_Loader_Autoloader
     /**
      * @var bool Whether or not to act as a fallback autoloader
      */
-    protected $_fallbackAutoloader = false;
+    protected bool $_fallbackAutoloader = false;
 
     /**
      * @var array Callback for internal autoloader implementation
      */
-    protected $_internalAutoloader;
+    protected array $_internalAutoloader;
 
     /**
      * @var array Supported namespaces 'Zend' and 'ZendX' by default.
      */
-    protected $_namespaces = array(
+    protected array $_namespaces = array(
         'Zend_'  => true,
         'ZendX_' => true,
     );
@@ -70,12 +70,12 @@ class Zend_Loader_Autoloader
     /**
      * @var array Namespace-specific autoloaders
      */
-    protected $_namespaceAutoloaders = array();
+    protected array $_namespaceAutoloaders = array();
 
     /**
      * @var bool Whether or not to suppress file not found warnings
      */
-    protected $_suppressNotFoundWarnings = false;
+    protected bool $_suppressNotFoundWarnings = false;
 
     /**
      * @var null|string

@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_DbTableDirectory extends Zend_Tool_Project_Co
     /**
      * @var string
      */
-    protected $_filesystemName = 'DbTable';
+    protected ?string $_filesystemName = 'DbTable';
 
     /**
      * getName()

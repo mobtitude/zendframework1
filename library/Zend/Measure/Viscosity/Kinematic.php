@@ -72,7 +72,7 @@ class Zend_Measure_Viscosity_Kinematic extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'CENTISTOKES'                  => array('0.000001',        'cSt'),
         'LENTOR'                       => array('0.0001',          'lentor'),
         'LITER_PER_CENTIMETER_DAY'     => array(array('' => '1', '/' => '864000'), 'l/cm day'),

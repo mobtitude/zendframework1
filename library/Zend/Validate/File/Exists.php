@@ -42,20 +42,19 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::DOES_NOT_EXIST => "File '%value%' does not exist",
     );
 
     /**
      * Internal list of directories
-     * @var string
      */
-    protected $_directory = '';
+    protected ?string $_directory = '';
 
     /**
      * @var array Error message template variables
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'directory' => '_directory'
     );
 

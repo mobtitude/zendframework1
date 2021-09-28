@@ -122,7 +122,7 @@ class Zend_Measure_Density extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ALUMINIUM'                 => array('2643',           'aluminium'),
         'COPPER'                    => array('8906',           'copper'),
         'GOLD'                      => array('19300',          'gold'),

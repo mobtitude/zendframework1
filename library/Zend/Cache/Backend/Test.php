@@ -44,28 +44,24 @@ class Zend_Cache_Backend_Test extends Zend_Cache_Backend implements Zend_Cache_B
      *
      * @var array available options
      */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * Frontend or Core directives
      *
      * @var array directives
      */
-    protected $_directives = array();
+    protected array $_directives = array();
 
     /**
      * Array to log actions
-     *
-     * @var array $_log
      */
-    private $_log = array();
+    private array $_log = array();
 
     /**
      * Current index for log array
-     *
-     * @var int $_index
      */
-    private $_index = 0;
+    private int $_index = 0;
 
     /**
      * Constructor

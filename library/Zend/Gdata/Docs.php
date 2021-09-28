@@ -67,12 +67,9 @@ class Zend_Gdata_Docs extends Zend_Gdata
     /**
      * @var string
      */
-    protected $_defaultPostUri = self::DOCUMENTS_LIST_FEED_URI;
+    protected ?string $_defaultPostUri = self::DOCUMENTS_LIST_FEED_URI;
 
-    /**
-     * @var array
-     */
-    protected static $SUPPORTED_FILETYPES = array(
+    protected static array $SUPPORTED_FILETYPES = array(
         'TXT'  => 'text/plain',
         'CSV'  => 'text/csv',
         'TSV'  => 'text/tab-separated-values',

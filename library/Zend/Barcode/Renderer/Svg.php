@@ -42,9 +42,8 @@ class Zend_Barcode_Renderer_Svg extends Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Root element of the XML structure
-     * @var DOMElement
      */
-    protected $_rootElement = null;
+    protected ?\DOMElement $_rootElement = null;
 
     /**
      * Height of the rendered image wanted by user

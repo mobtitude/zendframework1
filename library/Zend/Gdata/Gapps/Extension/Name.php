@@ -45,22 +45,18 @@ require_once 'Zend/Gdata/Gapps.php';
 class Zend_Gdata_Gapps_Extension_Name extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'apps';
-    protected $_rootElement = 'name';
+    protected string $_rootNamespace = 'apps';
+    protected ?string $_rootElement = 'name';
 
     /**
      * The associated user's family name.
-     *
-     * @var string
      */
-    protected $_familyName = null;
+    protected ?string $_familyName = null;
 
     /**
      * The associated user's given name.
-     *
-     * @var string
      */
-    protected $_givenName = null;
+    protected ?string $_givenName = null;
 
     /**
      * Constructs a new Zend_Gdata_Gapps_Extension_Name object.

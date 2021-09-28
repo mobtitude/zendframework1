@@ -33,10 +33,10 @@ require_once 'Zend/Translate/Adapter.php';
  */
 class Zend_Translate_Adapter_Gettext extends Zend_Translate_Adapter {
     // Internal variables
-    private $_bigEndian   = false;
+    private bool $_bigEndian   = false;
     private $_file        = false;
-    private $_adapterInfo = array();
-    private $_data        = array();
+    private array $_adapterInfo = array();
+    private array $_data        = array();
 
     /**
      * Read values from the MO file

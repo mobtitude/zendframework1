@@ -42,27 +42,23 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
 {
     /**
      * A constant empty string
-     * @var string
      */
-    protected $_strEmpty = '';
+    protected string $_strEmpty = '';
 
     /**
      * An array of reference objects per amf body
-     * @var array
      */
-    protected $_referenceObjects = array();
+    protected array $_referenceObjects = array();
 
     /**
      * An array of reference strings per amf body
-     * @var array
      */
-    protected $_referenceStrings = array();
+    protected array $_referenceStrings = array();
 
     /**
      * An array of reference class definitions, indexed by classname
-     * @var array
      */
-    protected $_referenceDefinitions = array();
+    protected array $_referenceDefinitions = array();
 
     /**
      * Serialize PHP types to AMF3 and write to stream

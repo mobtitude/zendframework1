@@ -46,17 +46,15 @@ class Zend_Validate_Alpha extends Zend_Validate_Abstract
 
     /**
      * Alphabetic filter used for validation
-     *
-     * @var Zend_Filter_Alpha
      */
-    protected static $_filter = null;
+    protected static ?\Zend_Filter_Alpha $_filter = null;
 
     /**
      * Validation failure message template definitions
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::INVALID      => "Invalid type given. String expected",
         self::NOT_ALPHA    => "'%value%' contains non alphabetic characters",
         self::STRING_EMPTY => "'%value%' is an empty string"

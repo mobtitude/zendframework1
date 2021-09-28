@@ -41,72 +41,45 @@ class Zend_Service_Amazon_Item
      */
     public $DetailPageURL;
 
-    /**
-     * @var int
-     */
-    public $SalesRank;
+    public ?int $SalesRank = null;
 
-    /**
-     * @var int
-     */
-    public $TotalReviews;
+    public ?int $TotalReviews = null;
 
-    /**
-     * @var int
-     */
-    public $AverageRating;
+    public ?float $AverageRating = null;
 
-    /**
-     * @var string
-     */
-    public $SmallImage;
+    public string $SmallImage;
 
-    /**
-     * @var string
-     */
-    public $MediumImage;
+    public string $MediumImage;
 
-    /**
-     * @var string
-     */
-    public $LargeImage;
+    public string $LargeImage;
 
-    /**
-     * @var string
-     */
-    public $Subjects;
+    public string $Subjects;
 
-    /**
-     * @var Zend_Service_Amazon_OfferSet
-     */
-    public $Offers;
+    public ?\Zend_Service_Amazon_OfferSet $Offers = null;
 
     /**
      * @var Zend_Service_Amazon_CustomerReview[]
      */
-    public $CustomerReviews = array();
+    public array $CustomerReviews = array();
 
     /**
      * @var Zend_Service_Amazon_SimilarProducts[]
      */
-    public $SimilarProducts = array();
+    public array $SimilarProducts = array();
 
     /**
      * @var Zend_Service_Amazon_Accessories[]
      */
-    public $Accessories = array();
+    public array $Accessories = array();
 
-    /**
-     * @var array
-     */
-    public $Tracks = array();
+    public array $Tracks = array();
 
     /**
      * @var Zend_Service_Amazon_ListmaniaLists[]
      */
-    public $ListmaniaLists = array();
+    public array $ListmaniaLists = array();
 
-    protected $_dom;
+    protected \DOMElement $_dom;
 
 
     /**

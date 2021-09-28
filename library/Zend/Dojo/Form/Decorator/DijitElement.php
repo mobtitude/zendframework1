@@ -44,15 +44,14 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
 {
     /**
      * Element attributes
-     * @var array
      */
-    protected $_attribs;
+    protected ?array $_attribs = null;
 
     /**
      * Element types that represent buttons
      * @var array
      */
-    protected $_buttonTypes = array(
+    protected array $_buttonTypes = array(
         'Zend_Dojo_Form_Element_Button',
         'Zend_Form_Element_Button',
         'Zend_Form_Element_Reset',
@@ -61,9 +60,8 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
 
     /**
      * Dijit option parameters
-     * @var array
      */
-    protected $_dijitParams = array();
+    protected array $_dijitParams = array();
 
     /**
      * Get element attributes

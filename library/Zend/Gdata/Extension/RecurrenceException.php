@@ -48,8 +48,8 @@ require_once 'Zend/Gdata/Extension/OriginalEvent.php';
 class Zend_Gdata_Extension_RecurrenceException extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'recurrenceException';
-    protected $_specialized = null;
+    protected ?string $_rootElement = 'recurrenceException';
+    protected ?bool $_specialized = null;
     protected $_entryLink = null;
     protected $_originalEvent = null;
 

@@ -49,14 +49,12 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
      *
      * keys are integers representing a word size
      */
-    private $_maxDistances = array();
+    private array $_maxDistances = array();
 
     /**
      * Base searching term.
-     *
-     * @var Zend_Search_Lucene_Index_Term
      */
-    private $_term;
+    private \Zend_Search_Lucene_Index_Term $_term;
 
     /**
      * A value between 0 and 1 to set the required similarity
@@ -64,17 +62,13 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
      *  _minimumSimilarity of 0.5 a term of the same length
      *  as the query term is considered similar to the query term if the edit distance
      *  between both terms is less than length(term)*0.5
-     *
-     * @var float
      */
-    private $_minimumSimilarity;
+    private float $_minimumSimilarity;
 
     /**
      * The length of common (non-fuzzy) prefix
-     *
-     * @var integer
      */
-    private $_prefixLength;
+    private int $_prefixLength;
 
     /**
      * Matched terms.
@@ -84,32 +78,24 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
      * post-processing
      *
      * Array of Zend_Search_Lucene_Index_Term objects
-     *
-     * @var array
      */
-    private $_matches = null;
+    private ?array $_matches = null;
 
     /**
      * Matched terms scores
-     *
-     * @var array
      */
-    private $_scores = null;
+    private ?array $_scores = null;
 
     /**
      * Array of the term keys.
      * Used to sort terms in alphabetical order if terms have the same socres
-     *
-     * @var array
      */
-    private $_termKeys = null;
+    private ?array $_termKeys = null;
 
     /**
      * Default non-fuzzy prefix length
-     *
-     * @var integer
      */
-    private static $_defaultPrefixLength = 3;
+    private static int $_defaultPrefixLength = 3;
 
     /**
      * Zend_Search_Lucene_Search_Query_Wildcard constructor.

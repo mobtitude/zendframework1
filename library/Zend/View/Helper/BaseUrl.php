@@ -35,10 +35,8 @@ class Zend_View_Helper_BaseUrl extends Zend_View_Helper_Abstract
 {
     /**
      * BaseUrl
-     *
-     * @var string
      */
-    protected $_baseUrl;
+    protected ?string $_baseUrl = null;
 
     /**
      * Returns site's base url, or file with base url prepended

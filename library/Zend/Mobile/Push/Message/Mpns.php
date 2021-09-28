@@ -47,10 +47,8 @@ abstract class Zend_Mobile_Push_Message_Mpns extends Zend_Mobile_Push_Message_Ab
 
     /**
      * Delay
-     *
-     * @var int
      */
-    protected $_delay;
+    protected int $_delay;
 
     /**
      * Get Delay

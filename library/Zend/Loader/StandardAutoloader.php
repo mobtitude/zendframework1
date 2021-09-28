@@ -44,22 +44,19 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
     /**
      * @var array Namespace/directory pairs to search; ZF library added by default
      */
-    protected $namespaces = array();
+    protected array $namespaces = array();
 
     /**
      * @var array Prefix/directory pairs to search
      */
-    protected $prefixes = array();
+    protected array $prefixes = array();
 
     /**
      * @var bool Whether or not the autoloader should also act as a fallback autoloader
      */
-    protected $fallbackAutoloaderFlag = false;
+    protected bool $fallbackAutoloaderFlag = false;
 
-    /**
-     * @var bool
-     */
-    protected $error;
+    protected ?bool $error = null;
 
     /**
      * Constructor

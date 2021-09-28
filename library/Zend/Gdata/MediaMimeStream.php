@@ -46,10 +46,8 @@ class Zend_Gdata_MediaMimeStream
 
     /**
      * A valid MIME boundary.
-     *
-     * @var string
      */
-    protected $_boundaryString = null;
+    protected ?string $_boundaryString = null;
 
     /**
      * A handle to the file that is part of the message.
@@ -60,9 +58,8 @@ class Zend_Gdata_MediaMimeStream
 
     /**
      * The current part being read from.
-     * @var integer
      */
-    protected $_currentPart = 0;
+    protected int $_currentPart = 0;
 
     /**
      * The size of the MIME message.
@@ -73,9 +70,8 @@ class Zend_Gdata_MediaMimeStream
     /**
      * An array of all the parts to be sent. Array members are either a
      * MimeFile or a MimeBodyString object.
-     * @var array
      */
-    protected $_parts = null;
+    protected ?array $_parts = null;
 
     /**
      * Create a new MimeMediaStream object.

@@ -38,9 +38,9 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_Media_Extension_MediaHash extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'hash';
-    protected $_rootNamespace = 'media';
-    protected $_algo = null;
+    protected ?string $_rootElement = 'hash';
+    protected string $_rootNamespace = 'media';
+    protected ?string $_algo = null;
 
     /**
      * Constructs a new MediaHash element

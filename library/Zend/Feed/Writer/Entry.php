@@ -42,25 +42,19 @@ class Zend_Feed_Writer_Entry
 
     /**
      * Internal array containing all data associated with this entry or item.
-     *
-     * @var array
      */
-    protected $_data = array();
+    protected array $_data = array();
 
     /**
      * Registered extensions
-     *
-     * @var array
      */
-    protected $_extensions = array();
+    protected array $_extensions = array();
 
     /**
      * Holds the value "atom" or "rss" depending on the feed type set when
      * when last exported.
-     *
-     * @var string
      */
-    protected $_type = null;
+    protected ?string $_type = null;
 
     /**
      * Constructor: Primarily triggers the registration of core extensions and

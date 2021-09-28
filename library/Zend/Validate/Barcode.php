@@ -42,7 +42,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
     const INVALID_CHARS  = 'barcodeInvalidChars';
     const INVALID_LENGTH = 'barcodeInvalidLength';
 
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::FAILED         => "'%value%' failed checksum validation",
         self::INVALID_CHARS  => "'%value%' contains invalid characters",
         self::INVALID_LENGTH => "'%value%' should have a length of %length% characters",
@@ -54,7 +54,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'length' => '_length'
     );
 

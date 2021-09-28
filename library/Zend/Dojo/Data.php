@@ -39,21 +39,18 @@ class Zend_Dojo_Data implements ArrayAccess,Iterator,Countable
 
     /**
      * Collected items
-     * @var array
      */
-    protected $_items = array();
+    protected array $_items = array();
 
     /**
      * Label field of item
-     * @var string
      */
-    protected $_label;
+    protected ?string $_label = null;
 
     /**
      * Data container metadata
-     * @var array
      */
-    protected $_metadata = array();
+    protected array $_metadata = array();
 
     /**
      * Constructor

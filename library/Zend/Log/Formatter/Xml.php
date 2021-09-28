@@ -46,7 +46,7 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
     /**
      * @var string Encoding to use in XML
      */
-    protected $_encoding;
+    protected ?string $_encoding = null;
 
     /**
      * Class constructor

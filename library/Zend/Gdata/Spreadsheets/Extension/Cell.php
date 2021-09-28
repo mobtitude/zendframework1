@@ -42,36 +42,28 @@ require_once 'Zend/Gdata/Extension.php';
  */
 class Zend_Gdata_Spreadsheets_Extension_Cell extends Zend_Gdata_Extension
 {
-    protected $_rootElement = 'cell';
-    protected $_rootNamespace = 'gs';
+    protected ?string $_rootElement = 'cell';
+    protected string $_rootNamespace = 'gs';
 
     /**
      * The row attribute of this cell
-     *
-     * @var string
      */
-    protected $_row = null;
+    protected ?string $_row = null;
 
     /**
      * The column attribute of this cell
-     *
-     * @var string
      */
-    protected $_col = null;
+    protected ?string $_col = null;
 
     /**
      * The inputValue attribute of this cell
-     *
-     * @var string
      */
-    protected $_inputValue = null;
+    protected ?string $_inputValue = null;
 
     /**
      * The numericValue attribute of this cell
-     *
-     * @var string
      */
-    protected $_numericValue = null;
+    protected ?string $_numericValue = null;
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_Extension_Cell element.

@@ -38,31 +38,23 @@ class Zend_Auth_Adapter_Digest implements Zend_Auth_Adapter_Interface
 {
     /**
      * Filename against which authentication queries are performed
-     *
-     * @var string
      */
-    protected $_filename;
+    protected ?string $_filename = null;
 
     /**
      * Digest authentication realm
-     *
-     * @var string
      */
-    protected $_realm;
+    protected ?string $_realm = null;
 
     /**
      * Digest authentication user
-     *
-     * @var string
      */
-    protected $_username;
+    protected ?string $_username = null;
 
     /**
      * Password for the user of the realm
-     *
-     * @var string
      */
-    protected $_password;
+    protected ?string $_password = null;
 
     /**
      * Sets adapter options

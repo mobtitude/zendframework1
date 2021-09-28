@@ -39,10 +39,8 @@ abstract class Zend_Pdf_Annotation
 {
     /**
      * Annotation dictionary
-     *
-     * @var Zend_Pdf_Element_Dictionary|Zend_Pdf_Element_Object|Zend_Pdf_Element_Reference
      */
-    protected $_annotationDictionary;
+    protected \Zend_Pdf_Element $_annotationDictionary;
 
     /**
      * Get annotation dictionary

@@ -39,20 +39,14 @@ require_once 'Zend/Tool/Project/Context/Interface.php';
 abstract class Zend_Tool_Project_Context_Filesystem_Abstract implements Zend_Tool_Project_Context_Interface
 {
 
-    /**
-     * @var Zend_Tool_Project_Profile_Resource
-     */
-    protected $_resource = null;
+    protected ?\Zend_Tool_Project_Profile_Resource $_resource = null;
 
     /**
      * @var string
      */
     protected $_baseDirectory = null;
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = null;
+    protected ?string $_filesystemName = null;
 
     /**
      * init()

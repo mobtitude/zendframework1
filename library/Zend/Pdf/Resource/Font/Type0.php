@@ -64,10 +64,8 @@ class Zend_Pdf_Resource_Font_Type0 extends Zend_Pdf_Resource_Font
 {
     /**
      * Descendant CIDFont
-     *
-     * @var Zend_Pdf_Resource_Font_CidFont
      */
-    private $_descendantFont;
+    private \Zend_Pdf_Resource_Font_CidFont $_descendantFont;
 
 
     /**

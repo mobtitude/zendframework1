@@ -34,10 +34,7 @@ require_once 'Zend/CodeGenerator/Abstract.php';
 class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Abstract
 {
 
-    /**
-     * @var string
-     */
-    protected $_content = null;
+    protected ?string $_content = null;
 
     /**
      * setContent()

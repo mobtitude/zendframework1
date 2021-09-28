@@ -33,42 +33,28 @@ require_once 'Zend/Feed/Writer/Extension/RendererInterface.php';
 abstract class Zend_Feed_Writer_Extension_RendererAbstract
     implements Zend_Feed_Writer_Extension_RendererInterface
 {
-    /**
-     * @var DOMDocument
-     */
-    protected $_dom = null;
+    protected ?\DOMDocument $_dom = null;
 
     /**
      * @var mixed
      */
     protected $_entry = null;
 
-    /**
-     * @var DOMElement
-     */
-    protected $_base = null;
+    protected ?\DOMElement $_base = null;
 
     /**
      * @var mixed
      */
     protected $_container = null;
 
-    /**
-     * @var string
-     */
-    protected $_type = null;
+    protected ?string $_type = null;
 
-    /**
-     * @var DOMElement
-     */
-    protected $_rootElement = null;
+    protected ?\DOMElement $_rootElement = null;
 
     /**
      * Encoding of all text values
-     *
-     * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
     /**
      * Constructor

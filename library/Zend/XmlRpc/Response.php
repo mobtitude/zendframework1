@@ -55,21 +55,18 @@ class Zend_XmlRpc_Response
 
     /**
      * Return type
-     * @var string
      */
-    protected $_type;
+    protected ?string $_type = null;
 
     /**
      * Response character encoding
-     * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
     /**
      * Fault, if response is a fault response
-     * @var null|Zend_XmlRpc_Fault
      */
-    protected $_fault = null;
+    protected ?\Zend_XmlRpc_Fault $_fault = null;
 
     /**
      * Constructor

@@ -33,17 +33,13 @@ class Zend_Search_Lucene_FSMAction
 {
     /**
      * Object reference
-     *
-     * @var object
      */
-    private $_object;
+    private object $_object;
 
     /**
      * Method name
-     *
-     * @var string
      */
-    private $_method;
+    private string $_method;
 
     /**
      * Object constructor

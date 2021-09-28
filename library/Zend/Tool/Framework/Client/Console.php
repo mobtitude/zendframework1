@@ -51,30 +51,15 @@ class Zend_Tool_Framework_Client_Console
                Zend_Tool_Framework_Client_Interactive_OutputInterface
 {
 
-    /**
-     * @var array
-     */
-    protected $_configOptions = null;
+    protected ?array $_configOptions = null;
 
-    /**
-     * @var array
-     */
-    protected $_storageOptions = null;
+    protected ?array $_storageOptions = null;
 
-    /**
-     * @var Zend_Filter_Word_CamelCaseToDash
-     */
-    protected $_filterToClientNaming = null;
+    protected ?\Zend_Filter $_filterToClientNaming = null;
 
-    /**
-     * @var Zend_Filter_Word_DashToCamelCase
-     */
-    protected $_filterFromClientNaming = null;
+    protected ?\Zend_Filter_Word_DashToCamelCase $_filterFromClientNaming = null;
 
-    /**
-     * @var array
-     */
-    protected $_classesToLoad = array();
+    protected array $_classesToLoad = array();
 
     /**
      * main() - This is typically called from zf.php. This method is a

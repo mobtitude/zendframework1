@@ -36,10 +36,8 @@ class Zend_Memory_Container_Locked extends Zend_Memory_Container
 {
     /**
      * Value object
-     *
-     * @var string
      */
-    public $value;
+    public string $value;
 
 
     /**

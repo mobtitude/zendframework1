@@ -52,14 +52,12 @@ require_once 'Zend/Xml/Security.php';
 class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
 {
 
-    protected $_rootElement = "AppsForYourDomainErrors";
+    protected ?string $_rootElement = "AppsForYourDomainErrors";
 
     /**
      * Array of Zend_Gdata_Error objects indexed by error code.
-     *
-     * @var array
      */
-    protected $_errors = array();
+    protected array $_errors = array();
 
     /**
      * Create a new ServiceException.

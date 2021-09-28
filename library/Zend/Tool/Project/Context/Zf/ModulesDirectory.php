@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_ModulesDirectory extends Zend_Tool_Project_Co
     /**
      * @var string
      */
-    protected $_filesystemName = 'modules';
+    protected ?string $_filesystemName = 'modules';
 
     /**
      * getName()

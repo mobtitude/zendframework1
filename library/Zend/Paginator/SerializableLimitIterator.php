@@ -30,17 +30,13 @@ class Zend_Paginator_SerializableLimitIterator extends LimitIterator implements 
 
     /**
      * Offset to first element
-     *
-     * @var int
      */
-    private $_offset;
+    private int $_offset;
 
     /**
      * Maximum number of elements to show or -1 for all
-     *
-     * @var int
      */
-    private $_count;
+    private int $_count;
 
     /**
      * Construct a Zend_Paginator_SerializableLimitIterator

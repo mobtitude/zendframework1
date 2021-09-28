@@ -40,18 +40,14 @@ class Zend_Search_Lucene_Document
     /**
      * Associative array Zend_Search_Lucene_Field objects where the keys to the
      * array are the names of the fields.
-     *
-     * @var array
      */
-    protected $_fields = array();
+    protected array $_fields = array();
 
     /**
      * Field boost factor
      * It's not stored directly in the index, but affects on normalization factor
-     *
-     * @var float
      */
-    public $boost = 1.0;
+    public float $boost = 1.0;
 
     /**
      * Proxy method for getFieldValue(), provides more convenient access to

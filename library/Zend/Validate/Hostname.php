@@ -61,7 +61,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::CANNOT_DECODE_PUNYCODE  => "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded",
         self::INVALID                 => "Invalid type given. String expected",
         self::INVALID_DASH            => "'%value%' appears to be a DNS hostname but contains a dash in an invalid position",
@@ -78,7 +78,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'tld' => '_tld'
     );
 
@@ -114,9 +114,8 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
      *
      * @see http://data.iana.org/TLD/tlds-alpha-by-domain.txt  List of all TLDs by domain
      * @see http://www.iana.org/domains/root/db/ Official list of supported TLDs
-     * @var array
      */
-    protected $_validTlds = array(
+    protected array $_validTlds = array(
         'aaa',
         'abb',
         'abbott',
@@ -1354,10 +1353,8 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
      * (.UA) Ukraine http://www.iana.org/domains/idn-tables/tables/ua_cyrl_1.2.html
      * (.VE) Venice http://www.iana.org/domains/idn-tables/tables/ve_es_1.0.html
      * (.VN) Vietnam http://www.vnnic.vn/english/5-6-300-2-2-04-20071115.htm#1.%20Introduction
-     *
-     * @var array
      */
-    protected $_validIdns = array(
+    protected array $_validIdns = array(
         'AC'  => array(1 => '/^[\x{002d}0-9a-zà-öø-ÿāăąćĉċčďđēėęěĝġģĥħīįĵķĺļľŀłńņňŋőœŕŗřśŝşšţťŧūŭůűųŵŷźżž]{1,63}$/iu'),
         'AR'  => array(1 => '/^[\x{002d}0-9a-zà-ãç-êìíñ-õü]{1,63}$/iu'),
         'AS'  => array(1 => '/^[\x{002d}0-9a-zà-öø-ÿāăąćĉċčďđēĕėęěĝğġģĥħĩīĭįıĵķĸĺļľłńņňŋōŏőœŕŗřśŝşšţťŧũūŭůűųŵŷźż]{1,63}$/iu'),
@@ -1488,7 +1485,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         'شبكة'  => array(1 => '/^[\x{0621}-\x{0624}\x{0626}-\x{063A}\x{0641}\x{0642}\x{0644}-\x{0648}\x{067E}\x{0686}\x{0698}\x{06A9}\x{06AF}\x{06CC}\x{06F0}-\x{06F9}]{1,30}$/iu'),
     );
 
-    protected $_idnLength = array(
+    protected array $_idnLength = array(
         'BIZ' => array(5 => 17, 11 => 15, 12 => 20),
         'CN'  => array(1 => 20),
         'COM' => array(3 => 17, 5 => 20),
@@ -1504,7 +1501,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         '网络' => array(1 => 20),
     );
 
-    protected $_options = array(
+    protected array $_options = array(
         'allow' => self::ALLOW_DNS,
         'idn'   => true,
         'tld'   => true,

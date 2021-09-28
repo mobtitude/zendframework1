@@ -29,15 +29,9 @@
 abstract class Zend_CodeGenerator_Abstract
 {
 
-    /**
-     * @var string
-     */
-    protected $_sourceContent = null;
+    protected ?string $_sourceContent = null;
 
-    /**
-     * @var bool
-     */
-    protected $_isSourceDirty = true;
+    protected bool $_isSourceDirty = true;
 
     /**
      * __construct()

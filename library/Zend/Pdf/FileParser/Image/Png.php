@@ -34,18 +34,18 @@ require_once 'Zend/Pdf/FileParser/Image.php';
  */
 class Zend_Pdf_FileParser_Image_Png extends Zend_Pdf_FileParser_Image
 {
-     protected $_isPNG;
-     protected $_width;
-     protected $_height;
-     protected $_bits;
-     protected $_color;
-     protected $_compression;
-     protected $_preFilter;
-     protected $_interlacing;
+     protected ?bool $_isPNG = null;
+     protected ?int $_width = null;
+     protected ?int $_height = null;
+     protected ?int $_bits = null;
+     protected ?int $_color = null;
+     protected ?int $_compression = null;
+     protected ?int $_preFilter = null;
+     protected ?int $_interlacing = null;
 
-     protected $_imageData;
-     protected $_paletteData;
-     protected $_transparencyData;
+     protected ?string $_imageData = null;
+     protected ?string $_paletteData = null;
+     protected ?array $_transparencyData = null;
 
   /**** Public Interface ****/
 

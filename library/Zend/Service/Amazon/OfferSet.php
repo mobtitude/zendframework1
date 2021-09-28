@@ -36,40 +36,22 @@ class Zend_Service_Amazon_OfferSet
      */
     public $LowestNewPrice;
 
-    /**
-     * @var string
-     */
-    public $LowestNewPriceCurrency;
+    public ?string $LowestNewPriceCurrency = null;
 
     /**
      * @var string
      */
     public $LowestUsedPrice;
 
-    /**
-     * @var string
-     */
-    public $LowestUsedPriceCurrency;
+    public ?string $LowestUsedPriceCurrency = null;
 
-    /**
-     * @var int
-     */
-    public $TotalNew;
+    public ?int $TotalNew = null;
 
-    /**
-     * @var int
-     */
-    public $TotalUsed;
+    public ?int $TotalUsed = null;
 
-    /**
-     * @var int
-     */
-    public $TotalCollectible;
+    public ?int $TotalCollectible = null;
 
-    /**
-     * @var int
-     */
-    public $TotalRefurbished;
+    public ?int $TotalRefurbished = null;
 
     /**
      * @var Zend_Service_Amazon_Offer[]

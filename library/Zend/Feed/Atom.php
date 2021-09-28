@@ -52,25 +52,19 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
 
     /**
      * The classname for individual feed elements.
-     *
-     * @var string
      */
-    protected $_entryClassName = 'Zend_Feed_Entry_Atom';
+    protected string $_entryClassName = 'Zend_Feed_Entry_Atom';
 
     /**
      * The element name for individual feed elements (Atom <entry>
      * elements).
-     *
-     * @var string
      */
-    protected $_entryElementName = 'entry';
+    protected string $_entryElementName = 'entry';
 
     /**
      * The default namespace for Atom feeds.
-     *
-     * @var string
      */
-    protected $_defaultNamespace = 'atom';
+    protected string $_defaultNamespace = 'atom';
 
 
     /**

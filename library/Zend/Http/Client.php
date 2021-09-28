@@ -117,10 +117,8 @@ class Zend_Http_Client
 
     /**
      * Configuration array, set using the constructor or using ::setConfig()
-     *
-     * @var array
      */
-    protected $config = array(
+    protected array $config = array(
         'maxredirects'    => 5,
         'strictredirects' => false,
         'useragent'       => 'Zend_Http_Client',
@@ -137,52 +135,38 @@ class Zend_Http_Client
 
     /**
      * The adapter used to perform the actual connection to the server
-     *
-     * @var Zend_Http_Client_Adapter_Interface
      */
-    protected $adapter = null;
+    protected ?\Zend_Http_Client_Adapter_Interface $adapter = null;
 
     /**
      * Request URI
-     *
-     * @var Zend_Uri_Http
      */
-    protected $uri = null;
+    protected ?\Zend_Uri_Http $uri = null;
 
     /**
      * Associative array of request headers
-     *
-     * @var array
      */
-    protected $headers = array();
+    protected array $headers = array();
 
     /**
      * HTTP request method
-     *
-     * @var string
      */
-    protected $method = self::GET;
+    protected string $method = self::GET;
 
     /**
      * Associative array of GET parameters
-     *
-     * @var array
      */
-    protected $paramsGet = array();
+    protected array $paramsGet = array();
 
     /**
      * Associative array of POST parameters
-     *
-     * @var array
      */
-    protected $paramsPost = array();
+    protected array $paramsPost = array();
 
     /**
      * Request body content type (for POST requests)
-     *
-     * @var string
      */
-    protected $enctype = null;
+    protected ?string $enctype = null;
 
     /**
      * The raw post data to send. Could be set by setRawData($data, $enctype).
@@ -200,72 +184,54 @@ class Zend_Http_Client
      * constants), for example 'basic' or 'digest'.
      *
      * If null, no authentication will be used.
-     *
-     * @var array|null
      */
-    protected $auth;
+    protected ?array $auth = null;
 
     /**
      * File upload arrays (used in POST requests)
      *
      * An associative array, where each element is of the format:
      *   'name' => array('filename.txt', 'text/plain', 'This is the actual file contents')
-     *
-     * @var array
      */
-    protected $files = array();
+    protected array $files = array();
 
     /**
      * Ordered list of keys from key/value pair data to include in body
      *
      * An associative array, where each element is of the format:
      *   '<field name>' => VTYPE_SCALAR | VTYPE_FILE
-     *
-     * @var array
      */
-    protected $body_field_order = array();
+    protected array $body_field_order = array();
 
     /**
      * The client's cookie jar
-     *
-     * @var Zend_Http_CookieJar
      */
-    protected $cookiejar = null;
+    protected ?\Zend_Http_CookieJar $cookiejar = null;
 
     /**
      * The last HTTP request sent by the client, as string
-     *
-     * @var string
      */
-    protected $last_request = null;
+    protected ?string $last_request = null;
 
     /**
      * The last HTTP response received by the client
-     *
-     * @var Zend_Http_Response
      */
-    protected $last_response = null;
+    protected ?\Zend_Http_Response $last_response = null;
 
     /**
      * Redirection counter
-     *
-     * @var int
      */
-    protected $redirectCounter = 0;
+    protected int $redirectCounter = 0;
 
     /**
      * Status for unmasking GET array params
-     *
-     * @var boolean
      */
-    protected $_unmaskStatus = false;
+    protected bool $_unmaskStatus = false;
 
     /**
      * Status if the http_build_query function escapes brackets
-     *
-     * @var boolean
      */
-    protected $_queryBracketsEscaped = true;
+    protected bool $_queryBracketsEscaped = true;
 
     /**
      * Fileinfo magic database resource

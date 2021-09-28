@@ -30,32 +30,24 @@
 class Zend_Service_WindowsAzure_Storage_TableEntity
 {
     /**
-     * Partition key
-     * 
-     * @var string
-     */
-    protected $_partitionKey;
+				 * Partition key
+				 */
+				protected string $_partitionKey;
     
     /**
-     * Row key
-     * 
-     * @var string
-     */
-    protected $_rowKey;
+				 * Row key
+				 */
+				protected string $_rowKey;
     
     /**
-     * Timestamp
-     * 
-     * @var string
-     */
-    protected $_timestamp;
+				 * Timestamp
+				 */
+				protected ?\DateTime $_timestamp = null;
     
     /**
-     * Etag
-     * 
-     * @var string
-     */
-    protected $_etag = '';
+				 * Etag
+				 */
+				protected string $_etag = '';
     
     /**
      * Constructor

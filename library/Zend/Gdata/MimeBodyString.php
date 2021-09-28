@@ -35,16 +35,13 @@ class Zend_Gdata_MimeBodyString
 
     /**
      * The source string.
-     *
-     * @var string
      */
-    protected $_sourceString = '';
+    protected string $_sourceString = '';
 
     /**
      * The size of the MIME message.
-     * @var integer
      */
-    protected $_bytesRead = 0;
+    protected int $_bytesRead = 0;
 
     /**
      * Create a new MimeBodyString object.

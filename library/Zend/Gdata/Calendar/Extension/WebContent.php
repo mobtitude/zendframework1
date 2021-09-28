@@ -38,8 +38,8 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Calendar_Extension_WebContent extends Zend_Gdata_App_Extension
 {
 
-    protected $_rootNamespace = 'gCal';
-    protected $_rootElement = 'webContent';
+    protected string $_rootNamespace = 'gCal';
+    protected ?string $_rootElement = 'webContent';
     protected $_url = null;
     protected $_height = null;
     protected $_width = null;

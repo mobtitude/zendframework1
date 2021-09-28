@@ -42,9 +42,8 @@ class Zend_Form_Element_Password extends Zend_Form_Element_Xhtml
 
     /**
      * Whether or not to render the password
-     * @var bool
      */
-    public $renderPassword = false;
+    public bool $renderPassword = false;
 
     /**
      * Set flag indicating whether or not to render the password

@@ -45,10 +45,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
 {
     /**
      * Container to operate on by default
-     *
-     * @var Zend_Navigation_Container
      */
-    protected $_container;
+    protected ?\Zend_Navigation_Container $_container = null;
 
     /**
      * The minimum depth a page must have to be included when rendering
@@ -66,31 +64,23 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
 
     /**
      * Indentation string
-     *
-     * @var string
      */
-    protected $_indent = '';
+    protected string $_indent = '';
 
     /**
      * Whether HTML/XML output should be formatted
-     *
-     * @var bool
      */
-    protected $_formatOutput = true;
+    protected bool $_formatOutput = true;
 
     /**
      * Prefix for IDs when they are normalized
-     *
-     * @var string|null
      */
-    protected $_prefixForId = null;
+    protected ?string $_prefixForId = null;
 
     /**
      * Skip current prefix for IDs when they are normalized (flag)
-     *
-     * @var bool
      */
-    protected $_skipPrefixForId = false;
+    protected bool $_skipPrefixForId = false;
 
     /**
      * Translator
@@ -101,17 +91,13 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
 
     /**
      * ACL to use when iterating pages
-     *
-     * @var Zend_Acl
      */
-    protected $_acl;
+    protected ?\Zend_Acl $_acl = null;
 
     /**
      * Wheter invisible items should be rendered by this helper
-     *
-     * @var bool
      */
-    protected $_renderInvisible = false;
+    protected bool $_renderInvisible = false;
 
     /**
      * ACL role to use when iterating pages
@@ -122,25 +108,19 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
 
     /**
      * Whether translator should be used for page labels and titles
-     *
-     * @var bool
      */
-    protected $_useTranslator = true;
+    protected bool $_useTranslator = true;
 
     /**
      * Whether ACL should be used for filtering out pages
-     *
-     * @var bool
      */
-    protected $_useAcl = true;
+    protected bool $_useAcl = true;
 
     /**
      * Default ACL to use when iterating pages if not explicitly set in the
      * instance by calling {@link setAcl()}
-     *
-     * @var Zend_Acl
      */
-    protected static $_defaultAcl;
+    protected static ?\Zend_Acl $_defaultAcl = null;
 
     /**
      * Default ACL role to use when iterating pages if not explicitly set in the

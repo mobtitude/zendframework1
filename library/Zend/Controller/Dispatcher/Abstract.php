@@ -34,52 +34,44 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
 {
     /**
      * Default action
-     * @var string
      */
-    protected $_defaultAction = 'index';
+    protected string $_defaultAction = 'index';
 
     /**
      * Default controller
-     * @var string
      */
-    protected $_defaultController = 'index';
+    protected string $_defaultController = 'index';
 
     /**
      * Default module
-     * @var string
      */
-    protected $_defaultModule = 'default';
+    protected string $_defaultModule = 'default';
 
     /**
      * Front Controller instance
-     * @var Zend_Controller_Front
      */
-    protected $_frontController;
+    protected ?\Zend_Controller_Front $_frontController = null;
 
     /**
      * Array of invocation parameters to use when instantiating action
      * controllers
-     * @var array
      */
-    protected $_invokeParams = array();
+    protected array $_invokeParams = array();
 
     /**
      * Path delimiter character
-     * @var string
      */
-    protected $_pathDelimiter = '_';
+    protected string $_pathDelimiter = '_';
 
     /**
      * Response object to pass to action controllers, if any
-     * @var Zend_Controller_Response_Abstract|null
      */
-    protected $_response = null;
+    protected ?\Zend_Controller_Response_Abstract $_response = null;
 
     /**
      * Word delimiter characters
-     * @var array
      */
-    protected $_wordDelimiter = array('-', '.');
+    protected array $_wordDelimiter = array('-', '.');
 
     /**
      * Constructor

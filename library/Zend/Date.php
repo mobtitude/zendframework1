@@ -35,13 +35,13 @@ require_once 'Zend/Locale/Math.php';
  */
 class Zend_Date extends Zend_Date_DateObject
 {
-    private $_locale  = null;
+    private ?string $_locale  = null;
 
     // Fractional second variables
     private $_fractional = 0;
     private $_precision  = 3;
 
-    private static $_options = array(
+    private static array $_options = array(
         'format_type'  => 'iso',      // format for date strings 'iso' or 'php'
         'fix_dst'      => true,       // fix dst on summer/winter time change
         'extend_month' => false,      // false - addMonth like SQL, true like excel

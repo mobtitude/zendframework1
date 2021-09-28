@@ -36,7 +36,7 @@ class Zend_Tool_Project_Provider_Project
     //implements Zend_Tool_Framework_Provider_DocblockManifestInterface
 {
 
-    protected $_specialties = array('Info');
+    protected array $_specialties = array('Info');
 
     /**
      * create()

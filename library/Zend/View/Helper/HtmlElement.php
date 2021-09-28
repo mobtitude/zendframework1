@@ -41,10 +41,8 @@ abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
 
     /**
      * The tag closing bracket
-     *
-     * @var string
      */
-    protected $_closingBracket = null;
+    protected ?string $_closingBracket = null;
 
     /**
      * Get the tag closing bracket

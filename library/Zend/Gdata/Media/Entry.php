@@ -52,10 +52,8 @@ class Zend_Gdata_Media_Entry extends Zend_Gdata_Entry
 
     /**
      * media:group element
-     *
-     * @var Zend_Gdata_Media_Extension_MediaGroup
      */
-    protected $_mediaGroup = null;
+    protected ?\Zend_Gdata_Media_Extension_MediaGroup $_mediaGroup = null;
 
     /**
      * Create a new instance.

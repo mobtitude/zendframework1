@@ -31,24 +31,18 @@ class Zend_Ldap_Collection implements Iterator, Countable
 {
     /**
      * Iterator
-     *
-     * @var Zend_Ldap_Collection_Iterator_Default
      */
-    protected $_iterator = null;
+    protected ?\Zend_Ldap_Collection_Iterator_Default $_iterator = null;
 
     /**
      * Current item number
-     *
-     * @var integer
      */
-    protected $_current = -1;
+    protected int $_current = -1;
 
     /**
      * Container for item caching to speed up multiple iterations
-     *
-     * @var array
      */
-    protected $_cache = array();
+    protected array $_cache = array();
 
     /**
      * Constructor.

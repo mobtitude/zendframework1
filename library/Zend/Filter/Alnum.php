@@ -46,24 +46,20 @@ class Zend_Filter_Alnum implements Zend_Filter_Interface
 
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support
-     *
-     * @var mixed
      **/
-    protected static $_unicodeEnabled;
+    protected static ?bool $_unicodeEnabled = null;
 
     /**
      * Locale in browser.
      *
      * @var Zend_Locale object
      */
-    protected $_locale;
+    protected ?\Zend_Locale $_locale = null;
 
     /**
      * The Alphabet means english alphabet.
-     *
-     * @var boolean
      */
-    protected static $_meansEnglishAlphabet;
+    protected static ?bool $_meansEnglishAlphabet = null;
 
     /**
      * Sets default option values for this instance

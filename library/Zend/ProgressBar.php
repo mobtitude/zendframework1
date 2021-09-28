@@ -29,17 +29,13 @@ class Zend_ProgressBar
 {
     /**
      * Min value
-     *
-     * @var float
      */
-    protected $_min;
+    protected float $_min;
 
     /**
      * Max value
-     *
-     * @var float
      */
-    protected $_max;
+    protected float $_max;
 
     /**
      * Current value
@@ -64,17 +60,13 @@ class Zend_ProgressBar
 
     /**
      * Adapter for the output
-     *
-     * @var Zend_ProgressBar_Adapter
      */
-    protected $_adapter;
+    protected \Zend_ProgressBar_Adapter $_adapter;
 
     /**
      * Namespace for keeping the progressbar persistent
-     *
-     * @var string
      */
-    protected $_persistenceNamespace = null;
+    protected ?\Zend_Session_Namespace $_persistenceNamespace = null;
 
     /**
      * Create a new progressbar backend.

@@ -55,14 +55,12 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
      * @var string
      * @access public
      */
-    public $EOL = "\n";
+    public string $EOL = "\n";
 
     /**
      * Remote smtp hostname or i.p.
-     *
-     * @var string
      */
-    protected $_host;
+    protected string $_host;
 
 
     /**
@@ -75,10 +73,8 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
 
     /**
      * Local client hostname or i.p.
-     *
-     * @var string
      */
-    protected $_name = 'localhost';
+    protected string $_name = 'localhost';
 
 
     /**
@@ -91,10 +87,8 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
 
     /**
      * Config options for authentication
-     *
-     * @var array
      */
-    protected $_config;
+    protected array $_config;
 
 
     /**

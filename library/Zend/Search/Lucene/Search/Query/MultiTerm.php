@@ -38,10 +38,8 @@ class Zend_Search_Lucene_Search_Query_MultiTerm extends Zend_Search_Lucene_Searc
     /**
      * Terms to find.
      * Array of Zend_Search_Lucene_Index_Term
-     *
-     * @var array
      */
-    private $_terms = array();
+    private array $_terms = array();
 
     /**
      * Term signs.
@@ -50,27 +48,21 @@ class Zend_Search_Lucene_Search_Query_MultiTerm extends Zend_Search_Lucene_Searc
      * If null then term is neither prohibited, nor required
      *
      * If array is null then all terms are required
-     *
-     * @var array
      */
-    private $_signs;
+    private ?array $_signs;
 
     /**
      * Result vector.
-     *
-     * @var array
      */
-    private $_resVector = null;
+    private ?array $_resVector = null;
 
     /**
      * Terms positions vectors.
      * Array of Arrays:
      * term1Id => (docId => freq, ...)
      * term2Id => (docId => freq, ...)
-     *
-     * @var array
      */
-    private $_termsFreqs = array();
+    private array $_termsFreqs = array();
 
 
     /**
@@ -87,10 +79,8 @@ class Zend_Search_Lucene_Search_Query_MultiTerm extends Zend_Search_Lucene_Searc
     /**
      * Terms weights
      * array of Zend_Search_Lucene_Search_Weight
-     *
-     * @var array
      */
-    private $_weights = array();
+    private array $_weights = array();
 
 
     /**

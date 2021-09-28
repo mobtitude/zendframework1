@@ -45,18 +45,14 @@ class Zend_Cache_Manager
 
     /**
      * Array of caches stored by the Cache Manager instance
-     *
-     * @var array
      */
-    protected $_caches = array();
+    protected array $_caches = array();
 
     /**
      * Array of ready made configuration templates for lazy
      * loading caches.
-     *
-     * @var array
      */
-    protected $_optionTemplates = array(
+    protected array $_optionTemplates = array(
         // Simple Common Default
         'default' => array(
             'frontend' => array(

@@ -73,7 +73,7 @@ class Zend_Gdata_App_Entry extends Zend_Gdata_App_FeedEntryParent
      *
      * @var string
      */
-    protected $_rootElement = 'entry';
+    protected ?string $_rootElement = 'entry';
 
     /**
      * Class name for each entry in this feed*
@@ -84,45 +84,33 @@ class Zend_Gdata_App_Entry extends Zend_Gdata_App_FeedEntryParent
 
     /**
      * atom:content element
-     *
-     * @var Zend_Gdata_App_Extension_Content
      */
-    protected $_content = null;
+    protected ?\Zend_Gdata_App_Extension_Content $_content = null;
 
     /**
      * atom:published element
-     *
-     * @var Zend_Gdata_App_Extension_Published
      */
-    protected $_published = null;
+    protected ?\Zend_Gdata_App_Extension_Published $_published = null;
 
     /**
      * atom:source element
-     *
-     * @var Zend_Gdata_App_Extension_Source
      */
-    protected $_source = null;
+    protected ?\Zend_Gdata_App_Extension_Source $_source = null;
 
     /**
      * atom:summary element
-     *
-     * @var Zend_Gdata_App_Extension_Summary
      */
-    protected $_summary = null;
+    protected ?\Zend_Gdata_App_Extension_Summary $_summary = null;
 
     /**
      * app:control element
-     *
-     * @var Zend_Gdata_App_Extension_Control
      */
-    protected $_control = null;
+    protected ?\Zend_Gdata_App_Extension_Control $_control = null;
 
     /**
      * app:edited element
-     *
-     * @var Zend_Gdata_App_Extension_Edited
      */
-    protected $_edited = null;
+    protected ?\Zend_Gdata_App_Extension_Edited $_edited = null;
 
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {

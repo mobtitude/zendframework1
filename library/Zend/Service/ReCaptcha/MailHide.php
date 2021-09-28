@@ -52,36 +52,25 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
 
     /**
      * The email address to protect
-     *
-     * @var string
      */
-    protected $_email = null;
+    protected ?string $_email = null;
 
-    /**
-     * @var Zend_Validate_Interface
-     */
-    protected $_emailValidator;
+    protected ?\Zend_Validate_Interface $_emailValidator = null;
 
     /**
      * Binary representation of the private key
-     *
-     * @var string
      */
-    protected $_privateKeyPacked = null;
+    protected ?string $_privateKeyPacked = null;
 
     /**
      * The local part of the email
-     *
-     * @var string
      */
-    protected $_emailLocalPart = null;
+    protected ?string $_emailLocalPart = null;
 
     /**
      * The domain part of the email
-     *
-     * @var string
      */
-    protected $_emailDomainPart = null;
+    protected ?string $_emailDomainPart = null;
 
     /**
      * Local constructor

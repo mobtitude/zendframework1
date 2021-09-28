@@ -36,20 +36,11 @@ require_once 'Zend/Tool/Project/Profile/Resource/SearchConstraints.php';
 class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator, Countable
 {
 
-    /**
-     * @var array
-     */
-    protected $_subResources = array();
+    protected array $_subResources = array();
 
-    /**
-     * @var int
-     */
-    protected $_position = 0;
+    protected int $_position = 0;
 
-    /**
-     * @var bool
-     */
-    protected $_appendable = true;
+    protected bool $_appendable = true;
 
     /**
      * @var array

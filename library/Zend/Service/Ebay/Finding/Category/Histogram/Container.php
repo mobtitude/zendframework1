@@ -40,10 +40,8 @@ class Zend_Service_Ebay_Finding_Category_Histogram_Container extends Zend_Servic
      *
      * This container is returned only when the specified category has children
      * categories.
-     *
-     * @var Zend_Service_Ebay_Finding_Category_Histogram_Set
      */
-    public $categoryHistogram;
+    public ?\Zend_Service_Ebay_Finding_Category_Histogram_Set $categoryHistogram = null;
 
     /**
      * @return void

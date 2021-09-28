@@ -63,10 +63,9 @@ class Zend_Currency
      * 'value'     => Money value
      * 'service'   => Exchange service to use
      *
-     * @var array
      * @see Zend_Locale
      */
-    protected $_options = array(
+    protected array $_options = array(
         'position'  => self::STANDARD,
         'script'    => null,
         'format'    => null,

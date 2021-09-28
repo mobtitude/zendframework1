@@ -36,10 +36,8 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
 
     /**
      * LDAP Connection
-     *
-     * @var Zend_Ldap
      */
-    protected $_ldap = null;
+    protected ?\Zend_Ldap $_ldap = null;
 
     /**
      * Result identifier resource
@@ -57,10 +55,8 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
 
     /**
      * Number of items in query result
-     *
-     * @var integer
      */
-    protected $_itemCount = -1;
+    protected int $_itemCount = -1;
 
     /**
      * The method that will be applied to the attribute's names.

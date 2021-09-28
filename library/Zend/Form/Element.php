@@ -57,135 +57,111 @@ class Zend_Form_Element implements Zend_Validate_Interface
 
     /**
      * 'Allow empty' flag
-     * @var bool
      */
-    protected $_allowEmpty = true;
+    protected bool $_allowEmpty = true;
 
     /**
      * Flag indicating whether or not to insert NotEmpty validator when element is required
-     * @var bool
      */
-    protected $_autoInsertNotEmptyValidator = true;
+    protected bool $_autoInsertNotEmptyValidator = true;
 
     /**
      * Array to which element belongs
-     * @var string
      */
-    protected $_belongsTo;
+    protected ?string $_belongsTo = null;
 
     /**
      * Element decorators
-     * @var array
      */
-    protected $_decorators = array();
+    protected array $_decorators = array();
 
     /**
      * Element description
-     * @var string
      */
-    protected $_description;
+    protected ?string $_description = null;
 
     /**
      * Should we disable loading the default decorators?
-     * @var bool
      */
-    protected $_disableLoadDefaultDecorators = false;
+    protected bool $_disableLoadDefaultDecorators = false;
 
     /**
      * Custom error messages
-     * @var array
      */
-    protected $_errorMessages = array();
+    protected array $_errorMessages = array();
 
     /**
      * Validation errors
-     * @var array
      */
-    protected $_errors = array();
+    protected array $_errors = array();
 
     /**
      * Separator to use when concatenating aggregate error messages (for
      * elements having array values)
-     * @var string
      */
-    protected $_errorMessageSeparator = '; ';
+    protected string $_errorMessageSeparator = '; ';
 
     /**
      * Element filters
-     * @var array
      */
-    protected $_filters = array();
+    protected array $_filters = array();
 
     /**
      * Ignore flag (used when retrieving values at form level)
-     * @var bool
      */
-    protected $_ignore = false;
+    protected bool $_ignore = false;
 
     /**
      * Does the element represent an array?
-     * @var bool
      */
-    protected $_isArray = false;
+    protected bool $_isArray = false;
 
     /**
      * Is the error marked as in an invalid state?
-     * @var bool
      */
-    protected $_isError = false;
+    protected bool $_isError = false;
 
     /**
      * Has the element been manually marked as invalid?
-     * @var bool
      */
-    protected $_isErrorForced = false;
+    protected bool $_isErrorForced = false;
 
     /**
      * Element label
-     * @var string
      */
-    protected $_label;
+    protected ?string $_label = null;
 
     /**
      * Plugin loaders for filter and validator chains
-     * @var array
      */
-    protected $_loaders = array();
+    protected array $_loaders = array();
 
     /**
      * Formatted validation error messages
-     * @var array
      */
-    protected $_messages = array();
+    protected array $_messages = array();
 
     /**
      * Element name
-     * @var string
      */
-    protected $_name;
+    protected ?string $_name = null;
 
     /**
      * Order of element
-     * @var int
      */
-    protected $_order;
+    protected ?int $_order = null;
 
     /**
      * Required flag
-     * @var bool
      */
-    protected $_required = false;
+    protected bool $_required = false;
 
-    /**
-     * @var Zend_Translate
-     */
-    protected $_translator;
+    protected ?\Zend_Translate_Adapter $_translator = null;
 
     /**
      * Is translation disabled?
-     * @var bool
      */
-    protected $_translatorDisabled = false;
+    protected bool $_translatorDisabled = false;
 
     /**
      * Element type
@@ -197,13 +173,12 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * Array of initialized validators
      * @var array Validators
      */
-    protected $_validators = array();
+    protected array $_validators = array();
 
     /**
      * Array of un-initialized validators
-     * @var array
      */
-    protected $_validatorRules = array();
+    protected array $_validatorRules = array();
 
     /**
      * Element value
@@ -211,27 +186,20 @@ class Zend_Form_Element implements Zend_Validate_Interface
      */
     protected $_value;
 
-    /**
-     * @var Zend_View_Interface
-     */
-    protected $_view;
+    protected ?\Zend_View_Interface $_view = null;
 
     /**
      * Is a specific decorator being rendered via the magic renderDecorator()?
      *
      * This is to allow execution of logic inside the render() methods of child
      * elements during the magic call while skipping the parent render() method.
-     *
-     * @var bool
      */
-    protected $_isPartialRendering = false;
+    protected bool $_isPartialRendering = false;
 
     /**
      * Use one error message for array elements with concatenated values
-     *
-     * @var bool
      */
-    protected $_concatJustValuesInErrorMessage = false;
+    protected bool $_concatJustValuesInErrorMessage = false;
 
     /**
      * Constructor

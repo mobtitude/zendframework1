@@ -37,10 +37,8 @@ class Zend_Service_WindowsAzure_Storage_BlobContainer
 {
     /**
      * Data
-     * 
-     * @var array
      */
-    protected $_data = null;
+    protected ?array $_data = null;
     
     /**
      * Constructor

@@ -45,10 +45,8 @@ class Zend_Service_Yahoo_ImageResultSet extends Zend_Service_Yahoo_ResultSet
 {
     /**
      * Image result set namespace
-     *
-     * @var string
      */
-    protected $_namespace = 'urn:yahoo:srchmi';
+    protected string $_namespace = 'urn:yahoo:srchmi';
 
 
     /**

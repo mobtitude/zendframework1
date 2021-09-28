@@ -40,17 +40,13 @@ class Zend_Service_Flickr
 
     /**
      * Your Flickr API key
-     *
-     * @var string
      */
-    public $apiKey;
+    public string $apiKey;
 
     /**
      * Reference to REST client object
-     *
-     * @var Zend_Rest_Client
      */
-    protected $_restClient = null;
+    protected ?\Zend_Rest_Client $_restClient = null;
 
 
     /**

@@ -37,7 +37,6 @@ class Zend_Amf_Value_Messaging_AsyncMessage extends Zend_Amf_Value_Messaging_Abs
 {
     /**
      * The message id to be responded to.
-     * @var String
      */
-    public $correlationId;
+    public string $correlationId;
 }

@@ -35,72 +35,61 @@ class Zend_Json_Server_Smd
 
     /**
      * Content type
-     * @var string
      */
-    protected $_contentType = 'application/json';
+    protected string $_contentType = 'application/json';
 
     /**
      * Content type regex
-     * @var string
      */
-    protected $_contentTypeRegex = '#[a-z]+/[a-z][a-z-]+#i';
+    protected string $_contentTypeRegex = '#[a-z]+/[a-z][a-z-]+#i';
 
     /**
      * Service description
-     * @var string
      */
-    protected $_description;
+    protected ?string $_description = null;
 
     /**
      * Generate Dojo-compatible SMD
-     * @var bool
      */
-    protected $_dojoCompatible = false;
+    protected bool $_dojoCompatible = false;
 
     /**
      * Current envelope
-     * @var string
      */
-    protected $_envelope = self::ENV_JSONRPC_1;
+    protected string $_envelope = self::ENV_JSONRPC_1;
 
     /**
      * Allowed envelope types
-     * @var array
      */
-    protected $_envelopeTypes = array(
+    protected array $_envelopeTypes = array(
         self::ENV_JSONRPC_1,
         self::ENV_JSONRPC_2,
     );
 
     /**
      * Service id
-     * @var string
      */
-    protected $_id;
+    protected ?string $_id = null;
 
     /**
      * Services offerred
-     * @var array
      */
-    protected $_services = array();
+    protected array $_services = array();
 
     /**
      * Service target
-     * @var string
      */
-    protected $_target;
+    protected ?string $_target = null;
 
     /**
      * Global transport
-     * @var string
      */
-    protected $_transport = 'POST';
+    protected string $_transport = 'POST';
 
     /**
      * Allowed transport types
-     * @var array
      */
-    protected $_transportTypes = array('POST');
+    protected array $_transportTypes = array('POST');
 
     /**
      * Set object state via options

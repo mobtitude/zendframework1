@@ -49,10 +49,8 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
 
     /**
      * Apple Server URI's
-     *
-     * @var array
      */
-    protected $_serverUriList = array(
+    protected array $_serverUriList = array(
         'ssl://gateway.sandbox.push.apple.com:2195',
         'ssl://gateway.push.apple.com:2195',
         'ssl://feedback.sandbox.push.apple.com:2196',
@@ -75,17 +73,13 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
 
     /**
      * Certificate
-     *
-     * @var string
      */
-    protected $_certificate;
+    protected ?string $_certificate = null;
 
     /**
      * Certificate Passphrase
-     *
-     * @var string
      */
-    protected $_certificatePassphrase;
+    protected ?string $_certificatePassphrase = null;
 
     /**
      * Get Certficiate

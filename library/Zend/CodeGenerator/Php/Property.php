@@ -39,10 +39,7 @@ require_once 'Zend/CodeGenerator/Php/Property/DefaultValue.php';
 class Zend_CodeGenerator_Php_Property extends Zend_CodeGenerator_Php_Member_Abstract
 {
 
-    /**
-     * @var bool
-     */
-    protected $_isConst = null;
+    protected ?bool $_isConst = null;
 
     /**
      * @var string

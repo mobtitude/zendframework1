@@ -31,11 +31,9 @@
 abstract class Zend_Service_SqlAzure_Management_ServiceEntityAbstract
 {
     /**
-     * Data
-     * 
-     * @var array
-     */
-    protected $_data = null;
+				 * Data
+				 */
+				protected ?array $_data = null;
     
     /**
      * Magic overload for setting properties

@@ -65,10 +65,8 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
 
     /**
      * Storage client
-     *
-     * @var Zend_Service_WindowsAzure_Storage_Blob
      */
-    protected $_storageClient = null;
+    protected ?\Zend_Service_WindowsAzure_Storage_Blob $_storageClient = null;
 
     /**
      * Creates a new Zend_Cloud_Storage_WindowsAzure instance

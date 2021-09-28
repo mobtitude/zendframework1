@@ -34,17 +34,13 @@ class Zend_Config_Writer_FileAbstract extends Zend_Config_Writer
 {
     /**
      * Filename to write to
-     *
-     * @var string
      */
-    protected $_filename = null;
+    protected ?string $_filename = null;
 
     /**
      * Wether to exclusively lock the file or not
-     *
-     * @var boolean
      */
-    protected $_exclusiveLock = false;
+    protected bool $_exclusiveLock = false;
 
     /**
      * Set the target filename

@@ -39,10 +39,8 @@ class Zend_View_Helper_Navigation_Breadcrumbs
 {
     /**
      * Breadcrumbs separator string
-     *
-     * @var string
      */
-    protected $_separator = ' &gt; ';
+    protected string $_separator = ' &gt; ';
 
     /**
      * The minimum depth a page must have to be included when rendering
@@ -53,10 +51,8 @@ class Zend_View_Helper_Navigation_Breadcrumbs
 
     /**
      * Whether last page in breadcrumb should be hyperlinked
-     *
-     * @var bool
      */
-    protected $_linkLast = false;
+    protected bool $_linkLast = false;
 
     /**
      * Partial view script to use for rendering menu

@@ -39,7 +39,7 @@ require_once 'Zend/Tool/Project/Provider/Exception.php';
 class Zend_Tool_Project_Provider_Test extends Zend_Tool_Project_Provider_Abstract
 {
 
-    protected $_specialties = array('Application', 'Library');
+    protected array $_specialties = array('Application', 'Library');
 
     /**
      * isTestingEnabled()

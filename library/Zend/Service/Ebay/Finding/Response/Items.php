@@ -48,25 +48,21 @@ class Zend_Service_Ebay_Finding_Response_Items extends Zend_Service_Ebay_Finding
      * number of item listings to return per page, total number of pages that
      * can be returned, and the total number of listings that match the search
      * criteria.
-     *
-     * @var Zend_Service_Ebay_Finding_PaginationOutput
      */
-    public $paginationOutput;
+    public ?\Zend_Service_Ebay_Finding_PaginationOutput $paginationOutput = null;
 
     /**
      * Container for the item listings that matched the search criteria.
      *
      * The data for each item is returned in individual containers, if any
      * matches were found.
-     *
-     * @var Zend_Service_Ebay_Finding_Search_Result
      */
-    public $searchResult;
+    public ?\Zend_Service_Ebay_Finding_Search_Result $searchResult = null;
 
     /**
      * @var Zend_Service_Ebay_Finding_Response_Items[]
      */
-    protected static $_pageCache = array();
+    protected static array $_pageCache = array();
 
     /**
      * @return void

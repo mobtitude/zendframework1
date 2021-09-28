@@ -39,7 +39,7 @@ class Zend_Service_ShortUrl_IsGd extends Zend_Service_ShortUrl_AbstractShortener
      *
      * @var string
      */
-    protected $_baseUri = 'http://is.gd';
+    protected ?string $_baseUri = 'http://is.gd';
 
     /**
      * This function shortens long url

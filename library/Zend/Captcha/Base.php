@@ -43,23 +43,18 @@ abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_
      * Element name
      *
      * Useful to generate/check form fields
-     *
-     * @var string
      */
-    protected $_name;
+    protected ?string $_name = null;
 
     /**
      * Captcha options
-     *
-     * @var array
      */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * Options to skip when processing options
-     * @var array
      */
-    protected $_skipOptions = array(
+    protected array $_skipOptions = array(
         'options',
         'config',
     );

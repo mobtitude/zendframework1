@@ -38,7 +38,7 @@ require_once 'Zend/Gdata/App/Extension/Text.php';
 class Zend_Gdata_App_Extension_Content extends Zend_Gdata_App_Extension_Text
 {
 
-    protected $_rootElement = 'content';
+    protected ?string $_rootElement = 'content';
     protected $_src = null;
 
     public function __construct($text = null, $type = 'text', $src = null)

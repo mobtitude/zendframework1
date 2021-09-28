@@ -41,7 +41,7 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
      * Error messages
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::NOT_SAME      => "The two given tokens do not match",
         self::MISSING_TOKEN => 'No token was provided to match against',
     );
@@ -49,7 +49,7 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'token' => '_tokenString'
     );
 
@@ -59,7 +59,7 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
      */
     protected $_tokenString;
     protected $_token;
-    protected $_strict = true;
+    protected bool $_strict = true;
 
     /**
      * Sets validator options

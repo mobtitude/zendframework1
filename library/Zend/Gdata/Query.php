@@ -42,17 +42,13 @@ class Zend_Gdata_Query
 
     /**
      * Query parameters.
-     *
-     * @var array
      */
-    protected $_params = array();
+    protected array $_params = array();
 
     /**
      * Default URL
-     *
-     * @var string
      */
-    protected $_defaultFeedUri = null;
+    protected ?string $_defaultFeedUri = null;
 
     /**
      * Base URL
@@ -64,10 +60,8 @@ class Zend_Gdata_Query
 
     /**
      * Category for the query
-     *
-     * @var string
      */
-    protected $_category = null;
+    protected ?string $_category = null;
 
     /**
      * Create Gdata_Query object

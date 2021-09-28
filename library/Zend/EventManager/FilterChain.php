@@ -35,7 +35,7 @@ class Zend_EventManager_FilterChain implements Zend_EventManager_Filter
     /**
      * @var Zend_EventManager_Filter_FilterIterator All filters
      */
-    protected $filters;
+    protected \Zend_EventManager_Filter_FilterIterator $filters;
 
     /**
      * Constructor

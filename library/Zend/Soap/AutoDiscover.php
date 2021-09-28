@@ -55,15 +55,9 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface
      */
     protected $_wsdl = null;
 
-    /**
-     * @var Zend_Server_Reflection
-     */
-    protected $_reflection = null;
+    protected ?\Zend_Server_Reflection $_reflection = null;
 
-    /**
-     * @var array
-     */
-    protected $_functions = array();
+    protected array $_functions = array();
 
     /**
      * @var boolean
@@ -86,17 +80,13 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface
 
     /**
      * soap:operation style
-     *
-     * @var array
      */
-    protected $_bindingStyle = array('style' => 'rpc', 'transport' => 'http://schemas.xmlsoap.org/soap/http');
+    protected array $_bindingStyle = array('style' => 'rpc', 'transport' => 'http://schemas.xmlsoap.org/soap/http');
 
     /**
      * Name of the class to handle the WSDL creation.
-     *
-     * @var string
      */
-    protected $_wsdlClass = 'Zend_Soap_Wsdl';
+    protected string $_wsdlClass = 'Zend_Soap_Wsdl';
 
     /**
      * Constructor

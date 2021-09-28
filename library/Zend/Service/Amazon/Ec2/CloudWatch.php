@@ -40,17 +40,17 @@ class Zend_Service_Amazon_Ec2_CloudWatch extends Zend_Service_Amazon_Ec2_Abstrac
     /**
      * The HTTP query server
      */
-    protected $_ec2Endpoint = 'monitoring.amazonaws.com';
+    protected string $_ec2Endpoint = 'monitoring.amazonaws.com';
 
     /**
      * The API version to use
      */
-    protected $_ec2ApiVersion = '2009-05-15';
+    protected string $_ec2ApiVersion = '2009-05-15';
 
     /**
      * XML Namespace for the CloudWatch Stuff
      */
-    protected $_xmlNamespace = 'http://monitoring.amazonaws.com/doc/2009-05-15/';
+    protected string $_xmlNamespace = 'http://monitoring.amazonaws.com/doc/2009-05-15/';
 
     /**
      * The following metrics are available from each EC2 instance.
@@ -106,10 +106,8 @@ class Zend_Service_Amazon_Ec2_CloudWatch extends Zend_Service_Amazon_Ec2_Abstrac
      * along with these metrics in order to refine the slice of data you want returned,
      * such as metric CPUUtilization and dimension ImageId to get all CPUUtilization
      * data for instances using the specified AMI.
-     *
-     * @var array
      */
-    protected $_validMetrics = array('CPUUtilization', 'NetworkIn', 'NetworkOut',
+    protected array $_validMetrics = array('CPUUtilization', 'NetworkIn', 'NetworkOut',
                                     'DiskWriteOps', 'DiskReadBytes', 'DiskReadOps',
                                     'DiskWriteBytes', 'Latency', 'RequestCount',
                                     'HealthyHostCount', 'UnHealthyHostCount');
@@ -147,10 +145,8 @@ class Zend_Service_Amazon_Ec2_CloudWatch extends Zend_Service_Amazon_Ec2_Abstrac
      * some cases. If your data is delayed, you should check the service’s Health Dashboard for
      * any current operational issues with either Amazon CloudWatch or the services collecting
      * the data, such as EC2 or Elastic Load Balancing.
-     *
-     * @var array
      */
-    protected $_validStatistics = array('Average', 'Maximum', 'Minimum', 'Samples', 'Sum');
+    protected array $_validStatistics = array('Average', 'Maximum', 'Minimum', 'Samples', 'Sum');
 
     /**
      * Valid Dimention Keys for getMetricStatistics
@@ -178,10 +174,8 @@ class Zend_Service_Amazon_Ec2_CloudWatch extends Zend_Service_Amazon_Ec2_Abstrac
      *  name. A LoadBalancer is represented by a DNS name and provides the single destination to
      *  which all requests intended for your application should be directed. This metric allows
      *  you to examine data from all instances connected to a single LoadBalancer.
-     *
-     * @var array
      */
-    protected $_validDimensionsKeys = array('ImageId', 'AvailabilityZone', 'AutoScalingGroupName',
+    protected array $_validDimensionsKeys = array('ImageId', 'AvailabilityZone', 'AutoScalingGroupName',
                                             'InstanceId', 'InstanceType', 'LoadBalancerName');
 
     /**

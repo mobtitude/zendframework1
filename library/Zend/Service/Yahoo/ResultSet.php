@@ -33,24 +33,18 @@ class Zend_Service_Yahoo_ResultSet implements SeekableIterator
 {
     /**
      * Total number of results available
-     *
-     * @var int
      */
-    public $totalResultsAvailable;
+    public int $totalResultsAvailable;
 
     /**
      * The number of results in this result set
-     *
-     * @var int
      */
-    public $totalResultsReturned;
+    public int $totalResultsReturned;
 
     /**
      * The offset in the total result set of this search set
-     *
-     * @var int
      */
-    public $firstResultPosition;
+    public int $firstResultPosition;
 
     /**
      * A DOMNodeList of results
@@ -61,17 +55,13 @@ class Zend_Service_Yahoo_ResultSet implements SeekableIterator
 
     /**
      * Yahoo Web Service Return Document
-     *
-     * @var DOMDocument
      */
-    protected $_dom;
+    protected \DOMDocument $_dom;
 
     /**
      * Xpath Object for $this->_dom
-     *
-     * @var DOMXPath
      */
-    protected $_xpath;
+    protected \DOMXPath $_xpath;
 
     /**
      * Current Index for SeekableIterator

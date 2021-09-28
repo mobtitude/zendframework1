@@ -36,31 +36,23 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
 {
     /**
      * Title of the tag
-     *
-     * @var string
      */
-    protected $_title = null;
+    protected ?string $_title = null;
 
     /**
      * Weight of the tag
-     *
-     * @var float
      */
-    protected $_weight = null;
+    protected ?float $_weight = null;
 
     /**
      * Custom parameters
-     *
-     * @var string
      */
-    protected $_params = array();
+    protected array $_params = array();
 
     /**
      * Option keys to skip when calling setOptions()
-     *
-     * @var array
      */
-    protected $_skipOptions = array(
+    protected array $_skipOptions = array(
         'options',
         'param'
     );

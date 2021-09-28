@@ -47,15 +47,13 @@ class Zend_Wildfire_Protocol_JsonStream
 
     /**
      * All messages to be sent.
-     * @var array
      */
-    protected $_messages = array();
+    protected array $_messages = array();
 
     /**
      * Plugins that are using this protocol
-     * @var array
      */
-    protected $_plugins = array();
+    protected array $_plugins = array();
 
     /**
      * Register a plugin that uses this protocol

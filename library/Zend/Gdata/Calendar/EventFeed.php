@@ -54,10 +54,8 @@ class Zend_Gdata_Calendar_EventFeed extends Zend_Gdata_Feed
 
     /**
      * The classname for the feed.
-     *
-     * @var string
      */
-    protected $_feedClassName = 'Zend_Gdata_Calendar_EventFeed';
+    protected string $_feedClassName = 'Zend_Gdata_Calendar_EventFeed';
 
     public function __construct($element = null)
     {

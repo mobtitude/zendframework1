@@ -33,27 +33,27 @@ class Zend_Amf_Util_BinaryStream
     /**
      * @var string Byte stream
      */
-    protected $_stream;
+    protected string $_stream;
 
     /**
      * @var int Length of stream
      */
-    protected $_streamLength;
+    protected int $_streamLength;
 
     /**
      * @var bool BigEndian encoding?
      */
-    protected $_bigEndian;
+    protected bool $_bigEndian;
 
     /**
      * @var int Current position in stream
      */
-    protected $_needle;
+    protected int $_needle;
 
     /**
      * @var bool str* functions overloaded using mbstring.func_overload?
      */
-    protected $_mbStringFunctionsOverloaded;
+    protected bool $_mbStringFunctionsOverloaded;
 
     /**
      * Constructor
@@ -140,7 +140,7 @@ class Zend_Amf_Util_BinaryStream
             );
         }
 
-        return ord($this->_stream{$this->_needle++});
+        return ord($this->_stream[$this->_needle++]);
     }
 
     /**

@@ -85,17 +85,13 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
 
     /**
      * XPath query for RDF
-     *
-     * @var string
      */
-    protected $_xpathQueryRdf = '';
+    protected string $_xpathQueryRdf = '';
 
     /**
      * XPath query for RSS
-     *
-     * @var string
      */
-    protected $_xpathQueryRss = '';
+    protected string $_xpathQueryRss = '';
 
     /**
      * Constructor

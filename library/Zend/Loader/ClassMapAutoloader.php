@@ -34,15 +34,13 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
 {
     /**
      * Registry of map files that have already been loaded
-     * @var array
      */
-    protected $mapsLoaded = array();
+    protected array $mapsLoaded = array();
 
     /**
      * Class name/filename map
-     * @var array
      */
-    protected $map = array();
+    protected array $map = array();
 
     /**
      * Constructor

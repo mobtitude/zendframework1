@@ -45,45 +45,33 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
 {
     /**
      * Reference to the HTTP Request object
-     *
-     * @var Zend_Controller_Request_Http
      */
-    protected $_request;
+    protected ?\Zend_Controller_Request_Http $_request = null;
 
     /**
      * Reference to the HTTP Response object
-     *
-     * @var Zend_Controller_Response_Http
      */
-    protected $_response;
+    protected ?\Zend_Controller_Response_Http $_response = null;
 
     /**
      * Object that looks up user credentials for the Basic scheme
-     *
-     * @var Zend_Auth_Adapter_Http_Resolver_Interface
      */
-    protected $_basicResolver;
+    protected ?\Zend_Auth_Adapter_Http_Resolver_Interface $_basicResolver = null;
 
     /**
      * Object that looks up user credentials for the Digest scheme
-     *
-     * @var Zend_Auth_Adapter_Http_Resolver_Interface
      */
-    protected $_digestResolver;
+    protected ?\Zend_Auth_Adapter_Http_Resolver_Interface $_digestResolver = null;
 
     /**
      * List of authentication schemes supported by this class
-     *
-     * @var array
      */
-    protected $_supportedSchemes = array('basic', 'digest');
+    protected array $_supportedSchemes = array('basic', 'digest');
 
     /**
      * List of schemes this class will accept from the client
-     *
-     * @var array
      */
-    protected $_acceptSchemes;
+    protected array $_acceptSchemes;
 
     /**
      * Space-delimited list of protected domains for Digest Auth
@@ -101,25 +89,19 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
 
     /**
      * Nonce timeout period
-     *
-     * @var integer
      */
-    protected $_nonceTimeout;
+    protected ?int $_nonceTimeout = null;
 
     /**
      * Whether to send the opaque value in the header. True by default
-     *
-     * @var boolean
      */
-    protected $_useOpaque;
+    protected ?bool $_useOpaque = null;
 
     /**
      * List of the supported digest algorithms. I want to support both MD5 and
      * MD5-sess, but MD5-sess won't make it into the first version.
-     *
-     * @var array
      */
-    protected $_supportedAlgos = array('MD5');
+    protected array $_supportedAlgos = array('MD5');
 
     /**
      * The actual algorithm to use. Defaults to MD5
@@ -131,25 +113,19 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
     /**
      * List of supported qop options. My intetion is to support both 'auth' and
      * 'auth-int', but 'auth-int' won't make it into the first version.
-     *
-     * @var array
      */
-    protected $_supportedQops = array('auth');
+    protected array $_supportedQops = array('auth');
 
     /**
      * Whether or not to do Proxy Authentication instead of origin server
      * authentication (send 407's instead of 401's). Off by default.
-     *
-     * @var boolean
      */
-    protected $_imaProxy;
+    protected ?bool $_imaProxy = null;
 
     /**
      * Flag indicating the client is IE and didn't bother to return the opaque string
-     *
-     * @var boolean
      */
-    protected $_ieNoOpaque;
+    protected bool $_ieNoOpaque;
 
     /**
      * Constructor

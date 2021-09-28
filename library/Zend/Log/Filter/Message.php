@@ -33,10 +33,7 @@ require_once 'Zend/Log/Filter/Abstract.php';
  */
 class Zend_Log_Filter_Message extends Zend_Log_Filter_Abstract
 {
-    /**
-     * @var string
-     */
-    protected $_regexp;
+    protected string $_regexp;
 
     /**
      * Filter out any log messages not matching $regexp.

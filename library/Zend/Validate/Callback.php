@@ -47,7 +47,7 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::INVALID_VALUE    => "'%value%' is not valid",
         self::INVALID_CALLBACK => "An exception has been raised within the callback",
     );
@@ -61,10 +61,8 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
 
     /**
      * Default options to set for the filter
-     *
-     * @var mixed
      */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * Sets validator options

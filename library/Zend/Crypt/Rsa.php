@@ -42,14 +42,11 @@ class Zend_Crypt_Rsa
     const BINARY = 'binary';
     const BASE64 = 'base64';
 
-    protected $_privateKey;
+    protected ?\Zend_Crypt_Rsa_Key_Private $_privateKey = null;
 
     protected $_publicKey;
 
-    /**
-     * @var string
-     */
-    protected $_pemString;
+    protected ?string $_pemString = null;
 
     protected $_pemPath;
 
@@ -57,7 +54,7 @@ class Zend_Crypt_Rsa
 
     protected $_certificatePath;
 
-    protected $_hashAlgorithm;
+    protected int $_hashAlgorithm;
 
     protected $_passPhrase;
 

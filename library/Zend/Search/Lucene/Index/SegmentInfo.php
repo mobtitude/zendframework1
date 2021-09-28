@@ -55,17 +55,13 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
 
     /**
      * Number of docs in a segment
-     *
-     * @var integer
      */
-    private $_docCount;
+    private int $_docCount;
 
     /**
      * Segment name
-     *
-     * @var string
      */
-    private $_name;
+    private string $_name;
 
     /**
      * Term Dictionary Index
@@ -91,41 +87,31 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
      * [2] -> $proxPointer
      * [3] -> $skipOffset
      * [4] -> $indexPointer
-     *
-     * @var array
      */
-    private $_termDictionaryInfos;
+    private array $_termDictionaryInfos;
 
     /**
      * Segment fields. Array of Zend_Search_Lucene_Index_FieldInfo objects for this segment
-     *
-     * @var array
      */
-    private $_fields;
+    private array $_fields;
 
     /**
      * Field positions in a dictionary.
      * (Term dictionary contains filelds ordered by names)
-     *
-     * @var array
      */
-    private $_fieldsDicPositions;
+    private array $_fieldsDicPositions;
 
 
     /**
      * Associative array where the key is the file name and the value is data offset
      * in a compound segment file (.csf).
-     *
-     * @var array
      */
-    private $_segFiles;
+    private array $_segFiles;
 
     /**
      * Associative array where the key is the file name and the value is file size (.csf).
-     *
-     * @var array
      */
-    private $_segFileSizes;
+    private ?array $_segFileSizes = null;
 
     /**
      * Delete file generation number
@@ -134,36 +120,28 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
      * -1 means 'there is no delete file'
      *  0 means pre-2.1 format delete file
      *  X specifies used delete file
-     *
-     * @var integer
      */
-    private $_delGen;
+    private int $_delGen;
 
     /**
      * Segment has single norms file
      *
      * If true then one .nrm file is used for all fields
      * Otherwise .fN files are used
-     *
-     * @var boolean
      */
-    private $_hasSingleNormFile;
+    private bool $_hasSingleNormFile;
 
     /**
      * Use compound segment file (*.cfs) to collect all other segment files
      * (excluding .del files)
-     *
-     * @var boolean
      */
-    private $_isCompound;
+    private ?bool $_isCompound;
 
 
     /**
      * File system adapter.
-     *
-     * @var Zend_Search_Lucene_Storage_Directory_Filesystem
      */
-    private $_directory;
+    private \Zend_Search_Lucene_Storage_Directory $_directory;
 
     /**
      * Normalization factors.
@@ -172,10 +150,8 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
      * Each byte corresponds to an indexed document in a segment and
      * encodes normalization factor (float value, encoded by
      * Zend_Search_Lucene_Search_Similarity::encodeNorm())
-     *
-     * @var array
      */
-    private $_norms = array();
+    private array $_norms = array();
 
     /**
      * List of deleted documents.
@@ -187,17 +163,13 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
 
     /**
      * $this->_deleted update flag
-     *
-     * @var boolean
      */
-    private $_deletedDirty = false;
+    private bool $_deletedDirty = false;
 
     /**
      * True if segment uses shared doc store
-     *
-     * @var boolean
      */
-    private $_usesSharedDocStore;
+    private ?bool $_usesSharedDocStore = null;
 
     /*
      * Shared doc store options.
@@ -206,7 +178,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
      * - 'segment'    => $docStoreSegment          The name of the segment that has the shared doc store files.
      * - 'isCompound' => $docStoreIsCompoundFile   True, if compound file format is used for the shared doc store files (.cfx file).
      */
-    private $_sharedDocStoreOptions;
+    private ?array $_sharedDocStoreOptions;
 
 
     /**
@@ -749,10 +721,8 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
      *
      * Size is 1024.
      * Numbers are used instead of class constants because of performance considerations
-     *
-     * @var array
      */
-    private $_termInfoCache = array();
+    private array $_termInfoCache = array();
 
     private function _cleanUpTermInfoCache()
     {
@@ -1630,45 +1600,33 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
 
     /**
      * Term Dictionary File object for stream like terms reading
-     *
-     * @var Zend_Search_Lucene_Storage_File
      */
-    private $_tisFile = null;
+    private ?\Zend_Search_Lucene_Storage_File $_tisFile = null;
 
     /**
      * Actual offset of the .tis file data
-     *
-     * @var integer
      */
-    private $_tisFileOffset;
+    private ?int $_tisFileOffset = null;
 
     /**
      * Frequencies File object for stream like terms reading
-     *
-     * @var Zend_Search_Lucene_Storage_File
      */
-    private $_frqFile = null;
+    private ?\Zend_Search_Lucene_Storage_File $_frqFile = null;
 
     /**
      * Actual offset of the .frq file data
-     *
-     * @var integer
      */
-    private $_frqFileOffset;
+    private ?int $_frqFileOffset = null;
 
     /**
      * Positions File object for stream like terms reading
-     *
-     * @var Zend_Search_Lucene_Storage_File
      */
-    private $_prxFile = null;
+    private ?\Zend_Search_Lucene_Storage_File $_prxFile = null;
 
     /**
      * Actual offset of the .prx file in the compound file
-     *
-     * @var integer
      */
-    private $_prxFileOffset;
+    private ?int $_prxFileOffset = null;
 
 
     /**
@@ -1687,51 +1645,39 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
 
     /**
      * Segment index interval
-     *
-     * @var integer
      */
-    private $_indexInterval;
+    private ?int $_indexInterval = null;
 
     /**
      * Segment skip interval
-     *
-     * @var integer
      */
-    private $_skipInterval;
+    private ?int $_skipInterval = null;
 
     /**
      * Last TermInfo in a terms stream
-     *
-     * @var Zend_Search_Lucene_Index_TermInfo
      */
-    private $_lastTermInfo = null;
+    private ?\Zend_Search_Lucene_Index_TermInfo $_lastTermInfo = null;
 
     /**
      * Last Term in a terms stream
-     *
-     * @var Zend_Search_Lucene_Index_Term
      */
-    private $_lastTerm = null;
+    private ?\Zend_Search_Lucene_Index_Term $_lastTerm = null;
 
     /**
      * Map of the document IDs
      * Used to get new docID after removing deleted documents.
      * It's not very effective from memory usage point of view,
      * but much more faster, then other methods
-     *
-     * @var array|null
      */
-    private $_docMap = null;
+    private ?array $_docMap = null;
 
     /**
      * An array of all term positions in the documents.
      * Array structure: array( docId => array( pos1, pos2, ...), ...)
      *
      * Is set to null if term positions loading has to be skipped
-     *
-     * @var array|null
      */
-    private $_lastTermPositions;
+    private ?array $_lastTermPositions = null;
 
 
     /**

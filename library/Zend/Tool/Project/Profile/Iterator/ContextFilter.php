@@ -31,30 +31,15 @@
 class Zend_Tool_Project_Profile_Iterator_ContextFilter extends RecursiveFilterIterator
 {
 
-    /**
-     * @var array
-     */
-    protected $_acceptTypes = array();
+    protected array $_acceptTypes = array();
 
-    /**
-     * @var array
-     */
-    protected $_denyTypes   = array();
+    protected array $_denyTypes   = array();
 
-    /**
-     * @var array
-     */
-    protected $_acceptNames = array();
+    protected array $_acceptNames = array();
 
-    /**
-     * @var array
-     */
-    protected $_denyNames   = array();
+    protected array $_denyNames   = array();
 
-    /**
-     * @var array
-     */
-    protected $_rawOptions = array();
+    protected array $_rawOptions = array();
 
     /**
      * __construct()

@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_TestApplicationDirectory extends Zend_Tool_Pr
     /**
      * @var string
      */
-    protected $_filesystemName = 'application';
+    protected ?string $_filesystemName = 'application';
 
     /**
      * getName()

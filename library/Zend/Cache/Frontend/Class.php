@@ -52,7 +52,7 @@ class Zend_Cache_Frontend_Class extends Zend_Cache_Core
      *
      * @var array available options
      */
-    protected $_specificOptions = array(
+    protected array $_specificOptions = array(
         'cached_entity'      => null,
         'cache_by_default'   => true,
         'cached_methods'     => array(),
@@ -61,10 +61,8 @@ class Zend_Cache_Frontend_Class extends Zend_Cache_Core
 
     /**
      * Tags array
-     *
-     * @var array
      */
-    protected $_tags = array();
+    protected array $_tags = array();
 
     /**
      * SpecificLifetime value
@@ -93,10 +91,8 @@ class Zend_Cache_Frontend_Class extends Zend_Cache_Core
 
     /**
      * Priority (used by some particular backends)
-     *
-     * @var int
      */
-    protected $_priority = 8;
+    protected int $_priority = 8;
 
     /**
      * Constructor

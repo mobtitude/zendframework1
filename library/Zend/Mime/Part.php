@@ -37,73 +37,53 @@ class Zend_Mime_Part
 
     /**
      * Type
-     *
-     * @var string
      */
-    public $type = Zend_Mime::TYPE_OCTETSTREAM;
+    public string $type = Zend_Mime::TYPE_OCTETSTREAM;
 
     /**
      * Encoding
-     *
-     * @var string
      */
-    public $encoding = Zend_Mime::ENCODING_8BIT;
+    public string $encoding = Zend_Mime::ENCODING_8BIT;
 
     /**
      * ID
-     *
-     * @var string
      */
-    public $id;
+    public string $id;
 
     /**
      * Disposition
-     *
-     * @var string
      */
-    public $disposition;
+    public string $disposition;
 
     /**
      * Filename
-     *
-     * @var string
      */
-    public $filename;
+    public string $filename;
 
     /**
      * Description
-     *
-     * @var string
      */
-    public $description;
+    public string $description;
 
     /**
      * Character set
-     *
-     * @var string
      */
-    public $charset;
+    public string $charset;
 
     /**
      * Boundary
-     *
-     * @var string
      */
-    public $boundary;
+    public string $boundary;
 
     /**
      * Location
-     *
-     * @var string
      */
-    public $location;
+    public string $location;
 
     /**
      * Language
-     *
-     * @var string
      */
-    public $language;
+    public string $language;
 
     /**
      * Content
@@ -112,10 +92,7 @@ class Zend_Mime_Part
      */
     protected $_content;
 
-    /**
-     * @var bool
-     */
-    protected $_isStream = false;
+    protected bool $_isStream = false;
 
     /**
      * create a new Mime Part.

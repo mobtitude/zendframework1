@@ -61,7 +61,7 @@ class Zend_Tool_Project_Context_System_ProjectDirectory
     /**
      * @var string
      */
-    protected $_filesystemName = null;
+    protected ?string $_filesystemName = null;
 
     /**
      * getName()

@@ -80,7 +80,7 @@ class Zend_Cache_Core
      *
      * @var array $_options available options
      */
-    protected $_options = array(
+    protected array $_options = array(
         'write_control'             => true,
         'caching'                   => true,
         'cache_id_prefix'           => null,
@@ -94,38 +94,28 @@ class Zend_Cache_Core
 
     /**
      * Array of options which have to be transfered to backend
-     *
-     * @var array $_directivesList
      */
-    protected static $_directivesList = array('lifetime', 'logging', 'logger');
+    protected static array $_directivesList = array('lifetime', 'logging', 'logger');
 
     /**
      * Not used for the core, just a sort a hint to get a common setOption() method (for the core and for frontends)
-     *
-     * @var array $_specificOptions
      */
-    protected $_specificOptions = array();
+    protected array $_specificOptions = array();
 
     /**
      * Last used cache id
-     *
-     * @var string $_lastId
      */
-    private $_lastId = null;
+    private ?string $_lastId = null;
 
     /**
      * True if the backend implements Zend_Cache_Backend_ExtendedInterface
-     *
-     * @var boolean $_extendedBackend
      */
-    protected $_extendedBackend = false;
+    protected bool $_extendedBackend = false;
 
     /**
      * Array of capabilities of the backend (only if it implements Zend_Cache_Backend_ExtendedInterface)
-     *
-     * @var array
      */
-    protected $_backendCapabilities = array();
+    protected array $_backendCapabilities = array();
 
     /**
      * Constructor

@@ -43,27 +43,23 @@ class Zend_XmlRpc_Fault
 {
     /**
      * Fault code
-     * @var int
      */
-    protected $_code;
+    protected ?int $_code = null;
 
     /**
      * Fault character encoding
-     * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected string $_encoding = 'UTF-8';
 
     /**
      * Fault message
-     * @var string
      */
-    protected $_message;
+    protected ?string $_message = null;
 
     /**
      * Internal fault codes => messages
-     * @var array
      */
-    protected $_internal = array(
+    protected array $_internal = array(
         404 => 'Unknown Error',
 
         // 610 - 619 reflection errors

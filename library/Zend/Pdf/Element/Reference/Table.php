@@ -32,42 +32,32 @@ class Zend_Pdf_Element_Reference_Table
 {
     /**
      * Parent reference table
-     *
-     * @var Zend_Pdf_Element_Reference_Table
      */
-    private $_parent;
+    private ?\Zend_Pdf_Element_Reference_Table $_parent = null;
 
     /**
      * Free entries
      * 'reference' => next free object number
-     *
-     * @var array
      */
-    private $_free;
+    private array $_free;
 
     /**
      * Generation numbers for free objects.
      * Array: objNum => nextGeneration
-     *
-     * @var array
      */
-    private $_generations;
+    private array $_generations;
 
     /**
      * In use entries
      * 'reference' => offset
-     *
-     * @var array
      */
-    private $_inuse;
+    private array $_inuse;
 
     /**
      * Generation numbers for free objects.
      * Array: objNum => objGeneration
-     *
-     * @var array
      */
-    private $_usedObjects;
+    private array $_usedObjects;
 
 
 

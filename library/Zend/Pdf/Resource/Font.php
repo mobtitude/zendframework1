@@ -50,85 +50,70 @@ require_once 'Zend/Pdf/Font.php';
 abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
 {
   /**** Instance Variables ****/
-
-
     /**
      * The type of font. Use TYPE_ constants defined in {@link Zend_Pdf_Font}.
-     * @var integer
      */
-    protected $_fontType = Zend_Pdf_Font::TYPE_UNKNOWN;
+    protected int $_fontType = Zend_Pdf_Font::TYPE_UNKNOWN;
 
     /**
      * Array containing descriptive names for the font. See {@link fontName()}.
-     * @var array
      */
-    protected $_fontNames = array();
+    protected array $_fontNames = array();
 
     /**
      * Flag indicating whether or not this font is bold.
-     * @var boolean
      */
-    protected $_isBold = false;
+    protected bool $_isBold = false;
 
     /**
      * Flag indicating whether or not this font is italic.
-     * @var boolean
      */
-    protected $_isItalic = false;
+    protected bool $_isItalic = false;
 
     /**
      * Flag indicating whether or not this font is monospaced.
-     * @var boolean
      */
-    protected $_isMonospace = false;
+    protected bool $_isMonospace = false;
 
     /**
      * The position below the text baseline of the underline (in glyph units).
-     * @var integer
      */
-    protected $_underlinePosition = 0;
+    protected int $_underlinePosition = 0;
 
     /**
      * The thickness of the underline (in glyph units).
-     * @var integer
      */
-    protected $_underlineThickness = 0;
+    protected int $_underlineThickness = 0;
 
     /**
      * The position above the text baseline of the strikethrough (in glyph units).
-     * @var integer
      */
-    protected $_strikePosition = 0;
+    protected int $_strikePosition = 0;
 
     /**
      * The thickness of the strikethrough (in glyph units).
-     * @var integer
      */
-    protected $_strikeThickness = 0;
+    protected int $_strikeThickness = 0;
 
     /**
      * Number of glyph units per em. See {@link getUnitsPerEm()}.
-     * @var integer
      */
-    protected $_unitsPerEm = 0;
+    protected int $_unitsPerEm = 0;
 
     /**
      * Typographical ascent. See {@link getAscent()}.
-     * @var integer
      */
-    protected $_ascent = 0;
+    protected int $_ascent = 0;
 
     /**
      * Typographical descent. See {@link getDescent()}.
-     * @var integer
      */
-    protected $_descent = 0;
+    protected int $_descent = 0;
 
     /**
      * Typographical line gap. See {@link getLineGap()}.
-     * @var integer
      */
-    protected $_lineGap = 0;
+    protected int $_lineGap = 0;
 
 
 

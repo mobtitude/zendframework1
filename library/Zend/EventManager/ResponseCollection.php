@@ -33,16 +33,14 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
 
         /**
          * Mode used when iterating
-         * @var int
          */
-        protected $mode = self::IT_MODE_KEEP;
+        protected int $mode = self::IT_MODE_KEEP;
 
         /**
          * Count of elements in the stack 
-         * 
-         * @var int
+         *
          */
-        protected $count = 0;
+        protected int $count = 0;
 
         /**
          * Data represented by this stack
@@ -357,7 +355,7 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
  */
 class Zend_EventManager_ResponseCollection extends SplStack 
 {
-    protected $stopped = false;
+    protected bool $stopped = false;
 
     /**
      * Did the last response provided trigger a short circuit of the stack?

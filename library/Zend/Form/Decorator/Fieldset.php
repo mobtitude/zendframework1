@@ -39,9 +39,8 @@ class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
 {
     /**
      * Attribs that should be removed prior to rendering
-     * @var array
      */
-    public $stripAttribs = array(
+    public array $stripAttribs = array(
         'action',
         'enctype',
         'helper',
@@ -52,15 +51,14 @@ class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
 
     /**
      * Fieldset legend
-     * @var string
      */
-    protected $_legend;
+    protected ?string $_legend = null;
 
     /**
      * Default placement: surround content
      * @var string
      */
-    protected $_placement = null;
+    protected ?string $_placement = null;
 
     /**
      * Get options

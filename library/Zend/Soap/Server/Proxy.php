@@ -22,10 +22,7 @@
 
 class Zend_Soap_Server_Proxy
 {
-    /**
-     * @var object
-     */
-    protected $_classInstance;
+    protected ?object $_classInstance = null;
     /**
      * @var string
      */

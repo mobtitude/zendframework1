@@ -41,7 +41,7 @@ class Zend_Form_Decorator_DtDdWrapper extends Zend_Form_Decorator_Abstract
      * Default placement: surround content
      * @var string
      */
-    protected $_placement = null;
+    protected ?string $_placement = null;
 
     /**
      * Render

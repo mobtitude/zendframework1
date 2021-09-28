@@ -40,10 +40,8 @@ class Zend_Pdf_Element_Dictionary extends Zend_Pdf_Element
     /**
      * Dictionary elements
      * Array of Zend_Pdf_Element objects ('name' => Zend_Pdf_Element)
-     *
-     * @var array
      */
-    private $_items = array();
+    private array $_items = array();
 
 
     /**

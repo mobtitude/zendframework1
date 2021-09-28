@@ -46,10 +46,8 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
     /**
      * If not null, specifies the group id of the group who should be
      * retrieved by this query.
-     *
-     * @var string
      */
-    protected $_groupId = null;
+    protected ?string $_groupId = null;
 
     /**
      * Create a new instance.

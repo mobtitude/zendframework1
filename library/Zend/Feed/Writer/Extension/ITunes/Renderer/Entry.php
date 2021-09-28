@@ -37,10 +37,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Entry
      * Set to TRUE if a rendering method actually renders something. This
      * is used to prevent premature appending of a XML namespace declaration
      * until an element which requires it is actually appended.
-     *
-     * @var bool
      */
-    protected $_called = false;
+    protected bool $_called = false;
 
     /**
      * Render entry

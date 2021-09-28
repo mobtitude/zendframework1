@@ -56,20 +56,11 @@ require_once 'Zend/Queue/Adapter/Db/Message.php';
  */
 class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
 {
-    /**
-     * @var Zend_Queue_Adapter_Db_Queue
-     */
-    protected $_queueTable = null;
+    protected ?\Zend_Queue_Adapter_Db_Queue $_queueTable = null;
 
-    /**
-     * @var Zend_Queue_Adapter_Db_Message
-     */
-    protected $_messageTable = null;
+    protected ?\Zend_Queue_Adapter_Db_Message $_messageTable = null;
 
-    /**
-     * @var Zend_Db_Table_Row_Abstract
-     */
-    protected $_messageRow = null;
+    protected ?\Zend_Db_Table_Row_Abstract $_messageRow = null;
 
     /**
      * Constructor

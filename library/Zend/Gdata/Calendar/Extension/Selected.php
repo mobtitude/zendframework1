@@ -38,9 +38,9 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Calendar_Extension_Selected extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gCal';
-    protected $_rootElement = 'selected';
-    protected $_value = null;
+    protected string $_rootNamespace = 'gCal';
+    protected ?string $_rootElement = 'selected';
+    protected ?bool $_value = null;
 
     /**
      * Constructs a new Zend_Gdata_Calendar_Extension_Selected object.

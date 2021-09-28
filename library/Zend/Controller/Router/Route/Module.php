@@ -39,47 +39,29 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
 
     /**
      * Default values for the route (ie. module, controller, action, params)
-     *
-     * @var array
      */
-    protected $_defaults;
+    protected array $_defaults;
 
     /**
      * Default values for the route (ie. module, controller, action, params)
-     *
-     * @var array
      */
-    protected $_values = array();
+    protected array $_values = array();
 
-    /**
-     * @var boolean
-     */
-    protected $_moduleValid = false;
+    protected bool $_moduleValid = false;
 
-    /**
-     * @var boolean
-     */
-    protected $_keysSet = false;
+    protected bool $_keysSet = false;
 
     /**#@+
      * Array keys to use for module, controller, and action. Should be taken out of request.
      *
      * @var string
      */
-    protected $_moduleKey     = 'module';
-    protected $_controllerKey = 'controller';
-    protected $_actionKey     = 'action';
-    /**#@-*/
+    protected string $_moduleKey     = 'module';
+    protected string $_controllerKey = 'controller';
+    protected string $_actionKey     = 'action';
+    protected ?\Zend_Controller_Dispatcher_Interface $_dispatcher;
 
-    /**
-     * @var Zend_Controller_Dispatcher_Interface
-     */
-    protected $_dispatcher;
-
-    /**
-     * @var Zend_Controller_Request_Abstract
-     */
-    protected $_request;
+    protected ?\Zend_Controller_Request_Abstract $_request;
 
     /**
      * Get the version of the route

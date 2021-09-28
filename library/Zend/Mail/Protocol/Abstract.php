@@ -62,30 +62,26 @@ abstract class Zend_Mail_Protocol_Abstract
 
     /**
      * Maximum of the transaction log
-     * @var integer
      */
-    protected $_maximumLog = 64;
+    protected int $_maximumLog = 64;
 
 
     /**
      * Hostname or IP address of remote server
-     * @var string
      */
-    protected $_host;
+    protected string $_host;
 
 
     /**
      * Port number of connection
-     * @var integer
      */
-    protected $_port;
+    protected ?int $_port;
 
 
     /**
      * Instance of Zend_Validate to check hostnames
-     * @var Zend_Validate
      */
-    protected $_validHost;
+    protected \Zend_Validate $_validHost;
 
 
     /**
@@ -97,16 +93,14 @@ abstract class Zend_Mail_Protocol_Abstract
 
     /**
      * Last request sent to server
-     * @var string
      */
-    protected $_request;
+    protected ?string $_request = null;
 
 
     /**
      * Array of server responses to last request
-     * @var array
      */
-    protected $_response;
+    protected ?array $_response = null;
 
 
     /**
@@ -119,9 +113,8 @@ abstract class Zend_Mail_Protocol_Abstract
 
     /**
      * Log of mail requests and server responses for a session
-     * @var array
      */
-    private $_log = array();
+    private array $_log = array();
 
 
     /**

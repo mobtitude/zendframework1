@@ -52,7 +52,7 @@ class Zend_Gdata_Docs_Query extends Zend_Gdata_Query
      *
      * @var string
      */
-    protected $_defaultFeedUri = self::DOCUMENTS_LIST_FEED_URI;
+    protected ?string $_defaultFeedUri = self::DOCUMENTS_LIST_FEED_URI;
 
     /**
      * The visibility to be used when querying for the feed. A request for a
@@ -67,10 +67,8 @@ class Zend_Gdata_Docs_Query extends Zend_Gdata_Query
      * The projection determines how much detail should be given in the
      * result of the query. Full is the only valid projection for the
      * documents list.
-     *
-     * @var string
      */
-    protected $_projection = 'full';
+    protected string $_projection = 'full';
 
     /**
      * Constructs a new instance of a Zend_Gdata_Docs_Query object.

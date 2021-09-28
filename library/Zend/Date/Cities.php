@@ -37,10 +37,8 @@ class Zend_Date_Cities
      * Array Collection of known cities
      *
      * The array contains 'latitude' and 'longitude' for every known city
-     *
-     * @var Array
      */
-    public static $cities = array(
+    public static array $cities = array(
         'Abidjan'       => array('latitude' =>    5.3411111, 'longitude' =>   -4.0280556),
         'Abu Dhabi'     => array('latitude' =>   24.4666667, 'longitude' =>   54.3666667),
         'Abuja'       => array('latitude' =>    9.1758333, 'longitude' =>    7.1808333),

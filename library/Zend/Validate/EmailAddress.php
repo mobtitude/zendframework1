@@ -50,7 +50,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::INVALID            => "Invalid type given. String expected",
         self::INVALID_FORMAT     => "'%value%' is not a valid email address in the basic format local-part@hostname",
         self::INVALID_HOSTNAME   => "'%hostname%' is not a valid hostname for email address '%value%'",
@@ -74,9 +74,8 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
      * @see http://tools.ietf.org/html/rfc6598#section-7
      *
      * @see http://en.wikipedia.org/wiki/IPv4
-     * @var array
      */
-    protected $_invalidIp = array(
+    protected array $_invalidIp = array(
         '0'   => '0.0.0.0/8',
         '10'  => '10.0.0.0/8',
         '100' => '100.64.0.0/10',
@@ -97,7 +96,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'hostname'  => '_hostname',
         'localPart' => '_localPart'
     );
@@ -115,7 +114,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
     /**
      * Internal options array
      */
-    protected $_options = array(
+    protected array $_options = array(
         'mx'       => false,
         'deep'     => false,
         'domain'   => true,

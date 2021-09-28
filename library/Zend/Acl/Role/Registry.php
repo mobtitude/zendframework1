@@ -36,10 +36,8 @@ class Zend_Acl_Role_Registry
 {
     /**
      * Internal Role registry data storage
-     *
-     * @var array
      */
-    protected $_roles = array();
+    protected array $_roles = array();
 
     /**
      * Adds a Role having an identifier unique to the registry

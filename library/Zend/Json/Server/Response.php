@@ -31,9 +31,8 @@ class Zend_Json_Server_Response
 {
     /**
      * Response error
-     * @var null|Zend_Json_Server_Error
      */
-    protected $_error;
+    protected ?\Zend_Json_Server_Error $_error = null;
 
     /**
      * Request ID
@@ -49,15 +48,13 @@ class Zend_Json_Server_Response
 
     /**
      * Service map
-     * @var Zend_Json_Server_Smd
      */
-    protected $_serviceMap;
+    protected ?\Zend_Json_Server_Smd $_serviceMap = null;
 
     /**
      * JSON-RPC version
-     * @var string
      */
-    protected $_version;
+    protected ?string $_version = null;
 
     /**
      * Set result

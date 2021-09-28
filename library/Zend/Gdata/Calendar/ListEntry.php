@@ -75,11 +75,11 @@ require_once 'Zend/Gdata/Extension/Where.php';
 class Zend_Gdata_Calendar_ListEntry extends Zend_Gdata_Entry
 {
 
-    protected $_color = null;
-    protected $_accessLevel = null;
-    protected $_hidden = null;
-    protected $_selected = null;
-    protected $_timezone = null;
+    protected ?\Zend_Gdata_Calendar_Extension_Color $_color = null;
+    protected ?\Zend_Gdata_Calendar_Extension_AccessLevel $_accessLevel = null;
+    protected ?\Zend_Gdata_Calendar_Extension_Hidden $_hidden = null;
+    protected ?\Zend_Gdata_Calendar_Extension_Selected $_selected = null;
+    protected ?\Zend_Gdata_Calendar_Extension_Timezone $_timezone = null;
     protected $_where = array();
 
     public function __construct($element = null)

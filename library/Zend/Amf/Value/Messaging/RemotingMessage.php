@@ -39,21 +39,18 @@ class Zend_Amf_Value_Messaging_RemotingMessage extends Zend_Amf_Value_Messaging_
 
     /**
      * The name of the service to be called including package name
-     * @var String
      */
-    public $source;
+    public string $source;
 
     /**
      * The name of the method to be called
-     * @var string
      */
-    public $operation;
+    public string $operation;
 
     /**
      * The arguments to call the mathod with
-     * @var array
      */
-    public $parameters;
+    public array $parameters;
 
     /**
      * Create a new Remoting Message

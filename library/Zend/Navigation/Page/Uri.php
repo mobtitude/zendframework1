@@ -38,10 +38,8 @@ class Zend_Navigation_Page_Uri extends Zend_Navigation_Page
 {
     /**
      * Page URI
-     *
-     * @var string|null
      */
-    protected $_uri = null;
+    protected ?string $_uri = null;
 
     /**
      * Sets page URI

@@ -47,47 +47,35 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
 {
     /**
      * Array of formatted events to include in message body.
-     *
-     * @var array
      */
-    protected $_eventsToMail = array();
+    protected array $_eventsToMail = array();
 
     /**
      * Array of formatted lines for use in an HTML email body; these events
      * are formatted with an optional formatter if the caller is using
      * Zend_Layout.
-     *
-     * @var array
      */
-    protected $_layoutEventsToMail = array();
+    protected array $_layoutEventsToMail = array();
 
     /**
      * Zend_Mail instance to use
-     *
-     * @var Zend_Mail
      */
-    protected $_mail;
+    protected \Zend_Mail $_mail;
 
     /**
      * Zend_Layout instance to use; optional.
-     *
-     * @var Zend_Layout
      */
-    protected $_layout;
+    protected ?\Zend_Layout $_layout = null;
 
     /**
      * Optional formatter for use when rendering with Zend_Layout.
-     *
-     * @var Zend_Log_Formatter_Interface
      */
-    protected $_layoutFormatter;
+    protected ?\Zend_Log_Formatter_Interface $_layoutFormatter = null;
 
     /**
      * Array keeping track of the number of entries per priority level.
-     *
-     * @var array
      */
-    protected $_numEntriesPerPriority = array();
+    protected array $_numEntriesPerPriority = array();
 
     /**
      * Subject prepend text.
@@ -95,17 +83,13 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
      * Can only be used of the Zend_Mail object has not already had its
      * subject line set.  Using this will cause the subject to have the entry
      * counts per-priority level appended to it.
-     *
-     * @var string|null
      */
-    protected $_subjectPrependText;
+    protected ?string $_subjectPrependText = null;
 
     /**
      * MethodMap for Zend_Mail's headers
-     *
-     * @var array
      */
-    protected static $_methodMapHeaders = array(
+    protected static array $_methodMapHeaders = array(
         'from' => 'setFrom',
         'to' => 'addTo',
         'cc' => 'addCc',

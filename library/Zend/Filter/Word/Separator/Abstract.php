@@ -34,7 +34,7 @@ require_once 'Zend/Filter/PregReplace.php';
 abstract class Zend_Filter_Word_Separator_Abstract extends Zend_Filter_PregReplace
 {
 
-    protected $_separator = null;
+    protected ?string $_separator = null;
 
     /**
      * Constructor

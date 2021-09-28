@@ -43,25 +43,21 @@ class Zend_Oauth_Client extends Zend_Http_Client
      * Flag to indicate that the client has detected the server as supporting
      * OAuth 1.0a
      */
-    public static $supportsRevisionA = false;
+    public static bool $supportsRevisionA = false;
 
     /**
      * Holds the current OAuth Configuration set encapsulated in an instance
      * of Zend_Oauth_Config; it's not a Zend_Config instance since that level
      * of abstraction is unnecessary and doesn't let me escape the accessors
      * and mutators anyway!
-     *
-     * @var Zend_Oauth_Config
      */
-    protected $_config = null;
+    protected ?\Zend_Oauth_Config $_config = null;
 
     /**
      * True if this request is being made with data supplied by
      * a stream object instead of a raw encoded string.
-     *
-     * @var bool
      */
-    protected $_streamingRequest = null;
+    protected ?bool $_streamingRequest = null;
 
     /**
      * Constructor; creates a new HTTP Client instance which itself is

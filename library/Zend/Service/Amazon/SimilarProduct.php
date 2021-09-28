@@ -31,15 +31,9 @@
  */
 class Zend_Service_Amazon_SimilarProduct
 {
-    /**
-     * @var string
-     */
-    public $ASIN;
+    public string $ASIN;
 
-    /**
-     * @var string
-     */
-    public $Title;
+    public string $Title;
 
     /**
      * Assigns values to properties relevant to SimilarProduct

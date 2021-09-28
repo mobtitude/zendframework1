@@ -43,15 +43,13 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
 
         /**
          * Count of items in the queue
-         * @var int
          */
-        protected $count = 0;
+        protected int $count = 0;
 
         /**
          * Flag indicating what should be returned when iterating or extracting
-         * @var int
          */
-        protected $extractFlags = self::EXTR_DATA;
+        protected int $extractFlags = self::EXTR_DATA;
 
         /**
          * @var bool|array
@@ -60,9 +58,8 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
 
         /**
          * All items in the queue
-         * @var array
          */
-        protected $queue = array();
+        protected array $queue = array();
 
         /**
          * Constructor
@@ -389,12 +386,9 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
     /**
      * @var int Seed used to ensure queue order for items of the same priority
      */
-    protected $serial = PHP_INT_MAX;
+    protected int $serial = PHP_INT_MAX;
 
-    /**
-     * @var bool
-     */
-    protected $isPhp53;
+    protected bool $isPhp53;
 
     /**
      * Constructor

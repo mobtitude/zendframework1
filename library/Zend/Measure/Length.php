@@ -356,7 +356,7 @@ class Zend_Measure_Length extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'AGATE'           => array(array('' => '0.0254', '/' => '72'), 'agate'),
         'ALEN_DANISH'     => array('0.6277',           'alen'),
         'ALEN'            => array('0.6',              'alen'),

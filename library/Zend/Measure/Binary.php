@@ -80,7 +80,7 @@ class Zend_Measure_Binary extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'BIT'              => array('0.125',                     'b'),
         'CRUMB'            => array('0.25',                      'crumb'),
         'NIBBLE'           => array('0.5',                       'nibble'),

@@ -36,9 +36,8 @@ class Zend_Dojo_Form_SubForm extends Zend_Form_SubForm
 {
     /**
      * Has the dojo view helper path been registered?
-     * @var bool
      */
-    protected $_dojoViewPathRegistered = false;
+    protected bool $_dojoViewPathRegistered = false;
 
     /**
      * Constructor

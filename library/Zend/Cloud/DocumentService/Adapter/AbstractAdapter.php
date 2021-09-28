@@ -45,22 +45,18 @@ abstract class Zend_Cloud_DocumentService_Adapter_AbstractAdapter
 
     /**
      * Class to utilize for new document objects
-     * @var string
      */
-    protected $_documentClass = 'Zend_Cloud_DocumentService_Document';
+    protected string $_documentClass = 'Zend_Cloud_DocumentService_Document';
 
     /**
      * Class to utilize for new document set objects
-     * @var string
      */
-    protected $_documentSetClass = 'Zend_Cloud_DocumentService_DocumentSet';
+    protected string $_documentSetClass = 'Zend_Cloud_DocumentService_DocumentSet';
 
     /**
      * Class to utilize for new query objects
-     *
-     * @var string
      */
-    protected $_queryClass = 'Zend_Cloud_DocumentService_Query';
+    protected string $_queryClass = 'Zend_Cloud_DocumentService_Query';
 
     /**
      * Set the class for document objects

@@ -32,8 +32,8 @@ require_once 'Zend/Gdata/Extension.php';
  */
 class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
 {
-    protected $_rootNamespace = 'ga';
-    protected $_rootElement = 'property';
+    protected string $_rootNamespace = 'ga';
+    protected ?string $_rootElement = 'property';
     protected $_value = null;
     protected $_name = null;
 

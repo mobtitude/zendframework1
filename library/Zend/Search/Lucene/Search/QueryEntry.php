@@ -31,10 +31,8 @@ abstract class Zend_Search_Lucene_Search_QueryEntry
 {
     /**
      * Query entry boost factor
-     *
-     * @var float
      */
-    protected $_boost = 1.0;
+    protected float $_boost = 1.0;
 
 
     /**

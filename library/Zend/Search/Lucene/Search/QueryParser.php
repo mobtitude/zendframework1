@@ -45,26 +45,20 @@ class Zend_Search_Lucene_Search_QueryParser extends Zend_Search_Lucene_FSM
 {
     /**
      * Parser instance
-     *
-     * @var Zend_Search_Lucene_Search_QueryParser
      */
-    private static $_instance = null;
+    private static ?\Zend_Search_Lucene_Search_QueryParser $_instance = null;
 
 
     /**
      * Query lexer
-     *
-     * @var Zend_Search_Lucene_Search_QueryLexer
      */
-    private $_lexer;
+    private \Zend_Search_Lucene_Search_QueryLexer $_lexer;
 
     /**
      * Tokens list
      * Array of Zend_Search_Lucene_Search_QueryToken objects
-     *
-     * @var array
      */
-    private $_tokens;
+    private ?array $_tokens = null;
 
     /**
      * Current token
@@ -98,24 +92,18 @@ class Zend_Search_Lucene_Search_QueryParser extends Zend_Search_Lucene_FSM
 
     /**
      * Context stack
-     *
-     * @var array
      */
-    private $_contextStack;
+    private ?array $_contextStack = null;
 
     /**
      * Query string encoding
-     *
-     * @var string
      */
-    private $_encoding;
+    private ?string $_encoding = null;
 
     /**
      * Query string default encoding
-     *
-     * @var string
      */
-    private $_defaultEncoding = '';
+    private string $_defaultEncoding = '';
 
     /**
      * Defines query parsing mode.
@@ -133,10 +121,8 @@ class Zend_Search_Lucene_Search_QueryParser extends Zend_Search_Lucene_FSM
      * {@link Zend_Search_Lucene::dontSuppressQueryParsingExceptions()} and
      * {@link Zend_Search_Lucene::checkQueryParsingExceptionsSuppressMode()} to operate
      * with this setting.
-     *
-     * @var boolean
      */
-    private $_suppressQueryParsingExceptions = true;
+    private bool $_suppressQueryParsingExceptions = true;
 
     /**
      * Boolean operators constants
@@ -146,10 +132,8 @@ class Zend_Search_Lucene_Search_QueryParser extends Zend_Search_Lucene_FSM
 
     /**
      * Default boolean queries operator
-     *
-     * @var integer
      */
-    private $_defaultOperator = self::B_OR;
+    private int $_defaultOperator = self::B_OR;
 
 
     /** Query parser State Machine states */

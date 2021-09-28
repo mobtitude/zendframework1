@@ -30,15 +30,9 @@ require_once 'Zend/XmlRpc/Generator/GeneratorAbstract.php';
  */
 class Zend_XmlRpc_Generator_DomDocument extends Zend_XmlRpc_Generator_GeneratorAbstract
 {
-    /**
-     * @var DOMDocument
-     */
-    protected $_dom;
+    protected ?\DOMDocument $_dom = null;
 
-    /**
-     * @var DOMNode
-     */
-    protected $_currentElement;
+    protected ?\DOMNode $_currentElement = null;
 
     /**
      * Start XML element

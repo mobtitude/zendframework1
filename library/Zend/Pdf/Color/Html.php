@@ -39,10 +39,8 @@ class Zend_Pdf_Color_Html extends Zend_Pdf_Color
 
     /**
      * Color
-     *
-     * @var Zend_Pdf_Color
      */
-    private $_color;
+    private \Zend_Pdf_Color $_color;
 
     /**
      * Class constructor.

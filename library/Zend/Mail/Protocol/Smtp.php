@@ -49,66 +49,50 @@ class Zend_Mail_Protocol_Smtp extends Zend_Mail_Protocol_Abstract
 {
     /**
      * The transport method for the socket
-     *
-     * @var string
      */
-    protected $_transport = 'tcp';
+    protected string $_transport = 'tcp';
 
 
     /**
      * Indicates that a session is requested to be secure
-     *
-     * @var string
      */
-    protected $_secure;
+    protected ?string $_secure = null;
 
 
     /**
      * Indicates an smtp session has been started by the HELO command
-     *
-     * @var boolean
      */
-    protected $_sess = false;
+    protected bool $_sess = false;
 
 
     /**
      * Indicates the HELO command has been issues
-     *
-     * @var unknown_type
      */
-    protected $_helo = false;
+    protected bool $_helo = false;
 
 
     /**
      * Indicates an smtp AUTH has been issued and authenticated
-     *
-     * @var unknown_type
      */
-    protected $_auth = false;
+    protected bool $_auth = false;
 
 
     /**
      * Indicates a MAIL command has been issued
-     *
-     * @var unknown_type
      */
-    protected $_mail = false;
+    protected bool $_mail = false;
 
 
     /**
      * Indicates one or more RCTP commands have been issued
-     *
-     * @var unknown_type
      */
-    protected $_rcpt = false;
+    protected bool $_rcpt = false;
 
 
     /**
      * Indicates that DATA has been issued and sent
-     *
-     * @var unknown_type
      */
-    protected $_data = null;
+    protected ?bool $_data = null;
 
 
     /**

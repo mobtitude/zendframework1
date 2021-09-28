@@ -41,10 +41,8 @@ class Zend_Config_Yaml extends Zend_Config
 
     /**
      * Whether to skip extends or not
-     *
-     * @var boolean
      */
-    protected $_skipExtends = false;
+    protected bool $_skipExtends = false;
 
     /**
      * What to call when we need to decode some YAML?
@@ -55,9 +53,8 @@ class Zend_Config_Yaml extends Zend_Config
 
     /**
      * Whether or not to ignore constants in parsed YAML
-     * @var bool
      */
-    protected static $_ignoreConstants = false;
+    protected static bool $_ignoreConstants = false;
 
     /**
      * Indicate whether parser should ignore constants or not

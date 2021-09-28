@@ -36,15 +36,13 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
 {
     /**
      * Array of options for multi-item
-     * @var array
      */
-    public $options = array();
+    public array $options = array();
 
     /**
      * Flag: autoregister inArray validator?
-     * @var bool
      */
-    protected $_registerInArrayValidator = true;
+    protected bool $_registerInArrayValidator = true;
 
     /**
      * Separator to use between options; defaults to '<br />'.
@@ -54,9 +52,8 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
 
     /**
      * Which values are translated already?
-     * @var array
      */
-    protected $_translated = array();
+    protected array $_translated = array();
 
     /**
      * Retrieve separator

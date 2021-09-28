@@ -117,17 +117,13 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 
 	/**
 	 * Stream wrapper clients
-	 *
-	 * @var array
 	 */
-	protected static $_wrapperClients = array();
+	protected static array $_wrapperClients = array();
 
 	/**
 	 * SharedAccessSignature credentials
-	 *
-	 * @var Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	 */
-	protected $_sharedAccessSignatureCredentials = null;
+	protected ?\Zend_Service_WindowsAzure_Credentials_SharedAccessSignature $_sharedAccessSignatureCredentials = null;
 
 	/**
 	 * Creates a new Zend_Service_WindowsAzure_Storage_Blob instance

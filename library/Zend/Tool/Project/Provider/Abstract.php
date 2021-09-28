@@ -61,17 +61,11 @@ abstract class Zend_Tool_Project_Provider_Abstract
     const NO_PROFILE_THROW_EXCEPTION = true;
     const NO_PROFILE_RETURN_FALSE    = false;
 
-    /**
-     * @var bool
-     */
-    protected static $_isInitialized = false;
+    protected static bool $_isInitialized = false;
 
     protected $_projectPath = null;
 
-    /**
-     * @var Zend_Tool_Project_Profile
-     */
-    protected $_loadedProfile = null;
+    protected ?\Zend_Tool_Project_Profile $_loadedProfile = null;
 
     public function initialize()
     {

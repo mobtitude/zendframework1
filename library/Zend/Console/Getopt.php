@@ -165,7 +165,7 @@ class Zend_Console_Getopt
      * ignoreCase is not enabled,
      * parseAll is enabled.
      */
-    protected $_getoptConfig = array(
+    protected array $_getoptConfig = array(
         self::CONFIG_RULEMODE   => self::MODE_ZEND,
         self::CONFIG_DASHDASH   => true,
         self::CONFIG_IGNORECASE => false,
@@ -174,53 +174,39 @@ class Zend_Console_Getopt
 
     /**
      * Stores the command-line arguments for the calling application.
-     *
-     * @var array
      */
-    protected $_argv = array();
+    protected array $_argv = array();
 
     /**
      * Stores the name of the calling application.
-     *
-     * @var string
      */
-    protected $_progname = '';
+    protected string $_progname = '';
 
     /**
      * Stores the list of legal options for this application.
-     *
-     * @var array
      */
-    protected $_rules = array();
+    protected array $_rules = array();
 
     /**
      * Stores alternate spellings of legal options.
-     *
-     * @var array
      */
-    protected $_ruleMap = array();
+    protected array $_ruleMap = array();
 
     /**
      * Stores options given by the user in the current invocation
      * of the application, as well as parameters given in options.
-     *
-     * @var array
      */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * Stores the command-line arguments other than options.
-     *
-     * @var array
      */
-    protected $_remainingArgs = array();
+    protected array $_remainingArgs = array();
 
     /**
      * State of the options: parsed or not yet parsed?
-     *
-     * @var boolean
      */
-    protected $_parsed = false;
+    protected bool $_parsed = false;
 
     /**
      * The constructor takes one to three parameters.

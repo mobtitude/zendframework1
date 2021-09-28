@@ -39,9 +39,9 @@ class Zend_Service_ShortUrl_MetamarkNet extends Zend_Service_ShortUrl_AbstractSh
      *
      * @var string
      */
-    protected $_baseUri = 'http://xrl.us/';
+    protected ?string $_baseUri = 'http://xrl.us/';
 
-    protected $_apiUri = 'http://metamark.net/api/rest/simple';
+    protected string $_apiUri = 'http://metamark.net/api/rest/simple';
 
     /**
      * This function shortens long url

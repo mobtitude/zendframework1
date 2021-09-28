@@ -44,9 +44,8 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
      * Coding map
      * - 0 = narrow bar
      * - 1 = wide bar
-     * @var array
      */
-    protected $_codingMap = array(
+    protected array $_codingMap = array(
         '0' => '00110',
         '1' => '10001',
         '2' => '01001',
@@ -132,7 +131,7 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
         $checksum = 0;
 
         for ($i = strlen($text); $i > 0; $i --) {
-            $checksum += intval($text{$i - 1}) * $factor;
+            $checksum += (int)$text[$i - 1] * $factor;
             $factor    = 4 - $factor;
         }
 

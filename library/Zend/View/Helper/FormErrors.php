@@ -37,17 +37,14 @@ require_once 'Zend/View/Helper/FormElement.php';
  */
 class Zend_View_Helper_FormErrors extends Zend_View_Helper_FormElement
 {
-    /**
-     * @var Zend_Form_Element
-     */
-    protected $_element;
+    protected \Zend_Form_Element $_element;
 
     /**#@+
      * @var string Element block start/end tags and separator
      */
-    protected $_htmlElementEnd       = '</li></ul>';
-    protected $_htmlElementStart     = '<ul%s><li>';
-    protected $_htmlElementSeparator = '</li><li>';
+    protected string $_htmlElementEnd       = '</li></ul>';
+    protected string $_htmlElementStart     = '<ul%s><li>';
+    protected string $_htmlElementSeparator = '</li><li>';
     /**#@-*/
 
     /**

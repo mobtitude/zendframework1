@@ -35,10 +35,8 @@ class Zend_Http_UserAgent_Bot extends Zend_Http_UserAgent_AbstractDevice
 
     /**
      * User Agent Signatures
-     *
-     * @var array
      */
-    protected static $_uaSignatures = array(
+    protected static array $_uaSignatures = array(
         // The most common ones.
         'googlebot',
         'msnbot',

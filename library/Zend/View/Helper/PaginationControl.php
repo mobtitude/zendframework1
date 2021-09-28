@@ -29,10 +29,8 @@ class Zend_View_Helper_PaginationControl
 {
     /**
      * View instance
-     *
-     * @var Zend_View_Instance
      */
-    public $view = null;
+    public ?\Zend_View_Interface $view = null;
 
     /**
      * Default view partial

@@ -51,10 +51,8 @@ class Zend_Gdata_Analytics_DataFeed extends Zend_Gdata_Feed
     protected $_entryClassName = 'Zend_Gdata_Analytics_DataEntry';
     /**
      * The classname for the feed.
-     *
-     * @var string
      */
-    protected $_feedClassName = 'Zend_Gdata_Analytics_DataFeed';
+    protected string $_feedClassName = 'Zend_Gdata_Analytics_DataFeed';
 
     public function __construct($element = null)
     {

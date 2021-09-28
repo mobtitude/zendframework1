@@ -114,7 +114,7 @@ class Zend_Measure_Speed extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'BENZ'                           => array('1',                                     'Bz'),
         'CENTIMETER_PER_DAY'             => array(array('' => '0.01', '/' => '86400'),       'cm/day'),
         'CENTIMETER_PER_HOUR'            => array(array('' => '0.01', '/' => '3600'),        'cm/h'),

@@ -46,10 +46,7 @@ class Zend_Dojo_View_Helper_Form extends Zend_Dojo_View_Helper_Dijit
      */
     protected $_module = 'dijit.form.Form';
 
-    /**
-     * @var Zend_View_Helper_Form
-     */
-    protected $_helper;
+    protected ?\Zend_View_Helper_Form $_helper = null;
 
     /**
      * dijit.form.Form

@@ -44,7 +44,7 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
     const YES          = 256;
     const ALL          = 511;
 
-    protected $_constants = array(
+    protected array $_constants = array(
         self::BOOLEAN      => 'boolean',
         self::INTEGER      => 'integer',
         self::FLOAT        => 'float',
@@ -67,17 +67,13 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
 
     /**
      * Internal locale
-     *
-     * @var array
      */
-    protected $_locale = array('auto');
+    protected array $_locale = array('auto');
 
     /**
      * Internal mode
-     *
-     * @var boolean
      */
-    protected $_casting = true;
+    protected bool $_casting = true;
 
     /**
      * Constructor

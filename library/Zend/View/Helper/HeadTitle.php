@@ -42,23 +42,18 @@ class Zend_View_Helper_HeadTitle extends Zend_View_Helper_Placeholder_Container_
 
     /**
      * Whether or not auto-translation is enabled
-     * @var boolean
      */
-    protected $_translate = false;
+    protected bool $_translate = false;
 
     /**
      * Translation object
-     *
-     * @var Zend_Translate_Adapter
      */
-    protected $_translator;
+    protected ?\Zend_Translate_Adapter $_translator = null;
 
     /**
      * Default title rendering order (i.e. order in which each title attached)
-     *
-     * @var string
      */
-    protected $_defaultAttachOrder = null;
+    protected ?string $_defaultAttachOrder = null;
 
     /**
      * Retrieve placeholder for title element and optionally set state

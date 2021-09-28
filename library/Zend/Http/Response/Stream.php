@@ -44,17 +44,13 @@ class Zend_Http_Response_Stream extends Zend_Http_Response
      * The name of the file containing the stream
      *
      * Will be empty if stream is not file-based.
-     *
-     * @var string
      */
-    protected $stream_name;
+    protected ?string $stream_name = null;
 
     /**
      * Should we clean up the stream file when this response is closed?
-     *
-     * @var boolean
      */
-    protected $_cleanup;
+    protected ?bool $_cleanup = null;
 
     /**
      * Get the response as stream

@@ -41,10 +41,8 @@ class Zend_TimeSync implements IteratorAggregate
 
     /**
      * Contains array of timeserver objects
-     *
-     * @var array
      */
-    protected $_timeservers = array();
+    protected array $_timeservers = array();
 
     /**
      * Holds a reference to the timeserver that is currently being used
@@ -55,10 +53,8 @@ class Zend_TimeSync implements IteratorAggregate
 
     /**
      * Allowed timeserver schemes
-     *
-     * @var array
      */
-    protected $_allowedSchemes = array(
+    protected array $_allowedSchemes = array(
         'Ntp',
         'Sntp'
     );
@@ -66,10 +62,8 @@ class Zend_TimeSync implements IteratorAggregate
     /**
      * Configuration array, set using the constructor or using
      * ::setOptions() or ::setOption()
-     *
-     * @var array
      */
-    public static $options = array(
+    public static array $options = array(
         'timeout' => 1
     );
 

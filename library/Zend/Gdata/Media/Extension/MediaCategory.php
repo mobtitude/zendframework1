@@ -38,14 +38,11 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_Media_Extension_MediaCategory extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'category';
-    protected $_rootNamespace = 'media';
+    protected ?string $_rootElement = 'category';
+    protected string $_rootNamespace = 'media';
 
-    /**
-     * @var string
-     */
-    protected $_scheme = null;
-    protected $_label = null;
+    protected ?string $_scheme = null;
+    protected ?string $_label = null;
 
     /**
      * Creates an individual MediaCategory object.

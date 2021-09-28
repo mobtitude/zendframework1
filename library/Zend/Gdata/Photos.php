@@ -112,7 +112,7 @@ class Zend_Gdata_Photos extends Zend_Gdata
      *
      * @var array
      */
-    public static $namespaces = array(
+    public static array $namespaces = array(
         array('gphoto', 'http://schemas.google.com/photos/2007', 1, 0),
         array('photo', 'http://www.pheed.com/pheed/', 1, 0),
         array('exif', 'http://schemas.google.com/photos/exif/2007', 1, 0),

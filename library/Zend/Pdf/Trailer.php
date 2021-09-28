@@ -29,14 +29,12 @@
  */
 abstract class Zend_Pdf_Trailer
 {
-    private static $_allowedKeys = array('Size', 'Prev', 'Root', 'Encrypt', 'Info', 'ID', 'Index', 'W', 'XRefStm', 'DocChecksum');
+    private static array $_allowedKeys = array('Size', 'Prev', 'Root', 'Encrypt', 'Info', 'ID', 'Index', 'W', 'XRefStm', 'DocChecksum');
 
     /**
      * Trailer dictionary.
-     *
-     * @var Zend_Pdf_Element_Dictionary
      */
-    private $_dict;
+    private \Zend_Pdf_Element_Dictionary $_dict;
 
     /**
      * Check if key is correct

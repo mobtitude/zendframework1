@@ -29,17 +29,13 @@ abstract class Zend_Feed_Reader_EntryAbstract
 {
     /**
      * Feed entry data
-     *
-     * @var array
      */
-    protected $_data = array();
+    protected array $_data = array();
 
     /**
      * DOM document object
-     *
-     * @var DOMDocument
      */
-    protected $_domDocument = null;
+    protected ?\DOMDocument $_domDocument = null;
 
     /**
      * Entry instance
@@ -50,24 +46,18 @@ abstract class Zend_Feed_Reader_EntryAbstract
 
     /**
      * Pointer to the current entry
-     *
-     * @var int
      */
-    protected $_entryKey = 0;
+    protected int $_entryKey = 0;
 
     /**
      * XPath object
-     *
-     * @var DOMXPath
      */
-    protected $_xpath = null;
+    protected ?\DOMXPath $_xpath = null;
 
     /**
      * Registered extensions
-     *
-     * @var array
      */
-    protected $_extensions = array();
+    protected array $_extensions = array();
 
     /**
      * Constructor

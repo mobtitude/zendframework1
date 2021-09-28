@@ -39,9 +39,8 @@ class Zend_Controller_Front
 {
     /**
      * Base URL
-     * @var string
      */
-    protected $_baseUrl = null;
+    protected ?string $_baseUrl = null;
 
     /**
      * Directory|ies where controllers are stored
@@ -52,70 +51,59 @@ class Zend_Controller_Front
 
     /**
      * Instance of Zend_Controller_Dispatcher_Interface
-     * @var Zend_Controller_Dispatcher_Interface
      */
-    protected $_dispatcher = null;
+    protected ?\Zend_Controller_Dispatcher_Interface $_dispatcher = null;
 
     /**
      * Singleton instance
      *
      * Marked only as protected to allow extension of the class. To extend,
      * simply override {@link getInstance()}.
-     *
-     * @var Zend_Controller_Front
      */
-    protected static $_instance = null;
+    protected static ?\Zend_Controller_Front $_instance = null;
 
     /**
      * Array of invocation parameters to use when instantiating action
      * controllers
-     * @var array
      */
-    protected $_invokeParams = array();
+    protected array $_invokeParams = array();
 
     /**
      * Subdirectory within a module containing controllers; defaults to 'controllers'
-     * @var string
      */
-    protected $_moduleControllerDirectoryName = 'controllers';
+    protected string $_moduleControllerDirectoryName = 'controllers';
 
     /**
      * Instance of Zend_Controller_Plugin_Broker
-     * @var Zend_Controller_Plugin_Broker
      */
-    protected $_plugins = null;
+    protected ?\Zend_Controller_Plugin_Broker $_plugins = null;
 
     /**
      * Instance of Zend_Controller_Request_Abstract
-     * @var Zend_Controller_Request_Abstract
      */
-    protected $_request = null;
+    protected ?\Zend_Controller_Request_Abstract $_request = null;
 
     /**
      * Instance of Zend_Controller_Response_Abstract
-     * @var Zend_Controller_Response_Abstract
      */
-    protected $_response = null;
+    protected ?\Zend_Controller_Response_Abstract $_response = null;
 
     /**
      * Whether or not to return the response prior to rendering output while in
      * {@link dispatch()}; default is to send headers and render output.
-     * @var boolean
      */
-    protected $_returnResponse = false;
+    protected bool $_returnResponse = false;
 
     /**
      * Instance of Zend_Controller_Router_Interface
-     * @var Zend_Controller_Router_Interface
      */
-    protected $_router = null;
+    protected ?\Zend_Controller_Router_Interface $_router = null;
 
     /**
      * Whether or not exceptions encountered in {@link dispatch()} should be
      * thrown or trapped in the response object
-     * @var boolean
      */
-    protected $_throwExceptions = false;
+    protected bool $_throwExceptions = false;
 
     /**
      * Constructor

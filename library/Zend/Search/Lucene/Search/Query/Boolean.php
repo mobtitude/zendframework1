@@ -38,10 +38,8 @@ class Zend_Search_Lucene_Search_Query_Boolean extends Zend_Search_Lucene_Search_
     /**
      * Subqueries
      * Array of Zend_Search_Lucene_Search_Query
-     *
-     * @var array
      */
-    private $_subqueries = array();
+    private array $_subqueries = array();
 
     /**
      * Subqueries signs.
@@ -50,10 +48,8 @@ class Zend_Search_Lucene_Search_Query_Boolean extends Zend_Search_Lucene_Search_
      * If null then subquery is neither prohibited, nor required
      *
      * If array is null then all subqueries are required
-     *
-     * @var array
      */
-    private $_signs = array();
+    private ?array $_signs = array();
 
     /**
      * Result vector.

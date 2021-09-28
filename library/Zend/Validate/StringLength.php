@@ -39,7 +39,7 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::INVALID   => "Invalid type given. String expected",
         self::TOO_SHORT => "'%value%' is less than %min% characters long",
         self::TOO_LONG  => "'%value%' is more than %max% characters long",
@@ -48,33 +48,27 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'min' => '_min',
         'max' => '_max'
     );
 
     /**
      * Minimum length
-     *
-     * @var integer
      */
-    protected $_min;
+    protected ?int $_min = null;
 
     /**
      * Maximum length
      *
      * If null, there is no maximum length
-     *
-     * @var integer|null
      */
-    protected $_max;
+    protected ?int $_max = null;
 
     /**
      * Encoding to use
-     *
-     * @var string|null
      */
-    protected $_encoding;
+    protected ?string $_encoding = null;
 
     /**
      * Sets validator options

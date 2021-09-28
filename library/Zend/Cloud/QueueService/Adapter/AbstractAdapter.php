@@ -41,10 +41,10 @@ abstract class Zend_Cloud_QueueService_Adapter_AbstractAdapter
     /**@-*/
 
     /** @var string Class to use for queue messages */
-    protected $_messageClass    = 'Zend_Cloud_QueueService_Message';
+    protected string $_messageClass    = 'Zend_Cloud_QueueService_Message';
 
     /** @var string Class to use for collections of queue messages */
-    protected $_messageSetClass = 'Zend_Cloud_QueueService_MessageSet';
+    protected string $_messageSetClass = 'Zend_Cloud_QueueService_MessageSet';
 
     /**
      * Set class to use for message objects

@@ -43,21 +43,19 @@ class Zend_Form_Decorator_Image extends Zend_Form_Decorator_Abstract
 {
     /**
      * Attributes that should not be passed to helper
-     * @var array
      */
-    protected $_attribBlacklist = array('helper', 'placement', 'separator', 'tag');
+    protected array $_attribBlacklist = array('helper', 'placement', 'separator', 'tag');
 
     /**
      * Default placement: append
      * @var string
      */
-    protected $_placement = 'APPEND';
+    protected ?string $_placement = 'APPEND';
 
     /**
      * HTML tag with which to surround image
-     * @var string
      */
-    protected $_tag;
+    protected ?string $_tag = null;
 
     /**
      * Set HTML tag with which to surround label

@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_ViewsDirectory extends Zend_Tool_Project_Cont
     /**
      * @var string
      */
-    protected $_filesystemName = 'views';
+    protected ?string $_filesystemName = 'views';
 
     /**
      * getName()

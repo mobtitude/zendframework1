@@ -44,17 +44,13 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
 
     /**
      * Wether this route is abstract or not
-     *
-     * @var boolean
      */
-    protected $_isAbstract = false;
+    protected bool $_isAbstract = false;
 
     /**
      * Path matched by this route
-     *
-     * @var string
      */
-    protected $_matchedPath = null;
+    protected ?string $_matchedPath = null;
 
     /**
      * Get the version of the route

@@ -34,15 +34,12 @@ require_once 'Zend/CodeGenerator/Php/Docblock/Tag.php';
 class Zend_CodeGenerator_Php_Docblock_Tag_License extends Zend_CodeGenerator_Php_Docblock_Tag
 {
 
-    /**
-     * @var string
-     */
-    protected $_url = null;
+    protected ?string $_url = null;
 
     /**
      * @var string
      */
-    protected $_description = null;
+    protected ?string $_description = null;
 
     /**
      * fromReflection()

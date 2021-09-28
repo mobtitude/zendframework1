@@ -48,9 +48,8 @@ class Zend_Dojo_View_Helper_BorderContainer extends Zend_Dojo_View_Helper_DijitC
 
     /**
      * Ensure style is only registered once
-     * @var bool
      */
-    protected $_styleIsRegistered = false;
+    protected bool $_styleIsRegistered = false;
 
     /**
      * dijit.layout.BorderContainer

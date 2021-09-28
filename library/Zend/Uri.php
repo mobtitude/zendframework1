@@ -31,17 +31,13 @@ abstract class Zend_Uri
 {
     /**
      * Scheme of this URI (http, ftp, etc.)
-     *
-     * @var string
      */
-    protected $_scheme = '';
+    protected string $_scheme = '';
 
     /**
      * Global configuration array
-     *
-     * @var array
      */
-    static protected $_config = array(
+    static protected array $_config = array(
         'allow_unwise' => false
     );
 

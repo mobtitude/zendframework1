@@ -40,7 +40,7 @@ require_once 'Zend/Ldap/Dn.php';
  */
 abstract class Zend_Ldap_Node_Abstract implements ArrayAccess, Countable
 {
-    protected static $_systemAttributes=array('createtimestamp', 'creatorsname',
+    protected static array $_systemAttributes=array('createtimestamp', 'creatorsname',
         'entrycsn', 'entrydn', 'entryuuid', 'hassubordinates', 'modifiersname',
         'modifytimestamp', 'structuralobjectclass', 'subschemasubentry',
         'distinguishedname', 'instancetype', 'name', 'objectcategory', 'objectguid',
@@ -48,17 +48,13 @@ abstract class Zend_Ldap_Node_Abstract implements ArrayAccess, Countable
 
     /**
      * Holds the node's DN.
-     *
-     * @var Zend_Ldap_Dn
      */
-    protected $_dn;
+    protected \Zend_Ldap_Dn $_dn;
 
     /**
      * Holds the node's current data.
-     *
-     * @var array
      */
-    protected $_currentData;
+    protected ?array $_currentData = null;
 
     /**
      * Constructor.

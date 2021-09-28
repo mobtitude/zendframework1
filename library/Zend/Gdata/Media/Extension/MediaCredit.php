@@ -38,18 +38,12 @@ require_once 'Zend/Gdata/App/Extension.php';
 class Zend_Gdata_Media_Extension_MediaCredit extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'credit';
-    protected $_rootNamespace = 'media';
+    protected ?string $_rootElement = 'credit';
+    protected string $_rootNamespace = 'media';
 
-    /**
-     * @var string
-     */
-    protected $_role = null;
+    protected ?string $_role = null;
 
-    /**
-     * @var string
-     */
-    protected $_scheme = null;
+    protected ?string $_scheme = null;
 
     /**
      * Creates an individual MediaCredit object.

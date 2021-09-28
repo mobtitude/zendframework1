@@ -45,36 +45,27 @@ class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
 {
     /**
      * Outline title.
-     *
-     * @var string
      */
-    protected $_title;
+    protected ?string $_title = null;
 
     /**
      * Color to be used for the outline entry’s text.
-
      * It uses the DeviceRGB color space for color representation.
      * Null means default value - black ([0.0 0.0 0.0] in RGB representation).
-     *
-     * @var Zend_Pdf_Color_Rgb
      */
-    protected $_color = null;
+    protected ?\Zend_Pdf_Color_Rgb $_color = null;
 
     /**
      * True if outline item is displayed in italic.
      * Default value is false.
-     *
-     * @var boolean
      */
-    protected $_italic = false;
+    protected bool $_italic = false;
 
     /**
      * True if outline item is displayed in bold.
      * Default value is false.
-     *
-     * @var boolean
      */
-    protected $_bold = false;
+    protected bool $_bold = false;
 
     /**
      * Target destination or action.

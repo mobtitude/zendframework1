@@ -49,20 +49,14 @@ require_once 'Zend/Json.php';
  */
 class Zend_Service_Twitter_Response
 {
-    /**
-     * @var Zend_Http_Response
-     */
-    protected $httpResponse;
+    protected \Zend_Http_Response $httpResponse;
 
     /**
      * @var array|stdClass
      */
     protected $jsonBody;
 
-    /**
-     * @var string
-     */
-    protected $rawBody;
+    protected string $rawBody;
 
     /**
      * Constructor

@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_SessionsDirectory extends Zend_Tool_Project_C
     /**
      * @var string
      */
-    protected $_filesystemName = 'sessions';
+    protected ?string $_filesystemName = 'sessions';
 
     /**
      * getName()

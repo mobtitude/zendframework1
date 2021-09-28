@@ -37,10 +37,7 @@ require_once 'Zend/Application/Resource/ResourceAbstract.php';
  */
 class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resource_ResourceAbstract
 {
-    /**
-     * @var Zend_Controller_Front
-     */
-    protected $_front;
+    protected ?\Zend_Controller_Front $_front = null;
 
     /**
      * Initialize Front Controller

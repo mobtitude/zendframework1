@@ -38,17 +38,15 @@ class Zend_Validate_Digits extends Zend_Validate_Abstract
 
     /**
      * Digits filter used for validation
-     *
-     * @var Zend_Filter_Digits
      */
-    protected static $_filter = null;
+    protected static ?\Zend_Filter_Digits $_filter = null;
 
     /**
      * Validation failure message template definitions
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::NOT_DIGITS   => "'%value%' must contain only digits",
         self::STRING_EMPTY => "'%value%' is an empty string",
         self::INVALID      => "Invalid type given. String, integer or float expected",

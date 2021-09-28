@@ -35,12 +35,9 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  */
 class Zend_Layout_Controller_Plugin_Layout extends Zend_Controller_Plugin_Abstract
 {
-    protected $_layoutActionHelper = null;
+    protected ?\Zend_Layout_Controller_Action_Helper_Layout $_layoutActionHelper = null;
 
-    /**
-     * @var Zend_Layout
-     */
-    protected $_layout;
+    protected ?\Zend_Layout $_layout = null;
 
     /**
      * Constructor

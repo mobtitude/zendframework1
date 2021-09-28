@@ -31,50 +31,29 @@
  */
 class Zend_Service_Amazon_Offer
 {
-    /**
-     * @var string
-     */
-    public $MerchantId;
+    public string $MerchantId;
 
-    /**
-     * @var string
-     */
-    public $MerchantName;
+    public ?string $MerchantName = null;
 
-    /**
-     * @var string
-     */
-    public $GlancePage;
+    public string $GlancePage;
 
-    /**
-     * @var string
-     */
-    public $Condition;
+    public string $Condition;
 
-    /**
-     * @var string
-     */
-    public $OfferListingId;
+    public string $OfferListingId;
 
     /**
      * @var string
      */
     public $Price;
 
-    /**
-     * @var string
-     */
-    public $CurrencyCode;
+    public ?string $CurrencyCode = null;
 
     /**
      * @var string
      */
     public $Availability;
 
-    /**
-     * @var boolean
-     */
-    public $IsEligibleForSuperSaverShipping = false;
+    public bool $IsEligibleForSuperSaverShipping = false;
 
     /**
      * Parse the given Offer element

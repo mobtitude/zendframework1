@@ -42,26 +42,23 @@ class Zend_Service_Audioscrobbler
     /**
      * Zend_Http_Client Object
      *
-     * @var     Zend_Http_Client
      * @access  protected
      */
-    protected $_client;
+    protected ?\Zend_Http_Client $_client = null;
 
     /**
      * Array that contains parameters being used by the webservice
      *
-     * @var     array
      * @access  protected
      */
-    protected $_params;
+    protected ?array $_params = null;
 
     /**
      * Holds error information (e.g., for handling simplexml_load_string() warnings)
      *
-     * @var     array
      * @access  protected
      */
-    protected $_error = null;
+    protected ?array $_error = null;
 
 
     /**

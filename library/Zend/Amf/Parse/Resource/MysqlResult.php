@@ -36,7 +36,7 @@ class Zend_Amf_Parse_Resource_MysqlResult
      *
      * Key => Value is Mysql type (exact string) => PHP type
      */
-    static public $fieldTypes = array(
+    static public array $fieldTypes = array(
         "int" => "int",
         "timestamp" => "int",
         "year" => "int",

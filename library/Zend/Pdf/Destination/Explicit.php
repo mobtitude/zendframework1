@@ -40,17 +40,13 @@ abstract class Zend_Pdf_Destination_Explicit extends Zend_Pdf_Destination
 {
     /**
      * Destination description array
-     *
-     * @var Zend_Pdf_Element_Array
      */
-    protected $_destinationArray;
+    protected \Zend_Pdf_Element_Array $_destinationArray;
 
     /**
      * True if it's a remote destination
-     *
-     * @var boolean
      */
-    protected $_isRemote;
+    protected ?bool $_isRemote = null;
 
     /**
      * Explicit destination object constructor

@@ -45,58 +45,49 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
     /**
      * @var array of existing class methods
      */
-    protected $_classMethods;
+    protected ?array $_classMethods = null;
 
     /**
      * Word delimiters (used for normalizing view script paths)
-     * @var array
      */
-    protected $_delimiters;
+    protected ?array $_delimiters = null;
 
     /**
      * Array of arguments provided to the constructor, minus the
      * {@link $_request Request object}.
-     * @var array
      */
-    protected $_invokeArgs = array();
+    protected array $_invokeArgs = array();
 
     /**
      * Front controller instance
-     * @var Zend_Controller_Front
      */
-    protected $_frontController;
+    protected ?\Zend_Controller_Front $_frontController = null;
 
     /**
      * Zend_Controller_Request_Abstract object wrapping the request environment
-     * @var Zend_Controller_Request_Abstract
      */
-    protected $_request = null;
+    protected ?\Zend_Controller_Request_Abstract $_request = null;
 
     /**
      * Zend_Controller_Response_Abstract object wrapping the response
-     * @var Zend_Controller_Response_Abstract
      */
-    protected $_response = null;
+    protected ?\Zend_Controller_Response_Abstract $_response = null;
 
     /**
      * View script suffix; defaults to 'phtml'
      * @see {render()}
-     * @var string
      */
-    public $viewSuffix = 'phtml';
+    public string $viewSuffix = 'phtml';
 
     /**
      * View object
-     * @var Zend_View_Interface
      */
-    public $view;
+    public ?\Zend_View $view = null;
 
     /**
      * Helper Broker to assist in routing help requests to the proper object
-     *
-     * @var Zend_Controller_Action_HelperBroker
      */
-    protected $_helper = null;
+    protected ?\Zend_Controller_Action_HelperBroker $_helper = null;
 
     /**
      * Class constructor

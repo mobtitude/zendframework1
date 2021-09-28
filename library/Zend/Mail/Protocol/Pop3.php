@@ -37,9 +37,8 @@ class Zend_Mail_Protocol_Pop3
 
     /**
      * saves if server supports top
-     * @var null|bool
      */
-    public $hasTop = null;
+    public ?bool $hasTop = null;
 
     /**
      * socket to pop3

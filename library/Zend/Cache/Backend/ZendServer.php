@@ -44,7 +44,7 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
      *
      * @var array available options
      */
-    protected $_options = array(
+    protected array $_options = array(
         'namespace' => 'zendframework'
     );
 

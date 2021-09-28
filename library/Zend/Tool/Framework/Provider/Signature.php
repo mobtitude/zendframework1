@@ -47,45 +47,27 @@ require_once 'Zend/Tool/Framework/Action/Base.php';
 class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Registry_EnabledInterface
 {
 
-    /**
-     * @var Zend_Tool_Framework_Registry
-     */
-    protected $_registry = null;
+    protected ?\Zend_Tool_Framework_Registry_Interface $_registry = null;
 
-    /**
-     * @var Zend_Tool_Framework_Provider_Interface
-     */
-    protected $_provider = null;
+    protected ?\Zend_Tool_Framework_Provider_Interface $_provider = null;
 
     /**
      * @var string
      */
     protected $_name = null;
 
-    /**
-     * @var array
-     */
-    protected $_specialties = array();
+    protected array $_specialties = array();
 
-    /**
-     * @var array
-     */
-    protected $_actionableMethods = array();
+    protected array $_actionableMethods = array();
 
     /**
      * @var unknown_type
      */
     protected $_actions = array();
 
-    /**
-     * @var Zend_Reflection_Class
-     */
-    protected $_providerReflection = null;
+    protected ?\Zend_Reflection_Class $_providerReflection = null;
 
-    /**
-     * @var bool
-     */
-    protected $_isProcessed = false;
+    protected bool $_isProcessed = false;
 
     /**
      * Constructor

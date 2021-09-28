@@ -53,12 +53,12 @@ require_once 'Zend/Gdata/Extension/EntryLink.php';
 class Zend_Gdata_Extension_Who extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'who';
-    protected $_email = null;
-    protected $_rel = null;
-    protected $_valueString = null;
-    protected $_attendeeStatus = null;
-    protected $_attendeeType = null;
+    protected ?string $_rootElement = 'who';
+    protected ?string $_email = null;
+    protected ?string $_rel = null;
+    protected ?string $_valueString = null;
+    protected ?\Zend_Gdata_Extension_AttendeeStatus $_attendeeStatus = null;
+    protected ?\Zend_Gdata_Extension_AttendeeType $_attendeeType = null;
     protected $_entryLink = null;
 
     /**

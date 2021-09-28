@@ -40,17 +40,13 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
 
     /**
      * Whether or not to use default routes
-     *
-     * @var boolean
      */
-    protected $_useDefaultRoutes = true;
+    protected bool $_useDefaultRoutes = true;
 
     /**
      * Array of routes to match against
-     *
-     * @var array
      */
-    protected $_routes = array();
+    protected array $_routes = array();
 
     /**
      * Currently matched route
@@ -61,25 +57,19 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
 
     /**
      * Global parameters given to all routes
-     *
-     * @var array
      */
-    protected $_globalParams = array();
+    protected array $_globalParams = array();
 
     /**
      * Separator to use with chain names
-     *
-     * @var string
      */
-    protected $_chainNameSeparator = '-';
+    protected string $_chainNameSeparator = '-';
 
     /**
      * Determines if request parameters should be used as global parameters
      * inside this router.
-     *
-     * @var boolean
      */
-    protected $_useCurrentParamsAsGlobal = false;
+    protected bool $_useCurrentParamsAsGlobal = false;
 
     /**
      * Add default routes which are used to mimic basic router behaviour

@@ -71,10 +71,8 @@ class Zend_Service_Rackspace_Servers_Image
     protected $progress;
     /**
      * The service that has created the image object
-     *
-     * @var Zend_Service_Rackspace_Servers
      */
-    protected $service;
+    protected \Zend_Service_Rackspace_Servers $service;
     /**
      * Construct
      * 

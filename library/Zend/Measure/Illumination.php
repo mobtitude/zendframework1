@@ -55,7 +55,7 @@ class Zend_Measure_Illumination extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'FOOTCANDLE'              => array('10.7639104',   'fc'),
         'KILOLUX'                 => array('1000',         'klx'),
         'LUMEN_PER_SQUARE_CENTIMETER' => array('10000',    'lm/cm²'),

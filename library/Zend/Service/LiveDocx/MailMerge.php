@@ -46,18 +46,16 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
     /**
      * Field values
      *
-     * @var   array
      * @since LiveDocx 1.0
      */
-    protected $_fieldValues;
+    protected array $_fieldValues;
 
     /**
      * Block field values
      *
-     * @var   array
      * @since LiveDocx 1.0
      */
-    protected $_blockFieldValues;
+    protected array $_blockFieldValues;
 
     /**
      * Constructor (LiveDocx.MailMerge SOAP Service)

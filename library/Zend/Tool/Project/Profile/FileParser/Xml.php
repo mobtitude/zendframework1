@@ -34,15 +34,9 @@ require_once 'Zend/Tool/Project/Profile/Resource.php';
 class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Profile_FileParser_Interface
 {
 
-    /**
-     * @var Zend_Tool_Project_Profile
-     */
-    protected $_profile = null;
+    protected ?\Zend_Tool_Project_Profile $_profile = null;
 
-    /**
-     * @var Zend_Tool_Project_Context_Repository
-     */
-    protected $_contextRepository = null;
+    protected ?\Zend_Tool_Project_Context_Repository $_contextRepository = null;
 
     /**
      * __construct()

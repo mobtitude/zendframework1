@@ -50,9 +50,8 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
 
     /**
      * Allowed parameter sources
-     * @var array
      */
-    protected $_paramSources = array('_GET', '_POST');
+    protected array $_paramSources = array('_GET', '_POST');
 
     /**
      * REQUEST_URI
@@ -68,21 +67,19 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
 
     /**
      * Base path of request
-     * @var string
      */
-    protected $_basePath = null;
+    protected ?string $_basePath = null;
 
     /**
      * PATH_INFO
-     * @var string
      */
-    protected $_pathInfo = '';
+    protected string $_pathInfo = '';
 
     /**
      * Instance parameters
      * @var array
      */
-    protected $_params = array();
+    protected array $_params = array();
 
     /**
      * Raw request body
@@ -92,9 +89,8 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
 
     /**
      * Alias keys for request parameters
-     * @var array
      */
-    protected $_aliases = array();
+    protected array $_aliases = array();
 
     /**
      * Constructor

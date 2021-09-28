@@ -49,20 +49,17 @@ require_once 'Zend/XmlRpc/Fault.php';
  */
 class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
 {
-    /**
-     * @var Exception
-     */
-    protected $_exception;
+    protected \Exception $_exception;
 
     /**
      * @var array Array of exception classes that may define xmlrpc faults
      */
-    protected static $_faultExceptionClasses = array('Zend_XmlRpc_Server_Exception' => true);
+    protected static array $_faultExceptionClasses = array('Zend_XmlRpc_Server_Exception' => true);
 
     /**
      * @var array Array of fault observers
      */
-    protected static $_observers = array();
+    protected static array $_observers = array();
 
     /**
      * Constructor

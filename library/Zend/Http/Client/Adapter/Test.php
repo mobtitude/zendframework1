@@ -51,18 +51,14 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
 {
     /**
      * Parameters array
-     *
-     * @var array
      */
-    protected $config = array();
+    protected array $config = array();
 
     /**
      * Buffer of responses to be returned by the read() method.  Can be
      * set using setResponse() and addResponse().
-     *
-     * @var array
      */
-    protected $responses = array("HTTP/1.1 400 Bad Request\r\n\r\n");
+    protected array $responses = array("HTTP/1.1 400 Bad Request\r\n\r\n");
 
     /**
      * Current position in the response buffer
@@ -73,10 +69,8 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
 
     /**
      * Wether or not the next request will fail with an exception
-     *
-     * @var boolean
      */
-    protected $_nextRequestWillFail = false;
+    protected bool $_nextRequestWillFail = false;
 
     /**
      * Adapter constructor, currently empty. Config is set using setConfig()

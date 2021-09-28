@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_PublicImagesDirectory extends Zend_Tool_Proje
     /**
      * @var string
      */
-    protected $_filesystemName = 'images';
+    protected ?string $_filesystemName = 'images';
 
     /**
      * getName()

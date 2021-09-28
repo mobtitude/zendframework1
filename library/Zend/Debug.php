@@ -31,10 +31,7 @@
 class Zend_Debug
 {
 
-    /**
-     * @var string
-     */
-    protected static $_sapi = null;
+    protected static ?string $_sapi = null;
 
     /**
      * Get the current value of the debug output environment.

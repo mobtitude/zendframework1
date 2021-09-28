@@ -46,8 +46,8 @@ require_once 'Zend/Gdata/Gapps.php';
 class Zend_Gdata_Gapps_Extension_Quota extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'apps';
-    protected $_rootElement = 'quota';
+    protected string $_rootNamespace = 'apps';
+    protected ?string $_rootElement = 'quota';
 
     /**
      * The amount of storage space available to the user in megabytes.

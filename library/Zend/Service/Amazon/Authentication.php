@@ -28,9 +28,9 @@
  */
 abstract class Zend_Service_Amazon_Authentication
 {
-    protected $_accessKey;
-    protected $_secretKey;
-    protected $_apiVersion;
+    protected ?string $_accessKey = null;
+    protected ?string $_secretKey = null;
+    protected ?string $_apiVersion = null;
 
     /**
      * Constructor

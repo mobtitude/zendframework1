@@ -45,10 +45,8 @@ class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
 {
     /**
      * Memory container object
-     *
-     * @var Zend_Memory_Container
      */
-    private $_memContainer;
+    private \Zend_Memory_Container_Movable $_memContainer;
 
 
     /**

@@ -38,26 +38,20 @@ class Zend_Search_Lucene_Search_QueryParserContext
      *
      * null means, that term should be searched through all fields
      * Zend_Search_Lucene_Search_Query::rewriteQuery($index) transletes such queries to several
-     *
-     * @var string|null
      */
-    private $_defaultField;
+    private ?string $_defaultField;
 
     /**
      * Field specified for next entry
-     *
-     * @var string
      */
-    private $_nextEntryField = null;
+    private ?string $_nextEntryField = null;
 
     /**
      * True means, that term is required.
      * False means, that term is prohibited.
      * null means, that term is neither prohibited, nor required
-     *
-     * @var boolean
      */
-    private $_nextEntrySign = null;
+    private ?bool $_nextEntrySign = null;
 
 
     /**
@@ -65,37 +59,28 @@ class Zend_Search_Lucene_Search_QueryParserContext
      */
     const GM_SIGNS   = 0;  // Signs mode: '+term1 term2 -term3 +(subquery1) -(subquery2)'
     const GM_BOOLEAN = 1;  // Boolean operators mode: 'term1 and term2  or  (subquery1) and not (subquery2)'
-
     /**
      * Grouping mode
-     *
-     * @var integer
      */
-    private $_mode = null;
+    private ?int $_mode = null;
 
     /**
      * Entries signs.
      * Used in GM_SIGNS grouping mode
-     *
-     * @var arrays
      */
-    private $_signs = array();
+    private array $_signs = array();
 
     /**
      * Query entries
      * Each entry is a Zend_Search_Lucene_Search_QueryEntry object or
      * boolean operator (Zend_Search_Lucene_Search_QueryToken class constant)
-     *
-     * @var array
      */
-    private $_entries = array();
+    private array $_entries = array();
 
     /**
      * Query string encoding
-     *
-     * @var string
      */
-    private $_encoding;
+    private string $_encoding;
 
 
     /**

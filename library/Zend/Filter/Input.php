@@ -69,67 +69,66 @@ class Zend_Filter_Input
     /**
      * @var array Input data, before processing.
      */
-    protected $_data = array();
+    protected array $_data = array();
 
     /**
      * @var array Association of rules to filters.
      */
-    protected $_filterRules = array();
+    protected array $_filterRules = array();
 
     /**
      * @var array Association of rules to validators.
      */
-    protected $_validatorRules = array();
+    protected array $_validatorRules = array();
 
     /**
      * @var array After processing data, this contains mapping of valid fields
      * to field values.
      */
-    protected $_validFields = array();
+    protected array $_validFields = array();
 
     /**
      * @var array After processing data, this contains mapping of validation
      * rules that did not pass validation to the array of messages returned
      * by the validator chain.
      */
-    protected $_invalidMessages = array();
+    protected array $_invalidMessages = array();
 
     /**
      * @var array After processing data, this contains mapping of validation
      * rules that did not pass validation to the array of error identifiers
      * returned by the validator chain.
      */
-    protected $_invalidErrors = array();
+    protected array $_invalidErrors = array();
 
     /**
      * @var array After processing data, this contains mapping of validation
      * rules in which some fields were missing to the array of messages
      * indicating which fields were missing.
      */
-    protected $_missingFields = array();
+    protected array $_missingFields = array();
 
     /**
      * @var array After processing, this contains a copy of $_data elements
      * that were not mentioned in any validation rule.
      */
-    protected $_unknownFields = array();
+    protected array $_unknownFields = array();
 
     /**
      * @var Zend_Filter_Interface The filter object that is run on values
      * returned by the getEscaped() method.
      */
-    protected $_defaultEscapeFilter = null;
+    protected ?\Zend_Filter_Interface $_defaultEscapeFilter = null;
 
     /**
      * Plugin loaders
-     * @var array
      */
-    protected $_loaders = array();
+    protected array $_loaders = array();
 
     /**
      * @var array Default values to use when processing filters and validators.
      */
-    protected $_defaults = array(
+    protected array $_defaults = array(
         self::ALLOW_EMPTY         => false,
         self::BREAK_CHAIN         => false,
         self::ESCAPE_FILTER       => 'HtmlEntities',
@@ -142,19 +141,17 @@ class Zend_Filter_Input
      * @var boolean Set to False initially, this is set to True after the
      * input data have been processed.  Reset to False in setData() method.
      */
-    protected $_processed = false;
+    protected bool $_processed = false;
 
     /**
      * Translation object
-     * @var Zend_Translate
      */
-    protected $_translator;
+    protected ?\Zend_Translate_Adapter $_translator = null;
 
     /**
      * Is translation disabled?
-     * @var Boolean
      */
-    protected $_translatorDisabled = false;
+    protected bool $_translatorDisabled = false;
 
     /**
      * @param array $filterRules

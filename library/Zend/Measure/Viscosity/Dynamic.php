@@ -80,7 +80,7 @@ class Zend_Measure_Viscosity_Dynamic extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'CENTIPOISE'          => array('0.001',      'cP'),
         'DECIPOISE'           => array('0.01',       'dP'),
         'DYNE_SECOND_PER_SQUARE_CENTIMETER'       => array('0.1',     'dyn s/cm²'),

@@ -60,7 +60,7 @@ class Zend_Measure_Torque extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'DYNE_CENTIMETER'     => array('0.0000001',          'dyncm'),
         'GRAM_CENTIMETER'     => array('0.0000980665',       'gcm'),
         'KILOGRAM_CENTIMETER' => array('0.0980665',          'kgcm'),

@@ -55,12 +55,12 @@ final class Zend_Amf_Parse_TypeLoader
     /**
      * @var string callback class
      */
-    public static $callbackClass;
+    public static string $callbackClass;
 
     /**
      * @var array AMF class map
      */
-    public static $classMap = array (
+    public static array $classMap = array (
         'flex.messaging.messages.AcknowledgeMessage' => 'Zend_Amf_Value_Messaging_AcknowledgeMessage',
         'flex.messaging.messages.ErrorMessage'       => 'Zend_Amf_Value_Messaging_AsyncMessage',
         'flex.messaging.messages.CommandMessage'     => 'Zend_Amf_Value_Messaging_CommandMessage',
@@ -72,7 +72,7 @@ final class Zend_Amf_Parse_TypeLoader
     /**
      * @var array Default class map
      */
-    protected static $_defaultClassMap = array(
+    protected static array $_defaultClassMap = array(
         'flex.messaging.messages.AcknowledgeMessage' => 'Zend_Amf_Value_Messaging_AcknowledgeMessage',
         'flex.messaging.messages.ErrorMessage'       => 'Zend_Amf_Value_Messaging_AsyncMessage',
         'flex.messaging.messages.CommandMessage'     => 'Zend_Amf_Value_Messaging_CommandMessage',
@@ -81,10 +81,7 @@ final class Zend_Amf_Parse_TypeLoader
         'flex.messaging.io.ArrayCollection'          => 'Zend_Amf_Value_Messaging_ArrayCollection',
     );
 
-    /**
-     * @var Zend_Loader_PluginLoader_Interface
-     */
-    protected static $_resourceLoader = null;
+    protected static ?\Zend_Loader_PluginLoader_Interface $_resourceLoader = null;
 
 
     /**

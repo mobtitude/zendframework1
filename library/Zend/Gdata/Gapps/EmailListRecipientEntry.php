@@ -61,10 +61,8 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      * <gd:who> element used to store the email address of the current
      * recipient. Only the email property of this element should be
      * populated.
-     *
-     * @var Zend_Gdata_Extension_Who
      */
-    protected $_who = null;
+    protected ?\Zend_Gdata_Extension_Who $_who = null;
 
     /**
      * Create a new instance.

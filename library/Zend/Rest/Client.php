@@ -41,9 +41,8 @@ class Zend_Rest_Client extends Zend_Service_Abstract
 {
     /**
      * Data for the query
-     * @var array
      */
-    protected $_data = array();
+    protected array $_data = array();
 
      /**
      * Zend_Uri of this web service
@@ -56,7 +55,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      * Must be set explicitly if you want to keep preset parameters.
      * @var bool true if you do not want a reset. Default false.
      */
-    protected $_noReset = false;
+    protected bool $_noReset = false;
 
     /**
      * Constructor

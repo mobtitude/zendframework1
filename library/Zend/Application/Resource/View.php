@@ -38,10 +38,7 @@ require_once 'Zend/Application/Resource/ResourceAbstract.php';
  */
 class Zend_Application_Resource_View extends Zend_Application_Resource_ResourceAbstract
 {
-    /**
-     * @var Zend_View_Interface
-     */
-    protected $_view;
+    protected ?\Zend_View $_view = null;
 
     /**
      * Defined by Zend_Application_Resource_Resource

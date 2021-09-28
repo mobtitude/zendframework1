@@ -54,12 +54,10 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
     const CUSTOM_XHTML        = 'CUSTOM_XHTML';
     const CUSTOM              = 'CUSTOM';
     /**#@-*/
-
     /**
      * Default DocType
-     * @var string
      */
-    protected $_defaultDoctype = self::HTML4_LOOSE;
+    protected string $_defaultDoctype = self::HTML4_LOOSE;
 
     /**
      * Registry containing current doctype and mappings
@@ -69,9 +67,8 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
 
     /**
      * Registry key in which helper is stored
-     * @var string
      */
-    protected $_regKey = 'Zend_View_Helper_Doctype';
+    protected string $_regKey = 'Zend_View_Helper_Doctype';
 
     /**
      * Constructor

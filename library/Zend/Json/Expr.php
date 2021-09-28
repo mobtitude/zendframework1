@@ -52,10 +52,8 @@ class Zend_Json_Expr
 {
     /**
      * Storage for javascript expression.
-     *
-     * @var string
      */
-    protected $_expression;
+    protected string $_expression;
 
     /**
      * Constructor

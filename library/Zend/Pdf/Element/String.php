@@ -35,10 +35,8 @@ class Zend_Pdf_Element_String extends Zend_Pdf_Element
 {
     /**
      * Object value
-     *
-     * @var string
      */
-    public $value;
+    public string $value;
 
     /**
      * Object constructor

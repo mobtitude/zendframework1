@@ -37,25 +37,17 @@ abstract class Zend_Oauth_Token
     const TOKEN_SECRET_PARAM_KEY         = 'oauth_token_secret';
     const TOKEN_PARAM_CALLBACK_CONFIRMED = 'oauth_callback_confirmed';
     /**@-*/
-
     /**
      * Token parameters
-     *
-     * @var array
      */
-    protected $_params = array();
+    protected array $_params = array();
 
     /**
      * OAuth response object
-     *
-     * @var Zend_Http_Response
      */
-    protected $_response = null;
+    protected ?\Zend_Http_Response $_response = null;
 
-    /**
-     * @var Zend_Oauth_Http_Utility
-     */
-    protected $_httpUtility = null;
+    protected ?\Zend_Oauth_Http_Utility $_httpUtility = null;
 
     /**
      * Constructor; basic setup for any Token subclass.

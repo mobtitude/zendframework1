@@ -44,52 +44,38 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
 
     /**
      * Background Image
-     *
-     * @var string
      */
-    protected $_backgroundImage;
+    protected ?string $_backgroundImage = null;
 
     /**
      * Count
-     *
-     * @var int
      */
-    protected $_count = 0;
+    protected int $_count = 0;
 
     /**
      * Title
-     *
-     * @var string
      */
-    protected $_title;
+    protected ?string $_title = null;
 
     /**
      * Back Background Image
-     *
-     * @var string
      */
-    protected $_backBackgroundImage;
+    protected ?string $_backBackgroundImage = null;
 
     /**
      * Back Title
-     *
-     * @var string
      */
-    protected $_backTitle;
+    protected ?string $_backTitle = null;
 
     /**
      * Back Content
-     *
-     * @var string
      */
-    protected $_backContent;
+    protected ?string $_backContent = null;
 
     /**
      * Tile ID
-     *
-     * @var string
      */
-    protected $_tileId;
+    protected ?string $_tileId = null;
 
     /**
      * Get Background Image

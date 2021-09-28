@@ -47,56 +47,56 @@ class Zend_Service_SlideShare_SlideShow
      *
      * @var string the HTML to embed the slide show
      */
-    protected $_embedCode;
+    protected ?string $_embedCode = null;
 
     /**
      * The URI for the thumbnail representation of the slide show
      *
      * @var string The URI of a thumbnail image
      */
-    protected $_thumbnailUrl;
+    protected ?string $_thumbnailUrl = null;
 
     /**
      * The title of the slide show
      *
      * @var string The slide show title
      */
-    protected $_title;
+    protected ?string $_title = null;
 
     /**
      * The Description of the slide show
      *
      * @var string The slide show description
      */
-    protected $_description;
+    protected ?string $_description = null;
 
     /**
      * The status of the silde show on the server
      *
      * @var int The Slide show status code
      */
-    protected $_status;
+    protected ?int $_status = null;
 
     /**
      * The Description of the slide show status code
      *
      * @var string The status description
      */
-    protected $_statusDescription;
+    protected ?string $_statusDescription = null;
 
     /**
      * The URL for the slide show
      *
      * @var string the URL for the slide show
      */
-    protected $_url;
+    protected ?string $_url = null;
 
     /**
      * The number of views this slide show has received
      *
      * @var int the number of views
      */
-    protected $_numViews;
+    protected ?int $_numViews = null;
 
     /**
      * The ID of the slide show on the server
@@ -110,28 +110,28 @@ class Zend_Service_SlideShare_SlideShow
      *
      * @var string the local filesystem path & file of the slide show to upload
      */
-    protected $_slideShowFilename;
+    protected ?string $_slideShowFilename = null;
 
     /**
      * An array of tags associated with the slide show
      *
      * @var array An array of tags associated with the slide show
      */
-    protected $_tags = array();
+    protected array $_tags = array();
 
     /**
      * The location of the slide show
      *
      * @var string the Location
      */
-    protected $_location;
+    protected ?string $_location = null;
 
     /**
      * The transcript associated with the slide show
      *
      * @var string the Transscript
      */
-    protected $_transcript;
+    protected ?string $_transcript = null;
 
 
     /**

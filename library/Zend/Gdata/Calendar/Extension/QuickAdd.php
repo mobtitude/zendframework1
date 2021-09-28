@@ -38,8 +38,8 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Calendar_Extension_QuickAdd extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gCal';
-    protected $_rootElement = 'quickadd';
+    protected string $_rootNamespace = 'gCal';
+    protected ?string $_rootElement = 'quickadd';
     protected $_value = null;
 
     /**

@@ -45,17 +45,13 @@ class Zend_Gdata_Gapps_OwnerQuery extends Zend_Gdata_Gapps_Query
 
     /**
      * Group owner is refering to
-     *
-     * @var string
      */
-    protected $_groupId = null;
+    protected ?string $_groupId = null;
 
     /**
      * The email of the owner
-     *
-     * @var string
      */
-    protected $_ownerEmail = null;
+    protected ?string $_ownerEmail = null;
 
     /**
      * Create a new instance.

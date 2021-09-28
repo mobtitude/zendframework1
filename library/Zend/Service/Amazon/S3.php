@@ -44,10 +44,8 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
 {
     /**
      * Store for stream wrapper clients
-     *
-     * @var array
      */
-    protected static $_wrapperClients = array();
+    protected static array $_wrapperClients = array();
 
     /**
      * Endpoint for the service

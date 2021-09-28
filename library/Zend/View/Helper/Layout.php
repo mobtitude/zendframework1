@@ -33,8 +33,7 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 class Zend_View_Helper_Layout extends Zend_View_Helper_Abstract
 {
-    /** @var Zend_Layout */
-    protected $_layout;
+    protected ?\Zend_Layout $_layout = null;
 
     /**
      * Get layout object

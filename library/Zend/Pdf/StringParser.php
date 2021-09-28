@@ -52,31 +52,23 @@ class Zend_Pdf_StringParser
 
     /**
      * Current position in a data
-     *
-     * @var integer
      */
-    public $offset = 0;
+    public int $offset = 0;
 
     /**
      * Current reference context
-     *
-     * @var Zend_Pdf_Element_Reference_Context
      */
-    private $_context = null;
+    private ?\Zend_Pdf_Element_Reference_Context $_context = null;
 
     /**
      * Array of elements of the currently parsed object/trailer
-     *
-     * @var array
      */
-    private $_elements = array();
+    private array $_elements = array();
 
     /**
      * PDF objects factory.
-     *
-     * @var Zend_Pdf_ElementFactory_Interface
      */
-    private $_objFactory = null;
+    private ?\Zend_Pdf_ElementFactory_Interface $_objFactory = null;
 
 
     /**

@@ -48,17 +48,14 @@ abstract class Zend_XmlRpc_Value
      * The native XML-RPC type of this object
      * One of the XMLRPC_TYPE_* constants
      */
-    protected $_type;
+    protected string $_type;
 
     /**
      * XML code representation of this object (will be calculated only once)
      */
-    protected $_xml;
+    protected ?string $_xml = null;
 
-    /**
-     * @var Zend_XmlRpc_Generator_GeneratorAbstract
-     */
-    protected static $_generator;
+    protected static ?\Zend_XmlRpc_Generator_GeneratorAbstract $_generator = null;
 
     /**
      * Specify that the XML-RPC native type will be auto detected from a PHP variable type

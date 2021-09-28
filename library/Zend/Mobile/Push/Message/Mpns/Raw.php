@@ -47,10 +47,8 @@ class Zend_Mobile_Push_Message_Mpns_Raw extends Zend_Mobile_Push_Message_Mpns
 
     /**
      * Message
-     *
-     * @var string
      */
-    protected $_msg;
+    protected ?string $_msg = null;
 
     /**
      * Get Delay

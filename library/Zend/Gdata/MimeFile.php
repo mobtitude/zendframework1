@@ -35,10 +35,8 @@ class Zend_Gdata_MimeFile
 
     /**
      * A handle to the file that is part of the message.
-     *
-     * @var resource
      */
-    protected $_fileHandle = null;
+    protected ?string $_fileHandle = null;
 
     /**
      * Create a new MimeFile object.

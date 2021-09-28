@@ -35,9 +35,8 @@ class Zend_View_Helper_Partial extends Zend_View_Helper_Abstract
 {
     /**
      * Variable to which object will be assigned
-     * @var string
      */
-    protected $_objectKey;
+    protected ?string $_objectKey = null;
 
     /**
      * Renders a template fragment within a variable scope distinct from the

@@ -59,7 +59,7 @@ class Zend_Measure_Lightness extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'APOSTILB'                      => array('0.31830989',   'asb'),
         'BLONDEL'                       => array('0.31830989',   'blondel'),
         'CANDELA_PER_SQUARE_CENTIMETER' => array('10000',        'cd/cm²'),

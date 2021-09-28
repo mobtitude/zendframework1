@@ -41,12 +41,7 @@ class Zend_Dojo_View_Helper_Dojo
      */
     const PROGRAMMATIC_SCRIPT = 1;
     const PROGRAMMATIC_NOSCRIPT = -1;
-    /**#@-*/
-
-    /**
-     * @var Zend_View_Interface
-     */
-    public $view;
+    public ?\Zend_View_Interface $view = null;
 
     /**
      * @var Zend_Dojo_View_Helper_Dojo_Container

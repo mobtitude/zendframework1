@@ -31,15 +31,13 @@ class Zend_Registry extends ArrayObject
 {
     /**
      * Class name of the singleton registry object.
-     * @var string
      */
-    private static $_registryClassName = 'Zend_Registry';
+    private static string $_registryClassName = 'Zend_Registry';
 
     /**
      * Registry object provides storage for shared objects.
-     * @var Zend_Registry
      */
-    private static $_registry = null;
+    private static ?\Zend_Registry $_registry = null;
 
     /**
      * Retrieves the default registry instance.

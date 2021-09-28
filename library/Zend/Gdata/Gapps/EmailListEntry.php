@@ -64,18 +64,14 @@ class Zend_Gdata_Gapps_EmailListEntry extends Zend_Gdata_Entry
     /**
      * <apps:emailList> child element containing general information about
      * this email list.
-     *
-     * @var Zend_Gdata_Gapps_Extension_EmailList
      */
-    protected $_emailList = null;
+    protected ?\Zend_Gdata_Gapps_Extension_EmailList $_emailList = null;
 
     /**
      * <gd:feedLink> element containing information about other feeds
      * relevant to this entry.
-     *
-     * @var Zend_Gdata_Extension_FeedLink
      */
-    protected $_feedLink = array();
+    protected array $_feedLink = array();
 
     /**
      * Create a new instance.

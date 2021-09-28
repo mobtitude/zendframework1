@@ -48,9 +48,8 @@ class Zend_Application_Bootstrap_Bootstrap
 
     /**
      * Application resource autoloader
-     * @var Zend_Loader_Autoloader_Resource
      */
-    protected $_resourceLoader;
+    protected ?\Zend_Loader_Autoloader_Resource $_resourceLoader = null;
 
     /**
      * Constructor

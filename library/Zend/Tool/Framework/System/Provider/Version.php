@@ -35,16 +35,13 @@ class Zend_Tool_Framework_System_Provider_Version
     implements Zend_Tool_Framework_Provider_Interface, Zend_Tool_Framework_Registry_EnabledInterface
 {
 
-    /**
-     * @var Zend_Tool_Framework_Registry_Interface
-     */
-    protected $_registry = null;
+    protected ?\Zend_Tool_Framework_Registry_Interface $_registry = null;
 
     const MODE_MAJOR = 'major';
     const MODE_MINOR = 'minor';
     const MODE_MINI  = 'mini';
 
-    protected $_specialties = array('MajorPart', 'MinorPart', 'MiniPart');
+    protected array $_specialties = array('MajorPart', 'MinorPart', 'MiniPart');
 
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
     {

@@ -40,10 +40,8 @@ abstract class Zend_Mobile_Push_Message_Abstract implements Zend_Mobile_Push_Mes
 {
     /**
      * Token
-     *
-     * @var string
      */
-    protected $_token;
+    protected ?array $_token = null;
 
     /**
      * Id
@@ -54,8 +52,6 @@ abstract class Zend_Mobile_Push_Message_Abstract implements Zend_Mobile_Push_Mes
 
     /**
      * Get Token
-     *
-     * @return string
      */
     public function getToken()
     {
@@ -65,7 +61,6 @@ abstract class Zend_Mobile_Push_Message_Abstract implements Zend_Mobile_Push_Mes
     /**
      * Set Token
      *
-     * @param  string $token
      * @throws Zend_Mobile_Push_Message_Exception
      * @return Zend_Mobile_Push_Message_Abstract
      */

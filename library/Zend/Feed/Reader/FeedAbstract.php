@@ -39,10 +39,8 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
 {
     /**
      * Parsed feed data
-     *
-     * @var array
      */
-    protected $_data = array();
+    protected array $_data = array();
 
     /**
      * Parsed feed data in the shape of a DOMDocument
@@ -53,38 +51,28 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
 
     /**
      * An array of parsed feed entries
-     *
-     * @var array
      */
-    protected $_entries = array();
+    protected array $_entries = array();
 
     /**
      * A pointer for the iterator to keep track of the entries array
-     *
-     * @var int
      */
-    protected $_entriesKey = 0;
+    protected int $_entriesKey = 0;
 
     /**
      * The base XPath query used to retrieve feed data
-     *
-     * @var DOMXPath
      */
-    protected $_xpath = null;
+    protected ?\DOMXPath $_xpath = null;
 
     /**
      * Array of loaded extensions
-     *
-     * @var array
      */
-    protected $_extensions = array();
+    protected array $_extensions = array();
 
     /**
      * Original Source URI (set if imported from a URI)
-     *
-     * @var string
      */
-    protected $_originalSourceUri = null;
+    protected ?string $_originalSourceUri = null;
 
     /**
      * Constructor

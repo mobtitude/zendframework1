@@ -39,7 +39,7 @@ class Zend_Validate_Regex extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::INVALID   => "Invalid type given. String, integer or float expected",
         self::NOT_MATCH => "'%value%' does not match against pattern '%pattern%'",
         self::ERROROUS  => "There was an internal error while using the pattern '%pattern%'",
@@ -48,16 +48,14 @@ class Zend_Validate_Regex extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected array $_messageVariables = array(
         'pattern' => '_pattern'
     );
 
     /**
      * Regular expression pattern
-     *
-     * @var string
      */
-    protected $_pattern;
+    protected ?string $_pattern = null;
 
     /**
      * Sets validator options

@@ -29,10 +29,8 @@ class Zend_Application
 {
     /**
      * Autoloader to use
-     *
-     * @var Zend_Loader_Autoloader
      */
-    protected $_autoloader;
+    protected \Zend_Loader_Autoloader $_autoloader;
 
     /**
      * Bootstrap
@@ -43,24 +41,18 @@ class Zend_Application
 
     /**
      * Application environment
-     *
-     * @var string
      */
-    protected $_environment;
+    protected string $_environment;
 
     /**
      * Flattened (lowercase) option keys
-     *
-     * @var array
      */
-    protected $_optionKeys = array();
+    protected array $_optionKeys = array();
 
     /**
      * Options for Zend_Application
-     *
-     * @var array
      */
-    protected $_options = array();
+    protected array $_options = array();
 
     /**
      * Constructor

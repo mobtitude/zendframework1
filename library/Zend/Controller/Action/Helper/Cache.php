@@ -46,36 +46,28 @@ class Zend_Controller_Action_Helper_Cache
 
     /**
      * Local Cache Manager object used by Helper
-     *
-     * @var Zend_Cache_Manager
      */
-    protected $_manager = null;
+    protected ?\Zend_Cache_Manager $_manager = null;
 
     /**
      * Indexed map of Actions to attempt Page caching on by Controller
-     *
-     * @var array
      */
-    protected $_caching = array();
+    protected array $_caching = array();
 
     /**
      * Indexed map of Tags by Controller and Action
-     *
-     * @var array
      */
-    protected $_tags = array();
+    protected array $_tags = array();
 
     /**
      * Indexed map of Extensions by Controller and Action
-     *
-     * @var array
      */
-    protected $_extensions = array();
+    protected array $_extensions = array();
 
     /**
      * Track output buffering condition
      */
-    protected $_obStarted = false;
+    protected bool $_obStarted = false;
 
     /**
      * Tell the helper which actions are cacheable and under which

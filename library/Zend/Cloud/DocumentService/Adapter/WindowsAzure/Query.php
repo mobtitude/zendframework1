@@ -38,10 +38,8 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
 {
     /**
      * Azure concrete query
-     *
-     * @var Zend_Service_WindowsAzure_Storage_TableEntityQuery
      */
-    protected $_azureSelect;
+    protected \Zend_Service_WindowsAzure_Storage_TableEntityQuery $_azureSelect;
 
     /**
      * Constructor

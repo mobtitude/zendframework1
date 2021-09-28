@@ -42,32 +42,24 @@ class Zend_Service_WindowsAzure_SessionHandler
 	const STORAGE_TYPE_BLOB = 'blob';
 	
     /**
-     * Storage back-end
-     * 
-     * @var Zend_Service_WindowsAzure_Storage_Table|Zend_Service_WindowsAzure_Storage_Blob
-     */
-    protected $_storage;
+				 * Storage back-end
+				 */
+				protected \Zend_Service_WindowsAzure_Storage $_storage;
     
     /**
-     * Storage backend type
-     * 
-     * @var string
-     */
-    protected $_storageType;
+				 * Storage backend type
+				 */
+				protected string $_storageType;
     
     /**
-     * Session container name
-     * 
-     * @var string
-     */
-    protected $_sessionContainer;
+				 * Session container name
+				 */
+				protected string $_sessionContainer;
     
     /**
-     * Session container partition
-     * 
-     * @var string
-     */
-    protected $_sessionContainerPartition;
+				 * Session container partition
+				 */
+				protected string $_sessionContainerPartition;
 	
     /**
      * Creates a new Zend_Service_WindowsAzure_SessionHandler instance

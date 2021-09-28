@@ -46,10 +46,8 @@ class Zend_Gdata_Gapps_UserQuery extends Zend_Gdata_Gapps_Query
     /**
      * If not null, specifies the username of the user who should be
      * retrieved by this query.
-     *
-     * @var string
      */
-    protected $_username = null;
+    protected ?string $_username = null;
 
     /**
      * Create a new instance.

@@ -58,7 +58,7 @@ class Zend_Measure_Angle extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'RADIAN'      => array('1','rad'),
         'MIL'         => array(array('' => M_PI,'/' => '3200'),   'mil'),
         'GRAD'        => array(array('' => M_PI,'/' => '200'),    'gr'),

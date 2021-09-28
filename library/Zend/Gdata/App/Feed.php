@@ -49,21 +49,17 @@ class Zend_Gdata_App_Feed extends Zend_Gdata_App_FeedSourceParent
      *
      * @var string
      */
-    protected $_rootElement = 'feed';
+    protected ?string $_rootElement = 'feed';
 
     /**
      * Cache of feed entries.
-     *
-     * @var array
      */
-    protected $_entry = array();
+    protected array $_entry = array();
 
     /**
      * Current location in $_entry array
-     *
-     * @var int
      */
-    protected $_entryIndex = 0;
+    protected int $_entryIndex = 0;
 
     /**
      * Make accessing some individual elements of the feed easier.

@@ -36,25 +36,19 @@ class Zend_Search_Lucene_Search_Weight_Boolean extends Zend_Search_Lucene_Search
 {
     /**
      * IndexReader.
-     *
-     * @var Zend_Search_Lucene_Interface
      */
-    private $_reader;
+    private \Zend_Search_Lucene_Interface $_reader;
 
     /**
      * The query that this concerns.
-     *
-     * @var Zend_Search_Lucene_Search_Query
      */
-    private $_query;
+    private \Zend_Search_Lucene_Search_Query $_query;
 
     /**
      * Queries weights
      * Array of Zend_Search_Lucene_Search_Weight
-     *
-     * @var array
      */
-    private $_weights;
+    private array $_weights;
 
 
     /**

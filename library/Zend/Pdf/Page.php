@@ -111,25 +111,19 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
 
     /**
      * Page dictionary (refers to an inderect Zend_Pdf_Element_Dictionary object).
-     *
-     * @var Zend_Pdf_Element_Reference|Zend_Pdf_Element_Object
      */
-    protected $_dictionary;
+    protected \Zend_Pdf_Element $_dictionary;
 
     /**
      * PDF objects factory.
-     *
-     * @var Zend_Pdf_ElementFactory_Interface
      */
-    protected $_objFactory = null;
+    protected ?\Zend_Pdf_ElementFactory_Interface $_objFactory = null;
 
     /**
      * Flag which signals, that page is created separately from any PDF document or
      * attached to anyone.
-     *
-     * @var boolean
      */
-    protected $_attached;
+    protected ?bool $_attached = null;
 
     /**
      * Safe Graphics State semafore
@@ -137,10 +131,8 @@ class Zend_Pdf_Page extends Zend_Pdf_Canvas_Abstract
      * If it's false, than we can't be sure Graphics State is restored withing
      * context of previous contents stream (ex. drawing coordinate system may be rotated).
      * We should encompass existing content with save/restore GS operators
-     *
-     * @var boolean
      */
-    protected $_safeGS;
+    protected ?bool $_safeGS = null;
 
     /**
      * Object constructor.

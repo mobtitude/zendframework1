@@ -38,30 +38,18 @@ require_once 'Zend/CodeGenerator/Php/Parameter/DefaultValue.php';
  */
 class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 {
-    /**
-     * @var string
-     */
-    protected $_type = null;
+    protected ?string $_type = null;
 
-    /**
-     * @var string
-     */
-    protected $_name = null;
+    protected ?string $_name = null;
 
     /**
      * @var string
      */
     protected $_defaultValue = null;
 
-    /**
-     * @var int
-     */
-    protected $_position = null;
+    protected ?int $_position = null;
 
-    /**
-     * @var bool
-     */
-    protected $_passedByReference = false;
+    protected bool $_passedByReference = false;
 
     /**
      * fromReflection()

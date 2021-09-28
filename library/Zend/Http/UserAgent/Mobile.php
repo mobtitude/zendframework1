@@ -39,10 +39,8 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
 
     /**
      * User Agent Signatures
-     *
-     * @var array
      */
-    protected static $_uaSignatures = array(
+    protected static array $_uaSignatures = array(
         'iphone',
         'ipod',
         'ipad',
@@ -164,10 +162,7 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
         'kbrowser'
     );
 
-    /**
-     * @var array
-     */
-    protected static $_haTerms = array(
+    protected static array $_haTerms = array(
         'midp',
         'wml',
         'vnd.rim',
@@ -177,10 +172,8 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
 
     /**
      * first 4 letters of mobile User Agent chains
-     *
-     * @var array
      */
-    protected static $_uaBegin = array(
+    protected static array $_uaBegin = array(
         'w3c ',
         'acs-',
         'alav',

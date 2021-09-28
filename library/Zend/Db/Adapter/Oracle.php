@@ -51,7 +51,7 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
      * persistent => (boolean) Set TRUE to use a persistent connection
      * @var array
      */
-    protected $_config = array(
+    protected array $_config = array(
         'dbname'       => null,
         'username'     => null,
         'password'     => null,
@@ -69,7 +69,7 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
      *
      * @var array Associative array of datatypes to values 0, 1, or 2.
      */
-    protected $_numericDataTypes = array(
+    protected array $_numericDataTypes = array(
         Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
         Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE,
@@ -78,10 +78,7 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
         'NUMBER'             => Zend_Db::FLOAT_TYPE,
     );
 
-    /**
-     * @var integer
-     */
-    protected $_execute_mode = null;
+    protected ?int $_execute_mode = null;
 
     /**
      * Default class name for a DB statement.
@@ -93,10 +90,8 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
     /**
      * Check if LOB field are returned as string
      * instead of OCI-Lob object
-     *
-     * @var boolean
      */
-    protected $_lobAsString = null;
+    protected ?bool $_lobAsString = null;
 
     /**
      * Creates a connection resource.

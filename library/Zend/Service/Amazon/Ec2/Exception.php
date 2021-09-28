@@ -36,7 +36,7 @@ require_once 'Zend/Service/Amazon/Exception.php';
  */
 class Zend_Service_Amazon_Ec2_Exception extends Zend_Service_Amazon_Exception
 {
-    private $awsErrorCode = '';
+    private string $awsErrorCode = '';
 
     public function __construct($message, $code = 0, $awsErrorCode = '')
     {

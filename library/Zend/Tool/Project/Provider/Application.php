@@ -31,7 +31,7 @@ class Zend_Tool_Project_Provider_Application
     implements Zend_Tool_Framework_Provider_Pretendable
 {
 
-    protected $_specialties = array('ClassNamePrefix');
+    protected array $_specialties = array('ClassNamePrefix');
 
     /**
      *

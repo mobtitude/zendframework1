@@ -45,10 +45,8 @@ class Zend_Service_Yahoo_VideoResultSet extends Zend_Service_Yahoo_ResultSet
 {
     /**
      * Video result set namespace
-     *
-     * @var string
      */
-    protected $_namespace = 'urn:yahoo:srchmv';
+    protected string $_namespace = 'urn:yahoo:srchmv';
 
 
     /**

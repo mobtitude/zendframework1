@@ -34,21 +34,15 @@
  */
 class Zend_XmlRpc_Client_ServerProxy
 {
-    /**
-     * @var Zend_XmlRpc_Client
-     */
-    private $_client = null;
+    private ?\Zend_XmlRpc_Client $_client = null;
 
-    /**
-     * @var string
-     */
-    private $_namespace = '';
+    private string $_namespace = '';
 
 
     /**
      * @var array of Zend_XmlRpc_Client_ServerProxy
      */
-    private $_cache = array();
+    private array $_cache = array();
 
 
     /**

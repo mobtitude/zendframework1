@@ -54,10 +54,8 @@ class Zend_Cloud_QueueService_Adapter_WindowsAzure
 
     /**
      * Storage client
-     *
-     * @var Zend_Service_WindowsAzure_Storage_Queue
      */
-    protected $_storageClient = null;
+    protected ?\Zend_Service_WindowsAzure_Storage_Queue $_storageClient = null;
 
     /**
      * Constructor

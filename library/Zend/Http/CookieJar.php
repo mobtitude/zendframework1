@@ -98,17 +98,13 @@ class Zend_Http_CookieJar implements Countable, IteratorAggregate
      *  + www.otherdomain.net
      *    + /
      *      - alsocookie
-     *
-     * @var array
      */
-    protected $cookies = array();
+    protected array $cookies = array();
 
     /**
      * The Zend_Http_Cookie array
-     *
-     * @var array
      */
-    protected $_rawCookies = array();
+    protected array $_rawCookies = array();
 
     /**
      * Construct a new CookieJar object

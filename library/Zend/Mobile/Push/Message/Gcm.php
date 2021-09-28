@@ -42,28 +42,22 @@ class Zend_Mobile_Push_Message_Gcm extends Zend_Mobile_Push_Message_Abstract
      *
      * @var array
      */
-    protected $_token = array();
+    protected ?array $_token = array();
 
     /**
      * Data key value pairs
-     * 
-     * @var array
      */
-    protected $_data = array();
+    protected array $_data = array();
 
     /**
      * Delay while idle
-     *
-     * @var boolean
      */
-    protected $_delay = false;
+    protected bool $_delay = false;
 
     /**
      * Time to live in seconds
-     * 
-     * @var int
      */
-    protected $_ttl = 2419200;
+    protected int $_ttl = 2419200;
 
     /**
      * Add a Token

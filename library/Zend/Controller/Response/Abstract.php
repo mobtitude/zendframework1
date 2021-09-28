@@ -33,9 +33,8 @@ abstract class Zend_Controller_Response_Abstract
 {
     /**
      * Body content
-     * @var array
      */
-    protected $_body = array();
+    protected array $_body = array();
 
     /**
      * Exception stack
@@ -45,15 +44,13 @@ abstract class Zend_Controller_Response_Abstract
 
     /**
      * Array of headers. Each header is an array with keys 'name' and 'value'
-     * @var array
      */
-    protected $_headers = array();
+    protected array $_headers = array();
 
     /**
      * Array of raw headers. Each header is a single string, the entire header to emit
-     * @var array
      */
-    protected $_headersRaw = array();
+    protected array $_headersRaw = array();
 
     /**
      * HTTP response code to use in headers
@@ -63,15 +60,13 @@ abstract class Zend_Controller_Response_Abstract
 
     /**
      * Flag; is this response a redirect?
-     * @var boolean
      */
-    protected $_isRedirect = false;
+    protected bool $_isRedirect = false;
 
     /**
      * Whether or not to render exceptions; off by default
-     * @var boolean
      */
-    protected $_renderExceptions = false;
+    protected bool $_renderExceptions = false;
 
     /**
      * Flag; if true, when header operations are called after headers have been
@@ -79,9 +74,8 @@ abstract class Zend_Controller_Response_Abstract
      * as normal. Defaults to true.
      *
      * @see canSendHeaders()
-     * @var boolean
      */
-    public $headersSentThrowsException = true;
+    public bool $headersSentThrowsException = true;
 
     /**
      * Normalize a header name

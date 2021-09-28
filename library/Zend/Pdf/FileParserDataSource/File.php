@@ -40,13 +40,10 @@ require_once 'Zend/Pdf/FileParserDataSource.php';
 class Zend_Pdf_FileParserDataSource_File extends Zend_Pdf_FileParserDataSource
 {
   /**** Instance Variables ****/
-
-
     /**
      * Fully-qualified path to the file.
-     * @var string
      */
-    protected $_filePath = '';
+    protected string $_filePath = '';
 
     /**
      * File resource handle .

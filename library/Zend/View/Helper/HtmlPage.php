@@ -48,10 +48,8 @@ class Zend_View_Helper_HtmlPage extends Zend_View_Helper_HtmlObject
 
     /**
      * Default attributes
-     *
-     * @var array
      */
-    protected $_attribs = array('classid' => self::ATTRIB_CLASSID);
+    protected array $_attribs = array('classid' => self::ATTRIB_CLASSID);
 
     /**
      * Output a html object tag

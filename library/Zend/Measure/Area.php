@@ -174,7 +174,7 @@ class Zend_Measure_Area extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ACRE'               => array('4046.856422',      'A'),
         'ACRE_COMMERCIAL'    => array('3344.50944',       'A'),
         'ACRE_SURVEY'        => array('4046.872627',      'A'),

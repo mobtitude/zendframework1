@@ -39,24 +39,18 @@ class Zend_Test_PHPUnit_Db_Metadata_Generic implements PHPUnit_Extensions_Databa
 {
     /**
      * Zend_Db Connection
-     *
-     * @var Zend_Db_Adapter_Abstract
      */
-    protected $_connection;
+    protected \Zend_Db_Adapter_Abstract $_connection;
 
     /**
      * Schemaname
-     *
-     * @var string
      */
-    protected $_schema;
+    protected string $_schema;
 
     /**
      * Cached Table metadata
-     *
-     * @var array
      */
-    protected $_tableMetadata = array();
+    protected array $_tableMetadata = array();
 
     /**
      * Creates a new database meta data object using the given pdo connection

@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_UploadsDirectory extends Zend_Tool_Project_Co
     /**
      * @var string
      */
-    protected $_filesystemName = 'uploads';
+    protected ?string $_filesystemName = 'uploads';
 
     /**
      * getName()

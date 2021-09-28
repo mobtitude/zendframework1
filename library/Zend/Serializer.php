@@ -32,10 +32,8 @@ class Zend_Serializer
 {
     /**
      * Plugin loader to load adapter.
-     *
-     * @var null|Zend_Loader_PluginLoader
      */
-    private static $_adapterLoader = null;
+    private static ?\Zend_Loader_PluginLoader $_adapterLoader = null;
 
     /**
      * The default adapter.

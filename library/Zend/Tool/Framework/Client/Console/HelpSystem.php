@@ -29,15 +29,9 @@
 class Zend_Tool_Framework_Client_Console_HelpSystem
 {
 
-    /**
-     * @var Zend_Tool_Framework_Registry_Interface
-     */
-    protected $_registry = null;
+    protected ?\Zend_Tool_Framework_Registry_Interface $_registry = null;
 
-    /**
-     * @var Zend_Tool_Framework_Client_Response
-     */
-    protected $_response = null;
+    protected ?\Zend_Tool_Framework_Client_Response $_response = null;
 
     /**
      * setRegistry()

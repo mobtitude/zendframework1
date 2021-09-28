@@ -67,21 +67,18 @@ class Zend_Dom_Query
 
     /**
      * Document type
-     * @var string
      */
-    protected $_docType;
+    protected ?string $_docType = null;
 
     /**
      * Document encoding
-     * @var null|string
      */
-    protected $_encoding;
+    protected ?string $_encoding = null;
 
     /**
      * XPath namespaces
-     * @var array
      */
-    protected $_xpathNamespaces = array();
+    protected array $_xpathNamespaces = array();
 
     /**
      * Constructor

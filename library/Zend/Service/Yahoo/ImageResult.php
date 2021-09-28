@@ -39,59 +39,43 @@ class Zend_Service_Yahoo_ImageResult extends Zend_Service_Yahoo_Result
 {
     /**
      * Summary info for the image
-     *
-     * @var string
      */
-    public $Summary;
+    public string $Summary;
 
     /**
      * The URL of the webpage hosting the image
-     *
-     * @var string
      */
-    public $RefererUrl;
+    public string $RefererUrl;
 
     /**
      * The size of the files in bytes
-     *
-     * @var string
      */
-    public $FileSize;
+    public string $FileSize;
 
     /**
      * The type of file (bmp, gif, jpeg, etc.)
-     *
-     * @var string
      */
-    public $FileFormat;
+    public string $FileFormat;
 
     /**
      * The height of the image in pixels
-     *
-     * @var string
      */
-    public $Height;
+    public string $Height;
 
     /**
      * The width of the image in pixels
-     *
-     * @var string
      */
-    public $Width;
+    public string $Width;
 
     /**
      * The thubmnail image for the article, if it exists
-     *
-     * @var Zend_Service_Yahoo_Image
      */
-    public $Thumbnail;
+    public ?\Zend_Service_Yahoo_Image $Thumbnail = null;
 
     /**
      * Image result namespace
-     *
-     * @var string
      */
-    protected $_namespace = 'urn:yahoo:srchmi';
+    protected string $_namespace = 'urn:yahoo:srchmi';
 
 
     /**

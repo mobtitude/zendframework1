@@ -47,24 +47,18 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
 
     /**
      * Object number within PDF file
-     *
-     * @var integer
      */
-    private $_objNum;
+    private int $_objNum;
 
     /**
      * Generation number
-     *
-     * @var integer
      */
-    private $_genNum;
+    private int $_genNum;
 
     /**
      * Reference context
-     *
-     * @var Zend_Pdf_Element_Reference_Context
      */
-    private $_context;
+    private \Zend_Pdf_Element_Reference_Context $_context;
 
 
     /**
@@ -74,10 +68,8 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
      * unnecessary dereferencing, whech can produce cascade dereferencing and parsing.
      * The same for duplication of getFactory() function. It can be processed by __call()
      * method, but we catch it here.
-     *
-     * @var Zend_Pdf_ElementFactory
      */
-    private $_factory;
+    private \Zend_Pdf_ElementFactory $_factory;
 
     /**
      * Object constructor:

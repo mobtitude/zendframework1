@@ -45,16 +45,14 @@ class Zend_Stdlib_PriorityQueue implements Countable, IteratorAggregate, Seriali
 
     /**
      * Inner queue class to use for iteration
-     * @var string
      */
-    protected $queueClass = 'Zend_Stdlib_SplPriorityQueue';
+    protected string $queueClass = 'Zend_Stdlib_SplPriorityQueue';
 
     /**
      * Actual items aggregated in the priority queue. Each item is an array
      * with keys "data" and "priority".
-     * @var array
      */
-    protected $items      = array();
+    protected array $items      = array();
 
     /**
      * Inner queue object

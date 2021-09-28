@@ -27,10 +27,7 @@
  */
 class Zend_Reflection_Parameter extends ReflectionParameter
 {
-    /**
-     * @var bool
-     */
-    protected $_isFromMethod = false;
+    protected bool $_isFromMethod = false;
 
     /**
      * Get declaring class reflection object

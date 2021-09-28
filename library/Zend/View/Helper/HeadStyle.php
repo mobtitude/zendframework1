@@ -46,15 +46,13 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
 
     /**
      * Allowed optional attributes
-     * @var array
      */
-    protected $_optionalAttributes = array('lang', 'title', 'media', 'dir');
+    protected array $_optionalAttributes = array('lang', 'title', 'media', 'dir');
 
     /**
      * Allowed media types
-     * @var array
      */
-    protected $_mediaTypes = array(
+    protected array $_mediaTypes = array(
         'all', 'aural', 'braille', 'handheld', 'print',
         'projection', 'screen', 'tty', 'tv'
     );
@@ -67,9 +65,8 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
 
     /**
      * Capture lock
-     * @var bool
      */
-    protected $_captureLock;
+    protected ?bool $_captureLock = null;
 
     /**
      * Capture type (append, prepend, set)

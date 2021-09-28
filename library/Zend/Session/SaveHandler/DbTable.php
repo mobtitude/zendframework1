@@ -79,24 +79,18 @@ class Zend_Session_SaveHandler_DbTable
 
     /**
      * Session table last modification time column
-     *
-     * @var string
      */
-    protected $_modifiedColumn = null;
+    protected ?string $_modifiedColumn = null;
 
     /**
      * Session table lifetime column
-     *
-     * @var string
      */
-    protected $_lifetimeColumn = null;
+    protected ?string $_lifetimeColumn = null;
 
     /**
      * Session table data column
-     *
-     * @var string
      */
-    protected $_dataColumn = null;
+    protected ?string $_dataColumn = null;
 
     /**
      * Session lifetime
@@ -107,24 +101,18 @@ class Zend_Session_SaveHandler_DbTable
 
     /**
      * Whether or not the lifetime of an existing session should be overridden
-     *
-     * @var boolean
      */
-    protected $_overrideLifetime = false;
+    protected bool $_overrideLifetime = false;
 
     /**
      * Session save path
-     *
-     * @var string
      */
-    protected $_sessionSavePath;
+    protected ?string $_sessionSavePath = null;
 
     /**
      * Session name
-     *
-     * @var string
      */
-    protected $_sessionName;
+    protected ?string $_sessionName = null;
 
     /**
      * Constructor

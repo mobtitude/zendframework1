@@ -28,8 +28,8 @@
  */
 class Zend_Cloud_QueueService_Message
 {
-    protected $_body;
-    protected $_clientMessage;
+    protected string $_body;
+    protected string $_clientMessage;
 
     /**
      * @param string $body Message text

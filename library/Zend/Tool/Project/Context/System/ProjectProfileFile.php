@@ -60,12 +60,9 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
     /**
      * @var string
      */
-    protected $_filesystemName = '.zfproject.xml';
+    protected ?string $_filesystemName = '.zfproject.xml';
 
-    /**
-     * @var Zend_Tool_Project_Profile
-     */
-    protected $_profile = null;
+    protected ?\Zend_Tool_Project_Profile $_profile = null;
 
     /**
      * getName()

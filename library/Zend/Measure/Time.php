@@ -77,7 +77,7 @@ class Zend_Measure_Time extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'ANOMALISTIC_YEAR'  => array('31558432', 'anomalistic year'),
         'ATTOSECOND'        => array('1.0e-18', 'as'),
         'CENTURY'           => array('3153600000', 'century'),

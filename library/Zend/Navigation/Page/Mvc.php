@@ -51,56 +51,46 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
 {
     /**
      * Action name to use when assembling URL
-     *
-     * @var string
      */
-    protected $_action;
+    protected ?string $_action = null;
 
     /**
      * Controller name to use when assembling URL
-     *
-     * @var string
      */
-    protected $_controller;
+    protected ?string $_controller = null;
 
     /**
      * Module name to use when assembling URL
-     *
-     * @var string
      */
-    protected $_module;
+    protected ?string $_module = null;
 
     /**
      * Params to use when assembling URL
      *
      * @see getHref()
-     * @var array
      */
-    protected $_params = array();
+    protected array $_params = array();
 
     /**
      * Route name to use when assembling URL
      *
      * @see getHref()
-     * @var string
      */
-    protected $_route;
+    protected ?string $_route = null;
 
     /**
      * Whether params should be reset when assembling URL
      *
      * @see getHref()
-     * @var bool
      */
-    protected $_resetParams = true;
+    protected bool $_resetParams = true;
 
     /**
      * Whether href should be encoded when assembling URL
      *
      * @see getHref()
-     * @var bool
      */
-    protected $_encodeUrl = true;
+    protected bool $_encodeUrl = true;
 
     /**
      * Whether this page should be considered active
@@ -113,9 +103,8 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      * Scheme to use when assembling URL
      *
      * @see getHref()
-     * @var string
      */
-    protected $_scheme;
+    protected ?string $_scheme = null;
 
     /**
      * Cached href
@@ -123,26 +112,22 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      * The use of this variable minimizes execution time when getHref() is
      * called more than once during the lifetime of a request. If a property
      * is updated, the cache is invalidated.
-     *
-     * @var string
      */
-    protected $_hrefCache;
+    protected ?string $_hrefCache = null;
 
     /**
      * Action helper for assembling URLs
      *
      * @see getHref()
-     * @var Zend_Controller_Action_Helper_Url
      */
-    protected static $_urlHelper = null;
+    protected static ?\Zend_Controller_Action_Helper_Abstract $_urlHelper = null;
 
     /**
      * View helper for assembling URLs with schemes
      *
      * @see getHref()
-     * @var Zend_View_Helper_ServerUrl
      */
-    protected static $_schemeHelper = null;
+    protected static ?\Zend_View_Helper_ServerUrl $_schemeHelper = null;
 
     // Accessors:
 

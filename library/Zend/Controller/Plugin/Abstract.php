@@ -29,15 +29,9 @@
  */
 abstract class Zend_Controller_Plugin_Abstract
 {
-    /**
-     * @var Zend_Controller_Request_Abstract
-     */
-    protected $_request;
+    protected ?\Zend_Controller_Request_Abstract $_request = null;
 
-    /**
-     * @var Zend_Controller_Response_Abstract
-     */
-    protected $_response;
+    protected ?\Zend_Controller_Response_Abstract $_response = null;
 
     /**
      * Set request object

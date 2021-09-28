@@ -80,28 +80,22 @@ class Zend_Db_Profiler
 
     /**
      * Array of Zend_Db_Profiler_Query objects.
-     *
-     * @var array
      */
-    protected $_queryProfiles = array();
+    protected array $_queryProfiles = array();
 
     /**
      * Stores enabled state of the profiler.  If set to False, calls to
      * queryStart() will simply be ignored.
-     *
-     * @var boolean
      */
-    protected $_enabled = false;
+    protected bool $_enabled = false;
 
     /**
      * Stores the number of seconds to filter.  NULL if filtering by time is
      * disabled.  If an integer is stored here, profiles whose elapsed time
      * is less than this value in seconds will be unset from
      * the self::$_queryProfiles array.
-     *
-     * @var integer
      */
-    protected $_filterElapsedSecs = null;
+    protected ?int $_filterElapsedSecs = null;
 
     /**
      * Logical OR of any of the filter constants.  NULL if filtering by query
@@ -109,10 +103,8 @@ class Zend_Db_Profiler
      * any of the query type constants.  When the query ends, if it is not
      * one of the types specified, it will be unset from the
      * self::$_queryProfiles array.
-     *
-     * @var integer
      */
-    protected $_filterTypes = null;
+    protected ?int $_filterTypes = null;
 
     /**
      * Class constructor.  The profiler is disabled by default unless it is

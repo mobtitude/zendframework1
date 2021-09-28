@@ -47,10 +47,8 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      * Connected is true if we have a reference to a live
      * Zend_Db_Table_Abstract object.
      * This is false after the Rowset has been deserialized.
-     *
-     * @var boolean
      */
-    protected $_connected = true;
+    protected bool $_connected = true;
 
     /**
      * Zend_Db_Table_Abstract class name.
@@ -61,10 +59,8 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
 
     /**
      * Zend_Db_Table_Row_Abstract class name.
-     *
-     * @var string
      */
-    protected $_rowClass = 'Zend_Db_Table_Row';
+    protected string $_rowClass = 'Zend_Db_Table_Row';
 
     /**
      * Iterator pointer.
@@ -82,20 +78,12 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
 
     /**
      * Collection of instantiated Zend_Db_Table_Row objects.
-     *
-     * @var array
      */
-    protected $_rows = array();
+    protected array $_rows = array();
 
-    /**
-     * @var boolean
-     */
-    protected $_stored = false;
+    protected bool $_stored = false;
 
-    /**
-     * @var boolean
-     */
-    protected $_readOnly = false;
+    protected bool $_readOnly = false;
 
     /**
      * Constructor.

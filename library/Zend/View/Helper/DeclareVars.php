@@ -37,7 +37,7 @@ class Zend_View_Helper_DeclareVars extends Zend_View_Helper_Abstract
      * The view object that created this helper object.
      * @var Zend_View
      */
-    public $view;
+    public ?Zend_View_Interface $view;
 
     /**
      * Declare template vars to set default values and avoid notices when using strictVars

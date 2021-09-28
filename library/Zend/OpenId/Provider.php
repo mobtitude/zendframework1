@@ -59,31 +59,23 @@ class Zend_OpenId_Provider
 
     /**
      * Time to live of association session in secconds
-     *
-     * @var integer $_sessionTtl
      */
-    private $_sessionTtl;
+    private int $_sessionTtl;
 
     /**
      * URL to peform interactive user login
-     *
-     * @var string $_loginUrl
      */
-    private $_loginUrl;
+    private string $_loginUrl;
 
     /**
      * URL to peform interactive validation of consumer by user
-     *
-     * @var string $_trustUrl
      */
-    private $_trustUrl;
+    private string $_trustUrl;
 
     /**
      * The OP Endpoint URL
-     *
-     * @var string $_opEndpoint
      */
-    private $_opEndpoint;
+    private ?string $_opEndpoint = null;
 
     /**
      * Constructs a Zend_OpenId_Provider object with given parameters.

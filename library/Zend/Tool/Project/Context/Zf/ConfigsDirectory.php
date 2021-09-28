@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_ConfigsDirectory extends Zend_Tool_Project_Co
     /**
      * @var string
      */
-    protected $_filesystemName = 'configs';
+    protected ?string $_filesystemName = 'configs';
 
     /**
      * getName()

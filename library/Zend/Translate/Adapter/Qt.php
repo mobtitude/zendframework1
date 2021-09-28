@@ -41,15 +41,15 @@ require_once 'Zend/Xml/Exception.php';
 class Zend_Translate_Adapter_Qt extends Zend_Translate_Adapter {
     // Internal variables
     private $_file        = false;
-    private $_cleared     = array();
+    private array $_cleared     = array();
     private $_transunit   = null;
     private $_source      = null;
-    private $_target      = null;
+    private ?string $_target      = null;
     private $_scontent    = null;
     private $_tcontent    = null;
-    private $_stag        = false;
-    private $_ttag        = true;
-    private $_data        = array();
+    private bool $_stag        = false;
+    private bool $_ttag        = true;
+    private array $_data        = array();
 
     /**
      * Load translation data (QT file reader)

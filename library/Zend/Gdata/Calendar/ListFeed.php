@@ -42,7 +42,7 @@ require_once 'Zend/Gdata/Calendar/Extension/Timezone.php';
  */
 class Zend_Gdata_Calendar_ListFeed extends Zend_Gdata_Feed
 {
-    protected $_timezone = null;
+    protected ?\Zend_Gdata_Calendar_Extension_Timezone $_timezone = null;
 
     /**
      * The classname for individual feed elements.
@@ -53,10 +53,8 @@ class Zend_Gdata_Calendar_ListFeed extends Zend_Gdata_Feed
 
     /**
      * The classname for the feed.
-     *
-     * @var string
      */
-    protected $_feedClassName = 'Zend_Gdata_Calendar_ListFeed';
+    protected string $_feedClassName = 'Zend_Gdata_Calendar_ListFeed';
 
     public function __construct($element = null)
     {

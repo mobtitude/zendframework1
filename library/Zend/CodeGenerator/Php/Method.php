@@ -53,15 +53,9 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
      */
     protected $_isFinal = false;
 
-    /**
-     * @var array
-     */
-    protected $_parameters = array();
+    protected array $_parameters = array();
 
-    /**
-     * @var string
-     */
-    protected $_body = null;
+    protected ?string $_body = null;
 
     /**
      * fromReflection()

@@ -37,30 +37,24 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected array $_messageTemplates = array(
         self::NOT_IN_ARRAY => "'%value%' was not found in the haystack",
     );
 
     /**
      * Haystack of possible values
-     *
-     * @var array
      */
-    protected $_haystack;
+    protected ?array $_haystack = null;
 
     /**
      * Whether a strict in_array() invocation is used
-     *
-     * @var boolean
      */
-    protected $_strict = false;
+    protected bool $_strict = false;
 
     /**
      * Whether a recursive search should be done
-     *
-     * @var boolean
      */
-    protected $_recursive = false;
+    protected bool $_recursive = false;
 
     /**
      * Sets validator options

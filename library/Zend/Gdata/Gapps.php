@@ -112,17 +112,15 @@ class Zend_Gdata_Gapps extends Zend_Gdata
 
     /**
      * The domain which is being administered via the Provisioning API.
-     *
-     * @var string
      */
-    protected $_domain = null;
+    protected ?string $_domain = null;
 
     /**
      * Namespaces used for Zend_Gdata_Gapps
      *
      * @var array
      */
-    public static $namespaces = array(
+    public static array $namespaces = array(
         array('apps', 'http://schemas.google.com/apps/2006', 1, 0)
     );
 

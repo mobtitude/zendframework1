@@ -33,8 +33,8 @@ require_once 'Zend/Gdata/Analytics/Extension/Property.php';
 class Zend_Gdata_Analytics_Extension_Metric 
     extends Zend_Gdata_Analytics_Extension_Property
 {
-    protected $_rootNamespace = 'ga';
-    protected $_rootElement = 'metric';
+    protected string $_rootNamespace = 'ga';
+    protected ?string $_rootElement = 'metric';
     protected $_value = null;
     protected $_name = null;
 

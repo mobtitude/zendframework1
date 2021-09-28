@@ -37,10 +37,8 @@ class Zend_Filter_Digits implements Zend_Filter_Interface
 {
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support
-     *
-     * @var mixed
      **/
-    protected static $_unicodeEnabled;
+    protected static ?bool $_unicodeEnabled = null;
 
     /**
      * Class constructor

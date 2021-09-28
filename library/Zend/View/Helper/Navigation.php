@@ -50,38 +50,28 @@ class Zend_View_Helper_Navigation
 
     /**
      * Default proxy to use in {@link render()}
-     *
-     * @var string
      */
-    protected $_defaultProxy = 'menu';
+    protected string $_defaultProxy = 'menu';
 
     /**
      * Contains references to proxied helpers
-     *
-     * @var array
      */
-    protected $_helpers = array();
+    protected array $_helpers = array();
 
     /**
      * Whether container should be injected when proxying
-     *
-     * @var bool
      */
-    protected $_injectContainer = true;
+    protected bool $_injectContainer = true;
 
     /**
      * Whether ACL should be injected when proxying
-     *
-     * @var bool
      */
-    protected $_injectAcl = true;
+    protected bool $_injectAcl = true;
 
     /**
      * Whether translator should be injected when proxying
-     *
-     * @var bool
      */
-    protected $_injectTranslator = true;
+    protected bool $_injectTranslator = true;
 
     /**
      * Helper entry point

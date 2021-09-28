@@ -58,25 +58,22 @@ class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container
 
     /**
      * Are arbitrary attributes allowed?
-     * @var bool
      */
-    protected $_arbitraryAttributes = false;
+    protected bool $_arbitraryAttributes = false;
 
     /**#@+
      * Capture type and/or attributes (used for hinting during capture)
      * @var string
      */
-    protected $_captureLock;
+    protected ?bool $_captureLock = null;
     protected $_captureScriptType  = null;
     protected $_captureScriptAttrs = null;
     protected $_captureType;
     /**#@-*/
-
     /**
      * Optional allowed attributes for script tag
-     * @var array
      */
-    protected $_optionalAttributes = array(
+    protected array $_optionalAttributes = array(
         'charset', 'defer', 'language', 'src'
     );
 
@@ -89,9 +86,8 @@ class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container
     /**
      * Whether or not to format scripts using CDATA; used only if doctype
      * helper is not accessible
-     * @var bool
      */
-    public $useCdata = false;
+    public bool $useCdata = false;
 
     /**
      * Constructor

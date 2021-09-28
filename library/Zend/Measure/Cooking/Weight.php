@@ -54,7 +54,7 @@ class Zend_Measure_Cooking_Weight extends Zend_Measure_Abstract
      *
      * @var array
      */
-    protected $_units = array(
+    protected array $_units = array(
         'HALF_STICK'    => array(array('' => '453.59237', '/' => '8'),                    'half stk'),
         'STICK'         => array(array('' => '453.59237', '/' => '4'),                    'stk'),
         'CUP'           => array(array('' => '453.59237', '/' => '2'),                    'c'),

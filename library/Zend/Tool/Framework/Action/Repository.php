@@ -35,15 +35,9 @@ class Zend_Tool_Framework_Action_Repository
     implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
 {
 
-    /**
-     * @var Zend_Tool_Framework_Registry_Interface
-     */
-    protected $_registry = null;
+    protected ?\Zend_Tool_Framework_Registry_Interface $_registry = null;
 
-    /**
-     * @var array
-     */
-    protected $_actions = array();
+    protected array $_actions = array();
 
     /**
      * setRegistry()

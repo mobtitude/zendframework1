@@ -43,9 +43,8 @@ class Zend_Cloud_DocumentService_Document
 
     /**
      * Name/value array of field names to values.
-     * @var array
      */
-    protected $_fields;
+    protected array $_fields;
 
     /**
      * Construct an instance of Zend_Cloud_DocumentService_Document.

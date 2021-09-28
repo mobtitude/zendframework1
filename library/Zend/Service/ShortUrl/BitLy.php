@@ -37,10 +37,8 @@ class Zend_Service_ShortUrl_BitLy extends Zend_Service_ShortUrl_AbstractShortene
 
     /**
      * Base URI of the service
-     *
-     * @var string
      */
-    protected $_apiUri = 'http://api.bitly.com';
+    protected string $_apiUri = 'http://api.bitly.com';
 
     /**
      * user login name

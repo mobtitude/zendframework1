@@ -38,10 +38,8 @@ abstract class Zend_Soap_Wsdl_Strategy_Abstract implements Zend_Soap_Wsdl_Strate
 {
     /**
      * Context object
-     *
-     * @var Zend_Soap_Wsdl
      */
-    protected $_context;
+    protected ?\Zend_Soap_Wsdl $_context = null;
 
     /**
      * Set the Zend_Soap_Wsdl Context object this strategy resides in.

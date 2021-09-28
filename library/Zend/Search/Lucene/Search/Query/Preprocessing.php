@@ -45,10 +45,8 @@ abstract class Zend_Search_Lucene_Search_Query_Preprocessing extends Zend_Search
      * It's filled during rewrite operation and may be used for search result highlighting
      *
      * Array of Zend_Search_Lucene_Index_Term objects
-     *
-     * @var array
      */
-    protected $_matches = null;
+    protected ?array $_matches = null;
 
     /**
      * Optimize query in the context of specified index

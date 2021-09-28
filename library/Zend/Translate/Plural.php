@@ -31,10 +31,8 @@ class Zend_Translate_Plural
 {
     /**
      * Manual rule to use
-     *
-     * @var string
      */
-    protected static $_plural = array();
+    protected static array $_plural = array();
 
     /**
      * Returns the plural definition to use

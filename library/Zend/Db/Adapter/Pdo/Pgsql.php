@@ -41,10 +41,8 @@ class Zend_Db_Adapter_Pdo_Pgsql extends Zend_Db_Adapter_Pdo_Abstract
 
     /**
      * PDO type.
-     *
-     * @var string
      */
-    protected $_pdoType = 'pgsql';
+    protected string $_pdoType = 'pgsql';
 
     /**
      * Keys are UPPERCASE SQL datatypes or the constants
@@ -57,7 +55,7 @@ class Zend_Db_Adapter_Pdo_Pgsql extends Zend_Db_Adapter_Pdo_Abstract
      *
      * @var array Associative array of datatypes to values 0, 1, or 2.
      */
-    protected $_numericDataTypes = array(
+    protected array $_numericDataTypes = array(
         Zend_Db::INT_TYPE    => Zend_Db::INT_TYPE,
         Zend_Db::BIGINT_TYPE => Zend_Db::BIGINT_TYPE,
         Zend_Db::FLOAT_TYPE  => Zend_Db::FLOAT_TYPE,

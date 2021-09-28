@@ -43,7 +43,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
 
     private $_props;
     private $_policy_url;
-    private $_version;
+    private float $_version;
 
     /**
      * Creates SREG extension object

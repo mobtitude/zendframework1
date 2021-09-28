@@ -35,17 +35,13 @@ class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_
 {
     /**
      * Array of term streams (Zend_Search_Lucene_Index_TermsStream_Interface objects)
-     *
-     * @var array
      */
-    protected $_termStreams;
+    protected array $_termStreams;
 
     /**
      * Terms stream queue
-     *
-     * @var Zend_Search_Lucene_Index_TermsPriorityQueue
      */
-    protected $_termsStreamQueue = null;
+    protected ?\Zend_Search_Lucene_Index_TermsPriorityQueue $_termsStreamQueue = null;
 
     /**
      * Last Term in a terms stream

@@ -39,25 +39,20 @@ require_once 'Zend/Pdf/Cmap.php';
 class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
 {
   /**** Instance Variables ****/
-
-
     /**
      * The starting character code covered by this table.
-     * @var integer
      */
-    protected $_startCode = 0;
+    protected int $_startCode = 0;
 
     /**
      * The ending character code covered by this table.
-     * @var integer
      */
-    protected $_endCode = 0;
+    protected int $_endCode = 0;
 
     /**
      * Glyph index array. Stores the actual glyph numbers.
-     * @var array
      */
-    protected $_glyphIndexArray = array();
+    protected array $_glyphIndexArray = array();
 
 
 
