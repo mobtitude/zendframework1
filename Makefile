@@ -3,12 +3,12 @@
 .PHONY: help
 help:
 	@echo
-	@echo "Wywołanie: make [akcja]"
+	@echo "Execution: make [action]"
 	@echo
-	@echo "Testy aplikacji:"
+	@echo "Application tests:"
 	@echo
-	@echo "* code-check-php        - sprawdza jakość kodu PHP"
-	@echo "* code-fix-php          - naprawia błędy w kodzie PHP które mogą być naprawione automatycznie"
+	@echo "* code-check-php        - check PHP code quality"
+	@echo "* code-fix-php          - fix PHP code, which can be fixed automatically"
 	@echo
 
 #
