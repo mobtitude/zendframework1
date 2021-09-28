@@ -81,7 +81,7 @@ class Zend_Service_Ebay_Finding_Response_Items extends Zend_Service_Ebay_Finding
             /**
              * @see Zend_Service_Ebay_Finding_Search_Result
              */
-            require_once 'Zend/Service/Ebay/Finding/Search/Result.php';
+            include_once 'Zend/Service/Ebay/Finding/Search/Result.php';
             $this->searchResult = new Zend_Service_Ebay_Finding_Search_Result($node);
         }
 
@@ -90,7 +90,7 @@ class Zend_Service_Ebay_Finding_Response_Items extends Zend_Service_Ebay_Finding
             /**
              * @see Zend_Service_Ebay_Finding_PaginationOutput
              */
-            require_once 'Zend/Service/Ebay/Finding/PaginationOutput.php';
+            include_once 'Zend/Service/Ebay/Finding/PaginationOutput.php';
             $this->paginationOutput = new Zend_Service_Ebay_Finding_PaginationOutput($node);
         }
     }
@@ -108,52 +108,54 @@ class Zend_Service_Ebay_Finding_Response_Items extends Zend_Service_Ebay_Finding
             /**
              * @see Zend_Service_Ebay_Finding_Exception
              */
-            require_once 'Zend/Service/Ebay/Finding/Exception.php';
+            include_once 'Zend/Service/Ebay/Finding/Exception.php';
             throw new Zend_Service_Ebay_Finding_Exception(
-                "Page number '{$number}' is out of range.");
+                "Page number '{$number}' is out of range."
+            );
         }
 
         // prepare arguments
         $arguments = array();
         switch ($this->_operation) {
-            case 'findItemsAdvanced':
+        case 'findItemsAdvanced':
                 $arguments[] = $this->getOption('keywords');
-                $arguments[] = $this->getOption('descriptionSearch');
+            $arguments[] = $this->getOption('descriptionSearch');
+            $arguments[] = $this->getOption('categoryId');
+            break;
+
+        case 'findItemsByCategory':
                 $arguments[] = $this->getOption('categoryId');
-                break;
+            break;
 
-            case 'findItemsByCategory':
-                $arguments[] = $this->getOption('categoryId');
-                break;
+        case 'findItemsByKeywords':
+            $arguments[] = $this->getOption('keywords');
+            break;
 
-            case 'findItemsByKeywords':
-                $arguments[] = $this->getOption('keywords');
-                break;
+        case 'findItemsByProduct':
+            $productId = $this->getOption('productId');
+            if (!is_array($productId)) {
+                $productId = array('' => $productId);
+            }
+            $arguments[] = array_key_exists('', $productId)
+                         ? $productId['']
+                         : null;
+            $arguments[] = array_key_exists('type', $productId)
+                         ? $productId['type']
+                         : null;
+            break;
 
-            case 'findItemsByProduct':
-                $productId = $this->getOption('productId');
-                if (!is_array($productId)) {
-                    $productId = array('' => $productId);
-                }
-                $arguments[] = array_key_exists('', $productId)
-                             ? $productId['']
-                             : null;
-                $arguments[] = array_key_exists('type', $productId)
-                             ? $productId['type']
-                             : null;
-                break;
+        case 'findItemsIneBayStores':
+            $arguments[] = $this->getOption('storeName');
+            break;
 
-            case 'findItemsIneBayStores':
-                $arguments[] = $this->getOption('storeName');
-                break;
-
-            default:
-                /**
-                 * @see Zend_Service_Ebay_Finding_Exception
-                 */
-                require_once 'Zend/Service/Ebay/Finding/Exception.php';
-                throw new Zend_Service_Ebay_Finding_Exception(
-                    "Invalid operation '{$this->_operation}'.");
+        default:
+            /**
+             * @see Zend_Service_Ebay_Finding_Exception
+             */
+            include_once 'Zend/Service/Ebay/Finding/Exception.php';
+            throw new Zend_Service_Ebay_Finding_Exception(
+                "Invalid operation '{$this->_operation}'."
+            );
         }
 
         // prepare options

@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Router_Route_Abstract */
+/**
+ * Zend_Controller_Router_Route_Abstract 
+ */
 require_once 'Zend/Controller/Router/Route/Abstract.php';
 
 /**
@@ -51,7 +53,8 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
 
     protected bool $_keysSet = false;
 
-    /**#@+
+    /**
+     * #@+
      * Array keys to use for module, controller, and action. Should be taken out of request.
      *
      * @var string
@@ -76,7 +79,7 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
     /**
      * Instantiates route based on passed Zend_Config structure
      *
-     * @param Zend_Config $config
+     * @param  Zend_Config $config
      * @return Zend_Controller_Router_Route_Module
      */
     public static function getInstance(Zend_Config $config)
@@ -101,8 +104,7 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
         array $defaults = array(),
         Zend_Controller_Dispatcher_Interface $dispatcher = null,
         Zend_Controller_Request_Abstract $request = null
-    )
-    {
+    ) {
         $this->_defaults = $defaults;
 
         if (isset($request)) {
@@ -146,8 +148,8 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
      * setControllerName(), and setActionName() accessors to set those values.
      * Always returns the values as an array.
      *
-     * @param string  $path Path used to match against this routing map
-     * @param boolean $partial
+     * @param  string  $path    Path used to match against this routing map
+     * @param  boolean $partial
      * @return array An array of assigned values or a false on a mismatch
      */
     public function match($path, $partial = false)
@@ -200,10 +202,10 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
     /**
      * Assembles user submitted parameters forming a URL path defined by this route
      *
-     * @param array   $data  An array of variable and value pairs used as parameters
-     * @param boolean $reset Weither to reset the current params
-     * @param boolean $encode
-     * @param boolean $partial
+     * @param  array   $data    An array of variable and value pairs used as parameters
+     * @param  boolean $reset   Weither to reset the current params
+     * @param  boolean $encode
+     * @param  boolean $partial
      * @return string Route path with user submitted parameters
      */
     public function assemble($data = array(), $reset = false, $encode = true, $partial = false)
@@ -283,7 +285,7 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
     /**
      * Return a single parameter of route's defaults
      *
-     * @param string $name Array key of the parameter
+     * @param  string $name Array key of the parameter
      * @return string Previously set default
      */
     public function getDefault($name)

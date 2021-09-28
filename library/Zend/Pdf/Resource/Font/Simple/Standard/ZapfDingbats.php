@@ -21,11 +21,15 @@
  */
 
 
-/** Internally used classes */
+/**
+ * Internally used classes 
+ */
 require_once 'Zend/Pdf/Element/Name.php';
 
 
-/** Zend_Pdf_Resource_Font_Simple_Standard */
+/**
+ * Zend_Pdf_Resource_Font_Simple_Standard 
+*/
 require_once 'Zend/Pdf/Resource/Font/Simple/Standard.php';
 
 /**
@@ -48,7 +52,9 @@ require_once 'Zend/Pdf/Resource/Font/Simple/Standard.php';
  */
 class Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats extends Zend_Pdf_Resource_Font_Simple_Standard
 {
-  /**** Instance Variables ****/
+    /****
+     * Instance Variables 
+     ****/
     /**
      * Array for conversion from local encoding to special font encoding.
      * See {@link encodeString()}.
@@ -182,10 +188,12 @@ class Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats extends Zend_Pdf_Resou
 
 
 
-  /**** Public Interface ****/
+    /****
+     * Public Interface 
+     ****/
 
 
-  /* Object Lifecycle */
+    /* Object Lifecycle */
 
     /**
      * Object constructor
@@ -368,9 +376,10 @@ class Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats extends Zend_Pdf_Resou
           0x27b5 =>   0xc1, 0x27b6 =>   0xc2, 0x27b7 =>   0xc3, 0x27b8 =>   0xc4,
           0x27b9 =>   0xc5, 0x27ba =>   0xc6, 0x27bb =>   0xc7, 0x27bc =>   0xc8,
           0x27bd =>   0xc9, 0x27be =>   0xca);
-        require_once 'Zend/Pdf/Cmap.php';
+        include_once 'Zend/Pdf/Cmap.php';
         $this->_cmap = Zend_Pdf_Cmap::cmapWithTypeData(
-            Zend_Pdf_Cmap::TYPE_BYTE_ENCODING_STATIC, $cmapData);
+            Zend_Pdf_Cmap::TYPE_BYTE_ENCODING_STATIC, $cmapData
+        );
 
 
         /* Resource dictionary */
@@ -389,14 +398,14 @@ class Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats extends Zend_Pdf_Resou
     }
 
 
-  /* Information and Conversion Methods */
+    /* Information and Conversion Methods */
 
     /**
      * Convert string encoding from local encoding to font encoding. Overridden
      * to defeat the conversion behavior for this ornamental font.
      *
-     * @param string $string
-     * @param string $charEncoding Character encoding of source text.
+     * @param  string $string
+     * @param  string $charEncoding Character encoding of source text.
      * @return string
      */
     public function encodeString($string, $charEncoding)
@@ -432,8 +441,8 @@ class Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats extends Zend_Pdf_Resou
      * Convert string encoding from font encoding to local encoding. Overridden
      * to defeat the conversion behavior for this ornamental font.
      *
-     * @param string $string
-     * @param string $charEncoding Character encoding of resulting text.
+     * @param  string $string
+     * @param  string $charEncoding Character encoding of resulting text.
      * @return string
      */
     public function decodeString($string, $charEncoding)
@@ -469,9 +478,9 @@ class Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats extends Zend_Pdf_Resou
      * character conversion. Don't use this for new code; it is more efficient
      * to use the appropriate Unicode characters directly.
      *
-     * @param string $string
-     * @param string $charEncoding (optional) Character encoding of source
-     *   string. Defaults to current locale.
+     * @param  string $string
+     * @param  string $charEncoding (optional) Character encoding of source
+     *                              string. Defaults to current locale.
      * @return string
      */
     public function toUnicode($string, $charEncoding = '')

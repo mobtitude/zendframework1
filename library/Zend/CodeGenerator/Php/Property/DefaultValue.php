@@ -26,14 +26,15 @@
 require_once 'Zend/CodeGenerator/Php/Abstract.php';
 
 /**
- * @category   Zend
- * @package    Zend_CodeGenerator
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_CodeGenerator
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Php_Abstract
 {
-    /**#@+
+    /**
+* #@+
      * Constant values
      */
     const TYPE_AUTO     = 'auto';
@@ -49,7 +50,9 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
     const TYPE_CONSTANT = 'constant';
     const TYPE_NULL     = 'null';
     const TYPE_OTHER    = 'other';
-    /**#@-*/
+    /**
+     * #@-
+     */
 
     /**
      * @var array of reflected constants
@@ -112,7 +115,7 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
     /**
      * setValue()
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return Zend_CodeGenerator_Php_Property_DefaultValue
      */
     public function setValue($value)
@@ -134,7 +137,7 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
     /**
      * setType()
      *
-     * @param string $type
+     * @param  string $type
      * @return Zend_CodeGenerator_Php_Property_DefaultValue
      */
     public function setType($type)
@@ -156,7 +159,7 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
     /**
      * setArrayDepth()
      *
-     * @param int $arrayDepth
+     * @param  int $arrayDepth
      * @return Zend_CodeGenerator_Php_Property_DefaultValue
      */
     public function setArrayDepth($arrayDepth)
@@ -178,7 +181,7 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
     /**
      * _getValidatedType()
      *
-     * @param string $type
+     * @param  string $type
      * @return string
      */
     protected function _getValidatedType($type)
@@ -193,31 +196,31 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
     /**
      * _getAutoDeterminedType()
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return string
      */
     public function _getAutoDeterminedType($value)
     {
         switch (gettype($value)) {
-            case 'boolean':
-                return self::TYPE_BOOLEAN;
-            case 'integer':
-                return self::TYPE_INT;
-            case 'string':
-                return self::TYPE_STRING;
-            case 'double':
-            case 'float':
-            case 'integer':
-                return self::TYPE_NUMBER;
-            case 'array':
-                return self::TYPE_ARRAY;
-            case 'NULL':
-                return self::TYPE_NULL;
-            case 'object':
-            case 'resource':
-            case 'unknown type':
-            default:
-                return self::TYPE_OTHER;
+        case 'boolean':
+            return self::TYPE_BOOLEAN;
+        case 'integer':
+            return self::TYPE_INT;
+        case 'string':
+            return self::TYPE_STRING;
+        case 'double':
+        case 'float':
+        case 'integer':
+            return self::TYPE_NUMBER;
+        case 'array':
+            return self::TYPE_ARRAY;
+        case 'NULL':
+            return self::TYPE_NULL;
+        case 'object':
+        case 'resource':
+        case 'unknown type':
+        default:
+            return self::TYPE_OTHER;
         }
     }
 
@@ -243,7 +246,7 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
                 $rii = new RecursiveIteratorIterator(
                     $it = new RecursiveArrayIterator($value),
                     RecursiveIteratorIterator::SELF_FIRST
-                    );
+                );
                 foreach ($rii as $curKey => $curValue) {
                     if (!$curValue instanceof Zend_CodeGenerator_Php_Property_DefaultValue) {
                         $curValue = new self(array('value' => $curValue));
@@ -259,57 +262,57 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
         $output = '';
 
         switch ($type) {
-            case self::TYPE_BOOLEAN:
-            case self::TYPE_BOOL:
-                $output .= ( $value ? 'true' : 'false' );
-                break;
-            case self::TYPE_STRING:
-                $output .= "'" . addcslashes($value, "'") . "'";
-                break;
-            case self::TYPE_NULL:
-                $output .= 'null';
-                break;
-            case self::TYPE_NUMBER:
-            case self::TYPE_INTEGER:
-            case self::TYPE_INT:
-            case self::TYPE_FLOAT:
-            case self::TYPE_DOUBLE:
-            case self::TYPE_CONSTANT:
-                $output .= $value;
-                break;
-            case self::TYPE_ARRAY:
-                $output .= 'array(';
-                $curArrayMultiblock = false;
-                if (count($value) > 1) {
-                    $curArrayMultiblock = true;
-                    $output .= PHP_EOL . str_repeat($this->_indentation, $this->_arrayDepth+1);
+        case self::TYPE_BOOLEAN:
+        case self::TYPE_BOOL:
+            $output .= ( $value ? 'true' : 'false' );
+            break;
+        case self::TYPE_STRING:
+            $output .= "'" . addcslashes($value, "'") . "'";
+            break;
+        case self::TYPE_NULL:
+            $output .= 'null';
+            break;
+        case self::TYPE_NUMBER:
+        case self::TYPE_INTEGER:
+        case self::TYPE_INT:
+        case self::TYPE_FLOAT:
+        case self::TYPE_DOUBLE:
+        case self::TYPE_CONSTANT:
+            $output .= $value;
+            break;
+        case self::TYPE_ARRAY:
+            $output .= 'array(';
+            $curArrayMultiblock = false;
+            if (count($value) > 1) {
+                $curArrayMultiblock = true;
+                $output .= PHP_EOL . str_repeat($this->_indentation, $this->_arrayDepth+1);
+            }
+            $outputParts = array();
+            $noKeyIndex = 0;
+            foreach ($value as $n => $v) {
+                $v->setArrayDepth($this->_arrayDepth + 1);
+                $partV = $v->generate();
+                $partV = substr($partV, 0, strlen($partV)-1);
+                if ($n === $noKeyIndex) {
+                    $outputParts[] = $partV;
+                    $noKeyIndex++;
+                } else {
+                    $outputParts[] = (is_int($n) ? $n : "'" . addcslashes($n, "'") . "'") . ' => ' . $partV;
                 }
-                $outputParts = array();
-                $noKeyIndex = 0;
-                foreach ($value as $n => $v) {
-                    $v->setArrayDepth($this->_arrayDepth + 1);
-                    $partV = $v->generate();
-                    $partV = substr($partV, 0, strlen($partV)-1);
-                    if ($n === $noKeyIndex) {
-                        $outputParts[] = $partV;
-                        $noKeyIndex++;
-                    } else {
-                        $outputParts[] = (is_int($n) ? $n : "'" . addcslashes($n, "'") . "'") . ' => ' . $partV;
-                    }
 
-                }
-                $output .= implode(',' . PHP_EOL . str_repeat($this->_indentation, $this->_arrayDepth+1), $outputParts);
-                if ($curArrayMultiblock == true) {
-                    $output .= PHP_EOL . str_repeat($this->_indentation, $this->_arrayDepth+1);
-                }
-                $output .= ')';
-                break;
-            case self::TYPE_OTHER:
-            default:
-                require_once "Zend/CodeGenerator/Php/Exception.php";
-                throw new Zend_CodeGenerator_Php_Exception(
-                    "Type '".get_class($value)."' is unknown or cannot be used as property default value."
-                );
+            }
+            $output .= implode(',' . PHP_EOL . str_repeat($this->_indentation, $this->_arrayDepth+1), $outputParts);
+            if ($curArrayMultiblock == true) {
+                $output .= PHP_EOL . str_repeat($this->_indentation, $this->_arrayDepth+1);
+            }
+            $output .= ')';
+            break;
+        case self::TYPE_OTHER:
+        default:
+            include_once "Zend/CodeGenerator/Php/Exception.php";
+            throw new Zend_CodeGenerator_Php_Exception(
+                "Type '".get_class($value)."' is unknown or cannot be used as property default value."
+            );
         }
 
         $output .= ';';

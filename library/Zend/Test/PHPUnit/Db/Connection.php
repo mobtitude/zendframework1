@@ -64,7 +64,7 @@ class Zend_Test_PHPUnit_Db_Connection extends PHPUnit_Extensions_Database_DB_Def
      * Construct Connection based on Zend_Db_Adapter_Abstract
      *
      * @param Zend_Db_Adapter_Abstract $db
-     * @param string $schema
+     * @param string                   $schema
      */
     public function __construct(Zend_Db_Adapter_Abstract $db, $schema)
     {
@@ -85,8 +85,8 @@ class Zend_Test_PHPUnit_Db_Connection extends PHPUnit_Extensions_Database_DB_Def
     /**
      * Creates a table with the result of the specified SQL statement.
      *
-     * @param string $resultName
-     * @param string $sql
+     * @param  string $resultName
+     * @param  string $sql
      * @return PHPUnit_Extensions_Database_DataSet_ITable
      */
     public function createQueryTable($resultName, $sql)

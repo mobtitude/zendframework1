@@ -62,8 +62,8 @@ abstract class Zend_Cloud_Infrastructure_Adapter_AbstractAdapter implements Zend
     /**
      * Wait for status $status with a timeout of $timeout seconds
      * 
-     * @param  string $id
-     * @param  string $status
+     * @param  string  $id
+     * @param  string  $status
      * @param  integer $timeout 
      * @return boolean
      */
@@ -84,50 +84,55 @@ abstract class Zend_Cloud_Infrastructure_Adapter_AbstractAdapter implements Zend
     /**
      * Run arbitrary shell script on an instance
      *
-     * @param  string $id
-     * @param  array $param
+     * @param  string       $id
+     * @param  array        $param
      * @param  string|array $cmd
      * @return string|array
      */ 
     public function deployInstance($id, $params, $cmd)
     {
         if (!function_exists("ssh2_connect")) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('Deployment requires the PHP "SSH" extension (ext/ssh2)');
         }
 
         if (empty($id)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('You must specify the instance where to deploy');
         }
 
         if (empty($cmd)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('You must specify the shell commands to run on the instance');
         }
 
         if (empty($params) 
             || empty($params[Zend_Cloud_Infrastructure_Instance::SSH_USERNAME]) 
             || (empty($params[Zend_Cloud_Infrastructure_Instance::SSH_PASSWORD]) 
-                && empty($params[Zend_Cloud_Infrastructure_Instance::SSH_KEY]))
+            && empty($params[Zend_Cloud_Infrastructure_Instance::SSH_KEY]))
         ) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('You must specify the params for the SSH connection');
         }
 
         $host = $this->publicDnsInstance($id);
         if (empty($host)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
-            throw new Zend_Cloud_Infrastructure_Exception(sprintf(
-                'The instance identified by "%s" does not exist', 
-                $id
-            ));
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
+            throw new Zend_Cloud_Infrastructure_Exception(
+                sprintf(
+                    'The instance identified by "%s" does not exist', 
+                    $id
+                )
+            );
         }
 
         $conn = ssh2_connect($host);
-        if (!ssh2_auth_password($conn, $params[Zend_Cloud_Infrastructure_Instance::SSH_USERNAME], 
-                $params[Zend_Cloud_Infrastructure_Instance::SSH_PASSWORD])) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+        if (!ssh2_auth_password(
+            $conn, $params[Zend_Cloud_Infrastructure_Instance::SSH_USERNAME], 
+            $params[Zend_Cloud_Infrastructure_Instance::SSH_PASSWORD]
+        )
+        ) {
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('SSH authentication failed');
         }
 

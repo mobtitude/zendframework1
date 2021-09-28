@@ -76,7 +76,7 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {
@@ -89,7 +89,7 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
      * child properties.  This is used to build an entry back into a DOM
      * and eventually XML text for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      *          child properties.
      */
@@ -116,26 +116,26 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
 
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('apps') . ':' . 'login';
-                $login = new Zend_Gdata_Gapps_Extension_Login();
-                $login->transferFromDOM($child);
-                $this->_login = $login;
-                break;
-            case $this->lookupNamespace('apps') . ':' . 'nickname';
-                $nickname = new Zend_Gdata_Gapps_Extension_Nickname();
-                $nickname->transferFromDOM($child);
-                $this->_nickname = $nickname;
-                break;
-            default:
+        case $this->lookupNamespace('apps') . ':' . 'login';
+            $login = new Zend_Gdata_Gapps_Extension_Login();
+            $login->transferFromDOM($child);
+            $this->_login = $login;
+            break;
+        case $this->lookupNamespace('apps') . ':' . 'nickname';
+            $nickname = new Zend_Gdata_Gapps_Extension_Nickname();
+            $nickname->transferFromDOM($child);
+            $this->_nickname = $nickname;
+            break;
+        default:
                 parent::takeChildFromDOM($child);
-                break;
+            break;
         }
     }
 
     /**
      * Get the value of the login property for this object.
      *
-     * @see setLogin
+     * @see    setLogin
      * @return Zend_Gdata_Gapps_Extension_Login The requested object.
      */
     public function getLogin()
@@ -147,8 +147,8 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
      * Set the value of the login property for this object. This property
      * is used to store the username address of the current user.
      *
-     * @param Zend_Gdata_Gapps_Extension_Login $value The desired value for
-     *          this instance's login property.
+     * @param  Zend_Gdata_Gapps_Extension_Login $value The desired value for
+     *                                                 this instance's login property.
      * @return Zend_Gdata_Gapps_NicknameEntry Provides a fluent interface.
      */
     public function setLogin($value)
@@ -160,7 +160,7 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
     /**
      * Get the value of the nickname property for this object.
      *
-     * @see setNickname
+     * @see    setNickname
      * @return Zend_Gdata_Gapps_Extension_Nickname The requested object.
      */
     public function getNickname()
@@ -172,8 +172,8 @@ class Zend_Gdata_Gapps_NicknameEntry extends Zend_Gdata_Entry
      * Set the value of the nickname property for this object. This property
      * is used to store the the name of the current nickname.
      *
-     * @param Zend_Gdata_Gapps_Extension_Nickname $value The desired value for
-     *          this instance's nickname property.
+     * @param  Zend_Gdata_Gapps_Extension_Nickname $value The desired value for
+     *                                                    this instance's nickname property.
      * @return Zend_Gdata_Gapps_NicknameEntry Provides a fluent interface.
      */
     public function setNickname($value)

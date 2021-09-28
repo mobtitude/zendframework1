@@ -68,7 +68,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     /**
      * Set S3 endpoint to use
      *
-     * @param string|Zend_Uri_Http $endpoint
+     * @param  string|Zend_Uri_Http $endpoint
      * @return Zend_Service_Amazon_S3
      */
     public function setEndpoint($endpoint)
@@ -80,7 +80,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             /**
              * @see Zend_Service_Amazon_S3_Exception
              */
-            require_once 'Zend/Service/Amazon/S3/Exception.php';
+            include_once 'Zend/Service/Amazon/S3/Exception.php';
             throw new Zend_Service_Amazon_S3_Exception('Invalid endpoint supplied');
         }
         $this->_endpoint = $endpoint;
@@ -114,7 +114,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     /**
      * Verify if the bucket name is valid
      *
-     * @param string $bucket
+     * @param  string $bucket
      * @return boolean
      */
     public function _validBucketName($bucket)
@@ -124,7 +124,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             /**
              * @see Zend_Service_Amazon_S3_Exception
              */
-            require_once 'Zend/Service/Amazon/S3/Exception.php';
+            include_once 'Zend/Service/Amazon/S3/Exception.php';
             throw new Zend_Service_Amazon_S3_Exception("Bucket name \"$bucket\" must be between 3 and 255 characters long");
         }
 
@@ -132,7 +132,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             /**
              * @see Zend_Service_Amazon_S3_Exception
              */
-            require_once 'Zend/Service/Amazon/S3/Exception.php';
+            include_once 'Zend/Service/Amazon/S3/Exception.php';
             throw new Zend_Service_Amazon_S3_Exception("Bucket name \"$bucket\" contains invalid characters");
         }
 
@@ -140,7 +140,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             /**
              * @see Zend_Service_Amazon_S3_Exception
              */
-            require_once 'Zend/Service/Amazon/S3/Exception.php';
+            include_once 'Zend/Service/Amazon/S3/Exception.php';
             throw new Zend_Service_Amazon_S3_Exception("Bucket name \"$bucket\" cannot be an IP address");
         }
         return true;
@@ -262,7 +262,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     /**
      * Remove all objects in the bucket.
      *
-     * @param string $bucket
+     * @param  string $bucket
      * @return boolean
      */
     public function cleanBucket($bucket)
@@ -279,7 +279,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             $params= array (
                 'marker' => $objects[count($objects)-1]
             );
-            $objects = $this->getObjectsByBucket($bucket,$params);
+            $objects = $this->getObjectsByBucket($bucket, $params);
         }
         
         return true;
@@ -295,7 +295,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
      * delimiter - Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element in the CommonPrefixes collection. These rolled-up keys are not returned elsewhere in the response.
      *
      * @param  string $bucket
-     * @param array $params S3 GET Bucket Paramater
+     * @param  array  $params S3 GET Bucket Paramater
      * @return array|false
      */
     public function getObjectsByBucket($bucket, $params = array())
@@ -320,19 +320,19 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         return $objects;
     }
      /**
-     * List the objects and common prefixes in a bucket.
-     *
-     * Provides the list of object keys and common prefixes that are contained in the bucket.  Valid params include the following.
-     * prefix - Limits the response to keys which begin with the indicated prefix. You can use prefixes to separate a bucket into different sets of keys in a way similar to how a file system uses folders.
-     * marker - Indicates where in the bucket to begin listing. The list will only include keys that occur lexicographically after marker. This is convenient for pagination: To get the next page of results use the last key of the current page as the marker.
-     * max-keys - The maximum number of keys you'd like to see in the response body. The server might return fewer than this many keys, but will not return more.
-     * delimiter - Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element in the CommonPrefixes collection. These rolled-up keys are not returned elsewhere in the response.
-     *
-     * @see ZF-11401
-     * @param  string $bucket
-     * @param array $params S3 GET Bucket Paramater
-     * @return array|false
-     */
+      * List the objects and common prefixes in a bucket.
+      *
+      * Provides the list of object keys and common prefixes that are contained in the bucket.  Valid params include the following.
+      * prefix - Limits the response to keys which begin with the indicated prefix. You can use prefixes to separate a bucket into different sets of keys in a way similar to how a file system uses folders.
+      * marker - Indicates where in the bucket to begin listing. The list will only include keys that occur lexicographically after marker. This is convenient for pagination: To get the next page of results use the last key of the current page as the marker.
+      * max-keys - The maximum number of keys you'd like to see in the response body. The server might return fewer than this many keys, but will not return more.
+      * delimiter - Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element in the CommonPrefixes collection. These rolled-up keys are not returned elsewhere in the response.
+      *
+      * @see    ZF-11401
+      * @param  string $bucket
+      * @param  array  $params S3 GET Bucket Paramater
+      * @return array|false
+      */
     public function getObjectsAndPrefixesByBucket($bucket, $params = array())
     {
         $response = $this->_makeRequest('GET', $bucket, $params);
@@ -414,7 +414,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
      *
      * Can use either provided filename for storage or create a temp file if none provided.
      *
-     * @param  string $object Object path
+     * @param  string $object     Object path
      * @param  string $streamfile File to write the stream to
      * @param  bool   $paidobject This is "requestor pays" object
      * @return Zend_Http_Response_Stream|false
@@ -441,9 +441,9 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     /**
      * Upload an object by a PHP string
      *
-     * @param  string $object Object name
+     * @param  string          $object Object name
      * @param  string|resource $data   Object data (can be string or stream)
-     * @param  array  $meta   Metadata
+     * @param  array           $meta   Metadata
      * @return boolean
      */
     public function putObject($object, $data, $meta=null)
@@ -478,9 +478,9 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     /**
      * Put file to S3 as object
      *
-     * @param string $path   File name
-     * @param string $object Object name
-     * @param array  $meta   Metadata
+     * @param  string $path   File name
+     * @param  string $object Object name
+     * @param  array  $meta   Metadata
      * @return boolean
      */
     public function putFile($path, $object, $meta=null)
@@ -490,7 +490,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             /**
              * @see Zend_Service_Amazon_S3_Exception
              */
-            require_once 'Zend/Service/Amazon/S3/Exception.php';
+            include_once 'Zend/Service/Amazon/S3/Exception.php';
             throw new Zend_Service_Amazon_S3_Exception("Cannot read file $path");
         }
 
@@ -499,7 +499,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         }
 
         if (!isset($meta[self::S3_CONTENT_TYPE_HEADER])) {
-           $meta[self::S3_CONTENT_TYPE_HEADER] = self::getMimeType($path);
+            $meta[self::S3_CONTENT_TYPE_HEADER] = self::getMimeType($path);
         }
 
         return $this->putObject($object, $data, $meta);
@@ -508,9 +508,9 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     /**
      * Put file to S3 as object, using streaming
      *
-     * @param string $path   File name
-     * @param string $object Object name
-     * @param array  $meta   Metadata
+     * @param  string $path   File name
+     * @param  string $object Object name
+     * @param  array  $meta   Metadata
      * @return boolean
      */
     public function putFileStream($path, $object, $meta=null)
@@ -520,7 +520,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             /**
              * @see Zend_Service_Amazon_S3_Exception
              */
-            require_once 'Zend/Service/Amazon/S3/Exception.php';
+            include_once 'Zend/Service/Amazon/S3/Exception.php';
             throw new Zend_Service_Amazon_S3_Exception("Cannot open file $path");
         }
 
@@ -529,7 +529,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         }
 
         if (!isset($meta[self::S3_CONTENT_TYPE_HEADER])) {
-           $meta[self::S3_CONTENT_TYPE_HEADER] = self::getMimeType($path);
+            $meta[self::S3_CONTENT_TYPE_HEADER] = self::getMimeType($path);
         }
 
         if(!isset($meta['Content-MD5'])) {
@@ -557,10 +557,10 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     /**
      * Copy an object
      *
-     * @param  string $sourceObject  Source object name
-     * @param  string $destObject    Destination object name
-     * @param  array  $meta          (OPTIONAL) Metadata to apply to desination object.
-     *                               Set to null to copy metadata from source object.
+     * @param  string $sourceObject Source object name
+     * @param  string $destObject   Destination object name
+     * @param  array  $meta         (OPTIONAL) Metadata to apply to desination object.
+     *                              Set to null to copy metadata from source object.
      * @return boolean
      */
     public function copyObject($sourceObject, $destObject, $meta = null)
@@ -586,10 +586,10 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
      *
      * Performs a copy to dest + verify + remove source
      *
-     * @param string $sourceObject  Source object name
-     * @param string $destObject    Destination object name
-     * @param array  $meta          (OPTIONAL) Metadata to apply to destination object.
-     *                              Set to null to retain existing metadata.
+     * @param string $sourceObject Source object name
+     * @param string $destObject   Destination object name
+     * @param array  $meta         (OPTIONAL) Metadata to apply to destination object.
+     *                             Set to null to retain existing metadata.
      */
     public function moveObject($sourceObject, $destObject, $meta = null)
     {
@@ -608,11 +608,11 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     /**
      * Make a request to Amazon S3
      *
-     * @param  string $method    Request method
-     * @param  string $path        Path to requested object
-     * @param  array  $params    Request parameters
-     * @param  array  $headers    HTTP headers
-     * @param  string|resource $data        Request data
+     * @param  string          $method  Request method
+     * @param  string          $path    Path to requested object
+     * @param  array           $params  Request parameters
+     * @param  array           $headers HTTP headers
+     * @param  string|resource $data    Request data
      * @return Zend_Http_Response
      */
     public function _makeRequest($method, $path='', $params=null, $headers=array(), $data=null)
@@ -629,7 +629,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             /**
              * @see Zend_Service_Amazon_S3_Exception
              */
-            require_once 'Zend/Service/Amazon/S3/Exception.php';
+            include_once 'Zend/Service/Amazon/S3/Exception.php';
             throw new Zend_Service_Amazon_S3_Exception("Only PUT request supports stream data");
         }
 
@@ -642,7 +642,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         }
         if (!empty($parts[1])) {
             // ZF-10218, ZF-10122
-            $pathparts = explode('?',$parts[1]);
+            $pathparts = explode('?', $parts[1]);
             $endpath = $pathparts[0];
             $endpoint->setPath('/'.$endpath);
             
@@ -677,15 +677,15 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             foreach ($params as $name=>$value) {
                 $client->setParameterGet($name, $value);
             }
-         }
+        }
 
-         if (($method == 'PUT') && ($data !== null)) {
-             if (!isset($headers['Content-type'])) {
-                 $headers['Content-type'] = self::getMimeType($path);
-             }
-             $client->setRawData($data, $headers['Content-type']);
-         } 
-         do {
+        if (($method == 'PUT') && ($data !== null)) {
+            if (!isset($headers['Content-type'])) {
+                $headers['Content-type'] = self::getMimeType($path);
+            }
+            $client->setRawData($data, $headers['Content-type']);
+        } 
+        do {
             $retry = false;
 
             $response = $client->request($method);
@@ -714,7 +714,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
      *
      * @param  string $method
      * @param  string $path
-     * @param  array &$headers
+     * @param  array  &$headers
      * @return string
      */
     protected function addSignature($method, $path, &$headers)
@@ -801,147 +801,147 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         }
 
         switch (strtolower($ext)) {
-            case 'xls':
-                $content_type = 'application/excel';
-                break;
-            case 'hqx':
-                $content_type = 'application/macbinhex40';
-                break;
-            case 'doc':
-            case 'dot':
-            case 'wrd':
-                $content_type = 'application/msword';
-                break;
-            case 'pdf':
-                $content_type = 'application/pdf';
-                break;
-            case 'pgp':
-                $content_type = 'application/pgp';
-                break;
-            case 'ps':
-            case 'eps':
-            case 'ai':
-                $content_type = 'application/postscript';
-                break;
-            case 'ppt':
-                $content_type = 'application/powerpoint';
-                break;
-            case 'rtf':
-                $content_type = 'application/rtf';
-                break;
-            case 'tgz':
-            case 'gtar':
-                $content_type = 'application/x-gtar';
-                break;
-            case 'gz':
-                $content_type = 'application/x-gzip';
-                break;
-            case 'php':
-            case 'php3':
-            case 'php4':
-                $content_type = 'application/x-httpd-php';
-                break;
-            case 'js':
-                $content_type = 'application/x-javascript';
-                break;
-            case 'ppd':
-            case 'psd':
-                $content_type = 'application/x-photoshop';
-                break;
-            case 'swf':
-            case 'swc':
-            case 'rf':
-                $content_type = 'application/x-shockwave-flash';
-                break;
-            case 'tar':
-                $content_type = 'application/x-tar';
-                break;
-            case 'zip':
-                $content_type = 'application/zip';
-                break;
-            case 'mid':
-            case 'midi':
-            case 'kar':
-                $content_type = 'audio/midi';
-                break;
-            case 'mp2':
-            case 'mp3':
-            case 'mpga':
-                $content_type = 'audio/mpeg';
-                break;
-            case 'ra':
-                $content_type = 'audio/x-realaudio';
-                break;
-            case 'wav':
-                $content_type = 'audio/wav';
-                break;
-            case 'bmp':
-                $content_type = 'image/bitmap';
-                break;
-            case 'gif':
-                $content_type = 'image/gif';
-                break;
-            case 'iff':
-                $content_type = 'image/iff';
-                break;
-            case 'jb2':
-                $content_type = 'image/jb2';
-                break;
-            case 'jpg':
-            case 'jpe':
-            case 'jpeg':
-                $content_type = 'image/jpeg';
-                break;
-            case 'jpx':
-                $content_type = 'image/jpx';
-                break;
-            case 'png':
-                $content_type = 'image/png';
-                break;
-            case 'tif':
-            case 'tiff':
-                $content_type = 'image/tiff';
-                break;
-            case 'wbmp':
-                $content_type = 'image/vnd.wap.wbmp';
-                break;
-            case 'xbm':
-                $content_type = 'image/xbm';
-                break;
-            case 'css':
-                $content_type = 'text/css';
-                break;
-            case 'txt':
-                $content_type = 'text/plain';
-                break;
-            case 'htm':
-            case 'html':
-                $content_type = 'text/html';
-                break;
-            case 'xml':
-                $content_type = 'text/xml';
-                break;
-            case 'xsl':
-                $content_type = 'text/xsl';
-                break;
-            case 'mpg':
-            case 'mpe':
-            case 'mpeg':
-                $content_type = 'video/mpeg';
-                break;
-            case 'qt':
-            case 'mov':
-                $content_type = 'video/quicktime';
-                break;
-            case 'avi':
-                $content_type = 'video/x-ms-video';
-                break;
-            case 'eml':
-                $content_type = 'message/rfc822';
-                break;
-            default:
-                $content_type = 'binary/octet-stream';
-                break;
+        case 'xls':
+            $content_type = 'application/excel';
+            break;
+        case 'hqx':
+            $content_type = 'application/macbinhex40';
+            break;
+        case 'doc':
+        case 'dot':
+        case 'wrd':
+            $content_type = 'application/msword';
+            break;
+        case 'pdf':
+            $content_type = 'application/pdf';
+            break;
+        case 'pgp':
+            $content_type = 'application/pgp';
+            break;
+        case 'ps':
+        case 'eps':
+        case 'ai':
+            $content_type = 'application/postscript';
+            break;
+        case 'ppt':
+            $content_type = 'application/powerpoint';
+            break;
+        case 'rtf':
+            $content_type = 'application/rtf';
+            break;
+        case 'tgz':
+        case 'gtar':
+            $content_type = 'application/x-gtar';
+            break;
+        case 'gz':
+            $content_type = 'application/x-gzip';
+            break;
+        case 'php':
+        case 'php3':
+        case 'php4':
+            $content_type = 'application/x-httpd-php';
+            break;
+        case 'js':
+            $content_type = 'application/x-javascript';
+            break;
+        case 'ppd':
+        case 'psd':
+            $content_type = 'application/x-photoshop';
+            break;
+        case 'swf':
+        case 'swc':
+        case 'rf':
+            $content_type = 'application/x-shockwave-flash';
+            break;
+        case 'tar':
+            $content_type = 'application/x-tar';
+            break;
+        case 'zip':
+            $content_type = 'application/zip';
+            break;
+        case 'mid':
+        case 'midi':
+        case 'kar':
+            $content_type = 'audio/midi';
+            break;
+        case 'mp2':
+        case 'mp3':
+        case 'mpga':
+            $content_type = 'audio/mpeg';
+            break;
+        case 'ra':
+            $content_type = 'audio/x-realaudio';
+            break;
+        case 'wav':
+            $content_type = 'audio/wav';
+            break;
+        case 'bmp':
+            $content_type = 'image/bitmap';
+            break;
+        case 'gif':
+            $content_type = 'image/gif';
+            break;
+        case 'iff':
+            $content_type = 'image/iff';
+            break;
+        case 'jb2':
+            $content_type = 'image/jb2';
+            break;
+        case 'jpg':
+        case 'jpe':
+        case 'jpeg':
+            $content_type = 'image/jpeg';
+            break;
+        case 'jpx':
+            $content_type = 'image/jpx';
+            break;
+        case 'png':
+            $content_type = 'image/png';
+            break;
+        case 'tif':
+        case 'tiff':
+            $content_type = 'image/tiff';
+            break;
+        case 'wbmp':
+            $content_type = 'image/vnd.wap.wbmp';
+            break;
+        case 'xbm':
+            $content_type = 'image/xbm';
+            break;
+        case 'css':
+            $content_type = 'text/css';
+            break;
+        case 'txt':
+            $content_type = 'text/plain';
+            break;
+        case 'htm':
+        case 'html':
+            $content_type = 'text/html';
+            break;
+        case 'xml':
+            $content_type = 'text/xml';
+            break;
+        case 'xsl':
+            $content_type = 'text/xsl';
+            break;
+        case 'mpg':
+        case 'mpe':
+        case 'mpeg':
+            $content_type = 'video/mpeg';
+            break;
+        case 'qt':
+        case 'mov':
+            $content_type = 'video/quicktime';
+            break;
+        case 'avi':
+            $content_type = 'video/x-ms-video';
+            break;
+        case 'eml':
+            $content_type = 'message/rfc822';
+            break;
+        default:
+            $content_type = 'binary/octet-stream';
+            break;
         }
 
         return $content_type;
@@ -993,7 +993,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         /**
          * @see Zend_Service_Amazon_S3_Stream
          */
-        require_once 'Zend/Service/Amazon/S3/Stream.php';
+        include_once 'Zend/Service/Amazon/S3/Stream.php';
 
         stream_register_wrapper($name, 'Zend_Service_Amazon_S3_Stream');
         $this->registerAsClient($name);

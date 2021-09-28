@@ -12,15 +12,17 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 
-/** Internally used classes */
+/**
+ * Internally used classes 
+ */
 require_once 'Zend/Pdf/Element/Array.php';
 require_once 'Zend/Pdf/Element/Dictionary.php';
 require_once 'Zend/Pdf/Element/Name.php';
@@ -28,15 +30,17 @@ require_once 'Zend/Pdf/Element/Numeric.php';
 require_once 'Zend/Pdf/Element/String/Binary.php';
 
 
-/** Zend_Pdf_Resource_Image */
+/**
+ * Zend_Pdf_Resource_Image 
+*/
 require_once 'Zend/Pdf/Resource/Image.php';
 
 /**
  * PNG image
  *
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
 {
@@ -67,20 +71,20 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
     /**
      * Object constructor
      *
-     * @param string $imageFileName
+     * @param  string $imageFileName
      * @throws Zend_Pdf_Exception
-     * @todo Add compression conversions to support compression strategys other than PNG_COMPRESSION_DEFAULT_STRATEGY.
-     * @todo Add pre-compression filtering.
-     * @todo Add interlaced image handling.
-     * @todo Add support for 16-bit images. Requires PDF version bump to 1.5 at least.
-     * @todo Add processing for all PNG chunks defined in the spec. gAMA etc.
-     * @todo Fix tRNS chunk support for Indexed Images to a SMask.
+     * @todo   Add compression conversions to support compression strategys other than PNG_COMPRESSION_DEFAULT_STRATEGY.
+     * @todo   Add pre-compression filtering.
+     * @todo   Add interlaced image handling.
+     * @todo   Add support for 16-bit images. Requires PDF version bump to 1.5 at least.
+     * @todo   Add processing for all PNG chunks defined in the spec. gAMA etc.
+     * @todo   Fix tRNS chunk support for Indexed Images to a SMask.
      */
     public function __construct($imageFileName)
     {
         if (($imageFile = @fopen($imageFileName, 'rb')) === false ) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception( "Can not open '$imageFileName' file for reading." );
+            include_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception("Can not open '$imageFileName' file for reading.");
         }
 
         parent::__construct();
@@ -88,23 +92,23 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
         //Check if the file is a PNG
         fseek($imageFile, 1, SEEK_CUR); //First signature byte (%)
         if ('PNG' != fread($imageFile, 3)) {
-            require_once 'Zend/Pdf/Exception.php';
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Image is not a PNG');
         }
         fseek($imageFile, 12, SEEK_CUR); //Signature bytes (Includes the IHDR chunk) IHDR processed linerarly because it doesnt contain a variable chunk length
-        $wtmp = unpack('Ni',fread($imageFile, 4)); //Unpack a 4-Byte Long
+        $wtmp = unpack('Ni', fread($imageFile, 4)); //Unpack a 4-Byte Long
         $width = $wtmp['i'];
-        $htmp = unpack('Ni',fread($imageFile, 4));
+        $htmp = unpack('Ni', fread($imageFile, 4));
         $height = $htmp['i'];
         $bits = ord(fread($imageFile, 1)); //Higher than 8 bit depths are only supported in later versions of PDF.
         $color = ord(fread($imageFile, 1));
 
         $compression = ord(fread($imageFile, 1));
-        $prefilter = ord(fread($imageFile,1));
+        $prefilter = ord(fread($imageFile, 1));
 
-        if (($interlacing = ord(fread($imageFile,1))) != Zend_Pdf_Resource_Image_Png::PNG_INTERLACING_DISABLED) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception( "Only non-interlaced images are currently supported." );
+        if (($interlacing = ord(fread($imageFile, 1))) != Zend_Pdf_Resource_Image_Png::PNG_INTERLACING_DISABLED) {
+            include_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception("Only non-interlaced images are currently supported.");
         }
 
         $this->_width = $width;
@@ -126,7 +130,7 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
         while (!feof($imageFile)) {
             $chunkLengthBytes = fread($imageFile, 4);
             if ($chunkLengthBytes === false) {
-                require_once 'Zend/Pdf/Exception.php';
+                include_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Error ocuured while image file reading.');
             }
 
@@ -134,68 +138,68 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
             $chunkLength    = $chunkLengthtmp['i'];
             $chunkType      = fread($imageFile, 4);
             switch($chunkType) {
-                case 'IDAT': //Image Data
-                    /*
-                     * Reads the actual image data from the PNG file. Since we know at this point that the compression
-                     * strategy is the default strategy, we also know that this data is Zip compressed. We will either copy
-                     * the data directly to the PDF and provide the correct FlateDecode predictor, or decompress the data
-                     * decode the filters and output the data as a raw pixel map.
-                     */
-                    $imageData .= fread($imageFile, $chunkLength);
-                    fseek($imageFile, 4, SEEK_CUR);
+            case 'IDAT': //Image Data
+                /*
+                 * Reads the actual image data from the PNG file. Since we know at this point that the compression
+                 * strategy is the default strategy, we also know that this data is Zip compressed. We will either copy
+                 * the data directly to the PDF and provide the correct FlateDecode predictor, or decompress the data
+                 * decode the filters and output the data as a raw pixel map.
+                 */
+                $imageData .= fread($imageFile, $chunkLength);
+                fseek($imageFile, 4, SEEK_CUR);
+                break;
+
+            case 'PLTE': //Palette
+                $paletteData = fread($imageFile, $chunkLength);
+                fseek($imageFile, 4, SEEK_CUR);
+                break;
+
+            case 'tRNS': //Basic (non-alpha channel) transparency.
+                $trnsData = fread($imageFile, $chunkLength);
+                switch ($color) {
+                case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_GRAY:
+                    $baseColor = ord(substr($trnsData, 1, 1));
+                    $transparencyData = array(new Zend_Pdf_Element_Numeric($baseColor),
+                                              new Zend_Pdf_Element_Numeric($baseColor));
                     break;
 
-                case 'PLTE': //Palette
-                    $paletteData = fread($imageFile, $chunkLength);
-                    fseek($imageFile, 4, SEEK_CUR);
+                case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_RGB:
+                    $red = ord(substr($trnsData, 1, 1));
+                    $green = ord(substr($trnsData, 3, 1));
+                    $blue = ord(substr($trnsData, 5, 1));
+                    $transparencyData = array(new Zend_Pdf_Element_Numeric($red),
+                                              new Zend_Pdf_Element_Numeric($red),
+                                              new Zend_Pdf_Element_Numeric($green),
+                                              new Zend_Pdf_Element_Numeric($green),
+                                              new Zend_Pdf_Element_Numeric($blue),
+                                              new Zend_Pdf_Element_Numeric($blue));
                     break;
 
-                case 'tRNS': //Basic (non-alpha channel) transparency.
-                    $trnsData = fread($imageFile, $chunkLength);
-                    switch ($color) {
-                        case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_GRAY:
-                            $baseColor = ord(substr($trnsData, 1, 1));
-                            $transparencyData = array(new Zend_Pdf_Element_Numeric($baseColor),
-                                                      new Zend_Pdf_Element_Numeric($baseColor));
-                            break;
-
-                        case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_RGB:
-                            $red = ord(substr($trnsData,1,1));
-                            $green = ord(substr($trnsData,3,1));
-                            $blue = ord(substr($trnsData,5,1));
-                            $transparencyData = array(new Zend_Pdf_Element_Numeric($red),
-                                                      new Zend_Pdf_Element_Numeric($red),
-                                                      new Zend_Pdf_Element_Numeric($green),
-                                                      new Zend_Pdf_Element_Numeric($green),
-                                                      new Zend_Pdf_Element_Numeric($blue),
-                                                      new Zend_Pdf_Element_Numeric($blue));
-                            break;
-
-                        case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_INDEXED:
-                            //Find the first transparent color in the index, we will mask that. (This is a bit of a hack. This should be a SMask and mask all entries values).
-                            if(($trnsIdx = strpos($trnsData, "\0")) !== false) {
-                                $transparencyData = array(new Zend_Pdf_Element_Numeric($trnsIdx),
-                                                          new Zend_Pdf_Element_Numeric($trnsIdx));
-                            }
-                            break;
-
-                        case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_GRAY_ALPHA:
-                            // Fall through to the next case
-
-                        case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_RGB_ALPHA:
-                            require_once 'Zend/Pdf/Exception.php';
-                            throw new Zend_Pdf_Exception( "tRNS chunk illegal for Alpha Channel Images" );
-                            break;
+                case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_INDEXED:
+                    //Find the first transparent color in the index, we will mask that. (This is a bit of a hack. This should be a SMask and mask all entries values).
+                    if(($trnsIdx = strpos($trnsData, "\0")) !== false) {
+                        $transparencyData = array(new Zend_Pdf_Element_Numeric($trnsIdx),
+                                                  new Zend_Pdf_Element_Numeric($trnsIdx));
                     }
-                    fseek($imageFile, 4, SEEK_CUR); //4 Byte Ending Sequence
                     break;
 
-                case 'IEND';
-                    break 2; //End the loop too
+                case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_GRAY_ALPHA:
+                    // Fall through to the next case
 
-                default:
-                    fseek($imageFile, $chunkLength + 4, SEEK_CUR); //Skip the section
-                    break;
+                case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_RGB_ALPHA:
+                    include_once 'Zend/Pdf/Exception.php';
+                    throw new Zend_Pdf_Exception("tRNS chunk illegal for Alpha Channel Images");
+                        break;
+                }
+                fseek($imageFile, 4, SEEK_CUR); //4 Byte Ending Sequence
+                break;
+
+            case 'IEND';
+                break 2; //End the loop too
+
+            default:
+                fseek($imageFile, $chunkLength + 4, SEEK_CUR); //Skip the section
+                break;
             }
         }
         fclose($imageFile);
@@ -204,106 +208,106 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
         $imageDataTmp = '';
         $smaskData = '';
         switch ($color) {
-            case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_RGB:
-                $colorSpace = new Zend_Pdf_Element_Name('DeviceRGB');
-                break;
+        case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_RGB:
+            $colorSpace = new Zend_Pdf_Element_Name('DeviceRGB');
+            break;
 
-            case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_GRAY:
-                $colorSpace = new Zend_Pdf_Element_Name('DeviceGray');
-                break;
+        case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_GRAY:
+            $colorSpace = new Zend_Pdf_Element_Name('DeviceGray');
+            break;
 
-            case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_INDEXED:
-                if(empty($paletteData)) {
-                    require_once 'Zend/Pdf/Exception.php';
-                    throw new Zend_Pdf_Exception( "PNG Corruption: No palette data read for indexed type PNG." );
-                }
-                $colorSpace = new Zend_Pdf_Element_Array();
-                $colorSpace->items[] = new Zend_Pdf_Element_Name('Indexed');
-                $colorSpace->items[] = new Zend_Pdf_Element_Name('DeviceRGB');
-                $colorSpace->items[] = new Zend_Pdf_Element_Numeric((strlen($paletteData)/3-1));
-                $paletteObject = $this->_objectFactory->newObject(new Zend_Pdf_Element_String_Binary($paletteData));
-                $colorSpace->items[] = $paletteObject;
-                break;
+        case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_INDEXED:
+            if(empty($paletteData)) {
+                include_once 'Zend/Pdf/Exception.php';
+                throw new Zend_Pdf_Exception("PNG Corruption: No palette data read for indexed type PNG.");
+            }
+            $colorSpace = new Zend_Pdf_Element_Array();
+            $colorSpace->items[] = new Zend_Pdf_Element_Name('Indexed');
+            $colorSpace->items[] = new Zend_Pdf_Element_Name('DeviceRGB');
+            $colorSpace->items[] = new Zend_Pdf_Element_Numeric((strlen($paletteData)/3-1));
+            $paletteObject = $this->_objectFactory->newObject(new Zend_Pdf_Element_String_Binary($paletteData));
+            $colorSpace->items[] = $paletteObject;
+            break;
 
-            case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_GRAY_ALPHA:
-                /*
-                 * To decode PNG's with alpha data we must create two images from one. One image will contain the Gray data
-                 * the other will contain the Gray transparency overlay data. The former will become the object data and the latter
-                 * will become the Shadow Mask (SMask).
-                 */
-                if($bits > 8) {
-                    require_once 'Zend/Pdf/Exception.php';
-                    throw new Zend_Pdf_Exception("Alpha PNGs with bit depth > 8 are not yet supported");
-                }
+        case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_GRAY_ALPHA:
+            /*
+             * To decode PNG's with alpha data we must create two images from one. One image will contain the Gray data
+             * the other will contain the Gray transparency overlay data. The former will become the object data and the latter
+             * will become the Shadow Mask (SMask).
+             */
+            if($bits > 8) {
+                include_once 'Zend/Pdf/Exception.php';
+                throw new Zend_Pdf_Exception("Alpha PNGs with bit depth > 8 are not yet supported");
+            }
 
-                $colorSpace = new Zend_Pdf_Element_Name('DeviceGray');
+            $colorSpace = new Zend_Pdf_Element_Name('DeviceGray');
 
-                require_once 'Zend/Pdf/ElementFactory.php';
-                $decodingObjFactory = Zend_Pdf_ElementFactory::createFactory(1);
-                $decodingStream = $decodingObjFactory->newStreamObject($imageData);
-                $decodingStream->dictionary->Filter      = new Zend_Pdf_Element_Name('FlateDecode');
-                $decodingStream->dictionary->DecodeParms = new Zend_Pdf_Element_Dictionary();
-                $decodingStream->dictionary->DecodeParms->Predictor        = new Zend_Pdf_Element_Numeric(15);
-                $decodingStream->dictionary->DecodeParms->Columns          = new Zend_Pdf_Element_Numeric($width);
-                $decodingStream->dictionary->DecodeParms->Colors           = new Zend_Pdf_Element_Numeric(2);   //GreyAlpha
-                $decodingStream->dictionary->DecodeParms->BitsPerComponent = new Zend_Pdf_Element_Numeric($bits);
-                $decodingStream->skipFilters();
+            include_once 'Zend/Pdf/ElementFactory.php';
+            $decodingObjFactory = Zend_Pdf_ElementFactory::createFactory(1);
+            $decodingStream = $decodingObjFactory->newStreamObject($imageData);
+            $decodingStream->dictionary->Filter      = new Zend_Pdf_Element_Name('FlateDecode');
+            $decodingStream->dictionary->DecodeParms = new Zend_Pdf_Element_Dictionary();
+            $decodingStream->dictionary->DecodeParms->Predictor        = new Zend_Pdf_Element_Numeric(15);
+            $decodingStream->dictionary->DecodeParms->Columns          = new Zend_Pdf_Element_Numeric($width);
+            $decodingStream->dictionary->DecodeParms->Colors           = new Zend_Pdf_Element_Numeric(2);   //GreyAlpha
+            $decodingStream->dictionary->DecodeParms->BitsPerComponent = new Zend_Pdf_Element_Numeric($bits);
+            $decodingStream->skipFilters();
 
-                $pngDataRawDecoded = $decodingStream->value;
+            $pngDataRawDecoded = $decodingStream->value;
 
-                //Iterate every pixel and copy out gray data and alpha channel (this will be slow)
-                for($pixel = 0, $pixelcount = ($width * $height); $pixel < $pixelcount; $pixel++) {
-                    $imageDataTmp .= $pngDataRawDecoded[($pixel*2)];
-                    $smaskData .= $pngDataRawDecoded[($pixel*2)+1];
-                }
-                $compressed = false;
-                $imageData  = $imageDataTmp; //Overwrite image data with the gray channel without alpha
-                break;
+            //Iterate every pixel and copy out gray data and alpha channel (this will be slow)
+            for($pixel = 0, $pixelcount = ($width * $height); $pixel < $pixelcount; $pixel++) {
+                $imageDataTmp .= $pngDataRawDecoded[($pixel*2)];
+                $smaskData .= $pngDataRawDecoded[($pixel*2)+1];
+            }
+            $compressed = false;
+            $imageData  = $imageDataTmp; //Overwrite image data with the gray channel without alpha
+            break;
 
-            case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_RGB_ALPHA:
-                /*
-                 * To decode PNG's with alpha data we must create two images from one. One image will contain the RGB data
-                 * the other will contain the Gray transparency overlay data. The former will become the object data and the latter
-                 * will become the Shadow Mask (SMask).
-                 */
-                if($bits > 8) {
-                    require_once 'Zend/Pdf/Exception.php';
-                    throw new Zend_Pdf_Exception("Alpha PNGs with bit depth > 8 are not yet supported");
-                }
+        case Zend_Pdf_Resource_Image_Png::PNG_CHANNEL_RGB_ALPHA:
+            /*
+             * To decode PNG's with alpha data we must create two images from one. One image will contain the RGB data
+             * the other will contain the Gray transparency overlay data. The former will become the object data and the latter
+             * will become the Shadow Mask (SMask).
+             */
+            if($bits > 8) {
+                include_once 'Zend/Pdf/Exception.php';
+                throw new Zend_Pdf_Exception("Alpha PNGs with bit depth > 8 are not yet supported");
+            }
 
-                $colorSpace = new Zend_Pdf_Element_Name('DeviceRGB');
+            $colorSpace = new Zend_Pdf_Element_Name('DeviceRGB');
 
-                require_once 'Zend/Pdf/ElementFactory.php';
-                $decodingObjFactory = Zend_Pdf_ElementFactory::createFactory(1);
-                $decodingStream = $decodingObjFactory->newStreamObject($imageData);
-                $decodingStream->dictionary->Filter      = new Zend_Pdf_Element_Name('FlateDecode');
-                $decodingStream->dictionary->DecodeParms = new Zend_Pdf_Element_Dictionary();
-                $decodingStream->dictionary->DecodeParms->Predictor        = new Zend_Pdf_Element_Numeric(15);
-                $decodingStream->dictionary->DecodeParms->Columns          = new Zend_Pdf_Element_Numeric($width);
-                $decodingStream->dictionary->DecodeParms->Colors           = new Zend_Pdf_Element_Numeric(4);   //RGBA
-                $decodingStream->dictionary->DecodeParms->BitsPerComponent = new Zend_Pdf_Element_Numeric($bits);
-                $decodingStream->skipFilters();
+            include_once 'Zend/Pdf/ElementFactory.php';
+            $decodingObjFactory = Zend_Pdf_ElementFactory::createFactory(1);
+            $decodingStream = $decodingObjFactory->newStreamObject($imageData);
+            $decodingStream->dictionary->Filter      = new Zend_Pdf_Element_Name('FlateDecode');
+            $decodingStream->dictionary->DecodeParms = new Zend_Pdf_Element_Dictionary();
+            $decodingStream->dictionary->DecodeParms->Predictor        = new Zend_Pdf_Element_Numeric(15);
+            $decodingStream->dictionary->DecodeParms->Columns          = new Zend_Pdf_Element_Numeric($width);
+            $decodingStream->dictionary->DecodeParms->Colors           = new Zend_Pdf_Element_Numeric(4);   //RGBA
+            $decodingStream->dictionary->DecodeParms->BitsPerComponent = new Zend_Pdf_Element_Numeric($bits);
+            $decodingStream->skipFilters();
 
-                $pngDataRawDecoded = $decodingStream->value;
+            $pngDataRawDecoded = $decodingStream->value;
 
-                //Iterate every pixel and copy out rgb data and alpha channel (this will be slow)
-                for($pixel = 0, $pixelcount = ($width * $height); $pixel < $pixelcount; $pixel++) {
-                    $imageDataTmp .= $pngDataRawDecoded[($pixel*4)+0] . $pngDataRawDecoded[($pixel*4)+1] . $pngDataRawDecoded[($pixel*4)+2];
-                    $smaskData .= $pngDataRawDecoded[($pixel*4)+3];
-                }
+            //Iterate every pixel and copy out rgb data and alpha channel (this will be slow)
+            for($pixel = 0, $pixelcount = ($width * $height); $pixel < $pixelcount; $pixel++) {
+                $imageDataTmp .= $pngDataRawDecoded[($pixel*4)+0] . $pngDataRawDecoded[($pixel*4)+1] . $pngDataRawDecoded[($pixel*4)+2];
+                $smaskData .= $pngDataRawDecoded[($pixel*4)+3];
+            }
 
-                $compressed = false;
-                $imageData  = $imageDataTmp; //Overwrite image data with the RGB channel without alpha
-                break;
+            $compressed = false;
+            $imageData  = $imageDataTmp; //Overwrite image data with the RGB channel without alpha
+            break;
 
-            default:
-                require_once 'Zend/Pdf/Exception.php';
-                throw new Zend_Pdf_Exception( "PNG Corruption: Invalid color space." );
+        default:
+            include_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception("PNG Corruption: Invalid color space.");
         }
 
         if(empty($imageData)) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception( "Corrupt PNG Image. Mandatory IDAT chunk not found." );
+            include_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception("Corrupt PNG Image. Mandatory IDAT chunk not found.");
         }
 
         $imageDictionary = $this->_resource->dictionary;
@@ -360,21 +364,24 @@ class Zend_Pdf_Resource_Image_Png extends Zend_Pdf_Resource_Image
     /**
      * Image width
      */
-    public function getPixelWidth() {
-    return $this->_width;
+    public function getPixelWidth()
+    {
+        return $this->_width;
     }
 
     /**
      * Image height
      */
-    public function getPixelHeight() {
+    public function getPixelHeight()
+    {
         return $this->_height;
     }
 
     /**
      * Image properties
      */
-    public function getProperties() {
+    public function getProperties()
+    {
         return $this->_imageProperties;
     }
 }

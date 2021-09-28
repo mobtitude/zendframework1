@@ -21,7 +21,9 @@
  */
 
 
-/** Zend_Search_Lucene_Storage_Directory */
+/**
+ * Zend_Search_Lucene_Storage_Directory 
+ */
 require_once 'Zend/Search/Lucene/Storage/Directory.php';
 
 
@@ -79,9 +81,9 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
     /**
      * Utility function to recursive directory creation
      *
-     * @param string $dir
-     * @param integer $mode
-     * @param boolean $recursive
+     * @param  string  $dir
+     * @param  integer $mode
+     * @param  boolean $recursive
      * @return boolean
      */
 
@@ -106,18 +108,18 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
      * Object constructor
      * Checks if $path is a directory or tries to create it.
      *
-     * @param string $path
+     * @param  string $path
      * @throws Zend_Search_Lucene_Exception
      */
     public function __construct($path)
     {
         if (!is_dir($path)) {
             if (file_exists($path)) {
-                require_once 'Zend/Search/Lucene/Exception.php';
+                include_once 'Zend/Search/Lucene/Exception.php';
                 throw new Zend_Search_Lucene_Exception('Path exists, but it\'s not a directory');
             } else {
                 if (!self::mkdirs($path)) {
-                    require_once 'Zend/Search/Lucene/Exception.php';
+                    include_once 'Zend/Search/Lucene/Exception.php';
                     throw new Zend_Search_Lucene_Exception("Can't create directory '$path'.");
                 }
             }
@@ -151,11 +153,12 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
     {
         $result = array();
 
-        $dirContent = opendir( $this->_dirPath );
+        $dirContent = opendir($this->_dirPath);
         while (($file = readdir($dirContent)) !== false) {
-            if (($file == '..')||($file == '.'))   continue;
+            if (($file == '..')||($file == '.')) {   continue;
+            }
 
-            if( !is_dir($this->_dirPath . '/' . $file) ) {
+            if(!is_dir($this->_dirPath . '/' . $file) ) {
                 $result[] = $file;
             }
         }
@@ -167,7 +170,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
     /**
      * Creates a new, empty file in the directory with the given $filename.
      *
-     * @param string $filename
+     * @param  string $filename
      * @return Zend_Search_Lucene_Storage_File
      * @throws Zend_Search_Lucene_Exception
      */
@@ -177,7 +180,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
             $this->_fileHandlers[$filename]->close();
         }
         unset($this->_fileHandlers[$filename]);
-        require_once 'Zend/Search/Lucene/Storage/File/Filesystem.php';
+        include_once 'Zend/Search/Lucene/Storage/File/Filesystem.php';
         $this->_fileHandlers[$filename] = new Zend_Search_Lucene_Storage_File_Filesystem($this->_dirPath . '/' . $filename, 'w+b');
 
         // Set file permissions, but don't care about any possible failures, since file may be already
@@ -191,7 +194,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
     /**
      * Removes an existing $filename in the directory.
      *
-     * @param string $filename
+     * @param  string $filename
      * @return void
      * @throws Zend_Search_Lucene_Exception
      */
@@ -207,7 +210,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
         ini_set('track_errors', '1');
         if (!@unlink($this->_dirPath . '/' . $filename)) {
             ini_set('track_errors', $trackErrors);
-            require_once 'Zend/Search/Lucene/Exception.php';
+            include_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Can\'t delete file: ' . $php_errormsg);
         }
         ini_set('track_errors', $trackErrors);
@@ -218,7 +221,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
      *
      * Method is used to prevent 'too many open files' error
      *
-     * @param string $filename
+     * @param  string $filename
      * @return void
      */
     public function purgeFile($filename)
@@ -233,7 +236,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
     /**
      * Returns true if a file with the given $filename exists.
      *
-     * @param string $filename
+     * @param  string $filename
      * @return boolean
      */
     public function fileExists($filename)
@@ -246,12 +249,12 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
     /**
      * Returns the length of a $filename in the directory.
      *
-     * @param string $filename
+     * @param  string $filename
      * @return integer
      */
     public function fileLength($filename)
     {
-        if (isset( $this->_fileHandlers[$filename] )) {
+        if (isset($this->_fileHandlers[$filename])) {
             return $this->_fileHandlers[$filename]->size();
         }
         return filesize($this->_dirPath .'/'. $filename);
@@ -261,7 +264,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
     /**
      * Returns the UNIX timestamp $filename was last modified.
      *
-     * @param string $filename
+     * @param  string $filename
      * @return integer
      */
     public function fileModified($filename)
@@ -273,8 +276,8 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
     /**
      * Renames an existing file in the directory.
      *
-     * @param string $from
-     * @param string $to
+     * @param  string $from
+     * @param  string $to
      * @return void
      * @throws Zend_Search_Lucene_Exception
      */
@@ -294,7 +297,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
 
         if (file_exists($this->_dirPath . '/' . $to)) {
             if (!unlink($this->_dirPath . '/' . $to)) {
-                require_once 'Zend/Search/Lucene/Exception.php';
+                include_once 'Zend/Search/Lucene/Exception.php';
                 throw new Zend_Search_Lucene_Exception('Delete operation failed');
             }
         }
@@ -305,7 +308,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
         $success = @rename($this->_dirPath . '/' . $from, $this->_dirPath . '/' . $to);
         if (!$success) {
             ini_set('track_errors', $trackErrors);
-            require_once 'Zend/Search/Lucene/Exception.php';
+            include_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception($php_errormsg);
         }
 
@@ -318,7 +321,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
     /**
      * Sets the modified time of $filename to now.
      *
-     * @param string $filename
+     * @param  string $filename
      * @return void
      */
     public function touchFile($filename)
@@ -335,20 +338,20 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
      * Shared handler are good for short atomic requests.
      * Non-shared handlers are useful for stream file reading (especial for compound files).
      *
-     * @param string $filename
-     * @param boolean $shareHandler
+     * @param  string  $filename
+     * @param  boolean $shareHandler
      * @return Zend_Search_Lucene_Storage_File
      */
     public function getFileObject($filename, $shareHandler = true)
     {
         $fullFilename = $this->_dirPath . '/' . $filename;
 
-        require_once 'Zend/Search/Lucene/Storage/File/Filesystem.php';
+        include_once 'Zend/Search/Lucene/Storage/File/Filesystem.php';
         if (!$shareHandler) {
             return new Zend_Search_Lucene_Storage_File_Filesystem($fullFilename);
         }
 
-        if (isset( $this->_fileHandlers[$filename] )) {
+        if (isset($this->_fileHandlers[$filename])) {
             $this->_fileHandlers[$filename]->seek(0);
             return $this->_fileHandlers[$filename];
         }

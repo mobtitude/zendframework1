@@ -15,7 +15,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cloud_Infrastructure_Instance 
+class Zend_Cloud_Infrastructure_Instance
 {
     const STATUS_RUNNING       = 'running';
     const STATUS_STOPPED       = 'stopped';
@@ -73,13 +73,13 @@ class Zend_Cloud_Infrastructure_Instance
      * Constructor
      * 
      * @param  Adapter $adapter
-     * @param  array $data 
+     * @param  array   $data 
      * @return void
      */
     public function __construct($adapter, $data = null)
     {
         if (!($adapter instanceof Zend_Cloud_Infrastructure_Adapter)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception("You must pass a Zend_Cloud_Infrastructure_Adapter instance");
         }
 
@@ -92,18 +92,20 @@ class Zend_Cloud_Infrastructure_Instance
         }
         
         if (empty($data) || !is_array($data)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception("You must pass an array of parameters");
         }
 
         foreach ($this->attributeRequired as $key) {
             if (empty($data[$key])) {
-                require_once 'Zend/Cloud/Infrastructure/Exception.php';
-                throw new Zend_Cloud_Infrastructure_Exception(sprintf(
-                    'The param "%s" is a required param for %s', 
-                    $key,
-                    __CLASS__
-                ));
+                include_once 'Zend/Cloud/Infrastructure/Exception.php';
+                throw new Zend_Cloud_Infrastructure_Exception(
+                    sprintf(
+                        'The param "%s" is a required param for %s', 
+                        $key,
+                        __CLASS__
+                    )
+                );
             }
         }
 
@@ -114,7 +116,7 @@ class Zend_Cloud_Infrastructure_Instance
     /**
      * Get Attribute with a specific key
      *
-     * @param array $data
+     * @param  array $data
      * @return misc|false
      */
     public function getAttribute($key) 
@@ -178,7 +180,7 @@ class Zend_Cloud_Infrastructure_Instance
     /**
      * Wait for status $status with a timeout of $timeout seconds
      * 
-     * @param  string $status
+     * @param  string  $status
      * @param  integer $timeout 
      * @return boolean
      */
@@ -293,7 +295,7 @@ class Zend_Cloud_Infrastructure_Instance
     /**
      * Return the system informations about the $metric of an instance
      * 
-     * @param  string $metric
+     * @param  string     $metric
      * @param  null|array $options
      * @return array|boolean
      */ 
@@ -305,7 +307,7 @@ class Zend_Cloud_Infrastructure_Instance
     /**
      * Run arbitrary shell script on the instance
      *
-     * @param  array $param
+     * @param  array        $param
      * @param  string|array $cmd
      * @return string|array
      */

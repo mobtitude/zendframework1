@@ -19,10 +19,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Xhtml */
+/**
+ * Zend_Form_Element_Xhtml 
+ */
 require_once 'Zend/Form/Element/Xhtml.php';
 
-/** @see Zend_Crypt_Math */
+/**
+ * @see Zend_Crypt_Math 
+*/
 require_once 'Zend/Crypt/Math.php';
 
 /**
@@ -39,6 +43,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
 {
     /**
      * Use formHidden view helper by default
+     *
      * @var string
      */
     public $helper = 'formHidden';
@@ -67,7 +72,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
      * token.
      *
      * @param  string|array|Zend_Config $spec
-     * @param  array|Zend_Config $options
+     * @param  array|Zend_Config        $options
      * @return void
      */
     public function __construct($spec, $options = null)
@@ -75,8 +80,8 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
         parent::__construct($spec, $options);
 
         $this->setAllowEmpty(false)
-             ->setRequired(true)
-             ->initCsrfValidator();
+            ->setRequired(true)
+            ->initCsrfValidator();
     }
 
     /**
@@ -101,7 +106,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
     public function getSession()
     {
         if (null === $this->_session) {
-            require_once 'Zend/Session/Namespace.php';
+            include_once 'Zend/Session/Namespace.php';
             $this->_session = new Zend_Session_Namespace($this->getSessionName());
         }
         return $this->_session;

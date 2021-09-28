@@ -31,10 +31,10 @@ require_once 'Zend/Tool/Project/Provider/Abstract.php';
 require_once 'Zend/Tool/Project/Provider/Exception.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Provider_Test extends Zend_Tool_Project_Provider_Abstract
 {
@@ -44,7 +44,7 @@ class Zend_Tool_Project_Provider_Test extends Zend_Tool_Project_Provider_Abstrac
     /**
      * isTestingEnabled()
      *
-     * @param Zend_Tool_Project_Profile $profile
+     * @param  Zend_Tool_Project_Profile $profile
      * @return bool
      */
     public static function isTestingEnabled(Zend_Tool_Project_Profile $profile)
@@ -73,10 +73,10 @@ class Zend_Tool_Project_Provider_Test extends Zend_Tool_Project_Provider_Abstrac
     /**
      * createApplicationResource()
      *
-     * @param Zend_Tool_Project_Profile $profile
-     * @param string $controllerName
-     * @param string $actionName
-     * @param string $moduleName
+     * @param  Zend_Tool_Project_Profile $profile
+     * @param  string                    $controllerName
+     * @param  string                    $actionName
+     * @param  string                    $moduleName
      * @return Zend_Tool_Project_Profile_Resource
      */
     public static function createApplicationResource(Zend_Tool_Project_Profile $profile, $controllerName, $actionName, $moduleName = null)
@@ -122,8 +122,8 @@ class Zend_Tool_Project_Provider_Test extends Zend_Tool_Project_Provider_Abstrac
     /**
      * createLibraryResource()
      *
-     * @param Zend_Tool_Project_Profile $profile
-     * @param string $libraryClassName
+     * @param  Zend_Tool_Project_Profile $profile
+     * @param  string                    $libraryClassName
      * @return Zend_Tool_Project_Profile_Resource
      */
     public static function createLibraryResource(Zend_Tool_Project_Profile $profile, $libraryClassName)

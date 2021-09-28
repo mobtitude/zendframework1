@@ -61,7 +61,7 @@ class Zend_Gdata_Geo_Extension_GmlPoint extends Zend_Gdata_Extension
      * Create a new instance.
      *
      * @param Zend_Gdata_Geo_Extension_GmlPos $pos (optional) Pos to which this
-     *          object should be initialized.
+     *                                             object should be initialized.
      */
     public function __construct($pos = null)
     {
@@ -75,7 +75,7 @@ class Zend_Gdata_Geo_Extension_GmlPoint extends Zend_Gdata_Extension
      * child properties.  This is used to build an entry back into a DOM
      * and eventually XML text for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      *          child properties.
      */
@@ -99,18 +99,18 @@ class Zend_Gdata_Geo_Extension_GmlPoint extends Zend_Gdata_Extension
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
 
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('gml') . ':' . 'pos';
-                $pos = new Zend_Gdata_Geo_Extension_GmlPos();
-                $pos->transferFromDOM($child);
-                $this->_pos = $pos;
-                break;
+        case $this->lookupNamespace('gml') . ':' . 'pos';
+            $pos = new Zend_Gdata_Geo_Extension_GmlPos();
+            $pos->transferFromDOM($child);
+            $this->_pos = $pos;
+            break;
         }
     }
 
     /**
      * Get the value for this element's pos attribute.
      *
-     * @see setPos
+     * @see    setPos
      * @return Zend_Gdata_Geo_Extension_GmlPos The requested attribute.
      */
     public function getPos()
@@ -121,7 +121,7 @@ class Zend_Gdata_Geo_Extension_GmlPoint extends Zend_Gdata_Extension
     /**
      * Set the value for this element's distance attribute.
      *
-     * @param Zend_Gdata_Geo_Extension_GmlPos $value The desired value for this attribute
+     * @param  Zend_Gdata_Geo_Extension_GmlPos $value The desired value for this attribute
      * @return Zend_Gdata_Geo_Extension_GmlPoint Provides a fluent interface
      */
     public function setPos($value)

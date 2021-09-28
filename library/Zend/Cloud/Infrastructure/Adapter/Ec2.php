@@ -54,7 +54,6 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
 
     /**
      * Ec2 Monitor 
-     *
      */
     protected ?\Zend_Service_Amazon_Ec2_CloudWatch $ec2Monitor = null;
 
@@ -120,14 +119,14 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
         }
         
         if (empty($options) || !is_array($options)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('Invalid options provided');
         }
         
         if (!isset($options[self::AWS_ACCESS_KEY]) 
             || !isset($options[self::AWS_SECRET_KEY])
         ) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('AWS keys not specified!');
         }
 
@@ -142,7 +141,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
         try {
             $this->ec2 = new Zend_Service_Amazon_Ec2_Instance($options[self::AWS_ACCESS_KEY], $options[self::AWS_SECRET_KEY], $this->region);
         } catch (Exception  $e) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('Error on create: ' . $e->getMessage(), $e->getCode(), $e);
         }
 
@@ -168,36 +167,36 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
             $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_LAUNCHTIME] = $attr['launchTime'];
 
             switch ($attr['instanceType']) {
-                case Zend_Service_Amazon_Ec2_Instance::MICRO:
+            case Zend_Service_Amazon_Ec2_Instance::MICRO:
                     $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_CPU]     = '1 virtual core';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '613MB';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '0GB';
-                    break;
-                case Zend_Service_Amazon_Ec2_Instance::SMALL:
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '613MB';
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '0GB';
+                break;
+            case Zend_Service_Amazon_Ec2_Instance::SMALL:
                     $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_CPU]     = '1 virtual core';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '1.7GB';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '160GB';
-                    break;
-                case Zend_Service_Amazon_Ec2_Instance::LARGE:
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '1.7GB';
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '160GB';
+                break;
+            case Zend_Service_Amazon_Ec2_Instance::LARGE:
                     $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_CPU]     = '2 virtual core';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '7.5GB';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '850GB';
-                    break;
-                case Zend_Service_Amazon_Ec2_Instance::XLARGE:
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_CPU]     = '4 virtual core';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '15GB';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '1690GB';
-                    break;
-                case Zend_Service_Amazon_Ec2_Instance::HCPU_MEDIUM:
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_CPU]     = '2 virtual core';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '1.7GB';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '350GB';
-                    break;
-                case Zend_Service_Amazon_Ec2_Instance::HCPU_XLARGE:
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_CPU]     = '8 virtual core';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '7GB';
-                    $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '1690GB';
-                    break;
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '7.5GB';
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '850GB';
+                break;
+            case Zend_Service_Amazon_Ec2_Instance::XLARGE:
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_CPU]     = '4 virtual core';
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '15GB';
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '1690GB';
+                break;
+            case Zend_Service_Amazon_Ec2_Instance::HCPU_MEDIUM:
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_CPU]     = '2 virtual core';
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '1.7GB';
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '350GB';
+                break;
+            case Zend_Service_Amazon_Ec2_Instance::HCPU_XLARGE:
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_CPU]     = '8 virtual core';
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_RAM]     = '7GB';
+                $result[Zend_Cloud_Infrastructure_Instance::INSTANCE_STORAGE] = '1690GB';
+                break;
             }
         }
         return $result;
@@ -254,7 +253,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
     /**
      * Reboot an instance
      *
-     * @param string $id
+     * @param  string $id
      * @return boolean
      */ 
     public function rebootInstance($id)
@@ -266,8 +265,8 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
     /**
      * Create a new instance
      *
-     * @param string $name
-     * @param array $options
+     * @param  string $name
+     * @param  array  $options
      * @return Instance|boolean
      */ 
     public function createInstance($name, $options)
@@ -289,7 +288,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
      */ 
     public function stopInstance($id)
     {
-        require_once 'Zend/Cloud/Infrastructure/Exception.php';
+        include_once 'Zend/Cloud/Infrastructure/Exception.php';
         throw new Zend_Cloud_Infrastructure_Exception('The stopInstance method is not implemented in the adapter');
     }
  
@@ -301,7 +300,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
      */ 
     public function startInstance($id)
     {
-        require_once 'Zend/Cloud/Infrastructure/Exception.php';
+        include_once 'Zend/Cloud/Infrastructure/Exception.php';
         throw new Zend_Cloud_Infrastructure_Exception('The startInstance method is not implemented in the adapter');
     }
  
@@ -334,12 +333,12 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
 
         foreach ($this->adapterResult as $result) {
             switch (strtolower($result['platform'])) {
-                case 'windows' :
-                    $platform = Zend_Cloud_Infrastructure_Image::IMAGE_WINDOWS;
-                    break;
-                default:
-                    $platform = Zend_Cloud_Infrastructure_Image::IMAGE_LINUX;
-                    break;
+            case 'windows' :
+                $platform = Zend_Cloud_Infrastructure_Image::IMAGE_WINDOWS;
+                break;
+            default:
+                $platform = Zend_Cloud_Infrastructure_Image::IMAGE_LINUX;
+                break;
             }
 
             $images[]= array (
@@ -351,7 +350,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
                 Zend_Cloud_Infrastructure_Image::IMAGE_PLATFORM     => $platform,
             );
         }
-        return new Zend_Cloud_Infrastructure_ImageList($images,$this->ec2Image);
+        return new Zend_Cloud_Infrastructure_ImageList($images, $this->ec2Image);
     }
 
     /**
@@ -362,7 +361,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
     public function zonesInstance()
     {
         if (!isset($this->ec2Zone)) {
-            $this->ec2Zone = new Zend_Service_Amazon_Ec2_AvailabilityZones($this->accessKey,$this->accessSecret,$this->region);
+            $this->ec2Zone = new Zend_Service_Amazon_Ec2_AvailabilityZones($this->accessKey, $this->accessSecret, $this->region);
         }
         $this->adapterResult = $this->ec2Zone->describe();
 
@@ -380,8 +379,8 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
     /**
      * Return the system information about the $metric of an instance
      * 
-     * @param  string $id
-     * @param  string $metric
+     * @param  string     $id
+     * @param  string     $metric
      * @param  null|array $options
      * @return array
      */ 
@@ -391,29 +390,33 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
             return false;
         }
 
-        if (!in_array($metric,$this->validMetrics)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
-            throw new Zend_Cloud_Infrastructure_Exception(sprintf(
-                'The metric "%s" is not valid', 
-                $metric
-            ));
+        if (!in_array($metric, $this->validMetrics)) {
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
+            throw new Zend_Cloud_Infrastructure_Exception(
+                sprintf(
+                    'The metric "%s" is not valid', 
+                    $metric
+                )
+            );
         }
 
         if (!empty($options) && !is_array($options)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('The options must be an array');
         }
 
         if (!empty($options) 
             && (empty($options[Zend_Cloud_Infrastructure_Instance::MONITOR_START_TIME]) 
-                || empty($options[Zend_Cloud_Infrastructure_Instance::MONITOR_END_TIME]))
+            || empty($options[Zend_Cloud_Infrastructure_Instance::MONITOR_END_TIME]))
         ) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
-            throw new Zend_Cloud_Infrastructure_Exception(sprintf(
-                'The options array must contain: "%s" and "%s"',
-                $options[Zend_Cloud_Infrastructure_Instance::MONITOR_START_TIME],
-                $options[Zend_Cloud_Infrastructure_Instance::MONITOR_END_TIME]
-            ));
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
+            throw new Zend_Cloud_Infrastructure_Exception(
+                sprintf(
+                    'The options array must contain: "%s" and "%s"',
+                    $options[Zend_Cloud_Infrastructure_Instance::MONITOR_START_TIME],
+                    $options[Zend_Cloud_Infrastructure_Instance::MONITOR_END_TIME]
+                )
+            );
         }      
 
         if (!isset($this->ec2Monitor)) {

@@ -12,19 +12,19 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Dojo
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Dojo
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
  * Dojo module layer and custom build profile generation support
  *
- * @package    Zend_Dojo
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Dojo
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Dojo_BuildLayer
 {
@@ -92,7 +92,7 @@ class Zend_Dojo_BuildLayer
             if ($options instanceof Zend_Config) {
                 $options = $options->toArray();
             } elseif (!is_array($options)) {
-                require_once 'Zend/Dojo/Exception.php';
+                include_once 'Zend/Dojo/Exception.php';
                 throw new Zend_Dojo_Exception('Invalid options provided to constructor');
             }
             $this->setOptions($options);
@@ -165,7 +165,7 @@ class Zend_Dojo_BuildLayer
     {
         if (null === $this->_dojo) {
             if (null === ($view = $this->getView())) {
-                require_once 'Zend/Dojo/Exception.php';
+                include_once 'Zend/Dojo/Exception.php';
                 throw new Zend_Dojo_Exception('View object not registered; cannot retrieve dojo helper');
             }
             $helper = $view->getHelper('dojo');
@@ -183,7 +183,7 @@ class Zend_Dojo_BuildLayer
     public function setLayerName($name)
     {
         if (!preg_match('/^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$/i', $name)) {
-            require_once 'Zend/Dojo/Exception.php';
+            include_once 'Zend/Dojo/Exception.php';
             throw new Zend_Dojo_Exception('Invalid layer name provided; must be of form[a-z][a-z0-9_](\.[a-z][a-z0-9_])+');
         }
         $this->_layerName = $name;
@@ -299,7 +299,7 @@ class Zend_Dojo_BuildLayer
      * Add a single build profile option
      *
      * @param  string $key
-     * @param  value $value
+     * @param  value  $value
      * @return Zend_Dojo_BuildLayer
      */
     public function addProfileOption($key, $value)
@@ -375,7 +375,7 @@ class Zend_Dojo_BuildLayer
      *
      * If just the prefix is passed, sets path to "../$prefix".
      *
-     * @param  string $prefix
+     * @param  string      $prefix
      * @param  null|string $path
      * @return Zend_Dojo_BuildLayer
      */
@@ -519,7 +519,7 @@ class Zend_Dojo_BuildLayer
      */
     protected function _filterJsonProfileToJavascript($profile)
     {
-        require_once 'Zend/Json.php';
+        include_once 'Zend/Json.php';
         $profile = Zend_Json::encode($profile);
         $profile = trim($profile, '"');
         $profile = preg_replace('/' . preg_quote('\\') . '/', '', $profile);

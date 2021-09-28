@@ -71,26 +71,25 @@ class Zend_Service_WindowsAzure_Log_Writer_WindowsAzure
     protected $_messageBuffer = array();
 
     /**
-     * @param Zend_Service_Service_WindowsAzure_Storage_Table|Zend_Service_WindowsAzure_Storage_Table $tableStorageConnection
-     * @param string                                                                                  $tableName
-     * @param bool                                                                                    $createTable create the Windows Azure table for logging if it does not exist
-     * @param bool                                                                                    $bufferMessages
+     * @param  Zend_Service_Service_WindowsAzure_Storage_Table|Zend_Service_WindowsAzure_Storage_Table $tableStorageConnection
+     * @param  string                                                                                  $tableName
+     * @param  bool                                                                                    $createTable            create the Windows Azure table for logging if it does not exist
+     * @param  bool                                                                                    $bufferMessages
      * @throws Zend_Service_Log_Exception
      */
     public function __construct(
         Zend_Service_WindowsAzure_Storage_Table $tableStorageConnection,
         $tableName, $createTable = true, $bufferMessages = true
-    )
-    {
+    ) {
         if ($tableStorageConnection == null) {
-            require_once 'Zend/Service/Log/Exception.php';
+            include_once 'Zend/Service/Log/Exception.php';
             throw new Zend_Service_Log_Exception(
                 'No connection to the Windows Azure tables provided.'
             );
         }
 
         if (!is_string($tableName)) {
-            require_once 'Zend/Service/Log/Exception.php';
+            include_once 'Zend/Service/Log/Exception.php';
             throw new Zend_Service_Log_Exception(
                 'Provided Windows Azure table name must be a string.'
             );
@@ -166,11 +165,11 @@ class Zend_Service_WindowsAzure_Log_Writer_WindowsAzure
      */
     public function setFormatter(
         Zend_Service_Log_Formatter_Interface $formatter
-    )
-    {
-        require_once 'Zend/Service/Log/Exception.php';
+    ) {
+        include_once 'Zend/Service/Log/Exception.php';
         throw new Zend_Service_Log_Exception(
-            get_class($this) . ' does not support formatting');
+            get_class($this) . ' does not support formatting'
+        );
     }
 
     /**

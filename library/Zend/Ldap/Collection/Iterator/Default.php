@@ -12,21 +12,21 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Ldap
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
  * Zend_Ldap_Collection_Iterator_Default is the default collection iterator implementation
  * using ext/ldap
  *
- * @category   Zend
- * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Ldap
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
 {
@@ -61,7 +61,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
     /**
      * The method that will be applied to the attribute's names.
      *
-     * @var  integer|callback
+     * @var integer|callback
      */
     protected $_attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
 
@@ -81,7 +81,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
             /**
              * @see Zend_Ldap_Exception
              */
-            require_once 'Zend/Ldap/Exception.php';
+            include_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception($this->_ldap, 'counting entries');
         }
     }
@@ -135,8 +135,9 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
         if (is_callable($attributeNameTreatment)) {
             if (is_string($attributeNameTreatment) && !function_exists($attributeNameTreatment)) {
                 $this->_attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
-            } else if (is_array($attributeNameTreatment) &&
-                    !method_exists($attributeNameTreatment[0], $attributeNameTreatment[1])) {
+            } else if (is_array($attributeNameTreatment) 
+                && !method_exists($attributeNameTreatment[0], $attributeNameTreatment[1])
+            ) {
                 $this->_attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
             } else {
                 $this->_attributeNameTreatment = $attributeNameTreatment;
@@ -145,13 +146,13 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
             $attributeNameTreatment = (int)$attributeNameTreatment;
             switch ($attributeNameTreatment) {
                 case self::ATTRIBUTE_TO_LOWER:
-                case self::ATTRIBUTE_TO_UPPER:
-                case self::ATTRIBUTE_NATIVE:
-                    $this->_attributeNameTreatment = $attributeNameTreatment;
-                    break;
-                default:
-                    $this->_attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
-                    break;
+            case self::ATTRIBUTE_TO_UPPER:
+            case self::ATTRIBUTE_NATIVE:
+                $this->_attributeNameTreatment = $attributeNameTreatment;
+                break;
+            default:
+                $this->_attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
+                break;
             }
         }
         return $this;
@@ -196,29 +197,33 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
 
         $entry = array('dn' => $this->key());
         $ber_identifier = null;
-        $name = @ldap_first_attribute($this->_ldap->getResource(), $this->_current,
-            $ber_identifier);
+        $name = @ldap_first_attribute(
+            $this->_ldap->getResource(), $this->_current,
+            $ber_identifier
+        );
         while ($name) {
             $data = @ldap_get_values_len($this->_ldap->getResource(), $this->_current, $name);
             unset($data['count']);
 
             switch($this->_attributeNameTreatment) {
-                case self::ATTRIBUTE_TO_LOWER:
-                    $attrName = strtolower($name);
-                    break;
-                case self::ATTRIBUTE_TO_UPPER:
-                    $attrName = strtoupper($name);
-                    break;
-                case self::ATTRIBUTE_NATIVE:
-                    $attrName = $name;
-                    break;
-                default:
-                    $attrName = call_user_func($this->_attributeNameTreatment, $name);
-                    break;
+            case self::ATTRIBUTE_TO_LOWER:
+                $attrName = strtolower($name);
+                break;
+            case self::ATTRIBUTE_TO_UPPER:
+                $attrName = strtoupper($name);
+                break;
+            case self::ATTRIBUTE_NATIVE:
+                $attrName = $name;
+                break;
+            default:
+                $attrName = call_user_func($this->_attributeNameTreatment, $name);
+                break;
             }
             $entry[$attrName] = $data;
-            $name = @ldap_next_attribute($this->_ldap->getResource(), $this->_current,
-                $ber_identifier);
+            $name = @ldap_next_attribute(
+                $this->_ldap->getResource(), $this->_current,
+                $ber_identifier
+            );
         }
         ksort($entry, SORT_LOCALE_STRING);
         return $entry;
@@ -238,8 +243,10 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
         if (is_resource($this->_current)) {
             $currentDn = @ldap_get_dn($this->_ldap->getResource(), $this->_current);
             if ($currentDn === false) {
-                /** @see Zend_Ldap_Exception */
-                require_once 'Zend/Ldap/Exception.php';
+                /**
+ * @see Zend_Ldap_Exception 
+*/
+                include_once 'Zend/Ldap/Exception.php';
                 throw new Zend_Ldap_Exception($this->_ldap, 'getting dn');
             }
             return $currentDn;
@@ -258,8 +265,10 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
     {
         if (is_resource($this->_current) && $this->_itemCount > 0) {
             $this->_current = @ldap_next_entry($this->_ldap->getResource(), $this->_current);
-            /** @see Zend_Ldap_Exception */
-            require_once 'Zend/Ldap/Exception.php';
+            /**
+ * @see Zend_Ldap_Exception 
+*/
+            include_once 'Zend/Ldap/Exception.php';
             if ($this->_current === false) {
                 $msg = $this->_ldap->getLastError($code);
                 if ($code === Zend_Ldap_Exception::LDAP_SIZELIMIT_EXCEEDED) {
@@ -284,10 +293,13 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
     {
         if (is_resource($this->_resultId)) {
             $this->_current = @ldap_first_entry($this->_ldap->getResource(), $this->_resultId);
-            /** @see Zend_Ldap_Exception */
-            require_once 'Zend/Ldap/Exception.php';
-            if ($this->_current === false &&
-                    $this->_ldap->getLastErrorCode() > Zend_Ldap_Exception::LDAP_SUCCESS) {
+            /**
+ * @see Zend_Ldap_Exception 
+*/
+            include_once 'Zend/Ldap/Exception.php';
+            if ($this->_current === false 
+                && $this->_ldap->getLastErrorCode() > Zend_Ldap_Exception::LDAP_SUCCESS
+            ) {
                 throw new Zend_Ldap_Exception($this->_ldap, 'getting first entry');
             }
         }

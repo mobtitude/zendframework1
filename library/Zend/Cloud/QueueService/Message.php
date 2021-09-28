@@ -32,7 +32,7 @@ class Zend_Cloud_QueueService_Message
     protected string $_clientMessage;
 
     /**
-     * @param string $body Message text
+     * @param string $body    Message text
      * @param string $message Original message
      */
     function __construct($body, $message)
@@ -43,6 +43,7 @@ class Zend_Cloud_QueueService_Message
 
     /**
      * Get the message body
+     *
      * @return string
      */
     public function getBody()

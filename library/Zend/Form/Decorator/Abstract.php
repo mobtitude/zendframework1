@@ -12,13 +12,15 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Form
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Interface */
+/**
+ * Zend_Form_Decorator_Interface 
+ */
 require_once 'Zend/Form/Decorator/Interface.php';
 
 /**
@@ -101,7 +103,7 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
      * Set option
      *
      * @param  string $key
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return Zend_Form_Decorator_Abstract
      */
     public function setOption($key, $value)
@@ -139,7 +141,7 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
     /**
      * Remove single option
      *
-     * @param mixed $key
+     * @param  mixed $key
      * @return void
      */
     public function removeOption($key)
@@ -174,9 +176,9 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
     {
         if ((!$element instanceof Zend_Form_Element)
             && (!$element instanceof Zend_Form)
-            && (!$element instanceof Zend_Form_DisplayGroup))
-        {
-            require_once 'Zend/Form/Decorator/Exception.php';
+            && (!$element instanceof Zend_Form_DisplayGroup)
+        ) {
+            include_once 'Zend/Form/Decorator/Exception.php';
             throw new Zend_Form_Decorator_Exception('Invalid element type passed to decorator');
         }
 
@@ -206,14 +208,14 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
             $placementOpt = strtoupper($placementOpt);
             switch ($placementOpt) {
                 case self::APPEND:
-                case self::PREPEND:
-                    $placement = $this->_placement = $placementOpt;
-                    break;
-                case false:
-                    $placement = $this->_placement = null;
-                    break;
-                default:
-                    break;
+            case self::PREPEND:
+                $placement = $this->_placement = $placementOpt;
+                break;
+            case false:
+                $placement = $this->_placement = null;
+                break;
+            default:
+                break;
             }
             $this->removeOption('placement');
         }
@@ -245,7 +247,7 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
      */
     public function render($content)
     {
-        require_once 'Zend/Form/Decorator/Exception.php';
+        include_once 'Zend/Form/Decorator/Exception.php';
         throw new Zend_Form_Decorator_Exception('render() not implemented');
     }
 }

@@ -33,16 +33,17 @@ require_once 'Zend/Validate/Barcode.php';
 /**
  * Class for generate Identcode barcode
  *
- * @category   Zend
- * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Barcode
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Barcode_Object_Identcode extends Zend_Barcode_Object_Code25interleaved
 {
 
     /**
      * Default options for Identcode barcode
+     *
      * @return void
      */
     protected function _getDefaultOptions()
@@ -53,18 +54,22 @@ class Zend_Barcode_Object_Identcode extends Zend_Barcode_Object_Code25interleave
 
     /**
      * Retrieve text to display
+     *
      * @return string
      */
     public function getTextToDisplay()
     {
-        return preg_replace('/([0-9]{2})([0-9]{3})([0-9]{3})([0-9]{3})([0-9])/',
-                            '$1.$2 $3.$4 $5',
-                            $this->getText());
+        return preg_replace(
+            '/([0-9]{2})([0-9]{3})([0-9]{3})([0-9]{3})([0-9])/',
+            '$1.$2 $3.$4 $5',
+            $this->getText()
+        );
     }
 
     /**
      * Check allowed characters
-     * @param string $value
+     *
+     * @param  string $value
      * @return string
      * @throws Zend_Barcode_Object_Exception
      */

@@ -91,6 +91,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
 
     /**
      * Whether or not {@link handle()} should send output or return the response.
+     *
      * @var boolean Defaults to false
      */
     protected bool $_returnResponse = false;
@@ -131,8 +132,8 @@ class Zend_Rest_Server implements Zend_Server_Interface
      *
      * Lowercase's a string by reference
      *
-     * @param string $value
-     * @param string $key
+     * @param  string $value
+     * @param  string $key
      * @return string Lower cased string
      */
     public static function lowerCase(&$value, &$key)
@@ -149,7 +150,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
      * When 'return response' is true, {@link handle()} will not send output,
      * but will instead return the response from the dispatched function/method.
      *
-     * @param boolean $flag
+     * @param  boolean $flag
      * @return boolean|Zend_Rest_Server Returns Zend_Rest_Server when used to set the flag; returns boolean flag value otherwise.
      */
     public function returnResponse($flag = null)
@@ -178,11 +179,9 @@ class Zend_Rest_Server implements Zend_Server_Interface
         if (isset($request['method'])) {
             $this->_method = $request['method'];
             if (isset($this->_functions[$this->_method])) {
-                if ($this->_functions[$this->_method] instanceof
-                    Zend_Server_Reflection_Function
-                    || $this->_functions[$this->_method] instanceof
-                       Zend_Server_Reflection_Method
-                       && $this->_functions[$this->_method]->isPublic()
+                if ($this->_functions[$this->_method] instanceofZend_Server_Reflection_Function
+                    || $this->_functions[$this->_method] instanceof                    Zend_Server_Reflection_Method
+                    && $this->_functions[$this->_method]->isPublic()
                 ) {
                     $requestKeys = array_keys($request);
                     array_walk($requestKeys, array(__CLASS__, "lowerCase"));
@@ -224,7 +223,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
 
                     $result = false;
                     if (count($callingArgs) < count($funcArgs)) {
-                        require_once 'Zend/Rest/Server/Exception.php';
+                        include_once 'Zend/Rest/Server/Exception.php';
                         $result = $this->fault(
                             new Zend_Rest_Server_Exception(
                                 'Invalid Method Call to ' . $this->_method
@@ -235,8 +234,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
                         );
                     }
 
-                    if (!$result && $this->_functions[$this->_method] instanceof
-                                    Zend_Server_Reflection_Method
+                    if (!$result && $this->_functions[$this->_method] instanceof                        Zend_Server_Reflection_Method
                     ) {
                         // Get class
                         $class = $this->_functions[$this->_method]->getDeclaringClass()->getName();
@@ -267,7 +265,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
                         }
                     }
                 } else {
-                    require_once "Zend/Rest/Server/Exception.php";
+                    include_once "Zend/Rest/Server/Exception.php";
                     $result = $this->fault(
                         new Zend_Rest_Server_Exception(
                             "Unknown Method '$this->_method'."
@@ -276,7 +274,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
                     );
                 }
             } else {
-                require_once "Zend/Rest/Server/Exception.php";
+                include_once "Zend/Rest/Server/Exception.php";
                 $result = $this->fault(
                     new Zend_Rest_Server_Exception(
                         "Unknown Method '$this->_method'."
@@ -285,7 +283,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
                 );
             }
         } else {
-            require_once "Zend/Rest/Server/Exception.php";
+            include_once "Zend/Rest/Server/Exception.php";
             $result = $this->fault(
                 new Zend_Rest_Server_Exception("No Method Specified."),
                 404
@@ -316,14 +314,14 @@ class Zend_Rest_Server implements Zend_Server_Interface
         }
 
         return $response;
-     }
+    }
 
     /**
      * Implement Zend_Server_Interface::setClass()
      *
      * @param string $classname Class name
      * @param string $namespace Class namespace (unused)
-     * @param array $argv An array of Constructor Arguments
+     * @param array  $argv      An array of Constructor Arguments
      */
     public function setClass($classname, $namespace = '', $argv = array())
     {
@@ -336,7 +334,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
     /**
      * Handle an array or object result
      *
-     * @param array|object $struct Result Value
+     * @param  array|object $struct Result Value
      * @return string XML Response
      */
     protected function _handleStruct($struct)
@@ -380,15 +378,14 @@ class Zend_Rest_Server implements Zend_Server_Interface
      * Recursively iterates through an associative array or object's properties
      * to build XML response.
      *
-     * @param mixed $struct
-     * @param DOMDocument $dom
-     * @param DOMElement $parent
+     * @param  mixed       $struct
+     * @param  DOMDocument $dom
+     * @param  DOMElement  $parent
      * @return void
      */
     protected function _structValue(
         $struct, DOMDocument $dom, DOMElement $parent
-    )
-    {
+    ) {
         $struct = (array)$struct;
 
         foreach ($struct as $key => $value) {
@@ -417,7 +414,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
     /**
      * Handle a single value
      *
-     * @param string|int|boolean $value Result value
+     * @param  string|int|boolean $value Result value
      * @return string XML Response
      */
     protected function _handleScalar($value)
@@ -468,8 +465,8 @@ class Zend_Rest_Server implements Zend_Server_Interface
      *
      * Creates XML error response, returning DOMDocument with response.
      *
-     * @param string|Exception $fault Message
-     * @param int $code Error Code
+     * @param  string|Exception $fault Message
+     * @param  int              $code  Error Code
      * @return DOMDocument
      */
     public function fault($exception = null, $code = null)
@@ -557,7 +554,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
     /**
      * Implement Zend_Server_Interface::addFunction()
      *
-     * @param string $function Function Name
+     * @param string $function  Function Name
      * @param string $namespace Function namespace (unused)
      */
     public function addFunction($function, $namespace = '')
@@ -570,7 +567,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
             if (is_callable($func) && !in_array($func, self::$magicMethods)) {
                 $this->_functions[$func] = $this->_reflection->reflectFunction($func);
             } else {
-                require_once 'Zend/Rest/Server/Exception.php';
+                include_once 'Zend/Rest/Server/Exception.php';
                 throw new Zend_Rest_Server_Exception(
                     "Invalid Method Added to Service."
                 );
@@ -591,7 +588,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
     /**
      * Implement Zend_Server_Interface::loadFunctions()
      *
-     * @todo Implement
+     * @todo  Implement
      * @param array $functions
      */
     public function loadFunctions($functions)
@@ -601,7 +598,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
     /**
      * Implement Zend_Server_Interface::setPersistence()
      *
-     * @todo Implement
+     * @todo  Implement
      * @param int $mode
      */
     public function setPersistence($mode)
@@ -612,7 +609,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
      * Call a static class method and return the result
      *
      * @param  string $class
-     * @param  array $args
+     * @param  array  $args
      * @return mixed
      */
     protected function _callStaticMethod($class, array $args)
@@ -635,7 +632,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
      * Call an instance method of an object
      *
      * @param  string $class
-     * @param  array $args
+     * @param  array  $args
      * @return mixed
      * @throws Zend_Rest_Server_Exception For invalid class name
      */
@@ -648,7 +645,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
                 $object = $this->_functions[$this->_method]->getDeclaringClass()->newInstance();
             }
         } catch (Exception $e) {
-            require_once 'Zend/Rest/Server/Exception.php';
+            include_once 'Zend/Rest/Server/Exception.php';
             throw new Zend_Rest_Server_Exception(
                 'Error instantiating class ' . $class .
                 ' to invoke method '

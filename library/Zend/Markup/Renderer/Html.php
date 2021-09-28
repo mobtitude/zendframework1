@@ -95,9 +95,11 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
             $options = $options->toArray();
         }
 
-        $this->_pluginLoader = new Zend_Loader_PluginLoader(array(
+        $this->_pluginLoader = new Zend_Loader_PluginLoader(
+            array(
             'Zend_Markup_Renderer_Html' => 'Zend/Markup/Renderer/Html/'
-        ));
+            )
+        );
 
         if (!isset($options['useDefaultMarkups']) && isset($options['useDefaultTags'])) {
             $options['useDefaultMarkups'] = $options['useDefaultTags'];
@@ -364,7 +366,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
      * Execute a replace token
      *
      * @param  Zend_Markup_Token $token
-     * @param  array $markup
+     * @param  array             $markup
      * @return string
      */
     protected function _executeReplace(Zend_Markup_Token $token, $markup)
@@ -384,7 +386,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
      * Execute a single replace token
      *
      * @param  Zend_Markup_Token $token
-     * @param  array $markup
+     * @param  array             $markup
      * @return string
      */
     protected function _executeSingleReplace(Zend_Markup_Token $token, $markup)
@@ -403,7 +405,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
      * Render some attributes
      *
      * @param  Zend_Markup_Token $token
-     * @param  array $attributes
+     * @param  array             $attributes
      * @return string
      */
     public static function renderAttributes(Zend_Markup_Token $token, array $attributes = array())
@@ -443,9 +445,11 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
          */
         foreach ($attributes as $attribute => $value) {
             if (isset($tokenAttributes[$attribute]) && !empty($tokenAttributes[$attribute])) {
-                $return .= ' ' . $attribute . '="' . htmlentities($tokenAttributes[$attribute],
-                                                                  ENT_QUOTES,
-                                                                  self::getEncoding()) . '"';
+                $return .= ' ' . $attribute . '="' . htmlentities(
+                    $tokenAttributes[$attribute],
+                    ENT_QUOTES,
+                    self::getEncoding()
+                ) . '"';
             } elseif (!empty($value)) {
                 $return .= ' ' . $attribute . '="' . htmlentities($value, ENT_QUOTES, self::getEncoding()) . '"';
             }
@@ -500,27 +504,27 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
         $scheme = strtolower($matches[1]);
 
         switch ($scheme) {
-            case 'javascript':
-                // JavaScript scheme is not allowed for security reason
+        case 'javascript':
+            // JavaScript scheme is not allowed for security reason
+            return false;
+
+        case 'http':
+        case 'https':
+        case 'ftp':
+            $components = @parse_url($uri);
+
+            if ($components === false) {
                 return false;
+            }
 
-            case 'http':
-            case 'https':
-            case 'ftp':
-                $components = @parse_url($uri);
+            if (!isset($components['host'])) {
+                return false;
+            }
 
-                if ($components === false) {
-                    return false;
-                }
+            return true;
 
-                if (!isset($components['host'])) {
-                    return false;
-                }
-
-                return true;
-
-            default:
-                return true;
+        default:
+            return true;
         }
     }
 }

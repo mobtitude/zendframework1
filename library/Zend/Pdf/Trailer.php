@@ -12,20 +12,20 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 
 /**
  * PDF file trailer
  *
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Pdf_Trailer
 {
@@ -39,14 +39,16 @@ abstract class Zend_Pdf_Trailer
     /**
      * Check if key is correct
      *
-     * @param string $key
+     * @param  string $key
      * @throws Zend_Pdf_Exception
      */
     private function _checkDictKey($key)
     {
-        if ( !in_array($key, self::$_allowedKeys) ) {
-            /** @todo Make warning (log entry) instead of an exception */
-            require_once 'Zend/Pdf/Exception.php';
+        if (!in_array($key, self::$_allowedKeys) ) {
+            /**
+ * @todo Make warning (log entry) instead of an exception 
+*/
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("Unknown trailer dictionary key: '$key'.");
         }
     }
@@ -69,7 +71,7 @@ abstract class Zend_Pdf_Trailer
     /**
      * Get handler
      *
-     * @param string $property
+     * @param  string $property
      * @return mixed
      */
     public function __get($property)
@@ -81,7 +83,7 @@ abstract class Zend_Pdf_Trailer
      * Set handler
      *
      * @param string $property
-     * @param  mixed $value
+     * @param mixed  $value
      */
     public function __set($property, $value)
     {

@@ -24,7 +24,7 @@
 /**
  * @see Zend_Gdata_Gapps_Query
  */
-require_once('Zend/Gdata/Gapps/Query.php');
+require_once 'Zend/Gdata/Gapps/Query.php';
 
 /**
  * Assists in constructing queries for Google Apps group entries.
@@ -52,15 +52,15 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
     /**
      * Create a new instance.
      *
-     * @param string $domain (optional) The Google Apps-hosted domain to use
-     *          when constructing query URIs.
-     * @param string $groupId (optional) Value for the groupId property.
+     * @param string $domain         (optional) The Google Apps-hosted domain to use
+     *                               when constructing query URIs.
+     * @param string $groupId        (optional) Value for the groupId property.
      * @param string $startGroupName (optional) Value for the
-     *          startGroupName property.
+     *                               startGroupName property.
      */
     public function __construct($domain = null, $groupId = null,
-            $startGroupId = null)
-    {
+        $startGroupId = null
+    ) {
         parent::__construct($domain);
         $this->setGroupId($groupId);
         $this->setStartGroupId($startGroupId);
@@ -71,9 +71,9 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
      * matching this value will be returned in search results. Set to
      * null to disable filtering by group id.
      *
-     * @see getGroupId
+     * @see   getGroupId
      * @param string $value The group id to filter search results by, or null to
-     *              disable.
+     *                      disable.
      */
     public function setGroupId($value)
     {
@@ -85,7 +85,7 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
      * returned.
      *
      * @param string $value The group id to filter search results by, or
-     *          null if disabled.
+     *                      null if disabled.
      */
     public function getGroupId()
     {
@@ -98,7 +98,7 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
      * Set to null to disable filtering by username.
      *
      * @param string $value The member email address to filter search
-     *              results by, or null to  disable.
+     *                      results by, or null to  disable.
      */
     public function setMember($value)
     {
@@ -114,7 +114,7 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
      * Get the member email address to query for. If no member is set,
      * null will be returned.
      *
-     * @see setMember
+     * @see    setMember
      * @return string The member email address to filter search
      *              results by, or null if disabled.
      */
@@ -130,6 +130,7 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
 
     /**
      * Sets the query parameter directOnly
+     *
      * @param bool $value
      */
     public function setDirectOnly($value)
@@ -147,7 +148,7 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
 
     /**
      *
-     * @see setDirectOnly
+     * @see    setDirectOnly
      * @return bool
      */
     public function getDirectOnly()
@@ -169,7 +170,7 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
      * a list of groups.
      *
      * @param string $value The first group id to be returned, or null to
-     *          disable.
+     *                      disable.
      */
     public function setStartGroupId($value)
     {
@@ -184,7 +185,7 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
      * Get the first group id which should be displayed when retrieving
      * a list of groups.
      *
-     * @see setStartGroupId
+     * @see    setStartGroupId
      * @return string The first group id to be returned, or null if
      *          disabled.
      */

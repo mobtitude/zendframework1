@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Rest
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Rest
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -44,10 +44,10 @@ require_once 'Zend/Controller/Request/Abstract.php';
  *
  * Request-aware route for RESTful modular routing
  *
- * @category   Zend
- * @package    Zend_Rest
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Rest
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
 {
@@ -66,9 +66,9 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
     /**
      * Constructor
      *
-     * @param Zend_Controller_Front $front Front Controller object
-     * @param array $defaults Defaults for map variables with keys as variable names
-     * @param array $responders Modules or controllers to receive RESTful routes
+     * @param Zend_Controller_Front $front      Front Controller object
+     * @param array                 $defaults   Defaults for map variables with keys as variable names
+     * @param array                 $responders Modules or controllers to receive RESTful routes
      */
     public function __construct(Zend_Controller_Front $front,
         array $defaults = array(),
@@ -113,7 +113,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      * setControllerName(), and setActionName() accessors to set those values.
      * Always returns the values as an array.
      *
-     * @param Zend_Controller_Request_Http $request Request used to match against this routing ruleset
+     * @param  Zend_Controller_Request_Http $request Request used to match against this routing ruleset
      * @return array An array of assigned values or a false on a mismatch
      */
     public function match($request, $partial = false)
@@ -192,7 +192,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
             if ($requestMethod != 'get') {
                 if ($request->getParam('_method')) {
                     $values[$this->_actionKey] = strtolower($request->getParam('_method'));
-                } elseif ( $request->getHeader('X-HTTP-Method-Override') ) {
+                } elseif ($request->getHeader('X-HTTP-Method-Override') ) {
                     $values[$this->_actionKey] = strtolower($request->getHeader('X-HTTP-Method-Override'));
                 } else {
                     $values[$this->_actionKey] = $requestMethod;
@@ -202,15 +202,15 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
                 // based on parameter count (posting to resource or collection)
                 switch( $values[$this->_actionKey] ){
                     case 'post':
-                        if ($pathElementCount > 0) {
-                            $values[$this->_actionKey] = 'put';
-                        } else {
-                            $values[$this->_actionKey] = 'post';
-                        }
+                if ($pathElementCount > 0) {
+                    $values[$this->_actionKey] = 'put';
+                } else {
+                    $values[$this->_actionKey] = 'post';
+                }
                         break;
-                    case 'put':
+                case 'put':
                         $values[$this->_actionKey] = 'put';
-                        break;
+                    break;
                 }
 
             } elseif ($specialGetTarget) {
@@ -222,8 +222,9 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
 
         $result = $this->_values + $this->_defaults;
 
-        if ($partial && $result)
+        if ($partial && $result) {
             $this->setMatchedPath($request->getPathInfo());
+        }
 
         return $result;
     }
@@ -231,9 +232,9 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
     /**
      * Assembles user submitted parameters forming a URL path defined by this route
      *
-     * @param array $data An array of variable and value pairs used as parameters
-     * @param bool $reset Weither to reset the current params
-     * @param bool $encode Weither to return urlencoded string
+     * @param  array $data   An array of variable and value pairs used as parameters
+     * @param  bool  $reset  Weither to reset the current params
+     * @param  bool  $encode Weither to return urlencoded string
      * @return string Route path with user submitted parameters
      */
     public function assemble($data = array(), $reset = false, $encode = true, $partial = false)
@@ -283,7 +284,8 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
                 unset($params['id']);
             }
             foreach ($params as $key => $value) {
-                if ($encode) $value = urlencode($value);
+                if ($encode) { $value = urlencode($value);
+                }
                 $url .= '/' . $key . '/' . $value;
             }
         } elseif (! empty($action) && isset($params['id'])) {
@@ -340,7 +342,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
     /**
      * Determine if a specified module supports RESTful routing
      *
-     * @param string $moduleName
+     * @param  string $moduleName
      * @return bool
      */
     protected function _checkRestfulModule($moduleName)
@@ -361,8 +363,8 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      * Determine if a specified module + controller combination supports
      * RESTful routing
      *
-     * @param string $moduleName
-     * @param string $controllerName
+     * @param  string $moduleName
+     * @param  string $controllerName
      * @return bool
      */
     protected function _checkRestfulController($moduleName, $controllerName)
@@ -395,7 +397,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
     /**
      * Determines if RESTful routing applies to an entire module
      *
-     * @param string $moduleName
+     * @param  string $moduleName
      * @return bool
      */
     protected function _fullRestfulModule($moduleName)

@@ -28,7 +28,9 @@
  */
 class Zend_Cloud_DocumentService_DocumentSet implements Countable, IteratorAggregate
 {
-    /** @var int */
+    /**
+     * @var int 
+     */
     protected $_documentCount;
 
     protected \ArrayIterator $_documents;

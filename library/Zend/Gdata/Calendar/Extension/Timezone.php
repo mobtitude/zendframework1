@@ -44,6 +44,7 @@ class Zend_Gdata_Calendar_Extension_Timezone extends Zend_Gdata_Extension
 
     /**
      * Constructs a new Zend_Gdata_Calendar_Extension_Timezone object.
+     *
      * @param string $value (optional) The text content of the element.
      */
     public function __construct($value = null)
@@ -59,7 +60,7 @@ class Zend_Gdata_Calendar_Extension_Timezone extends Zend_Gdata_Extension
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -103,7 +104,7 @@ class Zend_Gdata_Calendar_Extension_Timezone extends Zend_Gdata_Extension
     /**
      * Set the value for this element's value attribute.
      *
-     * @param string $value The desired value for this attribute.
+     * @param  string $value The desired value for this attribute.
      * @return Zend_Gdata_Calendar_Extension_Timezone The element being modified.
      */
     public function setValue($value)

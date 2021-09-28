@@ -12,10 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Dom
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Dom
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
@@ -53,6 +53,7 @@ class Zend_Dom_Query_Result implements Iterator,Countable
 
     /**
      * XPath query
+     *
      * @var string
      */
     protected $_xpathQuery;
@@ -60,12 +61,12 @@ class Zend_Dom_Query_Result implements Iterator,Countable
     /**
      * Constructor
      *
-     * @param  string $cssQuery
-     * @param  string|array $xpathQuery
-     * @param  DOMDocument $document
-     * @param  DOMNodeList $nodeList
+     * @param string       $cssQuery
+     * @param string|array $xpathQuery
+     * @param DOMDocument  $document
+     * @param DOMNodeList  $nodeList
      */
-    public function  __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
+    public function __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
     {
         $this->_cssQuery   = $cssQuery;
         $this->_xpathQuery = $xpathQuery;

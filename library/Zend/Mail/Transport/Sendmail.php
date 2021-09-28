@@ -40,6 +40,7 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
 {
     /**
      * Subject
+     *
      * @access public
      */
     public ?string $subject = null;
@@ -54,7 +55,8 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
 
     /**
      * EOL character string
-     * @var string
+     *
+     * @var    string
      * @access public
      */
     public string $EOL = PHP_EOL;
@@ -101,7 +103,8 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
                 $this->recipients,
                 $this->_mail->getSubject(),
                 $this->body,
-                $this->header);
+                $this->header
+            );
             restore_error_handler();
         } else {
             if(!is_string($this->parameters)) {
@@ -111,7 +114,7 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
                  * Exception is thrown here because
                  * $parameters is a public property
                  */
-                require_once 'Zend/Mail/Transport/Exception.php';
+                include_once 'Zend/Mail/Transport/Exception.php';
                 throw new Zend_Mail_Transport_Exception(
                     'Parameters were set but are not a string'
                 );
@@ -123,7 +126,8 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
                 $this->_mail->getSubject(),
                 $this->body,
                 $this->header,
-                $this->parameters);
+                $this->parameters
+            );
             restore_error_handler();
         }
 
@@ -131,7 +135,7 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
             /**
              * @see Zend_Mail_Transport_Exception
              */
-            require_once 'Zend/Mail/Transport/Exception.php';
+            include_once 'Zend/Mail/Transport/Exception.php';
             throw new Zend_Mail_Transport_Exception('Unable to send mail. ' . $this->_errstr);
         }
     }
@@ -144,10 +148,10 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
      * headers, respectively. This method strips those out as a sanity check to
      * prevent duplicate header entries.
      *
-     * @access  protected
-     * @param   array $headers
-     * @return  void
-     * @throws  Zend_Mail_Transport_Exception
+     * @access protected
+     * @param  array $headers
+     * @return void
+     * @throws Zend_Mail_Transport_Exception
      */
     protected function _prepareHeaders($headers)
     {
@@ -155,7 +159,7 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
             /**
              * @see Zend_Mail_Transport_Exception
              */
-            require_once 'Zend/Mail/Transport/Exception.php';
+            include_once 'Zend/Mail/Transport/Exception.php';
             throw new Zend_Mail_Transport_Exception('_prepareHeaders requires a registered Zend_Mail object');
         }
 
@@ -167,7 +171,7 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
                 /**
                  * @see Zend_Mail_Transport_Exception
                  */
-                require_once 'Zend/Mail/Transport/Exception.php';
+                include_once 'Zend/Mail/Transport/Exception.php';
                 throw new Zend_Mail_Transport_Exception('Missing To addresses');
             }
         } else {
@@ -176,7 +180,7 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
                 /**
                  * @see Zend_Mail_Transport_Exception
                  */
-                require_once 'Zend/Mail/Transport/Exception.php';
+                include_once 'Zend/Mail/Transport/Exception.php';
                 throw new Zend_Mail_Transport_Exception('Missing To header');
             }
 
@@ -202,11 +206,11 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
     /**
      * Temporary error handler for PHP native mail().
      *
-     * @param int    $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param string $errline
-     * @param array  $errcontext
+     * @param  int    $errno
+     * @param  string $errstr
+     * @param  string $errfile
+     * @param  string $errline
+     * @param  array  $errcontext
      * @return true
      */
     public function _handleMailErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)

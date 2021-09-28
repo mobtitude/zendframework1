@@ -31,10 +31,10 @@ require_once 'Zend/Tool/Project/Context/Zf/AbstractClassFile.php';
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Zf_FormFile extends Zend_Tool_Project_Context_Zf_AbstractClassFile
 {
@@ -51,7 +51,6 @@ class Zend_Tool_Project_Context_Zf_FormFile extends Zend_Tool_Project_Context_Zf
 
     /**
      * init()
-     *
      */
     public function init()
     {
@@ -92,22 +91,28 @@ class Zend_Tool_Project_Context_Zf_FormFile extends Zend_Tool_Project_Context_Zf
 
         $className = $this->getFullClassName($this->_formName, 'Form');
 
-        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+        $codeGenFile = new Zend_CodeGenerator_Php_File(
+            array(
             'fileName' => $this->getPath(),
             'classes' => array(
-                new Zend_CodeGenerator_Php_Class(array(
+                new Zend_CodeGenerator_Php_Class(
+                    array(
                     'name' => $className,
                     'extendedClass' => 'Zend_Form',
                     'methods' => array(
-                        new Zend_CodeGenerator_Php_Method(array(
+                        new Zend_CodeGenerator_Php_Method(
+                            array(
                             'name' => 'init',
                             'body' => '/* Form Elements & Other Definitions Here ... */',
-                            ))
+                            )
+                        )
                         )
 
-                    ))
+                    )
                 )
-            ));
+                )
+            )
+        );
         return $codeGenFile->generate();
     }
 }

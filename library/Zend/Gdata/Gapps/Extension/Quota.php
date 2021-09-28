@@ -74,7 +74,7 @@ class Zend_Gdata_Gapps_Extension_Quota extends Zend_Gdata_Extension
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -108,7 +108,7 @@ class Zend_Gdata_Gapps_Extension_Quota extends Zend_Gdata_Extension
     /**
      * Get the value for this element's limit attribute.
      *
-     * @see setLimit
+     * @see    setLimit
      * @return string The requested attribute.
      */
     public function getLimit()
@@ -121,7 +121,7 @@ class Zend_Gdata_Gapps_Extension_Quota extends Zend_Gdata_Extension
      * of storage space, in bytes, that should be made available to
      * the associated user.
      *
-     * @param string $value The desired value for this attribute.
+     * @param  string $value The desired value for this attribute.
      * @return Zend_Gdata_Gapps_Extension_Quota Provides a fluent interface.
      */
     public function setLimit($value)

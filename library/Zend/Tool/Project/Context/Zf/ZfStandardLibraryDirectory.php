@@ -31,10 +31,10 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Zf_ZfStandardLibraryDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
@@ -56,7 +56,6 @@ class Zend_Tool_Project_Context_Zf_ZfStandardLibraryDirectory extends Zend_Tool_
 
     /**
      * create()
-     *
      */
     public function create()
     {
@@ -87,7 +86,7 @@ class Zend_Tool_Project_Context_Zf_ZfStandardLibraryDirectory extends Zend_Tool_
      */
     protected function _getZfPath()
     {
-        require_once 'Zend/Loader.php';
+        include_once 'Zend/Loader.php';
         foreach (Zend_Loader::explodeIncludePath() as $includePath) {
             if (!file_exists($includePath) || $includePath[0] == '.') {
                 continue;

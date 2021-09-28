@@ -53,7 +53,7 @@ class Zend_Amf_Value_TraitsInfo
     /**
      * Used to keep track of all class traits of an AMF3 object
      *
-     * @param  string $className
+     * @param  string  $className
      * @param  boolean $dynamic
      * @param  boolean $externalizable
      * @param  boolean $properties

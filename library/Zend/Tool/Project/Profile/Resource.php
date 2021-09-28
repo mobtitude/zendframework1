@@ -33,10 +33,10 @@ require_once 'Zend/Tool/Project/Context/Repository.php';
 /**
  * This class is an iterator that will iterate only over enabled resources
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resource_Container
 {
@@ -45,12 +45,16 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
 
     protected ?\Zend_Tool_Project_Profile_Resource $_parentResource = null;
 
-    /**#@+
+    /**
+     * #@+
+     *
      * @var bool
      */
     protected $_deleted = false;
     protected bool $_enabled = true;
-    /**#@-*/
+    /**
+     * #@-
+     */
 
     /**
      * @var Zend_Tool_Project_Context|string
@@ -77,7 +81,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     /**
      * setContext()
      *
-     * @param string|Zend_Tool_Project_Context_Interface $context
+     * @param  string|Zend_Tool_Project_Context_Interface $context
      * @return Zend_Tool_Project_Profile_Resource
      */
     public function setContext($context)
@@ -117,7 +121,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     /**
      * setProfile()
      *
-     * @param Zend_Tool_Project_Profile $profile
+     * @param  Zend_Tool_Project_Profile $profile
      * @return Zend_Tool_Project_Profile_Resource
      */
     public function setProfile(Zend_Tool_Project_Profile $profile)
@@ -153,7 +157,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     /**
      * setEnabled()
      *
-     * @param bool $enabled
+     * @param  bool $enabled
      * @return Zend_Tool_Project_Profile_Resource
      */
     public function setEnabled($enabled = true)
@@ -176,7 +180,7 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     /**
      * setDeleted()
      *
-     * @param bool $deleted
+     * @param  bool $deleted
      * @return Zend_Tool_Project_Profile_Resource
      */
     public function setDeleted($deleted = true)
@@ -234,8 +238,8 @@ class Zend_Tool_Project_Profile_Resource extends Zend_Tool_Project_Profile_Resou
     /**
      * __call()
      *
-     * @param string $method
-     * @param array $arguments
+     * @param  string $method
+     * @param  array  $arguments
      * @return Zend_Tool_Project_Profile_Resource
      */
     public function __call($method, $arguments)

@@ -133,7 +133,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
      * Describes an entry in a feed of Book Search volumes
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {
@@ -147,7 +147,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistance.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -156,8 +156,11 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
         $element = parent::getDOM($doc);
         if ($this->_creators !== null) {
             foreach ($this->_creators as $creators) {
-                $element->appendChild($creators->getDOM(
-                    $element->ownerDocument));
+                $element->appendChild(
+                    $creators->getDOM(
+                        $element->ownerDocument
+                    )
+                );
             }
         }
         if ($this->_dates !== null) {
@@ -167,38 +170,56 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
         }
         if ($this->_descriptions !== null) {
             foreach ($this->_descriptions as $descriptions) {
-                $element->appendChild($descriptions->getDOM(
-                    $element->ownerDocument));
+                $element->appendChild(
+                    $descriptions->getDOM(
+                        $element->ownerDocument
+                    )
+                );
             }
         }
         if ($this->_formats !== null) {
             foreach ($this->_formats as $formats) {
-                $element->appendChild($formats->getDOM(
-                    $element->ownerDocument));
+                $element->appendChild(
+                    $formats->getDOM(
+                        $element->ownerDocument
+                    )
+                );
             }
         }
         if ($this->_identifiers !== null) {
             foreach ($this->_identifiers as $identifiers) {
-                $element->appendChild($identifiers->getDOM(
-                    $element->ownerDocument));
+                $element->appendChild(
+                    $identifiers->getDOM(
+                        $element->ownerDocument
+                    )
+                );
             }
         }
         if ($this->_languages !== null) {
             foreach ($this->_languages as $languages) {
-                $element->appendChild($languages->getDOM(
-                    $element->ownerDocument));
+                $element->appendChild(
+                    $languages->getDOM(
+                        $element->ownerDocument
+                    )
+                );
             }
         }
         if ($this->_publishers !== null) {
             foreach ($this->_publishers as $publishers) {
-                $element->appendChild($publishers->getDOM(
-                    $element->ownerDocument));
+                $element->appendChild(
+                    $publishers->getDOM(
+                        $element->ownerDocument
+                    )
+                );
             }
         }
         if ($this->_subjects !== null) {
             foreach ($this->_subjects as $subjects) {
-                $element->appendChild($subjects->getDOM(
-                    $element->ownerDocument));
+                $element->appendChild(
+                    $subjects->getDOM(
+                        $element->ownerDocument
+                    )
+                );
             }
         }
         if ($this->_titles !== null) {
@@ -207,24 +228,39 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
             }
         }
         if ($this->_comments !== null) {
-            $element->appendChild($this->_comments->getDOM(
-                $element->ownerDocument));
+            $element->appendChild(
+                $this->_comments->getDOM(
+                    $element->ownerDocument
+                )
+            );
         }
         if ($this->_embeddability !== null) {
-            $element->appendChild($this->_embeddability->getDOM(
-                $element->ownerDocument));
+            $element->appendChild(
+                $this->_embeddability->getDOM(
+                    $element->ownerDocument
+                )
+            );
         }
         if ($this->_rating !== null) {
-            $element->appendChild($this->_rating->getDOM(
-                $element->ownerDocument));
+            $element->appendChild(
+                $this->_rating->getDOM(
+                    $element->ownerDocument
+                )
+            );
         }
         if ($this->_review !== null) {
-            $element->appendChild($this->_review->getDOM(
-                $element->ownerDocument));
+            $element->appendChild(
+                $this->_review->getDOM(
+                    $element->ownerDocument
+                )
+            );
         }
         if ($this->_viewability !== null) {
-            $element->appendChild($this->_viewability->getDOM(
-                $element->ownerDocument));
+            $element->appendChild(
+                $this->_viewability->getDOM(
+                    $element->ownerDocument
+                )
+            );
         }
         return $element;
     }
@@ -458,7 +494,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the Comments class
      *
-     * @param Zend_Gdata_Extension_Comments|null $comments Comments class
+     * @param  Zend_Gdata_Extension_Comments|null $comments Comments class
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setComments($comments)
@@ -470,7 +506,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the creators
      *
-     * @param array $creators Creators|null
+     * @param  array $creators Creators|null
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setCreators($creators)
@@ -482,7 +518,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the dates
      *
-     * @param array $dates dates
+     * @param  array $dates dates
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setDates($dates)
@@ -494,7 +530,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the descriptions
      *
-     * @param array $descriptions descriptions
+     * @param  array $descriptions descriptions
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setDescriptions($descriptions)
@@ -506,7 +542,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the embeddability
      *
-     * @param Zend_Gdata_Books_Extension_Embeddability|null $embeddability
+     * @param  Zend_Gdata_Books_Extension_Embeddability|null $embeddability
      *        embeddability
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
@@ -519,7 +555,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the formats
      *
-     * @param array $formats formats
+     * @param  array $formats formats
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setFormats($formats)
@@ -531,7 +567,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the identifiers
      *
-     * @param array $identifiers identifiers
+     * @param  array $identifiers identifiers
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setIdentifiers($identifiers)
@@ -543,7 +579,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the languages
      *
-     * @param array $languages languages
+     * @param  array $languages languages
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setLanguages($languages)
@@ -555,7 +591,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the publishers
      *
-     * @param array $publishers publishers
+     * @param  array $publishers publishers
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setPublishers($publishers)
@@ -567,7 +603,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the rating
      *
-     * @param Zend_Gdata_Extension_Rating|null $rating rating
+     * @param  Zend_Gdata_Extension_Rating|null $rating rating
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setRating($rating)
@@ -579,7 +615,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the review
      *
-     * @param Zend_Gdata_Books_Extension_Review|null $review review
+     * @param  Zend_Gdata_Books_Extension_Review|null $review review
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setReview($review)
@@ -591,7 +627,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the subjects
      *
-     * @param array $subjects subjects
+     * @param  array $subjects subjects
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setSubjects($subjects)
@@ -603,7 +639,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the titles
      *
-     * @param array $titles titles
+     * @param  array $titles titles
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
     public function setTitles($titles)
@@ -615,7 +651,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
     /**
      * Sets the viewability
      *
-     * @param Zend_Gdata_Books_Extension_Viewability|null $viewability
+     * @param  Zend_Gdata_Books_Extension_Viewability|null $viewability
      *        viewability
      * @return Zend_Gdata_Books_VolumeEntry Provides a fluent interface
      */
@@ -637,10 +673,10 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
         $fullId = $this->getId()->getText();
         $position = strrpos($fullId, '/');
         if ($position === false) {
-            require_once 'Zend/Gdata/App/Exception.php';
+            include_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('Slash not found in atom:id');
         } else {
-            return substr($fullId, strrpos($fullId,'/') + 1);
+            return substr($fullId, strrpos($fullId, '/') + 1);
         }
     }
 

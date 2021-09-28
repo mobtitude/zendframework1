@@ -66,7 +66,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
     /**
      * Retrieve storage client for this stream type
      * 
-     * @param string $path
+     * @param  string $path
      * @return Zend_Service_WindowsAzure_Storage_Blob
      */
     protected function _getStorageClient($path = '')
@@ -89,7 +89,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
     /**
      * Extract container name
      *
-     * @param string $path
+     * @param  string $path
      * @return string
      */
     protected function _getContainerName($path)
@@ -105,7 +105,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
     /**
      * Extract file name
      *
-     * @param string $path
+     * @param  string $path
      * @return string
      */
     protected function _getFileName($path)
@@ -113,9 +113,9 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
         $url = parse_url($path);
         if ($url['host']) {
             $fileName = isset($url['path']) ? $url['path'] : $url['host'];
-    	    if (strpos($fileName, '/') === 0) {
-    	        $fileName = substr($fileName, 1);
-    	    }
+            if (strpos($fileName, '/') === 0) {
+                $fileName = substr($fileName, 1);
+            }
             return $fileName;
         }
 
@@ -146,7 +146,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
         // Write mode?
         if (strpbrk($mode, 'wax+')) {
             $this->_writeMode = true;
-    	} else {
+        } else {
             $this->_writeMode = false;
         }
         
@@ -352,8 +352,8 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
     /**
      * Attempt to rename the item
      *
-     * @param  string  $path_from
-     * @param  string  $path_to
+     * @param  string $path_from
+     * @param  string $path_to
      * @return boolean False
      */
     public function rename($path_from, $path_to)
@@ -386,7 +386,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
     /**
      * Return array of URL variables
      *
-     * @param  string $path
+     * @param  string  $path
      * @param  integer $flags
      * @return array
      */
@@ -410,9 +410,9 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
         $info = null;
         try {
             $info = $this->_getStorageClient($path)->getBlobInstance(
-                        $this->_getContainerName($path),
-                        $this->_getFileName($path)
-                    );
+                $this->_getContainerName($path),
+                $this->_getFileName($path)
+            );
             $stat['size']  = $info->Size;
 
             // Set the modification time and last modified to the Last-Modified header.
@@ -485,7 +485,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
     /**
      * Attempt to open a directory
      *
-     * @param  string $path
+     * @param  string  $path
      * @param  integer $options
      * @return boolean
      */

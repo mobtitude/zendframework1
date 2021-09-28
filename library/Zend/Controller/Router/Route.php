@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Router_Route_Abstract */
+/**
+ * Zend_Controller_Router_Route_Abstract 
+ */
 require_once 'Zend/Controller/Router/Route/Abstract.php';
 
 /**
@@ -126,7 +128,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
     /**
      * Instantiates route based on passed Zend_Config structure
      *
-     * @param Zend_Config $config Configuration object
+     * @param  Zend_Config $config Configuration object
      * @return Zend_Controller_Router_Route
      */
     public static function getInstance(Zend_Config $config)
@@ -150,8 +152,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
      */
     public function __construct(
         $route, $defaults = array(), $reqs = array(), Zend_Translate $translator = null, $locale = null
-    )
-    {
+    ) {
         $route               = trim($route, $this->_urlDelimiter);
         $this->_defaults     = (array)$defaults;
         $this->_requirements = (array)$reqs;
@@ -194,8 +195,8 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
      * Matches a user submitted path with parts defined by a map. Assigns and
      * returns an array of variables on a successful match.
      *
-     * @param string  $path Path used to match against this routing map
-     * @param boolean $partial
+     * @param  string  $path    Path used to match against this routing map
+     * @param  boolean $partial
      * @throws Zend_Controller_Router_Exception
      * @return array|false An array of assigned values or a false on a mismatch
      */
@@ -251,7 +252,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 $part = $this->_parts[$pos];
                 if ($this->_isTranslated
                     && (substr($part, 0, 1) === '@' && substr($part, 1, 1) !== '@'
-                        && $name === null)
+                    && $name === null)
                     || $name !== null && in_array($name, $this->_translatable)
                 ) {
                     if (substr($part, 0, 1) === '@') {
@@ -317,8 +318,8 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
     /**
      * Assembles user submitted parameters forming a URL path defined by this route
      *
-     * @param  array   $data  An array of variable and value pairs used as parameters
-     * @param  boolean $reset Whether or not to set route defaults with those provided in $data
+     * @param  array   $data    An array of variable and value pairs used as parameters
+     * @param  boolean $reset   Whether or not to set route defaults with those provided in $data
      * @param  boolean $encode
      * @param  boolean $partial
      * @throws Zend_Controller_Router_Exception
@@ -359,7 +360,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 } elseif (array_key_exists($name, $this->_defaults)) {
                     $value = $this->_defaults[$name];
                 } else {
-                    require_once 'Zend/Controller/Router/Exception.php';
+                    include_once 'Zend/Controller/Router/Exception.php';
                     throw new Zend_Controller_Router_Exception($name . ' is not specified');
                 }
 
@@ -427,7 +428,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
     /**
      * Return a single parameter of route's defaults
      *
-     * @param string $name Array key of the parameter
+     * @param  string $name Array key of the parameter
      * @return string Previously set default
      */
     public function getDefault($name)
@@ -517,7 +518,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
             }
         }
 
-        require_once 'Zend/Controller/Router/Exception.php';
+        include_once 'Zend/Controller/Router/Exception.php';
         throw new Zend_Controller_Router_Exception('Could not find a translator');
     }
 

@@ -101,7 +101,7 @@ abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
      * @access public
      *
      * @param array $attribs From this array, each key-value pair is
-     * converted to an attribute name and value.
+     *                       converted to an attribute name and value.
      *
      * @return string The XHTML for the attributes.
      */
@@ -115,7 +115,7 @@ abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
                 // Don't escape event attributes; _do_ substitute double quotes with singles
                 if (!is_scalar($val)) {
                     // non-scalar data should be cast to JSON first
-                    require_once 'Zend/Json.php';
+                    include_once 'Zend/Json.php';
                     $val = Zend_Json::encode($val);
                 }
                 // Escape single quotes inside event attribute values.

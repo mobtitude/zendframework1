@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Abstract */
+/**
+ * Zend_Form_Decorator_Abstract 
+ */
 require_once 'Zend/Form/Decorator/Abstract.php';
 
 /**
@@ -53,8 +55,10 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
         'markupListStart'         => '<ul class="form-errors">',
     );
 
-    /**#@+
+    /**
+     * #@+
      * Markup options
+     *
      * @var string
      */
     protected ?bool $_ignoreSubForms = null;
@@ -66,7 +70,9 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
     protected ?string $_markupListItemEnd = null;
     protected ?string $_markupListItemStart = null;
     protected ?string $_markupListStart = null;
-    /**#@-*/
+    /**
+     * #@-
+     */
     /**
      * Whether or not to escape error label and error message
      */
@@ -102,9 +108,9 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
                 . $this->getMarkupListEnd();
 
         switch ($this->getPlacement()) {
-            case self::APPEND:
+        case self::APPEND:
                 return $content . $this->getSeparator() . $markup;
-            case self::PREPEND:
+        case self::PREPEND:
                 return $markup . $this->getSeparator() . $content;
         }
     }
@@ -445,7 +451,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
     /**
      * Render element label
      *
-     * @param  Zend_Form_Element $element
+     * @param  Zend_Form_Element   $element
      * @param  Zend_View_Interface $view
      * @return string
      */
@@ -473,7 +479,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
     /**
      * Recurse through a form object, rendering errors
      *
-     * @param  Zend_Form $form
+     * @param  Zend_Form           $form
      * @param  Zend_View_Interface $view
      * @return string
      */

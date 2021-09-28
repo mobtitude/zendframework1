@@ -12,25 +12,27 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 
-/** Zend_Pdf_Element */
+/**
+ * Zend_Pdf_Element 
+ */
 require_once 'Zend/Pdf/Element.php';
 
 
 /**
  * PDF file 'boolean' element implementation
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Element_Boolean extends Zend_Pdf_Element
 {
@@ -43,13 +45,13 @@ class Zend_Pdf_Element_Boolean extends Zend_Pdf_Element
     /**
      * Object constructor
      *
-     * @param boolean $val
+     * @param  boolean $val
      * @throws Zend_Pdf_Exception
      */
     public function __construct($val)
     {
         if (! is_bool($val)) {
-            require_once 'Zend/Pdf/Exception.php';
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Argument must be boolean.');
         }
 
@@ -71,7 +73,7 @@ class Zend_Pdf_Element_Boolean extends Zend_Pdf_Element
     /**
      * Return object as string
      *
-     * @param Zend_Pdf_Factory $factory
+     * @param  Zend_Pdf_Factory $factory
      * @return string
      */
     public function toString($factory = null)

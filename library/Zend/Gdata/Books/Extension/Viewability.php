@@ -47,7 +47,7 @@ class Zend_Gdata_Books_Extension_Viewability extends Zend_Gdata_Extension
      * Describes a viewability
      *
      * @param string|null $value A programmatic value representing the book's
-     *        viewability mode.
+     *                           viewability mode.
      */
     public function __construct($value = null)
     {
@@ -62,7 +62,7 @@ class Zend_Gdata_Books_Extension_Viewability extends Zend_Gdata_Extension
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistance.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -107,8 +107,8 @@ class Zend_Gdata_Books_Extension_Viewability extends Zend_Gdata_Extension
      * Sets the programmatic value that describes the viewability of a volume in
      * Google Book Search
      *
-     * @param string $value programmatic value that describes the viewability
-     *     of a volume in Googl eBook Search
+     * @param  string $value programmatic value that describes the viewability
+     *                       of a volume in Googl eBook Search
      * @return Zend_Gdata_Books_Extension_Viewability Provides a fluent
      *     interface
      */

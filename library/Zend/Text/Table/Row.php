@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Text_Table
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  * @version   $Id$
  */
@@ -24,7 +24,7 @@
  *
  * @category  Zend
  * @package   Zend_Text_Table
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Text_Table_Row
@@ -56,7 +56,7 @@ class Zend_Text_Table_Row
             extract($options, EXTR_IF_EXISTS);
         }
 
-        require_once 'Zend/Text/Table/Column.php';
+        include_once 'Zend/Text/Table/Column.php';
 
         $column = new Zend_Text_Table_Column($content, $align, $colSpan, $encoding);
 
@@ -114,7 +114,7 @@ class Zend_Text_Table_Row
     public function getColumnWidths()
     {
         if ($this->_columnWidths === null) {
-            require_once 'Zend/Text/Table/Exception.php';
+            include_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('No columns were rendered yet');
         }
 
@@ -131,16 +131,16 @@ class Zend_Text_Table_Row
      * @return string
      */
     public function render(array $columnWidths,
-                           Zend_Text_Table_Decorator_Interface $decorator,
-                           $padding = 0)
-    {
+        Zend_Text_Table_Decorator_Interface $decorator,
+        $padding = 0
+    ) {
         // Prepare an array to store all column widths
         $this->_columnWidths = array();
 
         // If there is no single column, create a column which spans over the
         // entire row
         if (count($this->_columns) === 0) {
-            require_once 'Zend/Text/Table/Column.php';
+            include_once 'Zend/Text/Table/Column.php';
             $this->appendColumn(new Zend_Text_Table_Column(null, null, count($columnWidths)));
         }
 
@@ -154,14 +154,18 @@ class Zend_Text_Table_Row
 
             // Verify if there are enough column widths defined
             if (($colNum + $colSpan) > count($columnWidths)) {
-                require_once 'Zend/Text/Table/Exception.php';
+                include_once 'Zend/Text/Table/Exception.php';
                 throw new Zend_Text_Table_Exception('Too many columns');
             }
 
             // Calculate the column width
-            $columnWidth = ($colSpan - 1 + array_sum(array_slice($columnWidths,
-                                                                 $colNum,
-                                                                 $colSpan)));
+            $columnWidth = ($colSpan - 1 + array_sum(
+                array_slice(
+                    $columnWidths,
+                    $colNum,
+                    $colSpan
+                )
+            ));
 
             // Render the column and split it's lines into an array
             $result = explode("\n", $column->render($columnWidth, $padding));
@@ -181,8 +185,12 @@ class Zend_Text_Table_Row
         // it with an empty column
         if ($colNum < count($columnWidths)) {
             $remainingWidth = (count($columnWidths) - $colNum - 1) +
-                               array_sum(array_slice($columnWidths,
-                                                     $colNum));
+                            array_sum(
+                                array_slice(
+                                    $columnWidths,
+                                    $colNum
+                                )
+                            );
             $renderedColumns[] = array(str_repeat(' ', $remainingWidth));
 
             $this->_columnWidths[] = $remainingWidth;

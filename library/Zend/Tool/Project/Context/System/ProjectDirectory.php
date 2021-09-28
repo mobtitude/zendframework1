@@ -46,10 +46,10 @@ require_once 'Zend/Tool/Project/Context/System/NotOverwritable.php';
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_System_ProjectDirectory
     extends Zend_Tool_Project_Context_Filesystem_Directory
@@ -90,7 +90,7 @@ class Zend_Tool_Project_Context_System_ProjectDirectory
 
         // if not, exception.
         if ($projectDirectory == null) {
-            require_once 'Zend/Tool/Project/Exception.php';
+            include_once 'Zend/Tool/Project/Exception.php';
             throw new Zend_Tool_Project_Exception('projectDirectory cannot find the directory for this project.');
         }
 

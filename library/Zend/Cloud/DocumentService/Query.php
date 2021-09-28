@@ -58,7 +58,7 @@ class Zend_Cloud_DocumentService_Query
      * The call will be iterpreted as clause 'foo' with argument 'bar'
      *
      * @param  string $name Clause/method name
-     * @param  mixed $args
+     * @param  mixed  $args
      * @return Zend_Cloud_DocumentService_Query
      */
     public function __call($name, $args)
@@ -79,7 +79,7 @@ class Zend_Cloud_DocumentService_Query
             return $this;
         }
         if (!is_string($select) && !is_array($select)) {
-            require_once 'Zend/Cloud/DocumentService/Exception.php';
+            include_once 'Zend/Cloud/DocumentService/Exception.php';
             throw new Zend_Cloud_DocumentService_Exception("SELECT argument must be a string or an array of strings");
         }
         $this->_clauses[] = array(self::QUERY_SELECT, $select);
@@ -89,13 +89,13 @@ class Zend_Cloud_DocumentService_Query
     /**
      * FROM clause
      *
-     * @param string $name Field names
+     * @param  string $name Field names
      * @return Zend_Cloud_DocumentService_Query
      */
     public function from($name)
     {
         if(!is_string($name)) {
-            require_once 'Zend/Cloud/DocumentService/Exception.php';
+            include_once 'Zend/Cloud/DocumentService/Exception.php';
             throw new Zend_Cloud_DocumentService_Exception("FROM argument must be a string");
         }
         $this->_clauses[] = array(self::QUERY_FROM, $name);
@@ -105,15 +105,15 @@ class Zend_Cloud_DocumentService_Query
     /**
      * WHERE query
      *
-     * @param string $cond Condition
-     * @param array $args Arguments to substitute instead of ?'s in condition
-     * @param string $op relation to other clauses - and/or
+     * @param  string $cond Condition
+     * @param  array  $args Arguments to substitute instead of ?'s in condition
+     * @param  string $op   relation to other clauses - and/or
      * @return Zend_Cloud_DocumentService_Query
      */
     public function where($cond, $value = null, $op = 'and')
     {
         if (!is_string($cond)) {
-            require_once 'Zend/Cloud/DocumentService/Exception.php';
+            include_once 'Zend/Cloud/DocumentService/Exception.php';
             throw new Zend_Cloud_DocumentService_Exception("WHERE argument must be a string");
         }
         $this->_clauses[] = array(self::QUERY_WHERE, array($cond, $value, $op));
@@ -129,7 +129,7 @@ class Zend_Cloud_DocumentService_Query
     public function whereId($value)
     {
         if (!is_scalar($value)) {
-            require_once 'Zend/Cloud/DocumentService/Exception.php';
+            include_once 'Zend/Cloud/DocumentService/Exception.php';
             throw new Zend_Cloud_DocumentService_Exception("WHEREID argument must be a scalar");
         }
         $this->_clauses[] = array(self::QUERY_WHEREID, $value);
@@ -145,7 +145,7 @@ class Zend_Cloud_DocumentService_Query
     public function limit($limit)
     {
         if ($limit != (int) $limit) {
-            require_once 'Zend/Cloud/DocumentService/Exception.php';
+            include_once 'Zend/Cloud/DocumentService/Exception.php';
             throw new Zend_Cloud_DocumentService_Exception("LIMIT argument must be an integer");
         }
         $this->_clauses[] = array(self::QUERY_LIMIT, $limit);
@@ -156,7 +156,7 @@ class Zend_Cloud_DocumentService_Query
      * ORDER clause; field or fields to sort by, and direction to sort
      *
      * @param  string|int|array $sort
-     * @param  string $direction
+     * @param  string           $direction
      * @return Zend_Cloud_DocumentService_Query
      */
     public function order($sort, $direction = 'asc')

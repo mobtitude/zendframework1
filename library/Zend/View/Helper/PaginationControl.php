@@ -12,18 +12,18 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_View
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_View
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
- * @category   Zend
- * @package    Zend_View
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_View
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_PaginationControl
 {
@@ -77,9 +77,9 @@ class Zend_View_Helper_PaginationControl
      * the defaults will be used (if set).
      *
      * @param  Zend_Paginator (Optional) $paginator
-     * @param  string $scrollingStyle (Optional) Scrolling style
-     * @param  string $partial (Optional) View partial
-     * @param  array|string $params (Optional) params to pass to the partial
+     * @param  string                    $scrollingStyle (Optional) Scrolling style
+     * @param  string                    $partial        (Optional) View partial
+     * @param  array|string              $params         (Optional) params to pass to the partial
      * @return string
      * @throws Zend_View_Exception
      */
@@ -92,7 +92,7 @@ class Zend_View_Helper_PaginationControl
                 /**
                  * @see Zend_View_Exception
                  */
-                require_once 'Zend/View/Exception.php';
+                include_once 'Zend/View/Exception.php';
 
                 $e = new Zend_View_Exception('No paginator instance provided or incorrect type');
                 $e->setView($this->view);
@@ -105,7 +105,7 @@ class Zend_View_Helper_PaginationControl
                 /**
                  * @see Zend_View_Exception
                  */
-                require_once 'Zend/View/Exception.php';
+                include_once 'Zend/View/Exception.php';
                 $e = new Zend_View_Exception('No view partial provided and no default set');
                 $e->setView($this->view);
                 throw $e;
@@ -125,7 +125,7 @@ class Zend_View_Helper_PaginationControl
                 /**
                  * @see Zend_View_Exception
                  */
-                require_once 'Zend/View/Exception.php';
+                include_once 'Zend/View/Exception.php';
                 $e = new Zend_View_Exception('A view partial supplied as an array must contain two values: the filename and its module');
                 $e->setView($this->view);
                 throw $e;

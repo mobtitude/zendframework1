@@ -52,25 +52,25 @@ class Zend_Service_Rackspace_Servers_SharedIpGroup
      * Construct
      * 
      * @param  Zend_Service_Rackspace_Servers $service
-     * @param  array $data
+     * @param  array                          $data
      * @return void
      */
     public function __construct($service, $data)
     {
         if (!($service instanceof Zend_Service_Rackspace_Servers) || !is_array($data)) {
-            require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+            include_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception(self::ERROR_PARAM_CONSTRUCT);
         }
         if (!array_key_exists('name', $data)) {
-            require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+            include_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception(self::ERROR_PARAM_NO_NAME);
         }
         if (!array_key_exists('id', $data)) {
-            require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+            include_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception(self::ERROR_PARAM_NO_ID);
         }
         if (isset($data['servers']) && !is_array($data['servers'])) {
-            require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+            include_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception(self::ERROR_PARAM_NO_SERVERS);
         } 
         $this->service= $service;
@@ -119,7 +119,7 @@ class Zend_Service_Rackspace_Servers_SharedIpGroup
     /**
      * Get the server 
      * 
-     * @param integer $id
+     * @param  integer $id
      * @return Zend_Service_Rackspace_Servers_Server|boolean
      */
     public function getServer($id)
@@ -127,7 +127,7 @@ class Zend_Service_Rackspace_Servers_SharedIpGroup
         if (empty($this->serversId)) {
             $this->getServersId();
         }
-        if (in_array($id,$this->serversId)) {
+        if (in_array($id, $this->serversId)) {
             return $this->service->getServer($id);
         }
         return false;
@@ -143,7 +143,7 @@ class Zend_Service_Rackspace_Servers_SharedIpGroup
     public function createServer(array $data, $metadata=array(),$files=array()) 
     {
         $data['sharedIpGroupId']= (integer) $this->id;
-        return $this->service->createServer($data,$metadata,$files);
+        return $this->service->createServer($data, $metadata, $files);
     }
     /**
      * To Array

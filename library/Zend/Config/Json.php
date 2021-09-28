@@ -69,7 +69,7 @@ class Zend_Config_Json extends Zend_Config
      * Note that the keys in $section will override any keys of the same
      * name in the sections that have been included via "_extends".
      *
-     * @param  string  $json     JSON file or string to process
+     * @param  string  $json    JSON file or string to process
      * @param  mixed   $section Section to process
      * @param  boolean $options Whether modifiacations are allowed at runtime
      * @throws Zend_Config_Exception When JSON text is not set or cannot be loaded
@@ -78,7 +78,7 @@ class Zend_Config_Json extends Zend_Config
     public function __construct($json, $section = null, $options = false)
     {
         if (empty($json)) {
-            require_once 'Zend/Config/Exception.php';
+            include_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('Filename is not set');
         }
 
@@ -88,20 +88,20 @@ class Zend_Config_Json extends Zend_Config
         } elseif (is_array($options)) {
             foreach ($options as $key => $value) {
                 switch (strtolower($key)) {
-                    case 'allow_modifications':
-                    case 'allowmodifications':
-                        $allowModifications = (bool) $value;
-                        break;
-                    case 'skip_extends':
-                    case 'skipextends':
-                        $this->_skipExtends = (bool) $value;
-                        break;
-                    case 'ignore_constants':
-                    case 'ignoreconstants':
-                        $this->_ignoreConstants = (bool) $value;
-                        break;
-                    default:
-                        break;
+                case 'allow_modifications':
+                case 'allowmodifications':
+                    $allowModifications = (bool) $value;
+                    break;
+                case 'skip_extends':
+                case 'skipextends':
+                    $this->_skipExtends = (bool) $value;
+                    break;
+                case 'ignore_constants':
+                case 'ignoreconstants':
+                    $this->_ignoreConstants = (bool) $value;
+                    break;
+                default:
+                    break;
                 }
             }
         }
@@ -114,7 +114,7 @@ class Zend_Config_Json extends Zend_Config
 
         // Check if there was a error while loading file
         if ($this->_loadFileErrorStr !== null) {
-            require_once 'Zend/Config/Exception.php';
+            include_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception($this->_loadFileErrorStr);
         }
 
@@ -128,7 +128,7 @@ class Zend_Config_Json extends Zend_Config
             $config = Zend_Json::decode($json);
         } catch (Zend_Json_Exception $e) {
             // decode failed
-            require_once 'Zend/Config/Exception.php';
+            include_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception("Error parsing JSON data");
         }
 
@@ -143,7 +143,7 @@ class Zend_Config_Json extends Zend_Config
             $dataArray = array();
             foreach ($section as $sectionName) {
                 if (!isset($config[$sectionName])) {
-                    require_once 'Zend/Config/Exception.php';
+                    include_once 'Zend/Config/Exception.php';
                     throw new Zend_Config_Exception(sprintf('Section "%s" cannot be found', $sectionName));
                 }
 
@@ -153,7 +153,7 @@ class Zend_Config_Json extends Zend_Config
             parent::__construct($dataArray, $allowModifications);
         } else {
             if (!isset($config[$section])) {
-                require_once 'Zend/Config/Exception.php';
+                include_once 'Zend/Config/Exception.php';
                 throw new Zend_Config_Exception(sprintf('Section "%s" cannot be found', $section));
             }
 
@@ -173,16 +173,16 @@ class Zend_Config_Json extends Zend_Config
      * Helper function to process each element in the section and handle
      * the "_extends" inheritance attribute.
      *
-     * @param  array            $data Data array to process
-     * @param  string           $section Section to process
-     * @param  array            $config  Configuration which was parsed yet
+     * @param  array  $data    Data array to process
+     * @param  string $section Section to process
+     * @param  array  $config  Configuration which was parsed yet
      * @throws Zend_Config_Exception When $section cannot be found
      * @return array
      */
     protected function _processExtends(array $data, $section, array $config = array())
     {
         if (!isset($data[$section])) {
-            require_once 'Zend/Config/Exception.php';
+            include_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception(sprintf('Section "%s" cannot be found', $section));
         }
 
@@ -190,7 +190,7 @@ class Zend_Config_Json extends Zend_Config
 
         if (is_array($thisSection) && isset($thisSection[self::EXTENDS_NAME])) {
             if (is_array($thisSection[self::EXTENDS_NAME])) {
-                require_once 'Zend/Config/Exception.php';
+                include_once 'Zend/Config/Exception.php';
                 throw new Zend_Config_Exception('Invalid extends clause: must be a string; array received');
             }
             $this->_assertValidExtend($section, $thisSection[self::EXTENDS_NAME]);

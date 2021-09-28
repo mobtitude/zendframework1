@@ -20,30 +20,39 @@
  * @version    $Id$
  */
 
-/** @see Zend_Barcode_Renderer_RendererAbstract */
+/**
+ * @see Zend_Barcode_Renderer_RendererAbstract 
+ */
 require_once 'Zend/Barcode/Renderer/RendererAbstract.php';
 
-/** @see Zend_Pdf */
+/**
+ * @see Zend_Pdf 
+*/
 require_once 'Zend/Pdf.php';
 
-/** @see Zend_Pdf_Page */
+/**
+ * @see Zend_Pdf_Page 
+*/
 require_once 'Zend/Pdf/Page.php';
 
-/** @see Zend_Pdf_Color_Rgb */
+/**
+ * @see Zend_Pdf_Color_Rgb 
+*/
 require_once 'Zend/Pdf/Color/Rgb.php';
 
 /**
  * Class for rendering the barcode in PDF resource
  *
- * @category   Zend
- * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Barcode
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
 {
     /**
      * PDF resource
+     *
      * @var Zend_Pdf
      */
     protected $_resource = null;
@@ -55,6 +64,7 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Module size rendering
+     *
      * @var float
      */
     protected $_moduleSize = 0.5;
@@ -62,15 +72,15 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
     /**
      * Set an image resource to draw the barcode inside
      *
-     * @param Zend_Pdf $pdf
-     * @param int      $page
+     * @param  Zend_Pdf $pdf
+     * @param  int      $page
      * @return Zend_Barcode_Renderer
      * @throws Zend_Barcode_Renderer_Exception
      */
     public function setResource($pdf, $page = 0)
     {
         if (!$pdf instanceof Zend_Pdf) {
-            require_once 'Zend/Barcode/Renderer/Exception.php';
+            include_once 'Zend/Barcode/Renderer/Exception.php';
             throw new Zend_Barcode_Renderer_Exception(
                 'Invalid Zend_Pdf resource provided to setResource()'
             );
@@ -99,6 +109,7 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Draw the barcode in the PDF, send headers and the PDF
+     *
      * @return mixed
      */
     public function render()
@@ -110,6 +121,7 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Initialize the PDF resource
+     *
      * @return void
      */
     protected function _initRenderer()
@@ -127,7 +139,8 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Draw a polygon in the rendering resource
-     * @param array $points
+     *
+     * @param array   $points
      * @param integer $color
      * @param boolean $filled
      */
@@ -208,13 +221,13 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
         $top  = $page->getHeight() - $position[1] * $this->_moduleSize - $this->_topOffset;
 
         switch ($alignment) {
-            case 'center':
-                $left -= ($width / 2) * cos($angle);
-                $top  -= ($width / 2) * sin($angle);
-                break;
-            case 'right':
-                $left -= $width;
-                break;
+        case 'center':
+            $left -= ($width / 2) * cos($angle);
+            $top  -= ($width / 2) * sin($angle);
+            break;
+        case 'right':
+            $left -= $width;
+            break;
         }
         $page->rotate($left, $top, $angle);
         $page->drawText($text, $left, $top);
@@ -224,9 +237,10 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
     /**
      * Calculate the width of a string:
      * in case of using alignment parameter in drawText
-     * @param string $text
-     * @param Zend_Pdf_Font $font
-     * @param float $fontSize
+     *
+     * @param  string        $text
+     * @param  Zend_Pdf_Font $font
+     * @param  float         $fontSize
      * @return float
      */
     public function widthForStringUsingFontSize($text, $font, $fontSize)

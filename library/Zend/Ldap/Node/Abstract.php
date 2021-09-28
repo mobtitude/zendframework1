@@ -61,9 +61,9 @@ abstract class Zend_Ldap_Node_Abstract implements ArrayAccess, Countable
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  Zend_Ldap_Dn $dn
-     * @param  array        $data
-     * @param  boolean      $fromDataSource
+     * @param Zend_Ldap_Dn $dn
+     * @param array        $data
+     * @param boolean      $fromDataSource
      */
     protected function __construct(Zend_Ldap_Dn $dn, array $data, $fromDataSource)
     {
@@ -295,10 +295,12 @@ abstract class Zend_Ldap_Node_Abstract implements ArrayAccess, Countable
     {
         $name = strtolower($name);
         if (isset($this->_currentData[$name])) {
-            if ($emptyExists) return true;
+            if ($emptyExists) { return true;
+            }
             return count($this->_currentData[$name])>0;
         }
-        else return false;
+        else { return false;
+        }
     }
 
     /**

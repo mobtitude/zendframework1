@@ -26,10 +26,10 @@
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Context_Filesystem_File
 {
@@ -48,7 +48,6 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
 
     /**
      * init()
-     *
      */
     public function init()
     {
@@ -102,33 +101,42 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
         $className = ($this->_moduleName) ? $filter->filter(ucfirst($this->_moduleName)) . '_' : '';
         $className .= ucfirst($this->_controllerName) . 'Controller';
 
-        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+        $codeGenFile = new Zend_CodeGenerator_Php_File(
+            array(
             'fileName' => $this->getPath(),
             'classes' => array(
-                new Zend_CodeGenerator_Php_Class(array(
+                new Zend_CodeGenerator_Php_Class(
+                    array(
                     'name' => $className,
                     'extendedClass' => 'Zend_Controller_Action',
                     'methods' => array(
-                        new Zend_CodeGenerator_Php_Method(array(
+                        new Zend_CodeGenerator_Php_Method(
+                            array(
                             'name' => 'init',
                             'body' => '/* Initialize action controller here */',
-                            ))
+                            )
                         )
-                    ))
+                        )
+                    )
                 )
-            ));
+                )
+            )
+        );
 
 
         if ($className == 'ErrorController') {
 
-            $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+            $codeGenFile = new Zend_CodeGenerator_Php_File(
+                array(
                 'fileName' => $this->getPath(),
                 'classes' => array(
-                    new Zend_CodeGenerator_Php_Class(array(
+                    new Zend_CodeGenerator_Php_Class(
+                        array(
                         'name' => $className,
                         'extendedClass' => 'Zend_Controller_Action',
                         'methods' => array(
-                            new Zend_CodeGenerator_Php_Method(array(
+                            new Zend_CodeGenerator_Php_Method(
+                                array(
                                 'name' => 'errorAction',
                                 'body' => <<<EOS
 \$errors = \$this->_getParam('error_handler');
@@ -168,8 +176,10 @@ if (\$this->getInvokeArg('displayExceptions') == true) {
 
 \$this->view->request   = \$errors->request;
 EOS
-                                )),
-                            new Zend_CodeGenerator_Php_Method(array(
+                                )
+                            ),
+                            new Zend_CodeGenerator_Php_Method(
+                                array(
                                 'name' => 'getLog',
                                 'body' => <<<EOS
 \$bootstrap = \$this->getInvokeArg('bootstrap');
@@ -179,11 +189,14 @@ if (!\$bootstrap->hasResource('Log')) {
 \$log = \$bootstrap->getResource('Log');
 return \$log;
 EOS
-                                )),
+                                )
+                            ),
                             )
-                        ))
+                        )
                     )
-                ));
+                    )
+                )
+            );
 
         }
 

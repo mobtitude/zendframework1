@@ -12,25 +12,27 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 
-/** Zend_Pdf_Element_String */
+/**
+ * Zend_Pdf_Element_String 
+ */
 require_once 'Zend/Pdf/Element/String.php';
 
 
 /**
  * PDF file 'binary string' element implementation
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Element_String_Binary extends Zend_Pdf_Element_String
 {
@@ -45,7 +47,7 @@ class Zend_Pdf_Element_String_Binary extends Zend_Pdf_Element_String
     /**
      * Escape string according to the PDF rules
      *
-     * @param string $inStr
+     * @param  string $inStr
      * @return string
      */
     public static function escape($inStr)
@@ -57,7 +59,7 @@ class Zend_Pdf_Element_String_Binary extends Zend_Pdf_Element_String
     /**
      * Unescape string according to the PDF rules
      *
-     * @param string $inStr
+     * @param  string $inStr
      * @return string
      */
     public static function unescape($inStr)
@@ -81,14 +83,14 @@ class Zend_Pdf_Element_String_Binary extends Zend_Pdf_Element_String
             $chunks[] = '0';
         }
 
-        return pack('H*' , implode($chunks));
+        return pack('H*', implode($chunks));
     }
 
 
     /**
      * Return object as string
      *
-     * @param Zend_Pdf_Factory $factory
+     * @param  Zend_Pdf_Factory $factory
      * @return string
      */
     public function toString($factory = null)

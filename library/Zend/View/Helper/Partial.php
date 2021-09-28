@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_View_Helper_Abstract.php */
+/**
+ * Zend_View_Helper_Abstract.php 
+ */
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
@@ -52,12 +54,12 @@ class Zend_View_Helper_Partial extends Zend_View_Helper_Abstract
      * method to to the view object's assign() method. Otherwise, the result of
      * get_object_vars() is passed.
      *
-     * @param  string $name Name of view script
+     * @param  string       $name   Name of view script
      * @param  string|array $module If $model is empty, and $module is an array,
      *                              these are the variables to populate in the
      *                              view. Otherwise, the module in which the
      *                              partial resides
-     * @param  array $model Variables to populate in the view
+     * @param  array        $model  Variables to populate in the view
      * @return string|Zend_View_Helper_Partial
      */
     public function partial($name = null, $module = null, $model = null)
@@ -75,10 +77,10 @@ class Zend_View_Helper_Partial extends Zend_View_Helper_Abstract
         }
 
         if ((null !== $module) && is_string($module)) {
-            require_once 'Zend/Controller/Front.php';
+            include_once 'Zend/Controller/Front.php';
             $moduleDir = Zend_Controller_Front::getInstance()->getControllerDirectory($module);
             if (null === $moduleDir) {
-                require_once 'Zend/View/Helper/Partial/Exception.php';
+                include_once 'Zend/View/Helper/Partial/Exception.php';
                 $e = new Zend_View_Helper_Partial_Exception('Cannot render partial; module does not exist');
                 $e->setView($this->view);
                 throw $e;
@@ -86,8 +88,8 @@ class Zend_View_Helper_Partial extends Zend_View_Helper_Abstract
             $viewsDir = dirname($moduleDir) . '/views';
             $view->addBasePath($viewsDir);
         } elseif ((null == $model) && (null !== $module)
-            && (is_array($module) || is_object($module)))
-        {
+            && (is_array($module) || is_object($module))
+        ) {
             $model = $module;
         }
 

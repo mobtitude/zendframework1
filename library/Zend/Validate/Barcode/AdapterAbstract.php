@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Validate
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -25,16 +25,17 @@
 require_once 'Zend/Validate/Barcode/AdapterInterface.php';
 
 /**
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Validate
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Validate_Barcode_AdapterAbstract
     implements Zend_Validate_Barcode_AdapterInterface
 {
     /**
      * Allowed barcode lengths
+     *
      * @var integer|array|string
      */
     protected $_length;
@@ -46,6 +47,7 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
 
     /**
      * Callback to checksum function
+     *
      * @var string|array
      */
     protected $_checksum;
@@ -166,7 +168,6 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
 
     /**
      * Returns the checksum function name
-     *
      */
     public function getChecksum()
     {

@@ -21,10 +21,14 @@
  */
 
 
-/** @see Zend_Db_Adapter_Pdo_Ibm */
+/**
+ * @see Zend_Db_Adapter_Pdo_Ibm 
+ */
 require_once 'Zend/Db/Adapter/Pdo/Ibm.php';
 
-/** @see Zend_Db_Statement_Pdo_Ibm */
+/**
+ * @see Zend_Db_Statement_Pdo_Ibm 
+*/
 require_once 'Zend/Db/Statement/Pdo/Ibm.php';
 
 
@@ -68,8 +72,8 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
     /**
      * IDS catalog lookup for describe table
      *
-     * @param string $tableName
-     * @param string $schemaName OPTIONAL
+     * @param  string $tableName
+     * @param  string $schemaName OPTIONAL
      * @return array
      */
     public function describeTable($tableName, $schemaName = null)
@@ -122,8 +126,9 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
             }
 
             $identity = false;
-            if ($row[$typename] == 6 + 256 ||
-                $row[$typename] == 18 + 256) {
+            if ($row[$typename] == 6 + 256 
+                || $row[$typename] == 18 + 256
+            ) {
                 $identity = true;
             }
 
@@ -152,7 +157,7 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
      * Map number representation of a data type
      * to a string
      *
-     * @param int $typeNo
+     * @param  int $typeNo
      * @return string
      */
     protected function _getDataType($typeNo)
@@ -196,7 +201,7 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
      * Helper method to retrieve primary key column
      * and column location
      *
-     * @param int $tabid
+     * @param  int $tabid
      * @return array
      */
     protected function _getPrimaryInfo($tabid)
@@ -236,9 +241,9 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
     /**
      * Adds an IDS-specific LIMIT clause to the SELECT statement.
      *
-     * @param string $sql
-     * @param integer $count
-     * @param integer $offset OPTIONAL
+     * @param  string  $sql
+     * @param  integer $count
+     * @param  integer $offset OPTIONAL
      * @throws Zend_Db_Adapter_Exception
      * @return string
      */
@@ -246,8 +251,10 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
     {
         $count = intval($count);
         if ($count < 0) {
-            /** @see Zend_Db_Adapter_Exception */
-            require_once 'Zend/Db/Adapter/Exception.php';
+            /**
+ * @see Zend_Db_Adapter_Exception 
+*/
+            include_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
         } else if ($count == 0) {
               $limit_sql = str_ireplace("SELECT", "SELECT * FROM (SELECT", $sql);
@@ -255,8 +262,10 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
         } else {
             $offset = intval($offset);
             if ($offset < 0) {
-                /** @see Zend_Db_Adapter_Exception */
-                require_once 'Zend/Db/Adapter/Exception.php';
+                /**
+ * @see Zend_Db_Adapter_Exception 
+*/
+                include_once 'Zend/Db/Adapter/Exception.php';
                 throw new Zend_Db_Adapter_Exception("LIMIT argument offset=$offset is not valid");
             }
             if ($offset == 0) {
@@ -271,7 +280,7 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
     /**
      * IDS-specific last sequence id
      *
-     * @param string $sequenceName
+     * @param  string $sequenceName
      * @return integer
      */
     public function lastSequenceId($sequenceName)
@@ -283,11 +292,11 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
     }
 
      /**
-     * IDS-specific sequence id value
-     *
-     *  @param string $sequenceName
-     *  @return integer
-     */
+      * IDS-specific sequence id value
+      *
+      * @param  string $sequenceName
+      * @return integer
+      */
     public function nextSequenceId($sequenceName)
     {
         $sql = 'SELECT '.$this->_adapter->quoteIdentifier($sequenceName).'.NEXTVAL FROM '

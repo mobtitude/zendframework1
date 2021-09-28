@@ -21,10 +21,10 @@
  */
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Client_Console_HelpSystem
 {
@@ -36,7 +36,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * setRegistry()
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
+     * @param  Zend_Tool_Framework_Registry_Interface $registry
      * @return Zend_Tool_Framework_Client_Console_HelpSystem
      */
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
@@ -49,7 +49,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * respondWithErrorMessage()
      *
-     * @param string $errorMessage
+     * @param string    $errorMessage
      * @param Exception $exception
      */
     public function respondWithErrorMessage($errorMessage, Exception $exception = null)
@@ -100,7 +100,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * respondWithActionHelp()
      *
-     * @param string $actionName
+     * @param  string $actionName
      * @return Zend_Tool_Framework_Client_Console_HelpSystem
      */
     public function respondWithActionHelp($actionName)
@@ -114,8 +114,8 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * respondWithSpecialtyAndParamHelp()
      *
-     * @param string $providerName
-     * @param string $actionName
+     * @param  string $providerName
+     * @param  string $actionName
      * @return Zend_Tool_Framework_Client_Console_HelpSystem
      */
     public function respondWithSpecialtyAndParamHelp($providerName, $actionName)
@@ -124,7 +124,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
         $this->_response->appendContent(
             'Details for action "' . $actionName . '" and provider "' . $providerName . '"',
             array('color' => 'green')
-            );
+        );
         $this->_respondWithSystemInformation($providerName, $actionName, true);
         return $this;
     }
@@ -132,7 +132,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * respondWithProviderHelp()
      *
-     * @param string $providerName
+     * @param  string $providerName
      * @return Zend_Tool_Framework_Client_Console_HelpSystem
      */
     public function respondWithProviderHelp($providerName)
@@ -153,7 +153,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
         /**
          * @see Zend_Version
          */
-        require_once 'Zend/Version.php';
+        include_once 'Zend/Version.php';
         $this->_response->appendContent('Zend Framework', array('color' => array('hiWhite'), 'separator' => false));
         $this->_response->appendContent(' Command Line Console Tool v' . Zend_Version::VERSION . '');
         return $this;
@@ -162,9 +162,9 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * _respondWithSystemInformation()
      *
-     * @param string $providerNameFilter
-     * @param string $actionNameFilter
-     * @param bool $includeAllSpecialties
+     * @param  string $providerNameFilter
+     * @param  string $actionNameFilter
+     * @param  bool   $includeAllSpecialties
      * @return Zend_Tool_Framework_Client_Console_HelpSystem
      */
     protected function _respondWithSystemInformation($providerNameFilter = null, $actionNameFilter = null, $includeAllSpecialties = false)
@@ -218,31 +218,37 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
                     $actionMetadata = $displayActionMetadatas[$foundActionIndex];
                 }
 
-                $specialtyMetadata = $manifest->getMetadata(array(
+                $specialtyMetadata = $manifest->getMetadata(
+                    array(
                     'type'          => 'Tool',
                     'name'          => 'specialtyName',
                     'providerName'  => $providerName,
                     'specialtyName' => '_Global',
                     'clientName'    => 'console'
-                    ));
+                    )
+                );
 
                 // lets do the main _Global action first
-                $actionableGlobalLongParamMetadata = $manifest->getMetadata(array(
+                $actionableGlobalLongParamMetadata = $manifest->getMetadata(
+                    array(
                     'type'          => 'Tool',
                     'name'          => 'actionableMethodLongParams',
                     'providerName'  => $providerName,
                     'specialtyName' => '_Global',
                     'actionName'    => $actionName,
                     'clientName'    => 'console'
-                    ));
+                    )
+                );
 
-                $actionableGlobalMetadatas = $manifest->getMetadatas(array(
+                $actionableGlobalMetadatas = $manifest->getMetadatas(
+                    array(
                     'type'          => 'Tool',
                     'name'          => 'actionableMethodLongParams',
                     'providerName'  => $providerName,
                     'actionName'    => $actionName,
                     'clientName'    => 'console'
-                    ));
+                    )
+                );
 
                 if ($actionableGlobalLongParamMetadata) {
 
@@ -274,22 +280,26 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
                             continue;
                         }
 
-                        $specialtyMetadata = $manifest->getMetadata(array(
+                        $specialtyMetadata = $manifest->getMetadata(
+                            array(
                             'type'          => 'Tool',
                             'name'          => 'specialtyName',
                             'providerName'  => $providerMetadata->getProviderName(),
                             'specialtyName' => $specialtyName,
                             'clientName'    => 'console'
-                            ));
+                            )
+                        );
 
-                        $actionableSpecialtyLongMetadata = $manifest->getMetadata(array(
+                        $actionableSpecialtyLongMetadata = $manifest->getMetadata(
+                            array(
                             'type'          => 'Tool',
                             'name'          => 'actionableMethodLongParams',
                             'providerName'  => $providerMetadata->getProviderName(),
                             'specialtyName' => $specialtyName,
                             'actionName'    => $actionName,
                             'clientName'    => 'console'
-                            ));
+                            )
+                        );
 
                         if($actionableSpecialtyLongMetadata) {
                             $this->_respondWithCommand($providerMetadata, $actionMetadata, $specialtyMetadata, $actionableSpecialtyLongMetadata);
@@ -306,7 +316,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
                     $this->_response->appendContent(
                         'zf ' . $actionMetadata->getValue() . ' ' . $providerMetadata->getValue() . '.?',
                         array('color' => 'cyan', 'separator' => false)
-                        );
+                    );
                     $this->_response->appendContent(' to get specific help on them.', array('color' => 'yellow'));
                 }
 
@@ -322,7 +332,7 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * _respondWithProviderName()
      *
-     * @param Zend_Tool_Framework_Metadata_Tool $providerMetadata
+     * @param  Zend_Tool_Framework_Metadata_Tool $providerMetadata
      * @return Zend_Tool_Framework_Client_Console_HelpSystem
      */
     protected function _respondWithProviderName(Zend_Tool_Framework_Metadata_Tool $providerMetadata)
@@ -334,23 +344,23 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
     /**
      * _respondWithCommand()
      *
-     * @param Zend_Tool_Framework_Metadata_Tool $providerMetadata
-     * @param Zend_Tool_Framework_Metadata_Tool $actionMetadata
-     * @param Zend_Tool_Framework_Metadata_Tool $specialtyMetadata
-     * @param Zend_Tool_Framework_Metadata_Tool $parameterLongMetadata
+     * @param  Zend_Tool_Framework_Metadata_Tool $providerMetadata
+     * @param  Zend_Tool_Framework_Metadata_Tool $actionMetadata
+     * @param  Zend_Tool_Framework_Metadata_Tool $specialtyMetadata
+     * @param  Zend_Tool_Framework_Metadata_Tool $parameterLongMetadata
      * @return Zend_Tool_Framework_Client_Console_HelpSystem
      */
     protected function _respondWithCommand(
         Zend_Tool_Framework_Metadata_Tool $providerMetadata,
         Zend_Tool_Framework_Metadata_Tool $actionMetadata,
         Zend_Tool_Framework_Metadata_Tool $specialtyMetadata,
-        Zend_Tool_Framework_Metadata_Tool $parameterLongMetadata)//,
+        Zend_Tool_Framework_Metadata_Tool $parameterLongMetadata
+    ) {//,
         //Zend_Tool_Framework_Metadata_Tool $parameterShortMetadata)
-    {
         $this->_response->appendContent(
             '    zf ' . $actionMetadata->getValue() . ' ' . $providerMetadata->getValue(),
             array('color' => 'cyan', 'separator' => false)
-            );
+        );
 
         if ($specialtyMetadata->getSpecialtyName() != '_Global') {
             $this->_response->appendContent('.' . $specialtyMetadata->getValue(), array('color' => 'cyan', 'separator' => false));
@@ -359,14 +369,14 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
         foreach ($parameterLongMetadata->getValue() as $paramName => $consoleParamName) {
             $methodInfo = $parameterLongMetadata->getReference();
             $paramString = ' ' . $consoleParamName;
-            if ( ($defaultValue = $methodInfo['parameterInfo'][$paramName]['default']) != null) {
+            if (($defaultValue = $methodInfo['parameterInfo'][$paramName]['default']) != null) {
                 $paramString .= '[=' . $defaultValue . ']';
             }
             $this->_response->appendContent($paramString . '', array('separator' => false));
         }
 
-       $this->_response->appendContent(null, array('separator' => true));
-       return $this;
+        $this->_response->appendContent(null, array('separator' => true));
+        return $this;
     }
 
 }

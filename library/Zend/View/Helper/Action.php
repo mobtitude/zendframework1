@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_View_Helper_Abstract.php */
+/**
+ * Zend_View_Helper_Abstract.php 
+ */
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
@@ -53,7 +55,7 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
         $front   = Zend_Controller_Front::getInstance();
         $modules = $front->getControllerDirectory();
         if (empty($modules)) {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('Action helper depends on valid front controller instance');
             $e->setView($this->view);
             throw $e;
@@ -63,7 +65,7 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
         $response = $front->getResponse();
 
         if (empty($request) || empty($response)) {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('Action view helper requires both a registered request and response object in the front controller instance');
             $e->setView($this->view);
             throw $e;
@@ -89,7 +91,7 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
 
         $this->response->clearBody();
         $this->response->clearHeaders()
-                       ->clearRawHeaders();
+            ->clearRawHeaders();
     }
 
     /**
@@ -99,8 +101,8 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
      *
      * @param  string $action
      * @param  string $controller
-     * @param  string $module Defaults to default module
-     * @param  array $params
+     * @param  string $module     Defaults to default module
+     * @param  array  $params
      * @return string
      */
     public function action($action, $controller, $module = null, array $params = array())
@@ -115,10 +117,10 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
         Zend_Controller_Action_HelperBroker::addHelper(clone $viewRendererObj);
 
         $this->request->setParams($params)
-                      ->setModuleName($module)
-                      ->setControllerName($controller)
-                      ->setActionName($action)
-                      ->setDispatched(true);
+            ->setModuleName($module)
+            ->setControllerName($controller)
+            ->setActionName($action)
+            ->setDispatched(true);
 
         $this->dispatcher->dispatch($this->request, $this->response);
 
@@ -127,8 +129,8 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
 
 
         if (!$this->request->isDispatched()
-            || $this->response->isRedirect())
-        {
+            || $this->response->isRedirect()
+        ) {
             // forwards and redirects render nothing
             return '';
         }

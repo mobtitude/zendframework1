@@ -68,7 +68,7 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {
@@ -81,7 +81,7 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      * child properties.  This is used to build an entry back into a DOM
      * and eventually XML text for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      *          child properties.
      */
@@ -105,21 +105,21 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
 
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('gd') . ':' . 'who';
-                $who = new Zend_Gdata_Extension_Who();
-                $who->transferFromDOM($child);
-                $this->_who = $who;
-                break;
-            default:
+        case $this->lookupNamespace('gd') . ':' . 'who';
+            $who = new Zend_Gdata_Extension_Who();
+            $who->transferFromDOM($child);
+            $this->_who = $who;
+            break;
+        default:
                 parent::takeChildFromDOM($child);
-                break;
+            break;
         }
     }
 
     /**
      * Get the value of the who property for this object.
      *
-     * @see setWho
+     * @see    setWho
      * @return Zend_Gdata_Extension_Who The requested object.
      */
     public function getWho()
@@ -131,8 +131,8 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      * Set the value of the who property for this object. This property
      * is used to store the email address of the current recipient.
      *
-     * @param Zend_Gdata_Extension_Who $value The desired value for this
-     *          instance's who property.
+     * @param  Zend_Gdata_Extension_Who $value The desired value for this
+     *                                         instance's who property.
      * @return Zend_Gdata_Gapps_EventEntry Provides a fluent interface.
      */
     public function setWho($value)

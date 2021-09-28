@@ -51,12 +51,14 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
 {
     /**
      * Character encoding to use when escaping attributes
+     *
      * @var string
      */
     protected $_encoding;
 
     /**
      * Placement; default to surround content
+     *
      * @var string
      */
     protected ?string $_placement = null;
@@ -105,12 +107,12 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
     public function normalizeTag($tag)
     {
         if (!isset($this->_tagFilter)) {
-            require_once 'Zend/Filter.php';
-            require_once 'Zend/Filter/Alnum.php';
-            require_once 'Zend/Filter/StringToLower.php';
+            include_once 'Zend/Filter.php';
+            include_once 'Zend/Filter/Alnum.php';
+            include_once 'Zend/Filter/StringToLower.php';
             $this->_tagFilter = new Zend_Filter();
             $this->_tagFilter->addFilter(new Zend_Filter_Alnum())
-                             ->addFilter(new Zend_Filter_StringToLower());
+                ->addFilter(new Zend_Filter_StringToLower());
         }
         return $this->_tagFilter->filter($tag);
     }
@@ -152,7 +154,7 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
      * Get the formatted open tag
      *
      * @param  string $tag
-     * @param  array $attribs
+     * @param  array  $attribs
      * @return string
      */
     protected function _getOpenTag($tag, array $attribs = null)
@@ -200,26 +202,26 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
 
         switch ($placement) {
             case self::APPEND:
-                if ($closeOnly) {
-                    return $content . $this->_getCloseTag($tag);
-                }
-                if ($openOnly) {
-                    return $content . $this->_getOpenTag($tag, $attribs);
-                }
+        if ($closeOnly) {
+            return $content . $this->_getCloseTag($tag);
+        }
+        if ($openOnly) {
+            return $content . $this->_getOpenTag($tag, $attribs);
+        }
                 return $content
                      . $this->_getOpenTag($tag, $attribs)
                      . $this->_getCloseTag($tag);
             case self::PREPEND:
-                if ($closeOnly) {
-                    return $this->_getCloseTag($tag) . $content;
-                }
-                if ($openOnly) {
-                    return $this->_getOpenTag($tag, $attribs) . $content;
-                }
+        if ($closeOnly) {
+            return $this->_getCloseTag($tag) . $content;
+        }
+        if ($openOnly) {
+            return $this->_getOpenTag($tag, $attribs) . $content;
+        }
                 return $this->_getOpenTag($tag, $attribs)
                      . $this->_getCloseTag($tag)
                      . $content;
-            default:
+        default:
                 return (($openOnly || !$closeOnly) ? $this->_getOpenTag($tag, $attribs) : '')
                      . $content
                      . (($closeOnly || !$openOnly) ? $this->_getCloseTag($tag) : '');

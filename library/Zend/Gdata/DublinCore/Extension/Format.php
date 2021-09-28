@@ -46,7 +46,7 @@ class Zend_Gdata_DublinCore_Extension_Format extends Zend_Gdata_Extension
      * File format, physical medium, or dimensions of the resource
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($value = null)
     {

@@ -20,19 +20,23 @@
  * @version    $Id$
  */
 
-/** @see Zend_Barcode_Object_Code25 */
+/**
+ * @see Zend_Barcode_Object_Code25 
+ */
 require_once 'Zend/Barcode/Object/Code25.php';
 
-/** @see Zend_Validate_Barcode */
+/**
+ * @see Zend_Validate_Barcode 
+*/
 require_once 'Zend/Validate/Barcode.php';
 
 /**
  * Class for generate Interleaved 2 of 5 barcode
  *
- * @category   Zend
- * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Barcode
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
 {
@@ -43,6 +47,7 @@ class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
 
     /**
      * Default options for Code25interleaved barcode
+     *
      * @return void
      */
     protected function _getDefaultOptions()
@@ -52,7 +57,8 @@ class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
 
     /**
      * Activate/deactivate drawing of bearer bars
-     * @param boolean $value
+     *
+     * @param  boolean $value
      * @return Zend_Barcode_Object_Int25
      */
     public function setWithBearerBars($value)
@@ -63,6 +69,7 @@ class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
 
     /**
      * Retrieve if bearer bars are enabled
+     *
      * @return boolean
      */
     public function getWithBearerBars()
@@ -72,6 +79,7 @@ class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
 
     /**
      * Width of the barcode (in pixels)
+     *
      * @return integer
      */
     protected function _calculateBarcodeWidth()
@@ -86,6 +94,7 @@ class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
 
     /**
      * Prepare array to draw barcode
+     *
      * @return array
      */
     protected function _prepareBarcode()
@@ -146,12 +155,14 @@ class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
         $point2 = $this->_rotate($this->_calculateWidth() - 1, -1);
         $point3 = $this->_rotate($this->_calculateWidth() - 1, $width - 1);
         $point4 = $this->_rotate(-1, $width - 1);
-        $this->_addPolygon(array(
+        $this->_addPolygon(
+            array(
             $point1,
             $point2,
             $point3,
             $point4,
-        ));
+            )
+        );
         $point1 = $this->_rotate(
             0,
             0 + $this->_barHeight * $this->_factor - 1
@@ -168,11 +179,13 @@ class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
             0,
             0 + $this->_barHeight * $this->_factor - $width
         );
-        $this->_addPolygon(array(
+        $this->_addPolygon(
+            array(
             $point1,
             $point2,
             $point3,
             $point4,
-        ));
+            )
+        );
     }
 }

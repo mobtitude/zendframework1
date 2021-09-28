@@ -43,11 +43,15 @@ class Zend_Cloud_QueueService_Adapter_WindowsAzure
     const PROXY_PORT        = "storage_proxy_port";
     const PROXY_CREDENTIALS = "storage_proxy_credentials";
 
-    /** list options */
+    /**
+ * list options 
+*/
     const LIST_PREFIX      = 'prefix';
     const LIST_MAX_RESULTS = 'max_results';
 
-    /** message options */
+    /**
+ * message options 
+*/
     const MESSAGE_TTL = 'ttl';
 
     const DEFAULT_HOST = Zend_Service_WindowsAzure_Storage::URL_CLOUD_QUEUE;
@@ -96,7 +100,8 @@ class Zend_Cloud_QueueService_Adapter_WindowsAzure
         try {
             // TODO: support $usePathStyleUri and $retryPolicy
             $this->_storageClient = new Zend_Service_WindowsAzure_Storage_Queue(
-                $host, $options[self::ACCOUNT_NAME], $options[self::ACCOUNT_KEY]);
+                $host, $options[self::ACCOUNT_NAME], $options[self::ACCOUNT_KEY]
+            );
             // Parse other options
             if (! empty($options[self::PROXY_HOST])) {
                 $proxyHost = $options[self::PROXY_HOST];
@@ -269,7 +274,7 @@ class Zend_Cloud_QueueService_Adapter_WindowsAzure
      * Create Zend_Cloud_QueueService_Message array for
      * Azure messages.
      *
-     * @param array $messages
+     * @param  array $messages
      * @return Zend_Cloud_QueueService_Message[]
      */
     protected function _makeMessages($messages)
@@ -286,9 +291,9 @@ class Zend_Cloud_QueueService_Adapter_WindowsAzure
     /**
      * Delete the specified message from the specified queue.
      *
-     * @param  string $queueId
+     * @param  string                          $queueId
      * @param  Zend_Cloud_QueueService_Message $message Message ID or message
-     * @param  array  $options
+     * @param  array                           $options
      * @return void
      */
     public function deleteMessage($queueId, $message, $options = null)
@@ -314,7 +319,7 @@ class Zend_Cloud_QueueService_Adapter_WindowsAzure
      * Peek at the messages from the specified queue without removing them.
      *
      * @param  string $queueId
-     * @param  int $num How many messages
+     * @param  int    $num     How many messages
      * @param  array  $options
      * @return Zend_Cloud_QueueService_Message[]
      */
@@ -328,10 +333,11 @@ class Zend_Cloud_QueueService_Adapter_WindowsAzure
         } catch (Zend_Service_WindowsAzure_Exception $e) {
             throw new Zend_Cloud_QueueService_Exception('Error on peeking messages: '.$e->getMessage(), $e->getCode(), $e);
         }
-   }
+    }
 
     /**
      * Get Azure implementation
+     *
      * @return Zend_Service_Azure_Storage_Queue
      */
     public function getClient()

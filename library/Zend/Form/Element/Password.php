@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Xhtml */
+/**
+ * Zend_Form_Element_Xhtml 
+ */
 require_once 'Zend/Form/Element/Xhtml.php';
 
 /**
@@ -36,6 +38,7 @@ class Zend_Form_Element_Password extends Zend_Form_Element_Xhtml
 {
     /**
      * Use formPassword view helper by default
+     *
      * @var string
      */
     public $helper = 'formPassword';
@@ -47,6 +50,7 @@ class Zend_Form_Element_Password extends Zend_Form_Element_Xhtml
 
     /**
      * Set flag indicating whether or not to render the password
+     *
      * @param  bool $flag
      * @return Zend_Form_Element_Password
      */
@@ -72,7 +76,7 @@ class Zend_Form_Element_Password extends Zend_Form_Element_Xhtml
      * Ensure that validation error messages mask password value.
      *
      * @param  string $value
-     * @param  mixed $context
+     * @param  mixed  $context
      * @return bool
      */
     public function isValid($value, $context = null)

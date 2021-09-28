@@ -20,10 +20,14 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_FSM */
+/**
+ * Zend_Search_Lucene_FSM 
+ */
 require_once 'Zend/Search/Lucene/FSM.php';
 
-/** Zend_Search_Lucene_Search_QueryParser */
+/**
+ * Zend_Search_Lucene_Search_QueryParser 
+*/
 require_once 'Zend/Search/Lucene/Search/QueryToken.php';
 
 /**
@@ -35,7 +39,9 @@ require_once 'Zend/Search/Lucene/Search/QueryToken.php';
  */
 class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
 {
-    /** State Machine states */
+    /**
+ * State Machine states 
+*/
     const ST_WHITE_SPACE     = 0;
     const ST_SYNT_LEXEME     = 1;
     const ST_LEXEME          = 2;
@@ -47,7 +53,9 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
     const ST_MANTISSA        = 8;
     const ST_ERROR           = 9;
 
-    /** Input symbols */
+    /**
+ * Input symbols 
+*/
     const IN_WHITE_SPACE     = 0;
     const IN_SYNT_CHAR       = 1;
     const IN_LEXEME_MODIFIER = 2;
@@ -88,7 +96,8 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
 
     public function __construct()
     {
-        parent::__construct( array(self::ST_WHITE_SPACE,
+        parent::__construct(
+            array(self::ST_WHITE_SPACE,
                                    self::ST_SYNT_LEXEME,
                                    self::ST_LEXEME,
                                    self::ST_QUOTED_LEXEME,
@@ -98,7 +107,7 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
                                    self::ST_NUMBER,
                                    self::ST_MANTISSA,
                                    self::ST_ERROR),
-                             array(self::IN_WHITE_SPACE,
+            array(self::IN_WHITE_SPACE,
                                    self::IN_SYNT_CHAR,
                                    self::IN_MUTABLE_CHAR,
                                    self::IN_LEXEME_MODIFIER,
@@ -106,7 +115,8 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
                                    self::IN_QUOTE,
                                    self::IN_DECIMAL_POINT,
                                    self::IN_ASCII_DIGIT,
-                                   self::IN_CHAR));
+            self::IN_CHAR)
+        );
 
 
         $lexemeModifierErrorAction    = new Zend_Search_Lucene_FSMAction($this, 'lexModifierErrException');
@@ -115,7 +125,8 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
 
 
 
-        $this->addRules(array( array(self::ST_WHITE_SPACE,   self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
+        $this->addRules(
+            array( array(self::ST_WHITE_SPACE,   self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
                                array(self::ST_WHITE_SPACE,   self::IN_SYNT_CHAR,       self::ST_SYNT_LEXEME),
                                array(self::ST_WHITE_SPACE,   self::IN_MUTABLE_CHAR,    self::ST_SYNT_LEXEME),
                                array(self::ST_WHITE_SPACE,   self::IN_LEXEME_MODIFIER, self::ST_LEXEME_MODIFIER),
@@ -124,8 +135,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
                                array(self::ST_WHITE_SPACE,   self::IN_DECIMAL_POINT,   self::ST_LEXEME),
                                array(self::ST_WHITE_SPACE,   self::IN_ASCII_DIGIT,     self::ST_LEXEME),
                                array(self::ST_WHITE_SPACE,   self::IN_CHAR,            self::ST_LEXEME)
-                             ));
-        $this->addRules(array( array(self::ST_SYNT_LEXEME,   self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
+            )
+        );
+        $this->addRules(
+            array( array(self::ST_SYNT_LEXEME,   self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
                                array(self::ST_SYNT_LEXEME,   self::IN_SYNT_CHAR,       self::ST_SYNT_LEXEME),
                                array(self::ST_SYNT_LEXEME,   self::IN_MUTABLE_CHAR,    self::ST_SYNT_LEXEME),
                                array(self::ST_SYNT_LEXEME,   self::IN_LEXEME_MODIFIER, self::ST_LEXEME_MODIFIER),
@@ -134,8 +147,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
                                array(self::ST_SYNT_LEXEME,   self::IN_DECIMAL_POINT,   self::ST_LEXEME),
                                array(self::ST_SYNT_LEXEME,   self::IN_ASCII_DIGIT,     self::ST_LEXEME),
                                array(self::ST_SYNT_LEXEME,   self::IN_CHAR,            self::ST_LEXEME)
-                             ));
-        $this->addRules(array( array(self::ST_LEXEME,        self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
+            )
+        );
+        $this->addRules(
+            array( array(self::ST_LEXEME,        self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
                                array(self::ST_LEXEME,        self::IN_SYNT_CHAR,       self::ST_SYNT_LEXEME),
                                array(self::ST_LEXEME,        self::IN_MUTABLE_CHAR,    self::ST_LEXEME),
                                array(self::ST_LEXEME,        self::IN_LEXEME_MODIFIER, self::ST_LEXEME_MODIFIER),
@@ -147,8 +162,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
                                array(self::ST_LEXEME,        self::IN_DECIMAL_POINT,   self::ST_LEXEME),
                                array(self::ST_LEXEME,        self::IN_ASCII_DIGIT,     self::ST_LEXEME),
                                array(self::ST_LEXEME,        self::IN_CHAR,            self::ST_LEXEME)
-                             ));
-        $this->addRules(array( array(self::ST_QUOTED_LEXEME, self::IN_WHITE_SPACE,     self::ST_QUOTED_LEXEME),
+            )
+        );
+        $this->addRules(
+            array( array(self::ST_QUOTED_LEXEME, self::IN_WHITE_SPACE,     self::ST_QUOTED_LEXEME),
                                array(self::ST_QUOTED_LEXEME, self::IN_SYNT_CHAR,       self::ST_QUOTED_LEXEME),
                                array(self::ST_QUOTED_LEXEME, self::IN_MUTABLE_CHAR,    self::ST_QUOTED_LEXEME),
                                array(self::ST_QUOTED_LEXEME, self::IN_LEXEME_MODIFIER, self::ST_QUOTED_LEXEME),
@@ -157,8 +174,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
                                array(self::ST_QUOTED_LEXEME, self::IN_DECIMAL_POINT,   self::ST_QUOTED_LEXEME),
                                array(self::ST_QUOTED_LEXEME, self::IN_ASCII_DIGIT,     self::ST_QUOTED_LEXEME),
                                array(self::ST_QUOTED_LEXEME, self::IN_CHAR,            self::ST_QUOTED_LEXEME)
-                             ));
-        $this->addRules(array( array(self::ST_ESCAPED_CHAR,  self::IN_WHITE_SPACE,     self::ST_LEXEME),
+            )
+        );
+        $this->addRules(
+            array( array(self::ST_ESCAPED_CHAR,  self::IN_WHITE_SPACE,     self::ST_LEXEME),
                                array(self::ST_ESCAPED_CHAR,  self::IN_SYNT_CHAR,       self::ST_LEXEME),
                                array(self::ST_ESCAPED_CHAR,  self::IN_MUTABLE_CHAR,    self::ST_LEXEME),
                                array(self::ST_ESCAPED_CHAR,  self::IN_LEXEME_MODIFIER, self::ST_LEXEME),
@@ -167,8 +186,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
                                array(self::ST_ESCAPED_CHAR,  self::IN_DECIMAL_POINT,   self::ST_LEXEME),
                                array(self::ST_ESCAPED_CHAR,  self::IN_ASCII_DIGIT,     self::ST_LEXEME),
                                array(self::ST_ESCAPED_CHAR,  self::IN_CHAR,            self::ST_LEXEME)
-                             ));
-        $this->addRules(array( array(self::ST_ESCAPED_QCHAR, self::IN_WHITE_SPACE,     self::ST_QUOTED_LEXEME),
+            )
+        );
+        $this->addRules(
+            array( array(self::ST_ESCAPED_QCHAR, self::IN_WHITE_SPACE,     self::ST_QUOTED_LEXEME),
                                array(self::ST_ESCAPED_QCHAR, self::IN_SYNT_CHAR,       self::ST_QUOTED_LEXEME),
                                array(self::ST_ESCAPED_QCHAR, self::IN_MUTABLE_CHAR,    self::ST_QUOTED_LEXEME),
                                array(self::ST_ESCAPED_QCHAR, self::IN_LEXEME_MODIFIER, self::ST_QUOTED_LEXEME),
@@ -177,8 +198,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
                                array(self::ST_ESCAPED_QCHAR, self::IN_DECIMAL_POINT,   self::ST_QUOTED_LEXEME),
                                array(self::ST_ESCAPED_QCHAR, self::IN_ASCII_DIGIT,     self::ST_QUOTED_LEXEME),
                                array(self::ST_ESCAPED_QCHAR, self::IN_CHAR,            self::ST_QUOTED_LEXEME)
-                             ));
-        $this->addRules(array( array(self::ST_LEXEME_MODIFIER, self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
+            )
+        );
+        $this->addRules(
+            array( array(self::ST_LEXEME_MODIFIER, self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
                                array(self::ST_LEXEME_MODIFIER, self::IN_SYNT_CHAR,       self::ST_SYNT_LEXEME),
                                array(self::ST_LEXEME_MODIFIER, self::IN_MUTABLE_CHAR,    self::ST_SYNT_LEXEME),
                                array(self::ST_LEXEME_MODIFIER, self::IN_LEXEME_MODIFIER, self::ST_LEXEME_MODIFIER),
@@ -195,8 +218,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
 
                                // IN_CHAR              not allowed
                                array(self::ST_LEXEME_MODIFIER, self::IN_CHAR,            self::ST_ERROR, $lexemeModifierErrorAction),
-                             ));
-        $this->addRules(array( array(self::ST_NUMBER, self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
+            )
+        );
+        $this->addRules(
+            array( array(self::ST_NUMBER, self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
                                array(self::ST_NUMBER, self::IN_SYNT_CHAR,       self::ST_SYNT_LEXEME),
                                array(self::ST_NUMBER, self::IN_MUTABLE_CHAR,    self::ST_SYNT_LEXEME),
                                array(self::ST_NUMBER, self::IN_LEXEME_MODIFIER, self::ST_LEXEME_MODIFIER),
@@ -212,8 +237,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
 
                                // IN_CHAR              not allowed
                                array(self::ST_NUMBER, self::IN_CHAR,            self::ST_ERROR, $wrongNumberErrorAction),
-                             ));
-        $this->addRules(array( array(self::ST_MANTISSA, self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
+            )
+        );
+        $this->addRules(
+            array( array(self::ST_MANTISSA, self::IN_WHITE_SPACE,     self::ST_WHITE_SPACE),
                                array(self::ST_MANTISSA, self::IN_SYNT_CHAR,       self::ST_SYNT_LEXEME),
                                array(self::ST_MANTISSA, self::IN_MUTABLE_CHAR,    self::ST_SYNT_LEXEME),
                                array(self::ST_MANTISSA, self::IN_LEXEME_MODIFIER, self::ST_LEXEME_MODIFIER),
@@ -231,10 +258,13 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
 
                                // IN_CHAR              not allowed
                                array(self::ST_MANTISSA, self::IN_CHAR,            self::ST_ERROR, $wrongNumberErrorAction),
-                             ));
+            )
+        );
 
 
-        /** Actions */
+        /**
+ * Actions 
+*/
         $syntaxLexemeAction    = new Zend_Search_Lucene_FSMAction($this, 'addQuerySyntaxLexeme');
         $lexemeModifierAction  = new Zend_Search_Lucene_FSMAction($this, 'addLexemeModifier');
         $addLexemeAction       = new Zend_Search_Lucene_FSMAction($this, 'addLexeme');
@@ -243,13 +273,17 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
         $addLexemeCharAction   = new Zend_Search_Lucene_FSMAction($this, 'addLexemeChar');
 
 
-        /** Syntax lexeme */
+        /**
+ * Syntax lexeme 
+*/
         $this->addEntryAction(self::ST_SYNT_LEXEME,  $syntaxLexemeAction);
         // Two lexemes in succession
         $this->addTransitionAction(self::ST_SYNT_LEXEME, self::ST_SYNT_LEXEME, $syntaxLexemeAction);
 
 
-        /** Lexeme */
+        /**
+ * Lexeme 
+*/
         $this->addEntryAction(self::ST_LEXEME,                       $addLexemeCharAction);
         $this->addTransitionAction(self::ST_LEXEME, self::ST_LEXEME, $addLexemeCharAction);
         // ST_ESCAPED_CHAR => ST_LEXEME transition is covered by ST_LEXEME entry action
@@ -262,7 +296,9 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
         $this->addTransitionAction(self::ST_LEXEME, self::ST_MANTISSA,        $addLexemeAction);
 
 
-        /** Quoted lexeme */
+        /**
+ * Quoted lexeme 
+*/
         // We don't need entry action (skeep quote)
         $this->addTransitionAction(self::ST_QUOTED_LEXEME, self::ST_QUOTED_LEXEME, $addLexemeCharAction);
         $this->addTransitionAction(self::ST_ESCAPED_QCHAR, self::ST_QUOTED_LEXEME, $addLexemeCharAction);
@@ -270,11 +306,15 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
         $this->addTransitionAction(self::ST_QUOTED_LEXEME, self::ST_WHITE_SPACE,   $addQuotedLexemeAction);
 
 
-        /** Lexeme modifier */
+        /**
+ * Lexeme modifier 
+*/
         $this->addEntryAction(self::ST_LEXEME_MODIFIER, $lexemeModifierAction);
 
 
-        /** Number */
+        /**
+ * Number 
+*/
         $this->addEntryAction(self::ST_NUMBER,                           $addLexemeCharAction);
         $this->addEntryAction(self::ST_MANTISSA,                         $addLexemeCharAction);
         $this->addTransitionAction(self::ST_NUMBER,   self::ST_NUMBER,   $addLexemeCharAction);
@@ -295,7 +335,7 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
     /**
      * Translate input char to an input symbol of state machine
      *
-     * @param string $char
+     * @param  string $char
      * @return integer
      */
     private function _translateInput($char)
@@ -305,9 +345,9 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
         } else if (strpos(self::QUERY_MUTABLE_CHARS,        $char) !== false) { return self::IN_MUTABLE_CHAR;
         } else if (strpos(self::QUERY_LEXEMEMODIFIER_CHARS, $char) !== false) { return self::IN_LEXEME_MODIFIER;
         } else if (strpos(self::QUERY_ASCIIDIGITS_CHARS,    $char) !== false) { return self::IN_ASCII_DIGIT;
-        } else if ($char === '"' )                                            { return self::IN_QUOTE;
-        } else if ($char === '.' )                                            { return self::IN_DECIMAL_POINT;
-        } else if ($char === '\\')                                            { return self::IN_ESCAPE_CHAR;
+        } else if ($char === '"' ) { return self::IN_QUOTE;
+        } else if ($char === '.' ) { return self::IN_DECIMAL_POINT;
+        } else if ($char === '\\') { return self::IN_ESCAPE_CHAR;
         } else                                                                { return self::IN_CHAR;
         }
     }
@@ -316,8 +356,8 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
     /**
      * This method is used to tokenize query string into lexemes
      *
-     * @param string $inputString
-     * @param string $encoding
+     * @param  string $inputString
+     * @param  string $encoding
      * @return array
      * @throws Zend_Search_Lucene_Search_QueryParserException
      */
@@ -349,7 +389,7 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
         $this->process(self::IN_WHITE_SPACE);
 
         if ($this->getState() != self::ST_WHITE_SPACE) {
-            require_once 'Zend/Search/Lucene/Search/QueryParserException.php';
+            include_once 'Zend/Search/Lucene/Search/QueryParserException.php';
             throw new Zend_Search_Lucene_Search_QueryParserException('Unexpected end of query');
         }
 
@@ -381,26 +421,28 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
             $this->_queryStringPosition++;
 
             // check,
-            if ($this->_queryStringPosition == count($this->_queryString)  ||
-                $this->_queryString[$this->_queryStringPosition] != $lexeme) {
-                    require_once 'Zend/Search/Lucene/Search/QueryParserException.php';
+            if ($this->_queryStringPosition == count($this->_queryString)  
+                || $this->_queryString[$this->_queryStringPosition] != $lexeme
+            ) {
+                    include_once 'Zend/Search/Lucene/Search/QueryParserException.php';
                     throw new Zend_Search_Lucene_Search_QueryParserException('Two chars lexeme expected. ' . $this->_positionMsg());
-                }
+            }
 
             // duplicate character
             $lexeme .= $lexeme;
         }
 
         $token = new Zend_Search_Lucene_Search_QueryToken(
-                                Zend_Search_Lucene_Search_QueryToken::TC_SYNTAX_ELEMENT,
-                                $lexeme,
-                                $this->_queryStringPosition);
+            Zend_Search_Lucene_Search_QueryToken::TC_SYNTAX_ELEMENT,
+            $lexeme,
+            $this->_queryStringPosition
+        );
 
         // Skip this lexeme if it's a field indicator ':' and treat previous as 'field' instead of 'word'
         if ($token->type == Zend_Search_Lucene_Search_QueryToken::TT_FIELD_INDICATOR) {
             $token = array_pop($this->_lexemes);
             if ($token === null  ||  $token->type != Zend_Search_Lucene_Search_QueryToken::TT_WORD) {
-                require_once 'Zend/Search/Lucene/Search/QueryParserException.php';
+                include_once 'Zend/Search/Lucene/Search/QueryParserException.php';
                 throw new Zend_Search_Lucene_Search_QueryParserException('Field mark \':\' must follow field name. ' . $this->_positionMsg());
             }
 
@@ -416,9 +458,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
     public function addLexemeModifier()
     {
         $this->_lexemes[] = new Zend_Search_Lucene_Search_QueryToken(
-                                    Zend_Search_Lucene_Search_QueryToken::TC_SYNTAX_ELEMENT,
-                                    $this->_queryString[$this->_queryStringPosition],
-                                    $this->_queryStringPosition);
+            Zend_Search_Lucene_Search_QueryToken::TC_SYNTAX_ELEMENT,
+            $this->_queryString[$this->_queryStringPosition],
+            $this->_queryStringPosition
+        );
     }
 
 
@@ -428,9 +471,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
     public function addLexeme()
     {
         $this->_lexemes[] = new Zend_Search_Lucene_Search_QueryToken(
-                                    Zend_Search_Lucene_Search_QueryToken::TC_WORD,
-                                    $this->_currentLexeme,
-                                    $this->_queryStringPosition - 1);
+            Zend_Search_Lucene_Search_QueryToken::TC_WORD,
+            $this->_currentLexeme,
+            $this->_queryStringPosition - 1
+        );
 
         $this->_currentLexeme = '';
     }
@@ -441,9 +485,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
     public function addQuotedLexeme()
     {
         $this->_lexemes[] = new Zend_Search_Lucene_Search_QueryToken(
-                                    Zend_Search_Lucene_Search_QueryToken::TC_PHRASE,
-                                    $this->_currentLexeme,
-                                    $this->_queryStringPosition);
+            Zend_Search_Lucene_Search_QueryToken::TC_PHRASE,
+            $this->_currentLexeme,
+            $this->_queryStringPosition
+        );
 
         $this->_currentLexeme = '';
     }
@@ -454,9 +499,10 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
     public function addNumberLexeme()
     {
         $this->_lexemes[] = new Zend_Search_Lucene_Search_QueryToken(
-                                    Zend_Search_Lucene_Search_QueryToken::TC_NUMBER,
-                                    $this->_currentLexeme,
-                                    $this->_queryStringPosition - 1);
+            Zend_Search_Lucene_Search_QueryToken::TC_NUMBER,
+            $this->_currentLexeme,
+            $this->_queryStringPosition - 1
+        );
         $this->_currentLexeme = '';
     }
 
@@ -485,17 +531,17 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
      *********************************************************************/
     public function lexModifierErrException()
     {
-        require_once 'Zend/Search/Lucene/Search/QueryParserException.php';
+        include_once 'Zend/Search/Lucene/Search/QueryParserException.php';
         throw new Zend_Search_Lucene_Search_QueryParserException('Lexeme modifier character can be followed only by number, white space or query syntax element. ' . $this->_positionMsg());
     }
     public function quoteWithinLexemeErrException()
     {
-        require_once 'Zend/Search/Lucene/Search/QueryParserException.php';
+        include_once 'Zend/Search/Lucene/Search/QueryParserException.php';
         throw new Zend_Search_Lucene_Search_QueryParserException('Quote within lexeme must be escaped by \'\\\' char. ' . $this->_positionMsg());
     }
     public function wrongNumberErrException()
     {
-        require_once 'Zend/Search/Lucene/Search/QueryParserException.php';
+        include_once 'Zend/Search/Lucene/Search/QueryParserException.php';
         throw new Zend_Search_Lucene_Search_QueryParserException('Wrong number syntax.' . $this->_positionMsg());
     }
 }

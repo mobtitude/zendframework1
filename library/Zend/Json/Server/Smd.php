@@ -118,7 +118,7 @@ class Zend_Json_Server_Smd
     public function setTransport($transport)
     {
         if (!in_array($transport, $this->_transportTypes)) {
-            require_once 'Zend/Json/Server/Exception.php';
+            include_once 'Zend/Json/Server/Exception.php';
             throw new Zend_Json_Server_Exception(sprintf('Invalid transport "%s" specified', $transport));
         }
         $this->_transport = $transport;
@@ -144,7 +144,7 @@ class Zend_Json_Server_Smd
     public function setEnvelope($envelopeType)
     {
         if (!in_array($envelopeType, $this->_envelopeTypes)) {
-            require_once 'Zend/Json/Server/Exception.php';
+            include_once 'Zend/Json/Server/Exception.php';
             throw new Zend_Json_Server_Exception(sprintf('Invalid envelope type "%s"', $envelopeType));
         }
         $this->_envelope = $envelopeType;
@@ -171,7 +171,7 @@ class Zend_Json_Server_Smd
     public function setContentType($type)
     {
         if (!preg_match($this->_contentTypeRegex, $type)) {
-            require_once 'Zend/Json/Server/Exception.php';
+            include_once 'Zend/Json/Server/Exception.php';
             throw new Zend_Json_Server_Exception(sprintf('Invalid content type "%s" specified', $type));
         }
         $this->_contentType = $type;
@@ -279,12 +279,12 @@ class Zend_Json_Server_Smd
     /**
      * Add Service
      *
-     * @param Zend_Json_Server_Smd_Service|array $service
+     * @param  Zend_Json_Server_Smd_Service|array $service
      * @return void
      */
     public function addService($service)
     {
-        require_once 'Zend/Json/Server/Smd/Service.php';
+        include_once 'Zend/Json/Server/Smd/Service.php';
 
         if ($service instanceof Zend_Json_Server_Smd_Service) {
             $name = $service->getName();
@@ -292,12 +292,12 @@ class Zend_Json_Server_Smd
             $service = new Zend_Json_Server_Smd_Service($service);
             $name = $service->getName();
         } else {
-            require_once 'Zend/Json/Server/Exception.php';
+            include_once 'Zend/Json/Server/Exception.php';
             throw new Zend_Json_Server_Exception('Invalid service passed to addService()');
         }
 
         if (array_key_exists($name, $this->_services)) {
-            require_once 'Zend/Json/Server/Exception.php';
+            include_once 'Zend/Json/Server/Exception.php';
             throw new Zend_Json_Server_Exception('Attempt to register a service already registered detected');
         }
         $this->_services[$name] = $service;
@@ -452,7 +452,7 @@ class Zend_Json_Server_Smd
      */
     public function toJson()
     {
-        require_once 'Zend/Json.php';
+        include_once 'Zend/Json.php';
         return Zend_Json::encode($this->toArray());
     }
 

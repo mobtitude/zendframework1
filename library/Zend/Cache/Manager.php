@@ -12,24 +12,28 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Cache
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
-/** @see Zend_Cache_Exception */
+/**
+ * @see Zend_Cache_Exception 
+ */
 require_once 'Zend/Cache/Exception.php';
 
-/** @see Zend_Cache */
+/**
+ * @see Zend_Cache 
+*/
 require_once 'Zend/Cache.php';
 
 /**
- * @category   Zend
- * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Cache
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Cache_Manager
 {
@@ -110,7 +114,7 @@ class Zend_Cache_Manager
     /**
      * Set a new cache for the Cache Manager to contain
      *
-     * @param  string $name
+     * @param  string          $name
      * @param  Zend_Cache_Core $cache
      * @return Zend_Cache_Manager
      */
@@ -124,7 +128,7 @@ class Zend_Cache_Manager
      * Check if the Cache Manager contains the named cache object, or a named
      * configuration template to lazy load the cache object
      *
-     * @param string $name
+     * @param  string $name
      * @return bool
      */
     public function hasCache($name)
@@ -202,9 +206,11 @@ class Zend_Cache_Manager
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } elseif (!is_array($options)) {
-            require_once 'Zend/Cache/Exception.php';
-            throw new Zend_Cache_Exception('Options passed must be in'
-                . ' an associative array or instance of Zend_Config');
+            include_once 'Zend/Cache/Exception.php';
+            throw new Zend_Cache_Exception(
+                'Options passed must be in'
+                . ' an associative array or instance of Zend_Config'
+            );
         }
         $this->_optionTemplates[$name] = $options;
         return $this;
@@ -243,7 +249,7 @@ class Zend_Cache_Manager
      * template
      *
      * @param  string $name
-     * @param  array $options
+     * @param  array  $options
      * @return Zend_Cache_Manager
      * @throws Zend_Cache_Exception for invalid options format or if option templates do not have $name
      */
@@ -252,13 +258,17 @@ class Zend_Cache_Manager
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } elseif (!is_array($options)) {
-            require_once 'Zend/Cache/Exception.php';
-            throw new Zend_Cache_Exception('Options passed must be in'
-                . ' an associative array or instance of Zend_Config');
+            include_once 'Zend/Cache/Exception.php';
+            throw new Zend_Cache_Exception(
+                'Options passed must be in'
+                . ' an associative array or instance of Zend_Config'
+            );
         }
         if (!isset($this->_optionTemplates[$name])) {
-            throw new Zend_Cache_Exception('A cache configuration template'
-                . 'does not exist with the name "' . $name . '"');
+            throw new Zend_Cache_Exception(
+                'A cache configuration template'
+                . 'does not exist with the name "' . $name . '"'
+            );
         }
         $this->_optionTemplates[$name]
             = $this->_mergeOptions($this->_optionTemplates[$name], $options);

@@ -44,16 +44,17 @@ class Zend_Navigation_Page_Uri extends Zend_Navigation_Page
     /**
      * Sets page URI
      *
-     * @param  string $uri                page URI, must a string or null
+     * @param  string $uri page URI, must a string or null
      * @return Zend_Navigation_Page_Uri   fluent interface, returns self
      * @throws Zend_Navigation_Exception  if $uri is invalid
      */
     public function setUri($uri)
     {
         if (null !== $uri && !is_string($uri)) {
-            require_once 'Zend/Navigation/Exception.php';
+            include_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
-                    'Invalid argument: $uri must be a string or null');
+                'Invalid argument: $uri must be a string or null'
+            );
         }
 
         $this->_uri = $uri;
@@ -104,6 +105,7 @@ class Zend_Navigation_Page_Uri extends Zend_Navigation_Page
             parent::toArray(),
             array(
                 'uri' => $this->getUri()
-            ));
+            )
+        );
     }
 }

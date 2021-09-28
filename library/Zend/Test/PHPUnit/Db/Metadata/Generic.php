@@ -57,7 +57,7 @@ class Zend_Test_PHPUnit_Db_Metadata_Generic implements PHPUnit_Extensions_Databa
      * and schema name.
      *
      * @param Zend_Db_Adapter_Abstract $db
-     * @param string $schema
+     * @param string                   $schema
      */
     public final function __construct(Zend_Db_Adapter_Abstract $db, $schema)
     {
@@ -93,7 +93,7 @@ class Zend_Test_PHPUnit_Db_Metadata_Generic implements PHPUnit_Extensions_Databa
      * Returns an array containing the names of all the columns in the
      * $tableName table,
      *
-     * @param string $tableName
+     * @param  string $tableName
      * @return array
      */
     public function getTableColumns($tableName)
@@ -107,7 +107,7 @@ class Zend_Test_PHPUnit_Db_Metadata_Generic implements PHPUnit_Extensions_Databa
      * Returns an array containing the names of all the primary key columns in
      * the $tableName table.
      *
-     * @param string $tableName
+     * @param  string $tableName
      * @return array
      */
     public function getTablePrimaryKeys($tableName)
@@ -136,7 +136,7 @@ class Zend_Test_PHPUnit_Db_Metadata_Generic implements PHPUnit_Extensions_Databa
     /**
      * Returns a quoted schema object. (table name, column name, etc)
      *
-     * @param string $object
+     * @param  string $object
      * @return string
      */
     public function quoteSchemaObject($object)

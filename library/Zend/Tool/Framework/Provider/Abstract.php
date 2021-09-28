@@ -37,11 +37,10 @@ require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
  * At current it will return the request and response from the client registry
  * as they are the more common things that will be needed by providers
  *
- *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Tool_Framework_Provider_Abstract
     implements Zend_Tool_Framework_Provider_Interface, Zend_Tool_Framework_Registry_EnabledInterface
@@ -52,7 +51,7 @@ abstract class Zend_Tool_Framework_Provider_Abstract
     /**
      * setRegistry() - required by Zend_Tool_Framework_Registry_EnabledInterface
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
+     * @param  Zend_Tool_Framework_Registry_Interface $registry
      * @return Zend_Tool_Framework_Provider_Abstract
      */
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)

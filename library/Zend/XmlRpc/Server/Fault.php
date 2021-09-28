@@ -64,7 +64,7 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     /**
      * Constructor
      *
-     * @param Exception $e
+     * @param  Exception $e
      * @return Zend_XmlRpc_Server_Fault
      */
     public function __construct(Exception $e)
@@ -95,7 +95,7 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     /**
      * Return Zend_XmlRpc_Server_Fault instance
      *
-     * @param Exception $e
+     * @param  Exception $e
      * @return Zend_XmlRpc_Server_Fault
      */
     public static function getInstance(Exception $e)
@@ -106,7 +106,7 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     /**
      * Attach valid exceptions that can be used to define xmlrpc faults
      *
-     * @param string|array $classes Class name or array of class names
+     * @param  string|array $classes Class name or array of class names
      * @return void
      */
     public static function attachFaultException($classes)
@@ -125,7 +125,7 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     /**
      * Detach fault exception classes
      *
-     * @param string|array $classes Class name or array of class names
+     * @param  string|array $classes Class name or array of class names
      * @return void
      */
     public static function detachFaultException($classes)
@@ -150,15 +150,15 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
      * Expects a valid class name; that class must have a public static method
      * 'observe' that accepts an exception as its sole argument.
      *
-     * @param string $class
+     * @param  string $class
      * @return boolean
      */
     public static function attachObserver($class)
     {
         if (!is_string($class)
             || !class_exists($class)
-            || !is_callable(array($class, 'observe')))
-        {
+            || !is_callable(array($class, 'observe'))
+        ) {
             return false;
         }
 
@@ -172,7 +172,7 @@ class Zend_XmlRpc_Server_Fault extends Zend_XmlRpc_Fault
     /**
      * Detach an observer
      *
-     * @param string $class
+     * @param  string $class
      * @return boolean
      */
     public static function detachObserver($class)

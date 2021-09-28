@@ -25,10 +25,10 @@
  * Allows two unassociated parties to establish a joint shared secret key
  * to be used in encrypting subsequent communications.
  *
- * @category   Zend
- * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Crypt
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Crypt_DiffieHellman
 {
@@ -116,7 +116,7 @@ class Zend_Crypt_DiffieHellman
             if ($this->hasPrivateKey()) {
                 $details['priv_key'] = $this->getPrivateKey();
             }
-            $opensslKeyResource = openssl_pkey_new( array('dh' => $details) );
+            $opensslKeyResource = openssl_pkey_new(array('dh' => $details));
             $data = openssl_pkey_get_details($opensslKeyResource);
             $this->setPrivateKey($data['dh']['priv_key'], self::BINARY);
             $this->setPublicKey($data['dh']['pub_key'], self::BINARY);
@@ -131,8 +131,8 @@ class Zend_Crypt_DiffieHellman
     /**
      * Setter for the value of the public number
      *
-     * @param string $number
-     * @param string $type
+     * @param  string $number
+     * @param  string $type
      * @throws Zend_Crypt_DiffieHellman_Exception
      * @return Zend_Crypt_DiffieHellman
      */
@@ -142,7 +142,7 @@ class Zend_Crypt_DiffieHellman
             $number = $this->_math->fromBinary($number);
         }
         if (!preg_match("/^\d+$/", $number)) {
-            require_once('Zend/Crypt/DiffieHellman/Exception.php');
+            include_once 'Zend/Crypt/DiffieHellman/Exception.php';
             throw new Zend_Crypt_DiffieHellman_Exception('invalid parameter; not a positive natural number');
         }
         $this->_publicKey = (string) $number;
@@ -153,14 +153,14 @@ class Zend_Crypt_DiffieHellman
      * Returns own public key for communication to the second party to this
      * transaction.
      *
-     * @param string $type
+     * @param  string $type
      * @throws Zend_Crypt_DiffieHellman_Exception
      * @return string
      */
     public function getPublicKey($type = self::NUMBER)
     {
         if ($this->_publicKey === null) {
-            require_once 'Zend/Crypt/DiffieHellman/Exception.php';
+            include_once 'Zend/Crypt/DiffieHellman/Exception.php';
             throw new Zend_Crypt_DiffieHellman_Exception('A public key has not yet been generated using a prior call to generateKeys()');
         }
         if ($type == self::BINARY) {
@@ -182,9 +182,9 @@ class Zend_Crypt_DiffieHellman
      * If you need the binary form of the shared secret key, call
      * getSharedSecretKey() with the optional parameter for Binary output.
      *
-     * @param string $publicKey
-     * @param string $type
-     * @param string $output
+     * @param  string $publicKey
+     * @param  string $type
+     * @param  string $output
      * @throws Zend_Crypt_DiffieHellman_Exception
      * @return mixed
      */
@@ -194,7 +194,7 @@ class Zend_Crypt_DiffieHellman
             $publicKey = $this->_math->fromBinary($publicKey);
         }
         if (!preg_match("/^\d+$/", $publicKey)) {
-            require_once('Zend/Crypt/DiffieHellman/Exception.php');
+            include_once 'Zend/Crypt/DiffieHellman/Exception.php';
             throw new Zend_Crypt_DiffieHellman_Exception('invalid parameter; not a positive natural number');
         }
         if (function_exists('openssl_dh_compute_key') && self::$useOpenssl !== false) {
@@ -208,14 +208,14 @@ class Zend_Crypt_DiffieHellman
     /**
      * Return the computed shared secret key from the DiffieHellman transaction
      *
-     * @param string $type
+     * @param  string $type
      * @throws Zend_Crypt_DiffieHellman_Exception
      * @return string
      */
     public function getSharedSecretKey($type = self::NUMBER)
     {
         if (!isset($this->_secretKey)) {
-            require_once('Zend/Crypt/DiffieHellman/Exception.php');
+            include_once 'Zend/Crypt/DiffieHellman/Exception.php';
             throw new Zend_Crypt_DiffieHellman_Exception('A secret key has not yet been computed; call computeSecretKey()');
         }
         if ($type == self::BINARY) {
@@ -229,14 +229,14 @@ class Zend_Crypt_DiffieHellman
     /**
      * Setter for the value of the prime number
      *
-     * @param string $number
+     * @param  string $number
      * @throws Zend_Crypt_DiffieHellman_Exception
      * @return Zend_Crypt_DiffieHellman
      */
     public function setPrime($number)
     {
         if (!preg_match("/^\d+$/", $number) || $number < 11) {
-            require_once('Zend/Crypt/DiffieHellman/Exception.php');
+            include_once 'Zend/Crypt/DiffieHellman/Exception.php';
             throw new Zend_Crypt_DiffieHellman_Exception('invalid parameter; not a positive natural number or too small: should be a large natural number prime');
         }
         $this->_prime = (string) $number;
@@ -252,7 +252,7 @@ class Zend_Crypt_DiffieHellman
     public function getPrime()
     {
         if (!isset($this->_prime)) {
-            require_once('Zend/Crypt/DiffieHellman/Exception.php');
+            include_once 'Zend/Crypt/DiffieHellman/Exception.php';
             throw new Zend_Crypt_DiffieHellman_Exception('No prime number has been set');
         }
         return $this->_prime;
@@ -261,14 +261,14 @@ class Zend_Crypt_DiffieHellman
     /**
      * Setter for the value of the generator number
      *
-     * @param string $number
+     * @param  string $number
      * @throws Zend_Crypt_DiffieHellman_Exception
      * @return Zend_Crypt_DiffieHellman
      */
     public function setGenerator($number)
     {
         if (!preg_match("/^\d+$/", $number) || $number < 2) {
-            require_once('Zend/Crypt/DiffieHellman/Exception.php');
+            include_once 'Zend/Crypt/DiffieHellman/Exception.php';
             throw new Zend_Crypt_DiffieHellman_Exception('invalid parameter; not a positive natural number greater than 1');
         }
         $this->_generator = (string) $number;
@@ -284,7 +284,7 @@ class Zend_Crypt_DiffieHellman
     public function getGenerator()
     {
         if (!isset($this->_generator)) {
-            require_once('Zend/Crypt/DiffieHellman/Exception.php');
+            include_once 'Zend/Crypt/DiffieHellman/Exception.php';
             throw new Zend_Crypt_DiffieHellman_Exception('No generator number has been set');
         }
         return $this->_generator;
@@ -293,8 +293,8 @@ class Zend_Crypt_DiffieHellman
     /**
      * Setter for the value of the private number
      *
-     * @param string $number
-     * @param string $type
+     * @param  string $number
+     * @param  string $type
      * @throws Zend_Crypt_DiffieHellman_Exception
      * @return Zend_Crypt_DiffieHellman
      */
@@ -304,7 +304,7 @@ class Zend_Crypt_DiffieHellman
             $number = $this->_math->fromBinary($number);
         }
         if (!preg_match("/^\d+$/", $number)) {
-            require_once('Zend/Crypt/DiffieHellman/Exception.php');
+            include_once 'Zend/Crypt/DiffieHellman/Exception.php';
             throw new Zend_Crypt_DiffieHellman_Exception('invalid parameter; not a positive natural number');
         }
         $this->_privateKey = (string) $number;
@@ -314,7 +314,7 @@ class Zend_Crypt_DiffieHellman
     /**
      * Getter for the value of the private number
      *
-     * @param string $type
+     * @param  string $type
      * @return string
      */
     public function getPrivateKey($type = self::NUMBER)
@@ -346,7 +346,7 @@ class Zend_Crypt_DiffieHellman
      * Allows manual setting of the class in case of an extension
      * problem or bug.
      *
-     * @param string $extension
+     * @param  string $extension
      * @return void
      */
     public function setBigIntegerMath($extension = null)
@@ -354,7 +354,7 @@ class Zend_Crypt_DiffieHellman
         /**
          * @see Zend_Crypt_Math
          */
-        require_once 'Zend/Crypt/Math.php';
+        include_once 'Zend/Crypt/Math.php';
         $this->_math = new Zend_Crypt_Math($extension);
     }
 

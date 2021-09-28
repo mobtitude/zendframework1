@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Abstract */
+/**
+ * Zend_Form_Decorator_Abstract 
+ */
 require_once 'Zend/Form/Decorator/Abstract.php';
 
 /**
@@ -54,6 +56,7 @@ class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
 {
     /**
      * Default placement: append
+     *
      * @var string
      */
     protected ?string $_placement = 'APPEND';
@@ -97,7 +100,7 @@ class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
 
             if (null !== ($viewScript = $this->getOption('viewScript'))) {
                 $this->setViewScript($viewScript)
-                     ->removeOption('viewScript');
+                    ->removeOption('viewScript');
             }
         }
 
@@ -133,7 +136,7 @@ class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
 
             if (null !== ($viewModule = $this->getOption('viewModule'))) {
                 $this->setViewModule($viewModule)
-                     ->removeOption('viewModule');
+                    ->removeOption('viewModule');
             }
         }
 
@@ -156,7 +159,7 @@ class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
 
         $viewScript = $this->getViewScript();
         if (empty($viewScript)) {
-            require_once 'Zend/Form/Exception.php';
+            include_once 'Zend/Form/Exception.php';
             throw new Zend_Form_Exception('No view script registered with ViewScript decorator');
         }
 
@@ -179,11 +182,11 @@ class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
         $placement = $this->getPlacement();
 
         switch ($placement) {
-            case self::PREPEND:
+        case self::PREPEND:
                 return $renderedContent . $separator . $content;
-            case self::APPEND:
+        case self::APPEND:
                 return $content . $separator . $renderedContent;
-            default:
+        default:
                 return $renderedContent;
         }
     }

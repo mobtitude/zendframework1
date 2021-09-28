@@ -46,8 +46,8 @@ class Zend_Gdata_Extension_Reminder extends Zend_Gdata_Extension
     protected $_minutes = null;
 
     public function __construct($absoluteTime = null, $method = null, $days = null,
-            $hours = null, $minutes = null)
-    {
+        $hours = null, $minutes = null
+    ) {
         parent::__construct();
         $this->_absoluteTime = $absoluteTime;
         $this->_method = $method;
@@ -80,37 +80,38 @@ class Zend_Gdata_Extension_Reminder extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-            case 'absoluteTime':
+        case 'absoluteTime':
                 $this->_absoluteTime = $attribute->nodeValue;
-                break;
-            case 'method':
-                $this->_method = $attribute->nodeValue;
-                break;
-            case 'days':
-                $this->_days = $attribute->nodeValue;
-                break;
-            case 'hours':
-                $this->_hours = $attribute->nodeValue;
-                break;
-            case 'minutes':
-                $this->_minutes = $attribute->nodeValue;
-                break;
-            default:
-                parent::takeAttributeFromDOM($attribute);
+            break;
+        case 'method':
+            $this->_method = $attribute->nodeValue;
+            break;
+        case 'days':
+            $this->_days = $attribute->nodeValue;
+            break;
+        case 'hours':
+            $this->_hours = $attribute->nodeValue;
+            break;
+        case 'minutes':
+            $this->_minutes = $attribute->nodeValue;
+            break;
+        default:
+            parent::takeAttributeFromDOM($attribute);
         }
     }
 
     public function __toString()
     {
         $s = '';
-        if ($this->_absoluteTime)
+        if ($this->_absoluteTime) {
             $s = " at " . $this->_absoluteTime;
-        else if ($this->_days)
+        } else if ($this->_days) {
             $s = " in " . $this->_days . " days";
-        else if ($this->_hours)
+        } else if ($this->_hours) {
             $s = " in " . $this->_hours . " hours";
-        else if ($this->_minutes)
+        } else if ($this->_minutes) {
             $s = " in " . $this->_minutes . " minutes";
+        }
         return $this->_method . $s;
     }
 

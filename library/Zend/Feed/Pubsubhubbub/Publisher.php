@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Feed_Pubsubhubbub
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -25,10 +25,10 @@
 require_once 'Zend/Feed/Pubsubhubbub.php';
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Feed_Pubsubhubbub
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Pubsubhubbub_Publisher
 {
@@ -83,9 +83,11 @@ class Zend_Feed_Pubsubhubbub_Publisher
         if ($config instanceof Zend_Config) {
             $config = $config->toArray();
         } elseif (!is_array($config)) {
-            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('Array or Zend_Config object'
-                . 'expected, got ' . gettype($config));
+            include_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception(
+                'Array or Zend_Config object'
+                . 'expected, got ' . gettype($config)
+            );
         }
         if (array_key_exists('hubUrls', $config)) {
             $this->addHubUrls($config['hubUrls']);
@@ -109,10 +111,12 @@ class Zend_Feed_Pubsubhubbub_Publisher
     public function addHubUrl($url)
     {
         if (empty($url) || !is_string($url) || !Zend_Uri::check($url)) {
-            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('Invalid parameter "url"'
+            include_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception(
+                'Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
-                .'URL');
+                .'URL'
+            );
         }
         $this->_hubUrls[] = $url;
         return $this;
@@ -169,10 +173,12 @@ class Zend_Feed_Pubsubhubbub_Publisher
     public function addUpdatedTopicUrl($url)
     {
         if (empty($url) || !is_string($url) || !Zend_Uri::check($url)) {
-            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('Invalid parameter "url"'
+            include_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception(
+                'Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
-                .'URL');
+                .'URL'
+            );
         }
         $this->_updatedTopicUrls[] = $url;
         return $this;
@@ -229,20 +235,24 @@ class Zend_Feed_Pubsubhubbub_Publisher
     public function notifyHub($url)
     {
         if (empty($url) || !is_string($url) || !Zend_Uri::check($url)) {
-            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('Invalid parameter "url"'
+            include_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception(
+                'Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
-                .'URL');
+                .'URL'
+            );
         }
         $client = $this->_getHttpClient();
         $client->setUri($url);
         $response = $client->request();
         if ($response->getStatus() !== 204) {
-            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('Notification to Hub Server '
+            include_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception(
+                'Notification to Hub Server '
                 . 'at "' . $url . '" appears to have failed with a status code of "'
                 . $response->getStatus() . '" and message "'
-                . $response->getMessage() . '"');
+                . $response->getMessage() . '"'
+            );
         }
     }
 
@@ -262,9 +272,11 @@ class Zend_Feed_Pubsubhubbub_Publisher
         $client = $this->_getHttpClient();
         $hubs   = $this->getHubUrls();
         if (empty($hubs)) {
-            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('No Hub Server URLs'
-                . ' have been set so no notifcations can be sent');
+            include_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception(
+                'No Hub Server URLs'
+                . ' have been set so no notifcations can be sent'
+            );
         }
         $this->_errors = array();
         foreach ($hubs as $url) {
@@ -294,18 +306,22 @@ class Zend_Feed_Pubsubhubbub_Publisher
             return $this;
         }
         if (empty($name) || !is_string($name)) {
-            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('Invalid parameter "name"'
-                .' of "' . $name . '" must be a non-empty string');
+            include_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception(
+                'Invalid parameter "name"'
+                .' of "' . $name . '" must be a non-empty string'
+            );
         }
         if ($value === null) {
             $this->removeParameter($name);
             return $this;
         }
         if (empty($value) || (!is_string($value) && $value !== null)) {
-            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('Invalid parameter "value"'
-                .' of "' . $value . '" must be a non-empty string');
+            include_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception(
+                'Invalid parameter "value"'
+                .' of "' . $value . '" must be a non-empty string'
+            );
         }
         $this->_parameters[$name] = $value;
         return $this;
@@ -335,9 +351,11 @@ class Zend_Feed_Pubsubhubbub_Publisher
     public function removeParameter($name)
     {
         if (empty($name) || !is_string($name)) {
-            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('Invalid parameter "name"'
-                .' of "' . $name . '" must be a non-empty string');
+            include_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception(
+                'Invalid parameter "name"'
+                .' of "' . $name . '" must be a non-empty string'
+            );
         }
         if (array_key_exists($name, $this->_parameters)) {
             unset($this->_parameters[$name]);
@@ -392,16 +410,20 @@ class Zend_Feed_Pubsubhubbub_Publisher
     {
         $client = Zend_Feed_Pubsubhubbub::getHttpClient();
         $client->setMethod(Zend_Http_Client::POST);
-        $client->setConfig(array(
+        $client->setConfig(
+            array(
             'useragent' => 'Zend_Feed_Pubsubhubbub_Publisher/' . Zend_Version::VERSION,
-        ));
+            )
+        );
         $params   = array();
         $params[] = 'hub.mode=publish';
         $topics   = $this->getUpdatedTopicUrls();
         if (empty($topics)) {
-            require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('No updated topic URLs'
-                . ' have been set');
+            include_once 'Zend/Feed/Pubsubhubbub/Exception.php';
+            throw new Zend_Feed_Pubsubhubbub_Exception(
+                'No updated topic URLs'
+                . ' have been set'
+            );
         }
         foreach ($topics as $topicUrl) {
             $params[] = 'hub.url=' . urlencode($topicUrl);

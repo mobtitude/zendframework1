@@ -12,21 +12,21 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 
 /**
  * PDF file reference table
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Element_Reference_Table
 {
@@ -64,7 +64,7 @@ class Zend_Pdf_Element_Reference_Table
     /**
      * Object constructor
      */
-    public function  __construct()
+    public function __construct()
     {
         $this->_parent = null;
         $this->_free   = array();  $this->_generations = array();
@@ -75,7 +75,7 @@ class Zend_Pdf_Element_Reference_Table
     /**
      * Add reference to the reference table
      *
-     * @param string $ref
+     * @param string  $ref
      * @param integer $offset
      * @param boolean $inuse
      */
@@ -83,7 +83,7 @@ class Zend_Pdf_Element_Reference_Table
     {
         $refElements = explode(' ', $ref);
         if (!is_numeric($refElements[0]) || !is_numeric($refElements[1]) || $refElements[2] != 'R') {
-            require_once 'Zend/Pdf/Exception.php';
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("Incorrect reference: '$ref'");
         }
         $objNum = (int)$refElements[0];
@@ -113,7 +113,7 @@ class Zend_Pdf_Element_Reference_Table
     /**
      * Get object offset
      *
-     * @param string $ref
+     * @param  string $ref
      * @return integer
      */
     public function getOffset($ref)
@@ -137,14 +137,14 @@ class Zend_Pdf_Element_Reference_Table
     /**
      * Get next object from a list of free objects.
      *
-     * @param string $ref
+     * @param  string $ref
      * @return integer
      * @throws Zend_Pdf_Exception
      */
     public function getNextFree($ref)
     {
         if (isset($this->_inuse[$ref])) {
-            require_once 'Zend/Pdf/Exception.php';
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Object is not free');
         }
 
@@ -156,7 +156,7 @@ class Zend_Pdf_Element_Reference_Table
             return $this->_parent->getNextFree($ref);
         }
 
-        require_once 'Zend/Pdf/Exception.php';
+        include_once 'Zend/Pdf/Exception.php';
         throw new Zend_Pdf_Exception('Object not found.');
     }
 
@@ -164,13 +164,13 @@ class Zend_Pdf_Element_Reference_Table
     /**
      * Get next generation number for free object
      *
-     * @param integer $objNum
+     * @param  integer $objNum
      * @return unknown
      */
     public function getNewGeneration($objNum)
     {
         if (isset($this->_usedObjects[$objNum])) {
-            require_once 'Zend/Pdf/Exception.php';
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Object is not free');
         }
 
@@ -182,7 +182,7 @@ class Zend_Pdf_Element_Reference_Table
             return $this->_parent->getNewGeneration($objNum);
         }
 
-        require_once 'Zend/Pdf/Exception.php';
+        include_once 'Zend/Pdf/Exception.php';
         throw new Zend_Pdf_Exception('Object not found.');
     }
 }

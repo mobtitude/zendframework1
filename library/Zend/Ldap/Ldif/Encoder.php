@@ -273,7 +273,8 @@ class Zend_Ldap_Ldif_Encoder
         $string = '';
         $attributes = array_change_key_case($attributes, CASE_LOWER);
         if (!$this->_versionWritten && array_key_exists('dn', $attributes) && isset($this->_options['version'])
-                && array_key_exists('objectclass', $attributes)) {
+            && array_key_exists('objectclass', $attributes)
+        ) {
             $string .= sprintf('version: %d', $this->_options['version']) . PHP_EOL;
             $this->_versionWritten = true;
         }

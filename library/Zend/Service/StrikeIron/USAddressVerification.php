@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_Service_StrikeIron_Base */
+/**
+ * Zend_Service_StrikeIron_Base 
+ */
 require_once 'Zend/Service/StrikeIron/Base.php';
 
 /**
@@ -34,6 +36,7 @@ class Zend_Service_StrikeIron_USAddressVerification extends Zend_Service_StrikeI
 {
     /**
      * Configuration options
+     *
      * @param array
      */
     protected array $_options = array('username' => null,

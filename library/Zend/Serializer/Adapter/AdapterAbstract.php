@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** @see Zend_Serializer_Adapter_AdapterInterface */
+/**
+ * @see Zend_Serializer_Adapter_AdapterInterface 
+ */
 require_once 'Zend/Serializer/Adapter/AdapterInterface.php';
 
 /**
@@ -70,8 +72,8 @@ abstract class Zend_Serializer_Adapter_AdapterAbstract implements Zend_Serialize
     /**
      * Set a serializer option
      *
-     * @param  string $name Option name
-     * @param  mixed $value Option value
+     * @param  string $name  Option name
+     * @param  mixed  $value Option value
      * @return Zend_Serializer_Adapter_AdapterAbstract
      */
     public function setOption($name, $value)
@@ -101,7 +103,7 @@ abstract class Zend_Serializer_Adapter_AdapterAbstract implements Zend_Serialize
     {
         $name = (string) $name;
         if (!array_key_exists($name, $this->_options)) {
-            require_once 'Zend/Serializer/Exception.php';
+            include_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('Unknown option name "'.$name.'"');
         }
 

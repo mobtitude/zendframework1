@@ -44,6 +44,7 @@ class Zend_Gdata_Calendar_Extension_Hidden extends Zend_Gdata_Extension
 
     /**
      * Constructs a new Zend_Gdata_Calendar_Extension_Hidden object.
+     *
      * @param bool $value (optional) The value of the element.
      */
     public function __construct($value = null)
@@ -59,7 +60,7 @@ class Zend_Gdata_Calendar_Extension_Hidden extends Zend_Gdata_Extension
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -83,16 +84,16 @@ class Zend_Gdata_Calendar_Extension_Hidden extends Zend_Gdata_Extension
     {
         switch ($attribute->localName) {
         case 'value':
-            if ($attribute->nodeValue == "true") {
-                $this->_value = true;
-            }
-            else if ($attribute->nodeValue == "false") {
-                $this->_value = false;
-            }
-            else {
-                require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-                throw new Zend_Gdata_App_InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
-            }
+        if ($attribute->nodeValue == "true") {
+            $this->_value = true;
+        }
+        else if ($attribute->nodeValue == "false") {
+            $this->_value = false;
+        }
+        else {
+            include_once 'Zend/Gdata/App/InvalidArgumentException.php';
+            throw new Zend_Gdata_App_InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
+        }
             break;
         default:
             parent::takeAttributeFromDOM($attribute);
@@ -112,7 +113,7 @@ class Zend_Gdata_Calendar_Extension_Hidden extends Zend_Gdata_Extension
     /**
      * Set the value for this element's value attribute.
      *
-     * @param bool $value The desired value for this attribute.
+     * @param  bool $value The desired value for this attribute.
      * @return Zend_Gdata_Calendar_Extension_Hidden The element being modified.
      */
     public function setValue($value)

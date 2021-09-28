@@ -43,6 +43,7 @@ class Zend_Mail_Storage_Maildir_OldMessage extends Zend_Mail_Storage_Maildir
 {
     /**
      * used message class
+     *
      * @var string
      */
     protected string $_messageClass = 'Zend_Mail_Message';
@@ -66,8 +67,10 @@ class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
     {
         $this->_originalMaildir = dirname(__FILE__) . '/_files/test.maildir/';
         if (!is_dir($this->_originalMaildir . '/cur/')) {
-            $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
-                                 . 'directory before enabling the maildir tests');
+            $this->markTestSkipped(
+                'You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
+                . 'directory before enabling the maildir tests'
+            );
             return;
         }
 
@@ -133,7 +136,7 @@ class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Simple Message', $subject);
     }
 
-/*
+    /*
     public function testFetchTopBody()
     {
         $mail = new Zend_Mail_Storage_Maildir_OldMessage(array('dirname' => $this->_maildir));
@@ -141,7 +144,7 @@ class Zend_Mail_MaildirMessageOldTest extends PHPUnit_Framework_TestCase
         $content = $mail->getHeader(3, 1)->getContent();
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
     }
-*/
+    */
     public function testFetchMessageHeader()
     {
         $mail = new Zend_Mail_Storage_Maildir_OldMessage(array('dirname' => $this->_maildir));

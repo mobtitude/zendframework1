@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** @see Zend_Dom_Query */
+/**
+ * @see Zend_Dom_Query 
+ */
 require_once 'Zend/Dom/Query.php';
 
 /**
@@ -35,7 +37,8 @@ require_once 'Zend/Dom/Query.php';
  */
 class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constraint
 {
-    /**#@+
+    /**
+* #@+
      * Assertion type constants
      */
     const ASSERT_QUERY            = 'assertQuery';
@@ -44,7 +47,9 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
     const ASSERT_CONTENT_COUNT    = 'assertQueryCount';
     const ASSERT_CONTENT_COUNT_MIN= 'assertQueryCountMin';
     const ASSERT_CONTENT_COUNT_MAX= 'assertQueryCountMax';
-    /**#@-*/
+    /**
+     * #@-
+     */
     /**
      * Current assertion type
      */
@@ -136,7 +141,7 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
      *     public function evaluate($other, $description = '', $returnResult = FALSE)
      * We use the new interface for PHP-strict checking, but emulate the old one
      */
-    public function evaluate($content, $assertType = '', $match = FALSE)
+    public function evaluate($content, $assertType = '', $match = false)
     {
         if (strstr($assertType, 'Not')) {
             $this->setNegate(true);
@@ -149,7 +154,7 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
         }
 
         if (!in_array($assertType, $this->_assertTypes)) {
-            require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+            include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
             throw new Zend_Test_PHPUnit_Constraint_Exception(sprintf('Invalid assertion type "%s" provided to %s constraint', $assertType, __CLASS__));
         }
 
@@ -162,39 +167,39 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
 
         switch ($assertType) {
             case self::ASSERT_CONTENT_CONTAINS:
-                if (!$match) {
-                    require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
-                    throw new Zend_Test_PHPUnit_Constraint_Exception('No content provided against which to match');
-                }
+        if (!$match) {
+            include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+            throw new Zend_Test_PHPUnit_Constraint_Exception('No content provided against which to match');
+        }
                 $this->_content = $match;
                 return ($this->_negate)
                     ? $this->_notMatchContent($result, $match)
                     : $this->_matchContent($result, $match);
             case self::ASSERT_CONTENT_REGEX:
-                if (!$match) {
-                    require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
-                    throw new Zend_Test_PHPUnit_Constraint_Exception('No pattern provided against which to match');
-                }
+        if (!$match) {
+            include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+            throw new Zend_Test_PHPUnit_Constraint_Exception('No pattern provided against which to match');
+        }
                 $this->_content = $match;
                 return ($this->_negate)
                     ? $this->_notRegexContent($result, $match)
                     : $this->_regexContent($result, $match);
             case self::ASSERT_CONTENT_COUNT:
-            case self::ASSERT_CONTENT_COUNT_MIN:
-            case self::ASSERT_CONTENT_COUNT_MAX:
-                if ($match === false) {
-                    require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
-                    throw new Zend_Test_PHPUnit_Constraint_Exception('No count provided against which to compare');
-                }
-                $this->_content = $match;
-                return $this->_countContent($result, $match, $assertType);
-            case self::ASSERT_QUERY:
-            default:
-                if ($this->_negate) {
-                    return (0 == count($result));
-                } else {
-                    return (0 != count($result));
-                }
+        case self::ASSERT_CONTENT_COUNT_MIN:
+        case self::ASSERT_CONTENT_COUNT_MAX:
+            if ($match === false) {
+                include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+                throw new Zend_Test_PHPUnit_Constraint_Exception('No count provided against which to compare');
+            }
+            $this->_content = $match;
+            return $this->_countContent($result, $match, $assertType);
+        case self::ASSERT_QUERY:
+        default:
+            if ($this->_negate) {
+                return (0 == count($result));
+            } else {
+                return (0 != count($result));
+            }
         }
     }
 
@@ -214,47 +219,47 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
      *     protected function fail($other, $description, PHPUnit_Framework_ComparisonFailure $comparisonFailure = NULL)
      * We use the new interface for PHP-strict checking
      */
-    public function fail($other, $description, PHPUnit_Framework_ComparisonFailure $cannot_be_used = NULL)
+    public function fail($other, $description, PHPUnit_Framework_ComparisonFailure $cannot_be_used = null)
     {
-        require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+        include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
         switch ($this->_assertType) {
-            case self::ASSERT_CONTENT_CONTAINS:
-                $failure = 'Failed asserting node denoted by %s CONTAINS content "%s"';
-                if ($this->_negate) {
-                    $failure = 'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content "%s"';
-                }
-                $failure = sprintf($failure, $other, $this->_content);
-                break;
-            case self::ASSERT_CONTENT_REGEX:
-                $failure = 'Failed asserting node denoted by %s CONTAINS content MATCHING "%s"';
-                if ($this->_negate) {
-                    $failure = 'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content MATCHING "%s"';
-                }
-                $failure = sprintf($failure, $other, $this->_content);
-                break;
-            case self::ASSERT_CONTENT_COUNT:
-                $failure = 'Failed asserting node DENOTED BY %s OCCURS EXACTLY %d times';
-                if ($this->_negate) {
-                    $failure = 'Failed asserting node DENOTED BY %s DOES NOT OCCUR EXACTLY %d times';
-                }
-                $failure = sprintf($failure, $other, $this->_content);
-                break;
-            case self::ASSERT_CONTENT_COUNT_MIN:
-                $failure = 'Failed asserting node DENOTED BY %s OCCURS AT LEAST %d times';
-                $failure = sprintf($failure, $other, $this->_content);
-                break;
-            case self::ASSERT_CONTENT_COUNT_MAX:
-                $failure = 'Failed asserting node DENOTED BY %s OCCURS AT MOST %d times';
-                $failure = sprintf($failure, $other, $this->_content);
-                break;
-            case self::ASSERT_QUERY:
-            default:
-                $failure = 'Failed asserting node DENOTED BY %s EXISTS';
-                if ($this->_negate) {
-                    $failure = 'Failed asserting node DENOTED BY %s DOES NOT EXIST';
-                }
-                $failure = sprintf($failure, $other);
-                break;
+        case self::ASSERT_CONTENT_CONTAINS:
+            $failure = 'Failed asserting node denoted by %s CONTAINS content "%s"';
+            if ($this->_negate) {
+                $failure = 'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content "%s"';
+            }
+            $failure = sprintf($failure, $other, $this->_content);
+            break;
+        case self::ASSERT_CONTENT_REGEX:
+            $failure = 'Failed asserting node denoted by %s CONTAINS content MATCHING "%s"';
+            if ($this->_negate) {
+                $failure = 'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content MATCHING "%s"';
+            }
+            $failure = sprintf($failure, $other, $this->_content);
+            break;
+        case self::ASSERT_CONTENT_COUNT:
+            $failure = 'Failed asserting node DENOTED BY %s OCCURS EXACTLY %d times';
+            if ($this->_negate) {
+                $failure = 'Failed asserting node DENOTED BY %s DOES NOT OCCUR EXACTLY %d times';
+            }
+            $failure = sprintf($failure, $other, $this->_content);
+            break;
+        case self::ASSERT_CONTENT_COUNT_MIN:
+            $failure = 'Failed asserting node DENOTED BY %s OCCURS AT LEAST %d times';
+            $failure = sprintf($failure, $other, $this->_content);
+            break;
+        case self::ASSERT_CONTENT_COUNT_MAX:
+            $failure = 'Failed asserting node DENOTED BY %s OCCURS AT MOST %d times';
+            $failure = sprintf($failure, $other, $this->_content);
+            break;
+        case self::ASSERT_QUERY:
+        default:
+            $failure = 'Failed asserting node DENOTED BY %s EXISTS';
+            if ($this->_negate) {
+                $failure = 'Failed asserting node DENOTED BY %s DOES NOT EXIST';
+            }
+            $failure = sprintf($failure, $other);
+            break;
         }
 
         if (!empty($description)) {
@@ -277,8 +282,8 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
     /**
      * Register XPath namespaces
      *
-     * @param   array $xpathNamespaces
-     * @return  void
+     * @param  array $xpathNamespaces
+     * @return void
      */
     public function registerXpathNamespaces($xpathNamespaces)
     {
@@ -289,7 +294,7 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
      * Check to see if content is matched in selected nodes
      *
      * @param  Zend_Dom_Query_Result $result
-     * @param  string $match Content to match
+     * @param  string                $match  Content to match
      * @return bool
      */
     protected function _matchContent($result, $match)
@@ -314,7 +319,7 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
      * Check to see if content is NOT matched in selected nodes
      *
      * @param  Zend_Dom_Query_Result $result
-     * @param  string $match
+     * @param  string                $match
      * @return bool
      */
     protected function _notMatchContent($result, $match)
@@ -337,7 +342,7 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
      * Check to see if content is matched by regex in selected nodes
      *
      * @param  Zend_Dom_Query_Result $result
-     * @param  string $pattern
+     * @param  string                $pattern
      * @return bool
      */
     protected function _regexContent($result, $pattern)
@@ -360,7 +365,7 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
      * Check to see if content is NOT matched by regex in selected nodes
      *
      * @param  Zend_Dom_Query_Result $result
-     * @param  string $pattern
+     * @param  string                $pattern
      * @return bool
      */
     protected function _notRegexContent($result, $pattern)
@@ -383,8 +388,8 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
      * Determine if content count matches criteria
      *
      * @param  Zend_Dom_Query_Result $result
-     * @param  int $test Value against which to test
-     * @param  string $type assertion type
+     * @param  int                   $test   Value against which to test
+     * @param  string                $type   assertion type
      * @return boolean
      */
     protected function _countContent($result, $test, $type)
@@ -392,16 +397,16 @@ class Zend_Test_PHPUnit_Constraint_DomQuery37 extends PHPUnit_Framework_Constrai
         $count = count($result);
 
         switch ($type) {
-            case self::ASSERT_CONTENT_COUNT:
-                return ($this->_negate)
+        case self::ASSERT_CONTENT_COUNT:
+            return ($this->_negate)
                     ? ($test != $count)
                     : ($test == $count);
-            case self::ASSERT_CONTENT_COUNT_MIN:
-                return ($count >= $test);
-            case self::ASSERT_CONTENT_COUNT_MAX:
-                return ($count <= $test);
-            default:
-                return false;
+        case self::ASSERT_CONTENT_COUNT_MIN:
+            return ($count >= $test);
+        case self::ASSERT_CONTENT_COUNT_MAX:
+            return ($count <= $test);
+        default:
+            return false;
         }
     }
 

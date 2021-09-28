@@ -39,6 +39,7 @@ class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
 
     /**
      * Constructs a new Zend_Gdata_Calendar_Extension_Timezone object.
+     *
      * @param string $value (optional) The text content of the element.
      */
     public function __construct($value = null, $name = null)
@@ -59,15 +60,15 @@ class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-            case 'name':
+        case 'name':
                 $name = explode(':', $attribute->nodeValue);
-                $this->_name = end($name);
-                break;
-            case 'value':
-                $this->_value = $attribute->nodeValue;
-                break;
-            default:
-                parent::takeAttributeFromDOM($attribute);
+            $this->_name = end($name);
+            break;
+        case 'value':
+            $this->_value = $attribute->nodeValue;
+            break;
+        default:
+            parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -84,7 +85,7 @@ class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
     /**
      * Set the value for this element's value attribute.
      *
-     * @param string $value The desired value for this attribute.
+     * @param  string $value The desired value for this attribute.
      * @return Zend_Gdata_Analytics_Extension_Property The element being modified.
      */
     public function setValue($value)
@@ -94,7 +95,7 @@ class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return Zend_Gdata_Analytics_Extension_Property
      */
     public function setName($name)

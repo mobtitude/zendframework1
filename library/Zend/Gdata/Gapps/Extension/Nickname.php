@@ -56,6 +56,7 @@ class Zend_Gdata_Gapps_Extension_Nickname extends Zend_Gdata_Extension
 
     /**
      * Constructs a new Zend_Gdata_Gapps_Extension_Nickname object.
+     *
      * @param string $name (optional) The nickname being represented.
      */
     public function __construct($name = null)
@@ -71,7 +72,7 @@ class Zend_Gdata_Gapps_Extension_Nickname extends Zend_Gdata_Extension
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -105,7 +106,7 @@ class Zend_Gdata_Gapps_Extension_Nickname extends Zend_Gdata_Extension
     /**
      * Get the value for this element's name attribute.
      *
-     * @see setName
+     * @see    setName
      * @return string The requested attribute.
      */
     public function getName()
@@ -118,7 +119,7 @@ class Zend_Gdata_Gapps_Extension_Nickname extends Zend_Gdata_Extension
      * describes this nickname within the domain. Emails addressed to this
      * name will be delivered to the user who owns this nickname.
      *
-     * @param string $value The desired value for this attribute.
+     * @param  string $value The desired value for this attribute.
      * @return Zend_Gdata_Gapps_Extension_Nickname Provides a fluent
      *          interface.
      */

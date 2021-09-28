@@ -48,10 +48,10 @@ require_once 'Zend/Tool/Framework/Registry.php';
 require_once 'Zend/Tool/Framework/Provider/Initializable.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Tool_Project_Provider_Abstract
     extends Zend_Tool_Framework_Provider_Abstract
@@ -112,9 +112,9 @@ abstract class Zend_Tool_Project_Provider_Abstract
      *    - if an enpoint variable has been registered in teh client registry - key=workingDirectory
      *    - if an ENV variable with the key ZFPROJECT_PATH is found
      *
-     * @param bool   $loadProfileFlag         Whether or not to throw an exception when no profile is found
-     * @param string $projectDirectory        The project directory to use to search
-     * @param bool   $searchParentDirectories Whether or not to search upper level direcotries
+     * @param  bool   $loadProfileFlag         Whether or not to throw an exception when no profile is found
+     * @param  string $projectDirectory        The project directory to use to search
+     * @param  bool   $searchParentDirectories Whether or not to search upper level direcotries
      * @return Zend_Tool_Project_Profile
      */
     protected function _loadProfile($loadProfileFlag = self::NO_PROFILE_THROW_EXCEPTION, $projectDirectory = null, $searchParentDirectories = true)
@@ -181,7 +181,7 @@ abstract class Zend_Tool_Project_Provider_Abstract
     {
         $profile = $this->_loadProfile();
         if ($profile === false) {
-            require_once 'Zend/Tool/Project/Provider/Exception.php';
+            include_once 'Zend/Tool/Project/Provider/Exception.php';
             throw new Zend_Tool_Project_Provider_Exception('A project profile was not found in the current working directory.');
         }
         return $profile;
@@ -207,7 +207,6 @@ abstract class Zend_Tool_Project_Provider_Abstract
      * _storeProfile()
      *
      * This method will store the profile into its proper location
-     *
      */
     protected function _storeProfile()
     {
@@ -228,7 +227,7 @@ abstract class Zend_Tool_Project_Provider_Abstract
         }
 
         if (!class_exists('Zend_Tool_Project_Context_Content_Engine')) {
-            require_once 'Zend/Tool/Project/Context/Content/Engine.php';
+            include_once 'Zend/Tool/Project/Context/Content/Engine.php';
         }
 
         $engine = new Zend_Tool_Project_Context_Content_Engine($storage);

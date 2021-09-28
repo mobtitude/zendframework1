@@ -13,22 +13,22 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
- * @since      Preview Release 0.2
+ * @category  Zend
+ * @package   Zend_Session
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
+ * @since     Preview Release 0.2
  */
 
 
 /**
  * Zend_Session_Abstract
  *
- * @category   Zend
- * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Session
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Session_Abstract
 {
@@ -76,7 +76,7 @@ abstract class Zend_Session_Abstract
             /**
              * @see Zend_Session_Exception
              */
-            require_once 'Zend/Session/Exception.php';
+            include_once 'Zend/Session/Exception.php';
             throw new Zend_Session_Exception(self::_THROW_NOT_READABLE_MSG);
         }
 
@@ -102,7 +102,7 @@ abstract class Zend_Session_Abstract
             /**
              * @see Zend_Session_Exception
              */
-            require_once 'Zend/Session/Exception.php';
+            include_once 'Zend/Session/Exception.php';
             throw new Zend_Session_Exception(self::_THROW_NOT_WRITABLE_MSG);
         }
 
@@ -137,7 +137,7 @@ abstract class Zend_Session_Abstract
             /**
              * @see Zend_Session_Exception
              */
-            require_once 'Zend/Session/Exception.php';
+            include_once 'Zend/Session/Exception.php';
             throw new Zend_Session_Exception(self::_THROW_NOT_READABLE_MSG);
         }
 
@@ -164,8 +164,8 @@ abstract class Zend_Session_Abstract
     /**
      * namespaceGetAll() - Get an array containing $namespace, including expiring data.
      *
-     * @param string $namespace
-     * @param string $name
+     * @param  string $namespace
+     * @param  string $name
      * @return mixed
      */
     protected static function _namespaceGetAll($namespace)

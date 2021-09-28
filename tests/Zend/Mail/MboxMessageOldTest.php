@@ -43,6 +43,7 @@ class Zend_Mail_Storage_Mbox_OldMessage extends Zend_Mail_Storage_Mbox
 {
     /**
      * used message class
+     *
      * @var string
      */
     protected string $_messageClass = 'Zend_Mail_Message';
@@ -104,7 +105,7 @@ class Zend_Mail_MboxMessageOldTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Simple Message', $subject);
     }
 
-/*
+    /*
     public function testFetchTopBody()
     {
         $mail = new Zend_Mail_Storage_Mbox_OldMessage(array('filename' => $this->_mboxFile));
@@ -112,7 +113,7 @@ class Zend_Mail_MboxMessageOldTest extends PHPUnit_Framework_TestCase
         $content = $mail->getHeader(3, 1)->getContent();
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
     }
-*/
+    */
 
     public function testFetchMessageHeader()
     {

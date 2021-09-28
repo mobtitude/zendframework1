@@ -12,13 +12,15 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Server
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Server_Interface */
+/**
+ * Zend_Server_Interface 
+ */
 require_once 'Zend/Server/Interface.php';
 
 /**
@@ -49,17 +51,17 @@ require_once 'Zend/Server/Method/Parameter.php';
 /**
  * Zend_Server_Abstract
  *
- * @category   Zend
- * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Server
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 abstract class Zend_Server_Abstract implements Zend_Server_Interface
 {
     /**
      * @deprecated
-     * @var array List of PHP magic methods (lowercased)
+     * @var        array List of PHP magic methods (lowercased)
      */
     protected static array $magic_methods = array(
         '__call',
@@ -114,9 +116,9 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
      * Lowercase's a string by reference
      *
      * @deprecated
-     * @param  string $string value
-     * @param  string $key
-     * @return string Lower cased string
+     * @param      string $string value
+     * @param      string $key
+     * @return     string Lower cased string
      */
     public static function lowerCase(&$value, &$key)
     {
@@ -135,11 +137,11 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
         $callback = new Zend_Server_Method_Callback();
         if ($reflection instanceof Zend_Server_Reflection_Method) {
             $callback->setType($reflection->isStatic() ? 'static' : 'instance')
-                     ->setClass($reflection->getDeclaringClass()->getName())
-                     ->setMethod($reflection->getName());
+                ->setClass($reflection->getDeclaringClass()->getName())
+                ->setMethod($reflection->getName());
         } elseif ($reflection instanceof Zend_Server_Reflection_Function) {
             $callback->setType('function')
-                     ->setFunction($reflection->getName());
+                ->setFunction($reflection->getName());
         }
         return $callback;
     }
@@ -148,7 +150,7 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
      * Build a method signature
      *
      * @param  Zend_Server_Reflection_Function_Abstract $reflection
-     * @param  null|string|object $class
+     * @param  null|string|object                       $class
      * @return Zend_Server_Method_Definition
      * @throws Zend_Server_Exception on duplicate entry
      */
@@ -159,25 +161,27 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
         $method     = empty($ns) ? $name : $ns . '.' . $name;
 
         if (!$this->_overwriteExistingMethods && $this->_table->hasMethod($method)) {
-            require_once 'Zend/Server/Exception.php';
+            include_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception('Duplicate method registered: ' . $method);
         }
 
         $definition = new Zend_Server_Method_Definition();
         $definition->setName($method)
-                   ->setCallback($this->_buildCallback($reflection))
-                   ->setMethodHelp($reflection->getDescription())
-                   ->setInvokeArguments($reflection->getInvokeArguments());
+            ->setCallback($this->_buildCallback($reflection))
+            ->setMethodHelp($reflection->getDescription())
+            ->setInvokeArguments($reflection->getInvokeArguments());
 
         foreach ($reflection->getPrototypes() as $proto) {
             $prototype = new Zend_Server_Method_Prototype();
             $prototype->setReturnType($this->_fixType($proto->getReturnType()));
             foreach ($proto->getParameters() as $parameter) {
-                $param = new Zend_Server_Method_Parameter(array(
+                $param = new Zend_Server_Method_Parameter(
+                    array(
                     'type'     => $this->_fixType($parameter->getType()),
                     'name'     => $parameter->getName(),
                     'optional' => $parameter->isOptional(),
-                ));
+                    )
+                );
                 if ($parameter->isDefaultValueAvailable()) {
                     $param->setDefaultValue($parameter->getDefaultValue());
                 }
@@ -196,7 +200,7 @@ abstract class Zend_Server_Abstract implements Zend_Server_Interface
      * Dispatch method
      *
      * @param  Zend_Server_Method_Definition $invocable
-     * @param  array $params
+     * @param  array                         $params
      * @return mixed
      */
     protected function _dispatch(Zend_Server_Method_Definition $invocable, array $params)

@@ -39,10 +39,10 @@ require_once 'Zend/Uri/Http.php';
  *
  * See http://wp.netscape.com/newsref/std/cookie_spec.html for some specs.
  *
- * @category   Zend
- * @package    Zend_Http
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Http
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_Cookie
 {
@@ -89,24 +89,24 @@ class Zend_Http_Cookie
      * @param string $name
      * @param string $value
      * @param string $domain
-     * @param int $expires
+     * @param int    $expires
      * @param string $path
-     * @param bool $secure
+     * @param bool   $secure
      */
     public function __construct($name, $value, $domain, $expires = null, $path = null, $secure = false)
     {
         if (preg_match("/[=,; \t\r\n\013\014]/", $name)) {
-            require_once 'Zend/Http/Exception.php';
+            include_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("Cookie name cannot contain these characters: =,; \\t\\r\\n\\013\\014 ({$name})");
         }
 
         if (! $this->name = (string) $name) {
-            require_once 'Zend/Http/Exception.php';
+            include_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception('Cookies must have a name');
         }
 
         if (! $this->domain = (string) $domain) {
-            require_once 'Zend/Http/Exception.php';
+            include_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception('Cookies must have a domain');
         }
 
@@ -181,12 +181,13 @@ class Zend_Http_Cookie
      *
      * Always returns false if the cookie is a session cookie (has no expiry time)
      *
-     * @param int $now Timestamp to consider as "now"
+     * @param  int $now Timestamp to consider as "now"
      * @return boolean
      */
     public function isExpired($now = null)
     {
-        if ($now === null) $now = time();
+        if ($now === null) { $now = time();
+        }
         if (is_int($this->expires) && $this->expires < $now) {
             return true;
         } else {
@@ -207,27 +208,30 @@ class Zend_Http_Cookie
     /**
      * Checks whether the cookie should be sent or not in a specific scenario
      *
-     * @param string|Zend_Uri_Http $uri URI to check against (secure, domain, path)
-     * @param boolean $matchSessionCookies Whether to send session cookies
-     * @param int $now Override the current time when checking for expiry time
+     * @param  string|Zend_Uri_Http $uri                 URI to check against (secure, domain, path)
+     * @param  boolean              $matchSessionCookies Whether to send session cookies
+     * @param  int                  $now                 Override the current time when checking for expiry time
      * @return boolean
      */
     public function match($uri, $matchSessionCookies = true, $now = null)
     {
-        if (is_string ($uri)) {
+        if (is_string($uri)) {
             $uri = Zend_Uri_Http::factory($uri);
         }
 
         // Make sure we have a valid Zend_Uri_Http object
         if (! ($uri->valid() && ($uri->getScheme() == 'http' || $uri->getScheme() =='https'))) {
-            require_once 'Zend/Http/Exception.php';
+            include_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception('Passed URI is not a valid HTTP or HTTPS URI');
         }
 
         // Check that the cookie is secure (if required) and not expired
-        if ($this->secure && $uri->getScheme() != 'https') return false;
-        if ($this->isExpired($now)) return false;
-        if ($this->isSessionCookie() && ! $matchSessionCookies) return false;
+        if ($this->secure && $uri->getScheme() != 'https') { return false;
+        }
+        if ($this->isExpired($now)) { return false;
+        }
+        if ($this->isSessionCookie() && ! $matchSessionCookies) { return false;
+        }
 
         // Check if the domain matches
         if (! self::matchCookieDomain($this->getDomain(), $uri->getHost())) {
@@ -261,10 +265,10 @@ class Zend_Http_Cookie
      * Generate a new Cookie object from a cookie string
      * (for example the value of the Set-Cookie HTTP header)
      *
-     * @param string $cookieStr
-     * @param Zend_Uri_Http|string $refUri Reference URI for default values (domain, path)
-     * @param boolean $encodeValue Whether or not the cookie's value should be
-     *                             passed through urlencode/urldecode
+     * @param  string               $cookieStr
+     * @param  Zend_Uri_Http|string $refUri      Reference URI for default values (domain, path)
+     * @param  boolean              $encodeValue Whether or not the cookie's value should be
+     *                                           passed through urlencode/urldecode
      * @return Zend_Http_Cookie A new Zend_Http_Cookie object or false on failure.
      */
     public static function fromString($cookieStr, $refUri = null, $encodeValue = true)
@@ -283,7 +287,8 @@ class Zend_Http_Cookie
         $parts   = explode(';', $cookieStr);
 
         // If first part does not include '=', fail
-        if (strpos($parts[0], '=') === false) return false;
+        if (strpos($parts[0], '=') === false) { return false;
+        }
 
         // Get the name and value of the cookie
         list($name, $value) = explode('=', trim(array_shift($parts)), 2);
@@ -312,30 +317,30 @@ class Zend_Http_Cookie
                 list($k, $v) = $keyValue;
                 switch (strtolower($k))    {
                     case 'expires':
-                        if(($expires = strtotime($v)) === false) {
-                            /**
-                             * The expiration is past Tue, 19 Jan 2038 03:14:07 UTC
-                             * the maximum for 32-bit signed integer. Zend_Date
-                             * can get around that limit.
-                             *
-                             * @see Zend_Date
-                             */
-                            require_once 'Zend/Date.php';
+                if(($expires = strtotime($v)) === false) {
+                    /**
+                     * The expiration is past Tue, 19 Jan 2038 03:14:07 UTC
+                     * the maximum for 32-bit signed integer. Zend_Date
+                     * can get around that limit.
+                     *
+                     * @see Zend_Date
+                     */
+                    include_once 'Zend/Date.php';
 
-                            $expireDate = new Zend_Date($v);
-                            $expires = $expireDate->getTimestamp();
-                        }
+                    $expireDate = new Zend_Date($v);
+                    $expires = $expireDate->getTimestamp();
+                }
                         break;
 
-                    case 'path':
+                case 'path':
                         $path = $v;
-                        break;
+                    break;
 
-                    case 'domain':
+                case 'domain':
                         $domain = $v;
-                        break;
+                    break;
 
-                    default:
+                default:
                         break;
                 }
             }
@@ -355,20 +360,20 @@ class Zend_Http_Cookie
      *
      * Used by Zend_Http_Cookie and Zend_Http_CookieJar for cookie matching
      *
-     * @param  string $cookieDomain
-     * @param  string $host
+     * @param string $cookieDomain
+     * @param string $host
      *
      * @return boolean
      */
     public static function matchCookieDomain($cookieDomain, $host)
     {
         if (! $cookieDomain) {
-            require_once 'Zend/Http/Exception.php';
+            include_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$cookieDomain is expected to be a cookie domain");
         }
 
         if (! $host) {
-            require_once 'Zend/Http/Exception.php';
+            include_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$host is expected to be a host name");
         }
 
@@ -396,12 +401,12 @@ class Zend_Http_Cookie
     public static function matchCookiePath($cookiePath, $path)
     {
         if (! $cookiePath) {
-            require_once 'Zend/Http/Exception.php';
+            include_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$cookiePath is expected to be a cookie path");
         }
 
         if (! $path) {
-            require_once 'Zend/Http/Exception.php';
+            include_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$path is expected to be a host name");
         }
 

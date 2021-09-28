@@ -83,7 +83,7 @@ class Zend_Service_Amazon_S3_Stream
                 /**
                  * @see Zend_Service_Amazon_S3_Exception
                  */
-                require_once 'Zend/Service/Amazon/S3/Exception.php';
+                include_once 'Zend/Service/Amazon/S3/Exception.php';
                 throw new Zend_Service_Amazon_S3_Exception("Unable to parse URL $path");
             }
 
@@ -92,7 +92,7 @@ class Zend_Service_Amazon_S3_Stream
                 /**
                  * @see Zend_Service_Amazon_S3_Exception
                  */
-                require_once 'Zend/Service/Amazon/S3/Exception.php';
+                include_once 'Zend/Service/Amazon/S3/Exception.php';
                 throw new Zend_Service_Amazon_S3_Exception("Unknown client for wrapper {$url[0]}");
             }
         }
@@ -103,7 +103,7 @@ class Zend_Service_Amazon_S3_Stream
     /**
      * Extract object name from URL
      *
-     * @param string $path
+     * @param  string $path
      * @return string
      */
     protected function _getNamePart($path)
@@ -268,19 +268,19 @@ class Zend_Service_Amazon_S3_Stream
         }
 
         switch ($whence) {
-            case SEEK_CUR:
+        case SEEK_CUR:
                 // Set position to current location plus $offset
                 $new_pos = $this->_position + $offset;
-                break;
-            case SEEK_END:
+            break;
+        case SEEK_END:
                 // Set position to end-of-file plus $offset
                 $new_pos = $this->_objectSize + $offset;
-                break;
-            case SEEK_SET:
-            default:
-                // Set position equal to $offset
-                $new_pos = $offset;
-                break;
+            break;
+        case SEEK_SET:
+        default:
+            // Set position equal to $offset
+            $new_pos = $offset;
+            break;
         }
         $ret = ($new_pos >= 0 && $new_pos <= $this->_objectSize);
         if ($ret) {
@@ -334,12 +334,12 @@ class Zend_Service_Amazon_S3_Stream
         $stat['blksize'] = 0;
         $stat['blocks'] = 0;
 
-    if(($slash = strchr($this->_objectName, '/')) === false || $slash == strlen($this->_objectName)-1) {
-        /* bucket */
-        $stat['mode'] |= 040000;
-    } else {
-        $stat['mode'] |= 0100000;
-    }
+        if(($slash = strchr($this->_objectName, '/')) === false || $slash == strlen($this->_objectName)-1) {
+            /* bucket */
+            $stat['mode'] |= 040000;
+        } else {
+            $stat['mode'] |= 0100000;
+        }
            $info = $this->_s3->getInfo($this->_objectName);
         if (!empty($info)) {
             $stat['size']  = $info['size'];
@@ -364,8 +364,8 @@ class Zend_Service_Amazon_S3_Stream
     /**
      * Attempt to rename the item
      *
-     * @param  string  $path_from
-     * @param  string  $path_to
+     * @param  string $path_from
+     * @param  string $path_to
      * @return boolean False
      */
     public function rename($path_from, $path_to)
@@ -402,7 +402,7 @@ class Zend_Service_Amazon_S3_Stream
     /**
      * Attempt to open a directory
      *
-     * @param  string $path
+     * @param  string  $path
      * @param  integer $options
      * @return boolean
      */
@@ -423,7 +423,7 @@ class Zend_Service_Amazon_S3_Stream
     /**
      * Return array of URL variables
      *
-     * @param  string $path
+     * @param  string  $path
      * @param  integer $flags
      * @return array
      */
@@ -444,13 +444,13 @@ class Zend_Service_Amazon_S3_Stream
         $stat['blksize'] = 0;
         $stat['blocks'] = 0;
 
-    $name = $this->_getNamePart($path);
-    if(($slash = strchr($name, '/')) === false || $slash == strlen($name)-1) {
-        /* bucket */
-        $stat['mode'] |= 040000;
-    } else {
-        $stat['mode'] |= 0100000;
-    }
+        $name = $this->_getNamePart($path);
+        if(($slash = strchr($name, '/')) === false || $slash == strlen($name)-1) {
+            /* bucket */
+            $stat['mode'] |= 040000;
+        } else {
+            $stat['mode'] |= 0100000;
+        }
            $info = $this->_getS3Client($path)->getInfo($name);
 
         if (!empty($info)) {

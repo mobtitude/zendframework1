@@ -94,7 +94,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
     public function __construct()
     {
         if (!extension_loaded('curl')) {
-            require_once 'Zend/Http/Client/Adapter/Exception.php';
+            include_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('cURL extension has to be loaded to use this Zend_Http_Client adapter.');
         }
         $this->_invalidOverwritableCurlOptions = array(
@@ -129,7 +129,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
             $config = $config->toArray();
 
         } elseif (! is_array($config)) {
-            require_once 'Zend/Http/Client/Adapter/Exception.php';
+            include_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception(
                 'Array or Zend_Config object expected, got ' . gettype($config)
             );
@@ -143,15 +143,15 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         foreach ($config as $k => $v) {
             $option = strtolower($k);
             switch($option) {
-                case 'proxy_host':
-                    $this->setCurlOption(CURLOPT_PROXY, $v);
-                    break;
-                case 'proxy_port':
-                    $this->setCurlOption(CURLOPT_PROXYPORT, $v);
-                    break;
-                default:
-                    $this->_config[$option] = $v;
-                    break;
+            case 'proxy_host':
+                $this->setCurlOption(CURLOPT_PROXY, $v);
+                break;
+            case 'proxy_port':
+                $this->setCurlOption(CURLOPT_PROXYPORT, $v);
+                break;
+            default:
+                $this->_config[$option] = $v;
+                break;
             }
         }
 
@@ -159,20 +159,20 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
     }
 
     /**
-      * Retrieve the array of all configuration options
-      *
-      * @return array
-      */
-     public function getConfig()
-     {
-         return $this->_config;
-     }
+     * Retrieve the array of all configuration options
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        return $this->_config;
+    }
 
     /**
      * Direct setter for cURL adapter related options.
      *
      * @param  string|int $option
-     * @param  mixed $value
+     * @param  mixed      $value
      * @return Zend_Http_Adapter_Curl
      */
     public function setCurlOption($option, $value)
@@ -241,7 +241,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         if (!$this->_curl) {
             $this->close();
 
-            require_once 'Zend/Http/Client/Adapter/Exception.php';
+            include_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception('Unable to Connect to ' .  $host . ':' . $port);
         }
 
@@ -274,12 +274,12 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
     {
         // Make sure we're properly connected
         if (!$this->_curl) {
-            require_once 'Zend/Http/Client/Adapter/Exception.php';
+            include_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception("Trying to write but we are not connected");
         }
 
         if ($this->_connected_to[0] != $uri->getHost() || $this->_connected_to[1] != $uri->getPort()) {
-            require_once 'Zend/Http/Client/Adapter/Exception.php';
+            include_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception("Trying to write but we are connected to the wrong host");
         }
 
@@ -289,81 +289,81 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         // ensure correct curl call
         $curlValue = true;
         switch ($method) {
-            case Zend_Http_Client::GET:
-                $curlMethod = CURLOPT_HTTPGET;
-                break;
+        case Zend_Http_Client::GET:
+            $curlMethod = CURLOPT_HTTPGET;
+            break;
 
-            case Zend_Http_Client::POST:
-                $curlMethod = CURLOPT_POST;
-                break;
+        case Zend_Http_Client::POST:
+            $curlMethod = CURLOPT_POST;
+            break;
 
-            case Zend_Http_Client::PUT:
-                // There are two different types of PUT request, either a Raw Data string has been set
-                // or CURLOPT_INFILE and CURLOPT_INFILESIZE are used.
-                if(is_resource($body)) {
-                    $this->_config['curloptions'][CURLOPT_INFILE] = $body;
-                }
-                if (isset($this->_config['curloptions'][CURLOPT_INFILE])) {
-                    // Now we will probably already have Content-Length set, so that we have to delete it
-                    // from $headers at this point:
-                    foreach ($headers AS $k => $header) {
-                        if (preg_match('/Content-Length:\s*(\d+)/i', $header, $m)) {
-                            if(is_resource($body)) {
-                                $this->_config['curloptions'][CURLOPT_INFILESIZE] = (int)$m[1];
-                            }
-                            unset($headers[$k]);
+        case Zend_Http_Client::PUT:
+            // There are two different types of PUT request, either a Raw Data string has been set
+            // or CURLOPT_INFILE and CURLOPT_INFILESIZE are used.
+            if(is_resource($body)) {
+                $this->_config['curloptions'][CURLOPT_INFILE] = $body;
+            }
+            if (isset($this->_config['curloptions'][CURLOPT_INFILE])) {
+                // Now we will probably already have Content-Length set, so that we have to delete it
+                // from $headers at this point:
+                foreach ($headers AS $k => $header) {
+                    if (preg_match('/Content-Length:\s*(\d+)/i', $header, $m)) {
+                        if(is_resource($body)) {
+                            $this->_config['curloptions'][CURLOPT_INFILESIZE] = (int)$m[1];
                         }
+                        unset($headers[$k]);
                     }
-
-                    if (!isset($this->_config['curloptions'][CURLOPT_INFILESIZE])) {
-                        require_once 'Zend/Http/Client/Adapter/Exception.php';
-                        throw new Zend_Http_Client_Adapter_Exception("Cannot set a file-handle for cURL option CURLOPT_INFILE without also setting its size in CURLOPT_INFILESIZE.");
-                    }
-
-                    if(is_resource($body)) {
-                        $body = '';
-                    }
-
-                    $curlMethod = CURLOPT_PUT;
-                } else {
-                    $curlMethod = CURLOPT_CUSTOMREQUEST;
-                    $curlValue = "PUT";
                 }
-                break;
 
-            case Zend_Http_Client::PATCH:
+                if (!isset($this->_config['curloptions'][CURLOPT_INFILESIZE])) {
+                    include_once 'Zend/Http/Client/Adapter/Exception.php';
+                    throw new Zend_Http_Client_Adapter_Exception("Cannot set a file-handle for cURL option CURLOPT_INFILE without also setting its size in CURLOPT_INFILESIZE.");
+                }
+
+                if(is_resource($body)) {
+                    $body = '';
+                }
+
+                $curlMethod = CURLOPT_PUT;
+            } else {
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
-                $curlValue = "PATCH";
-                break;
+                $curlValue = "PUT";
+            }
+            break;
 
-            case Zend_Http_Client::DELETE:
-                $curlMethod = CURLOPT_CUSTOMREQUEST;
-                $curlValue = "DELETE";
-                break;
+        case Zend_Http_Client::PATCH:
+            $curlMethod = CURLOPT_CUSTOMREQUEST;
+            $curlValue = "PATCH";
+            break;
 
-            case Zend_Http_Client::OPTIONS:
-                $curlMethod = CURLOPT_CUSTOMREQUEST;
-                $curlValue = "OPTIONS";
-                break;
+        case Zend_Http_Client::DELETE:
+            $curlMethod = CURLOPT_CUSTOMREQUEST;
+            $curlValue = "DELETE";
+            break;
 
-            case Zend_Http_Client::TRACE:
-                $curlMethod = CURLOPT_CUSTOMREQUEST;
-                $curlValue = "TRACE";
-                break;
+        case Zend_Http_Client::OPTIONS:
+            $curlMethod = CURLOPT_CUSTOMREQUEST;
+            $curlValue = "OPTIONS";
+            break;
 
-            case Zend_Http_Client::HEAD:
-                $curlMethod = CURLOPT_CUSTOMREQUEST;
-                $curlValue = "HEAD";
-                break;
+        case Zend_Http_Client::TRACE:
+            $curlMethod = CURLOPT_CUSTOMREQUEST;
+            $curlValue = "TRACE";
+            break;
 
-            default:
-                // For now, through an exception for unsupported request methods
-                require_once 'Zend/Http/Client/Adapter/Exception.php';
-                throw new Zend_Http_Client_Adapter_Exception("Method currently not supported");
+        case Zend_Http_Client::HEAD:
+            $curlMethod = CURLOPT_CUSTOMREQUEST;
+            $curlValue = "HEAD";
+            break;
+
+        default:
+            // For now, through an exception for unsupported request methods
+            include_once 'Zend/Http/Client/Adapter/Exception.php';
+            throw new Zend_Http_Client_Adapter_Exception("Method currently not supported");
         }
 
         if(is_resource($body) && $curlMethod != CURLOPT_PUT) {
-            require_once 'Zend/Http/Client/Adapter/Exception.php';
+            include_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception("Streaming requests are allowed only with PUT");
         }
 
@@ -395,6 +395,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
 
         /**
          * Make sure POSTFIELDS is set after $curlMethod is set:
+         *
          * @link http://de2.php.net/manual/en/function.curl-setopt.php#81161
          */
         if ($method == Zend_Http_Client::POST) {
@@ -426,7 +427,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
             foreach ((array)$this->_config['curloptions'] as $k => $v) {
                 if (!in_array($k, $this->_invalidOverwritableCurlOptions)) {
                     if (curl_setopt($this->_curl, $k, $v) == false) {
-                        require_once 'Zend/Http/Client/Exception.php';
+                        include_once 'Zend/Http/Client/Exception.php';
                         throw new Zend_Http_Client_Exception(sprintf("Unknown or erroreous cURL option '%s' set", $k));
                     }
                 }
@@ -445,7 +446,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         $request .= $body;
 
         if (empty($this->_response)) {
-            require_once 'Zend/Http/Client/Exception.php';
+            include_once 'Zend/Http/Client/Exception.php';
             throw new Zend_Http_Client_Exception("Error in cURL request: " . curl_error($this->_curl));
         }
 
@@ -485,7 +486,6 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
 
     /**
      * Close the connection to the server
-     *
      */
     public function close()
     {
@@ -509,7 +509,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
     /**
      * Set output stream for the response
      *
-     * @param resource $stream
+     * @param  resource $stream
      * @return Zend_Http_Client_Adapter_Socket
      */
     public function setOutputStream($stream)
@@ -521,8 +521,8 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
     /**
      * Header reader function for CURL
      *
-     * @param resource $curl
-     * @param string $header
+     * @param  resource $curl
+     * @param  string   $header
      * @return int
      */
     public function readHeader($curl, $header)

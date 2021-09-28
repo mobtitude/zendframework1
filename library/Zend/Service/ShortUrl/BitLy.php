@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Service_ShortUrl
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Service_ShortUrl
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -27,10 +27,10 @@ require_once 'Zend/Service/ShortUrl/AbstractShortener.php';
 /**
  * Bit.ly API implementation
  *
- * @category   Zend
- * @package    Zend_Service_ShortUrl
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Service_ShortUrl
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_ShortUrl_BitLy extends Zend_Service_ShortUrl_AbstractShortener
 {
@@ -55,7 +55,7 @@ class Zend_Service_ShortUrl_BitLy extends Zend_Service_ShortUrl_AbstractShortene
     protected $_apiKey;
 
     /**
-     * @param string $login user login name or application access token
+     * @param string      $login  user login name or application access token
      * @param null|string $apiKey user API key
      */
     public function __construct($login, $apiKey = null)
@@ -70,7 +70,7 @@ class Zend_Service_ShortUrl_BitLy extends Zend_Service_ShortUrl_AbstractShortene
     /**
      * set OAuth credentials
      *
-     * @param $accessToken
+     * @param  $accessToken
      * @return Zend_Service_ShortUrl_BitLy
      */
     public function setOAuthAccessToken($accessToken)
@@ -83,8 +83,8 @@ class Zend_Service_ShortUrl_BitLy extends Zend_Service_ShortUrl_AbstractShortene
     /**
      * set login credentials
      *
-     * @param $login
-     * @param $apiKey
+     * @param  $login
+     * @param  $apiKey
      * @return Zend_Service_ShortUrl_BitLy
      */
     public function setApiLogin($login, $apiKey)
@@ -96,6 +96,7 @@ class Zend_Service_ShortUrl_BitLy extends Zend_Service_ShortUrl_AbstractShortene
 
     /**
      * prepare http client
+     *
      * @return void
      */
     protected function _setAccessParameter()
@@ -105,8 +106,8 @@ class Zend_Service_ShortUrl_BitLy extends Zend_Service_ShortUrl_AbstractShortene
             $this->getHttpClient()->setParameterGet('access_token', $this->_apiKey);
         } else {
             //login/APIKey authentication
-            $this->getHttpClient()->setParameterGet('login',$this->_loginName);
-            $this->getHttpClient()->setParameterGet('apiKey',$this->_apiKey);
+            $this->getHttpClient()->setParameterGet('login', $this->_loginName);
+            $this->getHttpClient()->setParameterGet('apiKey', $this->_apiKey);
         }
     }
 
@@ -138,8 +139,8 @@ class Zend_Service_ShortUrl_BitLy extends Zend_Service_ShortUrl_AbstractShortene
         $this->_setAccessParameter();
 
         $this->getHttpClient()->setUri($this->_apiUri.'/v3/shorten');
-        $this->getHttpClient()->setParameterGet('longUrl',$url);
-        $this->getHttpClient()->setParameterGet('format','txt');
+        $this->getHttpClient()->setParameterGet('longUrl', $url);
+        $this->getHttpClient()->setParameterGet('format', 'txt');
 
         return $this->_processRequest();
     }
@@ -157,8 +158,8 @@ class Zend_Service_ShortUrl_BitLy extends Zend_Service_ShortUrl_AbstractShortene
         $this->_setAccessParameter();
 
         $this->getHttpClient()->setUri($this->_apiUri.'/v3/expand');
-        $this->getHttpClient()->setParameterGet('shortUrl',$shortenedUrl);
-        $this->getHttpClient()->setParameterGet('format','txt');
+        $this->getHttpClient()->setParameterGet('shortUrl', $shortenedUrl);
+        $this->getHttpClient()->setParameterGet('format', 'txt');
 
         return $this->_processRequest();
     }

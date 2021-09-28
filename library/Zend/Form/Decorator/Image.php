@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Abstract */
+/**
+ * Zend_Form_Decorator_Abstract 
+ */
 require_once 'Zend/Form/Decorator/Abstract.php';
 
 /**
@@ -48,6 +50,7 @@ class Zend_Form_Decorator_Image extends Zend_Form_Decorator_Abstract
 
     /**
      * Default placement: append
+     *
      * @var string
      */
     protected ?string $_placement = 'APPEND';
@@ -135,14 +138,14 @@ class Zend_Form_Decorator_Image extends Zend_Form_Decorator_Abstract
         $image = $view->formImage($name, $element->getImageValue(), $attribs);
 
         if (null !== $tag) {
-            require_once 'Zend/Form/Decorator/HtmlTag.php';
+            include_once 'Zend/Form/Decorator/HtmlTag.php';
             $decorator = new Zend_Form_Decorator_HtmlTag();
             $decorator->setOptions(array('tag' => $tag));
             $image = $decorator->render($image);
         }
 
         switch ($placement) {
-            case self::PREPEND:
+        case self::PREPEND:
                 return $image . $separator . $content;
             case self::APPEND:
             default:

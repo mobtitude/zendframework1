@@ -61,6 +61,7 @@ class Zend_Cache_Frontend_File extends Zend_Cache_Core
      * ====> (boolean) ignore_missing_master_files
      * - if set to true, missing master files are ignored silently
      * - if set to false (default), an exception is thrown if there is a missing master file
+     *
      * @var array available options
      */
     protected array $_specificOptions = array(
@@ -134,7 +135,7 @@ class Zend_Cache_Frontend_File extends Zend_Cache_Core
      * To keep the compatibility
      *
      * @deprecated
-     * @param string $masterFile the complete path and name of the master file
+     * @param      string $masterFile the complete path and name of the master file
      */
     public function setMasterFile($masterFile)
     {

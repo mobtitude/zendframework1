@@ -45,31 +45,31 @@ class Zend_Gdata_Analytics_DataEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param DOMElement $child
+     * @param  DOMElement $child
      * @return void
      */
     protected function takeChildFromDOM($child)
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('analytics') . ':' . 'dimension';
-                $dimension = new Zend_Gdata_Analytics_Extension_Dimension();
-                $dimension->transferFromDOM($child);
-                $this->_dimensions[] = $dimension;
-                break;
-            case $this->lookupNamespace('analytics') . ':' . 'metric';
-                $metric = new Zend_Gdata_Analytics_Extension_Metric();
-                $metric->transferFromDOM($child);
-                $this->_metrics[] = $metric;
-                break;
-            default:
-                parent::takeChildFromDOM($child);
-                break;
+        case $this->lookupNamespace('analytics') . ':' . 'dimension';
+            $dimension = new Zend_Gdata_Analytics_Extension_Dimension();
+            $dimension->transferFromDOM($child);
+            $this->_dimensions[] = $dimension;
+            break;
+        case $this->lookupNamespace('analytics') . ':' . 'metric';
+            $metric = new Zend_Gdata_Analytics_Extension_Metric();
+            $metric->transferFromDOM($child);
+            $this->_metrics[] = $metric;
+            break;
+        default:
+            parent::takeChildFromDOM($child);
+            break;
         }
     }
 
     /**
-     * @param string $name 
+     * @param  string $name 
      * @return mixed
      */
     public function getDimension($name)
@@ -83,7 +83,7 @@ class Zend_Gdata_Analytics_DataEntry extends Zend_Gdata_Entry
     }
     
     /** 
-     * @param string $name 
+     * @param  string $name 
      * @return mixed
      */
     public function getMetric($name)
@@ -97,7 +97,7 @@ class Zend_Gdata_Analytics_DataEntry extends Zend_Gdata_Entry
     }
     
     /**
-     * @param string $name 
+     * @param  string $name 
      * @return mixed
      */
     public function getValue($name)

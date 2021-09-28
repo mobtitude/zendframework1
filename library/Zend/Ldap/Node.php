@@ -85,8 +85,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
     protected function __construct(Zend_Ldap_Dn $dn, array $data, $fromDataSource, Zend_Ldap $ldap = null)
     {
         parent::__construct($dn, $data, $fromDataSource);
-        if ($ldap !== null) $this->attachLdap($ldap);
-        else $this->detachLdap();
+        if ($ldap !== null) { $this->attachLdap($ldap);
+        } else { $this->detachLdap();
+        }
     }
 
     /**
@@ -126,10 +127,11 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             /**
              * @see Zend_Ldap_Exception
              */
-            require_once 'Zend/Ldap/Exception.php';
+            include_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'No LDAP connection specified.', Zend_Ldap_Exception::LDAP_OTHER);
         }
-        else return $this->_ldap;
+        else { return $this->_ldap;
+        }
     }
 
     /**
@@ -148,9 +150,11 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             /**
              * @see Zend_Ldap_Exception
              */
-            require_once 'Zend/Ldap/Exception.php';
-            throw new Zend_Ldap_Exception(null, 'LDAP connection is not responsible for given node.',
-                Zend_Ldap_Exception::LDAP_OTHER);
+            include_once 'Zend/Ldap/Exception.php';
+            throw new Zend_Ldap_Exception(
+                null, 'LDAP connection is not responsible for given node.',
+                Zend_Ldap_Exception::LDAP_OTHER
+            );
         }
 
         if ($ldap !== $this->_ldap) {
@@ -232,7 +236,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             /**
              * @see Zend_Ldap_Exception
              */
-            require_once 'Zend/Ldap/Exception.php';
+            include_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, '$dn is of a wrong data type.');
         }
         $new = new self($dn, array(), false, null);
@@ -259,7 +263,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             /**
              * @see Zend_Ldap_Exception
              */
-            require_once 'Zend/Ldap/Exception.php';
+            include_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, '$dn is of a wrong data type.');
         }
         $data = $ldap->getEntry($dn, array('*', '+'), true);
@@ -284,7 +288,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             /**
              * @see Zend_Ldap_Exception
              */
-            require_once 'Zend/Ldap/Exception.php';
+            include_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, '\'dn\' key is missing in array.');
         }
         if (is_string($data['dn']) || is_array($data['dn'])) {
@@ -295,7 +299,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             /**
              * @see Zend_Ldap_Exception
              */
-            require_once 'Zend/Ldap/Exception.php';
+            include_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, '\'dn\' key is of a wrong data type.');
         }
         $fromDataSource = ($fromDataSource === true) ? true : false;
@@ -307,7 +311,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
     /**
      * Ensures that teh RDN attributes are correctly set.
      *
-     * @param  boolean    $overwrite    True to overwrite the RDN attributes
+     * @param  boolean $overwrite True to overwrite the RDN attributes
      * @return void
      */
     protected function _ensureRdnAttributeValues($overwrite = false)
@@ -360,10 +364,10 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
 
 
     /**
-    * Is this node going to be deleted once update() is called?
-    *
-    * @return boolean
-    */
+     * Is this node going to be deleted once update() is called?
+     *
+     * @return boolean
+     */
     public function willBeDeleted()
     {
         return $this->_delete;
@@ -383,10 +387,10 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
     }
 
     /**
-    * Is this node going to be moved once update() is called?
-    *
-    * @return boolean
-    */
+     * Is this node going to be moved once update() is called?
+     *
+     * @return boolean
+     */
     public function willBeMoved()
     {
         if ($this->isNew() || $this->willBeDeleted()) {
@@ -415,7 +419,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             /**
              * @see Zend_Ldap_Exception
              */
-            require_once 'Zend/Ldap/Exception.php';
+            include_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'No LDAP connection available');
         }
 
@@ -576,7 +580,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
         /**
          * Zend_Ldap_Ldif_Encoder
          */
-        require_once 'Zend/Ldap/Ldif/Encoder.php';
+        include_once 'Zend/Ldap/Ldif/Encoder.php';
         return Zend_Ldap_Ldif_Encoder::encode($attributes, $options);
     }
 
@@ -737,8 +741,8 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      * @throws Zend_Ldap_Exception
      */
     public function setPasswordAttribute($password, $hashType = Zend_Ldap_Attribute::PASSWORD_HASH_MD5,
-        $attribName = 'userPassword')
-    {
+        $attribName = 'userPassword'
+    ) {
         $this->_assertChangeableAttribute($attribName);
         Zend_Ldap_Attribute::setPassword($this->_currentData, $password, $hashType, $attribName);
         return $this;
@@ -799,23 +803,24 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             /**
              * @see Zend_Ldap_Exception
              */
-            require_once 'Zend/Ldap/Exception.php';
+            include_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'DN cannot be changed.');
         }
         else if (array_key_exists($name, $rdn)) {
             /**
              * @see Zend_Ldap_Exception
              */
-            require_once 'Zend/Ldap/Exception.php';
+            include_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'Cannot change attribute because it\'s part of the RDN');
         } else if (in_array($name, self::$_systemAttributes)) {
             /**
              * @see Zend_Ldap_Exception
              */
-            require_once 'Zend/Ldap/Exception.php';
+            include_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'Cannot change attribute because it\'s read-only');
         }
-        else return true;
+        else { return true;
+        }
     }
 
     /**
@@ -935,9 +940,11 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
         /**
          * @see Zend_Ldap_Node_Collection
          */
-        require_once 'Zend/Ldap/Node/Collection.php';
-        return $this->getLdap()->search($filter, $this->_getDn(), $scope, array('*', '+'), $sort,
-            'Zend_Ldap_Node_Collection');
+        include_once 'Zend/Ldap/Node/Collection.php';
+        return $this->getLdap()->search(
+            $filter, $this->_getDn(), $scope, array('*', '+'), $sort,
+            'Zend_Ldap_Node_Collection'
+        );
     }
 
     /**
@@ -1028,7 +1035,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
         /**
          * @see Zend_Ldap_Node_ChildrenIterator
          */
-        require_once 'Zend/Ldap/Node/ChildrenIterator.php';
+        include_once 'Zend/Ldap/Node/ChildrenIterator.php';
         return new Zend_Ldap_Node_ChildrenIterator($this->_children);
     }
 
@@ -1101,9 +1108,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
         return $this->_iteratorRewind;
     }
 
-    ####################################################
-    # Empty method bodies for overriding in subclasses #
-    ####################################################
+    // 
+    // Empty method bodies for overriding in subclasses #
+    // 
 
     /**
      * Allows pre-delete logic to be applied to node.
@@ -1111,7 +1118,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @return void
      */
-    protected function _preDelete() { }
+    protected function _preDelete()
+    { 
+    }
 
     /**
      * Allows post-delete logic to be applied to node.
@@ -1119,7 +1128,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @return void
      */
-    protected function _postDelete() { }
+    protected function _postDelete()
+    { 
+    }
 
     /**
      * Allows pre-add logic to be applied to node.
@@ -1127,7 +1138,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @return void
      */
-    protected function _preAdd() { }
+    protected function _preAdd()
+    { 
+    }
 
     /**
      * Allows post-add logic to be applied to node.
@@ -1135,7 +1148,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @return void
      */
-    protected function _postAdd() { }
+    protected function _postAdd()
+    { 
+    }
 
     /**
      * Allows pre-rename logic to be applied to node.
@@ -1143,7 +1158,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @return void
      */
-    protected function _preRename() { }
+    protected function _preRename()
+    { 
+    }
 
     /**
      * Allows post-rename logic to be applied to node.
@@ -1151,7 +1168,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @return void
      */
-    protected function _postRename() { }
+    protected function _postRename()
+    { 
+    }
 
     /**
      * Allows pre-update logic to be applied to node.
@@ -1159,7 +1178,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @return void
      */
-    protected function _preUpdate() { }
+    protected function _preUpdate()
+    { 
+    }
 
     /**
      * Allows post-update logic to be applied to node.
@@ -1167,5 +1188,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      *
      * @return void
      */
-    protected function _postUpdate() { }
+    protected function _postUpdate()
+    { 
+    }
 }

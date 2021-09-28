@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Dojo_Form_Element_Dijit */
+/**
+ * Zend_Dojo_Form_Element_Dijit 
+ */
 require_once 'Zend/Dojo/Form/Element/Dijit.php';
 
 /**
@@ -43,6 +45,7 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
 
     /**
      * Use formCheckbox view helper by default
+     *
      * @var string
      */
     public $helper = 'CheckBox';
@@ -67,6 +70,7 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
 
     /**
      * Current value
+     *
      * @var string 0 or 1
      */
     protected $_value = '0';
@@ -109,7 +113,6 @@ class Zend_Dojo_Form_Element_CheckBox extends Zend_Dojo_Form_Element_Dijit
      *
      * Any other value causes the unchecked value to be set as the current
      * value, and the checked flag to be set as false.
-     *
      *
      * @param  mixed $value
      * @return Zend_Form_Element_Checkbox

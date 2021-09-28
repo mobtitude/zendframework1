@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Feed_Reader
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -30,10 +30,10 @@ require_once 'Zend/Feed/Reader.php';
 require_once 'Zend/Feed/Reader/FeedInterface.php';
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Feed_Reader
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInterface
 {
@@ -78,7 +78,7 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
      * Constructor
      *
      * @param DomDocument The DOM object for the feed's XML
-     * @param string $type Feed type
+     * @param string                                        $type Feed type
      */
     public function __construct(DomDocument $domDocument, $type = null)
     {
@@ -223,7 +223,6 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
 
     /**
      * Move the feed pointer forward
-     *
      */
     public function next()
     {
@@ -232,7 +231,6 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
 
     /**
      * Reset the pointer in the feed object
-     *
      */
     public function rewind()
     {
@@ -261,15 +259,17 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        require_once 'Zend/Feed/Exception.php';
-        throw new Zend_Feed_Exception('Method: ' . $method
-        . 'does not exist and could not be located on a registered Extension');
+        include_once 'Zend/Feed/Exception.php';
+        throw new Zend_Feed_Exception(
+            'Method: ' . $method
+            . 'does not exist and could not be located on a registered Extension'
+        );
     }
 
     /**
      * Return an Extension object with the matching name (postfixed with _Feed)
      *
-     * @param string $name
+     * @param  string $name
      * @return Zend_Feed_Reader_Extension_FeedAbstract
      */
     public function getExtension($name)
@@ -297,13 +297,11 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
 
     /**
      * Read all entries to the internal entries array
-     *
      */
     abstract protected function _indexEntries();
 
     /**
      * Register the default namespaces for the current feed format
-     *
      */
     abstract protected function _registerNamespaces();
 }

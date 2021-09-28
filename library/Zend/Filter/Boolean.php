@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Filter
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -25,10 +25,10 @@
 require_once 'Zend/Filter/Interface.php';
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Filter
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Filter_Boolean implements Zend_Filter_Interface
 {
@@ -150,7 +150,7 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
         }
 
         if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
-            require_once 'Zend/Filter/Exception.php';
+            include_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Unknown type');
         }
 
@@ -182,14 +182,14 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
         } elseif ($locale instanceof Zend_Locale) {
             $locale = array($locale->toString());
         } elseif (!is_array($locale)) {
-            require_once 'Zend/Filter/Exception.php';
+            include_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Locale has to be string, array or an instance of Zend_Locale');
         }
 
-        require_once 'Zend/Locale.php';
+        include_once 'Zend/Locale.php';
         foreach ($locale as $single) {
             if (!Zend_Locale::isLocale($single)) {
-                require_once 'Zend/Filter/Exception.php';
+                include_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception("Unknown locale '$single'");
             }
         }
@@ -240,7 +240,7 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
         if ($type >= self::YES) {
             $type -= self::YES;
             if (is_string($value)) {
-                require_once 'Zend/Locale.php';
+                include_once 'Zend/Locale.php';
                 $locales = $this->getLocale();
                 foreach ($locales as $locale) {
                     if ($this->_getLocalizedQuestion($value, false, $locale) === false) {
@@ -344,9 +344,9 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
     /**
      * Determine the value of a localized string, and compare it to a given value
      *
-     * @param  string $value
+     * @param  string  $value
      * @param  boolean $yes
-     * @param  array $locale
+     * @param  array   $locale
      * @return boolean
      */
     protected function _getLocalizedQuestion($value, $yes, $locale)

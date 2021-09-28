@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Validate
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -27,10 +27,10 @@ require_once 'Zend/Validate/Abstract.php';
 /**
  * Validates IBAN Numbers (International Bank Account Numbers)
  *
- * @category   Zend
- * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Validate
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_Iban extends Zend_Validate_Abstract
 {
@@ -147,7 +147,7 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
         }
 
         if (empty($locale)) {
-            require_once 'Zend/Registry.php';
+            include_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Locale')) {
                 $locale = Zend_Registry::get('Zend_Locale');
             }
@@ -179,10 +179,10 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
     public function setLocale($locale = null)
     {
         if ($locale !== false) {
-            require_once 'Zend/Locale.php';
+            include_once 'Zend/Locale.php';
             $locale = Zend_Locale::findLocale($locale);
             if (strlen($locale) < 4) {
-                require_once 'Zend/Validate/Exception.php';
+                include_once 'Zend/Validate/Exception.php';
                 throw new Zend_Validate_Exception('Region must be given for IBAN validation');
             }
         }
@@ -228,7 +228,8 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
                   'N',  'O',  'P',  'Q',  'R',  'S',  'T',  'U',  'V',  'W',  'X',  'Y',  'Z'),
             array('10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
                   '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35'),
-            $format);
+            $format
+        );
 
         $temp = intval(substr($format, 0, 1));
         $len  = strlen($format);

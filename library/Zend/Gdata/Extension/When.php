@@ -50,8 +50,8 @@ class Zend_Gdata_Extension_When extends Zend_Gdata_Extension
     protected $_endTime = null;
 
     public function __construct($startTime = null, $endTime = null,
-            $valueString = null, $reminders = null)
-    {
+        $valueString = null, $reminders = null
+    ) {
         parent::__construct();
         $this->_startTime = $startTime;
         $this->_endTime = $endTime;
@@ -74,7 +74,8 @@ class Zend_Gdata_Extension_When extends Zend_Gdata_Extension
         if ($this->_reminders !== null) {
             foreach ($this->_reminders as $reminder) {
                 $element->appendChild(
-                        $reminder->getDOM($element->ownerDocument));
+                    $reminder->getDOM($element->ownerDocument)
+                );
             }
         }
         return $element;
@@ -84,11 +85,11 @@ class Zend_Gdata_Extension_When extends Zend_Gdata_Extension
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('gd') . ':' . 'reminder';
-                $reminder = new Zend_Gdata_Extension_Reminder();
-                $reminder->transferFromDOM($child);
-                $this->_reminders[] = $reminder;
-                break;
+        case $this->lookupNamespace('gd') . ':' . 'reminder';
+            $reminder = new Zend_Gdata_Extension_Reminder();
+            $reminder->transferFromDOM($child);
+            $this->_reminders[] = $reminder;
+            break;
         default:
             parent::takeChildFromDOM($child);
             break;
@@ -98,25 +99,25 @@ class Zend_Gdata_Extension_When extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-            case 'startTime':
-                $this->_startTime = $attribute->nodeValue;
-                break;
-            case 'endTime':
-                $this->_endTime = $attribute->nodeValue;
-                break;
-            case 'valueString':
-                $this->_valueString = $attribute->nodeValue;
-                break;
-            default:
-                parent::takeAttributeFromDOM($attribute);
+        case 'startTime':
+            $this->_startTime = $attribute->nodeValue;
+            break;
+        case 'endTime':
+            $this->_endTime = $attribute->nodeValue;
+            break;
+        case 'valueString':
+            $this->_valueString = $attribute->nodeValue;
+            break;
+        default:
+            parent::takeAttributeFromDOM($attribute);
         }
     }
 
     public function __toString()
     {
-        if ($this->_valueString)
+        if ($this->_valueString) {
             return $this->_valueString;
-        else {
+        } else {
             return 'Starts: ' . $this->getStartTime() . ' ' .
                    'Ends: ' .  $this->getEndTime();
         }

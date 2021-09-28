@@ -21,7 +21,9 @@
  */
 
 
-/** Zend_Search_Lucene_Search_Query */
+/**
+ * Zend_Search_Lucene_Search_Query 
+ */
 require_once 'Zend/Search/Lucene/Search/Query.php';
 
 
@@ -72,19 +74,19 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
     /**
      * Zend_Search_Lucene_Search_Query_Range constructor.
      *
-     * @param Zend_Search_Lucene_Index_Term|null $lowerTerm
-     * @param Zend_Search_Lucene_Index_Term|null $upperTerm
-     * @param boolean $inclusive
+     * @param  Zend_Search_Lucene_Index_Term|null $lowerTerm
+     * @param  Zend_Search_Lucene_Index_Term|null $upperTerm
+     * @param  boolean                            $inclusive
      * @throws Zend_Search_Lucene_Exception
      */
     public function __construct($lowerTerm, $upperTerm, $inclusive)
     {
         if ($lowerTerm === null  &&  $upperTerm === null) {
-            require_once 'Zend/Search/Lucene/Exception.php';
+            include_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('At least one term must be non-null');
         }
         if ($lowerTerm !== null  &&  $upperTerm !== null  &&  $lowerTerm->field != $upperTerm->field) {
-            require_once 'Zend/Search/Lucene/Exception.php';
+            include_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Both terms must be for the same field');
         }
 
@@ -137,7 +139,7 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
     /**
      * Re-write query into primitive queries in the context of specified index
      *
-     * @param Zend_Search_Lucene_Interface $index
+     * @param  Zend_Search_Lucene_Interface $index
      * @return Zend_Search_Lucene_Search_Query
      */
     public function rewrite(Zend_Search_Lucene_Interface $index)
@@ -151,19 +153,20 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
             $fields = array($this->_field);
         }
 
-        require_once 'Zend/Search/Lucene.php';
+        include_once 'Zend/Search/Lucene.php';
         $maxTerms = Zend_Search_Lucene::getTermsPerQueryLimit();
         foreach ($fields as $field) {
             $index->resetTermsStream();
 
-            require_once 'Zend/Search/Lucene/Index/Term.php';
+            include_once 'Zend/Search/Lucene/Index/Term.php';
             if ($this->_lowerTerm !== null) {
                 $lowerTerm = new Zend_Search_Lucene_Index_Term($this->_lowerTerm->text, $field);
 
                 $index->skipTo($lowerTerm);
 
-                if (!$this->_inclusive  &&
-                    $index->currentTerm() == $lowerTerm) {
+                if (!$this->_inclusive  
+                    && $index->currentTerm() == $lowerTerm
+                ) {
                     // Skip lower term
                     $index->nextTerm();
                 }
@@ -182,7 +185,7 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
                     $this->_matches[] = $index->currentTerm();
 
                     if ($maxTerms != 0  &&  count($this->_matches) > $maxTerms) {
-                        require_once 'Zend/Search/Lucene/Exception.php';
+                        include_once 'Zend/Search/Lucene/Exception.php';
                         throw new Zend_Search_Lucene_Exception('Terms per query limit is reached.');
                     }
 
@@ -199,7 +202,7 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
                     $this->_matches[] = $index->currentTerm();
 
                     if ($maxTerms != 0  &&  count($this->_matches) > $maxTerms) {
-                        require_once 'Zend/Search/Lucene/Exception.php';
+                        include_once 'Zend/Search/Lucene/Exception.php';
                         throw new Zend_Search_Lucene_Exception('Terms per query limit is reached.');
                     }
 
@@ -211,13 +214,13 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
         }
 
         if (count($this->_matches) == 0) {
-            require_once 'Zend/Search/Lucene/Search/Query/Empty.php';
+            include_once 'Zend/Search/Lucene/Search/Query/Empty.php';
             return new Zend_Search_Lucene_Search_Query_Empty();
         } else if (count($this->_matches) == 1) {
-            require_once 'Zend/Search/Lucene/Search/Query/Term.php';
+            include_once 'Zend/Search/Lucene/Search/Query/Term.php';
             return new Zend_Search_Lucene_Search_Query_Term(reset($this->_matches));
         } else {
-            require_once 'Zend/Search/Lucene/Search/Query/MultiTerm.php';
+            include_once 'Zend/Search/Lucene/Search/Query/MultiTerm.php';
             $rewrittenQuery = new Zend_Search_Lucene_Search_Query_MultiTerm();
 
             foreach ($this->_matches as $matchedTerm) {
@@ -231,12 +234,12 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
     /**
      * Optimize query in the context of specified index
      *
-     * @param Zend_Search_Lucene_Interface $index
+     * @param  Zend_Search_Lucene_Interface $index
      * @return Zend_Search_Lucene_Search_Query
      */
     public function optimize(Zend_Search_Lucene_Interface $index)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
+        include_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('Range query should not be directly used for search. Use $query->rewrite($index)');
     }
 
@@ -249,7 +252,7 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
     public function getQueryTerms()
     {
         if ($this->_matches === null) {
-            require_once 'Zend/Search/Lucene/Exception.php';
+            include_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Search or rewrite operations have to be performed before.');
         }
 
@@ -259,13 +262,13 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
     /**
      * Constructs an appropriate Weight implementation for this query.
      *
-     * @param Zend_Search_Lucene_Interface $reader
+     * @param  Zend_Search_Lucene_Interface $reader
      * @return Zend_Search_Lucene_Search_Weight
      * @throws Zend_Search_Lucene_Exception
      */
     public function createWeight(Zend_Search_Lucene_Interface $reader)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
+        include_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('Range query should not be directly used for search. Use $query->rewrite($index)');
     }
 
@@ -274,13 +277,13 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
      * Execute query in context of index reader
      * It also initializes necessary internal structures
      *
-     * @param Zend_Search_Lucene_Interface $reader
-     * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
+     * @param  Zend_Search_Lucene_Interface             $reader
+     * @param  Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      * @throws Zend_Search_Lucene_Exception
      */
     public function execute(Zend_Search_Lucene_Interface $reader, $docsFilter = null)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
+        include_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('Range query should not be directly used for search. Use $query->rewrite($index)');
     }
 
@@ -294,35 +297,35 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
      */
     public function matchedDocs()
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
+        include_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('Range query should not be directly used for search. Use $query->rewrite($index)');
     }
 
     /**
      * Score specified document
      *
-     * @param integer $docId
-     * @param Zend_Search_Lucene_Interface $reader
+     * @param  integer                      $docId
+     * @param  Zend_Search_Lucene_Interface $reader
      * @return float
      * @throws Zend_Search_Lucene_Exception
      */
     public function score($docId, Zend_Search_Lucene_Interface $reader)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
+        include_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('Range query should not be directly used for search. Use $query->rewrite($index)');
     }
 
     /**
      * Query specific matches highlighting
      *
-     * @param Zend_Search_Lucene_Search_Highlighter_Interface $highlighter  Highlighter object (also contains doc for highlighting)
+     * @param Zend_Search_Lucene_Search_Highlighter_Interface $highlighter Highlighter object (also contains doc for highlighting)
      */
     protected function _highlightMatches(Zend_Search_Lucene_Search_Highlighter_Interface $highlighter)
     {
         $words = array();
 
         $docBody = $highlighter->getDocument()->getFieldUtf8Value('body');
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
+        include_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
         $tokens = Zend_Search_Lucene_Analysis_Analyzer::getDefault()->tokenize($docBody, 'UTF-8');
 
         $lowerTermText = ($this->_lowerTerm !== null)? $this->_lowerTerm->text : null;
@@ -331,16 +334,18 @@ class Zend_Search_Lucene_Search_Query_Range extends Zend_Search_Lucene_Search_Qu
         if ($this->_inclusive) {
             foreach ($tokens as $token) {
                 $termText = $token->getTermText();
-                if (($lowerTermText == null  ||  $lowerTermText <= $termText)  &&
-                    ($upperTermText == null  ||  $termText <= $upperTermText)) {
+                if (($lowerTermText == null  ||  $lowerTermText <= $termText)  
+                    && ($upperTermText == null  ||  $termText <= $upperTermText)
+                ) {
                     $words[] = $termText;
                 }
             }
         } else {
             foreach ($tokens as $token) {
                 $termText = $token->getTermText();
-                if (($lowerTermText == null  ||  $lowerTermText < $termText)  &&
-                    ($upperTermText == null  ||  $termText < $upperTermText)) {
+                if (($lowerTermText == null  ||  $lowerTermText < $termText)  
+                    && ($upperTermText == null  ||  $termText < $upperTermText)
+                ) {
                     $words[] = $termText;
                 }
             }

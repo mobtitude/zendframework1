@@ -15,7 +15,7 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cloud_Infrastructure_Image 
+class Zend_Cloud_Infrastructure_Image
 {
     const IMAGE_ID           = 'imageId';
     const IMAGE_OWNERID      = 'ownerId';
@@ -51,7 +51,7 @@ class Zend_Cloud_Infrastructure_Image
     /**
      * Constructor
      * 
-     * @param array $data
+     * @param array  $data
      * @param object $adapter 
      */
     public function __construct($data, $adapter = null) 
@@ -65,18 +65,20 @@ class Zend_Cloud_Infrastructure_Image
         }
         
         if (empty($data) || !is_array($data)) {
-            require_once 'Zend/Cloud/Infrastructure/Exception.php';
+            include_once 'Zend/Cloud/Infrastructure/Exception.php';
             throw new Zend_Cloud_Infrastructure_Exception('You must pass an array of parameters');
         }
 
         foreach ($this->attributeRequired as $key) {
             if (empty($data[$key])) {
-                require_once 'Zend/Cloud/Infrastructure/Exception.php';
-                throw new Zend_Cloud_Infrastructure_Exception(sprintf(
-                    'The param "%s" is a required parameter for class %s',
-                    $key,
-                    __CLASS__
-                ));
+                include_once 'Zend/Cloud/Infrastructure/Exception.php';
+                throw new Zend_Cloud_Infrastructure_Exception(
+                    sprintf(
+                        'The param "%s" is a required parameter for class %s',
+                        $key,
+                        __CLASS__
+                    )
+                );
             }
         }
 
@@ -87,7 +89,7 @@ class Zend_Cloud_Infrastructure_Image
     /**
      * Get Attribute with a specific key
      *
-     * @param array $data
+     * @param  array $data
      * @return misc|boolean
      */
     public function getAttribute($key) 

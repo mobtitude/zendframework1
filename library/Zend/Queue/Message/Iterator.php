@@ -35,10 +35,10 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
     protected array $_data = array();
 
      /**
-     * Connected is true if we have a reference to a live
-     * Zend_Queue_Adapter_AdapterInterface object.
-     * This is false after the Message has been deserialized.
-     */
+      * Connected is true if we have a reference to a live
+      * Zend_Queue_Adapter_AdapterInterface object.
+      * This is false after the Message has been deserialized.
+      */
     protected bool $_connected = true;
 
     /**
@@ -63,8 +63,8 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
     protected string $_messageClass = 'Zend_Queue_Message';
 
      /**
-     * Iterator pointer.
-     */
+      * Iterator pointer.
+      */
     protected int $_pointer = 0;
 
     /**
@@ -87,14 +87,14 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
         }
 
         if (!is_array($options['data'])) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('array optionsuration must have $options[\'data\'] = array');
         }
 
         // load the message class
         $classname = $this->_messageClass;
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
 

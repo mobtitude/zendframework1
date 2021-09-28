@@ -21,10 +21,10 @@
  */
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Client_Response
 {
@@ -47,13 +47,13 @@ class Zend_Tool_Framework_Client_Response
     /**
      * setContentCallback()
      *
-     * @param callback $callback
+     * @param  callback $callback
      * @return Zend_Tool_Framework_Client_Response
      */
     public function setContentCallback($callback)
     {
         if (!is_callable($callback)) {
-            require_once 'Zend/Tool/Framework/Client/Exception.php';
+            include_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('The callback provided is not callable');
         }
         $this->_callback = $callback;
@@ -63,7 +63,7 @@ class Zend_Tool_Framework_Client_Response
     /**
      * setContent()
      *
-     * @param string $content
+     * @param  string $content
      * @return Zend_Tool_Framework_Client_Response
      */
     public function setContent($content, Array $decoratorOptions = array())
@@ -78,7 +78,7 @@ class Zend_Tool_Framework_Client_Response
     /**
      * appendCallback
      *
-     * @param string $content
+     * @param  string $content
      * @return Zend_Tool_Framework_Client_Response
      */
     public function appendContent($content, Array $decoratorOptions = array())
@@ -97,8 +97,8 @@ class Zend_Tool_Framework_Client_Response
     /**
      * setDefaultDecoratorOptions()
      *
-     * @param array $decoratorOptions
-     * @param bool $mergeIntoExisting
+     * @param  array $decoratorOptions
+     * @param  bool  $mergeIntoExisting
      * @return Zend_Tool_Framework_Client_Response
      */
     public function setDefaultDecoratorOptions(Array $decoratorOptions, $mergeIntoExisting = false)
@@ -134,7 +134,7 @@ class Zend_Tool_Framework_Client_Response
     /**
      * setException()
      *
-     * @param Exception $exception
+     * @param  Exception $exception
      * @return Zend_Tool_Framework_Client_Response
      */
     public function setException(Exception $exception)
@@ -156,7 +156,7 @@ class Zend_Tool_Framework_Client_Response
     /**
      * Add Content Decorator
      *
-     * @param Zend_Tool_Framework_Client_Response_ContentDecorator_Interface $contentDecorator
+     * @param  Zend_Tool_Framework_Client_Response_ContentDecorator_Interface $contentDecorator
      * @return unknown
      */
     public function addContentDecorator(Zend_Tool_Framework_Client_Response_ContentDecorator_Interface $contentDecorator)
@@ -189,8 +189,8 @@ class Zend_Tool_Framework_Client_Response
     /**
      * _applyDecorators() apply a group of decorators
      *
-     * @param string $content
-     * @param array $decoratorOptions
+     * @param  string $content
+     * @param  array  $decoratorOptions
      * @return string
      */
     protected function _applyDecorators($content, Array $decoratorOptions)

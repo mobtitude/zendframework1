@@ -26,10 +26,10 @@
 require_once 'Zend/Tag/Taggable.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tag
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tag
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
 {
@@ -59,7 +59,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     {
         // Don't allow an empty value list
         if (count($values) === 0) {
-            require_once 'Zend/Tag/Exception.php';
+            include_once 'Zend/Tag/Exception.php';
             throw new Zend_Tag_Exception('Value list may not be empty');
         }
 
@@ -187,7 +187,8 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
      * @param  mixed $offset
      * @return boolean
      */
-    public function offsetExists($offset) {
+    public function offsetExists($offset)
+    {
         return array_key_exists($offset, $this->_items);
     }
 
@@ -197,23 +198,25 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
      * @param  mixed $offset
      * @return Zend_Tag_Taggable
      */
-    public function offsetGet($offset) {
+    public function offsetGet($offset)
+    {
         return $this->_items[$offset];
     }
 
     /**
      * Append a new item
      *
-     * @param  mixed          $offset
+     * @param  mixed             $offset
      * @param  Zend_Tag_Taggable $item
      * @throws OutOfBoundsException When item does not implement Zend_Tag_Taggable
      * @return void
      */
-    public function offsetSet($offset, $item) {
+    public function offsetSet($offset, $item)
+    {
         // We need to make that check here, as the method signature must be
         // compatible with ArrayAccess::offsetSet()
         if (!($item instanceof Zend_Tag_Taggable)) {
-            require_once 'Zend/Tag/Exception.php';
+            include_once 'Zend/Tag/Exception.php';
             throw new Zend_Tag_Exception('Item must implement Zend_Tag_Taggable');
         }
 
@@ -230,7 +233,8 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
      * @param  mixed $offset
      * @return void
      */
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset)
+    {
         unset($this->_items[$offset]);
     }
 }

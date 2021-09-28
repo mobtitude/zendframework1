@@ -32,14 +32,17 @@
  */
 class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Constraint
 {
-    /**#@+
+    /**
+* #@+
      * Assertion type constants
      */
     const ASSERT_RESPONSE_CODE   = 'assertResponseCode';
     const ASSERT_HEADER          = 'assertHeader';
     const ASSERT_HEADER_CONTAINS = 'assertHeaderContains';
     const ASSERT_HEADER_REGEX    = 'assertHeaderRegex';
-    /**#@-*/
+    /**
+     * #@-
+     */
     /**
      * Current assertion type
      */
@@ -115,10 +118,10 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
      *     public function evaluate($other, $description = '', $returnResult = FALSE)
      * We use the new interface for PHP-strict checking, but emulate the old one
      */
-    public function evaluate($response, $assertType = '', $variable = FALSE)
+    public function evaluate($response, $assertType = '', $variable = false)
     {
         if (!$response instanceof Zend_Controller_Response_Abstract) {
-            require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+            include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
             throw new Zend_Test_PHPUnit_Constraint_Exception('Header constraint assertions require a response object');
         }
 
@@ -128,7 +131,7 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
         }
 
         if (!in_array($assertType, $this->_assertTypes)) {
-            require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+            include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
             throw new Zend_Test_PHPUnit_Constraint_Exception(sprintf('Invalid assertion type "%s" provided to %s constraint', $assertType, __CLASS__));
         }
 
@@ -139,46 +142,46 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
 
         switch ($assertType) {
             case self::ASSERT_RESPONSE_CODE:
-                if (3 > $argc) {
-                    require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
-                    throw new Zend_Test_PHPUnit_Constraint_Exception('No response code provided against which to match');
-                }
+        if (3 > $argc) {
+            include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+            throw new Zend_Test_PHPUnit_Constraint_Exception('No response code provided against which to match');
+        }
                 $this->_code = $code = $argv[2];
                 return ($this->_negate)
                     ? $this->_notCode($response, $code)
                     : $this->_code($response, $code);
             case self::ASSERT_HEADER:
-                if (3 > $argc) {
-                    require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
-                    throw new Zend_Test_PHPUnit_Constraint_Exception('No header provided against which to match');
-                }
+        if (3 > $argc) {
+            include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+            throw new Zend_Test_PHPUnit_Constraint_Exception('No header provided against which to match');
+        }
                 $this->_header = $header = $argv[2];
                 return ($this->_negate)
                     ? $this->_notHeader($response, $header)
                     : $this->_header($response, $header);
-            case self::ASSERT_HEADER_CONTAINS:
-                if (4 > $argc) {
-                    require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
-                    throw new Zend_Test_PHPUnit_Constraint_Exception('Both a header name and content to match are required for ' . $assertType);
-                }
-                $this->_header = $header = $argv[2];
-                $this->_match  = $match  = $argv[3];
-                return ($this->_negate)
+        case self::ASSERT_HEADER_CONTAINS:
+            if (4 > $argc) {
+                include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+                throw new Zend_Test_PHPUnit_Constraint_Exception('Both a header name and content to match are required for ' . $assertType);
+            }
+            $this->_header = $header = $argv[2];
+            $this->_match  = $match  = $argv[3];
+            return ($this->_negate)
                     ? $this->_notHeaderContains($response, $header, $match)
                     : $this->_headerContains($response, $header, $match);
-            case self::ASSERT_HEADER_REGEX:
-                if (4 > $argc) {
-                    require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
-                    throw new Zend_Test_PHPUnit_Constraint_Exception('Both a header name and content to match are required for ' . $assertType);
-                }
-                $this->_header = $header = $argv[2];
-                $this->_match  = $match  = $argv[3];
-                return ($this->_negate)
+        case self::ASSERT_HEADER_REGEX:
+            if (4 > $argc) {
+                include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+                throw new Zend_Test_PHPUnit_Constraint_Exception('Both a header name and content to match are required for ' . $assertType);
+            }
+            $this->_header = $header = $argv[2];
+            $this->_match  = $match  = $argv[3];
+            return ($this->_negate)
                     ? $this->_notHeaderRegex($response, $header, $match)
                     : $this->_headerRegex($response, $header, $match);
-            default:
-                require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
-                throw new Zend_Test_PHPUnit_Constraint_Exception('Invalid assertion type ' . $assertType);
+        default:
+            include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+            throw new Zend_Test_PHPUnit_Constraint_Exception('Invalid assertion type ' . $assertType);
         }
     }
 
@@ -200,43 +203,43 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
      * NOTE 2:
      * Interface changed again in PHPUnit 4.1.0 because of refactoring to SebastianBergmann\Comparator
      */
-    public function fail($other, $description, \SebastianBergmann\Comparator\ComparisonFailure $cannot_be_used = NULL)
+    public function fail($other, $description, \SebastianBergmann\Comparator\ComparisonFailure $cannot_be_used = null)
     {
-        require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
+        include_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
         switch ($this->_assertType) {
-            case self::ASSERT_RESPONSE_CODE:
-                $failure = 'Failed asserting response code "%s"';
-                if ($this->_negate) {
-                    $failure = 'Failed asserting response code IS NOT "%s"';
-                }
-                $failure = sprintf($failure, $this->_code);
-                if (!$this->_negate && $this->_actualCode) {
-                    $failure .= sprintf(PHP_EOL . 'Was "%s"', $this->_actualCode);
-                }
-                break;
-            case self::ASSERT_HEADER:
-                $failure = 'Failed asserting response header "%s" found';
-                if ($this->_negate) {
-                    $failure = 'Failed asserting response response header "%s" WAS NOT found';
-                }
-                $failure = sprintf($failure, $this->_header);
-                break;
-            case self::ASSERT_HEADER_CONTAINS:
-                $failure = 'Failed asserting response header "%s" exists and contains "%s"';
-                if ($this->_negate) {
-                    $failure = 'Failed asserting response header "%s" DOES NOT CONTAIN "%s"';
-                }
-                $failure = sprintf($failure, $this->_header, $this->_match);
-                break;
-            case self::ASSERT_HEADER_REGEX:
-                $failure = 'Failed asserting response header "%s" exists and matches regex "%s"';
-                if ($this->_negate) {
-                    $failure = 'Failed asserting response header "%s" DOES NOT MATCH regex "%s"';
-                }
-                $failure = sprintf($failure, $this->_header, $this->_match);
-                break;
-            default:
-                throw new Zend_Test_PHPUnit_Constraint_Exception('Invalid assertion type ' . __FUNCTION__);
+        case self::ASSERT_RESPONSE_CODE:
+            $failure = 'Failed asserting response code "%s"';
+            if ($this->_negate) {
+                $failure = 'Failed asserting response code IS NOT "%s"';
+            }
+            $failure = sprintf($failure, $this->_code);
+            if (!$this->_negate && $this->_actualCode) {
+                $failure .= sprintf(PHP_EOL . 'Was "%s"', $this->_actualCode);
+            }
+            break;
+        case self::ASSERT_HEADER:
+            $failure = 'Failed asserting response header "%s" found';
+            if ($this->_negate) {
+                $failure = 'Failed asserting response response header "%s" WAS NOT found';
+            }
+            $failure = sprintf($failure, $this->_header);
+            break;
+        case self::ASSERT_HEADER_CONTAINS:
+            $failure = 'Failed asserting response header "%s" exists and contains "%s"';
+            if ($this->_negate) {
+                $failure = 'Failed asserting response header "%s" DOES NOT CONTAIN "%s"';
+            }
+            $failure = sprintf($failure, $this->_header, $this->_match);
+            break;
+        case self::ASSERT_HEADER_REGEX:
+            $failure = 'Failed asserting response header "%s" exists and matches regex "%s"';
+            if ($this->_negate) {
+                $failure = 'Failed asserting response header "%s" DOES NOT MATCH regex "%s"';
+            }
+            $failure = sprintf($failure, $this->_header, $this->_match);
+            break;
+        default:
+            throw new Zend_Test_PHPUnit_Constraint_Exception('Invalid assertion type ' . __FUNCTION__);
         }
 
         if (!empty($description)) {
@@ -260,7 +263,7 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
      * Compare response code for positive match
      *
      * @param  Zend_Controller_Response_Abstract $response
-     * @param  int $code
+     * @param  int                               $code
      * @return bool
      */
     protected function _code(Zend_Controller_Response_Abstract $response, $code)
@@ -274,7 +277,7 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
      * Compare response code for negative match
      *
      * @param  Zend_Controller_Response_Abstract $response
-     * @param  int $code
+     * @param  int                               $code
      * @return bool
      */
     protected function _notCode(Zend_Controller_Response_Abstract $response, $code)
@@ -302,7 +305,7 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
      * Positive check for response header presence
      *
      * @param  Zend_Controller_Response_Abstract $response
-     * @param  string $header
+     * @param  string                            $header
      * @return bool
      */
     protected function _header(Zend_Controller_Response_Abstract $response, $header)
@@ -314,7 +317,7 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
      * Negative check for response header presence
      *
      * @param  Zend_Controller_Response_Abstract $response
-     * @param  string $header
+     * @param  string                            $header
      * @return bool
      */
     protected function _notHeader(Zend_Controller_Response_Abstract $response, $header)
@@ -326,7 +329,7 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
      * Retrieve response header
      *
      * @param  Zend_Controller_Response_Abstract $response
-     * @param  string $header
+     * @param  string                            $header
      * @return string|null
      */
     protected function _getHeader(Zend_Controller_Response_Abstract $response, $header)
@@ -343,8 +346,8 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
      * Positive check for header contents matching pattern
      *
      * @param  Zend_Controller_Response_Abstract $response
-     * @param  string $header
-     * @param  string $match
+     * @param  string                            $header
+     * @param  string                            $match
      * @return bool
      */
     protected function _headerContains(Zend_Controller_Response_Abstract $response, $header, $match)
@@ -362,8 +365,8 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
      * Negative check for header contents matching pattern
      *
      * @param  Zend_Controller_Response_Abstract $response
-     * @param  string $header
-     * @param  string $match
+     * @param  string                            $header
+     * @param  string                            $match
      * @return bool
      */
     protected function _notHeaderContains(Zend_Controller_Response_Abstract $response, $header, $match)
@@ -381,8 +384,8 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
      * Positive check for header contents matching regex
      *
      * @param  Zend_Controller_Response_Abstract $response
-     * @param  string $header
-     * @param  string $pattern
+     * @param  string                            $header
+     * @param  string                            $pattern
      * @return bool
      */
     protected function _headerRegex(Zend_Controller_Response_Abstract $response, $header, $pattern)
@@ -400,8 +403,8 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader41 extends PHPUnit_Framework_Co
      * Negative check for header contents matching regex
      *
      * @param  Zend_Controller_Response_Abstract $response
-     * @param  string $header
-     * @param  string $pattern
+     * @param  string                            $header
+     * @param  string                            $pattern
      * @return bool
      */
     protected function _notHeaderRegex(Zend_Controller_Response_Abstract $response, $header, $pattern)

@@ -31,10 +31,10 @@ require_once 'Zend/Tool/Framework/Provider/Signature.php';
 require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
 
 /**
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Provider_Repository
     implements Zend_Tool_Framework_Registry_EnabledInterface, IteratorAggregate, Countable
@@ -62,7 +62,7 @@ class Zend_Tool_Framework_Provider_Repository
     /**
      * setRegistry()
      *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
+     * @param  Zend_Tool_Framework_Registry_Interface $registry
      * @return unknown
      */
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
@@ -74,7 +74,7 @@ class Zend_Tool_Framework_Provider_Repository
     /**
      * Set the ProcessOnAdd flag
      *
-     * @param unknown_type $processOnAdd
+     * @param  unknown_type $processOnAdd
      * @return unknown
      */
     public function setProcessOnAdd($processOnAdd = true)
@@ -86,7 +86,7 @@ class Zend_Tool_Framework_Provider_Repository
     /**
      * Add a provider to the repository for processing
      *
-     * @param Zend_Tool_Framework_Provider_Interface $provider
+     * @param  Zend_Tool_Framework_Provider_Interface $provider
      * @return Zend_Tool_Framework_Provider_Repository
      */
     public function addProvider(Zend_Tool_Framework_Provider_Interface $provider, $overwriteExistingProvider = false)
@@ -102,13 +102,15 @@ class Zend_Tool_Framework_Provider_Repository
         }
 
         // if a provider by the given name already exist, and its not set as overwritable, throw exception
-        if (!$overwriteExistingProvider &&
-            (array_key_exists($providerName, $this->_unprocessedProviders)
-                || array_key_exists($providerName, $this->_providers)))
-        {
-            require_once 'Zend/Tool/Framework/Provider/Exception.php';
-            throw new Zend_Tool_Framework_Provider_Exception('A provider by the name ' . $providerName
-                . ' is already registered and $overrideExistingProvider is set to false.');
+        if (!$overwriteExistingProvider 
+            && (array_key_exists($providerName, $this->_unprocessedProviders)
+            || array_key_exists($providerName, $this->_providers))
+        ) {
+            include_once 'Zend/Tool/Framework/Provider/Exception.php';
+            throw new Zend_Tool_Framework_Provider_Exception(
+                'A provider by the name ' . $providerName
+                . ' is already registered and $overrideExistingProvider is set to false.'
+            );
         }
 
         $this->_unprocessedProviders[$providerName] = $provider;
@@ -148,7 +150,6 @@ class Zend_Tool_Framework_Provider_Repository
 
     /**
      * Process all of the unprocessed providers
-     *
      */
     public function process()
     {
@@ -208,7 +209,7 @@ class Zend_Tool_Framework_Provider_Repository
     /**
      * getProvider()
      *
-     * @param string $providerName
+     * @param  string $providerName
      * @return Zend_Tool_Framework_Provider_Interface
      */
     public function getProvider($providerName)
@@ -219,7 +220,7 @@ class Zend_Tool_Framework_Provider_Repository
     /**
      * getProviderSignature()
      *
-     * @param string $providerName
+     * @param  string $providerName
      * @return Zend_Tool_Framework_Provider_Signature
      */
     public function getProviderSignature($providerName)
@@ -250,7 +251,7 @@ class Zend_Tool_Framework_Provider_Repository
     /**
      * _parseName - internal method to determine the name of an action when one is not explicity provided.
      *
-     * @param Zend_Tool_Framework_Action_Interface $action
+     * @param  Zend_Tool_Framework_Action_Interface $action
      * @return string
      */
     protected function _parseName(Zend_Tool_Framework_Provider_Interface $provider)

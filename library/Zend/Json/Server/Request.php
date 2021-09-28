@@ -82,7 +82,7 @@ class Zend_Json_Server_Request
     /**
      * Add a parameter to the request
      *
-     * @param  mixed $value
+     * @param  mixed  $value
      * @param  string $key
      * @return Zend_Json_Server_Request
      */
@@ -241,7 +241,7 @@ class Zend_Json_Server_Request
      */
     public function loadJson($json)
     {
-        require_once 'Zend/Json.php';
+        include_once 'Zend/Json.php';
         $options = Zend_Json::decode($json);
         $this->setOptions($options);
     }
@@ -267,7 +267,7 @@ class Zend_Json_Server_Request
             $jsonArray['jsonrpc'] = '2.0';
         }
 
-        require_once 'Zend/Json.php';
+        include_once 'Zend/Json.php';
         return Zend_Json::encode($jsonArray);
     }
 

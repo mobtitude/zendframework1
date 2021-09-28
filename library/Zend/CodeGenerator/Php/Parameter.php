@@ -31,10 +31,10 @@ require_once 'Zend/CodeGenerator/Php/Abstract.php';
 require_once 'Zend/CodeGenerator/Php/Parameter/DefaultValue.php';
 
 /**
- * @category   Zend
- * @package    Zend_CodeGenerator
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_CodeGenerator
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 {
@@ -54,7 +54,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     /**
      * fromReflection()
      *
-     * @param Zend_Reflection_Parameter $reflectionParameter
+     * @param  Zend_Reflection_Parameter $reflectionParameter
      * @return Zend_CodeGenerator_Php_Parameter
      */
     public static function fromReflection(Zend_Reflection_Parameter $reflectionParameter)
@@ -84,7 +84,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     /**
      * setType()
      *
-     * @param string $type
+     * @param  string $type
      * @return Zend_CodeGenerator_Php_Parameter
      */
     public function setType($type)
@@ -106,7 +106,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     /**
      * setName()
      *
-     * @param string $name
+     * @param  string $name
      * @return Zend_CodeGenerator_Php_Parameter
      */
     public function setName($name)
@@ -130,7 +130,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
      *
      * Certain variables are difficult to expres
      *
-     * @param null|bool|string|int|float|Zend_CodeGenerator_Php_Parameter_DefaultValue $defaultValue
+     * @param  null|bool|string|int|float|Zend_CodeGenerator_Php_Parameter_DefaultValue $defaultValue
      * @return Zend_CodeGenerator_Php_Parameter
      */
     public function setDefaultValue($defaultValue)
@@ -165,7 +165,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     /**
      * setPosition()
      *
-     * @param int $position
+     * @param  int $position
      * @return Zend_CodeGenerator_Php_Parameter
      */
     public function setPosition($position)
@@ -193,7 +193,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     }
 
     /**
-     * @param bool $passedByReference
+     * @param  bool $passedByReference
      * @return Zend_CodeGenerator_Php_Parameter
      */
     public function setPassedByReference($passedByReference)

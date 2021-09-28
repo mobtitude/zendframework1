@@ -41,7 +41,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
      * Constructor
      *
      * @param  Zend_Cloud_DocumentService_Adapter_SimpleDb $adapter
-     * @param  null|string $collectionName
+     * @param  null|string                                 $collectionName
      * @return void
      */
     public function __construct(Zend_Cloud_DocumentService_Adapter_SimpleDb $adapter, $collectionName = null)
@@ -80,45 +80,45 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
             list($name, $args) = $clause;
 
             switch ($name) {
-                case self::QUERY_SELECT:
-                    $select = $args[0];
-                    break;
-                case self::QUERY_FROM:
-                    if (null === $from) {
-                        // Only allow setting FROM clause once
-                        $from = $adapter->quoteName($args);
-                    }
-                    break;
-                case self::QUERY_WHERE:
-                    $statement = $this->_parseWhere($args[0], $args[1]);
-                    if (null === $where) {
-                        $where = $statement;
-                    } else {
-                        $operator = empty($args[2]) ? 'AND' : $args[2];
-                        $where .= ' ' . $operator . ' ' . $statement;
-                    }
-                    break;
-                case self::QUERY_WHEREID:
-                    $statement = $this->_parseWhere('ItemName() = ?', array($args));
-                    if (null === $where) {
-                        $where = $statement;
-                    } else {
-                        $operator = empty($args[2]) ? 'AND' : $args[2];
-                        $where .= ' ' . $operator . ' ' . $statement;
-                    }
-                    break;
-                case self::QUERY_ORDER:
-                    $order = $adapter->quoteName($args[0]);
-                    if (isset($args[1])) {
-                        $order .= ' ' . $args[1];
-                    }
-                    break;
-                case self::QUERY_LIMIT:
-                    $limit = $args;
-                    break;
-                default:
-                    // Ignore unknown clauses
-                    break;
+            case self::QUERY_SELECT:
+                $select = $args[0];
+                break;
+            case self::QUERY_FROM:
+                if (null === $from) {
+                    // Only allow setting FROM clause once
+                    $from = $adapter->quoteName($args);
+                }
+                break;
+            case self::QUERY_WHERE:
+                $statement = $this->_parseWhere($args[0], $args[1]);
+                if (null === $where) {
+                    $where = $statement;
+                } else {
+                    $operator = empty($args[2]) ? 'AND' : $args[2];
+                    $where .= ' ' . $operator . ' ' . $statement;
+                }
+                break;
+            case self::QUERY_WHEREID:
+                $statement = $this->_parseWhere('ItemName() = ?', array($args));
+                if (null === $where) {
+                    $where = $statement;
+                } else {
+                    $operator = empty($args[2]) ? 'AND' : $args[2];
+                    $where .= ' ' . $operator . ' ' . $statement;
+                }
+                break;
+            case self::QUERY_ORDER:
+                $order = $adapter->quoteName($args[0]);
+                if (isset($args[1])) {
+                    $order .= ' ' . $args[1];
+                }
+                break;
+            case self::QUERY_LIMIT:
+                $limit = $args;
+                break;
+            default:
+                // Ignore unknown clauses
+                break;
             }
         }
 
@@ -127,7 +127,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
         }
         if (empty($from)) {
             if (null === $collectionName) {
-                require_once 'Zend/Cloud/DocumentService/Exception.php';
+                include_once 'Zend/Cloud/DocumentService/Exception.php';
                 throw new Zend_Cloud_DocumentService_Exception("Query requires a FROM clause");
             }
             $from = $adapter->quoteName($collectionName);
@@ -150,7 +150,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
      *
      * @todo   Ensure this fulfills the entire SimpleDB query specification for WHERE
      * @param  string $where
-     * @param  array $args
+     * @param  array  $args
      * @return string
      */
     protected function _parseWhere($where, $args)
@@ -161,12 +161,12 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
         $adapter = $this->getAdapter()->getClient();
         $i = 0;
         while (false !== ($pos = strpos($where, '?'))) {
-           $where = substr_replace($where, $adapter->quote($args[$i]), $pos);
-           ++$i;
+            $where = substr_replace($where, $adapter->quote($args[$i]), $pos);
+            ++$i;
         }
         if (('(' != $where[0]) || (')' != $where[strlen($where) - 1])) {
             $where = '(' . $where . ')';
         }
         return $where;
     }
- }
+}

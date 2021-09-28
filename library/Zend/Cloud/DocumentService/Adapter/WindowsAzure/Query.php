@@ -50,7 +50,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
     public function __construct($select = null)
     {
         if (!$select instanceof Zend_Service_WindowsAzure_Storage_TableEntityQuery) {
-            require_once 'Zend/Service/WindowsAzure/Storage/TableEntityQuery.php';
+            include_once 'Zend/Service/WindowsAzure/Storage/TableEntityQuery.php';
             $select = new Zend_Service_WindowsAzure_Storage_TableEntityQuery();
         }
         $this->_azureSelect = $select;
@@ -72,7 +72,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
     /**
      * FROM clause (table name)
      *
-     * @param string $from
+     * @param  string $from
      * @return Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
      */
     public function from($from)
@@ -84,9 +84,9 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
     /**
      * WHERE clause (conditions to be used)
      *
-     * @param string $where
-     * @param mixed $value Value or array of values to be inserted instead of ?
-     * @param string $op Operation to use to join where clauses (AND/OR)
+     * @param  string $where
+     * @param  mixed  $value Value or array of values to be inserted instead of ?
+     * @param  string $op    Operation to use to join where clauses (AND/OR)
      * @return Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
      */
     public function where($where, $value = null, $op = 'and')
@@ -111,7 +111,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
     public function whereId($value)
     {
         if (!is_array($value)) {
-            require_once 'Zend/Cloud/DocumentService/Exception.php';
+            include_once 'Zend/Cloud/DocumentService/Exception.php';
             throw new Zend_Cloud_DocumentService_Exception('Invalid document key');
         }
         $this->_azureSelect->wherePartitionKey($value[0])->whereRowKey($value[1]);
@@ -134,14 +134,14 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
      * ORDER BY clause (sorting)
      *
      * @todo   Azure service doesn't seem to support this yet; emulate?
-     * @param  string $sort Column to sort by
+     * @param  string $sort      Column to sort by
      * @param  string $direction Direction - asc/desc
      * @return Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
      * @throws Zend_Cloud_OperationNotAvailableException
      */
     public function order($sort, $direction = 'asc')
     {
-        require_once 'Zend/Cloud/OperationNotAvailableException.php';
+        include_once 'Zend/Cloud/OperationNotAvailableException.php';
         throw new Zend_Cloud_OperationNotAvailableException('No support for sorting for Azure yet');
     }
 

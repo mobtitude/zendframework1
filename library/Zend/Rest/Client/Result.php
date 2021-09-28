@@ -29,7 +29,8 @@ require_once 'Zend/Xml/Security.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Rest_Client_Result implements IteratorAggregate {
+class Zend_Rest_Client_Result implements IteratorAggregate
+{
     /**
      * @var SimpleXMLElement
      */
@@ -43,7 +44,7 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
     /**
      * Constructor
      *
-     * @param string $data XML Result
+     * @param  string $data XML Result
      * @return void
      */
     public function __construct($data)
@@ -58,7 +59,7 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
                 $message = "REST Response Error: " . $this->_errstr;
                 $this->_errstr = null;
             }
-            require_once "Zend/Rest/Client/Result/Exception.php";
+            include_once "Zend/Rest/Client/Result/Exception.php";
             throw new Zend_Rest_Client_Result_Exception($message);
         }
     }
@@ -66,11 +67,11 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
     /**
      * Temporary error handler for parsing REST responses.
      *
-     * @param int    $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param string $errline
-     * @param array  $errcontext
+     * @param  int    $errno
+     * @param  string $errstr
+     * @param  string $errfile
+     * @param  string $errline
+     * @param  array  $errcontext
      * @return true
      */
     public function handleXmlErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
@@ -82,7 +83,7 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
     /**
      * Casts a SimpleXMLElement to its appropriate PHP value
      *
-     * @param SimpleXMLElement $value
+     * @param  SimpleXMLElement $value
      * @return mixed
      */
     public function toValue(SimpleXMLElement $value)
@@ -94,7 +95,7 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
     /**
      * Get Property Overload
      *
-     * @param string $name
+     * @param  string $name
      * @return null|SimpleXMLElement|array Null if not found, SimpleXMLElement if only one value found, array of Zend_Rest_Client_Result objects otherwise
      */
     public function __get($name)
@@ -120,8 +121,8 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
      *
      * For arrays, loops through each element and casts to a value as well.
      *
-     * @param string $method
-     * @param array $args
+     * @param  string $method
+     * @param  array  $args
      * @return mixed
      */
     public function __call($method, $args)
@@ -145,7 +146,7 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
     /**
      * Isset Overload
      *
-     * @param string $name
+     * @param  string $name
      * @return boolean
      */
     public function __isset($name)
@@ -181,7 +182,8 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
     public function getStatus()
     {
         $status = $this->_sxml->xpath('//status/text()');
-        if ( !isset($status[0]) ) return false;
+        if (!isset($status[0]) ) { return false;
+        }
         
         $status = strtolower($status[0]);
 

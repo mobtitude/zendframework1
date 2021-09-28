@@ -12,10 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Server
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
@@ -24,7 +24,7 @@
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Reflection
- * @version $Id$
+ * @version    $Id$
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -32,6 +32,7 @@ class Zend_Server_Reflection_Node
 {
     /**
      * Node value
+     *
      * @var mixed
      */
     protected $_value = null;
@@ -49,8 +50,8 @@ class Zend_Server_Reflection_Node
     /**
      * Constructor
      *
-     * @param mixed $value
-     * @param Zend_Server_Reflection_Node $parent Optional
+     * @param  mixed                       $value
+     * @param  Zend_Server_Reflection_Node $parent Optional
      * @return Zend_Server_Reflection_Node
      */
     public function __construct($value, Zend_Server_Reflection_Node $parent = null)
@@ -66,9 +67,9 @@ class Zend_Server_Reflection_Node
     /**
      * Set parent node
      *
-     * @param Zend_Server_Reflection_Node $node
-     * @param boolean $new Whether or not the child node is newly created
-     * and should always be attached
+     * @param  Zend_Server_Reflection_Node $node
+     * @param  boolean                     $new  Whether or not the child node is newly created
+     *                                           and should always be attached
      * @return void
      */
     public function setParent(Zend_Server_Reflection_Node $node, $new = false)
@@ -84,7 +85,7 @@ class Zend_Server_Reflection_Node
     /**
      * Create and attach a new child node
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @access public
      * @return Zend_Server_Reflection_Node New child node
      */
@@ -98,7 +99,7 @@ class Zend_Server_Reflection_Node
     /**
      * Attach a child node
      *
-     * @param Zend_Server_Reflection_Node $node
+     * @param  Zend_Server_Reflection_Node $node
      * @return void
      */
     public function attachChild(Zend_Server_Reflection_Node $node)
@@ -153,7 +154,7 @@ class Zend_Server_Reflection_Node
     /**
      * Set the node value
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return void
      */
     public function setValue($value)
@@ -183,8 +184,8 @@ class Zend_Server_Reflection_Node
             if (null === $value) {
                 $endPoints[] = $this;
             } elseif ((null !== $value)
-                && $child->hasChildren())
-            {
+                && $child->hasChildren()
+            ) {
                 $childEndPoints = $child->getEndPoints();
                 if (!empty($childEndPoints)) {
                     $endPoints = array_merge($endPoints, $childEndPoints);

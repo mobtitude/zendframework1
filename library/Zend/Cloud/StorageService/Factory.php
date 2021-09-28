@@ -56,11 +56,13 @@ class Zend_Cloud_StorageService_Factory extends Zend_Cloud_AbstractFactory
     {
         $adapter = parent::_getAdapter(self::STORAGE_ADAPTER_KEY, $options);
         if (!$adapter) {
-            require_once 'Zend/Cloud/StorageService/Exception.php';
-            throw new Zend_Cloud_StorageService_Exception('Class must be specified using the \'' .
-            self::STORAGE_ADAPTER_KEY . '\' key');
+            include_once 'Zend/Cloud/StorageService/Exception.php';
+            throw new Zend_Cloud_StorageService_Exception(
+                'Class must be specified using the \'' .
+                self::STORAGE_ADAPTER_KEY . '\' key'
+            );
         } elseif (!$adapter instanceof self::$_adapterInterface) {
-            require_once 'Zend/Cloud/StorageService/Exception.php';
+            include_once 'Zend/Cloud/StorageService/Exception.php';
             throw new Zend_Cloud_StorageService_Exception(
                 'Adapter must implement \'' . self::$_adapterInterface . '\''
             );

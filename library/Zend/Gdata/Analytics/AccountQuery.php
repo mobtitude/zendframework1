@@ -48,7 +48,7 @@ class Zend_Gdata_Analytics_AccountQuery extends Zend_Gdata_Query
     protected bool $_goals = false;
     
     /**
-     * @param string $accountId
+     * @param  string $accountId
      * @return Zend_Gdata_Analytics_AccountQuery
      */
     public function setAccountId($accountId)
@@ -66,7 +66,7 @@ class Zend_Gdata_Analytics_AccountQuery extends Zend_Gdata_Query
     }
 
     /**
-     * @param string $webpropertyId
+     * @param  string $webpropertyId
      * @return Zend_Gdata_Analytics_AccountQuery
      */
     public function setWebpropertyId($webpropertyId)
@@ -84,7 +84,7 @@ class Zend_Gdata_Analytics_AccountQuery extends Zend_Gdata_Query
     }
     
     /**
-     * @param string $profileId
+     * @param  string $profileId
      * @return Zend_Gdata_Analytics_AccountQuery
      */
     public function setProfileId($profileId)
@@ -102,7 +102,7 @@ class Zend_Gdata_Analytics_AccountQuery extends Zend_Gdata_Query
     }
     
     /**
-     * @param string $accountId
+     * @param  string $accountId
      * @return Zend_Gdata_Analytics_AccountQuery
      */
     public function webproperties($accountId = '~all')
@@ -113,8 +113,8 @@ class Zend_Gdata_Analytics_AccountQuery extends Zend_Gdata_Query
     }
     
     /**
-     * @param string $webpropertyId
-     * @param string $accountId
+     * @param  string $webpropertyId
+     * @param  string $accountId
      * @return Zend_Gdata_Analytics_AccountQuery
      */
     public function profiles($webpropertyId = '~all', $accountId = '~all')
@@ -128,9 +128,9 @@ class Zend_Gdata_Analytics_AccountQuery extends Zend_Gdata_Query
     }
     
     /**
-     * @param string $webpropertyId
-     * @param string $accountId
-     * @param string $accountId
+     * @param  string $webpropertyId
+     * @param  string $accountId
+     * @param  string $accountId
      * @return Zend_Gdata_Analytics_AccountQuery
      */
     public function goals($profileId = '~all', $webpropertyId = '~all', $accountId = '~all')

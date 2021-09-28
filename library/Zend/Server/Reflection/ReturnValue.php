@@ -12,10 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Server
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Server
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
@@ -28,7 +28,7 @@
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_Server_Reflection_ReturnValue
 {
@@ -45,7 +45,7 @@ class Zend_Server_Reflection_ReturnValue
     /**
      * Constructor
      *
-     * @param string $type Return value type
+     * @param string $type        Return value type
      * @param string $description Return value type
      */
     public function __construct($type = 'mixed', $description = '')
@@ -67,13 +67,13 @@ class Zend_Server_Reflection_ReturnValue
     /**
      * Set parameter type
      *
-     * @param string|null $type
+     * @param  string|null $type
      * @return void
      */
     public function setType($type)
     {
         if (!is_string($type) && (null !== $type)) {
-            require_once 'Zend/Server/Reflection/Exception.php';
+            include_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid parameter type');
         }
 
@@ -93,13 +93,13 @@ class Zend_Server_Reflection_ReturnValue
     /**
      * Set parameter description
      *
-     * @param string|null $description
+     * @param  string|null $description
      * @return void
      */
     public function setDescription($description)
     {
         if (!is_string($description) && (null !== $description)) {
-            require_once 'Zend/Server/Reflection/Exception.php';
+            include_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid parameter description');
         }
 

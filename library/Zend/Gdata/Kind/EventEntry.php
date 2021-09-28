@@ -210,7 +210,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
             $this->_visibility = $visiblity;
             break;
         case $this->lookupNamespace('gd') . ':' . 'recurrenceException';
-            require_once 'Zend/Gdata/Extension/RecurrenceException.php';
+            include_once 'Zend/Gdata/Extension/RecurrenceException.php';
             $recurrenceException = new Zend_Gdata_Extension_RecurrenceException();
             $recurrenceException ->transferFromDOM($child);
             $this->_recurrenceException[] = $recurrenceException;
@@ -243,7 +243,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param array $value
+     * @param  array $value
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setWhen($value)
@@ -258,7 +258,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param array $value
+     * @param  array $value
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setWhere($value)
@@ -273,7 +273,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param array $value
+     * @param  array $value
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setWho($value)
@@ -288,7 +288,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param array $value
+     * @param  array $value
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setRecurrence($value)
@@ -303,7 +303,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param array $value
+     * @param  array $value
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setEventStatus($value)
@@ -318,7 +318,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param array $value
+     * @param  array $value
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setComments($value)
@@ -333,7 +333,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param Zend_Gdata_Transparency $value
+     * @param  Zend_Gdata_Transparency $value
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setTransparency($value)
@@ -348,7 +348,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param Zend_Gdata_Visibility $value
+     * @param  Zend_Gdata_Visibility $value
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setVisibility($value)
@@ -363,7 +363,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param array $value
+     * @param  array $value
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setRecurrenceException($value)
@@ -378,7 +378,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param array $value
+     * @param  array $value
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setExtendedProperty($value)
@@ -393,7 +393,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     }
 
     /**
-     * @param Zend_Gdata_Extension_OriginalEvent $value
+     * @param  Zend_Gdata_Extension_OriginalEvent $value
      * @return Zend_Gdata_Kind_EventEntry Provides a fluent interface
      */
     public function setOriginalEvent($value)
@@ -415,7 +415,7 @@ class Zend_Gdata_Kind_EventEntry extends Zend_Gdata_Entry
     /**
      * Set the child's EntryLink element.
      *
-     * @param Zend_Gdata_Extension_EntryLink $value The desired value for this attribute.
+     * @param  Zend_Gdata_Extension_EntryLink $value The desired value for this attribute.
      * @return Zend_Gdata_Extension_Who The element being modified.
      */
     public function setEntryLink($value)

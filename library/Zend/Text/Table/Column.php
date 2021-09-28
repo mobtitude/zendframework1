@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Text_Table
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  * @version   $Id$
  */
@@ -34,7 +34,7 @@ require_once 'Zend/Text/MultiByte.php';
  *
  * @category  Zend
  * @package   Zend_Text_Table
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Text_Table_Column
@@ -73,10 +73,10 @@ class Zend_Text_Table_Column
     /**
      * Create a column for a Zend_Text_Table_Row object.
      *
-     * @param string  $content  The content of the column
-     * @param string  $align    The align of the content
-     * @param integer $colSpan  The colspan of the column
-     * @param string  $charset  The encoding of the content
+     * @param string  $content The content of the column
+     * @param string  $align   The align of the content
+     * @param integer $colSpan The colspan of the column
+     * @param string  $charset The encoding of the content
      */
     public function __construct($content = null, $align = null, $colSpan = null, $charset = null)
     {
@@ -100,15 +100,15 @@ class Zend_Text_Table_Column
      * the charset defined via Zend_Text_Table::setInputCharset() (defaults
      * to utf-8).
      *
-     * @param  string $content  Content of the column
-     * @param  string $charset  The charset of the content
+     * @param  string $content Content of the column
+     * @param  string $charset The charset of the content
      * @throws Zend_Text_Table_Exception When $content is not a string
      * @return Zend_Text_Table_Column
      */
     public function setContent($content, $charset = null)
     {
         if (is_string($content) === false) {
-            require_once 'Zend/Text/Table/Exception.php';
+            include_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('$content must be a string');
         }
 
@@ -143,7 +143,7 @@ class Zend_Text_Table_Column
     public function setAlign($align)
     {
         if (in_array($align, $this->_allowedAligns) === false) {
-            require_once 'Zend/Text/Table/Exception.php';
+            include_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('Invalid align supplied');
         }
 
@@ -162,7 +162,7 @@ class Zend_Text_Table_Column
     public function setColSpan($colSpan)
     {
         if (is_int($colSpan) === false or $colSpan < 1) {
-            require_once 'Zend/Text/Table/Exception.php';
+            include_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('$colSpan must be an integer and greater than 0');
         }
 
@@ -193,33 +193,33 @@ class Zend_Text_Table_Column
     public function render($columnWidth, $padding = 0)
     {
         if (is_int($columnWidth) === false or $columnWidth < 1) {
-            require_once 'Zend/Text/Table/Exception.php';
+            include_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('$columnWidth must be an integer and greater than 0');
         }
 
         $columnWidth -= ($padding * 2);
 
         if ($columnWidth < 1) {
-            require_once 'Zend/Text/Table/Exception.php';
+            include_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('Padding (' . $padding . ') is greater than column width');
         }
 
         switch ($this->_align) {
-            case self::ALIGN_LEFT:
-                $padMode = STR_PAD_RIGHT;
-                break;
+        case self::ALIGN_LEFT:
+            $padMode = STR_PAD_RIGHT;
+            break;
 
-            case self::ALIGN_CENTER:
-                $padMode = STR_PAD_BOTH;
-                break;
+        case self::ALIGN_CENTER:
+            $padMode = STR_PAD_BOTH;
+            break;
 
-            case self::ALIGN_RIGHT:
-                $padMode = STR_PAD_LEFT;
-                break;
+        case self::ALIGN_RIGHT:
+            $padMode = STR_PAD_LEFT;
+            break;
 
-            default:
-                // This can never happen, but the CS tells I have to have it ...
-                break;
+        default:
+            // This can never happen, but the CS tells I have to have it ...
+            break;
         }
 
         $outputCharset = Zend_Text_Table::getOutputCharset();

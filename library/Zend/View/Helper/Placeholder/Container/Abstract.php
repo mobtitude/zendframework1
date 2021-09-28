@@ -32,18 +32,21 @@ abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObje
 {
     /**
      * Whether or not to override all contents of placeholder
+     *
      * @const string
      */
     const SET    = 'SET';
 
     /**
      * Whether or not to append contents to placeholder
+     *
      * @const string
      */
     const APPEND = 'APPEND';
 
     /**
      * Whether or not to prepend contents to placeholder
+     *
      * @const string
      */
     const PREPEND = 'PREPEND';
@@ -75,12 +78,14 @@ abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObje
 
     /**
      * What type of capture (overwrite (set), append, prepend) to use
+     *
      * @var string
      */
     protected $_captureType;
 
     /**
      * Key to which to capture content
+     *
      * @var string
      */
     protected $_captureKey;
@@ -247,15 +252,15 @@ abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObje
     /**
      * Start capturing content to push into placeholder
      *
-     * @param int|string $type How to capture content into placeholder; append, prepend, or set
-     * @param null       $key
+     * @param  int|string $type How to capture content into placeholder; append, prepend, or set
+     * @param  null       $key
      * @throws Zend_View_Helper_Placeholder_Container_Exception
      * @return void
      */
     public function captureStart($type = Zend_View_Helper_Placeholder_Container_Abstract::APPEND, $key = null)
     {
         if ($this->_captureLock) {
-            require_once 'Zend/View/Helper/Placeholder/Container/Exception.php';
+            include_once 'Zend/View/Helper/Placeholder/Container/Exception.php';
             $e = new Zend_View_Helper_Placeholder_Container_Exception('Cannot nest placeholder captures for the same placeholder');
             $e->setView($this->view);
             throw $e;
@@ -283,35 +288,35 @@ abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObje
             $key = $this->_captureKey;
         }
         switch ($this->_captureType) {
-            case self::SET:
-                if (null !== $key) {
+        case self::SET:
+            if (null !== $key) {
+                $this[$key] = $data;
+            } else {
+                $this->exchangeArray(array($data));
+            }
+            break;
+        case self::PREPEND:
+            if (null !== $key) {
+                $array  = array($key => $data);
+                $values = $this->getArrayCopy();
+                $final  = $array + $values;
+                $this->exchangeArray($final);
+            } else {
+                $this->prepend($data);
+            }
+            break;
+        case self::APPEND:
+        default:
+            if (null !== $key) {
+                if (empty($this[$key])) {
                     $this[$key] = $data;
                 } else {
-                    $this->exchangeArray(array($data));
+                    $this[$key] .= $data;
                 }
-                break;
-            case self::PREPEND:
-                if (null !== $key) {
-                    $array  = array($key => $data);
-                    $values = $this->getArrayCopy();
-                    $final  = $array + $values;
-                    $this->exchangeArray($final);
-                } else {
-                    $this->prepend($data);
-                }
-                break;
-            case self::APPEND:
-            default:
-                if (null !== $key) {
-                    if (empty($this[$key])) {
-                        $this[$key] = $data;
-                    } else {
-                        $this[$key] .= $data;
-                    }
-                } else {
-                    $this[$this->nextIndex()] = $data;
-                }
-                break;
+            } else {
+                $this[$this->nextIndex()] = $data;
+            }
+            break;
         }
     }
 
@@ -330,6 +335,7 @@ abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObje
      * Next Index
      *
      * as defined by the PHP manual
+     *
      * @return int
      */
     public function nextIndex()
@@ -345,7 +351,7 @@ abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObje
     /**
      * Render the placeholder
      *
-     * @param null $indent
+     * @param  null $indent
      * @return string
      */
     public function toString($indent = null)

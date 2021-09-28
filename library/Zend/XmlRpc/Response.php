@@ -12,10 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Controller
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Controller
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
@@ -28,10 +28,14 @@ require_once 'Zend/XmlRpc/Value.php';
  */
 require_once 'Zend/XmlRpc/Fault.php';
 
-/** @see Zend_Xml_Security */
+/**
+ * @see Zend_Xml_Security 
+*/
 require_once 'Zend/Xml/Security.php';
 
-/** @see Zend_Xml_Exception */
+/**
+ * @see Zend_Xml_Exception 
+*/
 require_once 'Zend/Xml/Exception.php';
 
 /**
@@ -39,16 +43,17 @@ require_once 'Zend/Xml/Exception.php';
  *
  * Container for accessing an XMLRPC return value and creating the XML response.
  *
- * @category Zend
- * @package  Zend_XmlRpc
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @category  Zend
+ * @package   Zend_XmlRpc
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 class Zend_XmlRpc_Response
 {
     /**
      * Return value
+     *
      * @var mixed
      */
     protected $_return;
@@ -74,8 +79,8 @@ class Zend_XmlRpc_Response
      * Can optionally pass in the return value and type hinting; otherwise, the
      * return value can be set via {@link setReturnValue()}.
      *
-     * @param mixed $return
-     * @param string $type
+     * @param  mixed  $return
+     * @param  string $type
      * @return void
      */
     public function __construct($return = null, $type = null)
@@ -86,7 +91,7 @@ class Zend_XmlRpc_Response
     /**
      * Set encoding to use in response
      *
-     * @param string $encoding
+     * @param  string $encoding
      * @return Zend_XmlRpc_Response
      */
     public function setEncoding($encoding)
@@ -111,8 +116,8 @@ class Zend_XmlRpc_Response
      *
      * Sets the return value, with optional type hinting if provided.
      *
-     * @param mixed $value
-     * @param string $type
+     * @param  mixed  $value
+     * @param  string $type
      * @return void
      */
     public function setReturnValue($value, $type = null)
@@ -167,7 +172,7 @@ class Zend_XmlRpc_Response
      * Attempts to load a response from an XMLRPC response, autodetecting if it
      * is a fault response.
      *
-     * @param string $response
+     * @param  string $response
      * @return boolean True if a valid XMLRPC response, false if a fault
      * response or invalid input
      */
@@ -205,7 +210,7 @@ class Zend_XmlRpc_Response
 
         try {
             if (!isset($xml->params) || !isset($xml->params->param) || !isset($xml->params->param->value)) {
-                require_once 'Zend/XmlRpc/Value/Exception.php';
+                include_once 'Zend/XmlRpc/Value/Exception.php';
                 throw new Zend_XmlRpc_Value_Exception('Missing XML-RPC value in XML');
             }
             $valueXml = $xml->params->param->value->asXML();
@@ -230,12 +235,12 @@ class Zend_XmlRpc_Response
         $value = $this->_getXmlRpcReturn();
         $generator = Zend_XmlRpc_Value::getGenerator();
         $generator->openElement('methodResponse')
-                  ->openElement('params')
-                  ->openElement('param');
+            ->openElement('params')
+            ->openElement('param');
         $value->generateXml();
         $generator->closeElement('param')
-                  ->closeElement('params')
-                  ->closeElement('methodResponse');
+            ->closeElement('params')
+            ->closeElement('methodResponse');
 
         return $generator->flush();
     }

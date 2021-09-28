@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Service_ShortUrl
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: $
+ * @category  Zend
+ * @package   Zend_Service_ShortUrl
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id: $
  */
 
 /**
@@ -27,10 +27,10 @@ require_once 'Zend/Service/ShortUrl/AbstractShortener.php';
 /**
  * Is.gd API implementation
  *
- * @category   Zend
- * @package    Zend_Service_ShortUrl
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Service_ShortUrl
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_ShortUrl_IsGd extends Zend_Service_ShortUrl_AbstractShortener
 {
@@ -44,7 +44,7 @@ class Zend_Service_ShortUrl_IsGd extends Zend_Service_ShortUrl_AbstractShortener
     /**
      * This function shortens long url
      *
-     * @param string $url URL to Shorten
+     * @param  string $url URL to Shorten
      * @throws Zend_Service_ShortUrl_Exception When URL is not valid
      * @return string New URL
      */
@@ -63,10 +63,10 @@ class Zend_Service_ShortUrl_IsGd extends Zend_Service_ShortUrl_AbstractShortener
         return $response->getBody();
     }
 
-   /**
+    /**
      * Reveals target for short URL
      *
-     * @param string $shortenedUrl URL to reveal target of
+     * @param  string $shortenedUrl URL to reveal target of
      * @throws Zend_Service_ShortUrl_Exception When URL is not valid or is not shortened by this service
      * @return string
      */
@@ -82,7 +82,7 @@ class Zend_Service_ShortUrl_IsGd extends Zend_Service_ShortUrl_AbstractShortener
 
         $response = $this->getHttpClient()->request();
         if ($response->isError()) {
-            require_once 'Zend/Service/ShortUrl/Exception.php';
+            include_once 'Zend/Service/ShortUrl/Exception.php';
             throw new Zend_Service_ShortUrl_Exception($response->getMessage());
         }
 
@@ -90,7 +90,7 @@ class Zend_Service_ShortUrl_IsGd extends Zend_Service_ShortUrl_AbstractShortener
             return $response->getHeader('Location');
         }
 
-        require_once 'Zend/Service/ShortUrl/Exception.php';
+        include_once 'Zend/Service/ShortUrl/Exception.php';
         throw new Zend_Service_ShortUrl_Exception('Url unshortening was not successful');
     }
 }

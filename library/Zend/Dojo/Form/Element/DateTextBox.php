@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Dojo_Form_Element_ValidationTextBox */
+/**
+ * Zend_Dojo_Form_Element_ValidationTextBox 
+ */
 require_once 'Zend/Dojo/Form/Element/ValidationTextBox.php';
 
 /**
@@ -36,6 +38,7 @@ class Zend_Dojo_Form_Element_DateTextBox extends Zend_Dojo_Form_Element_Validati
 {
     /**
      * Use DateTextBox dijit view helper
+     *
      * @var string
      */
     public $helper = 'DateTextBox';
@@ -163,7 +166,7 @@ class Zend_Dojo_Form_Element_DateTextBox extends Zend_Dojo_Form_Element_Validati
     {
         $formatLength = strtolower($formatLength);
         if (!in_array($formatLength, $this->_allowedFormatTypes)) {
-            require_once 'Zend/Form/Element/Exception.php';
+            include_once 'Zend/Form/Element/Exception.php';
             throw new Zend_Form_Element_Exception(sprintf('Invalid formatLength "%s" specified', $formatLength));
         }
 
@@ -192,7 +195,7 @@ class Zend_Dojo_Form_Element_DateTextBox extends Zend_Dojo_Form_Element_Validati
     {
         $selector = strtolower($selector);
         if (!in_array($selector, $this->_allowedSelectorTypes)) {
-            require_once 'Zend/Form/Element/Exception.php';
+            include_once 'Zend/Form/Element/Exception.php';
             throw new Zend_Form_Element_Exception(sprintf('Invalid Selector "%s" specified', $selector));
         }
 

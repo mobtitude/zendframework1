@@ -52,6 +52,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
 
     /**
      * Url to which to redirect
+     *
      * @var string
      */
     protected $_redirectUrl = null;
@@ -87,7 +88,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     {
         $code = (int)$code;
         if ((300 > $code) || (307 < $code) || (304 == $code) || (306 == $code)) {
-            require_once 'Zend/Controller/Action/Exception.php';
+            include_once 'Zend/Controller/Action/Exception.php';
             throw new Zend_Controller_Action_Exception('Invalid redirect HTTP status code (' . $code  . ')');
         }
 
@@ -303,7 +304,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
      * Build a URL based on a route
      *
      * @param  array   $urlOptions
-     * @param  string  $name Route name
+     * @param  string  $name       Route name
      * @param  boolean $reset
      * @param  boolean $encode
      * @return void
@@ -506,7 +507,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
      * Overloading for old 'goto', 'setGoto', and 'gotoAndExit' methods
      *
      * @param  string $method
-     * @param  array $args
+     * @param  array  $args
      * @return mixed
      * @throws Zend_Controller_Action_Exception for invalid methods
      */
@@ -523,7 +524,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
             return call_user_func_array(array($this, 'gotoSimpleAndExit'), $args);
         }
 
-        require_once 'Zend/Controller/Action/Exception.php';
+        include_once 'Zend/Controller/Action/Exception.php';
         throw new Zend_Controller_Action_Exception(sprintf('Invalid method "%s" called on redirector', $method));
     }
 }

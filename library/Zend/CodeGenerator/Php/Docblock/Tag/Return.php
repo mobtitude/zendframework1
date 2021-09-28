@@ -26,10 +26,10 @@
 require_once 'Zend/CodeGenerator/Php/Docblock/Tag.php';
 
 /**
- * @category   Zend
- * @package    Zend_CodeGenerator
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_CodeGenerator
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_CodeGenerator_Php_Docblock_Tag_Return extends Zend_CodeGenerator_Php_Docblock_Tag
 {
@@ -44,7 +44,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Return extends Zend_CodeGenerator_Php_
     /**
      * fromReflection()
      *
-     * @param Zend_Reflection_Docblock_Tag $reflectionTagReturn
+     * @param  Zend_Reflection_Docblock_Tag $reflectionTagReturn
      * @return Zend_CodeGenerator_Php_Docblock_Tag_Return
      */
     public static function fromReflection(Zend_Reflection_Docblock_Tag $reflectionTagReturn)
@@ -61,7 +61,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Return extends Zend_CodeGenerator_Php_
     /**
      * setDatatype()
      *
-     * @param string $datatype
+     * @param  string $datatype
      * @return Zend_CodeGenerator_Php_Docblock_Tag_Return
      */
     public function setDatatype($datatype)

@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_Log_Formatter_Abstract */
+/**
+ * Zend_Log_Formatter_Abstract 
+ */
 require_once 'Zend/Log/Formatter/Abstract.php';
 
 /**
@@ -40,7 +42,7 @@ class Zend_Log_Formatter_Simple extends Zend_Log_Formatter_Abstract
     /**
      * Class constructor
      *
-     * @param  null|string  $format  Format specifier for log messages
+     * @param  null|string $format Format specifier for log messages
      * @return void
      * @throws Zend_Log_Exception
      */
@@ -51,7 +53,7 @@ class Zend_Log_Formatter_Simple extends Zend_Log_Formatter_Abstract
         }
 
         if (!is_string($format)) {
-            require_once 'Zend/Log/Exception.php';
+            include_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception('Format must be a string');
         }
 
@@ -59,10 +61,10 @@ class Zend_Log_Formatter_Simple extends Zend_Log_Formatter_Abstract
     }
 
     /**
-	 * Factory for Zend_Log_Formatter_Simple classe
-	 *
-	 * @param array|Zend_Config $options
-	 * @return Zend_Log_Formatter_Simple
+     * Factory for Zend_Log_Formatter_Simple classe
+     *
+     * @param  array|Zend_Config $options
+     * @return Zend_Log_Formatter_Simple
      */
     public static function factory($options)
     {
@@ -83,7 +85,7 @@ class Zend_Log_Formatter_Simple extends Zend_Log_Formatter_Abstract
     /**
      * Formats data into a single line to be written by the writer.
      *
-     * @param  array    $event    event data
+     * @param  array $event event data
      * @return string             formatted line to write to the log
      */
     public function format($event)
@@ -91,7 +93,7 @@ class Zend_Log_Formatter_Simple extends Zend_Log_Formatter_Abstract
         $output = $this->_format;
 
         foreach ($event as $name => $value) {
-            if ((is_object($value) && !method_exists($value,'__toString'))
+            if ((is_object($value) && !method_exists($value, '__toString'))
                 || is_array($value)
             ) {
                 $value = gettype($value);

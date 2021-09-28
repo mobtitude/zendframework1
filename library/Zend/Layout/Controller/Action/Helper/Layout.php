@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Action_Helper_Abstract */
+/**
+ * Zend_Controller_Action_Helper_Abstract 
+ */
 require_once 'Zend/Controller/Action/Helper/Abstract.php';
 
 /**
@@ -58,7 +60,7 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
             /**
              * @see Zend_Layout
              */
-            require_once 'Zend/Layout.php';
+            include_once 'Zend/Layout.php';
             $layout = Zend_Layout::getMvcInstance();
         }
 
@@ -88,7 +90,7 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
             /**
              * @see Zend_Controller_Front
              */
-            require_once 'Zend/Controller/Front.php';
+            include_once 'Zend/Controller/Front.php';
             $this->_frontController = Zend_Controller_Front::getInstance();
         }
 
@@ -106,7 +108,7 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
             /**
              * @see Zend_Layout
              */
-            require_once 'Zend/Layout.php';
+            include_once 'Zend/Layout.php';
             if (null === ($this->_layout = Zend_Layout::getMvcInstance())) {
                 $this->_layout = new Zend_Layout();
             }
@@ -164,7 +166,7 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
      * Proxy method calls to layout object
      *
      * @param  string $method
-     * @param  array $args
+     * @param  array  $args
      * @return mixed
      */
     public function __call($method, $args)
@@ -174,7 +176,7 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
             return call_user_func_array(array($layout, $method), $args);
         }
 
-        require_once 'Zend/Layout/Exception.php';
+        include_once 'Zend/Layout/Exception.php';
         throw new Zend_Layout_Exception(sprintf("Invalid method '%s' called on layout action helper", $method));
     }
 }

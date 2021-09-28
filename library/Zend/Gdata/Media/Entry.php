@@ -59,7 +59,7 @@ class Zend_Gdata_Media_Entry extends Zend_Gdata_Entry
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {
@@ -72,7 +72,7 @@ class Zend_Gdata_Media_Entry extends Zend_Gdata_Entry
      * child properties.  This is used to build an entry back into a DOM
      * and eventually XML text for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      *          child properties.
      */
@@ -110,7 +110,7 @@ class Zend_Gdata_Media_Entry extends Zend_Gdata_Entry
      * Returns the entry's mediaGroup object.
      *
      * @return Zend_Gdata_Media_Extension_MediaGroup
-    */
+     */
     public function getMediaGroup()
     {
         return $this->_mediaGroup;
@@ -119,7 +119,7 @@ class Zend_Gdata_Media_Entry extends Zend_Gdata_Entry
     /**
      * Sets the entry's mediaGroup object.
      *
-     * @param Zend_Gdata_Media_Extension_MediaGroup $mediaGroup
+     * @param  Zend_Gdata_Media_Extension_MediaGroup $mediaGroup
      * @return Zend_Gdata_Media_Entry Provides a fluent interface
      */
     public function setMediaGroup($mediaGroup)

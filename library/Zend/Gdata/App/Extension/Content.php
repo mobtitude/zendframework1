@@ -76,7 +76,7 @@ class Zend_Gdata_App_Extension_Content extends Zend_Gdata_App_Extension_Text
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_App_Entry Provides a fluent interface
      */
     public function setSrc($value)

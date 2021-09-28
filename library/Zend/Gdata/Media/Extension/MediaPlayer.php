@@ -57,8 +57,8 @@ class Zend_Gdata_Media_Extension_MediaPlayer extends Zend_Gdata_Extension
      * Constructs a new MediaPlayer element
      *
      * @param string $url
-     * @param int $width
-     * @param int $height
+     * @param int    $width
+     * @param int    $height
      */
     public function __construct($url = null, $width = null, $height = null)
     {
@@ -75,7 +75,7 @@ class Zend_Gdata_Media_Extension_MediaPlayer extends Zend_Gdata_Extension
      * and eventually XML text for sending to the server upon updates, or
      * for application storage/persistence.
      *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+     * @param  DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
      * child properties.
      */
@@ -127,7 +127,7 @@ class Zend_Gdata_Media_Extension_MediaPlayer extends Zend_Gdata_Extension
     }
 
     /**
-     * @param string $value
+     * @param  string $value
      * @return Zend_Gdata_Media_Extension_MediaPlayer Provides a fluent interface
      */
     public function setUrl($value)
@@ -145,7 +145,7 @@ class Zend_Gdata_Media_Extension_MediaPlayer extends Zend_Gdata_Extension
     }
 
     /**
-     * @param int $value
+     * @param  int $value
      * @return Zend_Gdata_Media_Extension_MediaPlayer Provides a fluent interface
      */
     public function setWidth($value)
@@ -163,7 +163,7 @@ class Zend_Gdata_Media_Extension_MediaPlayer extends Zend_Gdata_Extension
     }
 
     /**
-     * @param int $value
+     * @param  int $value
      * @return Zend_Gdata_Media_Extension_MediaPlayer Provides a fluent interface
      */
     public function setHeight($value)

@@ -12,10 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_EventManager
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 require_once 'Zend/EventManager/Filter.php';
@@ -25,10 +25,10 @@ require_once 'Zend/Stdlib/CallbackHandler.php';
 /**
  * FilterChain: intercepting filter manager
  *
- * @category   Zend
- * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_EventManager
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_EventManager_FilterChain implements Zend_EventManager_Filter
 {
@@ -55,7 +55,7 @@ class Zend_EventManager_FilterChain implements Zend_EventManager_Filter
      * Begins iteration of the filters.
      * 
      * @param  mixed $context Object under observation
-     * @param  mixed $argv Associative array of arguments
+     * @param  mixed $argv    Associative array of arguments
      * @return mixed
      */
     public function run($context, array $argv = array())
@@ -85,7 +85,7 @@ class Zend_EventManager_FilterChain implements Zend_EventManager_Filter
     public function attach($callback, $priority = 1)
     {
         if (empty($callback)) {
-            require_once 'Zend/Stdlib/Exception/InvalidCallbackException.php';
+            include_once 'Zend/Stdlib/Exception/InvalidCallbackException.php';
             throw new Zend_Stdlib_Exception_InvalidCallbackException('No callback provided');
         }
         $filter = new Zend_Stdlib_CallbackHandler($callback, array('priority' => $priority));

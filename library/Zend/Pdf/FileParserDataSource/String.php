@@ -20,7 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_FileParserDataSource */
+/**
+ * Zend_Pdf_FileParserDataSource 
+ */
 require_once 'Zend/Pdf/FileParserDataSource.php';
 
 /**
@@ -34,7 +36,9 @@ require_once 'Zend/Pdf/FileParserDataSource.php';
  */
 class Zend_Pdf_FileParserDataSource_String extends Zend_Pdf_FileParserDataSource
 {
-  /**** Instance Variables ****/
+    /****
+     * Instance Variables 
+     ****/
     /**
      * The string to parse.
      */
@@ -42,10 +46,12 @@ class Zend_Pdf_FileParserDataSource_String extends Zend_Pdf_FileParserDataSource
 
 
 
-  /**** Public Interface ****/
+    /****
+     * Public Interface 
+     ****/
 
 
-  /* Concrete Class Implementation */
+    /* Concrete Class Implementation */
 
     /**
      * Object constructor.
@@ -57,9 +63,11 @@ class Zend_Pdf_FileParserDataSource_String extends Zend_Pdf_FileParserDataSource
     public function __construct($string)
     {
         if (empty($string)) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('String is empty',
-                                         Zend_Pdf_Exception::PARAMETER_VALUE_OUT_OF_RANGE);
+            include_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception(
+                'String is empty',
+                Zend_Pdf_Exception::PARAMETER_VALUE_OUT_OF_RANGE
+            );
         }
         $this->_size = strlen($string);
         $this->_string = $string;
@@ -82,16 +90,18 @@ class Zend_Pdf_FileParserDataSource_String extends Zend_Pdf_FileParserDataSource
      * Throws an exception if there is insufficient data to completely fulfill
      * the request.
      *
-     * @param integer $byteCount Number of bytes to read.
+     * @param  integer $byteCount Number of bytes to read.
      * @return string
      * @throws Zend_Pdf_Exception
      */
     public function readBytes($byteCount)
     {
         if (($this->_offset + $byteCount) > $this->_size) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception("Insufficient data to read $byteCount bytes",
-                                         Zend_Pdf_Exception::INSUFFICIENT_DATA);
+            include_once 'Zend/Pdf/Exception.php';
+            throw new Zend_Pdf_Exception(
+                "Insufficient data to read $byteCount bytes",
+                Zend_Pdf_Exception::INSUFFICIENT_DATA
+            );
         }
         $bytes = substr($this->_string, $this->_offset, $byteCount);
         $this->_offset += $byteCount;
@@ -111,7 +121,7 @@ class Zend_Pdf_FileParserDataSource_String extends Zend_Pdf_FileParserDataSource
     }
 
 
-  /* Object Magic Methods */
+    /* Object Magic Methods */
 
     /**
      * Returns a string containing the parsed string's length.

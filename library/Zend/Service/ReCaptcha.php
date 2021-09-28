@@ -19,13 +19,19 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @see Zend_Service_Abstract */
+/**
+ * @see Zend_Service_Abstract 
+ */
 require_once 'Zend/Service/Abstract.php';
 
-/** @see Zend_Json */
+/**
+ * @see Zend_Json 
+*/
 require_once 'Zend/Json.php';
 
-/** @see Zend_Service_ReCaptcha_Response */
+/**
+ * @see Zend_Service_ReCaptcha_Response 
+*/
 require_once 'Zend/Service/ReCaptcha/Response.php';
 
 /**
@@ -106,16 +112,16 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
     /**
      * Class constructor
      *
-     * @param string $publicKey
-     * @param string $privateKey
-     * @param array $params
-     * @param array $options
-     * @param string $ip
+     * @param string            $publicKey
+     * @param string            $privateKey
+     * @param array             $params
+     * @param array             $options
+     * @param string            $ip
      * @param array|Zend_Config $params
      */
     public function __construct($publicKey = null, $privateKey = null,
-                                $params = null, $options = null, $ip = null)
-    {
+        $params = null, $options = null, $ip = null
+    ) {
         if ($publicKey !== null) {
             $this->setPublicKey($publicKey);
         }
@@ -163,7 +169,7 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
     /**
      * Set the ip property
      *
-     * @param string $ip
+     * @param  string $ip
      * @return Zend_Service_ReCaptcha
      */
     public function setIp($ip)
@@ -186,8 +192,8 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
     /**
      * Set a single parameter
      *
-     * @param string $key
-     * @param string $value
+     * @param  string $key
+     * @param  string $value
      * @return Zend_Service_ReCaptcha
      */
     public function setParam($key, $value)
@@ -200,7 +206,7 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
     /**
      * Set parameters
      *
-     * @param array|Zend_Config $params
+     * @param  array|Zend_Config $params
      * @return Zend_Service_ReCaptcha
      * @throws Zend_Service_ReCaptcha_Exception
      */
@@ -215,8 +221,10 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
                 $this->setParam($k, $v);
             }
         } else {
-            /** @see Zend_Service_ReCaptcha_Exception */
-            require_once 'Zend/Service/ReCaptcha/Exception.php';
+            /**
+ * @see Zend_Service_ReCaptcha_Exception 
+*/
+            include_once 'Zend/Service/ReCaptcha/Exception.php';
 
             throw new Zend_Service_ReCaptcha_Exception(
                 'Expected array or Zend_Config object'
@@ -239,7 +247,7 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
     /**
      * Get a single parameter
      *
-     * @param string $key
+     * @param  string $key
      * @return mixed
      */
     public function getParam($key)
@@ -250,8 +258,8 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
     /**
      * Set a single option
      *
-     * @param string $key
-     * @param string $value
+     * @param  string $key
+     * @param  string $value
      * @return Zend_Service_ReCaptcha
      */
     public function setOption($key, $value)
@@ -264,7 +272,7 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
     /**
      * Set options
      *
-     * @param array|Zend_Config $options
+     * @param  array|Zend_Config $options
      * @return Zend_Service_ReCaptcha
      * @throws Zend_Service_ReCaptcha_Exception
      */
@@ -279,8 +287,10 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
                 $this->setOption($k, $v);
             }
         } else {
-            /** @see Zend_Service_ReCaptcha_Exception */
-            require_once 'Zend/Service/ReCaptcha/Exception.php';
+            /**
+ * @see Zend_Service_ReCaptcha_Exception 
+*/
+            include_once 'Zend/Service/ReCaptcha/Exception.php';
 
             throw new Zend_Service_ReCaptcha_Exception(
                 'Expected array or Zend_Config object'
@@ -303,7 +313,7 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
     /**
      * Get a single option
      *
-     * @param string $key
+     * @param  string $key
      * @return mixed
      */
     public function getOption($key)
@@ -324,7 +334,7 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
     /**
      * Set the public key
      *
-     * @param string $publicKey
+     * @param  string $publicKey
      * @return Zend_Service_ReCaptcha
      */
     public function setPublicKey($publicKey)
@@ -347,7 +357,7 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
     /**
      * Set the private key
      *
-     * @param string $privateKey
+     * @param  string $privateKey
      * @return Zend_Service_ReCaptcha
      */
     public function setPrivateKey($privateKey)
@@ -369,8 +379,10 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
     public function getHtml($name = null)
     {
         if ($this->_publicKey === null) {
-            /** @see Zend_Service_ReCaptcha_Exception */
-            require_once 'Zend/Service/ReCaptcha/Exception.php';
+            /**
+ * @see Zend_Service_ReCaptcha_Exception 
+*/
+            include_once 'Zend/Service/ReCaptcha/Exception.php';
 
             throw new Zend_Service_ReCaptcha_Exception('Missing public key');
         }
@@ -435,23 +447,27 @@ HTML;
     /**
      * Post a solution to the verify server
      *
-     * @param string $challengeField
-     * @param string $responseField
+     * @param  string $challengeField
+     * @param  string $responseField
      * @return Zend_Http_Response
      * @throws Zend_Service_ReCaptcha_Exception
      */
     protected function _post($challengeField, $responseField)
     {
         if ($this->_privateKey === null) {
-            /** @see Zend_Service_ReCaptcha_Exception */
-            require_once 'Zend/Service/ReCaptcha/Exception.php';
+            /**
+ * @see Zend_Service_ReCaptcha_Exception 
+*/
+            include_once 'Zend/Service/ReCaptcha/Exception.php';
 
             throw new Zend_Service_ReCaptcha_Exception('Missing private key');
         }
 
         if ($this->_ip === null) {
-            /** @see Zend_Service_ReCaptcha_Exception */
-            require_once 'Zend/Service/ReCaptcha/Exception.php';
+            /**
+ * @see Zend_Service_ReCaptcha_Exception 
+*/
+            include_once 'Zend/Service/ReCaptcha/Exception.php';
 
             throw new Zend_Service_ReCaptcha_Exception('Missing ip address');
         }
@@ -467,8 +483,8 @@ HTML;
 
         /* Make the POST and return the response */
         return $httpClient->setUri(self::VERIFY_SERVER)
-                          ->setParameterPost($postParams)
-                          ->request(Zend_Http_Client::POST);
+            ->setParameterPost($postParams)
+            ->request(Zend_Http_Client::POST);
     }
 
     /**
@@ -477,8 +493,8 @@ HTML;
      * This method calls up the post method and returns a
      * Zend_Service_ReCaptcha_Response object.
      *
-     * @param string $challengeField
-     * @param string $responseField
+     * @param  string $challengeField
+     * @param  string $responseField
      * @return Zend_Service_ReCaptcha_Response
      */
     public function verify($challengeField, $responseField)

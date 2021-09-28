@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Mobile_Push_Message_Mpns **/
+/**
+ * Zend_Mobile_Push_Message_Mpns 
+ **/
 require_once 'Zend/Mobile/Push/Message/Mpns.php';
 
 /**
@@ -70,7 +72,7 @@ class Zend_Mobile_Push_Message_Mpns_Toast extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Title
      *
-     * @param string $title
+     * @param  string $title
      * @return Zend_Mobile_Push_Message_Mpns_Toast
      * @throws Zend_Mobile_Push_Message_Exception
      */
@@ -96,7 +98,7 @@ class Zend_Mobile_Push_Message_Mpns_Toast extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Message
      *
-     * @param string $msg
+     * @param  string $msg
      * @return Zend_Mobile_Push_Message_Mpns_Toast
      * @throws Zend_Mobile_Push_Message_Exception
      */
@@ -122,7 +124,7 @@ class Zend_Mobile_Push_Message_Mpns_Toast extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Params
      *
-     * @param string $params
+     * @param  string $params
      * @return Zend_Mobile_Push_Message_Mpns_Toast
      * @throws Zend_Mobile_Push_Message_Exception
      */
@@ -151,17 +153,20 @@ class Zend_Mobile_Push_Message_Mpns_Toast extends Zend_Mobile_Push_Message_Mpns
     /**
      * Set Delay
      *
-     * @param int $delay
+     * @param  int $delay
      * @return Zend_Mobile_Push_Message_Mpns_Toast
      * @throws Zend_Mobile_Push_Message_Exception
      */
     public function setDelay($delay)
     {
-        if (!in_array($delay, array(
+        if (!in_array(
+            $delay, array(
             self::DELAY_IMMEDIATE,
             self::DELAY_450S,
             self::DELAY_900S
-        ))) {
+            )
+        )
+        ) {
             throw new Zend_Mobile_Push_Message_Exception('$delay must be one of the DELAY_* constants');
         }
         $this->_delay = $delay;

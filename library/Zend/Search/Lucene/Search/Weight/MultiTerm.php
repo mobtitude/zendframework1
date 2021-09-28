@@ -21,7 +21,9 @@
  */
 
 
-/** Zend_Search_Lucene_Search_Weight */
+/**
+ * Zend_Search_Lucene_Search_Weight 
+ */
 require_once 'Zend/Search/Lucene/Search/Weight.php';
 
 
@@ -60,8 +62,8 @@ class Zend_Search_Lucene_Search_Weight_MultiTerm extends Zend_Search_Lucene_Sear
      * @param Zend_Search_Lucene_Interface    $reader
      */
     public function __construct(Zend_Search_Lucene_Search_Query $query,
-                                Zend_Search_Lucene_Interface    $reader)
-    {
+        Zend_Search_Lucene_Interface    $reader
+    ) {
         $this->_query   = $query;
         $this->_reader  = $reader;
         $this->_weights = array();
@@ -70,7 +72,7 @@ class Zend_Search_Lucene_Search_Weight_MultiTerm extends Zend_Search_Lucene_Sear
 
         foreach ($query->getTerms() as $id => $term) {
             if ($signs === null || $signs[$id] === null || $signs[$id]) {
-                require_once 'Zend/Search/Lucene/Search/Weight/Term.php';
+                include_once 'Zend/Search/Lucene/Search/Weight/Term.php';
                 $this->_weights[$id] = new Zend_Search_Lucene_Search_Weight_Term($term, $query, $reader);
                 $query->setWeight($id, $this->_weights[$id]);
             }

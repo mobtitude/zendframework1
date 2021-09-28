@@ -33,10 +33,10 @@ require_once 'Zend/Validate/Barcode.php';
 /**
  * Class for generate Code39 barcode
  *
- * @category   Zend
- * @package    Zend_Barcode
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Barcode
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
 {
@@ -92,6 +92,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Partial check of Code39 barcode
+     *
      * @return void
      */
     protected function _checkParams()
@@ -101,6 +102,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Width of the barcode (in pixels)
+     *
      * @return int
      */
     protected function _calculateBarcodeWidth()
@@ -113,7 +115,8 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Set text to encode
-     * @param string $value
+     *
+     * @param  string $value
      * @return Zend_Barcode_Object
      */
     public function setText($value)
@@ -124,6 +127,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Retrieve text to display
+     *
      * @return string
      */
     public function getText()
@@ -133,6 +137,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Retrieve text to display
+     *
      * @return string
      */
     public function getTextToDisplay()
@@ -147,6 +152,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Prepare array to draw barcode
+     *
      * @return array
      */
     protected function _prepareBarcode()

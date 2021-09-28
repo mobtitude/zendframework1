@@ -35,7 +35,9 @@ require_once 'Zend/Cache.php';
  */
 require_once 'Zend/Service/SlideShare/SlideShow.php';
 
-/** Zend_Xml_Security */
+/**
+ * Zend_Xml_Security 
+*/
 require_once 'Zend/Xml/Security.php';
 
 /**
@@ -81,7 +83,6 @@ class Zend_Service_SlideShare
 
     /**
      * The MIME type of Slideshow files
-     *
      */
     const POWERPOINT_MIME_TYPE = "application/vnd.ms-powerpoint";
 
@@ -127,7 +128,7 @@ class Zend_Service_SlideShare
      * Sets the Zend_Http_Client object to use in requests. If not provided a
      * default will be used.
      *
-     * @param Zend_Http_Client $client The HTTP client instance to use
+     * @param  Zend_Http_Client $client The HTTP client instance to use
      * @return Zend_Service_SlideShare
      */
     public function setHttpClient(Zend_Http_Client $client)
@@ -165,7 +166,7 @@ class Zend_Service_SlideShare
     /**
      * Sets the Zend_Cache object to use to cache the results of API queries
      *
-     * @param Zend_Cache_Core $cacheobject The Zend_Cache object used
+     * @param  Zend_Cache_Core $cacheobject The Zend_Cache object used
      * @return Zend_Service_SlideShare
      */
     public function setCacheObject(Zend_Cache_Core $cacheobject)
@@ -214,7 +215,7 @@ class Zend_Service_SlideShare
     /**
      * Sets the user name to use for API calls
      *
-     * @param string $un The username to use
+     * @param  string $un The username to use
      * @return Zend_Service_SlideShare
      */
     public function setUserName($un)
@@ -236,7 +237,7 @@ class Zend_Service_SlideShare
     /**
      * Sets the password to use in API calls
      *
-     * @param string $pw The password to use
+     * @param  string $pw The password to use
      * @return Zend_Service_SlideShare
      */
     public function setPassword($pw)
@@ -258,7 +259,7 @@ class Zend_Service_SlideShare
     /**
      * Sets the API key to be used in making API calls
      *
-     * @param string $key The API key to use
+     * @param  string $key The API key to use
      * @return Zend_Service_SlideShare
      */
     public function setApiKey($key)
@@ -280,7 +281,7 @@ class Zend_Service_SlideShare
     /**
      * Sets the shared secret used in making API calls
      *
-     * @param string $secret the shared secret
+     * @param  string $secret the shared secret
      * @return Zend_Service_SlideShare
      */
     public function setSharedSecret($secret)
@@ -299,8 +300,7 @@ class Zend_Service_SlideShare
      */
     public function __construct(
         $apikey, $sharedSecret, $username = null, $password = null
-    )
-    {
+    ) {
         $this->setApiKey($apikey)
             ->setSharedSecret($sharedSecret)
             ->setUserName($username)
@@ -312,12 +312,15 @@ class Zend_Service_SlideShare
     /**
      * Uploads the specified Slide show the the server
      *
-     * @param Zend_Service_SlideShare_SlideShow $ss The slide show
-     *                                              object representing the
-     *                                              slide show to upload
-     * @param boolean $makeSrcPublic                Determines if the slide
-     *                                              show's source file is public
-     *                                              or not upon upload
+     * @param  Zend_Service_SlideShare_SlideShow $ss            The slide show
+     *                                                          object
+     *                                                          representing
+     *                                                          the slide show
+     *                                                          to upload
+     * @param  boolean                           $makeSrcPublic Determines if the slide
+     *                                                          show's source file is
+     *                                                          public or not upon
+     *                                                          upload
      * @return Zend_Service_SlideShare_SlideShow The passed Slide show object,
      *                                           with the new assigned ID
      *                                           provided
@@ -325,8 +328,7 @@ class Zend_Service_SlideShare
      */
     public function uploadSlideShow(
         Zend_Service_SlideShare_SlideShow $ss, $makeSrcPublic = true
-    )
-    {
+    ) {
         $timestamp = time();
 
         $params = array(
@@ -344,7 +346,7 @@ class Zend_Service_SlideShare
         $filename = $ss->getFilename();
 
         if (!file_exists($filename) || !is_readable($filename)) {
-            require_once 'Zend/Service/SlideShare/Exception.php';
+            include_once 'Zend/Service/SlideShare/Exception.php';
             throw new Zend_Service_SlideShare_Exception(
                 'Specified Slideshow for upload not found or unreadable'
             );
@@ -371,11 +373,11 @@ class Zend_Service_SlideShare
         $client->setParameterPost($params);
         $client->setFileUpload($filename, "slideshow_srcfile");
 
-        require_once 'Zend/Http/Client/Exception.php';
+        include_once 'Zend/Http/Client/Exception.php';
         try {
             $response = $client->request('POST');
         } catch (Zend_Http_Client_Exception $e) {
-            require_once 'Zend/Service/SlideShare/Exception.php';
+            include_once 'Zend/Service/SlideShare/Exception.php';
             throw new Zend_Service_SlideShare_Exception(
                 "Service Request Failed: {$e->getMessage()}", 0, $e
             );
@@ -386,7 +388,7 @@ class Zend_Service_SlideShare
         if ($sxe->getName() == "SlideShareServiceError") {
             $message = (string)$sxe->Message[0];
             list($code, $errorStr) = explode(':', $message);
-            require_once 'Zend/Service/SlideShare/Exception.php';
+            include_once 'Zend/Service/SlideShare/Exception.php';
             throw new Zend_Service_SlideShare_Exception(
                 trim($errorStr),
                 $code
@@ -394,7 +396,7 @@ class Zend_Service_SlideShare
         }
 
         if (!$sxe->getName() == "SlideShowUploaded") {
-            require_once 'Zend/Service/SlideShare/Exception.php';
+            include_once 'Zend/Service/SlideShare/Exception.php';
             throw new Zend_Service_SlideShare_Exception(
                 'Unknown XML Respons Received'
             );
@@ -408,7 +410,7 @@ class Zend_Service_SlideShare
     /**
      * Retrieves a slide show's information based on slide show ID
      *
-     * @param int $ssId The slide show ID
+     * @param  int $ssId The slide show ID
      * @return Zend_Service_SlideShare_SlideShow the Slideshow object
      * @throws Zend_Service_SlideShare_Exception
      */
@@ -432,11 +434,11 @@ class Zend_Service_SlideShare
             $client->setUri(self::SERVICE_GET_SHOW_URI);
             $client->setParameterPost($params);
 
-            require_once 'Zend/Http/Client/Exception.php';
+            include_once 'Zend/Http/Client/Exception.php';
             try {
                 $response = $client->request('POST');
             } catch (Zend_Http_Client_Exception $e) {
-                require_once 'Zend/Service/SlideShare/Exception.php';
+                include_once 'Zend/Service/SlideShare/Exception.php';
                 throw new Zend_Service_SlideShare_Exception(
                     "Service Request Failed: {$e->getMessage()}", 0, $e
                 );
@@ -447,7 +449,7 @@ class Zend_Service_SlideShare
             if ($sxe->getName() == "SlideShareServiceError") {
                 $message = (string)$sxe->Message[0];
                 list($code, $errorStr) = explode(':', $message);
-                require_once 'Zend/Service/SlideShare/Exception.php';
+                include_once 'Zend/Service/SlideShare/Exception.php';
                 throw new Zend_Service_SlideShare_Exception(
                     trim($errorStr),
                     $code
@@ -455,7 +457,7 @@ class Zend_Service_SlideShare
             }
 
             if (!($sxe->getName() == 'Slideshow')) {
-                require_once 'Zend/Service/SlideShare/Exception.php';
+                include_once 'Zend/Service/SlideShare/Exception.php';
                 throw new Zend_Service_SlideShare_Exception(
                     'Unknown XML Repsonse Received'
                 );
@@ -471,15 +473,14 @@ class Zend_Service_SlideShare
     /**
      * Retrieves an array of slide shows for a given username
      *
-     * @param string $username The username to retrieve slide shows from
-     * @param int $offset The offset of the list to start retrieving from
-     * @param int $limit The maximum number of slide shows to retrieve
+     * @param  string $username The username to retrieve slide shows from
+     * @param  int    $offset   The offset of the list to start retrieving from
+     * @param  int    $limit    The maximum number of slide shows to retrieve
      * @return array An array of Zend_Service_SlideShare_SlideShow objects
      */
     public function getSlideShowsByUsername(
         $username, $offset = null, $limit = null
-    )
-    {
+    ) {
         return $this->_getSlideShowsByType(
             'username_for', $username, $offset, $limit
         );
@@ -488,9 +489,9 @@ class Zend_Service_SlideShare
     /**
      * Retrieves an array of slide shows based on tag
      *
-     * @param string $tag The tag to retrieve slide shows with
-     * @param int $offset The offset of the list to start retrieving from
-     * @param int $limit The maximum number of slide shows to retrieve
+     * @param  string $tag    The tag to retrieve slide shows with
+     * @param  int    $offset The offset of the list to start retrieving from
+     * @param  int    $limit  The maximum number of slide shows to retrieve
      * @return array An array of Zend_Service_SlideShare_SlideShow objects
      */
     public function getSlideShowsByTag($tag, $offset = null, $limit = null)
@@ -511,9 +512,9 @@ class Zend_Service_SlideShare
     /**
      * Retrieves an array of slide shows based on group name
      *
-     * @param string $group The group name to retrieve slide shows for
-     * @param int $offset The offset of the list to start retrieving from
-     * @param int $limit The maximum number of slide shows to retrieve
+     * @param  string $group  The group name to retrieve slide shows for
+     * @param  int    $offset The offset of the list to start retrieving from
+     * @param  int    $limit  The maximum number of slide shows to retrieve
      * @return array An array of Zend_Service_SlideShare_SlideShow objects
      */
     public function getSlideShowsByGroup($group, $offset = null, $limit = null)
@@ -525,37 +526,36 @@ class Zend_Service_SlideShare
      * Retrieves Zend_Service_SlideShare_SlideShow object arrays based on the type of
      * list desired
      *
-     * @param string $key    The type of slide show object to retrieve
-     * @param string $value  The specific search query for the slide show type to look up
-     * @param int    $offset The offset of the list to start retrieving from
-     * @param int    $limit  The maximum number of slide shows to retrieve
+     * @param  string $key    The type of slide show object to retrieve
+     * @param  string $value  The specific search query for the slide show type to look up
+     * @param  int    $offset The offset of the list to start retrieving from
+     * @param  int    $limit  The maximum number of slide shows to retrieve
      * @return array An array of Zend_Service_SlideShare_SlideShow objects
      * @throws Zend_Service_SlideShare_Exception
      */
     protected function _getSlideShowsByType(
         $key, $value, $offset = null, $limit = null
-    )
-    {
+    ) {
         $key = strtolower($key);
 
         switch ($key) {
-            case 'username_for':
+        case 'username_for':
                 $responseTag = 'User';
-                $queryUri    = self::SERVICE_GET_SHOW_BY_USER_URI;
-                break;
-            case 'group_name':
+            $queryUri    = self::SERVICE_GET_SHOW_BY_USER_URI;
+            break;
+        case 'group_name':
                 $responseTag = 'Group';
-                $queryUri    = self::SERVICE_GET_SHOW_BY_GROUP_URI;
-                break;
-            case 'tag':
+            $queryUri    = self::SERVICE_GET_SHOW_BY_GROUP_URI;
+            break;
+        case 'tag':
                 $responseTag = 'Tag';
-                $queryUri    = self::SERVICE_GET_SHOW_BY_TAG_URI;
-                break;
-            default:
-                require_once 'Zend/Service/SlideShare/Exception.php';
-                throw new Zend_Service_SlideShare_Exception(
-                    'Invalid SlideShare Query'
-                );
+            $queryUri    = self::SERVICE_GET_SHOW_BY_TAG_URI;
+            break;
+        default:
+                include_once 'Zend/Service/SlideShare/Exception.php';
+            throw new Zend_Service_SlideShare_Exception(
+                'Invalid SlideShare Query'
+            );
         }
 
         $timestamp = time();
@@ -584,11 +584,11 @@ class Zend_Service_SlideShare
             $client->setUri($queryUri);
             $client->setParameterPost($params);
 
-            require_once 'Zend/Http/Client/Exception.php';
+            include_once 'Zend/Http/Client/Exception.php';
             try {
                 $response = $client->request('POST');
             } catch (Zend_Http_Client_Exception $e) {
-                require_once 'Zend/Service/SlideShare/Exception.php';
+                include_once 'Zend/Service/SlideShare/Exception.php';
                 throw new Zend_Service_SlideShare_Exception(
                     "Service Request Failed: {$e->getMessage()}", 0, $e
                 );
@@ -599,14 +599,14 @@ class Zend_Service_SlideShare
             if ($sxe->getName() == "SlideShareServiceError") {
                 $message = (string)$sxe->Message[0];
                 list($code, $errorStr) = explode(':', $message);
-                require_once 'Zend/Service/SlideShare/Exception.php';
+                include_once 'Zend/Service/SlideShare/Exception.php';
                 throw new Zend_Service_SlideShare_Exception(
                     trim($errorStr), $code
                 );
             }
 
             if (!$sxe->getName() == $responseTag) {
-                require_once 'Zend/Service/SlideShare/Exception.php';
+                include_once 'Zend/Service/SlideShare/Exception.php';
                 throw new Zend_Service_SlideShare_Exception(
                     'Unknown or Invalid XML Repsonse Received'
                 );
@@ -632,7 +632,7 @@ class Zend_Service_SlideShare
      *
      * @see http://www.slideshare.net/developers/documentation#get_slideshow
      *
-     * @param SimpleXMLElement $node The input XML from the slideshare.net service
+     * @param  SimpleXMLElement $node The input XML from the slideshare.net service
      * @return Zend_Service_SlideShare_SlideShow The resulting object
      * @throws Zend_Service_SlideShare_Exception
      */
@@ -664,7 +664,7 @@ class Zend_Service_SlideShare
             return $ss;
         }
 
-        require_once 'Zend/Service/SlideShare/Exception.php';
+        include_once 'Zend/Service/SlideShare/Exception.php';
         throw new Zend_Service_SlideShare_Exception(
             'Was not provided the expected XML Node for processing'
         );

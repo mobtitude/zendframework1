@@ -10,11 +10,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_ProgressBar
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_ProgressBar
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 /**
@@ -22,7 +22,7 @@
  *
  * @category  Zend
  * @package   Zend_ProgressBar
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_ProgressBar
@@ -81,7 +81,7 @@ class Zend_ProgressBar
     {
         // Check min/max values and set them
         if ($min > $max) {
-            require_once 'Zend/ProgressBar/Exception.php';
+            include_once 'Zend/ProgressBar/Exception.php';
             throw new Zend_ProgressBar_Exception('$max must be greater than $min');
         }
 
@@ -91,7 +91,7 @@ class Zend_ProgressBar
 
         // See if we have to open a session namespace
         if ($persistenceNamespace !== null) {
-            require_once 'Zend/Session/Namespace.php';
+            include_once 'Zend/Session/Namespace.php';
 
             $this->_persistenceNamespace = new Zend_Session_Namespace($persistenceNamespace);
         }

@@ -20,13 +20,19 @@
  * @version    $Id$
  */
 
-/** Zend_Db_Profiler */
+/**
+ * Zend_Db_Profiler 
+ */
 require_once 'Zend/Db/Profiler.php';
 
-/** Zend_Wildfire_Plugin_FirePhp */
+/**
+ * Zend_Wildfire_Plugin_FirePhp 
+*/
 require_once 'Zend/Wildfire/Plugin/FirePhp.php';
 
-/** Zend_Wildfire_Plugin_FirePhp_TableMessage */
+/**
+ * Zend_Wildfire_Plugin_FirePhp_TableMessage 
+*/
 require_once 'Zend/Wildfire/Plugin/FirePhp/TableMessage.php';
 
 /**
@@ -57,6 +63,7 @@ class Zend_Db_Profiler_Firebug extends Zend_Db_Profiler
 
     /**
      * The total time taken for all profiled queries.
+     *
      * @var float
      */
     protected $_totalElapsedTime = 0;
@@ -64,7 +71,7 @@ class Zend_Db_Profiler_Firebug extends Zend_Db_Profiler
     /**
      * Constructor
      *
-     * @param string $label OPTIONAL Label for the profiling info.
+     * @param  string $label OPTIONAL Label for the profiling info.
      * @return void
      */
     public function __construct($label = null)
@@ -130,9 +137,11 @@ class Zend_Db_Profiler_Firebug extends Zend_Db_Profiler
 
         $this->_totalElapsedTime += $profile->getElapsedSecs();
 
-        $this->_message->addRow(array((string)round($profile->getElapsedSecs(),5),
+        $this->_message->addRow(
+            array((string)round($profile->getElapsedSecs(), 5),
                                       $profile->getQuery(),
-                                      ($params=$profile->getQueryParams())?$params:null));
+            ($params=$profile->getQueryParams())?$params:null)
+        );
 
         $this->updateMessageLabel();
     }
@@ -147,12 +156,16 @@ class Zend_Db_Profiler_Firebug extends Zend_Db_Profiler
         if (!$this->_message) {
             return;
         }
-        $this->_message->setLabel(str_replace(array('%label%',
+        $this->_message->setLabel(
+            str_replace(
+                array('%label%',
                                                     '%totalCount%',
                                                     '%totalDuration%'),
-                                              array($this->_label,
+                array($this->_label,
                                                     $this->getTotalNumQueries(),
-                                                    (string)round($this->_totalElapsedTime,5)),
-                                              $this->_label_template));
+                                                    (string)round($this->_totalElapsedTime, 5)),
+                $this->_label_template
+            )
+        );
     }
 }

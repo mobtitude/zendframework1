@@ -76,8 +76,8 @@ class Zend_Gdata_Analytics extends Zend_Gdata
      * Create Gdata object
      *
      * @param Zend_Http_Client $client
-     * @param string $applicationId The identity of the app in the form of
-     *          Company-AppName-Version
+     * @param string           $applicationId The identity of the app in the form of
+     *                                        Company-AppName-Version
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
@@ -90,7 +90,7 @@ class Zend_Gdata_Analytics extends Zend_Gdata
     /**
      * Retrieve account feed object
      * 
-     * @param string|Zend_Uri_Uri $uri
+     * @param  string|Zend_Uri_Uri $uri
      * @return Zend_Gdata_Analytics_AccountFeed
      */
     public function getAccountFeed($uri = self::ANALYTICS_ACCOUNT_FEED_URI)
@@ -104,7 +104,7 @@ class Zend_Gdata_Analytics extends Zend_Gdata
     /**
      * Retrieve data feed object
      * 
-     * @param string|Zend_Uri_Uri $uri
+     * @param  string|Zend_Uri_Uri $uri
      * @return Zend_Gdata_Analytics_DataFeed
      */
     public function getDataFeed($uri = self::ANALYTICS_FEED_URI)

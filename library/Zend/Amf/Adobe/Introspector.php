@@ -12,20 +12,26 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Amf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
-/** @see Zend_Amf_Parse_TypeLoader */
+/**
+ * @see Zend_Amf_Parse_TypeLoader 
+ */
 require_once 'Zend/Amf/Parse/TypeLoader.php';
 
-/** @see Zend_Reflection_Class */
+/**
+ * @see Zend_Reflection_Class 
+*/
 require_once 'Zend/Reflection/Class.php';
 
-/** @see Zend_Server_Reflection */
+/**
+ * @see Zend_Server_Reflection 
+*/
 require_once 'Zend/Server/Reflection.php';
 
 /**
@@ -76,7 +82,7 @@ class Zend_Amf_Adobe_Introspector
      * Create XML definition on an AMF service class
      *
      * @param  string $serviceClass Service class name
-     * @param  array $options invocation options
+     * @param  array  $options      invocation options
      * @return string XML with service class introspection
      */
     public function introspect($serviceClass, $options = array())
@@ -88,11 +94,11 @@ class Zend_Amf_Adobe_Introspector
         }
 
         // Transform com.foo.Bar into com_foo_Bar
-        $serviceClass = str_replace('.' , '_', $serviceClass);
+        $serviceClass = str_replace('.', '_', $serviceClass);
 
         // Introspect!
         if (!class_exists($serviceClass)) {
-            require_once 'Zend/Loader.php';
+            include_once 'Zend/Loader.php';
             Zend_Loader::loadClass($serviceClass, $this->_getServicePath());
         }
 
@@ -126,8 +132,8 @@ class Zend_Amf_Adobe_Introspector
     /**
      * Generate map of public class attributes
      *
-     * @param  string $typename type name
-     * @param  DOMElement $typexml target XML element
+     * @param  string     $typename type name
+     * @param  DOMElement $typexml  target XML element
      * @return void
      */
     protected function _addClassAttributes($typename, DOMElement $typexml)
@@ -158,7 +164,7 @@ class Zend_Amf_Adobe_Introspector
      * Build XML service description from reflection class
      *
      * @param  Zend_Server_Reflection_Class $refclass
-     * @param  DOMElement $target target XML element
+     * @param  DOMElement                   $target   target XML element
      * @return void
      */
     protected function _addService(Zend_Server_Reflection_Class $refclass, DOMElement $target)
@@ -305,7 +311,7 @@ class Zend_Amf_Adobe_Introspector
         return $asTypeName;
     }
 
-   /**
+    /**
      * Return error with error message
      *
      * @param  string $msg Error message

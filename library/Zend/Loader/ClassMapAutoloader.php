@@ -12,10 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Loader
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 // Grab SplAutoloader interface
@@ -26,9 +26,9 @@ require_once dirname(__FILE__) . '/SplAutoloader.php';
  *
  * Utilizes class-map files to lookup classfile locations.
  * 
- * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
+ * @package   Zend_Loader
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   New BSD {@link http://framework.zend.com/license/new-bsd}
  */
 class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
 {
@@ -93,7 +93,7 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
         }
 
         if (!is_array($map)) {
-            require_once dirname(__FILE__) . '/Exception/InvalidArgumentException.php';
+            include_once dirname(__FILE__) . '/Exception/InvalidArgumentException.php';
             throw new Zend_Loader_Exception_InvalidArgumentException('Map file provided does not return a map');
         }
 
@@ -115,7 +115,7 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
     public function registerAutoloadMaps($locations)
     {
         if (!is_array($locations) && !($locations instanceof Traversable)) {
-            require_once dirname(__FILE__) . '/Exception/InvalidArgumentException.php';
+            include_once dirname(__FILE__) . '/Exception/InvalidArgumentException.php';
             throw new Zend_Loader_Exception_InvalidArgumentException('Map list must be an array or implement Traversable');
         }
         foreach ($locations as $location) {
@@ -143,7 +143,7 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
     public function autoload($class)
     {
         if (isset($this->map[$class])) {
-            require_once $this->map[$class];
+            include_once $this->map[$class];
         }
     }
 
@@ -175,7 +175,7 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
     protected function loadMapFromFile($location)
     {
         if (!file_exists($location)) {
-            require_once dirname(__FILE__) . '/Exception/InvalidArgumentException.php';
+            include_once dirname(__FILE__) . '/Exception/InvalidArgumentException.php';
             throw new Zend_Loader_Exception_InvalidArgumentException('Map file provided does not exist');
         }
 
@@ -231,8 +231,8 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
      * Helper callback to resolve a parent path in a Phar archive
      * 
      * @param  string $value 
-     * @param  int $key 
-     * @param  array $parts 
+     * @param  int    $key 
+     * @param  array  $parts 
      * @return void
      */
     public static function resolvePharParentPath($value, $key, &$parts)

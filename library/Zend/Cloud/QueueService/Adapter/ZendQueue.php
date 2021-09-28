@@ -54,7 +54,7 @@ class Zend_Cloud_QueueService_Adapter_ZendQueue
      * @param  array|Zend_Config $options
      * @return void
      */
-    public function __construct ($options = array())
+    public function __construct($options = array())
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
@@ -233,7 +233,7 @@ class Zend_Cloud_QueueService_Adapter_ZendQueue
      * Create Zend_Cloud_QueueService_Message array for
      * Azure messages.
      *
-     * @param array $messages
+     * @param  array $messages
      * @return Zend_Cloud_QueueService_Message[]
      */
     protected function _makeMessages($messages)
@@ -250,9 +250,9 @@ class Zend_Cloud_QueueService_Adapter_ZendQueue
     /**
      * Delete the specified message from the specified queue.
      *
-     * @param  string $queueId
+     * @param  string                          $queueId
      * @param  Zend_Cloud_QueueService_Message $message Message ID or message
-     * @param  array  $options
+     * @param  array                           $options
      * @return void
      */
     public function deleteMessage($queueId, $message, $options = null)
@@ -278,18 +278,19 @@ class Zend_Cloud_QueueService_Adapter_ZendQueue
      * Peek at the messages from the specified queue without removing them.
      *
      * @param  string $queueId
-     * @param  int $num How many messages
+     * @param  int    $num     How many messages
      * @param  array  $options
      * @return Zend_Cloud_QueueService_Message[]
      */
     public function peekMessages($queueId, $num = 1, $options = null)
     {
-        require_once 'Zend/Cloud/OperationNotAvailableException.php';
+        include_once 'Zend/Cloud/OperationNotAvailableException.php';
         throw new Zend_Cloud_OperationNotAvailableException('ZendQueue doesn\'t currently support message peeking');
     }
 
     /**
      * Get Azure implementation
+     *
      * @return Zend_Queue
      */
     public function getClient()

@@ -229,7 +229,7 @@ class Zend_Ldap_Node_Schema_OpenLdap extends Zend_Ldap_Node_Schema
     /**
      * Parses an objectClasses value
      *
-     * @param string $value
+     * @param  string $value
      * @return array
      */
     protected function _parseObjectClass($value)
@@ -267,13 +267,15 @@ class Zend_Ldap_Node_Schema_OpenLdap extends Zend_Ldap_Node_Schema
     {
         $data = $node->getData();
         $parents = $data['sup'];
-        if ($parents === null || !is_array($parents) || count($parents) < 1) return;
+        if ($parents === null || !is_array($parents) || count($parents) < 1) { return;
+        }
         foreach ($parents as $parent) {
-            if (!array_key_exists($parent, $repository)) continue;
+            if (!array_key_exists($parent, $repository)) { continue;
+            }
             if (!array_key_exists('_parents', $data) || !is_array($data['_parents'])) {
-               $data['_parents'] = array();
-           }
-           $data['_parents'][] = $repository[$parent];
+                $data['_parents'] = array();
+            }
+            $data['_parents'][] = $repository[$parent];
         }
         $node->setData($data);
     }
@@ -446,7 +448,8 @@ class Zend_Ldap_Node_Schema_OpenLdap extends Zend_Ldap_Node_Schema
                     // until the end of the list is reached ')'
                     $data[$token] = array();
                     while ($tmp = array_shift($tokens)) {
-                        if ($tmp == ')') break;
+                        if ($tmp == ')') { break;
+                        }
                         if ($tmp != '$') {
                             $data[$token][] = Zend_Ldap_Attribute::convertFromLdapValue($tmp);
                         }
@@ -463,11 +466,11 @@ class Zend_Ldap_Node_Schema_OpenLdap extends Zend_Ldap_Node_Schema
     }
 
     /**
-    * Tokenizes the given value into an array
-    *
-    * @param  string $value
-    * @return array tokens
-    */
+     * Tokenizes the given value into an array
+     *
+     * @param  string $value
+     * @return array tokens
+     */
     protected function _tokenizeString($value)
     {
         $tokens = array();
@@ -485,8 +488,10 @@ class Zend_Ldap_Node_Schema_OpenLdap extends Zend_Ldap_Node_Schema
                 }
             }
         }
-        if ($tokens[0] == '(') array_shift($tokens);
-        if ($tokens[count($tokens) - 1] == ')') array_pop($tokens);
+        if ($tokens[0] == '(') { array_shift($tokens);
+        }
+        if ($tokens[count($tokens) - 1] == ')') { array_pop($tokens);
+        }
         return $tokens;
     }
 }

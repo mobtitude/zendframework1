@@ -41,14 +41,14 @@ class Zend_Gdata_Analytics_Extension_Metric
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-            case 'name':
+        case 'name':
                 $this->_name = $attribute->nodeValue;
-                break;
-            case 'value':
-                $this->_value = $attribute->nodeValue;
-                break;
-            default:
-                parent::takeAttributeFromDOM($attribute);
+            break;
+        case 'value':
+            $this->_value = $attribute->nodeValue;
+            break;
+        default:
+            parent::takeAttributeFromDOM($attribute);
         }
     }
 }

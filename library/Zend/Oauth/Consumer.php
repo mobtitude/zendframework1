@@ -12,39 +12,53 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Oauth
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
-/** Zend_Oauth */
+/**
+ * Zend_Oauth 
+ */
 require_once 'Zend/Oauth.php';
 
-/** Zend_Uri */
+/**
+ * Zend_Uri 
+*/
 require_once 'Zend/Uri.php';
 
-/** Zend_Oauth_Http_RequestToken */
+/**
+ * Zend_Oauth_Http_RequestToken 
+*/
 require_once 'Zend/Oauth/Http/RequestToken.php';
 
-/** Zend_Oauth_Http_UserAuthorization */
+/**
+ * Zend_Oauth_Http_UserAuthorization 
+*/
 require_once 'Zend/Oauth/Http/UserAuthorization.php';
 
-/** Zend_Oauth_Http_AccessToken */
+/**
+ * Zend_Oauth_Http_AccessToken 
+*/
 require_once 'Zend/Oauth/Http/AccessToken.php';
 
-/** Zend_Oauth_Token_AuthorizedRequest */
+/**
+ * Zend_Oauth_Token_AuthorizedRequest 
+*/
 require_once 'Zend/Oauth/Token/AuthorizedRequest.php';
 
-/** Zend_Oauth_Config */
+/**
+ * Zend_Oauth_Config 
+*/
 require_once 'Zend/Oauth/Config.php';
 
 /**
- * @category   Zend
- * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Oauth
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Oauth_Consumer extends Zend_Oauth
 {
@@ -84,8 +98,8 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * later exchanged for an authorized Access Token used to access the
      * protected resources exposed by a web service API.
      *
-     * @param  null|array $customServiceParameters Non-OAuth Provider-specified parameters
-     * @param  null|string $httpMethod
+     * @param  null|array                        $customServiceParameters Non-OAuth Provider-specified parameters
+     * @param  null|string                       $httpMethod
      * @param  null|Zend_Oauth_Http_RequestToken $request
      * @return Zend_Oauth_Token_Request
      */
@@ -116,8 +130,8 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * redirected back to the application which can now exchange the previous
      * Request Token for a fully authorized Access Token.
      *
-     * @param  null|array $customServiceParameters
-     * @param  null|Zend_Oauth_Token_Request $token
+     * @param  null|array                             $customServiceParameters
+     * @param  null|Zend_Oauth_Token_Request          $token
      * @param  null|Zend_OAuth_Http_UserAuthorization $redirect
      * @return string
      */
@@ -143,8 +157,8 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      *
      * Sends headers and exit()s on completion.
      *
-     * @param  null|array $customServiceParameters
-     * @param  null|Zend_Oauth_Token_Request $token
+     * @param  null|array                             $customServiceParameters
+     * @param  null|Zend_Oauth_Token_Request          $token
      * @param  null|Zend_Oauth_Http_UserAuthorization $request
      * @return void
      */
@@ -166,10 +180,10 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * Retrieve an Access Token in exchange for a previously received/authorized
      * Request Token.
      *
-     * @param  array $queryData GET data returned in user's redirect from Provider
+     * @param  array                                              $queryData  GET data returned in user's redirect from Provider
      * @param  Zend_Oauth_Token_Request Request Token information
-     * @param  string $httpMethod
-     * @param  Zend_Oauth_Http_AccessToken $request
+     * @param  string                                             $httpMethod
+     * @param  Zend_Oauth_Http_AccessToken                        $request
      * @return Zend_Oauth_Token_Access
      * @throws Zend_Oauth_Exception on invalid authorization token, non-matching response authorization token, or unprovided authorization token
      */
@@ -181,9 +195,10 @@ class Zend_Oauth_Consumer extends Zend_Oauth
     ) {
         $authorizedToken = new Zend_Oauth_Token_AuthorizedRequest($queryData);
         if (!$authorizedToken->isValid()) {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
-                'Response from Service Provider is not a valid authorized request token');
+                'Response from Service Provider is not a valid authorized request token'
+            );
         }
         if ($request === null) {
             $request = new Zend_Oauth_Http_AccessToken($this);
@@ -191,9 +206,11 @@ class Zend_Oauth_Consumer extends Zend_Oauth
 
         // OAuth 1.0a Verifier
         if ($authorizedToken->getParam('oauth_verifier') !== null) {
-            $params = array_merge($request->getParameters(), array(
+            $params = array_merge(
+                $request->getParameters(), array(
                 'oauth_verifier' => $authorizedToken->getParam('oauth_verifier')
-            ));
+                )
+            );
             $request->setParameters($params);
         }
         if ($httpMethod !== null) {
@@ -203,14 +220,14 @@ class Zend_Oauth_Consumer extends Zend_Oauth
         }
         if (isset($token)) {
             if ($authorizedToken->getToken() !== $token->getToken()) {
-                require_once 'Zend/Oauth/Exception.php';
+                include_once 'Zend/Oauth/Exception.php';
                 throw new Zend_Oauth_Exception(
                     'Authorized token from Service Provider does not match'
                     . ' supplied Request Token details'
                 );
             }
         } else {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Request token must be passed to method');
         }
         $this->_requestToken = $token;
@@ -256,14 +273,14 @@ class Zend_Oauth_Consumer extends Zend_Oauth
      * as it's API.
      *
      * @param  string $method
-     * @param  array $args
+     * @param  array  $args
      * @return mixed
      * @throws Zend_Oauth_Exception if method does not exist in config object
      */
     public function __call($method, array $args)
     {
         if (!method_exists($this->_config, $method)) {
-            require_once 'Zend/Oauth/Exception.php';
+            include_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Method does not exist: '.$method);
         }
         return call_user_func_array(array($this->_config,$method), $args);

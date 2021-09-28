@@ -36,10 +36,10 @@ require_once 'Zend/Tool/Project/Profile/Resource/Container.php';
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @category   Zend
- * @package    Zend_Tool
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Tool
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Container
 {
@@ -49,7 +49,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
     /**
      * Constructor, standard usage would allow the setting of options
      *
-     * @param array $options
+     * @param  array $options
      * @return bool
      */
     public function __construct($options = null)
@@ -79,23 +79,22 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
      */
     public function getIterator()
     {
-        require_once 'Zend/Tool/Project/Profile/Iterator/EnabledResourceFilter.php';
+        include_once 'Zend/Tool/Project/Profile/Iterator/EnabledResourceFilter.php';
 
         return new RecursiveIteratorIterator(
             new Zend_Tool_Project_Profile_Iterator_EnabledResourceFilter($this),
             RecursiveIteratorIterator::SELF_FIRST
-            );
+        );
     }
 
     /**
      * loadFromData() - Load a profile from data provided by the
      * 'profilData' attribute
-     *
      */
     public function loadFromData()
     {
         if (!isset($this->_attributes['profileData'])) {
-            require_once 'Zend/Tool/Project/Exception.php';
+            include_once 'Zend/Tool/Project/Exception.php';
             throw new Zend_Tool_Project_Exception('loadFromData() must have "profileData" set.');
         }
 
@@ -141,27 +140,26 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
      * this attempts to load a project profile file from a variety of locations depending
      * on what information the user provided vie $options or attributes, specifically the
      * 'projectDirectory' or 'projectProfileFile'
-     *
      */
     public function loadFromFile()
     {
         // if no data is supplied, need either a projectProfileFile or a projectDirectory
         if (!isset($this->_attributes['projectProfileFile']) && !isset($this->_attributes['projectDirectory'])) {
-            require_once 'Zend/Tool/Project/Exception.php';
+            include_once 'Zend/Tool/Project/Exception.php';
             throw new Zend_Tool_Project_Exception('loadFromFile() must have at least "projectProfileFile" or "projectDirectory" set.');
         }
 
         if (isset($this->_attributes['projectProfileFile'])) {
             $projectProfileFilePath = $this->_attributes['projectProfileFile'];
             if (!file_exists($projectProfileFilePath)) {
-                require_once 'Zend/Tool/Project/Exception.php';
+                include_once 'Zend/Tool/Project/Exception.php';
                 throw new Zend_Tool_Project_Exception('"projectProfileFile" was supplied but file was not found at location ' . $projectProfileFilePath);
             }
             $this->_attributes['projectDirectory'] = dirname($projectProfileFilePath);
         } else {
             $projectProfileFilePath = rtrim($this->_attributes['projectDirectory'], '/\\') . '/.zfproject.xml';
             if (!file_exists($projectProfileFilePath)) {
-                require_once 'Zend/Tool/Project/Exception.php';
+                include_once 'Zend/Tool/Project/Exception.php';
                 throw new Zend_Tool_Project_Exception('"projectDirectory" was supplied but no profile file file was not found at location ' . $projectProfileFilePath);
             }
             $this->_attributes['projectProfileFile'] = $projectProfileFilePath;
@@ -180,7 +178,6 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
      *
      * This will store the profile in memory to a place on disk determined by the attributes
      * available, specifically if the key 'projectProfileFile' is available
-     *
      */
     public function storeToFile()
     {
@@ -191,7 +188,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
         }
 
         if ($file == null) {
-            require_once 'Zend/Tool/Project/Exception.php';
+            include_once 'Zend/Tool/Project/Exception.php';
             throw new Zend_Tool_Project_Exception('storeToFile() must have a "projectProfileFile" attribute set.');
         }
 

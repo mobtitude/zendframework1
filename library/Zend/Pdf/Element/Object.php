@@ -12,25 +12,27 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @version   $Id$
  */
 
 
-/** Zend_Pdf_Element */
+/**
+ * Zend_Pdf_Element 
+ */
 require_once 'Zend/Pdf/Element.php';
 
 
 /**
  * PDF file 'indirect object' element implementation
  *
- * @category   Zend
- * @package    Zend_Pdf
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Pdf
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Pdf_Element_Object extends Zend_Pdf_Element
 {
@@ -63,26 +65,26 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
     /**
      * Object constructor
      *
-     * @param Zend_Pdf_Element $val
-     * @param integer $objNum
-     * @param integer $genNum
-     * @param Zend_Pdf_ElementFactory $factory
+     * @param  Zend_Pdf_Element        $val
+     * @param  integer                 $objNum
+     * @param  integer                 $genNum
+     * @param  Zend_Pdf_ElementFactory $factory
      * @throws Zend_Pdf_Exception
      */
     public function __construct(Zend_Pdf_Element $val, $objNum, $genNum, Zend_Pdf_ElementFactory $factory)
     {
         if ($val instanceof self) {
-            require_once 'Zend/Pdf/Exception.php';
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Object number must not be an instance of Zend_Pdf_Element_Object.');
         }
 
-        if ( !(is_integer($objNum) && $objNum > 0) ) {
-            require_once 'Zend/Pdf/Exception.php';
+        if (!(is_integer($objNum) && $objNum > 0) ) {
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Object number must be positive integer.');
         }
 
-        if ( !(is_integer($genNum) && $genNum >= 0) ) {
-            require_once 'Zend/Pdf/Exception.php';
+        if (!(is_integer($genNum) && $genNum >= 0) ) {
+            include_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Generation number must be non-negative integer.');
         }
 
@@ -143,7 +145,7 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
     /**
      * Return reference to the object
      *
-     * @param Zend_Pdf_Factory $factory
+     * @param  Zend_Pdf_Factory $factory
      * @return string
      */
     public function toString($factory = null)
@@ -163,7 +165,7 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
      *
      * $factory parameter defines operation context.
      *
-     * @param Zend_Pdf_ElementFactory $factory
+     * @param  Zend_Pdf_ElementFactory $factory
      * @return string
      */
     public function dump(Zend_Pdf_ElementFactory $factory)
@@ -178,7 +180,7 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
     /**
      * Get handler
      *
-     * @param string $property
+     * @param  string $property
      * @return mixed
      */
     public function __get($property)
@@ -190,7 +192,7 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
      * Set handler
      *
      * @param string $property
-     * @param  mixed $value
+     * @param mixed  $value
      */
     public function __set($property, $value)
     {
@@ -200,8 +202,8 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
     /**
      * Call handler
      *
-     * @param string $method
-     * @param array  $args
+     * @param  string $method
+     * @param  array  $args
      * @return mixed
      */
     public function __call($method, $args)
@@ -212,9 +214,9 @@ class Zend_Pdf_Element_Object extends Zend_Pdf_Element
     /**
      * Detach PDF object from the factory (if applicable), clone it and attach to new factory.
      *
-     * @param Zend_Pdf_ElementFactory $factory  The factory to attach
-     * @param array &$processed  List of already processed indirect objects, used to avoid objects duplication
-     * @param integer $mode  Cloning mode (defines filter for objects cloning)
+     * @param   Zend_Pdf_ElementFactory $factory    The factory to attach
+     * @param   array                   &$processed List of already processed indirect objects, used to avoid objects duplication
+     * @param   integer                 $mode       Cloning mode (defines filter for objects cloning)
      * @returns Zend_Pdf_Element
      */
     public function makeClone(Zend_Pdf_ElementFactory $factory, array &$processed, $mode)

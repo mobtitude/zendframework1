@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_View_Helper_Placeholder_Container_Standalone */
+/**
+ * Zend_View_Helper_Placeholder_Container_Standalone 
+ */
 require_once 'Zend/View/Helper/Placeholder/Container/Standalone.php';
 
 /**
@@ -32,14 +34,14 @@ require_once 'Zend/View/Helper/Placeholder/Container/Standalone.php';
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @method $this appendAlternate($href, $type, $title, $extras)
- * @method $this appendStylesheet($href, $media = 'screen', $conditionalStylesheet = false, array $extras = array())
- * @method $this offsetSetAlternate($index, $href, $type, $title, $extras)
- * @method $this offsetSetStylesheet($index, $href, $media = 'screen', $conditionalStylesheet = false, array $extras = array())
- * @method $this prependAlternate($href, $type, $title, $extras)
- * @method $this prependStylesheet($href, $media = 'screen', $conditionalStylesheet = false, array $extras = array())
- * @method $this setAlternate($href, $type, $title, $extras)
- * @method $this setStylesheet($href, $media = 'screen', $conditionalStylesheet = false, array $extras = array())
+ * @method     $this appendAlternate($href, $type, $title, $extras)
+ * @method     $this appendStylesheet($href, $media = 'screen', $conditionalStylesheet = false, array $extras = array())
+ * @method     $this offsetSetAlternate($index, $href, $type, $title, $extras)
+ * @method     $this offsetSetStylesheet($index, $href, $media = 'screen', $conditionalStylesheet = false, array $extras = array())
+ * @method     $this prependAlternate($href, $type, $title, $extras)
+ * @method     $this prependStylesheet($href, $media = 'screen', $conditionalStylesheet = false, array $extras = array())
+ * @method     $this setAlternate($href, $type, $title, $extras)
+ * @method     $this setStylesheet($href, $media = 'screen', $conditionalStylesheet = false, array $extras = array())
  */
 class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_Standalone
 {
@@ -91,16 +93,16 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
         if (null !== $attributes) {
             $item = $this->createData($attributes);
             switch ($placement) {
-                case Zend_View_Helper_Placeholder_Container_Abstract::SET:
-                    $this->set($item);
-                    break;
-                case Zend_View_Helper_Placeholder_Container_Abstract::PREPEND:
-                    $this->prepend($item);
-                    break;
-                case Zend_View_Helper_Placeholder_Container_Abstract::APPEND:
-                default:
-                    $this->append($item);
-                    break;
+            case Zend_View_Helper_Placeholder_Container_Abstract::SET:
+                $this->set($item);
+                break;
+            case Zend_View_Helper_Placeholder_Container_Abstract::PREPEND:
+                $this->prepend($item);
+                break;
+            case Zend_View_Helper_Placeholder_Container_Abstract::APPEND:
+            default:
+                $this->append($item);
+                break;
             }
         }
         return $this;
@@ -137,8 +139,8 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
      *   - public function appendSection()
      *   - public function appendSubsection()
      *
-     * @param mixed $method
-     * @param mixed $args
+     * @param  mixed $method
+     * @param  mixed $args
      * @return void
      */
     public function __call($method, $args)
@@ -157,7 +159,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
             }
 
             if (1 > $argc) {
-                require_once 'Zend/View/Exception.php';
+                include_once 'Zend/View/Exception.php';
                 $e =  new Zend_View_Exception(sprintf('%s requires at least one argument', $method));
                 $e->setView($this->view);
                 throw $e;
@@ -215,7 +217,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
     public function append($value)
     {
         if (!$this->_isValid($value)) {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('append() expects a data token; please use one of the custom append*() methods');
             $e->setView($this->view);
             throw $e;
@@ -228,13 +230,13 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
      * offsetSet()
      *
      * @param  string|int $index
-     * @param  array $value
+     * @param  array      $value
      * @return void
      */
     public function offsetSet($index, $value)
     {
         if (!$this->_isValid($value)) {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('offsetSet() expects a data token; please use one of the custom offsetSet*() methods');
             $e->setView($this->view);
             throw $e;
@@ -252,7 +254,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
     public function prepend($value)
     {
         if (!$this->_isValid($value)) {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('prepend() expects a data token; please use one of the custom prepend*() methods');
             $e->setView($this->view);
             throw $e;
@@ -270,7 +272,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
     public function set($value)
     {
         if (!$this->_isValid($value)) {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('set() expects a data token; please use one of the custom set*() methods');
             $e->setView($this->view);
             throw $e;
@@ -315,8 +317,8 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
 
         if (isset($attributes['conditionalStylesheet'])
             && !empty($attributes['conditionalStylesheet'])
-            && is_string($attributes['conditionalStylesheet']))
-        {
+            && is_string($attributes['conditionalStylesheet'])
+        ) {
             if (str_replace(' ', '', $attributes['conditionalStylesheet']) === '!IE') {
                 $link = '<!-->' . $link . '<!--';
             }
@@ -428,7 +430,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
     public function createDataAlternate(array $args)
     {
         if (3 > count($args)) {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception(sprintf('Alternate tags require 3 arguments; %s provided', count($args)));
             $e->setView($this->view);
             throw $e;
@@ -458,7 +460,8 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
 
     /**
      * Apply any overrides specified in the 'extras' array
-     * @param array $attributes
+     *
+     * @param  array $attributes
      * @return array
      */
     protected function _applyExtras($attributes)

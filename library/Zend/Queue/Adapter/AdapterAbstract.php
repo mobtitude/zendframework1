@@ -87,7 +87,7 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
      * host           => (string) What host to connect to, defaults to localhost
      * port           => (string) The port of the database
      *
-     * @param  array|Zend_Config $config An array having configuration data
+     * @param  array|Zend_Config                                        $config An array having configuration data
      * @param  Zend_Queue The Zend_Queue object that created this class
      * @return void
      * @throws Zend_Queue_Exception
@@ -102,7 +102,7 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
          * Verify that adapter parameters are in an array.
          */
         if (!is_array($options)) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Adapter options must be an array or Zend_Config object');
         }
 
@@ -117,7 +117,7 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
         // Normalize the options and merge with the defaults
         if (array_key_exists('options', $options)) {
             if (!is_array($options['options'])) {
-                require_once 'Zend/Queue/Exception.php';
+                include_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception("Configuration array 'options' must be an array");
             }
 
@@ -138,7 +138,7 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
     }
 
     /********************************************************************
-    * Queue management functions
+     * Queue management functions
      *********************************************************************/
     /**
      * get the Zend_Queue class that is attached to this object
@@ -183,5 +183,5 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
         $list = $this->getCapabilities();
 
         return (isset($list[$name]) && $list[$name]);
-     }
+    }
 }

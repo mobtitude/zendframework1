@@ -36,12 +36,14 @@ class Zend_Json_Server_Response
 
     /**
      * Request ID
+     *
      * @var mixed
      */
     protected $_id;
 
     /**
      * Result
+     *
      * @var mixed
      */
     protected $_result;
@@ -185,7 +187,7 @@ class Zend_Json_Server_Response
             $response['jsonrpc'] = $version;
         }
 
-        require_once 'Zend/Json.php';
+        include_once 'Zend/Json.php';
         return Zend_Json::encode($response);
     }
 
@@ -202,7 +204,7 @@ class Zend_Json_Server_Response
     /**
      * Set args
      *
-     * @param mixed $args
+     * @param  mixed $args
      * @return self
      */
     public function setArgs($args)

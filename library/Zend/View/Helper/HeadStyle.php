@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_View_Helper_Placeholder_Container_Standalone */
+/**
+ * Zend_View_Helper_Placeholder_Container_Standalone 
+ */
 require_once 'Zend/View/Helper/Placeholder/Container/Standalone.php';
 
 /**
@@ -31,15 +33,16 @@ require_once 'Zend/View/Helper/Placeholder/Container/Standalone.php';
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @method $this appendStyle($content, array $attributes = array())
- * @method $this offsetSetStyle($index, $content, array $attributes = array())
- * @method $this prependStyle($content, array $attributes = array())
- * @method $this setStyle($content, array $attributes = array())
+ * @method     $this appendStyle($content, array $attributes = array())
+ * @method     $this offsetSetStyle($index, $content, array $attributes = array())
+ * @method     $this prependStyle($content, array $attributes = array())
+ * @method     $this setStyle($content, array $attributes = array())
  */
 class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_Standalone
 {
     /**
      * Registry key for placeholder
+     *
      * @var string
      */
     protected $_regKey = 'Zend_View_Helper_HeadStyle';
@@ -59,6 +62,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
 
     /**
      * Capture type and/or attributes (used for hinting during capture)
+     *
      * @var string
      */
     protected $_captureAttrs = null;
@@ -70,6 +74,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
 
     /**
      * Capture type (append, prepend, set)
+     *
      * @var string
      */
     protected $_captureType;
@@ -92,8 +97,8 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
      *
      * Returns headStyle helper object; optionally, allows specifying
      *
-     * @param  string $content Stylesheet contents
-     * @param  string $placement Append, prepend, or set
+     * @param  string       $content    Stylesheet contents
+     * @param  string       $placement  Append, prepend, or set
      * @param  string|array $attributes Optional attributes to utilize
      * @return Zend_View_Helper_HeadStyle
      */
@@ -101,16 +106,16 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     {
         if ((null !== $content) && is_string($content)) {
             switch (strtoupper($placement)) {
-                case 'SET':
+            case 'SET':
                     $action = 'setStyle';
-                    break;
-                case 'PREPEND':
-                    $action = 'prependStyle';
-                    break;
-                case 'APPEND':
-                default:
-                    $action = 'appendStyle';
-                    break;
+                break;
+            case 'PREPEND':
+                $action = 'prependStyle';
+                break;
+            case 'APPEND':
+            default:
+                $action = 'appendStyle';
+                break;
             }
             $this->$action($content, $attributes);
         }
@@ -128,7 +133,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
      * - setStyle($content, $attributes = array())
      *
      * @param  string $method
-     * @param  array $args
+     * @param  array  $args
      * @return void
      * @throws Zend_View_Exception When no $content provided or invalid method
      */
@@ -147,7 +152,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
             }
 
             if (1 > $argc) {
-                require_once 'Zend/View/Exception.php';
+                include_once 'Zend/View/Exception.php';
                 $e = new Zend_View_Exception(sprintf('Method "%s" requires minimally content for the stylesheet', $method));
                 $e->setView($this->view);
                 throw $e;
@@ -176,7 +181,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     /**
      * Determine if a value is a valid style tag
      *
-     * @param  mixed $value
+     * @param  mixed  $value
      * @param  string $method
      * @return boolean
      */
@@ -184,8 +189,8 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     {
         if ((!$value instanceof stdClass)
             || !isset($value->content)
-            || !isset($value->attributes))
-        {
+            || !isset($value->attributes)
+        ) {
             return false;
         }
 
@@ -201,7 +206,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     public function append($value)
     {
         if (!$this->_isValid($value)) {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('Invalid value passed to append; please use appendStyle()');
             $e->setView($this->view);
             throw $e;
@@ -214,13 +219,13 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
      * Override offsetSet to enforce style creation
      *
      * @param  string|int $index
-     * @param  mixed $value
+     * @param  mixed      $value
      * @return void
      */
     public function offsetSet($index, $value)
     {
         if (!$this->_isValid($value)) {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('Invalid value passed to offsetSet; please use offsetSetStyle()');
             $e->setView($this->view);
             throw $e;
@@ -238,7 +243,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     public function prepend($value)
     {
         if (!$this->_isValid($value)) {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('Invalid value passed to prepend; please use prependStyle()');
             $e->setView($this->view);
             throw $e;
@@ -256,7 +261,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     public function set($value)
     {
         if (!$this->_isValid($value)) {
-            require_once 'Zend/View/Exception.php';
+            include_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('Invalid value passed to set; please use setStyle()');
             $e->setView($this->view);
             throw $e;
@@ -268,14 +273,14 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     /**
      * Start capture action
      *
-     * @param  mixed $captureType
+     * @param  mixed  $captureType
      * @param  string $typeOrAttrs
      * @return void
      */
     public function captureStart($type = Zend_View_Helper_Placeholder_Container_Abstract::APPEND, $attrs = null)
     {
         if ($this->_captureLock) {
-            require_once 'Zend/View/Helper/Placeholder/Container/Exception.php';
+            include_once 'Zend/View/Helper/Placeholder/Container/Exception.php';
             $e = new Zend_View_Helper_Placeholder_Container_Exception('Cannot nest headStyle captures');
             $e->setView($this->view);
             throw $e;
@@ -300,24 +305,24 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
         $this->_captureLock  = false;
 
         switch ($this->_captureType) {
-            case Zend_View_Helper_Placeholder_Container_Abstract::SET:
-                $this->setStyle($content, $attrs);
-                break;
-            case Zend_View_Helper_Placeholder_Container_Abstract::PREPEND:
-                $this->prependStyle($content, $attrs);
-                break;
-            case Zend_View_Helper_Placeholder_Container_Abstract::APPEND:
-            default:
-                $this->appendStyle($content, $attrs);
-                break;
+        case Zend_View_Helper_Placeholder_Container_Abstract::SET:
+            $this->setStyle($content, $attrs);
+            break;
+        case Zend_View_Helper_Placeholder_Container_Abstract::PREPEND:
+            $this->prependStyle($content, $attrs);
+            break;
+        case Zend_View_Helper_Placeholder_Container_Abstract::APPEND:
+        default:
+            $this->appendStyle($content, $attrs);
+            break;
         }
     }
 
     /**
      * Convert content and attributes into valid style tag
      *
-     * @param  stdClass $item Item to render
-     * @param  string $indent Indentation to use
+     * @param  stdClass $item   Item to render
+     * @param  string   $indent Indentation to use
      * @return string
      */
     public function itemToString(stdClass $item, $indent)
@@ -410,7 +415,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
      * Create data item for use in stack
      *
      * @param  string $content
-     * @param  array $attributes
+     * @param  array  $attributes
      * @return stdClass
      */
     public function createData($content, array $attributes)

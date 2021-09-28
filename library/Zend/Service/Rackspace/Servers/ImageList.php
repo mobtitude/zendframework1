@@ -53,13 +53,13 @@ class Zend_Service_Rackspace_Servers_ImageList implements Countable, Iterator, A
      * Construct
      *
      * @param  RackspaceServers $service
-     * @param  array $list
+     * @param  array            $list
      * @return void
      */
     public function __construct($service,$list = array())
     {
         if (!($service instanceof Zend_Service_Rackspace_Servers) || !is_array($list)) {
-            require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+            include_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception("You must pass a Zend_Service_Rackspace_Servers object and an array");
         }
         $this->service= $service;
@@ -74,7 +74,7 @@ class Zend_Service_Rackspace_Servers_ImageList implements Countable, Iterator, A
     private function constructFromArray(array $list)
     {
         foreach ($list as $image) {
-            $this->addImage(new Zend_Service_Rackspace_Servers_Image($this->service,$image));
+            $this->addImage(new Zend_Service_Rackspace_Servers_Image($this->service, $image));
         }
     }
     /**
@@ -83,7 +83,7 @@ class Zend_Service_Rackspace_Servers_ImageList implements Countable, Iterator, A
      * @param  Zend_Service_Rackspace_Servers_Image $image
      * @return Zend_Service_Rackspace_Servers_ImageList
      */
-    protected function addImage (Zend_Service_Rackspace_Servers_Image $image)
+    protected function addImage(Zend_Service_Rackspace_Servers_Image $image)
     {
         $this->images[] = $image;
         return $this;
@@ -177,8 +177,8 @@ class Zend_Service_Rackspace_Servers_ImageList implements Countable, Iterator, A
      *
      * Implement ArrayAccess::offsetExists()
      *
-     * @param   int     $offset
-     * @return  bool
+     * @param  int $offset
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -189,16 +189,16 @@ class Zend_Service_Rackspace_Servers_ImageList implements Countable, Iterator, A
      *
      * Implement ArrayAccess::offsetGet()
      *
-     * @param   int     $offset
-     * @throws  Zend_Service_Rackspace_Servers_Exception
-     * @return  Zend_Service_Rackspace_Servers_Image
+     * @param  int $offset
+     * @throws Zend_Service_Rackspace_Servers_Exception
+     * @return Zend_Service_Rackspace_Servers_Image
      */
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
             return $this->images[$offset];
         } else {
-            require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+            include_once 'Zend/Service/Rackspace/Servers/Exception.php';
             throw new Zend_Service_Rackspace_Servers_Exception('Illegal index');
         }
     }
@@ -208,13 +208,13 @@ class Zend_Service_Rackspace_Servers_ImageList implements Countable, Iterator, A
      *
      * Implement ArrayAccess::offsetSet()
      *
-     * @param   int     $offset
-     * @param   string  $value
-     * @throws  Zend_Service_Rackspace_Servers_Exception
+     * @param  int    $offset
+     * @param  string $value
+     * @throws Zend_Service_Rackspace_Servers_Exception
      */
     public function offsetSet($offset, $value)
     {
-        require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+        include_once 'Zend/Service/Rackspace/Servers/Exception.php';
         throw new Zend_Service_Rackspace_Servers_Exception('You are trying to set read-only property');
     }
 
@@ -223,12 +223,12 @@ class Zend_Service_Rackspace_Servers_ImageList implements Countable, Iterator, A
      *
      * Implement ArrayAccess::offsetUnset()
      *
-     * @param   int     $offset
-     * @throws  Zend_Service_Rackspace_Servers_Exception
+     * @param  int $offset
+     * @throws Zend_Service_Rackspace_Servers_Exception
      */
     public function offsetUnset($offset)
     {
-        require_once 'Zend/Service/Rackspace/Servers/Exception.php';
+        include_once 'Zend/Service/Rackspace/Servers/Exception.php';
         throw new Zend_Service_Rackspace_Servers_Exception('You are trying to unset read-only property');
     }
 }

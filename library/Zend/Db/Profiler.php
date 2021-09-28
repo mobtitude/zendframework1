@@ -48,7 +48,6 @@ class Zend_Db_Profiler
 
     /**
      * Updating existing information in the database, such as SQL's UPDATE.
-     *
      */
     const UPDATE = 8;
 
@@ -238,8 +237,8 @@ class Zend_Db_Profiler
      * record the time.  If the profiler is not enabled, this takes no
      * action and immediately returns null.
      *
-     * @param  string  $queryText   SQL statement
-     * @param  integer $queryType   OPTIONAL Type of query, one of the Zend_Db_Profiler::* constants
+     * @param  string  $queryText SQL statement
+     * @param  integer $queryType OPTIONAL Type of query, one of the Zend_Db_Profiler::* constants
      * @return integer|null
      */
     public function queryStart($queryText, $queryType = null)
@@ -251,28 +250,28 @@ class Zend_Db_Profiler
         // make sure we have a query type
         if (null === $queryType) {
             switch (strtolower(substr(ltrim($queryText), 0, 6))) {
-                case 'insert':
+            case 'insert':
                     $queryType = self::INSERT;
-                    break;
-                case 'update':
+                break;
+            case 'update':
                     $queryType = self::UPDATE;
-                    break;
-                case 'delete':
-                    $queryType = self::DELETE;
-                    break;
-                case 'select':
-                    $queryType = self::SELECT;
-                    break;
-                default:
-                    $queryType = self::QUERY;
-                    break;
+                break;
+            case 'delete':
+                $queryType = self::DELETE;
+                break;
+            case 'select':
+                $queryType = self::SELECT;
+                break;
+            default:
+                $queryType = self::QUERY;
+                break;
             }
         }
 
         /**
          * @see Zend_Db_Profiler_Query
          */
-        require_once 'Zend/Db/Profiler/Query.php';
+        include_once 'Zend/Db/Profiler/Query.php';
         $this->_queryProfiles[] = new Zend_Db_Profiler_Query($queryText, $queryType);
 
         end($this->_queryProfiles);
@@ -300,7 +299,7 @@ class Zend_Db_Profiler
             /**
              * @see Zend_Db_Profiler_Exception
              */
-            require_once 'Zend/Db/Profiler/Exception.php';
+            include_once 'Zend/Db/Profiler/Exception.php';
             throw new Zend_Db_Profiler_Exception("Profiler has no query with handle '$queryId'.");
         }
 
@@ -311,7 +310,7 @@ class Zend_Db_Profiler
             /**
              * @see Zend_Db_Profiler_Exception
              */
-            require_once 'Zend/Db/Profiler/Exception.php';
+            include_once 'Zend/Db/Profiler/Exception.php';
             throw new Zend_Db_Profiler_Exception("Query with profiler handle '$queryId' has already ended.");
         }
 
@@ -353,7 +352,7 @@ class Zend_Db_Profiler
             /**
              * @see Zend_Db_Profiler_Exception
              */
-            require_once 'Zend/Db/Profiler/Exception.php';
+            include_once 'Zend/Db/Profiler/Exception.php';
             throw new Zend_Db_Profiler_Exception("Query handle '$queryId' not found in profiler log.");
         }
 

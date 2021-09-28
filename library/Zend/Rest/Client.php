@@ -21,13 +21,19 @@
  */
 
 
-/** Zend_Service_Abstract */
+/**
+ * Zend_Service_Abstract 
+ */
 require_once 'Zend/Service/Abstract.php';
 
-/** Zend_Rest_Client_Result */
+/**
+ * Zend_Rest_Client_Result 
+*/
 require_once 'Zend/Rest/Client/Result.php';
 
-/** Zend_Uri */
+/**
+ * Zend_Uri 
+*/
 require_once 'Zend/Uri.php';
 
 /**
@@ -45,14 +51,16 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     protected array $_data = array();
 
      /**
-     * Zend_Uri of this web service
-     * @var Zend_Uri_Http
-     */
+      * Zend_Uri of this web service
+      *
+      * @var Zend_Uri_Http
+      */
     protected $_uri = null;
     
     /**
      * Flag indicating the Zend_Http_Client is fresh and needs no reset.
      * Must be set explicitly if you want to keep preset parameters.
+     *
      * @var bool true if you do not want a reset. Default false.
      */
     protected bool $_noReset = false;
@@ -60,7 +68,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     /**
      * Constructor
      *
-     * @param string|Zend_Uri_Http $uri URI for the web service
+     * @param  string|Zend_Uri_Http $uri URI for the web service
      * @return void
      */
     public function __construct($uri = null)
@@ -73,7 +81,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     /**
      * Set the URI to use in the request
      *
-     * @param string|Zend_Uri_Http $uri URI for the web service
+     * @param  string|Zend_Uri_Http $uri URI for the web service
      * @return Zend_Rest_Client
      */
     public function setUri($uri)
@@ -100,7 +108,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     /**
      * Call a remote REST web service URI and return the Zend_Http_Response object
      *
-     * @param  string $path            The path to append to the URI
+     * @param  string $path The path to append to the URI
      * @throws Zend_Rest_Client_Exception
      * @return void
      */
@@ -108,7 +116,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     {
         // Get the URI object and configure it
         if (!$this->_uri instanceof Zend_Uri_Http) {
-            require_once 'Zend/Rest/Client/Exception.php';
+            include_once 'Zend/Rest/Client/Exception.php';
             throw new Zend_Rest_Client_Exception('URI object must be set before performing call');
         }
 
@@ -142,6 +150,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      * Parameters will accumulate between requests, but as soon as you do not
      * call this function prior to any request, all preset parameters will be reset
      * as by default.
+     *
      * @param boolean $bool
      */
     public function setNoReset($bool = true)
@@ -152,8 +161,8 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     /**
      * Performs an HTTP GET request to the $path.
      *
-     * @param string $path
-     * @param array  $query Array of GET parameters
+     * @param  string $path
+     * @param  array  $query Array of GET parameters
      * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
@@ -172,8 +181,8 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      * client. String data is pushed in as raw POST data; array or object data
      * is pushed in as POST parameters.
      *
-     * @param mixed $method
-     * @param mixed $data
+     * @param  mixed $method
+     * @param  mixed $data
      * @return Zend_Http_Response
      */
     protected function _performPost($method, $data = null)
@@ -190,8 +199,8 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     /**
      * Performs an HTTP POST request to $path.
      *
-     * @param string $path
-     * @param mixed $data Raw data to send
+     * @param  string $path
+     * @param  mixed  $data Raw data to send
      * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
@@ -204,8 +213,8 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     /**
      * Performs an HTTP PUT request to $path.
      *
-     * @param string $path
-     * @param mixed $data Raw data to send in request
+     * @param  string $path
+     * @param  mixed  $data Raw data to send in request
      * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
@@ -218,7 +227,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     /**
      * Performs an HTTP DELETE request to $path.
      *
-     * @param string $path
+     * @param  string $path
      * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
@@ -244,8 +253,8 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      * $response = $rest->get();
      * </code>
      *
-     * @param string $method Method name
-     * @param array $args Method args
+     * @param  string $method Method name
+     * @param  array  $args   Method args
      * @return Zend_Rest_Client_Result|Zend_Rest_Client Zend_Rest_Client if using
      * a remote method, Zend_Rest_Client_Result if using an HTTP request method
      */

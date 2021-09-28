@@ -40,7 +40,7 @@ require_once 'Zend/Gdata/Spreadsheets/Extension/ColCount.php';
  *
  * @category   Zend
  * @package    Zend_Gdata
- * @subpackage   Spreadsheets
+ * @subpackage Spreadsheets
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -48,10 +48,10 @@ class Zend_Gdata_Spreadsheets_CellFeed extends Zend_Gdata_Feed
 {
 
     /**
-    * The classname for individual feed elements.
-    *
-    * @var string
-    */
+     * The classname for individual feed elements.
+     *
+     * @var string
+     */
     protected $_entryClassName = 'Zend_Gdata_Spreadsheets_CellEntry';
 
     /**
@@ -60,21 +60,22 @@ class Zend_Gdata_Spreadsheets_CellFeed extends Zend_Gdata_Feed
     protected string $_feedClassName = 'Zend_Gdata_Spreadsheets_CellFeed';
 
     /**
-    * The row count for the feed.
-    *
-    * @var Zend_Gdata_Spreadsheets_Extension_RowCount
-    */
+     * The row count for the feed.
+     *
+     * @var Zend_Gdata_Spreadsheets_Extension_RowCount
+     */
     protected $_rowCount = null;
 
     /**
-    * The column count for the feed.
-    *
-    * @var Zend_Gdata_Spreadsheets_Extension_ColCount
-    */
+     * The column count for the feed.
+     *
+     * @var Zend_Gdata_Spreadsheets_Extension_ColCount
+     */
     protected $_colCount = null;
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_CellFeed object.
+     *
      * @param DOMElement $element (optional) The XML Element on which to base this object.
      */
     public function __construct($element = null)
@@ -99,24 +100,25 @@ class Zend_Gdata_Spreadsheets_CellFeed extends Zend_Gdata_Feed
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-            case $this->lookupNamespace('gs') . ':' . 'rowCount';
-                $rowCount = new Zend_Gdata_Spreadsheets_Extension_RowCount();
-                $rowCount->transferFromDOM($child);
-                $this->_rowCount = $rowCount;
-                break;
-            case $this->lookupNamespace('gs') . ':' . 'colCount';
-                $colCount = new Zend_Gdata_Spreadsheets_Extension_ColCount();
-                $colCount->transferFromDOM($child);
-                $this->_colCount = $colCount;
-                break;
-            default:
-                parent::takeChildFromDOM($child);
-                break;
+        case $this->lookupNamespace('gs') . ':' . 'rowCount';
+            $rowCount = new Zend_Gdata_Spreadsheets_Extension_RowCount();
+            $rowCount->transferFromDOM($child);
+            $this->_rowCount = $rowCount;
+            break;
+        case $this->lookupNamespace('gs') . ':' . 'colCount';
+            $colCount = new Zend_Gdata_Spreadsheets_Extension_ColCount();
+            $colCount->transferFromDOM($child);
+            $this->_colCount = $colCount;
+            break;
+        default:
+            parent::takeChildFromDOM($child);
+            break;
         }
     }
 
     /**
      * Gets the row count for this feed.
+     *
      * @return string The row count for the feed.
      */
     public function getRowCount()
@@ -126,6 +128,7 @@ class Zend_Gdata_Spreadsheets_CellFeed extends Zend_Gdata_Feed
 
     /**
      * Gets the column count for this feed.
+     *
      * @return string The column count for the feed.
      */
     public function getColumnCount()
@@ -135,6 +138,7 @@ class Zend_Gdata_Spreadsheets_CellFeed extends Zend_Gdata_Feed
 
     /**
      * Sets the row count for this feed.
+     *
      * @param string $rowCount The new row count for the feed.
      */
     public function setRowCount($rowCount)
@@ -145,6 +149,7 @@ class Zend_Gdata_Spreadsheets_CellFeed extends Zend_Gdata_Feed
 
     /**
      * Sets the column count for this feed.
+     *
      * @param string $colCount The new column count for the feed.
      */
     public function setColumnCount($colCount)

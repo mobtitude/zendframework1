@@ -37,10 +37,10 @@ class Zend_Queue_Message
     protected array $_data = array();
 
      /**
-     * Connected is true if we have a reference to a live
-     * Zend_Queue_Adapter_Abstract object.
-     * This is false after the Message has been deserialized.
-     */
+      * Connected is true if we have a reference to a live
+      * Zend_Queue_Adapter_Abstract object.
+      * This is false after the Message has been deserialized.
+      */
     protected bool $_connected = true;
 
     /**
@@ -73,7 +73,7 @@ class Zend_Queue_Message
                     $result = get_class($options['queue']);
                 }
 
-                require_once 'Zend/Queue/Exception.php';
+                include_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception(
                     '$options[\'queue\'] = '
                     . $result
@@ -83,7 +83,7 @@ class Zend_Queue_Message
         }
         if (isset($options['data'])) {
             if (!is_array($options['data'])) {
-                require_once 'Zend/Queue/Exception.php';
+                include_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception('Data must be an array');
             }
             $this->_data = $options['data'];
@@ -100,7 +100,7 @@ class Zend_Queue_Message
     public function __get($key)
     {
         if (!array_key_exists($key, $this->_data)) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception("Specified field \"$key\" is not in the message");
         }
         return $this->_data[$key];
@@ -117,7 +117,7 @@ class Zend_Queue_Message
     public function __set($key, $value)
     {
         if (!array_key_exists($key, $this->_data)) {
-            require_once 'Zend/Queue/Exception.php';
+            include_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception("Specified field \"$key\" is not in the message");
         }
         $this->_data[$key] = $value;
@@ -126,7 +126,7 @@ class Zend_Queue_Message
     /**
      * Test existence of message field
      *
-     * @param  string  $key The column key.
+     * @param  string $key The column key.
      * @return boolean
      */
     public function __isset($key)
@@ -161,10 +161,10 @@ class Zend_Queue_Message
     }
 
      /**
-     * Returns the queue object, or null if this is disconnected message
-     *
-     * @return Zend_Queue|null
-     */
+      * Returns the queue object, or null if this is disconnected message
+      *
+      * @return Zend_Queue|null
+      */
     public function getQueue()
     {
         return $this->_queue;
