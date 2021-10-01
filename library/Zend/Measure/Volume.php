@@ -151,7 +151,7 @@ class Zend_Measure_Volume extends Zend_Measure_Abstract
         'CUBIC_INCH'          => array(array('' => '0.0037854118', '/' => '231'), 'in³'),
         'CUBIC_KILOMETER'     => array('1.0e+9',        'km³'),
         'CUBIC_METER'         => array('1',             'm³'),
-        'CUBIC_MILE'          => array(array('' => '0.0037854118', '/' => '231', '*' => '75271680', '*' => '3379200'),
+        'CUBIC_MILE'          => array(array('' => '0.0037854118', '/' => '231', '*' => '3379200'),
                                        'mi³'),
         'CUBIC_MICROMETER'    => array('1.0e-18',       'µm³'),
         'CUBIC_MILLIMETER'    => array('1.0e-9',        'mm³'),

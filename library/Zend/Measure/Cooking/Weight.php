@@ -61,9 +61,9 @@ class Zend_Measure_Cooking_Weight extends Zend_Measure_Abstract
         'GRAM'          => array('1',                                                   'g'),
         'OUNCE'         => array(array('' => '453.59237', '/' => '16'),                   'oz'),
         'POUND'         => array('453.59237',                                           'lb'),
-        'TEASPOON'      => array(array('' => '1.2503332', '' => '453.59237', '/' => '128'), 'tsp'),
+        'TEASPOON'      => array(array('' => '453.59237', '/' => '128'), 'tsp'),
         'TEASPOON_US'   => array(array('' => '453.59237', '/' => '96'),                   'tsp'),
-        'TABLESPOON'    => array(array('' => '1.2503332', '' => '453.59237', '/' => '32'),  'tbsp'),
+        'TABLESPOON'    => array(array('' => '453.59237', '/' => '32'),  'tbsp'),
         'TABLESPOON_US' => array(array('' => '453.59237', '/' => '32'),                   'tbsp'),
         'STANDARD'      => 'GRAM'
     );

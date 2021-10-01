@@ -53,6 +53,11 @@ class Zend_Amf_Adobe_Introspector
     protected $_types;
 
     /**
+     * @var DOMElement DOM element to store operations
+     */
+    protected $_ops;
+
+    /**
      * @var array Map of the known types
      */
     protected $_typesMap = array();

@@ -140,7 +140,7 @@ class Zend_Amf_Util_BinaryStream
             );
         }
 
-        return ord($this->_stream{$this->_needle++});
+        return ord($this->_stream[$this->_needle++]);
     }
 
     /**
@@ -223,6 +223,7 @@ class Zend_Amf_Util_BinaryStream
     {
         $this->writeLong($this->_mbStringFunctionsOverloaded ? mb_strlen($stream, '8bit') : strlen($stream));
         $this->_stream.= $stream;
+        return $this;
     }
 
     /**

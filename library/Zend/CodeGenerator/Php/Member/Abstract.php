@@ -136,7 +136,6 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
      * setFinal()
      *
      * @param bool $isFinal
-     * @return Zend_CodeGenerator_Php_Member_Abstract
      */
     public function setFinal($isFinal)
     {

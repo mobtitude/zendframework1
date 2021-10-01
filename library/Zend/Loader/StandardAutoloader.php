@@ -301,7 +301,6 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
      *
      * @param  string $class
      * @param  string $type
-     * @return void
      */
     protected function loadClass($class, $type)
     {

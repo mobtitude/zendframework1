@@ -89,7 +89,7 @@ class Zend_Measure_Time extends Zend_Measure_Abstract
         'FORTNIGHT'         => array('1209600', 'fortnight'),
         'GAUSSIAN_YEAR'     => array('31558196', 'gaussian year'),
         'GIGASECOND'        => array('1.0e+9', 'Gs'),
-        'GREAT_YEAR'        => array(array('*' => '31536000', '*' => '25700'), 'great year'),
+        'GREAT_YEAR'        => array(array('*' => '25700'), 'great year'),
         'GREGORIAN_YEAR'    => array('31536000', 'year'),
         'HOUR'              => array('3600', 'h'),
         'JULIAN_YEAR'       => array('31557600', 'a'),

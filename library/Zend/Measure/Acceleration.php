@@ -81,7 +81,7 @@ class Zend_Measure_Acceleration extends Zend_Measure_Abstract
         'KILOMETER_PER_HOUR_SECOND'    => array(array('' => '5','/' => '18'), 'km/h²'),
         'KILOMETER_PER_SQUARE_SECOND'  => array('1000',     'km/s²'),
         'METER_PER_SQUARE_SECOND'      => array('1',        'm/s²'),
-        'MILE_PER_HOUR_MINUTE'         => array(array('' => '22', '/' => '15', '*' => '0.3048', '/' => '60'), 'mph/m'),
+        'MILE_PER_HOUR_MINUTE'         => array(array('' => '22', '/' => '60', '*' => '0.3048'), 'mph/m'),
         'MILE_PER_HOUR_SECOND'         => array(array('' => '22', '/' => '15', '*' => '0.3048'), 'mph/s'),
         'MILE_PER_SQUARE_SECOND'       => array('1609.344', 'mi/s²'),
         'MILLIGAL'                     => array('0.00001',  'mgal'),

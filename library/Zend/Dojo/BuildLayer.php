@@ -511,7 +511,6 @@ class Zend_Dojo_BuildLayer
      * Retrieve module prefix
      *
      * @param  string $module
-     * @return void
      */
     protected function _getPrefix($module)
     {

@@ -553,8 +553,6 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
 
     /**
      * Build the database structure
-     *
-     * @return false
      */
     private function _buildStructure()
     {

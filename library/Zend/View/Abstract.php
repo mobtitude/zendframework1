@@ -957,7 +957,6 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
      * Finds a view script from the available directories.
      *
      * @param string $name The base name of the script.
-     * @return void
      */
     protected function _script($name)
     {

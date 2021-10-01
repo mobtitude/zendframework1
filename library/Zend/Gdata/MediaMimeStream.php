@@ -112,8 +112,6 @@ class Zend_Gdata_MediaMimeStream
 
     /**
      * Sandwiches the entry body into a MIME message
-     *
-     * @return void
      */
     private function wrapEntry($entry, $fileMimeType)
     {

@@ -937,7 +937,6 @@ class Zend_Gdata_App
      * DELETE entry with client object
      *
      * @param mixed $data The Zend_Gdata_App_Entry or URL to delete
-     * @return void
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_App_InvalidArgumentException

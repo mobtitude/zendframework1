@@ -271,12 +271,11 @@ class Zend_Auth_Adapter_OpenId implements Zend_Auth_Adapter_Interface
                     Zend_Auth_Result::SUCCESS,
                     $id,
                     array("Authentication successful"));
-            } else {
-                return new Zend_Auth_Result(
-                    Zend_Auth_Result::FAILURE,
-                    $id,
-                    array("Authentication failed", $consumer->getError()));
             }
+            return new Zend_Auth_Result(
+                Zend_Auth_Result::FAILURE,
+                $id,
+                array("Authentication failed", $consumer->getError()));
         }
     }
 

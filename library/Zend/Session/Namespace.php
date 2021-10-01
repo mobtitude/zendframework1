@@ -237,8 +237,6 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
 
     /**
      * unlockAll() - unmark all session/namespaces to enable read & write
-     *
-     * @return void
      */
     public static function unlockAll()
     {
@@ -411,7 +409,8 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
             throw new Zend_Session_Exception("The '$name' key must be a non-empty string");
         }
 
-        return parent::_namespaceUnset($this->_namespace, $name);
+        parent::_namespaceUnset($this->_namespace, $name);
+        return true;
     }
 
 
