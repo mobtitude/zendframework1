@@ -97,7 +97,7 @@ class Zend_Mobile_Push_Response_Gcm
             $this->setResponse($response);
         }
 
-        if ($message) {
+        if ($message !== null) {
             $this->setMessage($message);
         }
 

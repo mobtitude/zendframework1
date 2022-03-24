@@ -286,11 +286,7 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
 
                         $this->_temp['attributes'][$attribute] = '';
 
-                        if (empty($matches['eq'])) {
-                            $this->_state = self::STATE_SCANATTRS;
-                        } else {
-                            $this->_state = self::STATE_PARSEVALUE;
-                        }
+                        $this->_state = empty($matches['eq']) ? self::STATE_SCANATTRS : self::STATE_PARSEVALUE;
                     }
                     break;
                 case self::STATE_PARSEVALUE:
@@ -303,11 +299,7 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
 
                     $this->_pointer += strlen((string) $matches[0]);
 
-                    if (!empty($matches['quote'])) {
-                        $this->_temp['attributes'][$attribute] = $matches['valuequote'];
-                    } else {
-                        $this->_temp['attributes'][$attribute] = $matches['value'];
-                    }
+                    $this->_temp['attributes'][$attribute] = empty($matches['quote']) ? $matches['value'] : $matches['valuequote'];
                     $this->_temp['tag'] .= $matches[0];
 
                     $this->_state = self::STATE_SCANATTRS;
@@ -337,17 +329,14 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
             if ($this->_isStopper($token['tag'])) {
                 // find the stopper
                 $oldItems = array();
-
                 while (!in_array($token['tag'], $this->_tags[$this->_current->getName()]['stoppers'])) {
                     $oldItems[]     = clone $this->_current;
                     $this->_current = $this->_current->getParent();
                 }
-
                 // we found the stopper, so stop the tag
                 $this->_current->setStopper($token['tag']);
                 $this->_removeFromSearchedStoppers($this->_current);
                 $this->_current = $this->_current->getParent();
-
                 // add the old items again if there are any
                 if (!empty($oldItems)) {
                     foreach (array_reverse($oldItems) as $item) {
@@ -357,56 +346,18 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
                         $this->_current = $item;
                     }
                 }
-            } else {
-                if ($token['type'] == Zend_Markup_Token::TYPE_TAG) {
-                    if ($token['tag'] == self::NEWLINE) {
-                        // this is a newline tag, add it as a token
-                        $this->_current->addChild(new Zend_Markup_Token(
-                            "\n",
-                            Zend_Markup_Token::TYPE_NONE,
-                            '',
-                            array(),
-                            $this->_current
-                        ));
-                    } elseif (isset($token['name']) && ($token['name'][0] == '/')) {
-                        // this is a stopper, add it as a empty token
-                        $this->_current->addChild(new Zend_Markup_Token(
-                            $token['tag'],
-                            Zend_Markup_Token::TYPE_NONE,
-                            '',
-                            array(),
-                            $this->_current
-                        ));
-                    } elseif (isset($this->_tags[$this->_current->getName()]['parse_inside'])
-                        && !$this->_tags[$this->_current->getName()]['parse_inside']
-                    ) {
-                        $this->_current->addChild(new Zend_Markup_Token(
-                            $token['tag'],
-                            Zend_Markup_Token::TYPE_NONE,
-                            '',
-                            array(),
-                            $this->_current
-                        ));
-                    } else {
-                        // add the tag
-                        $child = new Zend_Markup_Token(
-                            $token['tag'],
-                            $token['type'],
-                            $token['name'],
-                            $token['attributes'],
-                            $this->_current
-                        );
-                        $this->_current->addChild($child);
-
-                        // add stoppers for this tag, if its has stoppers
-                        if ($this->_getType($token['name']) == self::TYPE_DEFAULT) {
-                            $this->_current = $child;
-
-                            $this->_addToSearchedStoppers($this->_current);
-                        }
-                    }
-                } else {
-                    // no tag, just add it as a simple token
+            } elseif ($token['type'] == Zend_Markup_Token::TYPE_TAG) {
+                if ($token['tag'] == self::NEWLINE) {
+                    // this is a newline tag, add it as a token
+                    $this->_current->addChild(new Zend_Markup_Token(
+                        "\n",
+                        Zend_Markup_Token::TYPE_NONE,
+                        '',
+                        array(),
+                        $this->_current
+                    ));
+                } elseif (isset($token['name']) && ($token['name'][0] == '/')) {
+                    // this is a stopper, add it as a empty token
                     $this->_current->addChild(new Zend_Markup_Token(
                         $token['tag'],
                         Zend_Markup_Token::TYPE_NONE,
@@ -414,7 +365,43 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
                         array(),
                         $this->_current
                     ));
+                } elseif (isset($this->_tags[$this->_current->getName()]['parse_inside'])
+                    && !$this->_tags[$this->_current->getName()]['parse_inside']
+                ) {
+                    $this->_current->addChild(new Zend_Markup_Token(
+                        $token['tag'],
+                        Zend_Markup_Token::TYPE_NONE,
+                        '',
+                        array(),
+                        $this->_current
+                    ));
+                } else {
+                    // add the tag
+                    $child = new Zend_Markup_Token(
+                        $token['tag'],
+                        $token['type'],
+                        $token['name'],
+                        $token['attributes'],
+                        $this->_current
+                    );
+                    $this->_current->addChild($child);
+
+                    // add stoppers for this tag, if its has stoppers
+                    if ($this->_getType($token['name']) == self::TYPE_DEFAULT) {
+                        $this->_current = $child;
+
+                        $this->_addToSearchedStoppers($this->_current);
+                    }
                 }
+            } else {
+                // no tag, just add it as a simple token
+                $this->_current->addChild(new Zend_Markup_Token(
+                    $token['tag'],
+                    Zend_Markup_Token::TYPE_NONE,
+                    '',
+                    array(),
+                    $this->_current
+                ));
             }
         }
     }
@@ -460,12 +447,7 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
     protected function _isStopper($tag)
     {
         $this->_checkTagDeclaration($this->_current->getName());
-
-        if (!empty($this->_searchedStoppers[$tag])) {
-            return true;
-        }
-
-        return false;
+        return !empty($this->_searchedStoppers[$tag]);
     }
 
     /**

@@ -29,6 +29,7 @@
  */
 class Zend_Json_Server_Response
 {
+    public $_args;
     /**
      * Response error
      * @var null|Zend_Json_Server_Error
@@ -147,11 +148,7 @@ class Zend_Json_Server_Response
         $version = is_array($version)
             ? implode(' ', $version)
             : $version;
-        if ((string)$version == '2.0') {
-            $this->_version = '2.0';
-        } else {
-            $this->_version = null;
-        }
+        $this->_version = (string)$version == '2.0' ? '2.0' : null;
         return $this;
     }
 

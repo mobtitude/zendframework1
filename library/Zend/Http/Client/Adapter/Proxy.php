@@ -188,7 +188,7 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
         // Build request headers
         if ($this->negotiated) {
             $path = $uri->getPath();
-            if ($uri->getQuery()) {
+            if ($uri->getQuery() !== '' && $uri->getQuery() !== '0') {
                 $path .= '?' . $uri->getQuery();
             }
             $request = "$method $path HTTP/$http_ver\r\n";
@@ -217,13 +217,11 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
             );
         }
 
-        if(is_resource($body)) {
-            if(stream_copy_to_stream($body, $this->socket) == 0) {
-                require_once 'Zend/Http/Client/Adapter/Exception.php';
-                throw new Zend_Http_Client_Adapter_Exception(
-                    'Error writing request to server'
-                );
-            }
+        if (is_resource($body) && stream_copy_to_stream($body, $this->socket) == 0) {
+            require_once 'Zend/Http/Client/Adapter/Exception.php';
+            throw new Zend_Http_Client_Adapter_Exception(
+                'Error writing request to server'
+            );
         }
 
         return $request;
@@ -280,7 +278,7 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
             $gotStatus = $gotStatus || (strpos($line, 'HTTP') !== false);
             if ($gotStatus) {
                 $response .= $line;
-                if (!chop($line)) {
+                if (!rtrim($line)) {
                     break;
                 }
             }
@@ -314,8 +312,7 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
         if (!$success) {
             require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception(
-                'Unable to connect to HTTPS server through proxy: could not '
-                . 'negotiate secure connection.'
+                'Unable to connect to HTTPS server through proxy: could not negotiate secure connection.'
             );
         }
     }

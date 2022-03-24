@@ -64,11 +64,7 @@ class Zend_Mail_Part_File extends Zend_Mail_Part
             throw new Zend_Mail_Exception('no file given in params');
         }
 
-        if (!is_resource($params['file'])) {
-            $this->_fh = fopen($params['file'], 'r');
-        } else {
-            $this->_fh = $params['file'];
-        }
+        $this->_fh = is_resource($params['file']) ? $params['file'] : fopen($params['file'], 'r');
         if (!$this->_fh) {
             /**
              * @see Zend_Mail_Exception
@@ -134,7 +130,7 @@ class Zend_Mail_Part_File extends Zend_Mail_Part
                     $this->_partPos[] = $part;
                 }
                 $part = array($pos);
-            } else if ($line == '--' . $boundary . '--') {
+            } elseif ($line === '--' . $boundary . '--') {
                 $part[1] = $lastPos;
                 $this->_partPos[] = $part;
                 break;

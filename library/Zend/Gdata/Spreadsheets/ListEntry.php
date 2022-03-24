@@ -118,12 +118,10 @@ class Zend_Gdata_Spreadsheets_ListEntry extends Zend_Gdata_Entry
     {
         if ($name === null) {
             return $this->_customByName;
+        } elseif (array_key_exists($name, $this->customByName)) {
+            return $this->_customByName[$name];
         } else {
-            if (array_key_exists($name, $this->customByName)) {
-                return $this->_customByName[$name];
-            } else {
-                return null;
-            }
+            return null;
         }
     }
 

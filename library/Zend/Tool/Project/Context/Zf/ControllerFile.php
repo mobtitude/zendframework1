@@ -102,7 +102,7 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
     {
         $filter = new Zend_Filter_Word_DashToCamelCase();
         
-        $className = ($this->_moduleName) ? $filter->filter(ucfirst($this->_moduleName)) . '_' : '';
+        $className = ($this->_moduleName !== '' && $this->_moduleName !== '0') ? $filter->filter(ucfirst($this->_moduleName)) . '_' : '';
         $className .= ucfirst($this->_controllerName) . 'Controller';
 
         $codeGenFile = new Zend_CodeGenerator_Php_File(array(
@@ -216,8 +216,7 @@ EOS
     {
         $codeGenFile = Zend_CodeGenerator_Php_File::fromReflectedFileName($this->getPath());
         $codeGenFileClasses = $codeGenFile->getClasses();
-        $class = array_shift($codeGenFileClasses);
-        return $class;
+        return array_shift($codeGenFileClasses);
     }
 
 }

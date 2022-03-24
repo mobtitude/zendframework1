@@ -64,7 +64,7 @@ class Zend_Mail_Protocol_Pop3
      */
     public function __construct($host = '', $port = null, $ssl = false)
     {
-        if ($host) {
+        if ($host !== '' && $host !== '0') {
             $this->connect($host, $port, $ssl);
         }
     }
@@ -114,11 +114,7 @@ class Zend_Mail_Protocol_Pop3
 
         strtok($welcome, '<');
         $this->_timestamp = strtok('>');
-        if (!strpos($this->_timestamp, '@')) {
-            $this->_timestamp = null;
-        } else {
-            $this->_timestamp = '<' . $this->_timestamp . '>';
-        }
+        $this->_timestamp = strpos($this->_timestamp, '@') ? '<' . $this->_timestamp . '>' : null;
 
         if ($ssl === 'TLS') {
             $this->request('STLS');
@@ -145,7 +141,7 @@ class Zend_Mail_Protocol_Pop3
      */
     public function sendRequest($request)
     {
-        $result = @fputs($this->_socket, $request . "\r\n");
+        $result = @fwrite($this->_socket, $request . "\r\n");
         if (!$result) {
             /**
              * @see Zend_Mail_Protocol_Exception
@@ -351,7 +347,7 @@ class Zend_Mail_Protocol_Pop3
         $result = explode("\n", $result);
         $messages = array();
         foreach ($result as $line) {
-            if (!$line) {
+            if ($line === '' || $line === '0') {
                 continue;
             }
             list($no, $id) = explode(' ', trim($line), 2);
@@ -431,8 +427,7 @@ class Zend_Mail_Protocol_Pop3
      */
     public function retrieve($msgno)
     {
-        $result = $this->request("RETR $msgno", true);
-        return $result;
+        return $this->request("RETR $msgno", true);
     }
 
     /**

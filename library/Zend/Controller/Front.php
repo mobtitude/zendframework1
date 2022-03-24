@@ -859,10 +859,8 @@ class Zend_Controller_Front
         /**
          * Set base URL of request object, if available
          */
-        if (is_callable(array($this->_request, 'setBaseUrl'))) {
-            if (null !== $this->_baseUrl) {
-                $this->_request->setBaseUrl($this->_baseUrl);
-            }
+        if (is_callable(array($this->_request, 'setBaseUrl')) && null !== $this->_baseUrl) {
+            $this->_request->setBaseUrl($this->_baseUrl);
         }
 
         /**

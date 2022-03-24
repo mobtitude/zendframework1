@@ -109,9 +109,8 @@ class Zend_Search_Lucene_Search_Query_Wildcard extends Zend_Search_Lucene_Search
             if ($astrericPosition !== false) {
                 return substr($word, 0, min($questionMarkPosition, $astrericPosition));
             }
-
             return substr($word, 0, $questionMarkPosition);
-        } else if ($astrericPosition !== false) {
+        } elseif ($astrericPosition !== false) {
             return substr($word, 0, $astrericPosition);
         }
 
@@ -129,12 +128,7 @@ class Zend_Search_Lucene_Search_Query_Wildcard extends Zend_Search_Lucene_Search
     {
         $this->_matches = array();
 
-        if ($this->_pattern->field === null) {
-            // Search through all fields
-            $fields = $index->getFieldNames(true /* indexed fields list */);
-        } else {
-            $fields = array($this->_pattern->field);
-        }
+        $fields = $this->_pattern->field === null ? $index->getFieldNames(true /* indexed fields list */) : array($this->_pattern->field);
 
         $prefix          = self::_getPrefix($this->_pattern->text);
         $prefixLength    = strlen($prefix);
@@ -162,7 +156,7 @@ class Zend_Search_Lucene_Search_Query_Wildcard extends Zend_Search_Lucene_Search
 
                 while ($index->currentTerm() !== null          &&
                        $index->currentTerm()->field == $field  &&
-                       substr($index->currentTerm()->text, 0, $prefixLength) == $prefix) {
+                       substr($index->currentTerm()->text, 0, $prefixLength) === $prefix) {
                     if (preg_match($matchExpression, $index->currentTerm()->text) === 1) {
                         $this->_matches[] = $index->currentTerm();
 
@@ -197,7 +191,7 @@ class Zend_Search_Lucene_Search_Query_Wildcard extends Zend_Search_Lucene_Search
         if (count($this->_matches) == 0) {
             require_once 'Zend/Search/Lucene/Search/Query/Empty.php';
             return new Zend_Search_Lucene_Search_Query_Empty();
-        } else if (count($this->_matches) == 1) {
+        } elseif (count($this->_matches) == 1) {
             require_once 'Zend/Search/Lucene/Search/Query/Term.php';
             return new Zend_Search_Lucene_Search_Query_Term(reset($this->_matches));
         } else {
@@ -344,11 +338,7 @@ class Zend_Search_Lucene_Search_Query_Wildcard extends Zend_Search_Lucene_Search
     public function __toString()
     {
         // It's used only for query visualisation, so we don't care about characters escaping
-        if ($this->_pattern->field !== null) {
-            $query = $this->_pattern->field . ':';
-        } else {
-            $query = '';
-        }
+        $query = $this->_pattern->field !== null ? $this->_pattern->field . ':' : '';
 
         $query .= $this->_pattern->text;
 

@@ -258,14 +258,12 @@ class Zend_Search_Lucene_Search_Query_Boolean extends Zend_Search_Lucene_Search_
                 $terms[]        = $subquery->getTerm();
                 $tsigns[]       = $signs[$id];
                 $boostFactors[] = $subquery->getBoost();
-
                 // remove subquery from a subqueries list
                 unset($subqueries[$id]);
                 unset($signs[$id]);
-           } else if ($subquery instanceof Zend_Search_Lucene_Search_Query_MultiTerm) {
+            } elseif ($subquery instanceof Zend_Search_Lucene_Search_Query_MultiTerm) {
                 $subTerms = $subquery->getTerms();
                 $subSigns = $subquery->getSigns();
-
                 if ($signs[$id] === true) {
                     // It's a required multi-term subquery.
                     // Something like '... +(+term1 -term2 term3 ...) ...'
@@ -284,7 +282,7 @@ class Zend_Search_Lucene_Search_Query_Boolean extends Zend_Search_Lucene_Search_
                         foreach ($subSigns as $sign) {
                             if ($sign === true) {
                                 $hasRequired   = true;
-                            } else if ($sign === false) {
+                            } elseif ($sign === false) {
                                 $hasProhibited = true;
                                 break;
                             }
@@ -384,21 +382,17 @@ class Zend_Search_Lucene_Search_Query_Boolean extends Zend_Search_Lucene_Search_
             require_once 'Zend/Search/Lucene/Search/Query/Term.php';
             $clause = new Zend_Search_Lucene_Search_Query_Term(reset($terms));
             $clause->setBoost(reset($boostFactors));
-
             $subqueries[] = $clause;
             $signs[]      = reset($tsigns);
-
             // Clear terms list
             $terms = array();
-        } else if (count($terms) > 1  &&  count(array_unique($boostFactors)) == 1) {
+        } elseif (count($terms) > 1  &&  count(array_unique($boostFactors)) == 1) {
             require_once 'Zend/Search/Lucene/Search/Query/MultiTerm.php';
             $clause = new Zend_Search_Lucene_Search_Query_MultiTerm($terms, $tsigns);
             $clause->setBoost(reset($boostFactors));
-
             $subqueries[] = $clause;
             // Clause sign is 'required' if clause contains required terms. 'Optional' otherwise.
             $signs[]      = (in_array(true, $tsigns))? true : null;
-
             // Clear terms list
             $terms = array();
         }
@@ -408,23 +402,20 @@ class Zend_Search_Lucene_Search_Query_Boolean extends Zend_Search_Lucene_Search_
             require_once 'Zend/Search/Lucene/Search/Query/Term.php';
             $subqueries[] = new Zend_Search_Lucene_Search_Query_Term(reset($prohibitedTerms));
             $signs[]      = false;
-
             // Clear prohibited terms list
             $prohibitedTerms = array();
-        } else if (count($prohibitedTerms) > 1) {
+        } elseif (count($prohibitedTerms) > 1) {
             // prepare signs array
             $prohibitedSigns = array();
-            foreach ($prohibitedTerms as $id => $term) {
+            foreach (array_keys($prohibitedTerms) as $id) {
                 // all prohibited term are grouped as optional into multi-term query
                 $prohibitedSigns[$id] = null;
             }
-
             // (boost factors are not significant for prohibited clauses)
             require_once 'Zend/Search/Lucene/Search/Query/MultiTerm.php';
             $subqueries[] = new Zend_Search_Lucene_Search_Query_MultiTerm($prohibitedTerms, $prohibitedSigns);
             // Clause sign is 'prohibited'
             $signs[]      = false;
-
             // Clear terms list
             $prohibitedTerms = array();
         }
@@ -512,11 +503,7 @@ class Zend_Search_Lucene_Search_Query_Boolean extends Zend_Search_Lucene_Search_
                  * This code is used as workaround for array_intersect_key() slowness problem.
                  */
                 $updatedVector = array();
-                foreach ($this->_resVector as $id => $value) {
-                    if (isset($nextResVector[$id])) {
-                        $updatedVector[$id] = $value;
-                    }
-                }
+                $updatedVector = array_filter($this->_resVector, fn($value) => isset($nextResVector[$id]));
                 $this->_resVector = $updatedVector;
             }
 
@@ -577,11 +564,7 @@ class Zend_Search_Lucene_Search_Query_Boolean extends Zend_Search_Lucene_Search_
                  * This code is used as workaround for array_intersect_key() slowness problem.
                  */
                 $updatedVector = array();
-                foreach ($required as $id => $value) {
-                    if (isset($nextResVector[$id])) {
-                        $updatedVector[$id] = $value;
-                    }
-                }
+                $updatedVector = array_filter($required, fn($value) => isset($nextResVector[$id]));
                 $required = $updatedVector;
             }
 
@@ -798,7 +781,7 @@ class Zend_Search_Lucene_Search_Query_Boolean extends Zend_Search_Lucene_Search_
 
             if ($this->_signs === null || $this->_signs[$id] === true) {
                 $query .= '+';
-            } else if ($this->_signs[$id] === false) {
+            } elseif ($this->_signs[$id] === false) {
                 $query .= '-';
             }
 

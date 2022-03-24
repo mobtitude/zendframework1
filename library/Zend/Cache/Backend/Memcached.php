@@ -214,16 +214,12 @@ class Zend_Cache_Backend_Memcached extends Zend_Cache_Backend implements Zend_Ca
     public function save($data, $id, $tags = array(), $specificLifetime = false)
     {
         $lifetime = $this->getLifetime($specificLifetime);
-        if ($this->_options['compression']) {
-            $flag = MEMCACHE_COMPRESSED;
-        } else {
-            $flag = 0;
-        }
+        $flag = $this->_options['compression'] ? MEMCACHE_COMPRESSED : 0;
 
         // ZF-8856: using set because add needs a second request if item already exists
         $result = @$this->_memcache->set($id, array($data, time(), $lifetime), $flag, $lifetime);
 
-        if (count($tags) > 0) {
+        if ($tags !== []) {
             $this->_log(self::TAGS_UNSUPPORTED_BY_SAVE_OF_MEMCACHED_BACKEND);
         }
 
@@ -452,11 +448,7 @@ class Zend_Cache_Backend_Memcached extends Zend_Cache_Backend implements Zend_Ca
      */
     public function touch($id, $extraLifetime)
     {
-        if ($this->_options['compression']) {
-            $flag = MEMCACHE_COMPRESSED;
-        } else {
-            $flag = 0;
-        }
+        $flag = $this->_options['compression'] ? MEMCACHE_COMPRESSED : 0;
         $tmp = $this->_memcache->get($id);
         if (is_array($tmp)) {
             $data = $tmp[0];

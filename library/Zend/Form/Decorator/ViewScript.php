@@ -90,11 +90,9 @@ class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
     public function getViewScript()
     {
         if (null === $this->_viewScript) {
-            if (null !== ($element = $this->getElement())) {
-                if (null !== ($viewScript = $element->getAttrib('viewScript'))) {
-                    $this->setViewScript($viewScript);
-                    return $viewScript;
-                }
+            if (null !== ($element = $this->getElement()) && null !== ($viewScript = $element->getAttrib('viewScript'))) {
+                $this->setViewScript($viewScript);
+                return $viewScript;
             }
 
             if (null !== ($viewScript = $this->getOption('viewScript'))) {
@@ -126,11 +124,9 @@ class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
     public function getViewModule()
     {
         if (null === $this->_viewModule) {
-            if (null !== ($element = $this->getElement())) {
-                if (null !== ($viewModule = $element->getAttrib('viewModule'))) {
-                    $this->setViewModule($viewModule);
-                    return $viewModule;
-                }
+            if (null !== ($element = $this->getElement()) && null !== ($viewModule = $element->getAttrib('viewModule'))) {
+                $this->setViewModule($viewModule);
+                return $viewModule;
             }
 
             if (null !== ($viewModule = $this->getOption('viewModule'))) {
@@ -152,7 +148,7 @@ class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
     {
         $element = $this->getElement();
         $view    = $element->getView();
-        if (null === $view) {
+        if (!$view instanceof \Zend_View_Interface) {
             return $content;
         }
 

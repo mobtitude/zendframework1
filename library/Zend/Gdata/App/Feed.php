@@ -282,8 +282,7 @@ class Zend_Gdata_App_Feed extends Zend_Gdata_App_FeedSourceParent
         $nextLink = $this->getNextLink();
         if (!$nextLink) {
             require_once 'Zend/Gdata/App/HttpException.php';
-            throw new Zend_Gdata_App_Exception('No link to next set ' .
-            'of results found.');
+            throw new Zend_Gdata_App_Exception('No link to next set of results found.');
         }
         $nextLinkHref = $nextLink->getHref();
         $service = new Zend_Gdata_App($this->getHttpClient());
@@ -303,8 +302,7 @@ class Zend_Gdata_App_Feed extends Zend_Gdata_App_FeedSourceParent
         $previousLink = $this->getPreviousLink();
         if (!$previousLink) {
             require_once 'Zend/Gdata/App/HttpException.php';
-            throw new Zend_Gdata_App_Exception('No link to previous set ' .
-            'of results found.');
+            throw new Zend_Gdata_App_Exception('No link to previous set of results found.');
         }
         $previousLinkHref = $previousLink->getHref();
         $service = new Zend_Gdata_App($this->getHttpClient());

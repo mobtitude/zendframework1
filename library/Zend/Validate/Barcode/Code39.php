@@ -89,10 +89,6 @@ class Zend_Validate_Barcode_Code39 extends Zend_Validate_Barcode_AdapterAbstract
         }
 
         $mod = $count % 43;
-        if ($mod == $this->_check[$checksum]) {
-            return true;
-        }
-
-        return false;
+        return $mod == $this->_check[$checksum];
     }
 }

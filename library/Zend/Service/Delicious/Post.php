@@ -92,8 +92,7 @@ class Zend_Service_Delicious_Post extends Zend_Service_Delicious_SimplePost
              * @see Zend_Service_Delicious_Exception
              */
             require_once 'Zend/Service/Delicious/Exception.php';
-            throw new Zend_Service_Delicious_Exception("Second argument must be array with at least 2 keys ('url' and"
-                                                     . " 'title')");
+            throw new Zend_Service_Delicious_Exception('Second argument must be array with at least 2 keys (\'url\' and \'title\')');
         }
 
         if (isset($values['date']) && ! $values['date'] instanceof Zend_Date) {
@@ -285,7 +284,7 @@ class Zend_Service_Delicious_Post extends Zend_Service_Delicious_SimplePost
              * @todo replace strtotime() with Zend_Date equivalent
              */
             'date'   => new Zend_Date(strtotime($node->getAttribute('time'))),
-            'shared' => ($node->getAttribute('shared') == 'no' ? false : true),
+            'shared' => ($node->getAttribute('shared') != 'no'),
             'hash'   => $node->getAttribute('hash')
         );
     }

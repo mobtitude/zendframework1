@@ -129,7 +129,7 @@ abstract class Zend_Mail_Transport_Abstract
         if (null !== $boundary) {
             // Build multipart mail
             $type = $this->_mail->getType();
-            if (!$type) {
+            if ($type === '' || $type === '0') {
                 if ($this->_mail->hasAttachments) {
                     $type = Zend_Mime::MULTIPART_MIXED;
                 } elseif ($this->_mail->getBodyText() && $this->_mail->getBodyHtml()) {

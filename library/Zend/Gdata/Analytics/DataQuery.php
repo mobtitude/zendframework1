@@ -363,7 +363,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     public function getQueryUrl()
     {
         $uri = $this->_defaultFeedUri;
-        if (isset($this->_url)) {
+        if ($this->_url !== null) {
             $uri = $this->_url;
         }
         
@@ -393,11 +393,9 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
             $filters.=($filter[1]===true?';':',').$filter[0];
         }
         
-        if ($filters!="") {
+        if ($filters != "") {
             $this->setParam('filters', ltrim($filters, ",;"));
         }
-        
-        $uri .= $this->getQueryString();
-        return $uri;
+        return $uri . $this->getQueryString();
     }
 }

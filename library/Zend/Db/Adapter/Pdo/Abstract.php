@@ -45,6 +45,7 @@ require_once 'Zend/Db/Statement/Pdo.php';
 abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
 {
 
+    protected $_pdoType;
     /**
      * Default class name for a DB statement.
      *
@@ -391,7 +392,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
             return null;
         }
         $matches = null;
-        if (preg_match('/((?:[0-9]{1,2}\.){1,3}[0-9]{1,2})/', (string) $version, $matches)) {
+        if (preg_match('/((?:\d{1,2}\.){1,3}\d{1,2})/', (string) $version, $matches)) {
             return $matches[1];
         } else {
             return null;

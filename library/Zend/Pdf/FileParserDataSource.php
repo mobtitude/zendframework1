@@ -155,7 +155,7 @@ abstract class Zend_Pdf_FileParserDataSource
      */
     public function moveToOffset($offset)
     {
-        if ($this->_offset == $offset) {
+        if ($this->_offset === $offset) {
             return;    // Not moving; do nothing.
         }
         if ($offset < 0) {

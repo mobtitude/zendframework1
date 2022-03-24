@@ -113,7 +113,7 @@ class Zend_Auth_Storage_Session implements Zend_Auth_Storage_Interface
      */
     public function isEmpty()
     {
-        return !isset($this->_session->{$this->_member});
+        return !(property_exists($this->_session, '_member') && $this->_session->{$this->_member} !== null);
     }
 
     /**

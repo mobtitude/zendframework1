@@ -206,7 +206,7 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
         $flags = ord(fread($this->_socket, 1));
         $info  = stream_get_meta_data($this->_socket);
 
-        if ($info['timed_out'] === true) {
+        if ($info['timed_out']) {
             fclose($this->_socket);
             throw new Zend_TimeSync_Exception('could not connect to ' .
                 "'$this->_timeserver' on port '$this->_port', reason: 'server timed out'");
@@ -331,11 +331,11 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
             case 0:
                 if (substr($refid, 0, 3) === 'DCN') {
                     $ntpserviceid = 'DCN routing protocol';
-                } else if (substr($refid, 0, 4) === 'NIST') {
+                } elseif (substr($refid, 0, 4) === 'NIST') {
                     $ntpserviceid = 'NIST public modem';
-                } else if (substr($refid, 0, 3) === 'TSP') {
+                } elseif (substr($refid, 0, 3) === 'TSP') {
                     $ntpserviceid = 'TSP time protocol';
-                } else if (substr($refid, 0, 3) === 'DTS') {
+                } elseif (substr($refid, 0, 3) === 'DTS') {
                     $ntpserviceid = 'Digital Time Service';
                 }
                 break;
@@ -343,15 +343,15 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
             case 1:
                 if (substr($refid, 0, 4) === 'ATOM') {
                     $ntpserviceid = 'Atomic Clock (calibrated)';
-                } else if (substr($refid, 0, 3) === 'VLF') {
+                } elseif (substr($refid, 0, 3) === 'VLF') {
                     $ntpserviceid = 'VLF radio';
-                } else if ($refid === 'CALLSIGN') {
+                } elseif ($refid === 'CALLSIGN') {
                     $ntpserviceid = 'Generic radio';
-                } else if (substr($refid, 0, 4) === 'LORC') {
+                } elseif (substr($refid, 0, 4) === 'LORC') {
                     $ntpserviceid = 'LORAN-C radionavigation';
-                } else if (substr($refid, 0, 4) === 'GOES') {
+                } elseif (substr($refid, 0, 4) === 'GOES') {
                     $ntpserviceid = 'GOES UHF environment satellite';
-                } else if (substr($refid, 0, 3) === 'GPS') {
+                } elseif (substr($refid, 0, 3) === 'GPS') {
                     $ntpserviceid = 'GPS UHF satellite positioning';
                 }
                 break;
@@ -424,8 +424,7 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
         $this->_info['offset'] += $binary['transmitstamp'];
         $this->_info['offset'] -= $binary['clientreceived'];
         $this->_info['offset'] /= 2;
-        $time = (time() - $this->_info['offset']);
 
-        return $time;
+        return time() - $this->_info['offset'];
     }
 }

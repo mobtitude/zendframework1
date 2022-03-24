@@ -134,11 +134,7 @@ class Zend_Gdata_Photos_UserQuery extends Zend_Gdata_Query
      */
      public function setUser($value)
      {
-         if ($value !== null) {
-             $this->_user = $value;
-         } else {
-             $this->_user = Zend_Gdata_Photos::DEFAULT_USER;
-         }
+         $this->_user = $value !== null ? $value : Zend_Gdata_Photos::DEFAULT_USER;
      }
 
     /**

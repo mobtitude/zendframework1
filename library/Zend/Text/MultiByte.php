@@ -44,7 +44,7 @@ class Zend_Text_MultiByte
         $stringWidth = iconv_strlen($string, $charset);
         $breakWidth  = iconv_strlen($break, $charset);
         
-        if (strlen($string) === 0) {
+        if ((string) $string === '') {
             return '';
         } elseif ($breakWidth === null) {
             throw new Zend_Text_Exception('Break string cannot be empty');
@@ -58,11 +58,7 @@ class Zend_Text_MultiByte
         for ($current = 0; $current < $stringWidth; $current++) {
             $char = iconv_substr($string, $current, 1, $charset);
             
-            if ($breakWidth === 1) {
-                $possibleBreak = $char;
-            } else {
-                $possibleBreak = iconv_substr($string, $current, $breakWidth, $charset);
-            }
+            $possibleBreak = $breakWidth === 1 ? $char : iconv_substr($string, $current, $breakWidth, $charset);
             
             if ($possibleBreak === $break) {
                 $result    .= iconv_substr($string, $lastStart, $current - $lastStart + $breakWidth, $charset);
@@ -80,7 +76,7 @@ class Zend_Text_MultiByte
                 $lastStart  = $lastSpace = $current;
             } elseif ($current - $lastStart >= $width && $lastStart < $lastSpace) {
                 $result    .= iconv_substr($string, $lastStart, $lastSpace - $lastStart, $charset) . $break;
-                $lastStart  = $lastSpace = $lastSpace + 1;
+                $lastStart  = $lastSpace += 1;
             }
         }
         

@@ -98,7 +98,9 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
     public function _sendMail()
     {
         if ($this->parameters === null) {
-            set_error_handler(array($this, '_handleMailErrors'));
+            set_error_handler(function (int $errno, string $errstr, ?string $errfile = \null, ?string $errline = \null, ?array $errcontext = \null) : bool {
+                return $this->_handleMailErrors($errno, $errstr, $errfile, $errline, $errcontext);
+            });
             $result = mail(
                 $this->recipients,
                 $this->_mail->getSubject(),
@@ -119,7 +121,9 @@ class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
                 );
             }
 
-            set_error_handler(array($this, '_handleMailErrors'));
+            set_error_handler(function (int $errno, string $errstr, ?string $errfile = \null, ?string $errline = \null, ?array $errcontext = \null) : bool {
+                return $this->_handleMailErrors($errno, $errstr, $errfile, $errline, $errcontext);
+            });
             $result = mail(
                 $this->recipients,
                 $this->_mail->getSubject(),

@@ -140,8 +140,7 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
     {
         if ($this->_storage === null) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('No storage object has been'
-                . ' set that subclasses Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface');
+            throw new Zend_Feed_Pubsubhubbub_Exception('No storage object has been set that subclasses Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface');
         }
         return $this->_storage;
     }
@@ -196,11 +195,10 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
      */
     public function setSubscriberCount($count)
     {
-        $count = intval($count);
+        $count = (int) $count;
         if ($count <= 0) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('Subscriber count must be'
-                . ' greater than zero');
+            throw new Zend_Feed_Pubsubhubbub_Exception('Subscriber count must be greater than zero');
         }
         $this->_subscriberCount = $count;
         return $this;

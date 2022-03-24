@@ -101,17 +101,14 @@ class Zend_Tool_Project_Context_Zf_BootstrapFile extends Zend_Tool_Project_Conte
 
     public function getApplicationInstance()
     {
-        if ($this->_applicationInstance == null) {
-            if ($this->_applicationConfigFile->getContext()->exists()) {
-                define('APPLICATION_PATH', $this->_applicationDirectory->getPath());
-                $applicationOptions = array();
-                $applicationOptions['config'] = $this->_applicationConfigFile->getPath();
-
-                $this->_applicationInstance = new Zend_Application(
-                    'development',
-                    $applicationOptions
-                    );
-            }
+        if ($this->_applicationInstance == null && $this->_applicationConfigFile->getContext()->exists()) {
+            define('APPLICATION_PATH', $this->_applicationDirectory->getPath());
+            $applicationOptions = array();
+            $applicationOptions['config'] = $this->_applicationConfigFile->getPath();
+            $this->_applicationInstance = new Zend_Application(
+                'development',
+                $applicationOptions
+                );
         }
 
         return $this->_applicationInstance;

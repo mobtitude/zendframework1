@@ -68,16 +68,14 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
             $dir = $tmp . '/openid/consumer';
         }
         $this->_dir = $dir;
-        if (!is_dir($this->_dir)) {
-            if (!@mkdir($this->_dir, 0700, 1)) {
-                /**
-                 * @see Zend_OpenId_Exception
-                 */
-                require_once 'Zend/OpenId/Exception.php';
-                throw new Zend_OpenId_Exception(
-                    'Cannot access storage directory ' . $dir,
-                    Zend_OpenId_Exception::ERROR_STORAGE);
-            }
+        if (!is_dir($this->_dir) && !@mkdir($this->_dir, 0700, 1)) {
+            /**
+             * @see Zend_OpenId_Exception
+             */
+            require_once 'Zend/OpenId/Exception.php';
+            throw new Zend_OpenId_Exception(
+                'Cannot access storage directory ' . $dir,
+                Zend_OpenId_Exception::ERROR_STORAGE);
         }
         if (($f = fopen($this->_dir.'/assoc.lock', 'w+')) === null) {
             /**
@@ -485,11 +483,7 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
                 }
                 unset($nonceFiles);
             } else {
-                if (is_string($date)) {
-                    $time = time($date);
-                } else {
-                    $time = $date;
-                }
+                $time = is_string($date) ? time() : $date;
                 $nonceFiles = glob($this->_dir . '/nonce_*');
                 foreach ((array) $nonceFiles as $name) {
                     if (filemtime($name) < $time) {

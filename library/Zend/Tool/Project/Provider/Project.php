@@ -131,8 +131,7 @@ class Zend_Tool_Project_Provider_Project
         }
         
         $version = Zend_Version::VERSION;
-
-        $data = <<<EOS
+        return <<<EOS
 <?xml version="1.0" encoding="UTF-8"?>
 <projectProfile type="default" version="$version">
     <projectDirectory>
@@ -204,7 +203,6 @@ $testAction
     </projectDirectory>
 </projectProfile>
 EOS;
-        return $data;
     }
 
     public static function getDefaultReadmeContents($caller = null)

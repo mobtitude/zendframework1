@@ -210,11 +210,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
         $endPoints = array();
         foreach ($signatureTrees as $root) {
             $tmp = $root->getEndPoints();
-            if (empty($tmp)) {
-                $endPoints = array_merge($endPoints, array($root));
-            } else {
-                $endPoints = array_merge($endPoints, $tmp);
-            }
+            $endPoints = empty($tmp) ? array_merge($endPoints, array($root)) : array_merge($endPoints, $tmp);
         }
 
         foreach ($endPoints as $node) {

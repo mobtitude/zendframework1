@@ -291,9 +291,8 @@ class Zend_Queue_Stomp_Frame
         if ($body !== false) {
             $frame .= $body;
         }
-        $frame .= self::END_OF_FRAME;
 
-        return $frame;
+        return $frame . self::END_OF_FRAME;
     }
 
     /**

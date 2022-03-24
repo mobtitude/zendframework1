@@ -187,8 +187,7 @@ class Zend_Gdata_Gapps_MemberQuery extends Zend_Gdata_Gapps_Query
         if ($this->_memberId !== null) {
             $uri .= '/' . $this->_memberId;
         }
-        $uri .= $this->getQueryString();
-        return $uri;
+        return $uri . $this->getQueryString();
     }
 
 }

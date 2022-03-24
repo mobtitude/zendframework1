@@ -165,7 +165,9 @@ class Zend_Config_Yaml extends Zend_Config
         }
 
         // Suppress warnings and errors while loading file
-        set_error_handler(array($this, '_loadFileErrorHandler'));
+        set_error_handler(function (int $errno, string $errstr, string $errfile, int $errline) {
+            return $this->_loadFileErrorHandler($errno, $errstr, $errfile, $errline);
+        });
         $yaml = file_get_contents($yaml);
         restore_error_handler();
 
@@ -258,9 +260,7 @@ class Zend_Config_Yaml extends Zend_Config
             unset($thisSection[self::EXTENDS_NAME]);
         }
 
-        $config = $this->_arrayMergeRecursive($config, $thisSection);
-
-        return $config;
+        return $this->_arrayMergeRecursive($config, $thisSection);
     }
 
     /**
@@ -318,14 +318,14 @@ class Zend_Config_Yaml extends Zend_Config
 
             if (preg_match("/(?!-)([\w\-]+):\s*(.*)/", $line, $m)) {
                 // key: value
-                if (strlen((string) $m[2])) {
+                if (strlen((string) $m[2]) !== 0) {
                     // simple key: value
                     $value = preg_replace("/#.*$/", "", $m[2]);
                     $value = self::_parseValue($value);
                 } else {
                     // key: and then values on new lines
                     $value = self::_decodeYaml($currentIndent + 1, $lines);
-                    if (is_array($value) && !count($value)) {
+                    if (is_array($value) && $value === []) {
                         $value = "";
                     }
                 }

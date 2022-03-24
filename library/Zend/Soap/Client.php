@@ -330,10 +330,8 @@ class Zend_Soap_Client
                 if ($value === null) {
                     unset($options[$key]);
                 }
-            } else {
-                if ($value == null) {
-                    unset($options[$key]);
-                }
+            } elseif ($value == null) {
+                unset($options[$key]);
             }
         }
 
@@ -777,11 +775,7 @@ class Zend_Soap_Client
      */
     public function setCompressionOptions($compressionOptions)
     {
-        if ($compressionOptions === null) {
-            $this->_compression = null;
-        } else {
-            $this->_compression = (int)$compressionOptions;
-        }
+        $this->_compression = $compressionOptions === null ? null : (int)$compressionOptions;
         $this->_soapClient = null;
         return $this;
     }
@@ -869,11 +863,7 @@ class Zend_Soap_Client
      */
     public function setWsdlCache($caching)
     {
-        if ($caching === null) {
-            $this->_cache_wsdl = null;
-        } else {
-            $this->_cache_wsdl = (int)$caching;
-        }
+        $this->_cache_wsdl = $caching === null ? null : (int)$caching;
         return $this;
     }
 
@@ -895,11 +885,7 @@ class Zend_Soap_Client
      */
     public function setUserAgent($userAgent)
     {
-        if ($userAgent === null) {
-            $this->_user_agent = null;
-        } else {
-            $this->_user_agent = (string)$userAgent;
-        }
+        $this->_user_agent = $userAgent === null ? null : (string)$userAgent;
         return $this;
     }
 
@@ -1030,9 +1016,9 @@ class Zend_Soap_Client
     {
         // Perform request as is
         if ($one_way == null) {
-            return call_user_func(array($client,'SoapClient::__doRequest'), $request, $location, $action, $version);
+            return $client->SoapClient::__doRequest($request, $location, $action, $version);
         } else {
-            return call_user_func(array($client,'SoapClient::__doRequest'), $request, $location, $action, $version, $one_way);
+            return $client->SoapClient::__doRequest($request, $location, $action, $version, $one_way);
         }
     }
 
@@ -1155,7 +1141,7 @@ class Zend_Soap_Client
         $result = $soapClient->__soapCall($name,
                                                  $this->_preProcessArguments($arguments),
                                                  null, /* Options are already set to the SOAP client object */
-                                                 (count($soapHeaders) > 0)? $soapHeaders : null,
+                                                 ($soapHeaders !== [])? $soapHeaders : null,
                                                  $this->_soapOutputHeaders);
 
         // Reset non-permanent input headers

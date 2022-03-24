@@ -226,9 +226,9 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
      */
     public function current()
     {
-        return (($this->valid() === false)
-            ? null
-            : $this->_data[$this->_pointer]); // return the messages object
+        return (($this->valid())
+            ? $this->_data[$this->_pointer]
+            : null); // return the messages object
     }
 
     /**

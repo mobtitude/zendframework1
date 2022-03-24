@@ -234,18 +234,13 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
                  * @see Zend_Auth_Adapter_Exception
                  */
                 require_once 'Zend/Auth/Adapter/Exception.php';
-                throw new Zend_Auth_Adapter_Exception('Config key \'nonce_timeout\' is required, and must be an '
-                                                    . 'integer');
+                throw new Zend_Auth_Adapter_Exception('Config key \'nonce_timeout\' is required, and must be an integer');
             } else {
                 $this->_nonceTimeout = (int) $config['nonce_timeout'];
             }
 
             // We use the opaque value unless explicitly told not to
-            if (isset($config['use_opaque']) && false == (bool) $config['use_opaque']) {
-                $this->_useOpaque = false;
-            } else {
-                $this->_useOpaque = true;
-            }
+            $this->_useOpaque = isset($config['use_opaque']) && false == (bool) $config['use_opaque'] ? false : true;
 
             if (isset($config['algorithm']) && in_array($config['algorithm'], $this->_supportedAlgos)) {
                 $this->_algo = $config['algorithm'];
@@ -368,15 +363,10 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
              * @see Zend_Auth_Adapter_Exception
              */
             require_once 'Zend/Auth/Adapter/Exception.php';
-            throw new Zend_Auth_Adapter_Exception('Request and Response objects must be set before calling '
-                                                . 'authenticate()');
+            throw new Zend_Auth_Adapter_Exception('Request and Response objects must be set before calling authenticate()');
         }
 
-        if ($this->_imaProxy) {
-            $getHeader = 'Proxy-Authorization';
-        } else {
-            $getHeader = 'Authorization';
-        }
+        $getHeader = $this->_imaProxy ? 'Proxy-Authorization' : 'Authorization';
 
         $authHeader = $this->_request->getHeader($getHeader);
         if (!$authHeader) {
@@ -478,14 +468,12 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
      */
     protected function _digestHeader()
     {
-        $wwwauth = 'Digest realm="' . $this->_realm . '", '
+        return 'Digest realm="' . $this->_realm . '", '
                  . 'domain="' . $this->_domains . '", '
                  . 'nonce="' . $this->_calcNonce() . '", '
                  . ($this->_useOpaque ? 'opaque="' . $this->_calcOpaque() . '", ' : '')
                  . 'algorithm="' . $this->_algo . '", '
                  . 'qop="' . implode(',', $this->_supportedQops) . '"';
-
-        return $wwwauth;
     }
 
     /**
@@ -509,14 +497,13 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
              * @see Zend_Auth_Adapter_Exception
              */
             require_once 'Zend/Auth/Adapter/Exception.php';
-            throw new Zend_Auth_Adapter_Exception('A basicResolver object must be set before doing Basic '
-                                                . 'authentication');
+            throw new Zend_Auth_Adapter_Exception('A basicResolver object must be set before doing Basic authentication');
         }
 
         // Decode the Authorization header
         $auth = substr($header, strlen('Basic '));
         $auth = base64_decode($auth);
-        if (!$auth) {
+        if ($auth === '' || $auth === '0') {
             /**
              * @see Zend_Auth_Adapter_Exception
              */
@@ -664,9 +651,7 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
         // nonce will change on its own, and effectively log the user out. This
         // would be surprising if the user just logged in.
         $timeout = ceil(time() / $this->_nonceTimeout) * $this->_nonceTimeout;
-
-        $nonce = hash('md5', $timeout . ':' . $this->_request->getServer('HTTP_USER_AGENT') . ':' . __CLASS__);
-        return $nonce;
+        return hash('md5', $timeout . ':' . $this->_request->getServer('HTTP_USER_AGENT') . ':' . __CLASS__);
     }
 
     /**
@@ -745,7 +730,7 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
             return false;
         } else {
             // Make sure the path portion of both URIs is the same
-            if ($rUri['path'] != $cUri['path']) {
+            if ($rUri['path'] !== $cUri['path']) {
                 return false;
             }
             // Section 3.2.2.5 seems to suggest that the value of the URI

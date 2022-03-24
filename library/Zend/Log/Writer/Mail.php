@@ -207,7 +207,7 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
         }
 
         $headerAddresses = array_intersect_key($config, self::$_methodMapHeaders);
-        if (count($headerAddresses)) {
+        if ($headerAddresses !== []) {
             foreach ($headerAddresses as $header => $address) {
                 $method = self::$_methodMapHeaders[$header];
                 if (is_array($address) && isset($address['name'])
@@ -217,11 +217,7 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
                         $address['email'],
                         $address['name']
                     );
-                } else if (is_array($address) && isset($address['email'])) {
-                    $params = array($address['email']);
-                } else {
-                    $params = array($address);
-                }
+                } else $params = is_array($address) && isset($address['email']) ? array($address['email']) : array($address);
                 call_user_func_array(array($mail, $method), $params);
             }
         }
@@ -279,12 +275,7 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
         // layout if one exists.  Otherwise, just use the event with its
         // default format.
         if ($this->_layout) {
-            if ($this->_layoutFormatter) {
-                $this->_layoutEventsToMail[] =
-                    $this->_layoutFormatter->format($event);
-            } else {
-                $this->_layoutEventsToMail[] = $formattedEvent;
-            }
+            $this->_layoutEventsToMail[] = $this->_layoutFormatter ? $this->_layoutFormatter->format($event) : $formattedEvent;
         }
     }
 
@@ -314,8 +305,7 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
     {
         if (!$this->_layout) {
             throw new Zend_Log_Exception(
-                'cannot set formatter for layout; ' .
-                    'a Zend_Layout instance is not in use');
+                'cannot set formatter for layout; a Zend_Layout instance is not in use');
         }
 
         $this->_layoutFormatter = $formatter;
@@ -337,10 +327,9 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
      */
     public function setSubjectPrependText($subject)
     {
-        if ($this->_mail->getSubject()) {
+        if ($this->_mail->getSubject() !== '' && $this->_mail->getSubject() !== '0') {
             throw new Zend_Log_Exception(
-                'subject already set on mail; ' .
-                    'cannot set subject prepend text');
+                'subject already set on mail; cannot set subject prepend text');
         }
 
         $this->_subjectPrependText = (string) $subject;

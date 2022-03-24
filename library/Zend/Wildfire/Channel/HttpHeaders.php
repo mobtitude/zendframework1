@@ -120,7 +120,7 @@ class Zend_Wildfire_Channel_HttpHeaders extends Zend_Controller_Plugin_Abstract 
      */
     public static function getInstance($skipCreate=false)
     {
-        if (self::$_instance===null && $skipCreate!==true) {
+        if (self::$_instance===null && !$skipCreate) {
             return self::init();
         }
         return self::$_instance;
@@ -164,9 +164,8 @@ class Zend_Wildfire_Channel_HttpHeaders extends Zend_Controller_Plugin_Abstract 
      */
     protected function _initProtocol($uri)
     {
-        switch ($uri) {
-            case Zend_Wildfire_Protocol_JsonStream::PROTOCOL_URI;
-                return new Zend_Wildfire_Protocol_JsonStream();
+        if ($uri === Zend_Wildfire_Protocol_JsonStream::PROTOCOL_URI) {
+            return new Zend_Wildfire_Protocol_JsonStream();
         }
         require_once 'Zend/Wildfire/Exception.php';
         throw new Zend_Wildfire_Exception('Tyring to initialize unknown protocol for URI "'.$uri.'".');
@@ -330,7 +329,7 @@ class Zend_Wildfire_Channel_HttpHeaders extends Zend_Controller_Plugin_Abstract 
     {
         if (!$this->_response) {
             $response = Zend_Controller_Front::getInstance()->getResponse();
-            if ($response) {
+            if ($response !== null) {
                 $this->setResponse($response);
             }
         }

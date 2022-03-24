@@ -261,7 +261,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
      */
     public function getSession()
     {
-        if (!isset($this->_session) || (null === $this->_session)) {
+        if (!($this->_session !== null) || (null === $this->_session)) {
             $id = $this->getId();
             if (!class_exists($this->_sessionClass)) {
                 require_once 'Zend/Loader.php';
@@ -331,7 +331,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
 
         $totIndexCon = count($consonants) - 1;
         $totIndexVow = count($vowels) - 1;
-        for ($i=0; $i < $wordLen; $i = $i + 2) {
+        for ($i=0; $i < $wordLen; $i += 2) {
             // generate word with mix of vowels and consonants
             $consonant = $consonants[Zend_Crypt_Math::randInteger(0, $totIndexCon, true)];
             $vowel     = $vowels[Zend_Crypt_Math::randInteger(0, $totIndexVow, true)];

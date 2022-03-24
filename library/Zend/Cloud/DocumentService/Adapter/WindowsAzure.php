@@ -107,11 +107,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
         }
 
         // Build Zend_Service_WindowsAzure_Storage_Blob instance
-        if (!isset($options[self::HOST])) {
-            $host = self::DEFAULT_HOST;
-        } else {
-            $host = $options[self::HOST];
-        }
+        $host = isset($options[self::HOST]) ? $options[self::HOST] : self::DEFAULT_HOST;
 
         if (! isset($options[self::ACCOUNT_NAME])) {
             throw new Zend_Cloud_DocumentService_Exception('No Windows Azure account name provided.');
@@ -360,7 +356,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
             $fieldset = $fieldset->getFields();
         }
 
-        $this->_validateCompositeKey($documentId, $collectionName);
+        $this->_validateCompositeKey($documentId);
         $this->_validateFields($fieldset);
         try {
             $entity = new Zend_Service_WindowsAzure_Storage_DynamicTableEntity($documentId[0], $documentId[1]);
@@ -525,7 +521,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure
      */
     protected function _validateKey($key)
     {
-        if (preg_match('@[/#?' . preg_quote('\\') . ']@', $key)) {
+        if (preg_match('@[/#?' . preg_quote('\\', '@') . ']@', $key)) {
             throw new Zend_Cloud_DocumentService_Exception('Invalid partition or row key provided; must not contain /, \\,  #, or ? characters');
         }
     }

@@ -147,12 +147,11 @@ class Zend_Service_Rackspace_Files extends Zend_Service_Rackspace_Abstract
     {
         $result= $this->httpCall($this->getStorageUrl(),'HEAD');
         if ($result->isSuccessful()) {
-            $output= array(
+            return array(
                 'tot_containers'  => $result->getHeader(self::ACCOUNT_CONTAINER_COUNT),
                 'size_containers' => $result->getHeader(self::ACCOUNT_BYTES_USED),
                 'tot_objects'     => $result->getHeader(self::ACCOUNT_OBJ_COUNT)
             );
-            return $output;
         }
         return false;
     }
@@ -278,13 +277,12 @@ class Zend_Service_Rackspace_Files extends Zend_Service_Rackspace_Abstract
                         $metadata[strtolower(substr($type, $count))]= $value;
                     }
                 }
-                $data= array (
+                return array (
                     'name'     => $container,
                     'count'    => $result->getHeader(self::CONTAINER_OBJ_COUNT),
                     'bytes'    => $result->getHeader(self::CONTAINER_BYTES_USE),
                     'metadata' => $metadata
                 );
-                return $data;
             case '404':
                 $this->errorMsg= self::ERROR_CONTAINER_NOT_FOUND;
                 break;
@@ -524,7 +522,7 @@ class Zend_Service_Rackspace_Files extends Zend_Service_Rackspace_Abstract
                         $metadata[strtolower(substr($type, $count))]= $value;
                     }
                 }
-                $data= array (
+                return array (
                     'name'          => $object,
                     'container'     => $container,
                     'hash'          => $result->getHeader(self::HEADER_HASH),
@@ -533,7 +531,6 @@ class Zend_Service_Rackspace_Files extends Zend_Service_Rackspace_Abstract
                     'last_modified' => $result->getHeader(self::HEADER_LAST_MODIFIED),
                     'metadata'      => $metadata
                 );
-                return $data;
             case '404':
                 $this->errorMsg= self::ERROR_OBJECT_NOT_FOUND;
                 break;
@@ -660,18 +657,10 @@ class Zend_Service_Rackspace_Files extends Zend_Service_Rackspace_Abstract
             }
         }
         if (isset($cdn_enabled)) {
-            if ($cdn_enabled===true) {
-                $headers[self::CDN_ENABLED]= 'true';
-            } else {
-                $headers[self::CDN_ENABLED]= 'false';
-            }
+            $headers[self::CDN_ENABLED] = $cdn_enabled ? 'true' : 'false';
         }
         if (isset($log)) {
-            if ($log===true) {
-                $headers[self::CDN_LOG_RETENTION]= 'true';
-            } else  {
-                $headers[self::CDN_LOG_RETENTION]= 'false';
-            }
+            $headers[self::CDN_LOG_RETENTION] = $log ? 'true' : 'false';
         }
         $result= $this->httpCall($this->getCdnUrl().'/'.rawurlencode($container),'POST',$headers);
         $status= $result->getStatus();

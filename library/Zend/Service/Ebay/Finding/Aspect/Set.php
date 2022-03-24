@@ -44,7 +44,7 @@ class Zend_Service_Ebay_Finding_Aspect_Set extends Zend_Service_Ebay_Finding_Set
     {
         // check node
         $node = $this->_nodes->item($this->_key);
-        if (!$node) {
+        if (!$node instanceof \DOMNode) {
             return null;
         }
 

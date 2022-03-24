@@ -129,8 +129,7 @@ abstract class Zend_Ldap_Node_Abstract implements ArrayAccess, Countable
      */
     public function getDn()
     {
-        $dn = clone $this->_getDn();
-        return $dn;
+        return clone $this->_getDn();
     }
 
     /**
@@ -208,7 +207,7 @@ abstract class Zend_Ldap_Node_Abstract implements ArrayAccess, Countable
     public function getAttributes($includeSystemAttributes = true)
     {
         $data = array();
-        foreach ($this->getData($includeSystemAttributes) as $name => $value) {
+        foreach (array_keys($this->getData($includeSystemAttributes)) as $name) {
             $data[$name] = $this->getAttribute($name, null);
         }
         return $data;
@@ -269,14 +268,9 @@ abstract class Zend_Ldap_Node_Abstract implements ArrayAccess, Countable
      */
     public function getData($includeSystemAttributes = true)
     {
-        if ($includeSystemAttributes === false) {
+        if (!$includeSystemAttributes) {
             $data = array();
-            foreach ($this->_currentData as $key => $value) {
-                if (!in_array($key, self::$_systemAttributes)) {
-                    $data[$key] = $value;
-                }
-            }
-            return $data;
+            return array_filter($this->_currentData, fn($value) => !in_array($key, self::$_systemAttributes));
         } else {
             return $this->_currentData;
         }

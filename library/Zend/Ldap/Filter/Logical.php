@@ -66,8 +66,9 @@ abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
     protected function __construct(array $subfilters, $symbol)
     {
         foreach ($subfilters as $key => $s) {
-            if (is_string($s)) $subfilters[$key] = new Zend_Ldap_Filter_String($s);
-            else if (!($s instanceof Zend_Ldap_Filter_Abstract)) {
+            if (is_string($s)) {
+                $subfilters[$key] = new Zend_Ldap_Filter_String($s);
+            } elseif (!($s instanceof Zend_Ldap_Filter_Abstract)) {
                 /**
                  * @see Zend_Ldap_Filter_Exception
                  */
@@ -101,7 +102,6 @@ abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
     {
         $return = '(' . $this->_symbol;
         foreach ($this->_subfilters as $sub) $return .= $sub->toString();
-        $return .= ')';
-        return $return;
+        return $return . ')';
     }
 }

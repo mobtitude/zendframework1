@@ -430,7 +430,7 @@ class Zend_Dojo_View_Helper_Dojo_Container
     public function setCdnVersion($version = null)
     {
         $this->enable();
-        if (preg_match('/^[1-9]\.[0-9]{1,2}(\.[0-9]{1,2})?$/', (string) $version)) {
+        if (preg_match('/^[1-9]\.\d{1,2}(\.\d{1,2})?$/', (string) $version)) {
             $this->_cdnVersion = $version;
         }
         return $this;
@@ -508,7 +508,7 @@ class Zend_Dojo_View_Helper_Dojo_Container
      */
     public function useLocalPath()
     {
-        return (null === $this->_localPath) ? false : true;
+        return null !== $this->_localPath;
     }
 
     /**
@@ -960,22 +960,18 @@ EOJ;
 
         $this->_isXhtml = $this->view->doctype()->isXhtml();
 
-        if (Zend_Dojo_View_Helper_Dojo::useDeclarative()) {
-            if (null === $this->getDjConfigOption('parseOnLoad')) {
-                $this->setDjConfigOption('parseOnLoad', true);
-            }
+        if (Zend_Dojo_View_Helper_Dojo::useDeclarative() && null === $this->getDjConfigOption('parseOnLoad')) {
+            $this->setDjConfigOption('parseOnLoad', true);
         }
 
         if (!empty($this->_dijits)) {
             $this->registerDijitLoader();
         }
-
-        $html  = $this->_renderStylesheets() . PHP_EOL
+        return $this->_renderStylesheets() . PHP_EOL
                . $this->_renderDjConfig() . PHP_EOL
                . $this->_renderDojoScriptTag() . PHP_EOL
                . $this->_renderLayers() . PHP_EOL
                . $this->_renderExtras();
-        return $html;
     }
 
     /**
@@ -1000,12 +996,8 @@ EOJ;
      */
     protected function _renderStylesheets()
     {
-        if ($this->useCdn()) {
-            $base = $this->getCdnBase()
-                  . $this->getCdnVersion();
-        } else {
-            $base = $this->_getLocalRelativePath();
-        }
+        $base = $this->useCdn() ? $this->getCdnBase()
+              . $this->getCdnVersion() : $this->_getLocalRelativePath();
 
         $registeredStylesheets = $this->getStylesheetModules();
         foreach ($registeredStylesheets as $stylesheet) {
@@ -1032,10 +1024,9 @@ EOJ;
         foreach ($stylesheets as $stylesheet) {
             $style .= '    @import "' . $stylesheet . '";' . PHP_EOL;
         }
-        $style .= (($this->_isXhtml) ? '-->' : '-->') . PHP_EOL
-                . '</style>';
 
-        return $style;
+        return $style . ((($this->_isXhtml) ? '-->' : '-->') . PHP_EOL
+                . '</style>');
     }
 
     /**
@@ -1051,13 +1042,12 @@ EOJ;
         }
 
         require_once 'Zend/Json.php';
-        $scriptTag = '<script type="text/javascript">' . PHP_EOL
+
+        return '<script type="text/javascript">' . PHP_EOL
                    . (($this->_isXhtml) ? '//<![CDATA[' : '//<!--') . PHP_EOL
                    . '    var djConfig = ' . Zend_Json::encode($djConfigValues) . ';' . PHP_EOL
                    . (($this->_isXhtml) ? '//]]>' : '//-->') . PHP_EOL
                    . '</script>';
-
-        return $scriptTag;
     }
 
     /**
@@ -1078,9 +1068,7 @@ EOJ;
         } else {
             $source = $this->getLocalPath();
         }
-
-        $scriptTag = '<script type="text/javascript" src="' . $source . '"></script>';
-        return $scriptTag;
+        return '<script type="text/javascript" src="' . $source . '"></script>';
     }
 
     /**
@@ -1165,13 +1153,11 @@ EOJ;
         if (preg_match('/^\s*$/s', $content)) {
             return '';
         }
-
-        $html = '<script type="text/javascript">' . PHP_EOL
+        return '<script type="text/javascript">' . PHP_EOL
               . (($this->_isXhtml) ? '//<![CDATA[' : '//<!--') . PHP_EOL
               . $content
               . (($this->_isXhtml) ? '//]]>' : '//-->') . PHP_EOL
               . PHP_EOL . '</script>';
-        return $html;
     }
 
     /**

@@ -108,7 +108,7 @@ class Zend_Application_Resource_Session extends Zend_Application_Resource_Resour
             unset($options['savehandler']);
         }
 
-        if (count($options) > 0) {
+        if ($options !== []) {
             Zend_Session::setOptions($options);
         }
 

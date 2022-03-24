@@ -153,7 +153,7 @@ class Zend_Mail_Storage_Mbox extends Zend_Mail_Storage_Abstract
 
         $message = $this->getRawHeader($id);
         // file pointer is after headers now
-        if ($bodyLines) {
+        if ($bodyLines !== 0) {
             $message .= "\n";
             while ($bodyLines-- && ftell($this->_fh) < $this->_positions[$id - 1]['end']) {
                 $message .= fgets($this->_fh);
@@ -225,7 +225,7 @@ class Zend_Mail_Storage_Mbox extends Zend_Mail_Storage_Abstract
             $params = (object)$params;
         }
 
-        if (!isset($params->filename) /* || Zend_Loader::isReadable($params['filename']) */) {
+        if (!(property_exists($params, 'filename') && $params->filename !== null) /* || Zend_Loader::isReadable($params['filename']) */) {
             /**
              * @see Zend_Mail_Storage_Exception
              */

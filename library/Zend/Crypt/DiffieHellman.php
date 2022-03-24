@@ -121,7 +121,7 @@ class Zend_Crypt_DiffieHellman
      */
     public function generateKeys()
     {
-        if (function_exists('openssl_dh_compute_key') && self::$useOpenssl !== false) {
+        if (function_exists('openssl_dh_compute_key') && self::$useOpenssl) {
             $details = array();
             $details['p'] = $this->getPrime();
             $details['g'] = $this->getGenerator();
@@ -209,7 +209,7 @@ class Zend_Crypt_DiffieHellman
             require_once('Zend/Crypt/DiffieHellman/Exception.php');
             throw new Zend_Crypt_DiffieHellman_Exception('invalid parameter; not a positive natural number');
         }
-        if (function_exists('openssl_dh_compute_key') && self::$useOpenssl !== false) {
+        if (function_exists('openssl_dh_compute_key') && self::$useOpenssl) {
             $this->_secretKey = openssl_dh_compute_key($publicKey, $this->getPublicKey());
         } else {
             $this->_secretKey = $this->_math->powmod($publicKey, $this->getPrivateKey(), $this->getPrime());
@@ -226,7 +226,7 @@ class Zend_Crypt_DiffieHellman
      */
     public function getSharedSecretKey($type = self::NUMBER)
     {
-        if (!isset($this->_secretKey)) {
+        if (!($this->_secretKey !== null)) {
             require_once('Zend/Crypt/DiffieHellman/Exception.php');
             throw new Zend_Crypt_DiffieHellman_Exception('A secret key has not yet been computed; call computeSecretKey()');
         }
@@ -263,7 +263,7 @@ class Zend_Crypt_DiffieHellman
      */
     public function getPrime()
     {
-        if (!isset($this->_prime)) {
+        if (!($this->_prime !== null)) {
             require_once('Zend/Crypt/DiffieHellman/Exception.php');
             throw new Zend_Crypt_DiffieHellman_Exception('No prime number has been set');
         }
@@ -295,7 +295,7 @@ class Zend_Crypt_DiffieHellman
      */
     public function getGenerator()
     {
-        if (!isset($this->_generator)) {
+        if (!($this->_generator !== null)) {
             require_once('Zend/Crypt/DiffieHellman/Exception.php');
             throw new Zend_Crypt_DiffieHellman_Exception('No generator number has been set');
         }
@@ -349,7 +349,7 @@ class Zend_Crypt_DiffieHellman
      */
     public function hasPrivateKey()
     {
-        return isset($this->_privateKey);
+        return $this->_privateKey !== null;
     }
 
     /**
@@ -381,8 +381,7 @@ class Zend_Crypt_DiffieHellman
      */
     protected function _generatePrivateKey()
     {
-        $rand = $this->_math->rand($this->getGenerator(), $this->getPrime());
-        return $rand;
+        return $this->_math->rand($this->getGenerator(), $this->getPrime());
     }
 
 }

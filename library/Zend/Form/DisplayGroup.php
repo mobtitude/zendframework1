@@ -29,6 +29,7 @@
  */
 class Zend_Form_DisplayGroup implements Iterator,Countable
 {
+    public $id;
     /**
      * Group attributes
      * @var array
@@ -369,7 +370,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
      */
     public function getId()
     {
-        if (isset($this->id)) {
+        if (property_exists($this, 'id') && $this->id !== null) {
             return $this->id;
         }
 
@@ -386,9 +387,8 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
         }
         $id = str_replace('][', '-', $id);
         $id = str_replace(array(']', '['), '-', $id);
-        $id = trim($id, '-');
 
-        return $id;
+        return trim($id, '-');
     }
 
     /**
@@ -685,13 +685,8 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
     protected function _getDecorator($name, $options = null)
     {
         $class = $this->getPluginLoader()->load($name);
-        if (null === $options) {
-            $decorator = new $class;
-        } else {
-            $decorator = new $class($options);
-        }
 
-        return $decorator;
+        return null === $options ? new $class : new $class($options);
     }
 
     /**
@@ -895,7 +890,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
      */
     public function getView()
     {
-        if (null === $this->_view) {
+        if (!$this->_view instanceof \Zend_View_Interface) {
             require_once 'Zend/Controller/Action/HelperBroker.php';
             $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
             $this->setView($viewRenderer->view);
@@ -930,8 +925,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
     public function __toString()
     {
         try {
-            $return = $this->render();
-            return $return;
+            return $this->render();
         } catch (Exception $e) {
             trigger_error($e->getMessage(), E_USER_WARNING);
             return '';
@@ -968,7 +962,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
             return null;
         }
 
-        if (null === $this->_translator) {
+        if (!$this->_translator instanceof \Zend_Translate_Adapter) {
             require_once 'Zend/Form.php';
             return Zend_Form::getDefaultTranslator();
         }
@@ -1025,7 +1019,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
             if (false !== ($decorator = $this->getDecorator($decoratorName))) {
                 $decorator->setElement($this);
                 $seed = '';
-                if (0 < count($args)) {
+                if ([] !== $args) {
                     $seed = array_shift($args);
                 }
                 return $decorator->render($seed);
@@ -1165,7 +1159,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
             $decoratorsExchange = array();
             unset($order[$name]);
             asort($order);
-            foreach ($order as $key => $index) {
+            foreach (array_keys($order) as $key) {
                 if ($key == $newName) {
                     $decoratorsExchange[$key] = $instance;
                     continue;

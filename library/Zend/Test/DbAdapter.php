@@ -94,7 +94,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      */
     public function appendStatementToStack(Zend_Test_DbStatement $stmt)
     {
-        array_push($this->_statementStack, $stmt);
+        $this->_statementStack[] = $stmt;
         return $this;
     }
 
@@ -106,7 +106,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      */
     public function appendLastInsertIdToStack($id)
     {
-        array_push($this->_lastInsertIdStack, $id);
+        $this->_lastInsertIdStack[] = $id;
         return $this;
     }
 
@@ -236,11 +236,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
     {
         $queryId = $this->getProfiler()->queryStart($sql);
 
-        if(count($this->_statementStack)) {
-            $stmt = array_pop($this->_statementStack);
-        } else {
-            $stmt = new Zend_Test_DbStatement();
-        }
+        $stmt = count($this->_statementStack) ? array_pop($this->_statementStack) : new Zend_Test_DbStatement();
 
         if($this->getProfiler()->getEnabled() == true) {
             $qp = $this->getProfiler()->getQueryProfile($queryId);
@@ -266,7 +262,7 @@ class Zend_Test_DbAdapter extends Zend_Db_Adapter_Abstract
      */
     public function lastInsertId($tableName = null, $primaryKey = null)
     {
-        if(count($this->_lastInsertIdStack)) {
+        if($this->_lastInsertIdStack !== []) {
             return array_pop($this->_lastInsertIdStack);
         } else {
             return false;

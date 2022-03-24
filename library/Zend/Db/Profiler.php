@@ -162,11 +162,7 @@ class Zend_Db_Profiler
      */
     public function setFilterElapsedSecs($minimumSeconds = null)
     {
-        if (null === $minimumSeconds) {
-            $this->_filterElapsedSecs = null;
-        } else {
-            $this->_filterElapsedSecs = (integer) $minimumSeconds;
-        }
+        $this->_filterElapsedSecs = null === $minimumSeconds ? null : (integer) $minimumSeconds;
 
         return $this;
     }
@@ -384,11 +380,7 @@ class Zend_Db_Profiler
     {
         $queryProfiles = array();
         foreach ($this->_queryProfiles as $key => $qp) {
-            if ($queryType === null) {
-                $condition = true;
-            } else {
-                $condition = ($qp->getQueryType() & $queryType);
-            }
+            $condition = $queryType === null ? true : $qp->getQueryType() & $queryType;
 
             if (($qp->hasEnded() || $showUnfinished) && $condition) {
                 $queryProfiles[$key] = $qp;
@@ -415,11 +407,7 @@ class Zend_Db_Profiler
     {
         $elapsedSecs = 0;
         foreach ($this->_queryProfiles as $key => $qp) {
-            if (null === $queryType) {
-                $condition = true;
-            } else {
-                $condition = ($qp->getQueryType() & $queryType);
-            }
+            $condition = null === $queryType ? true : $qp->getQueryType() & $queryType;
             if (($qp->hasEnded()) && $condition) {
                 $elapsedSecs += $qp->getElapsedSecs();
             }

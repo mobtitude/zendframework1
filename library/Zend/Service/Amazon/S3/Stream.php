@@ -82,7 +82,7 @@ class Zend_Service_Amazon_S3_Stream
         if ($this->_s3 === null) {
             $url = explode(':', $path);
 
-            if (!$url) {
+            if ($url === []) {
                 /**
                  * @see Zend_Service_Amazon_S3_Exception
                  */
@@ -112,8 +112,8 @@ class Zend_Service_Amazon_S3_Stream
     protected function _getNamePart($path)
     {
         $url = parse_url($path);
-        if ($url['host']) {
-            return !empty($url['path']) ? $url['host'].$url['path'] : $url['host'];
+        if ($url['host'] !== '' && $url['host'] !== '0') {
+            return empty($url['path']) ? $url['host'] : $url['host'].$url['path'];
         }
 
         return '';
@@ -183,7 +183,7 @@ class Zend_Service_Amazon_S3_Stream
      */
     public function stream_read($count)
     {
-        if (!$this->_objectName) {
+        if ($this->_objectName === '' || $this->_objectName === '0') {
             return false;
         }
 
@@ -223,7 +223,7 @@ class Zend_Service_Amazon_S3_Stream
      */
     public function stream_write($data)
     {
-        if (!$this->_objectName) {
+        if ($this->_objectName === '' || $this->_objectName === '0') {
             return 0;
         }
         $len = strlen($data);
@@ -240,7 +240,7 @@ class Zend_Service_Amazon_S3_Stream
      */
     public function stream_eof()
     {
-        if (!$this->_objectName) {
+        if ($this->_objectName === '' || $this->_objectName === '0') {
             return true;
         }
 
@@ -266,7 +266,7 @@ class Zend_Service_Amazon_S3_Stream
      */
     public function stream_seek($offset, $whence)
     {
-        if (!$this->_objectName) {
+        if ($this->_objectName === '' || $this->_objectName === '0') {
             return false;
         }
 
@@ -318,7 +318,7 @@ class Zend_Service_Amazon_S3_Stream
      */
     public function stream_stat()
     {
-        if (!$this->_objectName) {
+        if ($this->_objectName === '' || $this->_objectName === '0') {
             return false;
         }
 
@@ -337,7 +337,7 @@ class Zend_Service_Amazon_S3_Stream
         $stat['blksize'] = 0;
         $stat['blocks'] = 0;
 
-    if(($slash = strchr($this->_objectName, '/')) === false || $slash == strlen($this->_objectName)-1) {
+    if(($slash = strstr($this->_objectName, '/')) === false || $slash == strlen($this->_objectName)-1) {
         /* bucket */
         $stat['mode'] |= 040000;
     } else {
@@ -448,7 +448,7 @@ class Zend_Service_Amazon_S3_Stream
         $stat['blocks'] = 0;
 
     $name = $this->_getNamePart($path);
-    if(($slash = strchr($name, '/')) === false || $slash == strlen($name)-1) {
+    if(($slash = strstr($name, '/')) === false || $slash == strlen($name)-1) {
         /* bucket */
         $stat['mode'] |= 040000;
     } else {

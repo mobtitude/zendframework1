@@ -103,7 +103,7 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
                 }
 
                 $element = $doc->getElementsByTagName($this->_rootElement)->item(0);
-                if (!$element) {
+                if (!$element instanceof \DOMElement) {
                     /**
                      * @see Zend_Feed_Exception
                      */

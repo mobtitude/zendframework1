@@ -84,7 +84,7 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
             $this->setCase($case);
         }
 
-        if (is_array($options) and isset($options['case'])) {
+        if (is_array($options) && isset($options['case'])) {
             $this->setCase($options['case']);
             unset($options['case']);
         }
@@ -121,9 +121,7 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
      */
     public function getExtension()
     {
-        $extension = explode(',', $this->_extension);
-
-        return $extension;
+        return explode(',', $this->_extension);
     }
 
     /**
@@ -207,9 +205,9 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
 
         if ($this->_case && (in_array($info['extension'], $extensions))) {
             return true;
-        } else if (!$this->getCase()) {
+        } elseif (!$this->getCase()) {
             foreach ($extensions as $extension) {
-                if (strtolower($extension) == strtolower($info['extension'])) {
+                if (strtolower($extension) === strtolower($info['extension'])) {
                     return true;
                 }
             }

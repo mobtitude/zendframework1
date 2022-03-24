@@ -76,7 +76,7 @@ class Zend_Tool_Project_Context_Zf_TestApplicationControllerFile extends Zend_To
     {
         $attributes = array();
 
-        if ($this->_forControllerName) {
+        if ($this->_forControllerName !== '' && $this->_forControllerName !== '0') {
             $attributes['forControllerName'] = $this->getForControllerName();
         }
 

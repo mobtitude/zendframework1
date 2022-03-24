@@ -77,12 +77,10 @@ class Zend_Translate_Adapter_XmlTm extends Zend_Translate_Adapter {
             Zend_Xml_Security::scanFile($filename);
         } catch (Zend_Xml_Exception $e) {
             require_once 'Zend/Translate/Exception.php';
-            throw new Zend_Translate_Exception(
-                $e->getMessage()
-            );
+            throw new Zend_Translate_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        if (!xml_parse($this->_file, file_get_contents($filename))) {
+        if (xml_parse($this->_file, file_get_contents($filename)) === 0) {
             $ex = sprintf('XML error: %s at line %d of file %s',
                           xml_error_string(xml_get_error_code($this->_file)),
                           xml_get_current_line_number($this->_file),
@@ -111,8 +109,7 @@ class Zend_Translate_Adapter_XmlTm extends Zend_Translate_Adapter {
     {
         switch (strtolower($name)) {
             case 'tm:tu':
-                if (!empty($this->_tag) and !empty($this->_content) or
-                    (isset($this->_data[$this->_lang][$this->_tag]) === false)) {
+                if (!empty($this->_tag) && !empty($this->_content) || !isset($this->_data[$this->_lang][$this->_tag])) {
                     $this->_data[$this->_lang][$this->_tag] = $this->_content;
                 }
                 $this->_tag     = null;
@@ -136,8 +133,7 @@ class Zend_Translate_Adapter_XmlTm extends Zend_Translate_Adapter {
         $file = file_get_contents($filename, null, null, 0, 100);
         if (strpos($file, "encoding") !== false) {
             $encoding = substr($file, strpos($file, "encoding") + 9);
-            $encoding = substr($encoding, 1, strpos($encoding, $encoding[0], 1) - 1);
-            return $encoding;
+            return substr($encoding, 1, strpos($encoding, $encoding[0], 1) - 1);
         }
         return 'UTF-8';
     }

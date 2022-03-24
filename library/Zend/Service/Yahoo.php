@@ -896,12 +896,12 @@ class Zend_Service_Yahoo
     protected function _compareOptions(array $options, array $validOptions)
     {
         $difference = array_diff(array_keys($options), $validOptions);
-        if ($difference) {
+        if ($difference !== []) {
             /**
              * @see Zend_Service_Exception
              */
             require_once 'Zend/Service/Exception.php';
-            throw new Zend_Service_Exception('The following parameters are invalid: ' . join(', ', $difference));
+            throw new Zend_Service_Exception('The following parameters are invalid: ' . implode(', ', $difference));
         }
     }
 

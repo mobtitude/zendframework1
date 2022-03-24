@@ -37,6 +37,10 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
 {
 
     /**
+     * @var mixed|\Zend_Tool_Project_Profile_Resource_Container
+     */
+    public $_parentResource;
+    /**
      * @var array
      */
     protected $_subResources = array();
@@ -97,7 +101,7 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
                 break;
             }
 
-            if (strtolower($currentResource->getName()) == strtolower($currentConstraint->name)) {
+            if (strtolower($currentResource->getName()) === strtolower($currentConstraint->name)) {
 
                 $paramsMatch = true;
 
@@ -181,7 +185,7 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
 
         $newResource = new Zend_Tool_Project_Profile_Resource($context);
 
-        if ($attributes) {
+        if ($attributes !== []) {
             $newResource->setAttributes($attributes);
         }
 
@@ -251,7 +255,7 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
      */
     public function getAttribute($name)
     {
-        return (array_key_exists($name, $this->_attributes)) ? $this->_attributes[$name] : null;
+        return $this->_attributes[$name] ?? null;
     }
 
     /**
@@ -320,7 +324,7 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
         if (!$this->isAppendable()) {
             throw new Exception('Resource by name ' . (string) $this . ' is not appendable');
         }
-        array_push($this->_subResources, $resource);
+        $this->_subResources[] = $resource;
         $resource->setParentResource($this);
 
         return $this;
@@ -383,7 +387,7 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
      */
     public function hasChildren()
     {
-        return (count($this->_subResources > 0)) ? true : false;
+        return (bool) count($this->_subResources > 0);
     }
 
     /**

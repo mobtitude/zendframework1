@@ -218,13 +218,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
     protected function _loadData(array $data, $fromDataSource)
     {
         parent::_loadData($data, $fromDataSource);
-        if ($fromDataSource === true) {
-            $this->_originalData = $data;
-        } else {
-            $this->_originalData = array();
-        }
+        $this->_originalData = $fromDataSource ? $data : array();
         $this->_children = null;
-        $this->_markAsNew(($fromDataSource === true) ? false : true);
+        $this->_markAsNew(!$fromDataSource);
         $this->_markAsToBeDeleted(false);
     }
 
@@ -240,7 +236,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
     {
         if (is_string($dn) || is_array($dn)) {
             $dn = Zend_Ldap_Dn::factory($dn);
-        } else if ($dn instanceof Zend_Ldap_Dn) {
+        } elseif ($dn instanceof Zend_Ldap_Dn) {
             $dn = clone $dn;
         } else {
             /**
@@ -267,7 +263,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
     {
         if (is_string($dn) || is_array($dn)) {
             $dn = Zend_Ldap_Dn::factory($dn);
-        } else if ($dn instanceof Zend_Ldap_Dn) {
+        } elseif ($dn instanceof Zend_Ldap_Dn) {
             $dn = clone $dn;
         } else {
             /**
@@ -280,8 +276,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
         if ($data === null) {
             return null;
         }
-        $entry = new self($dn, $data, true, $ldap);
-        return $entry;
+        return new self($dn, $data, true, $ldap);
     }
 
     /**
@@ -303,7 +298,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
         }
         if (is_string($data['dn']) || is_array($data['dn'])) {
             $dn = Zend_Ldap_Dn::factory($data['dn']);
-        } else if ($data['dn'] instanceof Zend_Ldap_Dn) {
+        } elseif ($data['dn'] instanceof Zend_Ldap_Dn) {
             $dn = clone $data['dn'];
         } else {
             /**
@@ -312,7 +307,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, '\'dn\' key is of a wrong data type.');
         }
-        $fromDataSource = ($fromDataSource === true) ? true : false;
+        $fromDataSource = $fromDataSource;
         $new = new self($dn, $data, $fromDataSource, null);
         $new->_ensureRdnAttributeValues();
         return $new;
@@ -329,7 +324,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
         foreach ($this->getRdnArray() as $key => $value) {
             if (!array_key_exists($key, $this->_currentData) || $overwrite) {
                 Zend_Ldap_Attribute::setAttribute($this->_currentData, $key, $value, false);
-            } else if (!in_array($value, $this->_currentData[$key])) {
+            } elseif (!in_array($value, $this->_currentData[$key])) {
                 Zend_Ldap_Attribute::setAttribute($this->_currentData, $key, $value, true);
             }
         }
@@ -344,7 +339,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      */
     protected function _markAsNew($new)
     {
-        $this->_new = ($new === false) ? false : true;
+        $this->_new = $new;
     }
 
     /**
@@ -369,7 +364,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      */
     protected function _markAsToBeDeleted($delete)
     {
-        $this->_delete = ($delete === true) ? true : false;
+        $this->_delete = $delete;
     }
 
 
@@ -405,7 +400,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
     {
         if ($this->isNew() || $this->willBeDeleted()) {
             return false;
-        } else if ($this->_newDn !== null) {
+        } elseif ($this->_newDn !== null) {
             return ($this->_dn != $this->_newDn);
         } else {
             return false;
@@ -456,7 +451,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             $this->_preRename();
             $recursive = $this->hasChildren();
             $ldap->rename($this->_dn, $this->_newDn, $recursive, false);
-            foreach ($this->_newDn->getRdn() as $key => $value) {
+            foreach (array_keys($this->_newDn->getRdn()) as $key) {
                 if (array_key_exists($key, $changedData)) {
                     unset($changedData[$key]);
                 }
@@ -465,7 +460,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
             $this->_newDn = null;
             $this->_postRename();
         }
-        if (count($changedData) > 0) {
+        if ($changedData !== []) {
             $this->_preUpdate();
             $ldap->update($this->_getDn(), $changedData);
             $this->_postUpdate();
@@ -496,8 +491,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      */
     public function getCurrentDn()
     {
-        $dn = clone parent::_getDn();
-        return $dn;
+        return clone parent::_getDn();
     }
 
     /**
@@ -511,11 +505,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
      */
     public function setDn($newDn)
     {
-        if ($newDn instanceof Zend_Ldap_Dn) {
-            $this->_newDn = clone $newDn;
-        } else {
-            $this->_newDn = Zend_Ldap_Dn::factory($newDn);
-        }
+        $this->_newDn = $newDn instanceof Zend_Ldap_Dn ? clone $newDn : Zend_Ldap_Dn::factory($newDn);
         $this->_ensureRdnAttributeValues(true);
         return $this;
     }
@@ -610,7 +600,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
         foreach ($this->_currentData as $key => $value) {
             if (!array_key_exists($key, $this->_originalData) && !empty($value)) {
                 $changed[$key] = $value;
-            } else if ($this->_originalData[$key] !== $this->_currentData[$key]) {
+            } elseif ($this->_originalData[$key] !== $this->_currentData[$key]) {
                 $changed[$key] = $value;
             }
         }
@@ -633,9 +623,9 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
         foreach ($this->_currentData as $key => $value) {
             if (!array_key_exists($key, $this->_originalData) && !empty($value)) {
                 $changes['add'][$key] = $value;
-            } else if (count($this->_originalData[$key]) === 0 && !empty($value)) {
+            } elseif (count($this->_originalData[$key]) === 0 && !empty($value)) {
                 $changes['add'][$key] = $value;
-            } else if ($this->_originalData[$key] !== $this->_currentData[$key]) {
+            } elseif ($this->_originalData[$key] !== $this->_currentData[$key]) {
                 if (empty($value)) {
                     $changes['delete'][$key] = $value;
                 } else {
@@ -815,21 +805,19 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
              */
             require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'DN cannot be changed.');
-        }
-        else if (array_key_exists($name, $rdn)) {
+        } elseif (array_key_exists($name, $rdn)) {
             /**
              * @see Zend_Ldap_Exception
              */
             require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'Cannot change attribute because it\'s part of the RDN');
-        } else if (in_array($name, self::$_systemAttributes)) {
+        } elseif (in_array($name, self::$_systemAttributes)) {
             /**
              * @see Zend_Ldap_Exception
              */
             require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'Cannot change attribute because it\'s read-only');
-        }
-        else return true;
+        } else return true;
     }
 
     /**
@@ -1015,7 +1003,7 @@ class Zend_Ldap_Node extends Zend_Ldap_Node_Abstract implements Iterator, Recurs
                 return false;
             }
         } else {
-            return (count($this->_children) > 0);
+            return ($this->_children !== []);
         }
     }
 

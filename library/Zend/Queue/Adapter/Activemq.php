@@ -236,26 +236,24 @@ class Zend_Queue_Adapter_Activemq extends Zend_Queue_Adapter_AdapterAbstract
             $this->_subscribe($queue);
         }
 
-        if ($maxMessages > 0) {
-            if ($this->_client->canRead()) {
-                for ($i = 0; $i < $maxMessages; $i++) {
-                    $response = $this->_client->receive();
+        if ($maxMessages > 0 && $this->_client->canRead()) {
+            for ($i = 0; $i < $maxMessages; $i++) {
+                $response = $this->_client->receive();
 
-                    switch ($response->getCommand()) {
-                        case 'MESSAGE':
-                            $datum = array(
-                                'message_id' => $response->getHeader('message-id'),
-                                'handle'     => $response->getHeader('message-id'),
-                                'body'       => $response->getBody(),
-                                'md5'        => md5($response->getBody())
-                            );
-                            $data[] = $datum;
-                            break;
-                        default:
-                            $block = print_r($response, true);
-                            require_once 'Zend/Queue/Exception.php';
-                            throw new Zend_Queue_Exception('Invalid response received: ' . $block);
-                    }
+                switch ($response->getCommand()) {
+                    case 'MESSAGE':
+                        $datum = array(
+                            'message_id' => $response->getHeader('message-id'),
+                            'handle'     => $response->getHeader('message-id'),
+                            'body'       => $response->getBody(),
+                            'md5'        => md5($response->getBody())
+                        );
+                        $data[] = $datum;
+                        break;
+                    default:
+                        $block = print_r($response, true);
+                        require_once 'Zend/Queue/Exception.php';
+                        throw new Zend_Queue_Exception('Invalid response received: ' . $block);
                 }
             }
         }

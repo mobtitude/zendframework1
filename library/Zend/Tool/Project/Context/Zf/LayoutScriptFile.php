@@ -85,7 +85,7 @@ class Zend_Tool_Project_Context_Zf_LayoutScriptFile extends Zend_Tool_Project_Co
     {
         $attributes = array();
 
-        if ($this->_layoutName) {
+        if ($this->_layoutName !== '' && $this->_layoutName !== '0') {
             $attributes['layoutName'] = $this->_layoutName;
         }
 
@@ -99,11 +99,9 @@ class Zend_Tool_Project_Context_Zf_LayoutScriptFile extends Zend_Tool_Project_Co
      */
     public function getContents()
     {
-        $contents = <<<EOS
+        return <<<EOS
 <?php echo \$this->layout()->content; ?>
 EOS;
-
-        return $contents;
     }
 
 }

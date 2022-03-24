@@ -457,18 +457,12 @@ class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
      */
     public function receive()
     {
-        if (!$this->_validated) {
-            if (!$this->isValid($this->getName())) {
-                return false;
-            }
+        if (!$this->_validated && !$this->isValid($this->getName())) {
+            return false;
         }
 
         $adapter = $this->getTransferAdapter();
-        if ($adapter->receive($this->getName())) {
-            return true;
-        }
-
-        return false;
+        return $adapter->receive($this->getName());
     }
 
     /**
@@ -755,7 +749,7 @@ class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
         }
 
         $translator = $this->getTransferAdapter()->getTranslator();
-        if (null === $translator) {
+        if (!$translator instanceof \Zend_Translate_Adapter) {
             require_once 'Zend/Form.php';
             return Zend_Form::getDefaultTranslator();
         }

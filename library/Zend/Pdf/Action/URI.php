@@ -140,11 +140,7 @@ class Zend_Pdf_Action_URI extends Zend_Pdf_Action
     {
         $this->_actionDictionary->touch();
 
-        if ($isMap) {
-            $this->_actionDictionary->IsMap = new Zend_Pdf_Element_Boolean(true);
-        } else {
-            $this->_actionDictionary->IsMap = null;
-        }
+        $this->_actionDictionary->IsMap = $isMap ? new Zend_Pdf_Element_Boolean(true) : null;
 
         return $this;
     }

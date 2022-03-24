@@ -130,11 +130,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
     {
         if ($location === null) {
             $uri = self::DOCUMENTS_LIST_FEED_URI;
-        } else if ($location instanceof Zend_Gdata_Query) {
-            $uri = $location->getQueryUrl();
-        } else {
-            $uri = $location;
-        }
+        } else $uri = $location instanceof Zend_Gdata_Query ? $location->getQueryUrl() : $location;
         return parent::getFeed($uri, 'Zend_Gdata_Docs_DocumentListFeed');
     }
 
@@ -152,11 +148,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null'
             );
-        } else if ($location instanceof Zend_Gdata_Query) {
-            $uri = $location->getQueryUrl();
-        } else {
-            $uri = $location;
-        }
+        } else $uri = $location instanceof Zend_Gdata_Query ? $location->getQueryUrl() : $location;
         return parent::getEntry($uri, 'Zend_Gdata_Docs_DocumentListEntry');
     }
 
@@ -245,11 +237,7 @@ class Zend_Gdata_Docs extends Zend_Gdata
 
         // Create the media source which describes the file.
         $fs = $this->newMediaFileSource($fileLocation);
-        if ($title !== null) {
-            $slugHeader = $title;
-        } else {
-            $slugHeader = $fileLocation;
-        }
+        $slugHeader = $title !== null ? $title : $fileLocation;
 
         // Set the slug header to tell the Google Documents server what the
         // title of the document should be and what the file extension was

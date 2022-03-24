@@ -89,13 +89,12 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {
                 $temp['type'] = array_shift($options);
             }
-
             $options = $temp;
         }
 
@@ -128,13 +127,12 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
             foreach($type as $value) {
                 if (is_int($value)) {
                     $detected += $value;
-                } else if (in_array($value, $this->_constants)) {
+                } elseif (in_array($value, $this->_constants)) {
                     $detected += array_search($value, $this->_constants);
                 }
             }
-
             $type = $detected;
-        } else if (is_string($type) && in_array($type, $this->_constants)) {
+        } elseif (is_string($type) && in_array($type, $this->_constants)) {
             $type = array_search($type, $this->_constants);
         }
 
@@ -194,12 +192,9 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
         if ($type >= self::OBJECT) {
             $type -= self::OBJECT;
             // fall trough, objects are always not empty
-        } else if ($object === false) {
-            // object not allowed but object given -> return false
-            if (is_object($value)) {
-                $this->_error(self::IS_EMPTY);
-                return false;
-            }
+        } elseif (!$object && is_object($value)) {
+            $this->_error(self::IS_EMPTY);
+            return false;
         }
 
         // SPACE ('   ')

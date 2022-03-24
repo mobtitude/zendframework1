@@ -210,7 +210,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
      */
     public function setAbstract($isAbstract)
     {
-        $this->_isAbstract = ($isAbstract) ? true : false;
+        $this->_isAbstract = $isAbstract;
         return $this;
     }
 
@@ -599,9 +599,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             }
         }
 
-        $output .= self::LINE_FEED . '}' . self::LINE_FEED;
-
-        return $output;
+        return $output . (self::LINE_FEED . '}' . self::LINE_FEED);
     }
 
     /**

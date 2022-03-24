@@ -142,7 +142,7 @@ abstract class Zend_Mail_Protocol_Abstract
              * @see Zend_Mail_Protocol_Exception
              */
             require_once 'Zend/Mail/Protocol/Exception.php';
-            throw new Zend_Mail_Protocol_Exception(join(', ', $this->_validHost->getMessages()));
+            throw new Zend_Mail_Protocol_Exception(implode(', ', $this->_validHost->getMessages()));
         }
 
         $this->_host = $host;
@@ -277,7 +277,7 @@ abstract class Zend_Mail_Protocol_Abstract
             throw new Zend_Mail_Protocol_Exception($errorStr);
         }
 
-        if (($result = $this->_setStreamTimeout(self::TIMEOUT_CONNECTION)) === false) {
+        if (!($result = $this->_setStreamTimeout(self::TIMEOUT_CONNECTION))) {
             /**
              * @see Zend_Mail_Protocol_Exception
              */

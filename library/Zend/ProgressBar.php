@@ -112,7 +112,7 @@ class Zend_ProgressBar
 
         // See If a persistenceNamespace exists and handle accordingly
         if ($this->_persistenceNamespace !== null) {
-            if (isset($this->_persistenceNamespace->isSet)) {
+            if (property_exists($this->_persistenceNamespace, 'isSet') && $this->_persistenceNamespace->isSet !== null) {
                 $this->_startTime  = $this->_persistenceNamespace->startTime;
                 $this->_current    = $this->_persistenceNamespace->current;
                 $this->_statusText = $this->_persistenceNamespace->statusText;
@@ -163,20 +163,12 @@ class Zend_ProgressBar
         }
 
         // Calculate percent
-        if ($this->_min === $this->_max) {
-            $percent = false;
-        } else {
-            $percent = (float) ($this->_current - $this->_min) / ($this->_max - $this->_min);
-        }
+        $percent = $this->_min === $this->_max ? false : (float) ($this->_current - $this->_min) / ($this->_max - $this->_min);
 
         // Calculate ETA
         $timeTaken = time() - $this->_startTime;
 
-        if ($percent === .0 || $percent === false) {
-            $timeRemaining = null;
-        } else {
-            $timeRemaining = round(((1 / $percent) * $timeTaken) - $timeTaken);
-        }
+        $timeRemaining = $percent === .0 || $percent === false ? null : round(((1 / $percent) * $timeTaken) - $timeTaken);
 
         // Poll the adapter
         $this->_adapter->notify($this->_current, $this->_max, $percent, $timeTaken, $timeRemaining, $this->_statusText);

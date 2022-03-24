@@ -41,7 +41,7 @@ class Zend_Tool_Framework_Client_Config
      */
     public function __config($options = array())
     {
-        if ($options) {
+        if ($options !== []) {
             $this->setOptions($options);
         }
     }

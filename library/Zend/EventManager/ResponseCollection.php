@@ -91,7 +91,7 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
         {
             $this->rewind();
             $value = array_pop($this->stack);
-            array_push($this->stack, $value);
+            $this->stack[] = $value;
             return $value;
         }
 
@@ -253,7 +253,7 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
          */
         public function push($value)
         {
-            array_push($this->data, $value);
+            $this->data[] = $value;
             $this->count++;
             $this->stack  = false;
         }
@@ -341,8 +341,7 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
         public function valid()
         {
             $key = key($this->stack);
-            $var = ($key !== null && $key !== false);
-            return $var;
+            return $key !== null && $key !== false;
         }
     }
 }
@@ -414,11 +413,6 @@ class Zend_EventManager_ResponseCollection extends SplStack
      */
     public function contains($value)
     {
-        foreach ($this as $response) {
-            if ($response === $value) {
-                return true;
-            }
-        }
-        return false;
+        return in_array($value, $this, true);
     }
 }

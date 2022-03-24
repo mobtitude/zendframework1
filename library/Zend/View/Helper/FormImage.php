@@ -68,11 +68,7 @@ class Zend_View_Helper_FormImage extends Zend_View_Helper_FormElement
         }
 
         // Do we have a value?
-        if (isset($value) && !empty($value)) {
-            $value = ' value="' . $this->view->escape($value) . '"';
-        } else {
-            $value = '';
-        }
+        $value = isset($value) && !empty($value) ? ' value="' . $this->view->escape($value) . '"' : '';
 
         // Disabled?
         $disabled = '';

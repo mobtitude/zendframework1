@@ -140,8 +140,7 @@ class Zend_Cache_Core
             $options = $options->toArray();
         }
         if (!is_array($options)) {
-            Zend_Cache::throwException("Options passed were not an array"
-            . " or Zend_Config instance.");
+            Zend_Cache::throwException('Options passed were not an array or Zend_Config instance.');
         }
         foreach ($options as $name => $value) {
             $this->setOption($name, $value);
@@ -350,20 +349,14 @@ class Zend_Cache_Core
         if (!$this->_options['caching']) {
             return true;
         }
-        if ($id === null) {
-            $id = $this->_lastId;
-        } else {
-            $id = $this->_id($id);
-        }
+        $id = $id === null ? $this->_lastId : $this->_id($id);
         $this->_validateIdOrTag($id);
         $this->_validateTagsArray($tags);
         if ($this->_options['automatic_serialization']) {
             // we need to serialize datas before storing them
             $data = serialize($data);
-        } else {
-            if (!is_string($data)) {
-                Zend_Cache::throwException("Datas must be string or set automatic_serialization = true");
-            }
+        } elseif (!is_string($data)) {
+            Zend_Cache::throwException("Datas must be string or set automatic_serialization = true");
         }
 
         // automatic cleaning
@@ -402,7 +395,7 @@ class Zend_Cache_Core
 
         if ($this->_options['write_control']) {
             $data2 = $this->_backend->load($id, true);
-            if ($data!=$data2) {
+            if ($data != $data2) {
                 $this->_log("Zend_Cache_Core::save(): write control of item '{$id}' failed -> removing it", 4);
                 $this->_backend->remove($id);
                 return false;
@@ -675,7 +668,7 @@ class Zend_Cache_Core
         if (substr($string, 0, 9) == 'internal-') {
             Zend_Cache::throwException('"internal-*" ids or tags are reserved');
         }
-        if (!preg_match('~^[a-zA-Z0-9_]+$~D', $string)) {
+        if (!preg_match('~^\w+$~D', $string)) {
             Zend_Cache::throwException("Invalid id or tag '$string' : must use only [a-zA-Z0-9_]");
         }
     }
@@ -739,7 +732,7 @@ class Zend_Cache_Core
         if (!$this->_options['logging']) {
             return;
         }
-        if (!(isset($this->_options['logger']) || $this->_options['logger'] instanceof Zend_Log)) {
+        if (!isset($this->_options['logger']) && !$this->_options['logger'] instanceof Zend_Log) {
             Zend_Cache::throwException('Logging is enabled but logger is not set');
         }
         $logger = $this->_options['logger'];

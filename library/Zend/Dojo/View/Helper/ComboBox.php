@@ -75,8 +75,7 @@ class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
                 if (is_string($store)) {
                     $html .= $store;
                 }
-                $html .= $this->_createFormElement($id, $value, $params, $attribs);
-                return $html;
+                return $html . $this->_createFormElement($id, $value, $params, $attribs);
             }
             unset($params['store']);
         } elseif (array_key_exists('store', $params)) {
@@ -90,14 +89,11 @@ class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
                     $storeParams['params'] = $params['storeParams'];
                     unset($params['storeParams']);
                 }
-                if (false !== ($store = $this->_renderStore($storeParams, $id))) {
-                    if (is_string($store)) {
-                        $html .= $store;
-                    }
+                if (false !== ($store = $this->_renderStore($storeParams, $id)) && is_string($store)) {
+                    $html .= $store;
                 }
             }
-            $html .= $this->_createFormElement($id, $value, $params, $attribs);
-            return $html;
+            return $html . $this->_createFormElement($id, $value, $params, $attribs);
         }
 
         // required for correct type casting in declerative mode 

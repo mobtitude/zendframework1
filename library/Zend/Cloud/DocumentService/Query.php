@@ -146,7 +146,7 @@ class Zend_Cloud_DocumentService_Query
      */
     public function limit($limit)
     {
-        if ($limit != (int) $limit) {
+        if ($limit !== (int) $limit) {
             require_once 'Zend/Cloud/DocumentService/Exception.php';
             throw new Zend_Cloud_DocumentService_Exception("LIMIT argument must be an integer");
         }

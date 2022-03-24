@@ -100,12 +100,10 @@ class Zend_Gdata_Geo_Extension_GmlPoint extends Zend_Gdata_Extension
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
 
-        switch ($absoluteNodeName) {
-            case $this->lookupNamespace('gml') . ':' . 'pos';
-                $pos = new Zend_Gdata_Geo_Extension_GmlPos();
-                $pos->transferFromDOM($child);
-                $this->_pos = $pos;
-                break;
+        if ($absoluteNodeName === $this->lookupNamespace('gml') . ':' . 'pos') {
+            $pos = new Zend_Gdata_Geo_Extension_GmlPos();
+            $pos->transferFromDOM($child);
+            $this->_pos = $pos;
         }
     }
 

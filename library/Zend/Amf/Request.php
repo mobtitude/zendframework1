@@ -153,9 +153,7 @@ class Zend_Amf_Request
             require_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Unable to parse ' . $name . ' header data: ' . $e->getMessage() . ' '. $e->getLine(), 0, $e);
         }
-
-        $header = new Zend_Amf_Value_MessageHeader($name, $mustRead, $data, $length);
-        return $header;
+        return new Zend_Amf_Value_MessageHeader($name, $mustRead, $data, $length);
     }
 
     /**
@@ -190,9 +188,7 @@ class Zend_Amf_Request
             // set the encoding so we return our message in AMF3
             $this->_objectEncoding = Zend_Amf_Constants::AMF3_OBJECT_ENCODING;
         }
-
-        $body = new Zend_Amf_Value_MessageBody($targetURI, $responseURI, $data);
-        return $body;
+        return new Zend_Amf_Value_MessageBody($targetURI, $responseURI, $data);
     }
 
     /**

@@ -240,8 +240,7 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
         }
         if (isset($data['length']) && (int) $data['length'] <= 0) {
             require_once 'Zend/Feed/Exception.php';
-            $exception = new Zend_Feed_Exception('Enclosure "length" must be an integer'
-            . ' indicating the content\'s length in bytes');
+            $exception = new Zend_Feed_Exception('Enclosure "length" must be an integer indicating the content\'s length in bytes');
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {

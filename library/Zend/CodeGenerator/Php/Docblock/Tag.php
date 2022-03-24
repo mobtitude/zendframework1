@@ -112,9 +112,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag extends Zend_CodeGenerator_Php_Abstrac
         } catch (Zend_Loader_Exception $exception) {
             $tagClass = 'Zend_CodeGenerator_Php_Docblock_Tag';
         }
-
-        $tag = new $tagClass(array('name' => $tagName));
-        return $tag;
+        return new $tagClass(array('name' => $tagName));
     }
 
     /**
@@ -169,7 +167,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag extends Zend_CodeGenerator_Php_Abstrac
     public function generate()
     {
         $tag = '@' . $this->_name;
-        if ($this->_description) {
+        if ($this->_description !== '' && $this->_description !== '0') {
             $tag .= ' ' . $this->_description;
         }
         return $tag;

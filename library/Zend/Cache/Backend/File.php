@@ -129,10 +129,8 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
         } else {
             $this->setCacheDir(self::getTmpDir() . DIRECTORY_SEPARATOR, false);
         }
-        if (isset($this->_options['file_name_prefix'])) { // particular case for this option
-            if (!preg_match('~^[a-zA-Z0-9_]+$~D', (string) $this->_options['file_name_prefix'])) {
-                Zend_Cache::throwException('Invalid file_name_prefix : must use only [a-zA-Z0-9_]');
-            }
+        // particular case for this option
+        if (isset($this->_options['file_name_prefix']) && !preg_match('~^\w+$~D', (string) $this->_options['file_name_prefix'])) { Zend_Cache::throwException('Invalid file_name_prefix : must use only [a-zA-Z0-9_]');
         }
         if ($this->_options['metadatas_array_max_size'] < 10) {
             Zend_Cache::throwException('Invalid metadatas_array_max_size, must be > 10');
@@ -253,11 +251,7 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
                 return false;
             }
         }
-        if ($this->_options['read_control']) {
-            $hash = $this->_hash($data, $this->_options['read_control_type']);
-        } else {
-            $hash = '';
-        }
+        $hash = $this->_options['read_control'] ? $this->_hash($data, $this->_options['read_control_type']) : '';
         $metadatas = array(
             'hash' => $hash,
             'mtime' => time(),
@@ -269,8 +263,7 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
             $this->_log('Zend_Cache_Backend_File::save() / error on saving metadata');
             return false;
         }
-        $res = $this->_filePutContents($file, $data);
-        return $res;
+        return $this->_filePutContents($file, $data);
     }
 
     /**
@@ -440,11 +433,7 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
             'expire' => $metadatas['expire'] + $extraLifetime,
             'tags' => $metadatas['tags']
         );
-        $res = $this->_setMetadatas($id, $newMetadatas);
-        if (!$res) {
-            return false;
-        }
-        return true;
+        return $this->_setMetadatas($id, $newMetadatas);
     }
 
     /**
@@ -568,11 +557,10 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
     {
         $file = $this->_metadatasFile($id);
         $result = $this->_fileGetContents($file);
-        if (!$result) {
+        if ($result === '' || $result === '0') {
             return false;
         }
-        $tmp = @unserialize($result);
-        return $tmp;
+        return @unserialize($result);
     }
 
     /**
@@ -585,11 +573,7 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
     protected function _saveMetadatas($id, $metadatas)
     {
         $file = $this->_metadatasFile($id);
-        $result = $this->_filePutContents($file, serialize($metadatas));
-        if (!$result) {
-            return false;
-        }
-        return true;
+        return $this->_filePutContents($file, serialize($metadatas));
     }
 
     /**
@@ -741,7 +725,7 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
                         break;
                 }
             }
-            if ((is_dir($file)) and ($this->_options['hashed_directory_level']>0)) {
+            if (is_dir($file) && $this->_options['hashed_directory_level']>0) {
                 // Recursive call
                 $result = $this->_clean($file . DIRECTORY_SEPARATOR, $mode, $tags) && $result;
                 if ($mode == Zend_Cache::CLEANING_MODE_ALL) {
@@ -832,7 +816,7 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
                         break;
                 }
             }
-            if ((is_dir($file)) and ($this->_options['hashed_directory_level']>0)) {
+            if (is_dir($file) && $this->_options['hashed_directory_level']>0) {
                 // Recursive call
                 $recursiveRs =  $this->_get($file . DIRECTORY_SEPARATOR, $mode, $tags);
                 if ($recursiveRs === false) {
@@ -892,8 +876,7 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
     protected function _idToFileName($id)
     {
         $prefix = $this->_options['file_name_prefix'];
-        $result = $prefix . '---' . $id;
-        return $result;
+        return $prefix . '---' . $id;
     }
 
     /**
@@ -1013,7 +996,7 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
             fseek($f, 0);
             ftruncate($f, 0);
             $tmp = @fwrite($f, $string);
-            if (!($tmp === FALSE)) {
+            if ($tmp !== FALSE) {
                 $result = true;
             }
             @fclose($f);

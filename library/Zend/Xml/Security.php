@@ -54,10 +54,7 @@ class Zend_Xml_Security
      */
     public static function loadXmlErrorHandler($errno, $errstr, $errfile, $errline)
     {
-        if (substr_count($errstr, 'DOMDocument::loadXML()') > 0) {
-            return true;
-        }
-        return false;
+        return substr_count($errstr, 'DOMDocument::loadXML()') > 0;
     }
 
     /**
@@ -106,11 +103,9 @@ class Zend_Xml_Security
         // Scan for potential XEE attacks using ENTITY, if not PHP-FPM
         if (!self::isPhpFpm()) {
             foreach ($dom->childNodes as $child) {
-                if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
-                    if ($child->entities->length > 0) {
-                        require_once 'Exception.php';
-                        throw new Zend_Xml_Exception(self::ENTITY_DETECT);
-                    }
+                if ($child->nodeType === XML_DOCUMENT_TYPE_NODE && $child->entities->length > 0) {
+                    require_once 'Exception.php';
+                    throw new Zend_Xml_Exception(self::ENTITY_DETECT);
                 }
             }
         }
@@ -173,11 +168,7 @@ class Zend_Xml_Security
                 && version_compare(PHP_VERSION, '5.6.6', 'lt')
             )
         );
-
-        if (substr(php_sapi_name(), 0, 3) === 'fpm' && $isVulnerableVersion) {
-            return true;
-        }
-        return false;
+        return substr(php_sapi_name(), 0, 3) === 'fpm' && $isVulnerableVersion;
     }
 
     /**
@@ -239,7 +230,7 @@ class Zend_Xml_Security
     protected static function detectXmlStringEncoding($xml)
     {
         foreach (self::getAsciiEncodingMap() as $encoding => $generator) {
-            $prefix = call_user_func($generator, '<' . '?xml');
+            $prefix = call_user_func($generator, '<?xml');
             if (0 === strncmp($xml, $prefix, strlen((string) $prefix))) {
                 return $encoding;
             }

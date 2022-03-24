@@ -57,7 +57,7 @@ class Zend_Search_Lucene_Index_DictionaryLoader
         // $tiVersion = $tiiFile->readInt();
         $tiVersion = ord($data[0]) << 24 | ord($data[1]) << 16 | ord($data[2]) << 8  | ord($data[3]);
         $pos += 4;
-        if ($tiVersion != (int)0xFFFFFFFE /* pre-2.1 format */ &&
+        if ($tiVersion !== (int)0xFFFFFFFE /* pre-2.1 format */ &&
             $tiVersion != (int)0xFFFFFFFD /* 2.1+ format    */) {
                 require_once 'Zend/Search/Lucene/Exception.php';
                 throw new Zend_Search_Lucene_Exception('Wrong TermInfoIndexFile file format');
@@ -74,10 +74,10 @@ class Zend_Search_Lucene_Index_DictionaryLoader
                               ord($data[$pos+6]) << 8   |
                               ord($data[$pos+7]);
         } else {
-            if ((ord($data[$pos])            != 0) ||
-                (ord($data[$pos+1])          != 0) ||
-                (ord($data[$pos+2])          != 0) ||
-                (ord($data[$pos+3])          != 0) ||
+            if ((ord($data[$pos]) != 0) ||
+                (ord($data[$pos+1]) != 0) ||
+                (ord($data[$pos+2]) != 0) ||
+                (ord($data[$pos+3]) != 0) ||
                 ((ord($data[$pos+4]) & 0x80) != 0)) {
                     require_once 'Zend/Search/Lucene/Exception.php';
                     throw new Zend_Search_Lucene_Exception('Largest supported segment size (for 32-bit mode) is 2Gb');
@@ -134,12 +134,12 @@ class Zend_Search_Lucene_Index_DictionaryLoader
                 for ($count1 = 0; $count1 < $len; $count1++ ) {
                     if (( ord($termSuffix[$count1]) & 0xC0 ) == 0xC0) {
                         $addBytes = 1;
-                        if (ord($termSuffix[$count1]) & 0x20 ) {
+                        if ((ord($termSuffix[$count1]) & 0x20) !== 0 ) {
                             $addBytes++;
 
                             // Never used for Java Lucene created index.
                             // Java2 doesn't encode strings in four bytes
-                            if (ord($termSuffix[$count1]) & 0x10 ) {
+                            if ((ord($termSuffix[$count1]) & 0x10) !== 0 ) {
                                 $addBytes++;
                             }
                         }
@@ -166,9 +166,9 @@ class Zend_Search_Lucene_Index_DictionaryLoader
                 $charBytes = 1;
                 if ((ord($prevTerm[$pb]) & 0xC0) == 0xC0) {
                     $charBytes++;
-                    if (ord($prevTerm[$pb]) & 0x20 ) {
+                    if ((ord($prevTerm[$pb]) & 0x20) !== 0 ) {
                         $charBytes++;
-                        if (ord($prevTerm[$pb]) & 0x10 ) {
+                        if ((ord($prevTerm[$pb]) & 0x10) !== 0 ) {
                             $charBytes++;
                         }
                     }
@@ -252,7 +252,7 @@ class Zend_Search_Lucene_Index_DictionaryLoader
         }
 
         // Check special index entry mark
-        if ($termDictionary[0][0] != (int)0xFFFFFFFF) {
+        if ($termDictionary[0][0] !== (int)0xFFFFFFFF) {
             require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Wrong TermInfoIndexFile file format');
         }

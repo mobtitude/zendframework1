@@ -132,11 +132,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
                     $markerType = Zend_Amf_Constants::AMF3_NULL;
                     break;
                 case (is_bool($data)):
-                    if ($data){
-                        $markerType = Zend_Amf_Constants::AMF3_BOOLEAN_TRUE;
-                    } else {
-                        $markerType = Zend_Amf_Constants::AMF3_BOOLEAN_FALSE;
-                    }
+                    $markerType = $data ? Zend_Amf_Constants::AMF3_BOOLEAN_TRUE : Zend_Amf_Constants::AMF3_BOOLEAN_FALSE;
                     break;
                 case (is_int($data)):
                     if (($data > 0xFFFFFFF) || ($data < -268435456)) {
@@ -158,9 +154,9 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
                     // Handle object types.
                     if (($data instanceof DateTime) || ($data instanceof Zend_Date)) {
                         $markerType = Zend_Amf_Constants::AMF3_DATE;
-                    } else if ($data instanceof Zend_Amf_Value_ByteArray) {
+                    } elseif ($data instanceof Zend_Amf_Value_ByteArray) {
                         $markerType = Zend_Amf_Constants::AMF3_BYTEARRAY;
-                    } else if (($data instanceof DOMDocument) || ($data instanceof SimpleXMLElement)) {
+                    } elseif (($data instanceof DOMDocument) || ($data instanceof SimpleXMLElement)) {
                         $markerType = Zend_Amf_Constants::AMF3_XMLSTRING;
                     } else {
                         $markerType = Zend_Amf_Constants::AMF3_OBJECT;
@@ -231,7 +227,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
     public function writeString(&$string)
     {
         $len = $this->_mbStringFunctionsOverloaded ? mb_strlen($string, '8bit') : strlen($string);
-        if(!$len){
+        if($len === 0){
             $this->writeInteger(0x01);
             return $this;
         }
@@ -264,7 +260,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
 
         if (is_string($data)) {
             //nothing to do
-        } else if ($data instanceof Zend_Amf_Value_ByteArray) {
+        } elseif ($data instanceof Zend_Amf_Value_ByteArray) {
             $data = $data->getData();
         } else {
             require_once 'Zend/Amf/Exception.php';
@@ -288,11 +284,11 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
             return $this;
         }
 
-        if(is_string($xml)) {
+        if (is_string($xml)) {
             //nothing to do
-        } else if ($xml instanceof DOMDocument) {
+        } elseif ($xml instanceof DOMDocument) {
             $xml = $xml->saveXml();
-        } else if ($xml instanceof SimpleXMLElement) {
+        } elseif ($xml instanceof SimpleXMLElement) {
             $xml = $xml->asXML();
         } else {
             require_once 'Zend/Amf/Exception.php';
@@ -424,7 +420,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
                 break;
 
             // Check to see if the user has defined an explicit Action Script type.
-            case isset($object->_explicitType):
+            case property_exists($object, '_explicitType') && $object->_explicitType !== null:
                 $className = $object->_explicitType;
                 break;
 

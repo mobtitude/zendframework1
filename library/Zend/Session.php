@@ -637,7 +637,7 @@ class Zend_Session extends Zend_Session_Abstract
      */
     public static function isRegenerated()
     {
-        return ( (self::$_regenerateIdState > 0) ? true : false );
+        return ( self::$_regenerateIdState > 0 );
     }
 
 
@@ -867,7 +867,7 @@ class Zend_Session extends Zend_Session_Abstract
      */
     public static function getIterator()
     {
-        if (parent::$_readable === false) {
+        if (!parent::$_readable) {
             /** @see Zend_Session_Exception */
             require_once 'Zend/Session/Exception.php';
             throw new Zend_Session_Exception(parent::_THROW_NOT_READABLE_MSG);

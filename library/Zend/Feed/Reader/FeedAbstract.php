@@ -97,11 +97,7 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
         $this->_domDocument = $domDocument;
         $this->_xpath = new DOMXPath($this->_domDocument);
 
-        if ($type !== null) {
-            $this->_data['type'] = $type;
-        } else {
-            $this->_data['type'] = Zend_Feed_Reader::detectType($this->_domDocument);
-        }
+        $this->_data['type'] = $type !== null ? $type : Zend_Feed_Reader::detectType($this->_domDocument);
         $this->_registerNamespaces();
         $this->_indexEntries();
         $this->_loadExtensions();

@@ -82,19 +82,23 @@ class Zend_Service_Console_Command_ParameterSource_ConfigFile
 		// Loop aliases
 		foreach ($parameter->aliases as $alias) {
 			if (array_key_exists($alias, $iniValues)) {
-				$parameterValue = $iniValues[$alias]; break;
-			} else if (array_key_exists(strtolower($alias), $iniValues)) {
-				$parameterValue = $iniValues[strtolower($alias)]; break;
-			} else if (array_key_exists(str_replace('-', '', $alias), $iniValues)) {
-				$parameterValue = $iniValues[str_replace('-', '', $alias)]; break;
-			} else if (array_key_exists(strtolower(str_replace('-', '', $alias)), $iniValues)) {
-				$parameterValue = $iniValues[strtolower(str_replace('-', '', $alias))]; break;
+				$parameterValue = $iniValues[$alias];
+				break;
+			} elseif (array_key_exists(strtolower($alias), $iniValues)) {
+				$parameterValue = $iniValues[strtolower($alias)];
+				break;
+			} elseif (array_key_exists(str_replace('-', '', $alias), $iniValues)) {
+				$parameterValue = $iniValues[str_replace('-', '', $alias)];
+				break;
+			} elseif (array_key_exists(strtolower(str_replace('-', '', $alias)), $iniValues)) {
+				$parameterValue = $iniValues[strtolower(str_replace('-', '', $alias))];
+				break;
 			}
 		}
 
 		if (strtolower($parameterValue) == 'true') {
 			$parameterValue = true;
-		} else if (strtolower($parameterValue) == 'false') {
+		} elseif (strtolower($parameterValue) == 'false') {
 			$parameterValue = false;
 		}
 

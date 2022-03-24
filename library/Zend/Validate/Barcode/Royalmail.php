@@ -91,11 +91,7 @@ class Zend_Validate_Barcode_Royalmail extends Zend_Validate_Barcode_AdapterAbstr
         $rowchkvalue = array_keys($this->_rows, $rowvalue);
         $colchkvalue = array_keys($this->_columns, $colvalue);
         $chkvalue    = current(array_intersect($rowchkvalue, $colchkvalue));
-        if ($chkvalue == $checksum) {
-            return true;
-        }
-
-        return false;
+        return $chkvalue == $checksum;
     }
 
     /**

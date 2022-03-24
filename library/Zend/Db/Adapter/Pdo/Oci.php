@@ -143,8 +143,7 @@ class Zend_Db_Adapter_Pdo_Oci extends Zend_Db_Adapter_Pdo_Abstract
      */
     public function listTables()
     {
-        $data = $this->fetchCol('SELECT table_name FROM all_tables');
-        return $data;
+        return $this->fetchCol('SELECT table_name FROM all_tables');
     }
 
     /**
@@ -242,7 +241,9 @@ class Zend_Db_Adapter_Pdo_Oci extends Zend_Db_Adapter_Pdo_Abstract
 
         $desc = array();
         foreach ($result as $key => $row) {
-            list ($primary, $primaryPosition, $identity) = array(false, null, false);
+            $primary = false;
+            $primaryPosition = null;
+            $identity = false;
             if ($row[$constraint_type] == 'P') {
                 $primary = true;
                 $primaryPosition = $row[$position];
@@ -282,8 +283,7 @@ class Zend_Db_Adapter_Pdo_Oci extends Zend_Db_Adapter_Pdo_Abstract
     public function lastSequenceId($sequenceName)
     {
         $this->_connect();
-        $value = $this->fetchOne('SELECT '.$this->quoteIdentifier($sequenceName, true).'.CURRVAL FROM dual');
-        return $value;
+        return $this->fetchOne('SELECT '.$this->quoteIdentifier($sequenceName, true).'.CURRVAL FROM dual');
     }
 
     /**
@@ -297,8 +297,7 @@ class Zend_Db_Adapter_Pdo_Oci extends Zend_Db_Adapter_Pdo_Abstract
     public function nextSequenceId($sequenceName)
     {
         $this->_connect();
-        $value = $this->fetchOne('SELECT '.$this->quoteIdentifier($sequenceName, true).'.NEXTVAL FROM dual');
-        return $value;
+        return $this->fetchOne('SELECT '.$this->quoteIdentifier($sequenceName, true).'.NEXTVAL FROM dual');
     }
 
     /**
@@ -344,14 +343,14 @@ class Zend_Db_Adapter_Pdo_Oci extends Zend_Db_Adapter_Pdo_Abstract
      */
     public function limit($sql, $count, $offset = 0)
     {
-        $count = intval($count);
+        $count = (int) $count;
         if ($count <= 0) {
             /** @see Zend_Db_Adapter_Exception */
             require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
         }
 
-        $offset = intval($offset);
+        $offset = (int) $offset;
         if ($offset < 0) {
             /** @see Zend_Db_Adapter_Exception */
             require_once 'Zend/Db/Adapter/Exception.php';

@@ -44,7 +44,7 @@ class Zend_Service_Ebay_Finding_Error_Data_Set extends Zend_Service_Ebay_Finding
     {
         // check node
         $node = $this->_nodes->item($this->_key);
-        if (!$node) {
+        if (!$node instanceof \DOMNode) {
             return null;
         }
 

@@ -61,6 +61,10 @@ require_once 'Zend/Validate/EmailAddress.php';
 class Zend_Feed_Writer_Feed_FeedAbstract
 {
     /**
+     * @var mixed[]|object[]|mixed
+     */
+    public $_extensions;
+    /**
      * Contains all Feed level date to append in feed output
      *
      * @var array
@@ -332,11 +336,7 @@ class Zend_Feed_Writer_Feed_FeedAbstract
                 $dvalid = true;
             }
             $validator = new Zend_Validate_EmailAddress;
-            if ($validator->isValid($matches['name'])) {
-                $nvalid = true;
-            } else {
-                $nvalid = $validator->isValid('info@' . $matches['name']);
-            }
+            $nvalid = $validator->isValid($matches['name']) ? true : $validator->isValid('info@' . $matches['name']);
             return $dvalid && $nvalid;
 
         }
@@ -356,8 +356,7 @@ class Zend_Feed_Writer_Feed_FeedAbstract
         if (empty($data['uri']) || !is_string($data['uri'])
         || !Zend_Uri::check($data['uri'])) {
             require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Invalid parameter: parameter \'uri\''
-            . ' must be a non-empty string and valid URI/IRI');
+            throw new Zend_Feed_Exception('Invalid parameter: parameter \'uri\' must be a non-empty string and valid URI/IRI');
         }
         $this->_data['image'] = $data;
     }
@@ -374,8 +373,7 @@ class Zend_Feed_Writer_Feed_FeedAbstract
         if (empty($data['uri']) || !is_string($data['uri'])
         || !Zend_Uri::check($data['uri'])) {
             require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Invalid parameter: parameter \'uri\''
-            . ' must be a non-empty string and valid URI/IRI');
+            throw new Zend_Feed_Exception('Invalid parameter: parameter \'uri\' must be a non-empty string and valid URI/IRI');
         }
         $this->_data['icon'] = $data;
     }
@@ -463,8 +461,7 @@ class Zend_Feed_Writer_Feed_FeedAbstract
     {
         if (empty($url) || !is_string($url) || !Zend_Uri::check($url)) {
             require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Invalid parameter: "url" array value'
-            . ' must be a non-empty string and valid URI/IRI');
+            throw new Zend_Feed_Exception('Invalid parameter: "url" array value must be a non-empty string and valid URI/IRI');
         }
         $this->_data['baseUrl'] = $url;
     }
@@ -478,8 +475,7 @@ class Zend_Feed_Writer_Feed_FeedAbstract
     {
         if (empty($url) || !is_string($url) || !Zend_Uri::check($url)) {
             require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Invalid parameter: "url" array value'
-            . ' must be a non-empty string and valid URI/IRI');
+            throw new Zend_Feed_Exception('Invalid parameter: "url" array value must be a non-empty string and valid URI/IRI');
         }
         if (!isset($this->_data['hubs'])) {
             $this->_data['hubs'] = array();
@@ -512,15 +508,11 @@ class Zend_Feed_Writer_Feed_FeedAbstract
             . 'contain at least a "term" element containing the machine '
             . ' readable category name');
         }
-        if (isset($category['scheme'])) {
-            if (empty($category['scheme'])
-                || !is_string($category['scheme'])
-                || !Zend_Uri::check($category['scheme'])
-            ) {
-                require_once 'Zend/Feed/Exception.php';
-                throw new Zend_Feed_Exception('The Atom scheme or RSS domain of'
-                . ' a category must be a valid URI');
-            }
+        if (isset($category['scheme']) && (empty($category['scheme'])
+            || !is_string($category['scheme'])
+            || !Zend_Uri::check($category['scheme']))) {
+            require_once 'Zend/Feed/Exception.php';
+            throw new Zend_Feed_Exception('The Atom scheme or RSS domain of a category must be a valid URI');
         }
         if (!isset($this->_data['categories'])) {
             $this->_data['categories'] = array();

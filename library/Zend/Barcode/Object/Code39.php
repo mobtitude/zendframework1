@@ -159,7 +159,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
             $visible     = true;
             foreach ($barcodeChar as $c) {
                 /* visible, width, top, length */
-                $width          = $c ? $this->_barThickWidth : $this->_barThinWidth;
+                $width          = $c !== '' && $c !== '0' ? $this->_barThickWidth : $this->_barThinWidth;
                 $barcodeTable[] = array((int) $visible, $width, 0, 1);
                 $visible = ! $visible;
             }

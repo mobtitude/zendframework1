@@ -164,10 +164,8 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
      */
     public function setOption($name, $value)
     {
-        switch ($name) {
-            case 'protocol':
-                $value = $this->_checkProtocolNumber($value);
-                break;
+        if ($name === 'protocol') {
+            $value = $this->_checkProtocolNumber($value);
         }
 
         return parent::setOption($name, $value);
@@ -201,7 +199,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
      */
     public function serialize($value, array $opts = array())
     {
-        $opts = $opts + $this->_options;
+        $opts += $this->_options;
 
         $this->_protocol = $this->_checkProtocolNumber($opts['protocol']);
         $this->_binary   = $this->_protocol != 0;
@@ -289,7 +287,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
             } else {
                 // LONG_BINGET + pack("<i", i)
                 $bin = pack('l', $id);
-                if (self::$_isLittleEndian === false) {
+                if (!self::$_isLittleEndian) {
                     $bin = strrev($bin);
                 }
                 $this->_pickle .= self::OP_LONG_BINGET . $bin;
@@ -314,7 +312,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
             } else {
                 // LONG_BINPUT + pack("<i", i)
                 $bin = pack('l', $id);
-                if (self::$_isLittleEndian === false) {
+                if (!self::$_isLittleEndian) {
                     $bin = strrev($bin);
                 }
                 $this->_pickle .= self::OP_LONG_BINPUT . $bin;
@@ -389,7 +387,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
                 // fits in a 4-byte signed int.
                 // self.write(BININT + pack("<i", obj))
                 $bin = pack('l', $value);
-                if (self::$_isLittleEndian === false) {
+                if (!self::$_isLittleEndian) {
                     $bin = strrev($bin);
                 }
                 $this->_pickle .= self::OP_BININT . $bin;
@@ -411,7 +409,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         if ($this->_binary) {
             // self.write(BINFLOAT + pack('>d', obj))
             $bin = pack('d', $value);
-            if (self::$_isLittleEndian === true) {
+            if (self::$_isLittleEndian) {
                 $bin = strrev($bin);
             }
             $this->_pickle .= self::OP_BINFLOAT . $bin;
@@ -441,7 +439,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
             } else {
                 // self.write(BINSTRING + pack("<i", n) + obj)
                 $binLen = pack('l', $n);
-                if (self::$_isLittleEndian === false) {
+                if (!self::$_isLittleEndian) {
                     $binLen = strrev($binLen);
                 }
                 $this->_pickle .= self::OP_BINSTRING . $binLen . $value;
@@ -604,7 +602,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
             $this->_load($op);
         }
 
-        if (!count($this->_stack)) {
+        if (count($this->_stack) === 0) {
             require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('No data found');
         }
@@ -799,7 +797,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     protected function _loadLongBinPut()
     {
         $bin = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (!self::$_isLittleEndian) {
             $bin = strrev($bin);
         }
         list(, $id) = unpack('l', $bin);
@@ -855,7 +853,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     protected function _loadLongBinGet()
     {
         $bin = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (!self::$_isLittleEndian) {
             $bin = strrev($bin);
         }
         list(, $id) = unpack('l', $bin);
@@ -922,7 +920,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     protected function _loadBinInt()
     {
         $bin = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (!self::$_isLittleEndian) {
             $bin = strrev($bin);
         }
         list(, $int)    = unpack('l', $bin);
@@ -959,11 +957,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     protected function _loadLong()
     {
         $data = rtrim($this->_readline(), 'L');
-        if ($data === '') {
-            $this->_stack[] = 0;
-        } else {
-            $this->_stack[] = $data;
-        }
+        $this->_stack[] = $data === '' ? 0 : $data;
     }
 
     /**
@@ -986,7 +980,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     protected function _loadLong4()
     {
         $nBin = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (!self::$_isLittleEndian) {
             $nBin = strrev($$nBin);
         }
         list(, $n) = unpack('l', $nBin);
@@ -1014,7 +1008,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     protected function _loadBinFloat()
     {
         $bin = $this->_read(8);
-        if (self::$_isLittleEndian === true) {
+        if (self::$_isLittleEndian) {
             $bin = strrev($bin);
         }
         list(, $float)  = unpack('d', $bin);
@@ -1066,7 +1060,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     {
         // read byte length
         $nBin = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (!self::$_isLittleEndian) {
             $nBin = strrev($$nBin);
         }
         list(, $n)      = unpack('l', $nBin);
@@ -1154,7 +1148,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     {
         // read byte length
         $n = $this->_read(4);
-        if (self::$_isLittleEndian === false) {
+        if (!self::$_isLittleEndian) {
             $n = strrev($n);
         }
         list(, $n) = unpack('l', $n);

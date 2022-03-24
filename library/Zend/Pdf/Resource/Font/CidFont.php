@@ -57,6 +57,10 @@ require_once 'Zend/Pdf/Resource/Font.php';
 abstract class Zend_Pdf_Resource_Font_CidFont extends Zend_Pdf_Resource_Font
 {
     /**
+     * @var mixed
+     */
+    public $_isMonospaced;
+    /**
      * Object representing the font's cmap (character to glyph map).
      * @var Zend_Pdf_Cmap
      */
@@ -166,7 +170,7 @@ abstract class Zend_Pdf_Resource_Font_CidFont extends Zend_Pdf_Resource_Font
             if ($lastCharCode == -1) {
                 $charCodesSequense = array();
                 $sequenceStartCode = $charCode;
-            } else if ($charCode != $lastCharCode + 1) {
+            } elseif ($charCode != $lastCharCode + 1) {
                 // New chracters sequence detected
                 $widthsSequences[$sequenceStartCode] = $charCodesSequense;
                 $charCodesSequense = array();
@@ -196,39 +200,31 @@ abstract class Zend_Pdf_Resource_Font_CidFont extends Zend_Pdf_Resource_Font
                         $pdfCharsWidths[] = new Zend_Pdf_Element_Numeric($this->toEmSpace($lastWidth));       // Width
 
                         // Reset widths sequence
-                        $startCode = $startCode + $widthsInSequence;
+                        $startCode += $widthsInSequence;
                         $widthsInSequence = 0;
                     }
-
                     // Collect new width
                     $pdfWidths[] = new Zend_Pdf_Element_Numeric($this->toEmSpace($width));
-
                     $lastWidth = $width;
-                } else {
-                    // Width is equal to previous
+                } elseif (count($pdfWidths) != 0) {
+                    // We already have some widths collected
+                    // So, we've just detected new widths sequence
+                    // Remove last element from widths list, since it's a part of widths sequence
+                    array_pop($pdfWidths);
+                    // and write the rest if it's not empty
                     if (count($pdfWidths) != 0) {
-                        // We already have some widths collected
-                        // So, we've just detected new widths sequence
+                        // Save it as 'c_1st [w1 w2 ... wn]'.
+                        $pdfCharsWidths[] = new Zend_Pdf_Element_Numeric($startCode); // First character code
+                        $pdfCharsWidths[] = new Zend_Pdf_Element_Array($pdfWidths);   // Widths array
 
-                        // Remove last element from widths list, since it's a part of widths sequence
-                        array_pop($pdfWidths);
-
-                        // and write the rest if it's not empty
-                        if (count($pdfWidths) != 0) {
-                            // Save it as 'c_1st [w1 w2 ... wn]'.
-                            $pdfCharsWidths[] = new Zend_Pdf_Element_Numeric($startCode); // First character code
-                            $pdfCharsWidths[] = new Zend_Pdf_Element_Array($pdfWidths);   // Widths array
-
-                            // Reset widths collection
-                            $startCode += count($pdfWidths);
-                            $pdfWidths = array();
-                        }
-
-                        $widthsInSequence = 2;
-                    } else {
-                        // Continue widths sequence
-                        $widthsInSequence++;
+                        // Reset widths collection
+                        $startCode += count($pdfWidths);
+                        $pdfWidths = array();
                     }
+                    $widthsInSequence = 2;
+                } else {
+                    // Continue widths sequence
+                    $widthsInSequence++;
                 }
             }
 
@@ -236,14 +232,19 @@ abstract class Zend_Pdf_Resource_Font_CidFont extends Zend_Pdf_Resource_Font
             if (count($pdfWidths) != 0) {
                 // We have some widths collected
                 // Save it as 'c_1st [w1 w2 ... wn]'.
-                $pdfCharsWidths[] = new Zend_Pdf_Element_Numeric($startCode); // First character code
-                $pdfCharsWidths[] = new Zend_Pdf_Element_Array($pdfWidths);   // Widths array
-            } else if ($widthsInSequence != 0){
+                $pdfCharsWidths[] = new Zend_Pdf_Element_Numeric($startCode);
+                // First character code
+                $pdfCharsWidths[] = new Zend_Pdf_Element_Array($pdfWidths);
+                // Widths array
+            } elseif ($widthsInSequence != 0) {
                 // We have widths sequence
                 // Save it as 'c_1st c_last w'.
-                $pdfCharsWidths[] = new Zend_Pdf_Element_Numeric($startCode);                         // First character code
-                $pdfCharsWidths[] = new Zend_Pdf_Element_Numeric($startCode + $widthsInSequence - 1); // Last character code
-                $pdfCharsWidths[] = new Zend_Pdf_Element_Numeric($this->toEmSpace($lastWidth));       // Width
+                $pdfCharsWidths[] = new Zend_Pdf_Element_Numeric($startCode);
+                // First character code
+                $pdfCharsWidths[] = new Zend_Pdf_Element_Numeric($startCode + $widthsInSequence - 1);
+                // Last character code
+                $pdfCharsWidths[] = new Zend_Pdf_Element_Numeric($this->toEmSpace($lastWidth));
+                // Width
             }
         }
 
@@ -381,11 +382,7 @@ abstract class Zend_Pdf_Resource_Font_CidFont extends Zend_Pdf_Resource_Font
     {
         $widths = array();
         foreach ($charCodes as $key => $charCode) {
-            if (!isset($this->_charWidths[$charCode])) {
-                $widths[$key] = $this->_missingCharWidth;
-            } else {
-                $widths[$key] = $this->_charWidths[$charCode];
-            }
+            $widths[$key] = isset($this->_charWidths[$charCode]) ? $this->_charWidths[$charCode] : $this->_missingCharWidth;
         }
         return $widths;
     }

@@ -91,7 +91,7 @@ abstract class Zend_Mobile_Push_Message_Abstract implements Zend_Mobile_Push_Mes
     /**
      * Set Message ID
      *
-     * @param  int|string|float|bool $id Scalar
+     * @param scalar $id Scalar
      * @return Zend_Mobile_Push_Message_Abstract
      * @throws Exception
      */

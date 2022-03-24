@@ -261,9 +261,9 @@ class Zend_Pdf_Outline_Created extends Zend_Pdf_Outline
         $target = $this->getTarget();
         if ($target === null) {
             // Do nothing
-        } else if ($target instanceof Zend_Pdf_Destination) {
+        } elseif ($target instanceof Zend_Pdf_Destination) {
             $outlineDictionary->Dest = $target->getResource();
-        } else if ($target instanceof Zend_Pdf_Action) {
+        } elseif ($target instanceof Zend_Pdf_Action) {
             $outlineDictionary->A    = $target->getResource();
         } else {
             require_once 'Zend/Pdf/Exception.php';

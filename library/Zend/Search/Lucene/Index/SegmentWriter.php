@@ -225,7 +225,7 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
      */
     public function addStoredFields($storedFields)
     {
-        if (!isset($this->_fdxFile)) {
+        if (!($this->_fdxFile !== null)) {
             $this->_fdxFile = $this->_directory->createFile($this->_name . '.fdx');
             $this->_fdtFile = $this->_directory->createFile($this->_name . '.fdt');
 
@@ -459,15 +459,7 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
             }
         }
 
-        if (count($termDocs) >= self::$skipInterval) {
-            /**
-             * @todo Write Skip Data to a freq file.
-             * It's not used now, but make index more optimal
-             */
-            $skipOffset = $this->_frqFile->tell() - $freqPointer;
-        } else {
-            $skipOffset = 0;
-        }
+        $skipOffset = count($termDocs) >= self::$skipInterval ? $this->_frqFile->tell() - $freqPointer : 0;
 
         $term = new Zend_Search_Lucene_Index_Term($termEntry->text,
                                                   $this->_fields[$termEntry->field]->number);
@@ -519,7 +511,7 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
             $matchedBytes = 0;
             $maxBytes = min(strlen($prevTerm->text), strlen($term->text));
             while ($matchedBytes < $maxBytes  &&
-                   $prevTerm->text[$matchedBytes] == $term->text[$matchedBytes]) {
+                   $prevTerm->text[$matchedBytes] === $term->text[$matchedBytes]) {
                 $matchedBytes++;
             }
 
@@ -530,9 +522,9 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
                 $charBytes = 1;
                 if ((ord($term->text[$prefixBytes]) & 0xC0) == 0xC0) {
                     $charBytes++;
-                    if (ord($term->text[$prefixBytes]) & 0x20 ) {
+                    if ((ord($term->text[$prefixBytes]) & 0x20) !== 0 ) {
                         $charBytes++;
-                        if (ord($term->text[$prefixBytes]) & 0x10 ) {
+                        if ((ord($term->text[$prefixBytes]) & 0x10) !== 0 ) {
                             $charBytes++;
                         }
                     }

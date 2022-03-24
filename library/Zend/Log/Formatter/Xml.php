@@ -66,11 +66,11 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
             	'rootElement' => array_shift($args)
             );
 
-            if (count($args)) {
+            if ($args !== []) {
                 $options['elementMap'] = array_shift($args);
             }
 
-            if (count($args)) {
+            if ($args !== []) {
                 $options['encoding'] = array_shift($args);
             }
         }

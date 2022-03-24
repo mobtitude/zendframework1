@@ -32,6 +32,10 @@ require_once 'Zend/Pdf/Canvas/Abstract.php';
 class Zend_Pdf_Canvas extends Zend_Pdf_Canvas_Abstract
 {
     /**
+     * @var array<string, int>
+     */
+    public array $_procset;
+    /**
      * Canvas procedure sets.
      *
      * Allowed values: 'PDF', 'Text', 'ImageB', 'ImageC', 'ImageI'.

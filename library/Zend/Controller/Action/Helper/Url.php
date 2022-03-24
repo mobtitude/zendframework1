@@ -59,7 +59,7 @@ class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Ab
         }
 
         $url = $controller . '/' . $action;
-        if ($module != $this->getFrontController()->getDispatcher()->getDefaultModule()) {
+        if ($module !== $this->getFrontController()->getDispatcher()->getDefaultModule()) {
             $url = $module . '/' . $url;
         }
 
@@ -76,9 +76,7 @@ class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Ab
             $url .= '/' . $paramString;
         }
 
-        $url = '/' . ltrim($url, '/');
-
-        return $url;
+        return '/' . ltrim($url, '/');
     }
 
     /**

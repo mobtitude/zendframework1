@@ -49,7 +49,9 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
      */
     public function __construct($data)
     {
-        set_error_handler(array($this, 'handleXmlErrors'));
+        set_error_handler(function (int $errno, string $errstr, ?string $errfile = \null, ?string $errline = \null, ?array $errcontext = \null) : bool {
+            return $this->handleXmlErrors($errno, $errstr, $errfile, $errline, $errcontext);
+        });
         $this->_sxml = Zend_Xml_Security::scan($data); 
         restore_error_handler();
         if($this->_sxml === false) {
@@ -100,8 +102,8 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
      */
     public function __get($name)
     {
-        if (isset($this->_sxml->{$name})) {
-            return $this->_sxml->{$name};
+        if (isset($this->_sxml->getName())) {
+            return $this->_sxml->getName();
         }
 
         $result = $this->_sxml->xpath("//$name");
@@ -151,17 +153,12 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
      */
     public function __isset($name)
     {
-        if (isset($this->_sxml->{$name})) {
+        if (isset($this->_sxml->getName())) {
             return true;
         }
 
         $result = $this->_sxml->xpath("//$name");
-
-        if (sizeof($result) > 0) {
-            return true;
-        }
-
-        return false;
+        return count($result) > 0;
     }
 
     /**
@@ -229,7 +226,7 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
             return (string) $message[0];
         } else {
             $result = $this->_sxml->xpath('//response');
-            if (sizeof($result) > 1) {
+            if (count($result) > 1) {
                 return (string) "An error occured.";
             } else {
                 return (string) $result[0];

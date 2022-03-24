@@ -163,7 +163,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
             $front     = Zend_Controller_Front::getInstance();
             $request   = $front->getRequest();
             $reqParams = array();
-            if ($request) {
+            if ($request !== null) {
                 $reqParams = $request->getParams();
                 if (!array_key_exists('module', $reqParams)) {
                     $reqParams['module'] = $front->getDefaultModule();
@@ -205,8 +205,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
                 }
             }
 
-            if (count(array_intersect_assoc($reqParams, $myParams)) ==
-                count($myParams)
+            if (count(array_intersect_assoc($reqParams, $myParams)) === count($myParams)
             ) {
                 $this->_active = true;
 
@@ -229,7 +228,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      */
     public function getHref()
     {
-        if ($this->_hrefCache) {
+        if ($this->_hrefCache !== '' && $this->_hrefCache !== '0') {
             return $this->_hrefCache;
         }
 

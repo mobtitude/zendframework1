@@ -279,7 +279,7 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
      */
     public function getDelay()
     {
-        if (!$this->_delay) {
+        if ($this->_delay === 0) {
             return self::DELAY_IMMEDIATE;
         }
         return $this->_delay;
@@ -324,24 +324,21 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
     {
         $ret = '<?xml version="1.0" encoding="utf-8"?>'
             . '<wp:Notification xmlns:wp="WPNotification">'
-            . '<wp:Tile' . (($this->_tileId) ? ' Id="' . htmlspecialchars($this->_tileId) . '"' : '') . '>'
+            . '<wp:Tile' . (($this->_tileId !== '' && $this->_tileId !== '0') ? ' Id="' . htmlspecialchars($this->_tileId) . '"' : '') . '>'
             . '<wp:BackgroundImage>' . htmlspecialchars($this->_backgroundImage) . '</wp:BackgroundImage>'
             . '<wp:Count>' . (int) $this->_count . '</wp:Count>'
             . '<wp:Title>' . htmlspecialchars($this->_title) . '</wp:Title>';
 
-        if ($this->_backBackgroundImage) {
+        if ($this->_backBackgroundImage !== '' && $this->_backBackgroundImage !== '0') {
             $ret .= '<wp:BackBackgroundImage>' . htmlspecialchars($this->_backBackgroundImage) . '</wp:BackBackgroundImage>';
         }
-        if ($this->_backTitle) {
+        if ($this->_backTitle !== '' && $this->_backTitle !== '0') {
             $ret .= '<wp:BackTitle>' . htmlspecialchars($this->_backTitle) . '</wp:BackTitle>';
         }
-        if ($this->_backContent) {
+        if ($this->_backContent !== '' && $this->_backContent !== '0') {
             $ret .= '<wp:BackContent>' . htmlspecialchars($this->_backContent) . '</wp:BackContent>';
         }
-
-        $ret .= '</wp:Tile>'
-            . '</wp:Notification>';
-        return $ret;
+        return $ret . '</wp:Tile></wp:Notification>';
     }
 
     /**
@@ -351,7 +348,7 @@ class Zend_Mobile_Push_Message_Mpns_Tile extends Zend_Mobile_Push_Message_Mpns
      */
     public function validate()
     {
-        if (!isset($this->_token) || strlen($this->_token) === 0) {
+        if (!($this->_token !== null) || $this->_token === '') {
             return false;
         }
         if (empty($this->_backgroundImage)) {

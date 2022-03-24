@@ -71,11 +71,7 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
             throw new Zend_Translate_Exception('Translation file \'' . $filename . '\' is not readable.');
         }
 
-        if (empty($options['useId'])) {
-            $this->_useId = false;
-        } else {
-            $this->_useId = true;
-        }
+        $this->_useId = !empty($options['useId']);
 
         $encoding      = $this->_findEncoding($filename);
         $this->_target = $locale;
@@ -89,12 +85,10 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
             Zend_Xml_Security::scanFile($filename);
         } catch (Zend_Xml_Exception $e) {
             require_once 'Zend/Translate/Exception.php';
-            throw new Zend_Translate_Exception(
-                $e->getMessage()
-            );
+            throw new Zend_Translate_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        if (!xml_parse($this->_file, file_get_contents($filename))) {
+        if (xml_parse($this->_file, file_get_contents($filename)) === 0) {
             $ex = sprintf('XML error: %s at line %d of file %s',
                           xml_error_string(xml_get_error_code($this->_file)),
                           xml_get_current_line_number($this->_file),
@@ -115,7 +109,7 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
                 $this->_scontent .= " $key=\"$value\"";
             }
             $this->_scontent .= ">";
-        } else if ($this->_ttag === true) {
+        } elseif ($this->_ttag === true) {
             $this->_tcontent .= "<".$name;
             foreach($attrib as $key => $value) {
                 $this->_tcontent .= " $key=\"$value\"";
@@ -164,9 +158,9 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
 
     private function _endElement($file, $name)
     {
-        if (($this->_stag === true) and ($name !== 'source')) {
+        if ($this->_stag === true && $name !== 'source') {
             $this->_scontent .= "</".$name.">";
-        } else if (($this->_ttag === true) and ($name !== 'target')) {
+        } elseif ($this->_ttag === true && $name !== 'target') {
             $this->_tcontent .= "</".$name.">";
         } else {
             switch (strtolower($name)) {
@@ -182,11 +176,9 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
                             !isset($this->_data[$this->_source][$this->_langId])) {
                             $this->_data[$this->_source][$this->_langId] = $this->_scontent;
                         }
-                    } else {
-                        if (!empty($this->_scontent) &&
-                            !isset($this->_data[$this->_source][$this->_scontent])) {
-                            $this->_data[$this->_source][$this->_scontent] = $this->_scontent;
-                        }
+                    } elseif (!empty($this->_scontent) &&
+                        !isset($this->_data[$this->_source][$this->_scontent])) {
+                        $this->_data[$this->_source][$this->_scontent] = $this->_scontent;
                     }
                     $this->_stag = false;
                     break;
@@ -196,11 +188,9 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
                             !isset($this->_data[$this->_target][$this->_langId])) {
                             $this->_data[$this->_target][$this->_langId] = $this->_tcontent;
                         }
-                    } else {
-                        if (!empty($this->_tcontent) && !empty($this->_scontent) &&
-                            !isset($this->_data[$this->_target][$this->_scontent])) {
-                            $this->_data[$this->_target][$this->_scontent] = $this->_tcontent;
-                        }
+                    } elseif (!empty($this->_tcontent) && !empty($this->_scontent) &&
+                        !isset($this->_data[$this->_target][$this->_scontent])) {
+                        $this->_data[$this->_target][$this->_scontent] = $this->_tcontent;
                     }
                     $this->_ttag = false;
                     break;
@@ -212,11 +202,11 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
 
     private function _contentElement($file, $data)
     {
-        if (($this->_transunit !== null) and ($this->_source !== null) and ($this->_stag === true)) {
+        if ($this->_transunit !== null && $this->_source !== null && $this->_stag === true) {
             $this->_scontent .= $data;
         }
 
-        if (($this->_transunit !== null) and ($this->_target !== null) and ($this->_ttag === true)) {
+        if ($this->_transunit !== null && $this->_target !== null && $this->_ttag === true) {
             $this->_tcontent .= $data;
         }
     }
@@ -226,8 +216,7 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
         $file = file_get_contents($filename, null, null, 0, 100);
         if (strpos($file, "encoding") !== false) {
             $encoding = substr($file, strpos($file, "encoding") + 9);
-            $encoding = substr($encoding, 1, strpos($encoding, $encoding[0], 1) - 1);
-            return $encoding;
+            return substr($encoding, 1, strpos($encoding, $encoding[0], 1) - 1);
         }
         return 'UTF-8';
     }

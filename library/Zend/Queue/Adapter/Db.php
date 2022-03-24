@@ -276,9 +276,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
             $this->_queues[$queue->queue_name] = (int)$queue->queue_id;
         }
 
-        $list = array_keys($this->_queues);
-
-        return $list;
+        return array_keys($this->_queues);
     }
 
     /**
@@ -465,12 +463,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
     {
         $db    = $this->_messageTable->getAdapter();
         $where = $db->quoteInto('handle=?', $message->handle);
-
-        if ($this->_messageTable->delete($where)) {
-            return true;
-        }
-
-        return false;
+        return (bool) $this->_messageTable->delete($where);
     }
 
     /********************************************************************
@@ -524,7 +517,7 @@ class Zend_Queue_Adapter_Db extends Zend_Queue_Adapter_AdapterAbstract
 
         $queue = $this->_queueTable->fetchRow($query);
 
-        if ($queue === null) {
+        if (!$queue instanceof \Zend_Db_Table_Row_Abstract) {
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Queue does not exist: ' . $name);
         }

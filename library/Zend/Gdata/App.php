@@ -341,8 +341,7 @@ class Zend_Gdata_App
         if ($enabled && !function_exists('gzinflate')) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'You cannot enable gzipped responses if the zlib module ' .
-                    'is not enabled in your PHP installation.');
+                    'You cannot enable gzipped responses if the zlib module is not enabled in your PHP installation.');
 
         }
         self::$_gzipEnabled = $enabled;
@@ -415,7 +414,7 @@ class Zend_Gdata_App
      */
     public function setMajorProtocolVersion($value)
     {
-        if (!($value >= 1)) {
+        if ($value < 1) {
             require_once('Zend/Gdata/App/InvalidArgumentException.php');
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Major protocol version must be >= 1');
@@ -445,7 +444,7 @@ class Zend_Gdata_App
      */
     public function setMinorProtocolVersion($value)
     {
-        if (!($value >= 0)) {
+        if ($value < 0) {
             require_once('Zend/Gdata/App/InvalidArgumentException.php');
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Minor protocol version must be >= 0');
@@ -618,8 +617,7 @@ class Zend_Gdata_App
             $headers['x-http-method-override'] != 'DELETE') {
                 require_once 'Zend/Gdata/App/InvalidArgumentException.php';
                 throw new Zend_Gdata_App_InvalidArgumentException(
-                        'You must specify the data to post as either a ' .
-                        'string or a child of Zend_Gdata_App_Entry');
+                        'You must specify the data to post as either a string or a child of Zend_Gdata_App_Entry');
         }
         if ($url === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
@@ -693,7 +691,7 @@ class Zend_Gdata_App
                 $this->_httpClient->setAdapter($oldHttpAdapter);
             }
             require_once 'Zend/Gdata/App/HttpException.php';
-            throw new Zend_Gdata_App_HttpException($e->getMessage(), $e);
+            throw new Zend_Gdata_App_HttpException($e->getMessage(), $e, $e);
         }
         if ($response->isRedirect() && $response->getStatus() != '304') {
             if ($remainingRedirects > 0) {
@@ -742,7 +740,7 @@ class Zend_Gdata_App
             $requestData['method'], $requestData['url']);
 
         $feedContent = $response->getBody();
-        if (false === $useObjectMapping) {
+        if (!$useObjectMapping) {
             return $feedContent;
         }
         $feed = self::importString($feedContent, $className);
@@ -1111,11 +1109,7 @@ class Zend_Gdata_App
             }
 
             $next = $feed->getLink('next');
-            if ($next !== null) {
-                $feed = $this->getFeed($next->href, $feedClass);
-            } else {
-                $feed = null;
-            }
+            $feed = $next !== null ? $this->getFeed($next->href, $feedClass) : null;
         }
         while ($feed != null);
         return $result;
@@ -1235,11 +1229,7 @@ class Zend_Gdata_App
      */
     public function useObjectMapping($value)
     {
-        if ($value === True) {
-            $this->_useObjectMapping = true;
-        } else {
-            $this->_useObjectMapping = false;
-        }
+        $this->_useObjectMapping = $value;
     }
 
 }

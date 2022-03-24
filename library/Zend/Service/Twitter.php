@@ -328,10 +328,7 @@ class Zend_Service_Twitter
      */
     public function isAuthorised()
     {
-        if ($this->getHttpClient() instanceof Zend_Oauth_Client) {
-            return true;
-        }
-        return false;
+        return $this->getHttpClient() instanceof Zend_Oauth_Client;
     }
 
     /**
@@ -861,11 +858,7 @@ class Zend_Service_Twitter
                     $params['max_id'] = $this->validInteger($value);
                     break;
                 case 'trim_user':
-                    if (in_array($value, array(true, 'true', 't', 1, '1'))) {
-                        $value = true;
-                    } else {
-                        $value = false;
-                    }
+                    $value = in_array($value, array(true, 'true', 't', 1, '1'));
                     $params['trim_user'] = $value;
                     break;
                 case 'contributor_details:':
@@ -918,11 +911,7 @@ class Zend_Service_Twitter
                     $params['max_id'] = $this->validInteger($value);
                     break;
                 case 'trim_user':
-                    if (in_array($value, array(true, 'true', 't', 1, '1'))) {
-                        $value = true;
-                    } else {
-                        $value = false;
-                    }
+                    $value = in_array($value, array(true, 'true', 't', 1, '1'));
                     $params['trim_user'] = $value;
                     break;
                 case 'contributor_details:':
@@ -1003,7 +992,7 @@ class Zend_Service_Twitter
 
         $params = array('status' => $status);
         $inReplyToStatusId = $this->validInteger($inReplyToStatusId);
-        if ($inReplyToStatusId) {
+        if ($inReplyToStatusId !== 0) {
             $params['in_reply_to_status_id'] = $inReplyToStatusId;
         }
         $response = $this->post($path, $params);
@@ -1051,11 +1040,7 @@ class Zend_Service_Twitter
                     $params['max_id'] = $this->validInteger($value);
                     break;
                 case 'trim_user':
-                    if (in_array($value, array(true, 'true', 't', 1, '1'))) {
-                        $value = true;
-                    } else {
-                        $value = false;
-                    }
+                    $value = in_array($value, array(true, 'true', 't', 1, '1'));
                     $params['trim_user'] = $value;
                     break;
                 case 'contributor_details:':
@@ -1243,8 +1228,7 @@ class Zend_Service_Twitter
         $client = $this->getHttpClient();
         $this->prepare($path, $client);
         $client->setParameterGet($query);
-        $response = $client->request(Zend_Http_Client::GET);
-        return $response;
+        return $client->request(Zend_Http_Client::GET);
     }
 
     /**
@@ -1259,8 +1243,7 @@ class Zend_Service_Twitter
     {
         $client = $this->getHttpClient();
         $this->prepare($path, $client);
-        $response = $this->performPost(Zend_Http_Client::POST, $data, $client);
-        return $response;
+        return $this->performPost(Zend_Http_Client::POST, $data, $client);
     }
 
     /**
@@ -1296,7 +1279,7 @@ class Zend_Service_Twitter
      */
     protected function createUserParameter($id, array $params)
     {
-        if ($this->validInteger($id)) {
+        if ($this->validInteger($id) !== 0) {
             $params['user_id'] = $id;
             return $params;
         }

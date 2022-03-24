@@ -151,10 +151,7 @@ class Zend_Cloud_Infrastructure_InstanceList implements Countable, Iterator, Arr
     public function valid()
     {
         $numItems = $this->count();
-        if ($numItems > 0 && $this->iteratorKey < $numItems) {
-            return true;
-        }
-        return false;
+        return $numItems > 0 && $this->iteratorKey < $numItems;
     }
 
     /**

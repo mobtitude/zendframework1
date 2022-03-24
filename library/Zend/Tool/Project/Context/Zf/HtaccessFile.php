@@ -61,7 +61,7 @@ class Zend_Tool_Project_Context_Zf_HtaccessFile extends Zend_Tool_Project_Contex
      */
     public function getContents()
     {
-        $output = <<<EOS
+        return <<<EOS
 
 RewriteEngine On
 # The following rule tells Apache that if the requested filename
@@ -81,7 +81,6 @@ RewriteRule ^(.*)$ - [E=BASE:%1]
 RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
 
 EOS;
-        return $output;
     }
 
 }

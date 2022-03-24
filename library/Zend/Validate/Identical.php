@@ -76,9 +76,8 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
             if (array_key_exists('strict', $token)) {
                 $this->setStrict($token['strict']);
             }
-
             $this->setToken($token['token']);
-        } else if (null !== $token) {
+        } elseif (null !== $token) {
             $this->setToken($token);
         }
     }

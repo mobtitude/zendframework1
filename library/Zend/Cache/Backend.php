@@ -175,11 +175,7 @@ class Zend_Cache_Backend
         foreach (array($_ENV, $_SERVER) as $tab) {
             foreach (array('TMPDIR', 'TEMP', 'TMP', 'windir', 'SystemRoot') as $key) {
                 if (isset($tab[$key]) && is_string($tab[$key])) {
-                    if (($key == 'windir') or ($key == 'SystemRoot')) {
-                        $dir = realpath($tab[$key] . '\\temp');
-                    } else {
-                        $dir = realpath($tab[$key]);
-                    }
+                    $dir = ($key == 'windir' || $key == 'SystemRoot') ? realpath($tab[$key] . '\\temp') : realpath($tab[$key]);
                     if ($this->_isGoodTmpDir($dir)) {
                         return $dir;
                     }
@@ -225,12 +221,7 @@ class Zend_Cache_Backend
      */
     protected function _isGoodTmpDir($dir)
     {
-        if (is_readable($dir)) {
-            if (is_writable($dir)) {
-                return true;
-            }
-        }
-        return false;
+        return is_readable($dir) && is_writable($dir);
     }
 
     /**

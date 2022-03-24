@@ -245,15 +245,13 @@ abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_
      */
     public function isValid($value, $context = null)
     {
-        if ($this->registerInArrayValidator()) {
-            if (!$this->getValidator('InArray')) {
-                $options = $this->getMultiOptions();
-                $this->addValidator(
-                    'InArray',
-                    true,
-                    array(array_keys($options))
-                );
-            }
+        if ($this->registerInArrayValidator() && !$this->getValidator('InArray')) {
+            $options = $this->getMultiOptions();
+            $this->addValidator(
+                'InArray',
+                true,
+                array(array_keys($options))
+            );
         }
         return parent::isValid($value, $context);
     }

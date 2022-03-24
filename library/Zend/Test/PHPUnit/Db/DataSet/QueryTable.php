@@ -71,7 +71,7 @@ class Zend_Test_PHPUnit_Db_DataSet_QueryTable extends PHPUnit_Extensions_Databas
         {
             $this->loadData();
             $keys = array();
-            if(count($this->data) > 0) {
+            if($this->data !== []) {
                 $keys = array_keys($this->data[0]);
             }
             $this->tableMetaData = new PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData(

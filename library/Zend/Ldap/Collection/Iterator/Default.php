@@ -139,7 +139,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
         if (is_callable($attributeNameTreatment)) {
             if (is_string($attributeNameTreatment) && !function_exists($attributeNameTreatment)) {
                 $this->_attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
-            } else if (is_array($attributeNameTreatment) &&
+            } elseif (is_array($attributeNameTreatment) &&
                     !method_exists($attributeNameTreatment[0], $attributeNameTreatment[1])) {
                 $this->_attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
             } else {
@@ -200,8 +200,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
 
         $entry = array('dn' => $this->key());
         $ber_identifier = null;
-        $name = @ldap_first_attribute($this->_ldap->getResource(), $this->_current,
-            $ber_identifier);
+        $name = @ldap_first_attribute($this->_ldap->getResource(), $this->_current);
         while ($name) {
             $data = @ldap_get_values_len($this->_ldap->getResource(), $this->_current, $name);
             unset($data['count']);
@@ -221,8 +220,7 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
                     break;
             }
             $entry[$attrName] = $data;
-            $name = @ldap_next_attribute($this->_ldap->getResource(), $this->_current,
-                $ber_identifier);
+            $name = @ldap_next_attribute($this->_ldap->getResource(), $this->_current);
         }
         ksort($entry, SORT_LOCALE_STRING);
         return $entry;
@@ -269,8 +267,8 @@ class Zend_Ldap_Collection_Iterator_Default implements Iterator, Countable
                 if ($code === Zend_Ldap_Exception::LDAP_SIZELIMIT_EXCEEDED) {
                     // we have reached the size limit enforced by the server
                     return;
-                } else if ($code > Zend_Ldap_Exception::LDAP_SUCCESS) {
-                     throw new Zend_Ldap_Exception($this->_ldap, 'getting next entry (' . $msg . ')');
+                } elseif ($code > Zend_Ldap_Exception::LDAP_SUCCESS) {
+                    throw new Zend_Ldap_Exception($this->_ldap, 'getting next entry (' . $msg . ')');
                 }
             }
         } else {

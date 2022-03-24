@@ -138,17 +138,15 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['allow'] = array_shift($options);
             if (!empty($options)) {
                 $temp['mx'] = array_shift($options);
             }
-
             if (!empty($options)) {
                 $temp['hostname'] = array_shift($options);
             }
-
             $options = $temp;
         }
 
@@ -245,7 +243,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
      */
     public function setHostnameValidator(Zend_Validate_Hostname $hostnameValidator = null, $allow = Zend_Validate_Hostname::ALLOW_DNS)
     {
-        if (!$hostnameValidator) {
+        if ($hostnameValidator === null) {
             $hostnameValidator = new Zend_Validate_Hostname($allow);
         }
 
@@ -355,7 +353,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
         $octet = explode('.',$host);
         if ((int)$octet[0] >= 224) {
             return true;
-        } else if (array_key_exists($octet[0], $this->_invalidIp)) {
+        } elseif (array_key_exists($octet[0], $this->_invalidIp)) {
             foreach ((array)$this->_invalidIp[$octet[0]] as $subnetData) {
                 // we skip the first loop as we already know that octet matches
                 for ($i = 1; $i < 4; $i++) {
@@ -383,7 +381,6 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
                     }
                 }
             }
-
             return true;
         } else {
             return false;
@@ -459,7 +456,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
         $result = getmxrr($hostname, $mxHosts);
         if (!$result) {
             $this->_error(self::INVALID_MX_RECORD);
-        } else if ($this->_options['deep'] && function_exists('checkdnsrr')) {
+        } elseif ($this->_options['deep'] && function_exists('checkdnsrr')) {
             $validAddress = false;
             $reserved     = true;
             foreach ($mxHosts as $hostname) {
@@ -476,7 +473,6 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
                     break;
                 }
             }
-
             if (!$validAddress) {
                 $result = false;
                 if ($reserved) {
@@ -501,16 +497,14 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
                          ->isValid($this->_hostname);
         if (!$hostname) {
             $this->_error(self::INVALID_HOSTNAME);
-
             // Get messages and errors from hostnameValidator
             foreach ($this->_options['hostname']->getMessages() as $code => $message) {
                 $this->_messages[$code] = $message;
             }
-
             foreach ($this->_options['hostname']->getErrors() as $error) {
                 $this->_errors[] = $error;
             }
-        } else if ($this->_options['mx']) {
+        } elseif ($this->_options['mx']) {
             // MX check on hostname
             $hostname = $this->_validateMXRecords();
         }
@@ -541,8 +535,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
         $this->_setValue($value);
 
         // Split email address up and disallow '..'
-        if ((strpos($value, '..') !== false) or
-            (!preg_match('/^(.+)@([^@]+)$/', $value, $matches))) {
+        if (strpos($value, '..') !== false || !preg_match('/^(.+)@([^@]+)$/', $value, $matches)) {
             $this->_error(self::INVALID_FORMAT);
             return false;
         }
@@ -561,14 +554,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
         }
 
         $local = $this->_validateLocalPart();
-
         // If both parts valid, return true
-        if ($local && $length) {
-            if (($this->_options['domain'] && $hostname) || !$this->_options['domain']) {
-                return true;
-            }
-        }
-
-        return false;
+        return $local && $length && (($this->_options['domain'] && $hostname) || !$this->_options['domain']);
     }
 }

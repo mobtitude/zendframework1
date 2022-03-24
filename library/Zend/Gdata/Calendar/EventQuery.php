@@ -396,7 +396,7 @@ class Zend_Gdata_Calendar_EventQuery extends Zend_Gdata_Query
         if ($value !== null) {
             if (is_bool($value)) {
                 $this->_params['singleevents'] = ($value?'true':'false');
-            } elseif ($value == 'true' | $value == 'false') {
+            } elseif (($value == 'true' | $value == 'false') !== 0) {
                 $this->_params['singleevents'] = $value;
             } else {
                 require_once 'Zend/Gdata/App/Exception.php';
@@ -445,7 +445,7 @@ class Zend_Gdata_Calendar_EventQuery extends Zend_Gdata_Query
         if ($value !== null) {
             if (is_bool($value)) {
                 $this->_params['futureevents'] = ($value?'true':'false');
-            } elseif ($value == 'true' | $value == 'false') {
+            } elseif (($value == 'true' | $value == 'false') !== 0) {
                 $this->_params['futureevents'] = $value;
             } else {
                 require_once 'Zend/Gdata/App/Exception.php';
@@ -464,11 +464,7 @@ class Zend_Gdata_Calendar_EventQuery extends Zend_Gdata_Query
      */
     public function getQueryUrl()
     {
-        if (isset($this->_url)) {
-            $uri = $this->_url;
-        } else {
-            $uri = $this->_defaultFeedUri;
-        }
+        $uri = $this->_url !== null ? $this->_url : $this->_defaultFeedUri;
         if ($this->getUser() != null) {
             $uri .= '/' . $this->getUser();
         }
@@ -484,8 +480,7 @@ class Zend_Gdata_Calendar_EventQuery extends Zend_Gdata_Query
                 $uri .= '/comments/' . $this->getComments();
             }
         }
-        $uri .= $this->getQueryString();
-        return $uri;
+        return $uri . $this->getQueryString();
     }
 
 }

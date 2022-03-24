@@ -333,7 +333,7 @@ class Zend_Gdata_Spreadsheets_CellQuery extends Zend_Gdata_Query
     {
         if (is_bool($value)) {
             $this->_params['return-empty'] = ($value?'true':'false');
-        } else if ($value != null) {
+        } elseif ($value != null) {
             $this->_params['return-empty'] = $value;
         } else {
             unset($this->_params['return-empty']);
@@ -399,9 +399,7 @@ class Zend_Gdata_Spreadsheets_CellQuery extends Zend_Gdata_Query
         } else {
             $uri = $this->_url;
         }
-
-        $uri .= $this->getQueryString();
-        return $uri;
+        return $uri . $this->getQueryString();
     }
 
     /**

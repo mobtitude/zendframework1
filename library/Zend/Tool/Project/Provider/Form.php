@@ -44,12 +44,10 @@ class Zend_Tool_Project_Provider_Form extends Zend_Tool_Project_Provider_Abstrac
             throw new Zend_Tool_Project_Provider_Exception($exceptionMessage);
         }
 
-        $newForm = $formsDirectory->createResource(
+        return $formsDirectory->createResource(
             'formFile',
             array('formName' => $formName, 'moduleName' => $moduleName)
             );
-
-        return $newForm;
     }
 
     /**
@@ -101,16 +99,13 @@ class Zend_Tool_Project_Provider_Form extends Zend_Tool_Project_Provider_Abstrac
 
         if ($formDirectoryResource->isEnabled()) {
             throw new Zend_Tool_Project_Provider_Exception('This project already has forms enabled.');
+        } elseif ($this->_registry->getRequest()->isPretend()) {
+            $this->_registry->getResponse()->appendContent('Would enable forms directory at ' . $formDirectoryResource->getContext()->getPath());
         } else {
-            if ($this->_registry->getRequest()->isPretend()) {
-                $this->_registry->getResponse()->appendContent('Would enable forms directory at ' . $formDirectoryResource->getContext()->getPath());
-            } else {
-                $this->_registry->getResponse()->appendContent('Enabling forms directory at ' . $formDirectoryResource->getContext()->getPath());
-                $formDirectoryResource->setEnabled(true);
-                $formDirectoryResource->create();
-                $this->_storeProfile();
-            }
-
+            $this->_registry->getResponse()->appendContent('Enabling forms directory at ' . $formDirectoryResource->getContext()->getPath());
+            $formDirectoryResource->setEnabled(true);
+            $formDirectoryResource->create();
+            $this->_storeProfile();
         }
     }
 

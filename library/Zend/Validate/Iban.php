@@ -141,11 +141,7 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
         }
 
         if (is_array($locale)) {
-            if (array_key_exists('locale', $locale)) {
-                $locale = $locale['locale'];
-            } else {
-                $locale = null;
-            }
+            $locale = $locale['locale'] ?? null;
         }
 
         if (empty($locale)) {
@@ -232,11 +228,11 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
                   '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35'),
             $format);
 
-        $temp = intval(substr($format, 0, 1));
+        $temp = (int) substr($format, 0, 1);
         $len  = strlen($format);
         for ($x = 1; $x < $len; ++$x) {
             $temp *= 10;
-            $temp += intval(substr($format, $x, 1));
+            $temp += (int) substr($format, $x, 1);
             $temp %= 97;
         }
 

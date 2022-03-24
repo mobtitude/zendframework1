@@ -89,8 +89,7 @@ class Zend_Application
                 $options = $options->toArray();
             } elseif (!is_array($options)) {
                 throw new Zend_Application_Exception(
-                    'Invalid options provided; must be location of config file,'
-                    . ' a config object, or an array'
+                    'Invalid options provided; must be location of config file, a config object, or an array'
                 );
             }
 
@@ -166,9 +165,9 @@ class Zend_Application
             $autoloader = $this->getAutoloader();
             if (method_exists($autoloader, 'setZfPath')) {
                 $zfPath    = $options['autoloaderzfpath'];
-                $zfVersion = !empty($options['autoloaderzfversion'])
-                           ? $options['autoloaderzfversion']
-                           : 'latest';
+                $zfVersion = empty($options['autoloaderzfversion'])
+                           ? 'latest'
+                           : $options['autoloaderzfversion'];
                 $autoloader->setZfPath($zfPath, $zfVersion);
             }
         }
@@ -341,8 +340,7 @@ class Zend_Application
 
         if (!$this->_bootstrap instanceof Zend_Application_Bootstrap_Bootstrapper) {
             throw new Zend_Application_Exception(
-                'Bootstrap class does not implement'
-                . ' Zend_Application_Bootstrap_Bootstrapper'
+                'Bootstrap class does not implement Zend_Application_Bootstrap_Bootstrapper'
             );
         }
 
@@ -422,8 +420,7 @@ class Zend_Application
                 $config = include $file;
                 if (!is_array($config)) {
                     throw new Zend_Application_Exception(
-                        'Invalid configuration file provided; PHP file does not'
-                        . ' return array value'
+                        'Invalid configuration file provided; PHP file does not return array value'
                     );
                 }
                 return $config;

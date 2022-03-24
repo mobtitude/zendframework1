@@ -90,11 +90,11 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
      */
     public function __construct($objNum, $genNum = 0, Zend_Pdf_Element_Reference_Context $context, Zend_Pdf_ElementFactory $factory)
     {
-        if ( !(is_integer($objNum) && $objNum > 0) ) {
+        if ( !(is_int($objNum) && $objNum > 0) ) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Object number must be positive integer');
         }
-        if ( !(is_integer($genNum) && $genNum >= 0) ) {
+        if ( !(is_int($genNum) && $genNum >= 0) ) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Generation number must be non-negative integer');
         }
@@ -140,11 +140,7 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
      */
     public function toString($factory = null)
     {
-        if ($factory === null) {
-            $shift = 0;
-        } else {
-            $shift = $factory->getEnumerationShift($this->_factory);
-        }
+        $shift = $factory === null ? 0 : $factory->getEnumerationShift($this->_factory);
 
         return $this->_objNum + $shift . ' ' . $this->_genNum . ' R';
     }
@@ -173,7 +169,7 @@ class Zend_Pdf_Element_Reference extends Zend_Pdf_Element
             return;
         }
 
-        if ($obj->toString() != $this->_objNum . ' ' . $this->_genNum . ' R') {
+        if ($obj->toString() !== $this->_objNum . ' ' . $this->_genNum . ' R') {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Incorrect reference to the object');
         }

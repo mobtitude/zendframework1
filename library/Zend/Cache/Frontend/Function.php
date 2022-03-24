@@ -161,7 +161,7 @@ class Zend_Cache_Frontend_Function extends Zend_Cache_Core
 
         // generate a unique id for arguments
         $argsStr = '';
-        if ($args) {
+        if ($args !== []) {
             try {
                 $argsStr = @serialize(array_values($args));
             } catch (Exception $e) {

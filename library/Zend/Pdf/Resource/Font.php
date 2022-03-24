@@ -234,10 +234,8 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
                     break;
                 }
             }
-        } else {
-            if (isset($this->_fontNames[$nameType][$language])) {
-                $name = $this->_fontNames[$nameType][$language];
-            }
+        } elseif (isset($this->_fontNames[$nameType][$language])) {
+            $name = $this->_fontNames[$nameType][$language];
         }
         /* If the preferred language could not be found, use whatever is first.
          */

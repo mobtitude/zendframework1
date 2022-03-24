@@ -43,12 +43,7 @@ class Zend_EventManager_Filter_FilterIterator extends Zend_Stdlib_SplPriorityQue
     public function contains($datum)
     {
         $chain = clone $this;
-        foreach ($chain as $item) {
-            if ($item === $datum) {
-                return true;
-            }
-        }
-        return false;
+        return in_array($datum, $chain, true);
     }
 
     /**
@@ -106,8 +101,6 @@ class Zend_EventManager_Filter_FilterIterator extends Zend_Stdlib_SplPriorityQue
         if (!$next instanceof Zend_Stdlib_CallbackHandler) {
             return;
         }
-
-        $return = call_user_func($next->getCallback(), $context, $params, $chain);
-        return $return;
+        return call_user_func($next->getCallback(), $context, $params, $chain);
     }
 }

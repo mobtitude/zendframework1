@@ -183,7 +183,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
         //Check if this is a reference string
         if (($stringReference & 0x01) == 0) {
             // reference string
-            $stringReference = $stringReference >> 1;
+            $stringReference >>= 1;
             if ($stringReference >= count($this->_referenceStrings)) {
                 require_once 'Zend/Amf/Exception.php';
                 throw new Zend_Amf_Exception('Undefined string reference: ' . $stringReference);
@@ -193,7 +193,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
         }
 
         $length = $stringReference >> 1;
-        if ($length) {
+        if ($length !== 0) {
             $string = $this->_stream->readBytes($length);
             $this->_referenceStrings[] = $string;
         } else {
@@ -217,7 +217,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
     {
         $dateReference = $this->readInteger();
         if (($dateReference & 0x01) == 0) {
-            $dateReference = $dateReference >> 1;
+            $dateReference >>= 1;
             if ($dateReference>=count($this->_referenceObjects)) {
                 require_once 'Zend/Amf/Exception.php';
                 throw new Zend_Amf_Exception('Undefined date reference: ' . $dateReference);
@@ -244,7 +244,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
     {
         $arrayReference = $this->readInteger();
         if (($arrayReference & 0x01)==0){
-            $arrayReference = $arrayReference >> 1;
+            $arrayReference >>= 1;
             if ($arrayReference>=count($this->_referenceObjects)) {
                 require_once 'Zend/Amf/Exception.php';
                 throw new Zend_Amf_Exception('Unknow array reference: ' . $arrayReference);
@@ -263,7 +263,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
             $key = $this->readString();
         }
 
-        $arrayReference = $arrayReference >>1;
+        $arrayReference >>= 1;
 
         //We have a dense array
         for ($i=0; $i < $arrayReference; $i++) {
@@ -283,7 +283,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
     {
         $traitsInfo   = $this->readInteger();
         $storedObject = ($traitsInfo & 0x01)==0;
-        $traitsInfo   = $traitsInfo >> 1;
+        $traitsInfo >>= 1;
 
         // Check if the Object is in the stored Objects reference table
         if ($storedObject) {
@@ -296,7 +296,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
         } else {
             // Check if the Object is in the stored Definitions reference table
             $storedClass = ($traitsInfo & 0x01) == 0;
-            $traitsInfo  = $traitsInfo >> 1;
+            $traitsInfo >>= 1;
             if ($storedClass) {
                 $ref = $traitsInfo;
                 if (!isset($this->_referenceDefinitions[$ref])) {
@@ -313,23 +313,19 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                 $className     = $this->readString();
                 $encoding      = $traitsInfo & 0x03;
                 $propertyNames = array();
-                $traitsInfo    = $traitsInfo >> 2;
+                $traitsInfo >>= 2;
             }
 
             // We now have the object traits defined in variables. Time to go to work:
             if (!$className) {
                 // No class name generic object
                 $returnObject = new stdClass();
+            } elseif ($loader = Zend_Amf_Parse_TypeLoader::loadType($className)) {
+                $returnObject = new $loader();
             } else {
-                // Defined object
-                // Typed object lookup against registered classname maps
-                if ($loader = Zend_Amf_Parse_TypeLoader::loadType($className)) {
-                    $returnObject = new $loader();
-                } else {
-                    //user defined typed object
-                    require_once 'Zend/Amf/Exception.php';
-                    throw new Zend_Amf_Exception('Typed object not found: '. $className . ' ');
-                }
+                //user defined typed object
+                require_once 'Zend/Amf/Exception.php';
+                throw new Zend_Amf_Exception('Typed object not found: '. $className . ' ');
             }
 
             // Add the Object to the reference table
@@ -365,7 +361,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                             $propertyNames[]       = $property;
                             $properties[$property] = $this->readTypeMarker();
                         }
-                    } while ($property !="");
+                    } while ($property != "");
                     break;
                 default:
                     // basic property list object.
@@ -399,7 +395,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
         }
 
        if ($returnObject instanceof Zend_Amf_Value_Messaging_ArrayCollection) {
-            if (isset($returnObject->externalizedData)) {
+            if (property_exists($returnObject, 'externalizedData') && $returnObject->externalizedData !== null) {
                 $returnObject = $returnObject->externalizedData;
             } else {
                 $returnObject = get_object_vars($returnObject);

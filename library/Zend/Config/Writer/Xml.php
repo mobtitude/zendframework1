@@ -72,9 +72,7 @@ class Zend_Config_Writer_Xml extends Zend_Config_Writer_FileAbstract
         $dom = dom_import_simplexml($xml)->ownerDocument;
         $dom->formatOutput = true;
 
-        $xmlString = $dom->saveXML();
-
-        return $xmlString;
+        return $dom->saveXML();
     }
 
     /**
@@ -100,7 +98,7 @@ class Zend_Config_Writer_Xml extends Zend_Config_Writer_FileAbstract
                 } else {
                     $branchType = 'string';
                 }
-            } else if ($branchType !== (is_numeric($key) ? 'numeric' : 'string')) {
+            } elseif ($branchType !== (is_numeric($key) ? 'numeric' : 'string')) {
                 require_once 'Zend/Config/Exception.php';
                 throw new Zend_Config_Exception('Mixing of string and numeric keys is not allowed');
             }
@@ -113,14 +111,11 @@ class Zend_Config_Writer_Xml extends Zend_Config_Writer_FileAbstract
                 } else {
                     $parent->addChild($branchName, (string) $value);
                 }
+            } elseif ($value instanceof Zend_Config) {
+                $child = $xml->addChild($key);
+                $this->_addBranch($value, $child, $xml);
             } else {
-                if ($value instanceof Zend_Config) {
-                    $child = $xml->addChild($key);
-
-                    $this->_addBranch($value, $child, $xml);
-                } else {
-                    $xml->addChild($key, (string) $value);
-                }
+                $xml->addChild($key, (string) $value);
             }
         }
     }

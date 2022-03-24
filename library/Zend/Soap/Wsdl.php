@@ -143,13 +143,13 @@ class Zend_Soap_Wsdl
      */
     public function setComplexTypeStrategy($strategy)
     {
-        if($strategy === true) {
+        if ($strategy === true) {
             require_once "Zend/Soap/Wsdl/Strategy/DefaultComplexType.php";
             $strategy = new Zend_Soap_Wsdl_Strategy_DefaultComplexType();
-        } else if($strategy === false) {
+        } elseif ($strategy === false) {
             require_once "Zend/Soap/Wsdl/Strategy/AnyType.php";
             $strategy = new Zend_Soap_Wsdl_Strategy_AnyType();
-        } else if(is_string($strategy)) {
+        } elseif (is_string($strategy)) {
             if(class_exists($strategy)) {
                 $strategy = new $strategy();
             } else {
@@ -194,7 +194,7 @@ class Zend_Soap_Wsdl
 
         $message->setAttribute('name', $name);
 
-        if (sizeof($parts) > 0) {
+        if ($parts !== []) {
             foreach ($parts as $name => $type) {
                 $part = $this->_dom->createElement('part');
                 $part->setAttribute('name', $name);
@@ -425,11 +425,7 @@ class Zend_Soap_Wsdl
      */
     public function addDocumentation($input_node, $documentation)
     {
-        if ($input_node === $this) {
-            $node = $this->_dom->documentElement;
-        } else {
-            $node = $input_node;
-        }
+        $node = $input_node === $this ? $this->_dom->documentElement : $input_node;
 
         $doc = $this->_dom->createElement('documentation');
         $doc_cdata = $this->_dom->createTextNode(str_replace(array("\r\n", "\r"), "\n", $documentation));
@@ -625,7 +621,7 @@ class Zend_Soap_Wsdl
             if (in_array($key, array('sequence', 'all', 'choice'))) {
                 if (is_array($value)) {
                     $complexType = $this->_dom->createElement('xsd:complexType');
-                    if (count($value) > 0) {
+                    if ($value !== []) {
                         $container = $this->_dom->createElement('xsd:' . $key);
                         foreach ($value as $subelement) {
                             $subelementXml = $this->_parseElement($subelement);

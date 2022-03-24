@@ -77,12 +77,10 @@ class Zend_Translate_Adapter_Tbx extends Zend_Translate_Adapter {
             Zend_Xml_Security::scanFile($filename);
         } catch (Zend_Xml_Exception $e) {
             require_once 'Zend/Translate/Exception.php';
-            throw new Zend_Translate_Exception(
-                $e->getMessage()
-            );
+            throw new Zend_Translate_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        if (!xml_parse($this->_file, file_get_contents($filename))) {
+        if (xml_parse($this->_file, file_get_contents($filename)) === 0) {
             $ex = sprintf('XML error: %s at line %d of file %s',
                           xml_error_string(xml_get_error_code($this->_file)),
                           xml_get_current_line_number($this->_file),
@@ -109,9 +107,9 @@ class Zend_Translate_Adapter_Tbx extends Zend_Translate_Adapter {
                     $this->_termentry = null;
                     break;
                 case 'langset':
-                    if (isset($attrib['xml:lang']) === true) {
+                    if (isset($attrib['xml:lang'])) {
                         $this->_langset = $attrib['xml:lang'];
-                        if (isset($this->_data[$this->_langset]) === false) {
+                        if (!isset($this->_data[$this->_langset])) {
                             $this->_data[$this->_langset] = array();
                         }
                     }
@@ -128,7 +126,7 @@ class Zend_Translate_Adapter_Tbx extends Zend_Translate_Adapter {
 
     private function _endElement($file, $name)
     {
-        if (($this->_term !== null) and ($name != "term")) {
+        if ($this->_term !== null && $name != "term") {
             $this->_content .= "</".$name.">";
         } else {
             switch (strtolower($name)) {
@@ -140,7 +138,7 @@ class Zend_Translate_Adapter_Tbx extends Zend_Translate_Adapter {
                     if (empty($this->_termentry)) {
                         $this->_termentry = $this->_content;
                     }
-                    if (!empty($this->_content) or (isset($this->_data[$this->_langset][$this->_termentry]) === false)) {
+                    if (!empty($this->_content) || !isset($this->_data[$this->_langset][$this->_termentry])) {
                         $this->_data[$this->_langset][$this->_termentry] = $this->_content;
                     }
                     break;
@@ -162,8 +160,7 @@ class Zend_Translate_Adapter_Tbx extends Zend_Translate_Adapter {
         $file = file_get_contents($filename, null, null, 0, 100);
         if (strpos($file, "encoding") !== false) {
             $encoding = substr($file, strpos($file, "encoding") + 9);
-            $encoding = substr($encoding, 1, strpos($encoding, $encoding[0], 1) - 1);
-            return $encoding;
+            return substr($encoding, 1, strpos($encoding, $encoding[0], 1) - 1);
         }
         return 'UTF-8';
     }

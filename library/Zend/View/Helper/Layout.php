@@ -43,7 +43,7 @@ class Zend_View_Helper_Layout extends Zend_View_Helper_Abstract
      */
     public function getLayout()
     {
-        if (null === $this->_layout) {
+        if (!$this->_layout instanceof \Zend_Layout) {
             require_once 'Zend/Layout.php';
             $this->_layout = Zend_Layout::getMvcInstance();
             if (null === $this->_layout) {

@@ -97,16 +97,11 @@ class Zend_Gdata_Books_VolumeQuery extends Zend_Gdata_Query
      */
     public function getQueryUrl()
     {
-        if (isset($this->_url)) {
-            $url = $this->_url;
-        } else {
-            $url = Zend_Gdata_Books::VOLUME_FEED_URI;
-        }
+        $url = $this->_url !== null ? $this->_url : Zend_Gdata_Books::VOLUME_FEED_URI;
         if ($this->getCategory() !== null) {
             $url .= '/-/' . $this->getCategory();
         }
-        $url = $url . $this->getQueryString();
-        return $url;
+        return $url . $this->getQueryString();
     }
 
 }

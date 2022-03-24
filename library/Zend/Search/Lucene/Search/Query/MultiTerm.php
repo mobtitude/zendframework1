@@ -423,11 +423,7 @@ class Zend_Search_Lucene_Search_Query_MultiTerm extends Zend_Search_Lucene_Searc
             }
         }
 
-        if ($required !== null) {
-            $this->_resVector = $required;
-        } else {
-            $this->_resVector = $optional;
-        }
+        $this->_resVector = $required !== null ? $required : $optional;
 
         if (count($prohibited) != 0) {
             // $this->_resVector = array_diff_key($this->_resVector, $prohibited);
@@ -437,7 +433,7 @@ class Zend_Search_Lucene_Search_Query_MultiTerm extends Zend_Search_Lucene_Searc
              */
             if (count($this->_resVector) < count($prohibited)) {
                 $updatedVector = $this->_resVector;
-                foreach ($this->_resVector as $id => $value) {
+                foreach (array_keys($this->_resVector) as $id) {
                     if (isset($prohibited[$id])) {
                         unset($updatedVector[$id]);
                     }
@@ -445,7 +441,7 @@ class Zend_Search_Lucene_Search_Query_MultiTerm extends Zend_Search_Lucene_Searc
                 $this->_resVector = $updatedVector;
             } else {
                 $updatedVector = $this->_resVector;
-                foreach ($prohibited as $id => $value) {
+                foreach (array_keys($prohibited) as $id) {
                     unset($updatedVector[$id]);
                 }
                 $this->_resVector = $updatedVector;
@@ -648,7 +644,7 @@ class Zend_Search_Lucene_Search_Query_MultiTerm extends Zend_Search_Lucene_Searc
 
             if ($this->_signs === null || $this->_signs[$id] === true) {
                 $query .= '+';
-            } else if ($this->_signs[$id] === false) {
+            } elseif ($this->_signs[$id] === false) {
                 $query .= '-';
             }
 

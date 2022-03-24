@@ -354,11 +354,7 @@ class Zend_Service_SlideShare
             );
         }
 
-        if (!empty($description)) {
-            $params['slideshow_description'] = $description;
-        } else {
-            $params['slideshow_description'] = "";
-        }
+        $params['slideshow_description'] = empty($description) ? "" : $description;
 
         if (!empty($tags)) {
             $tmp = array();
@@ -458,7 +454,7 @@ class Zend_Service_SlideShare
                 );
             }
 
-            if (!($sxe->getName() == 'Slideshow')) {
+            if ($sxe->getName() != 'Slideshow') {
                 require_once 'Zend/Service/SlideShare/Exception.php';
                 throw new Zend_Service_SlideShare_Exception(
                     'Unknown XML Repsonse Received'

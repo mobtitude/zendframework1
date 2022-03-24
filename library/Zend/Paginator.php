@@ -276,13 +276,13 @@ class Zend_Paginator implements Countable, IteratorAggregate
             if ($adapter == self::INTERNAL_ADAPTER) {
                 if (is_array($data)) {
                     $adapter = 'Array';
-                } else if ($data instanceof Zend_Db_Table_Select) {
+                } elseif ($data instanceof Zend_Db_Table_Select) {
                     $adapter = 'DbTableSelect';
-                } else if ($data instanceof Zend_Db_Select) {
+                } elseif ($data instanceof Zend_Db_Select) {
                     $adapter = 'DbSelect';
-                } else if ($data instanceof Iterator) {
+                } elseif ($data instanceof Iterator) {
                     $adapter = 'Iterator';
-                } else if (is_integer($data)) {
+                } elseif (is_int($data)) {
                     $adapter = 'Null';
                 } else {
                     $type = (is_object($data)) ? get_class($data) : gettype($data);
@@ -450,7 +450,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
     {
         if ($adapter instanceof Zend_Paginator_Adapter_Interface) {
             $this->_adapter = $adapter;
-        } else if ($adapter instanceof Zend_Paginator_AdapterAggregate) {
+        } elseif ($adapter instanceof Zend_Paginator_AdapterAggregate) {
             $this->_adapter = $adapter->getPaginatorAdapter();
         } else {
             /**
@@ -488,8 +488,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
     public function __toString()
     {
         try {
-            $return = $this->render();
-            return $return;
+            return $this->render();
         } catch (Exception $e) {
             trigger_error($e->getMessage(), E_USER_WARNING);
         }
@@ -516,7 +515,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
      */
     public function count()
     {
-        if (!$this->_pageCount) {
+        if ($this->_pageCount === 0) {
             $this->_pageCount = $this->_calculatePageCount();
         }
 
@@ -689,7 +688,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
     {
         if ($pageNumber == null) {
             $pageNumber = $this->getCurrentPageNumber();
-        } else if ($pageNumber < 0) {
+        } elseif ($pageNumber < 0) {
             $pageNumber = ($this->count() + 1) + $pageNumber;
         }
 
@@ -767,13 +766,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
     {
         $itemCount = 0;
 
-        if (is_array($items) || $items instanceof Countable) {
-            $itemCount = count($items);
-        } else { // $items is something like LimitIterator
-            $itemCount = iterator_count($items);
-        }
-
-        return $itemCount;
+        return is_array($items) || $items instanceof Countable ? count($items) : iterator_count($items);
     }
 
     /**
@@ -1146,8 +1139,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
                      */
                     require_once 'Zend/View/Exception.php';
 
-                    throw new Zend_View_Exception('Scrolling style must implement ' .
-                        'Zend_Paginator_ScrollingStyle_Interface');
+                    throw new Zend_View_Exception('Scrolling style must implement Zend_Paginator_ScrollingStyle_Interface');
                 }
 
                 return $scrollingStyle;
@@ -1166,8 +1158,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
                  */
                 require_once 'Zend/View/Exception.php';
 
-                throw new Zend_View_Exception('Scrolling style must be a class ' .
-                    'name or object implementing Zend_Paginator_ScrollingStyle_Interface');
+                throw new Zend_View_Exception('Scrolling style must be a class name or object implementing Zend_Paginator_ScrollingStyle_Interface');
         }
     }
 }

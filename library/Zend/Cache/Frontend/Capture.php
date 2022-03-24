@@ -59,7 +59,9 @@ class Zend_Cache_Frontend_Capture extends Zend_Cache_Core
     {
         $this->_tags = $tags;
         $this->_extension = $extension;
-        ob_start(array($this, '_flush'));
+        ob_start(function (string $data) : string {
+            return $this->_flush($data);
+        });
         ob_implicit_flush(false);
         $this->_idStack[] = $id;
         return false;

@@ -70,7 +70,7 @@ class Zend_Application_Resource_Translate extends Zend_Application_Resource_Reso
             if (!isset($options['content']) && !isset($options['data'])) {
                 require_once 'Zend/Application/Resource/Exception.php';
                 throw new Zend_Application_Resource_Exception('No translation source data provided.');
-            } else if (array_key_exists('content', $options) && array_key_exists('data', $options)) {
+            } elseif (array_key_exists('content', $options) && array_key_exists('data', $options)) {
                 require_once 'Zend/Application/Resource/Exception.php';
                 throw new Zend_Application_Resource_Exception(
                     'Conflict on translation source data: choose only one key between content and data.'
@@ -86,10 +86,8 @@ class Zend_Application_Resource_Translate extends Zend_Application_Resource_Reso
                 unset($options['data']);
             }
 
-            if (isset($options['log'])) {
-                if (is_array($options['log'])) {
-                    $options['log'] = Zend_Log::factory($options['log']);
-                }
+            if (isset($options['log']) && is_array($options['log'])) {
+                $options['log'] = Zend_Log::factory($options['log']);
             }
 
             if (isset($options['options'])) {

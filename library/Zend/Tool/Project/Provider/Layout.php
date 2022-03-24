@@ -74,7 +74,7 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
 
         $zc = $applicationConfigResource->getAsZendConfig();
 
-        if (isset($zc->resources) && isset($zc->resources->layout)) {
+        if (property_exists($zc, 'resources') && $zc->resources !== null && (property_exists($zc->resources, 'layout') && $zc->resources->layout !== null)) {
             $this->_registry->getResponse()->appendContent('A layout resource already exists in this project\'s application configuration file.');
             return;
         }
@@ -108,7 +108,7 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
         $applicationConfigResource = $this->_getApplicationConfigResource($profile);
         $zc = $applicationConfigResource->getAsZendConfig();
 
-        if (isset($zc->resources) && !isset($zc->resources->layout)) {
+        if (property_exists($zc, 'resources') && $zc->resources !== null && !(property_exists($zc->resources, 'layout') && $zc->resources->layout !== null)) {
             $this->_registry->getResponse()->appendContent('No layout configuration exists in application config file.');
             return;
         }

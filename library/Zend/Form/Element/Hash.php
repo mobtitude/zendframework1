@@ -125,11 +125,7 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
     public function initCsrfValidator()
     {
         $session = $this->getSession();
-        if (isset($session->hash)) {
-            $rightHash = $session->hash;
-        } else {
-            $rightHash = null;
-        }
+        $rightHash = property_exists($session, 'hash') && $session->hash !== null ? $session->hash : null;
 
         $this->addValidator('Identical', true, array($rightHash));
         return $this;

@@ -65,10 +65,9 @@ class Zend_View_Helper_ServerUrl
 
         if (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) {
             $this->setHost($_SERVER['HTTP_HOST']);
-        } else if (isset($_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'])) {
+        } elseif (isset($_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'])) {
             $name = $_SERVER['SERVER_NAME'];
             $port = $_SERVER['SERVER_PORT'];
-
             if (($scheme == 'http' && $port == 80) ||
                 ($scheme == 'https' && $port == 443)) {
                 $this->setHost($name);
@@ -93,11 +92,7 @@ class Zend_View_Helper_ServerUrl
     {
         if ($requestUri === true) {
             $path = $_SERVER['REQUEST_URI'];
-        } else if (is_string($requestUri)) {
-            $path = $requestUri;
-        } else {
-            $path = '';
-        }
+        } else $path = is_string($requestUri) ? $requestUri : '';
 
         return $this->getScheme() . '://' . $this->getHost() . $path;
     }

@@ -84,11 +84,7 @@ class Zend_Acl_Role_Registry
             require_once 'Zend/Acl/Role/Registry/Exception.php';
             foreach ($parents as $parent) {
                 try {
-                    if ($parent instanceof Zend_Acl_Role_Interface) {
-                        $roleParentId = $parent->getRoleId();
-                    } else {
-                        $roleParentId = $parent;
-                    }
+                    $roleParentId = $parent instanceof Zend_Acl_Role_Interface ? $parent->getRoleId() : $parent;
                     $roleParent = $this->get($roleParentId);
                 } catch (Zend_Acl_Role_Registry_Exception $e) {
                     throw new Zend_Acl_Role_Registry_Exception("Parent Role id '$roleParentId' does not exist", 0, $e);
@@ -118,11 +114,7 @@ class Zend_Acl_Role_Registry
      */
     public function get($role)
     {
-        if ($role instanceof Zend_Acl_Role_Interface) {
-            $roleId = $role->getRoleId();
-        } else {
-            $roleId = (string) $role;
-        }
+        $roleId = $role instanceof Zend_Acl_Role_Interface ? $role->getRoleId() : (string) $role;
 
         if (!$this->has($role)) {
             /**
@@ -145,11 +137,7 @@ class Zend_Acl_Role_Registry
      */
     public function has($role)
     {
-        if ($role instanceof Zend_Acl_Role_Interface) {
-            $roleId = $role->getRoleId();
-        } else {
-            $roleId = (string) $role;
-        }
+        $roleId = $role instanceof Zend_Acl_Role_Interface ? $role->getRoleId() : (string) $role;
 
         return isset($this->_roles[$roleId]);
     }

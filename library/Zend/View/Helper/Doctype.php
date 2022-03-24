@@ -137,11 +137,7 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
                         $e->setView($this->view);
                         throw $e;
                     }
-                    if (stristr($doctype, 'xhtml')) {
-                        $type = self::CUSTOM_XHTML;
-                    } else {
-                        $type = self::CUSTOM;
-                    }
+                    $type = stristr($doctype, 'xhtml') ? self::CUSTOM_XHTML : self::CUSTOM;
                     $this->setDoctype($type);
                     $this->_registry['doctypes'][$type] = $doctype;
                     break;
@@ -190,7 +186,7 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
      */
     public function isXhtml()
     {
-        return (stristr($this->getDoctype(), 'xhtml') ? true : false);
+        return ((bool) stristr($this->getDoctype(), 'xhtml'));
     }
 
     /**
@@ -217,7 +213,7 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
      * @return booleean
      */
     public function isHtml5() {
-        return (stristr($this->doctype(), '<!DOCTYPE html>') ? true : false);
+        return ((bool) stristr($this->doctype(), '<!DOCTYPE html>'));
     }
     
     /**
@@ -226,7 +222,7 @@ class Zend_View_Helper_Doctype extends Zend_View_Helper_Abstract
      * @return booleean
      */
     public function isRdfa() {
-        return (stristr($this->getDoctype(), 'rdfa') ? true : false);
+        return ((bool) stristr($this->getDoctype(), 'rdfa'));
     }
 
     /**

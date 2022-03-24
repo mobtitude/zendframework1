@@ -45,7 +45,7 @@ abstract class Zend_Pdf_Target
                 // It's a well-formed action, load it
                 require_once 'Zend/Pdf/Action.php';
                 return Zend_Pdf_Action::load($resource);
-            } else if ($resource->D !== null) {
+            } elseif ($resource->D !== null) {
                 // It's a destination
                 $resource = $resource->D;
             } else {

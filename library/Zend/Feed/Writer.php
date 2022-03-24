@@ -153,14 +153,11 @@ class Zend_Feed_Writer
         $entryName = $name . '_Entry';
         $feedRendererName  = $name . '_Renderer_Feed';
         $entryRendererName = $name . '_Renderer_Entry';
-        if (self::isRegistered($name)) {
-            if (self::getPluginLoader()->isLoaded($feedName)
-                || self::getPluginLoader()->isLoaded($entryName)
-                || self::getPluginLoader()->isLoaded($feedRendererName)
-                || self::getPluginLoader()->isLoaded($entryRendererName)
-            ) {
-                return;
-            }
+        if (self::isRegistered($name) && (self::getPluginLoader()->isLoaded($feedName)
+            || self::getPluginLoader()->isLoaded($entryName)
+            || self::getPluginLoader()->isLoaded($feedRendererName)
+            || self::getPluginLoader()->isLoaded($entryRendererName))) {
+            return;
         }
         try {
             self::getPluginLoader()->load($feedName);
@@ -205,14 +202,10 @@ class Zend_Feed_Writer
         $entryName = $extensionName . '_Entry';
         $feedRendererName  = $extensionName . '_Renderer_Feed';
         $entryRendererName = $extensionName . '_Renderer_Entry';
-        if (in_array($feedName, self::$_extensions['feed'])
+        return in_array($feedName, self::$_extensions['feed'])
             || in_array($entryName, self::$_extensions['entry'])
             || in_array($feedRendererName, self::$_extensions['feedRenderer'])
-            || in_array($entryRendererName, self::$_extensions['entryRenderer'])
-        ) {
-            return true;
-        }
-        return false;
+            || in_array($entryRendererName, self::$_extensions['entryRenderer']);
     }
 
     /**

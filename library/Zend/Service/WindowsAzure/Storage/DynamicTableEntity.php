@@ -72,9 +72,9 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
     {
         if (strtolower($name) == 'partitionkey') {
             $this->setPartitionKey($value);
-        } else if (strtolower($name) == 'rowkey') {
+        } elseif (strtolower($name) == 'rowkey') {
             $this->setRowKey($value);
-        } else if (strtolower($name) == 'etag') {
+        } elseif (strtolower($name) == 'etag') {
             $this->setEtag($value);
         } else {
             if (!array_key_exists(strtolower($name), $this->_dynamicProperties)) {
@@ -83,11 +83,11 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
                     $type = 'Edm.String';
                     if (is_int($value)) {
                         $type = 'Edm.Int32';
-                    } else if (is_float($value)) {
+                    } elseif (is_float($value)) {
                         $type = 'Edm.Double';
-                    } else if (is_bool($value)) {
+                    } elseif (is_bool($value)) {
                         $type = 'Edm.Boolean';
-                    } else if ($value instanceof DateTime || $this->_convertToDateTime($value) !== false) {
+                    } elseif ($value instanceof DateTime || $this->_convertToDateTime($value) !== false) {
                         if (!$value instanceof DateTime) {
                             $value = $this->_convertToDateTime($value);
                         }
@@ -109,18 +109,16 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
             	
             	// Try to convert the type
             	if ($type == 'Edm.Int32' || $type == 'Edm.Int64') {
-            		$value = intval($value);
-            	} else if ($type == 'Edm.Double') {
-            		$value = floatval($value);
-            	} else if ($type == 'Edm.Boolean') {
-            		if (!is_bool($value)) {
-            			$value = strtolower($value) == 'true';
-            		}
-            	} else if ($type == 'Edm.DateTime') {
-            		if (!$value instanceof DateTime) {
-                    	$value = $this->_convertToDateTime($value);
-                    }
-            	}
+                 $value = (int) $value;
+             } elseif ($type == 'Edm.Double') {
+                 $value = floatval($value);
+             } elseif ($type == 'Edm.Boolean') {
+                 if (!is_bool($value)) {
+               			$value = strtolower($value) == 'true';
+               		}
+             } elseif ($type == 'Edm.DateTime' && !$value instanceof DateTime) {
+                 $value = $this->_convertToDateTime($value);
+             }
             }
        
     		// Set value

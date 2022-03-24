@@ -176,7 +176,7 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
         } else {
             $list = $this->_xpath->query($this->_xpathQueryRdf . '//rss:author');
         }
-        if ($list->length) {
+        if ($list->length !== 0) {
             foreach ($list as $author) {
                 $string = trim($author->nodeValue);
                 $email = null;
@@ -292,7 +292,7 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
             }
         }
 
-        if (!$date) {
+        if ($date === null) {
             $date = $this->getExtension('DublinCore')->getDate();
         }
 
@@ -370,7 +370,7 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
             }
         }
 
-        if (!$enclosure) {
+        if ($enclosure === null) {
             $enclosure = $this->getExtension('Atom')->getEnclosure();
         }
 
@@ -407,9 +407,9 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
         }
 
         if (!$id) {
-            if ($this->getPermalink()) {
+            if ($this->getPermalink() !== '' && $this->getPermalink() !== '0') {
                 $id = $this->getPermalink();
-            } elseif ($this->getTitle()) {
+            } elseif ($this->getTitle() !== '' && $this->getTitle() !== '0') {
                 $id = $this->getTitle();
             } else {
                 $id = null;
@@ -460,7 +460,7 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
             $list = $this->_xpath->query($this->_xpathQueryRdf.'//rss:link');
         }
 
-        if (!$list->length) {
+        if ($list->length === 0) {
             $links = $this->getExtension('Atom')->getLinks();
         } else {
             foreach ($list as $link) {
@@ -491,7 +491,7 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
             $list = $this->_xpath->query($this->_xpathQueryRdf.'//rss:category');
         }
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             $categoryCollection = new Zend_Feed_Reader_Collection_Category;
             foreach ($list as $category) {
                 $categoryCollection[] = array(

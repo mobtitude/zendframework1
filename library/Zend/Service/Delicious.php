@@ -296,7 +296,7 @@ class Zend_Service_Delicious
         if ($url) {
             $parms['url'] = $url;
         }
-        if ($dt) {
+        if ($dt !== null) {
             $parms['dt'] = $dt->get('Y-m-d\TH:i:s\Z');
         }
 
@@ -336,7 +336,7 @@ class Zend_Service_Delicious
         if ($tag) {
             $parms['tag'] = $tag;
         }
-        if ($count) {
+        if ($count !== '' && $count !== '0') {
             $parms['count'] = $count;
         }
 
@@ -396,7 +396,7 @@ class Zend_Service_Delicious
         if ($count) {
             $parms['count'] = $count;
         }
-        if ($sort) {
+        if ($sort !== '' && $sort !== '0') {
             $parms['sort'] = $sort;
         }
 
@@ -539,12 +539,12 @@ class Zend_Service_Delicious
         $rootNode = $response->documentElement;
         $arrOut = array();
 
-        if ($rootNode->nodeName == $root) {
+        if ($rootNode->nodeName === $root) {
             $childNodes = $rootNode->childNodes;
 
             for ($i = 0; $i < $childNodes->length; $i++) {
                 $currentNode = $childNodes->item($i);
-                if ($currentNode->nodeName == $child) {
+                if ($currentNode->nodeName === $child) {
                     $arrOut[$currentNode->getAttribute($attKey)] = $currentNode->getAttribute($attValue);
                 }
             }
@@ -594,11 +594,7 @@ class Zend_Service_Delicious
 
         if ($rootNode && $rootNode->nodeName == 'result') {
 
-            if ($rootNode->hasAttribute('code')) {
-                $strResponse = $rootNode->getAttribute('code');
-            } else {
-                $strResponse = $rootNode->nodeValue;
-            }
+            $strResponse = $rootNode->hasAttribute('code') ? $rootNode->getAttribute('code') : $rootNode->nodeValue;
 
             if ($strResponse != 'done' && $strResponse != 'ok') {
                 /**

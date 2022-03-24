@@ -74,11 +74,7 @@ class Zend_Validate_Alnum extends Zend_Validate_Abstract
         }
 
         if (is_array($allowWhiteSpace)) {
-            if (array_key_exists('allowWhiteSpace', $allowWhiteSpace)) {
-                $allowWhiteSpace = $allowWhiteSpace['allowWhiteSpace'];
-            } else {
-                $allowWhiteSpace = false;
-            }
+            $allowWhiteSpace = array_key_exists('allowWhiteSpace', $allowWhiteSpace) ? $allowWhiteSpace['allowWhiteSpace'] : false;
         }
 
         $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
@@ -138,7 +134,7 @@ class Zend_Validate_Alnum extends Zend_Validate_Abstract
 
         self::$_filter->allowWhiteSpace = $this->allowWhiteSpace;
 
-        if ($value != self::$_filter->filter($value)) {
+        if ($value !== self::$_filter->filter($value)) {
             $this->_error(self::NOT_ALNUM);
             return false;
         }

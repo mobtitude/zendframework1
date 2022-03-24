@@ -58,11 +58,7 @@ class Zend_OpenId_Provider_User_Session extends Zend_OpenId_Provider_User
      */
     public function __construct(Zend_Session_Namespace $session = null)
     {
-        if ($session === null) {
-            $this->_session = new Zend_Session_Namespace("openid");
-        } else {
-            $this->_session = $session;
-        }
+        $this->_session = $session === null ? new Zend_Session_Namespace("openid") : $session;
     }
 
     /**
@@ -84,7 +80,7 @@ class Zend_OpenId_Provider_User_Session extends Zend_OpenId_Provider_User
      */
     public function getLoggedInUser()
     {
-        if (isset($this->_session->logged_in)) {
+        if (property_exists($this->_session, 'logged_in') && $this->_session->logged_in !== null) {
             return $this->_session->logged_in;
         }
         return false;

@@ -53,12 +53,8 @@ abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
      */
     public function getClosingBracket()
     {
-        if (!$this->_closingBracket) {
-            if ($this->_isXhtml()) {
-                $this->_closingBracket = ' />';
-            } else {
-                $this->_closingBracket = '>';
-            }
+        if ($this->_closingBracket === '' || $this->_closingBracket === '0') {
+            $this->_closingBracket = $this->_isXhtml() ? ' />' : '>';
         }
 
         return $this->_closingBracket;

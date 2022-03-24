@@ -104,7 +104,7 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
             $barcodeChar = str_split($this->_codingMap[$char]);
             foreach ($barcodeChar as $c) {
                 /* visible, width, top, length */
-                $width = $c ? $this->_barThickWidth : $this->_barThinWidth;
+                $width = $c !== '' && $c !== '0' ? $this->_barThickWidth : $this->_barThinWidth;
                 $barcodeTable[] = array(1 , $width , 0 , 1);
                 $barcodeTable[] = array(0 , $this->_barThinWidth);
             }
@@ -132,12 +132,10 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
         $checksum = 0;
 
         for ($i = strlen($text); $i > 0; $i --) {
-            $checksum += intval($text[$i - 1]) * $factor;
+            $checksum += (int) $text[$i - 1] * $factor;
             $factor    = 4 - $factor;
         }
 
-        $checksum = (10 - ($checksum % 10)) % 10;
-
-        return $checksum;
+        return (10 - ($checksum % 10)) % 10;
     }
 }

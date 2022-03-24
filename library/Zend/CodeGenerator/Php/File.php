@@ -109,11 +109,9 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
     {
         $realpath = realpath($filePath);
 
-        if ($realpath === false) {
-            if ( ($realpath = Zend_Reflection_File::findRealpathInIncludePath($filePath)) === false) {
-                require_once 'Zend/CodeGenerator/Php/Exception.php';
-                throw new Zend_CodeGenerator_Php_Exception('No file for ' . $realpath . ' was found.');
-            }
+        if ($realpath === false && ($realpath = Zend_Reflection_File::findRealpathInIncludePath($filePath)) === false) {
+            require_once 'Zend/CodeGenerator/Php/Exception.php';
+            throw new Zend_CodeGenerator_Php_Exception('No file for ' . $realpath . ' was found.');
         }
 
         if ($usePreviousCodeGeneratorIfItExists && isset(self::$_fileCodeGenerators[$realpath])) {
@@ -156,7 +154,8 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
 
             $bodyLines = explode("\n", $body);
             $bodyReturn = array();
-            for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
+            $bodyLinesCount = count($bodyLines);
+            for ($lineNum = 1; $lineNum <= $bodyLinesCount; $lineNum++) {
                 if ($lineNum == $classStartLine) {
                     $bodyReturn[] = str_replace('?', $class->getName(), self::$_markerClass);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
                     $lineNum = $classEndLine;
@@ -174,8 +173,9 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
 
             $bodyLines = explode("\n", $body);
             $bodyReturn = array();
-            for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
-                if ($lineNum == $docblock->getStartLine()) {
+            $bodyLinesCount = count($bodyLines);
+            for ($lineNum = 1; $lineNum <= $bodyLinesCount; $lineNum++) {
+                if ($lineNum === $docblock->getStartLine()) {
                     $bodyReturn[] = str_replace('?', $class->getName(), self::$_markerDocblock);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
                     $lineNum = $docblock->getEndLine();
                 } else {
@@ -381,7 +381,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
      */
     public function generate()
     {
-        if ($this->isSourceDirty() === false) {
+        if (!$this->isSourceDirty()) {
             return $this->_sourceContent;
         }
 

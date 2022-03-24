@@ -109,11 +109,7 @@ class Zend_Config implements Countable, Iterator
         $this->_index = 0;
         $this->_data = array();
         foreach ($array as $key => $value) {
-            if (is_array($value)) {
-                $this->_data[$key] = new self($value, $this->_allowModifications);
-            } else {
-                $this->_data[$key] = $value;
-            }
+            $this->_data[$key] = is_array($value) ? new self($value, $this->_allowModifications) : $value;
         }
         $this->_count = count($this->_data);
     }
@@ -157,11 +153,7 @@ class Zend_Config implements Countable, Iterator
     public function __set($name, $value)
     {
         if ($this->_allowModifications) {
-            if (is_array($value)) {
-                $this->_data[$name] = new self($value, true);
-            } else {
-                $this->_data[$name] = $value;
-            }
+            $this->_data[$name] = is_array($value) ? new self($value, true) : $value;
             $this->_count = count($this->_data);
         } else {
             /** @see Zend_Config_Exception */
@@ -180,11 +172,7 @@ class Zend_Config implements Countable, Iterator
     {
       $array = array();
       foreach ($this->_data as $key => $value) {
-          if ($value instanceof Zend_Config) {
-              $array[$key] = clone $value;
-          } else {
-              $array[$key] = $value;
-          }
+          $array[$key] = $value instanceof Zend_Config ? clone $value : $value;
       }
       $this->_data = $array;
     }
@@ -199,11 +187,7 @@ class Zend_Config implements Countable, Iterator
         $array = array();
         $data = $this->_data;
         foreach ($data as $key => $value) {
-            if ($value instanceof Zend_Config) {
-                $array[$key] = $value->toArray();
-            } else {
-                $array[$key] = $value;
-            }
+            $array[$key] = $value instanceof Zend_Config ? $value->toArray() : $value;
         }
         return $array;
     }
@@ -348,11 +332,7 @@ class Zend_Config implements Countable, Iterator
                     $this->$key = $item;
                 }
             } else {
-                if($item instanceof Zend_Config) {
-                    $this->$key = new Zend_Config($item->toArray(), !$this->readOnly());
-                } else {
-                    $this->$key = $item;
-                }
+                $this->$key = $item instanceof Zend_Config ? new Zend_Config($item->toArray(), !$this->readOnly()) : $item;
             }
         }
 
@@ -406,7 +386,7 @@ class Zend_Config implements Countable, Iterator
     {
         if ($extendedSection === null && isset($this->_extends[$extendingSection])) {
             unset($this->_extends[$extendingSection]);
-        } else if ($extendedSection !== null) {
+        } elseif ($extendedSection !== null) {
             $this->_extends[$extendingSection] = $extendedSection;
         }
     }
@@ -467,12 +447,10 @@ class Zend_Config implements Countable, Iterator
             foreach ($secondArray as $key => $value) {
                 if (isset($firstArray[$key])) {
                     $firstArray[$key] = $this->_arrayMergeRecursive($firstArray[$key], $value);
+                } elseif ($key === 0) {
+                    $firstArray= array(0=>$this->_arrayMergeRecursive($firstArray, $value));
                 } else {
-                    if($key === 0) {
-                        $firstArray= array(0=>$this->_arrayMergeRecursive($firstArray, $value));
-                    } else {
-                        $firstArray[$key] = $value;
-                    }
+                    $firstArray[$key] = $value;
                 }
             }
         } else {

@@ -90,11 +90,7 @@ class Zend_Db_Statement_Db2 extends Zend_Db_Statement
             $type = DB2_PARAM_IN;
         }
 
-        if (isset($options['data-type'])) {
-            $datatype = $options['data-type'];
-        } else {
-            $datatype = DB2_CHAR;
-        }
+        $datatype = isset($options['data-type']) ? $options['data-type'] : DB2_CHAR;
 
         if (!db2_bind_param($this->_stmt, $parameter, "variable", $type, $datatype)) {
             /**
@@ -198,13 +194,9 @@ class Zend_Db_Statement_Db2 extends Zend_Db_Statement
         }
 
         $retval = true;
-        if ($params !== null) {
-            $retval = @db2_execute($this->_stmt, $params);
-        } else {
-            $retval = @db2_execute($this->_stmt);
-        }
+        $retval = $params !== null ? @db2_execute($this->_stmt, $params) : @db2_execute($this->_stmt);
 
-        if ($retval === false) {
+        if (!$retval) {
             /**
              * @see Zend_Db_Statement_Db2_Exception
              */
@@ -215,7 +207,7 @@ class Zend_Db_Statement_Db2 extends Zend_Db_Statement
         }
 
         $this->_keys = array();
-        if ($field_num = $this->columnCount()) {
+        if (($field_num = $this->columnCount()) !== 0) {
             for ($i = 0; $i < $field_num; $i++) {
                 $name = db2_field_name($this->_stmt, $i);
                 $this->_keys[] = $name;
@@ -289,8 +281,7 @@ class Zend_Db_Statement_Db2 extends Zend_Db_Statement
      */
     public function fetchObject($class = 'stdClass', array $config = array())
     {
-        $obj = $this->fetch(Zend_Db::FETCH_OBJ);
-        return $obj;
+        return $this->fetch(Zend_Db::FETCH_OBJ);
     }
 
     /**

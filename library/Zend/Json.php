@@ -74,7 +74,7 @@ class Zend_Json
     public static function decode($encodedValue, $objectDecodeType = Zend_Json::TYPE_ARRAY)
     {
         $encodedValue = (string) $encodedValue;
-        if (function_exists('json_decode') && self::$useBuiltinEncoderDecoder !== true) {
+        if (function_exists('json_decode') && !self::$useBuiltinEncoderDecoder) {
             $decode = json_decode($encodedValue, $objectDecodeType);
 
             // php < 5.3
@@ -150,7 +150,7 @@ class Zend_Json
         }
 
         // Encoding
-        if (function_exists('json_encode') && self::$useBuiltinEncoderDecoder !== true) {
+        if (function_exists('json_encode') && !self::$useBuiltinEncoderDecoder) {
             $encodedResult = json_encode($valueToEncode);
         } else {
             require_once 'Zend/Json/Encoder.php';
@@ -206,7 +206,7 @@ class Zend_Json
             );
             $value = $magicKey;
         } elseif (is_array($value)) {
-            foreach ($value as $k => $v) {
+            foreach (array_keys($value) as $k) {
                 $value[$k] = self::_recursiveJsonExprFinder($value[$k], $javascriptExpressions, $k);
             }
         } elseif (is_object($value)) {

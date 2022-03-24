@@ -559,11 +559,7 @@ class Zend_Db_Select
             $cond = $this->_adapter->quoteInto($cond, $value, $type);
         }
 
-        if ($this->_parts[self::HAVING]) {
-            $this->_parts[self::HAVING][] = self::SQL_AND . " ($cond)";
-        } else {
-            $this->_parts[self::HAVING][] = "($cond)";
-        }
+        $this->_parts[self::HAVING][] = $this->_parts[self::HAVING] ? self::SQL_AND . " ($cond)" : "($cond)";
 
         return $this;
     }
@@ -586,11 +582,7 @@ class Zend_Db_Select
             $cond = $this->_adapter->quoteInto($cond, $value, $type);
         }
 
-        if ($this->_parts[self::HAVING]) {
-            $this->_parts[self::HAVING][] = self::SQL_OR . " ($cond)";
-        } else {
-            $this->_parts[self::HAVING][] = "($cond)";
-        }
+        $this->_parts[self::HAVING][] = $this->_parts[self::HAVING] ? self::SQL_OR . " ($cond)" : "($cond)";
 
         return $this;
     }
@@ -786,7 +778,7 @@ class Zend_Db_Select
             throw new Zend_Db_Select_Exception("Invalid join type '$type'");
         }
 
-        if (count($this->_parts[self::UNION])) {
+        if (count($this->_parts[self::UNION]) > 0) {
             require_once 'Zend/Db/Select/Exception.php';
             throw new Zend_Db_Select_Exception("Invalid use of table with " . self::SQL_UNION);
         }
@@ -979,7 +971,7 @@ class Zend_Db_Select
             $columnValues[] = array($currentCorrelationName, $col, is_string($alias) ? $alias : null);
         }
 
-        if ($columnValues) {
+        if ($columnValues !== []) {
 
             // should we attempt to prepend or insert these values?
             if ($afterCorrelationName === true || is_string($afterCorrelationName)) {
@@ -1001,12 +993,12 @@ class Zend_Db_Select
 
             // apply current values to current stack
             foreach ($columnValues as $columnValue) {
-                array_push($this->_parts[self::COLUMNS], $columnValue);
+                $this->_parts[self::COLUMNS][] = $columnValue;
             }
 
             // finish ensuring that all previous values are applied (if they exist)
             while ($tmpColumns) {
-                array_push($this->_parts[self::COLUMNS], array_shift($tmpColumns));
+                $this->_parts[self::COLUMNS][] = array_shift($tmpColumns);
             }
         }
     }
@@ -1022,7 +1014,7 @@ class Zend_Db_Select
      */
     protected function _where($condition, $value = null, $type = null, $bool = true)
     {
-        if (count($this->_parts[self::UNION])) {
+        if (count($this->_parts[self::UNION]) > 0) {
             require_once 'Zend/Db/Select/Exception.php';
             throw new Zend_Db_Select_Exception("Invalid use of where clause with " . self::SQL_UNION);
         }
@@ -1033,11 +1025,7 @@ class Zend_Db_Select
 
         $cond = "";
         if ($this->_parts[self::WHERE]) {
-            if ($bool === true) {
-                $cond = self::SQL_AND . ' ';
-            } else {
-                $cond = self::SQL_OR . ' ';
-            }
+            $cond = $bool ? self::SQL_AND . ' ' : self::SQL_OR . ' ';
         }
 
         return $cond . "($condition)";
@@ -1100,7 +1088,7 @@ class Zend_Db_Select
      */
     protected function _renderColumns($sql)
     {
-        if (!count($this->_parts[self::COLUMNS])) {
+        if (count($this->_parts[self::COLUMNS]) === 0) {
             return null;
         }
 
@@ -1259,12 +1247,12 @@ class Zend_Db_Select
             $order = array();
             foreach ($this->_parts[self::ORDER] as $term) {
                 if (is_array($term)) {
-                    if(is_numeric($term[0]) && strval(intval($term[0])) == $term[0]) {
+                    if(is_numeric($term[0]) && strval((int) $term[0]) == $term[0]) {
                         $order[] = (int)trim($term[0]) . ' ' . $term[1];
                     } else {
                         $order[] = $this->_adapter->quoteIdentifier($term[0], true) . ' ' . $term[1];
                     }
-                } elseif (is_numeric($term) && strval(intval($term)) == $term) {
+                } elseif (is_numeric($term) && strval((int) $term) == $term) {
                     $order[] = (int)trim($term);
                 } else {
                     $order[] = $this->_adapter->quoteIdentifier($term, true);
@@ -1342,7 +1330,7 @@ class Zend_Db_Select
          */
         if (preg_match('/^join([a-zA-Z]*?)Using$/', $method, $matches)) {
             $type = strtolower($matches[1]);
-            if ($type) {
+            if ($type !== '' && $type !== '0') {
                 $type .= ' join';
                 if (!in_array($type, self::$_joinTypes)) {
                     require_once 'Zend/Db/Select/Exception.php';
@@ -1356,7 +1344,9 @@ class Zend_Db_Select
                 $type = self::INNER_JOIN;
             }
             array_unshift($args, $type);
-            return call_user_func_array(array($this, '_joinUsing'), $args);
+            return call_user_func_array(function ($type, $name, $cond, $cols = '*', $schema = \null) : \Zend_Db_Select {
+                return $this->_joinUsing($type, $name, $cond, $cols, $schema);
+            }, $args);
         }
 
         require_once 'Zend/Db/Select/Exception.php';

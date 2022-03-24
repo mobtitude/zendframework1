@@ -129,11 +129,7 @@ class Zend_XmlRpc_Client
      */
     public function __construct($server, Zend_Http_Client $httpClient = null)
     {
-        if ($httpClient === null) {
-            $this->_httpClient = new Zend_Http_Client();
-        } else {
-            $this->_httpClient = $httpClient;
-        }
+        $this->_httpClient = $httpClient === null ? new Zend_Http_Client() : $httpClient;
 
         $this->_introspector  = new Zend_XmlRpc_Client_ServerIntrospection($this);
         $this->_serverAddress = $server;
@@ -352,10 +348,8 @@ class Zend_XmlRpc_Client
                             if (!is_array($signature)) {
                                 continue;
                             }
-                            if (isset($signature['parameters'][$key])) {
-                                if ($signature['parameters'][$key] == $type) {
-                                    break;
-                                }
+                            if (isset($signature['parameters'][$key]) && $signature['parameters'][$key] == $type) {
+                                break;
                             }
                         }
                     } elseif (isset($signatures[0]['parameters'][$key])) {

@@ -129,7 +129,7 @@ class Zend_Db_Table_Select extends Zend_Db_Select
         $fields   = $this->getPart(Zend_Db_Table_Select::COLUMNS);
         $cols     = $this->_info[Zend_Db_Table_Abstract::COLS];
 
-        if (!count($fields)) {
+        if (count($fields) === 0) {
             return $readOnly;
         }
 
@@ -197,7 +197,7 @@ class Zend_Db_Table_Select extends Zend_Db_Select
         if (count($this->_parts[self::UNION]) == 0) {
 
             // If no fields are specified we assume all fields from primary table
-            if (!count($fields)) {
+            if (count($fields) === 0) {
                 $this->from($primary, self::SQL_WILDCARD, $schema);
                 $fields = $this->getPart(Zend_Db_Table_Select::COLUMNS);
             }
@@ -209,11 +209,9 @@ class Zend_Db_Table_Select extends Zend_Db_Select
                     list($table, $column) = $columnEntry;
 
                     // Check each column to ensure it only references the primary table
-                    if ($column) {
-                        if (!isset($from[$table]) || $from[$table]['tableName'] != $primary) {
-                            require_once 'Zend/Db/Table/Select/Exception.php';
-                            throw new Zend_Db_Table_Select_Exception('Select query cannot join with another table');
-                        }
+                    if ($column && (!isset($from[$table]) || $from[$table]['tableName'] != $primary)) {
+                        require_once 'Zend/Db/Table/Select/Exception.php';
+                        throw new Zend_Db_Table_Select_Exception('Select query cannot join with another table');
                     }
                 }
             }

@@ -46,11 +46,7 @@ class Zend_Service_Amazon_SimpleDb_Attribute
         $this->_itemName = $itemName;
         $this->_name     = $name;
 
-        if (!is_array($values)) {
-            $this->_values = array($values);
-        } else {
-            $this->_values = $values;
-        }
+        $this->_values = is_array($values) ? $values : array($values);
     }
 
     /**

@@ -195,11 +195,10 @@ class Zend_Crypt_Math_BigInteger_Gmp implements Zend_Crypt_Math_BigInteger_Inter
         $bigInt = gmp_strval($operand, 16);
         if (strlen($bigInt) % 2 != 0) {
             $bigInt = '0' . $bigInt;
-        } else if ($bigInt[0] > '7') {
+        } elseif ($bigInt[0] > '7') {
             $bigInt = '00' . $bigInt;
         }
-        $return = pack("H*", $bigInt);
-        return $return;
+        return pack("H*", $bigInt);
     }
 
     /**

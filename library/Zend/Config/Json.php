@@ -110,7 +110,9 @@ class Zend_Config_Json extends Zend_Config
             }
         }
 
-        set_error_handler(array($this, '_loadFileErrorHandler')); // Warnings and errors are suppressed
+        set_error_handler(function (int $errno, string $errstr, string $errfile, int $errline) {
+            return $this->_loadFileErrorHandler($errno, $errstr, $errfile, $errline);
+        }); // Warnings and errors are suppressed
         if ($json[0] != '{') {
             $json = file_get_contents($json);
         }
@@ -133,7 +135,7 @@ class Zend_Config_Json extends Zend_Config
         } catch (Zend_Json_Exception $e) {
             // decode failed
             require_once 'Zend/Config/Exception.php';
-            throw new Zend_Config_Exception("Error parsing JSON data");
+            throw new Zend_Config_Exception("Error parsing JSON data", $e->getCode(), $e);
         }
 
         if ($section === null) {
@@ -205,9 +207,7 @@ class Zend_Config_Json extends Zend_Config
             unset($thisSection[self::EXTENDS_NAME]);
         }
 
-        $config = $this->_arrayMergeRecursive($config, $thisSection);
-
-        return $config;
+        return $this->_arrayMergeRecursive($config, $thisSection);
     }
 
     /**

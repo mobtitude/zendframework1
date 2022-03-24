@@ -72,7 +72,9 @@ class Zend_Mail_Transport_File extends Zend_Mail_Transport_Abstract
             $options['path'] = sys_get_temp_dir();
         }
         if (!isset($options['callback'])) {
-            $options['callback'] = array($this, 'defaultCallback');
+            $options['callback'] = function ($transport) : string {
+                return $this->defaultCallback($transport);
+            };
         }
 
         $this->setOptions($options);

@@ -88,7 +88,7 @@ class Zend_Oauth_Http_Utility
     public function toEncodedQueryString(array $params, $customParamsOnly = false)
     {
         if ($customParamsOnly) {
-            foreach ($params as $key=>$value) {
+            foreach (array_keys($params) as $key) {
                 if (preg_match("/^oauth_/", (string) $key)) {
                     unset($params[$key]);
                 }
@@ -118,10 +118,8 @@ class Zend_Oauth_Http_Utility
         );
 
         foreach ($params as $key => $value) {
-            if ($excludeCustomParams) {
-                if (!preg_match("/^oauth_/", (string) $key)) {
-                    continue;
-                }
+            if ($excludeCustomParams && !preg_match("/^oauth_/", (string) $key)) {
+                continue;
             }
             $headerValue[] = self::urlEncode($key)
                            . '="'
@@ -211,7 +209,6 @@ class Zend_Oauth_Http_Utility
     public static function urlEncode($value)
     {
         $encoded = rawurlencode($value);
-        $encoded = str_replace('%7E', '~', $encoded);
-        return $encoded;
+        return str_replace('%7E', '~', $encoded);
     }
 }

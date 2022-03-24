@@ -100,17 +100,15 @@ class Zend_Validate_Between extends Zend_Validate_Abstract
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['min'] = array_shift($options);
             if (!empty($options)) {
                 $temp['max'] = array_shift($options);
             }
-
             if (!empty($options)) {
                 $temp['inclusive'] = array_shift($options);
             }
-
             $options = $temp;
         }
 
@@ -212,11 +210,9 @@ class Zend_Validate_Between extends Zend_Validate_Abstract
                 $this->_error(self::NOT_BETWEEN);
                 return false;
             }
-        } else {
-            if ($this->_min >= $value || $value >= $this->_max) {
-                $this->_error(self::NOT_BETWEEN_STRICT);
-                return false;
-            }
+        } elseif ($this->_min >= $value || $value >= $this->_max) {
+            $this->_error(self::NOT_BETWEEN_STRICT);
+            return false;
         }
         return true;
     }

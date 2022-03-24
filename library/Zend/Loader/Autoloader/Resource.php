@@ -34,6 +34,7 @@ require_once 'Zend/Loader/Autoloader/Interface.php';
  */
 class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interface
 {
+    public array $_resources;
     /**
      * @var string Base path to resource classes
      */
@@ -151,7 +152,7 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
                 $namespace[] = array_shift($segments);
             }
             $namespace = implode('_', $namespace);
-            if ($namespace != $namespaceTopLevel) {
+            if ($namespace !== $namespaceTopLevel) {
                 // wrong prefix? we're done
                 return false;
             }
@@ -197,7 +198,7 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
     public function autoload($class)
     {
         $classPath = $this->getClassPath($class);
-        if (false !== $classPath) {
+        if ($classPath) {
             return include $classPath;
         }
         return false;

@@ -143,7 +143,7 @@ class Zend_Text_Table_Row
 
         // If there is no single column, create a column which spans over the
         // entire row
-        if (count($this->_columns) === 0) {
+        if ($this->_columns === []) {
             require_once 'Zend/Text/Table/Column.php';
             $this->appendColumn(new Zend_Text_Table_Column(null, null, count($columnWidths)));
         }
@@ -198,7 +198,7 @@ class Zend_Text_Table_Row
             $result .= $decorator->getVertical();
 
             foreach ($renderedColumns as $index => $renderedColumn) {
-                if (isset($renderedColumn[$line]) === true) {
+                if (isset($renderedColumn[$line])) {
                     $result .= $renderedColumn[$line];
                 } else {
                     $result .= str_repeat(' ', $this->_columnWidths[$index]);

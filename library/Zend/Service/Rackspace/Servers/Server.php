@@ -272,7 +272,7 @@ class Zend_Service_Rackspace_Servers_Server
     public function changeName($name) 
     {
         $result= $this->service->changeServerName($this->id, $name);
-        if ($result!==false) {
+        if ($result) {
             $this->name= $name;
             return true;
         }
@@ -287,7 +287,7 @@ class Zend_Service_Rackspace_Servers_Server
     public function changePassword($password)
     {
         $result=  $this->service->changeServerPassword($this->id, $password);
-        if ($result!==false) {
+        if ($result) {
             $this->adminPass= $password;
             return true;
         }

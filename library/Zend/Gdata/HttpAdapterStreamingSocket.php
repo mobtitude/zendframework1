@@ -79,7 +79,7 @@ class Zend_Gdata_HttpAdapterStreamingSocket extends Zend_Http_Client_Adapter_Soc
 
         // Build request headers
         $path = $uri->getPath();
-        if ($uri->getQuery()) $path .= '?' . $uri->getQuery();
+        if ($uri->getQuery() !== '' && $uri->getQuery() !== '0') $path .= '?' . $uri->getQuery();
         $request = "{$method} {$path} HTTP/{$http_ver}\r\n";
         foreach ($headers as $k => $v) {
             if (is_string($k)) $v = ucfirst($k) . ": $v";

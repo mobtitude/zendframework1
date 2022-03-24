@@ -129,8 +129,7 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
         if ($key != null && !function_exists('openssl_pkey_get_private')) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'You cannot enable secure AuthSub if the openssl module ' .
-                    'is not enabled in your PHP installation.');
+                    'You cannot enable secure AuthSub if the openssl module is not enabled in your PHP installation.');
         }
         $this->_authSubPrivateKeyId = openssl_pkey_get_private(
                 $key, $passphrase);

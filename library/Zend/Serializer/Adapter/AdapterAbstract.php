@@ -57,11 +57,7 @@ abstract class Zend_Serializer_Adapter_AdapterAbstract implements Zend_Serialize
      */
     public function setOptions($opts)
     {
-        if ($opts instanceof Zend_Config) {
-            $opts = $opts->toArray();
-        } else {
-            $opts = (array) $opts;
-        }
+        $opts = $opts instanceof Zend_Config ? $opts->toArray() : (array) $opts;
 
         foreach ($opts as $k => $v) {
             $this->setOption($k, $v);

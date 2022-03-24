@@ -134,7 +134,7 @@ class Zend_Tool_Project_Context_Zf_ProjectProviderFile extends Zend_Tool_Project
                 ));
         }
 
-        if ($methods) {
+        if ($methods !== []) {
             $class->setMethods($methods);
         }
 

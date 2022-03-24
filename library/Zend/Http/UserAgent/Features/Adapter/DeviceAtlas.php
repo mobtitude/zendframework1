@@ -44,11 +44,9 @@ class Zend_Http_UserAgent_Features_Adapter_DeviceAtlas implements Zend_Http_User
      */
     public static function getFromRequest($request, array $config)
     {
-        if (!class_exists('Mobi_Mtld_DA_Api')) {
-            if (!isset($config['deviceatlas'])) {
-                require_once 'Zend/Http/UserAgent/Features/Exception.php';
-                throw new Zend_Http_UserAgent_Features_Exception('"DeviceAtlas" configuration is not defined');
-            }
+        if (!class_exists('Mobi_Mtld_DA_Api') && !isset($config['deviceatlas'])) {
+            require_once 'Zend/Http/UserAgent/Features/Exception.php';
+            throw new Zend_Http_UserAgent_Features_Exception('"DeviceAtlas" configuration is not defined');
         }
 
         $config = $config['deviceatlas'];
@@ -71,8 +69,6 @@ class Zend_Http_UserAgent_Features_Adapter_DeviceAtlas implements Zend_Http_User
         //load the device data-tree : e.g. 'json/DeviceAtlas.json
         $tree = Mobi_Mtld_DA_Api::getTreeFromFile($config['deviceatlas_data']);
 
-        $properties = Mobi_Mtld_DA_Api::getProperties($tree, $request['http_user_agent']);
-
-        return $properties;
+        return Mobi_Mtld_DA_Api::getProperties($tree, $request['http_user_agent']);
     }
 }

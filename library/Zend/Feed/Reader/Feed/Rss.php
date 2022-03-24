@@ -126,7 +126,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
         } else {
             $list = $this->_xpath->query('//rss:author');
         }
-        if ($list->length) {
+        if ($list->length !== 0) {
             foreach ($list as $author) {
                 $string = trim($author->nodeValue);
                 $email = null;
@@ -253,7 +253,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
             }
         }
 
-        if (!$date) {
+        if ($date === null) {
             $date = $this->getExtension('DublinCore')->getDate();
         }
 
@@ -315,7 +315,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
             }
         }
 
-        if (!$date) {
+        if ($date === null) {
             $date = null;
         }
 
@@ -642,11 +642,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
 
         $hubs = $this->getExtension('Atom')->getHubs();
 
-        if (empty($hubs)) {
-            $hubs = null;
-        } else {
-            $hubs = array_unique($hubs);
-        }
+        $hubs = empty($hubs) ? null : array_unique($hubs);
 
         $this->_data['hubs'] = $hubs;
 
@@ -671,7 +667,7 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
             $list = $this->_xpath->query('/rdf:RDF/rss:channel//rss:category');
         }
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             $categoryCollection = new Zend_Feed_Reader_Collection_Category;
             foreach ($list as $category) {
                 $categoryCollection[] = array(

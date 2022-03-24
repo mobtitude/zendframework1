@@ -45,11 +45,7 @@ extends Zend_Feed_Reader_Collection_CollectionAbstract
     public function getValues() {
         $categories = array();
         foreach ($this->getIterator() as $element) {
-            if (isset($element['label']) && !empty($element['label'])) {
-                $categories[] = $element['label'];
-            } else {
-                $categories[] = $element['term'];
-            }
+            $categories[] = isset($element['label']) && !empty($element['label']) ? $element['label'] : $element['term'];
         }
         return array_unique($categories);
     }

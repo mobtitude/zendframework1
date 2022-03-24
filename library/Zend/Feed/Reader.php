@@ -344,9 +344,7 @@ class Zend_Feed_Reader
             $dom = Zend_Xml_Security::scan($string, $dom);        
         } catch (Zend_Xml_Exception $e) {    
             require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception(
-                $e->getMessage()
-            );
+            throw new Zend_Feed_Exception($e->getMessage(), $e->getCode(), $e);
         }
         if (!$dom) {
             // Build error message
@@ -373,8 +371,7 @@ class Zend_Feed_Reader
             $reader = new Zend_Feed_Reader_Feed_Atom($dom, $type);
         } else {
             require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('The URI used does not point to a '
-            . 'valid Atom, RSS or RDF feed that Zend_Feed_Reader can parse.');
+            throw new Zend_Feed_Exception('The URI used does not point to a valid Atom, RSS or RDF feed that Zend_Feed_Reader can parse.');
         }
         return $reader;
     }
@@ -461,9 +458,7 @@ class Zend_Feed_Reader
                 $dom = Zend_Xml_Security::scan($feed, $dom);
             } catch (Zend_Xml_Exception $e) {
                 require_once 'Zend/Feed/Exception.php';
-                throw new Zend_Feed_Exception(
-                    $e->getMessage()
-                );
+                throw new Zend_Feed_Exception($e->getMessage(), $e->getCode(), $e);
             }
             //libxml_disable_entity_loader($oldValue);
             @ini_restore('track_errors');
@@ -485,7 +480,7 @@ class Zend_Feed_Reader
         }
         $xpath = new DOMXPath($dom);
 
-        if ($xpath->query('/rss')->length) {
+        if ($xpath->query('/rss')->length !== 0) {
             $type = self::TYPE_RSS_ANY;
             $version = $xpath->evaluate('string(/rss/@version)');
 
@@ -518,7 +513,7 @@ class Zend_Feed_Reader
 
         $xpath->registerNamespace('rdf', self::NAMESPACE_RDF);
 
-        if ($xpath->query('/rdf:RDF')->length) {
+        if ($xpath->query('/rdf:RDF')->length !== 0) {
             $xpath->registerNamespace('rss', self::NAMESPACE_RSS_10);
 
             if ($xpath->query('/rdf:RDF/rss:channel')->length
@@ -543,11 +538,11 @@ class Zend_Feed_Reader
         $type = self::TYPE_ATOM_ANY;
         $xpath->registerNamespace('atom', self::NAMESPACE_ATOM_10);
 
-        if ($xpath->query('//atom:feed')->length) {
+        if ($xpath->query('//atom:feed')->length !== 0) {
             return self::TYPE_ATOM_10;
         }
 
-        if ($xpath->query('//atom:entry')->length) {
+        if ($xpath->query('//atom:entry')->length !== 0) {
             if ($specOnly == true) {
                 return self::TYPE_ATOM_10;
             } else {
@@ -557,7 +552,7 @@ class Zend_Feed_Reader
 
         $xpath->registerNamespace('atom', self::NAMESPACE_ATOM_03);
 
-        if ($xpath->query('//atom:feed')->length) {
+        if ($xpath->query('//atom:feed')->length !== 0) {
             return self::TYPE_ATOM_03;
         }
 
@@ -633,11 +628,9 @@ class Zend_Feed_Reader
     {
         $feedName  = $name . '_Feed';
         $entryName = $name . '_Entry';
-        if (self::isRegistered($name)) {
-            if (self::getPluginLoader()->isLoaded($feedName) ||
-                self::getPluginLoader()->isLoaded($entryName)) {
-                return;
-            }
+        if (self::isRegistered($name) && (self::getPluginLoader()->isLoaded($feedName) ||
+            self::getPluginLoader()->isLoaded($entryName))) {
+            return;
         }
         try {
             self::getPluginLoader()->load($feedName);
@@ -668,12 +661,8 @@ class Zend_Feed_Reader
     {
         $feedName  = $extensionName . '_Feed';
         $entryName = $extensionName . '_Entry';
-        if (in_array($feedName, self::$_extensions['feed'])
-            || in_array($entryName, self::$_extensions['entry'])
-        ) {
-            return true;
-        }
-        return false;
+        return in_array($feedName, self::$_extensions['feed'])
+            || in_array($entryName, self::$_extensions['entry']);
     }
 
     /**

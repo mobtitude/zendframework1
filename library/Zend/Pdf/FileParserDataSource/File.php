@@ -74,7 +74,7 @@ class Zend_Pdf_FileParserDataSource_File extends Zend_Pdf_FileParserDataSource
      */
     public function __construct($filePath)
     {
-        if (! (is_file($filePath) || is_link($filePath))) {
+        if (!is_file($filePath) && !is_link($filePath)) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("Invalid file path: $filePath",
                                          Zend_Pdf_Exception::BAD_FILE_PATH);
@@ -178,7 +178,7 @@ class Zend_Pdf_FileParserDataSource_File extends Zend_Pdf_FileParserDataSource
      */
     public function moveToOffset($offset)
     {
-        if ($this->_offset == $offset) {
+        if ($this->_offset === $offset) {
             return;    // Not moving; do nothing.
         }
         parent::moveToOffset($offset);

@@ -194,8 +194,7 @@ class Zend_Feed
     {
         if (trim($string) == '') {
             require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Document/string being imported'
-            . ' is an Empty string or comes from an empty HTTP response');
+            throw new Zend_Feed_Exception('Document/string being imported is an Empty string or comes from an empty HTTP response');
         }
         $doc = new DOMDocument;
         $doc = Zend_Xml_Security::scan($string, $doc);
@@ -230,7 +229,7 @@ class Zend_Feed
         }
 
         // Try to find the base feed element of an RSS feed
-        if ($doc->getElementsByTagName('channel')->item(0)) {
+        if ($doc->getElementsByTagName('channel')->item(0) !== null) {
             /**
              * @see Zend_Feed_Rss
              */

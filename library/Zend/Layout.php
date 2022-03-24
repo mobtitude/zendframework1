@@ -174,12 +174,10 @@ class Zend_Layout
     {
         if (null === self::$_mvcInstance) {
             self::$_mvcInstance = new self($options, true);
-        } else {
-            if (is_string($options)) {
-                self::$_mvcInstance->setLayoutPath($options);
-            } elseif (is_array($options) || $options instanceof Zend_Config) {
-                self::$_mvcInstance->setOptions($options);
-            }
+        } elseif (is_string($options)) {
+            self::$_mvcInstance->setLayoutPath($options);
+        } elseif (is_array($options) || $options instanceof Zend_Config) {
+            self::$_mvcInstance->setOptions($options);
         }
 
         return self::$_mvcInstance;
@@ -460,7 +458,7 @@ class Zend_Layout
      */
     protected function _setMvcEnabled($mvcEnabled)
     {
-        $this->_mvcEnabled = ($mvcEnabled) ? true : false;
+        $this->_mvcEnabled = $mvcEnabled;
         return $this;
     }
 
@@ -482,7 +480,7 @@ class Zend_Layout
      */
     public function setMvcSuccessfulActionOnly($successfulActionOnly)
     {
-        $this->_mvcSuccessfulActionOnly = ($successfulActionOnly) ? true : false;
+        $this->_mvcSuccessfulActionOnly = $successfulActionOnly;
         return $this;
     }
 

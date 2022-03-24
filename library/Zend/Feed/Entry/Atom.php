@@ -217,7 +217,7 @@ class Zend_Feed_Entry_Atom extends Zend_Feed_Entry_Abstract
         }
 
         $newEntry = $newEntry->getElementsByTagName($this->_rootElement)->item(0);
-        if (!$newEntry) {
+        if (!$newEntry instanceof \DOMElement) {
             /**
              * @see Zend_Feed_Exception
              */
@@ -226,7 +226,7 @@ class Zend_Feed_Entry_Atom extends Zend_Feed_Entry_Abstract
                                           . "\n\n" . $client->responseBody);
         }
 
-        if ($this->_element->parentNode) {
+        if ($this->_element->parentNode !== null) {
             $oldElement = $this->_element;
             $this->_element = $oldElement->ownerDocument->importNode($newEntry, true);
             $oldElement->parentNode->replaceChild($this->_element, $oldElement);

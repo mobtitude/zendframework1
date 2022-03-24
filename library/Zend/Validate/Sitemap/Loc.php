@@ -77,7 +77,7 @@ class Zend_Validate_Sitemap_Loc extends Zend_Validate_Abstract
 
         $this->_setValue($value);
         $result = Zend_Uri::check($value);
-        if ($result !== true) {
+        if (!$result) {
             $this->_error(self::NOT_VALID);
             return false;
         }

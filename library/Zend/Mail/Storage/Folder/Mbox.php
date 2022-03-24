@@ -82,7 +82,7 @@ class Zend_Mail_Storage_Folder_Mbox extends Zend_Mail_Storage_Mbox implements Ze
             $params = (object)$params;
         }
 
-        if (isset($params->filename)) {
+        if (property_exists($params, 'filename') && $params->filename !== null) {
             /**
              * @see Zend_Mail_Storage_Exception
              */
@@ -90,7 +90,7 @@ class Zend_Mail_Storage_Folder_Mbox extends Zend_Mail_Storage_Mbox implements Ze
             throw new Zend_Mail_Storage_Exception('use Zend_Mail_Storage_Mbox for a single file');
         }
 
-        if (!isset($params->dirname) || !is_dir($params->dirname)) {
+        if (!(property_exists($params, 'dirname') && $params->dirname !== null) || !is_dir($params->dirname)) {
             /**
              * @see Zend_Mail_Storage_Exception
              */
@@ -101,7 +101,7 @@ class Zend_Mail_Storage_Folder_Mbox extends Zend_Mail_Storage_Mbox implements Ze
         $this->_rootdir = rtrim($params->dirname, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
         $this->_buildFolderTree($this->_rootdir);
-        $this->selectFolder(!empty($params->folder) ? $params->folder : 'INBOX');
+        $this->selectFolder(empty($params->folder) ? 'INBOX' : $params->folder);
         $this->_has['top']      = true;
         $this->_has['uniqueid'] = false;
     }
@@ -120,7 +120,7 @@ class Zend_Mail_Storage_Folder_Mbox extends Zend_Mail_Storage_Mbox implements Ze
      */
     protected function _buildFolderTree($currentDir, $parentFolder = null, $parentGlobalName = '')
     {
-        if (!$parentFolder) {
+        if ($parentFolder === null) {
             $this->_rootFolder = new Zend_Mail_Storage_Folder('/', '/', false);
             $parentFolder = $this->_rootFolder;
         }

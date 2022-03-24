@@ -80,8 +80,7 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
     {
         if(!$this->getDataContainer()->getTitle()) {
             require_once 'Zend/Feed/Exception.php';
-            $message = 'Atom 1.0 feed elements MUST contain exactly one'
-            . ' atom:title element but a title has not been set';
+            $message = 'Atom 1.0 feed elements MUST contain exactly one atom:title element but a title has not been set';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;

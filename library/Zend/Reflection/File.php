@@ -38,6 +38,10 @@ require_once 'Zend/Reflection/Function.php';
 class Zend_Reflection_File implements Reflector
 {
     /**
+     * @var mixed|string
+     */
+    public $_fileName;
+    /**
      * @var string
      */
     protected $_filepath        = null;
@@ -88,12 +92,10 @@ class Zend_Reflection_File implements Reflector
         $fileName = $file;
         
         $fileRealpath = realpath($fileName);
-        if ($fileRealpath) {
-            // realpath() doesn't return false if Suhosin is included
-            // see http://uk3.php.net/manual/en/function.realpath.php#82770
-            if (!file_exists($fileRealpath)) {
-                $fileRealpath = false;
-            }
+        // realpath() doesn't return false if Suhosin is included
+        // see http://uk3.php.net/manual/en/function.realpath.php#82770
+        if ($fileRealpath && !file_exists($fileRealpath)) {
+            $fileRealpath = false;
         }
         
         if ($fileRealpath === false) {
@@ -120,7 +122,7 @@ class Zend_Reflection_File implements Reflector
     {
         require_once 'Zend/Loader.php';
         $includePaths = Zend_Loader::explodeIncludePath();
-        while (count($includePaths) > 0) {
+        while ($includePaths !== []) {
             $filePath = array_shift($includePaths) . DIRECTORY_SEPARATOR . $fileName;
 
             if ( ($foundRealpath = realpath($filePath)) !== false) {
@@ -339,7 +341,7 @@ class Zend_Reflection_File implements Reflector
                 // Maintain the count of open braces
                 if ($token == '{') {
                     $openBraces++;
-                } else if ($token == '}') {
+                } elseif ($token == '}') {
                     if ( $embeddedVariableTrapped ) {
                         $embeddedVariableTrapped = false;
                     } else {

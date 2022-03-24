@@ -140,8 +140,7 @@ class Zend_Gdata_Gapps_UserQuery extends Zend_Gdata_Gapps_Query
         if ($this->_username !== null) {
             $uri .= '/' . $this->_username;
         }
-        $uri .= $this->getQueryString();
-        return $uri;
+        return $uri . $this->getQueryString();
     }
 
 }

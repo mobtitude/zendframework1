@@ -161,7 +161,7 @@ class Zend_TimeSync implements IteratorAggregate
      */
     public function setServer($alias)
     {
-        if (isset($this->_timeservers[$alias]) === true) {
+        if (isset($this->_timeservers[$alias])) {
             $this->_current = $this->_timeservers[$alias];
         } else {
             require_once 'Zend/TimeSync/Exception.php';
@@ -182,7 +182,7 @@ class Zend_TimeSync implements IteratorAggregate
             return Zend_TimeSync::$options;
         }
 
-        if (isset(Zend_TimeSync::$options[$key]) === true) {
+        if (isset(Zend_TimeSync::$options[$key])) {
             return Zend_TimeSync::$options[$key];
         } else {
             require_once 'Zend/TimeSync/Exception.php';
@@ -201,14 +201,14 @@ class Zend_TimeSync implements IteratorAggregate
     public function getServer($alias = null)
     {
         if ($alias === null) {
-            if (isset($this->_current) && $this->_current !== false) {
+            if ($this->_current !== null && $this->_current !== false) {
                 return $this->_current;
             } else {
                 require_once 'Zend/TimeSync/Exception.php';
                 throw new Zend_TimeSync_Exception('there is no timeserver set');
             }
         }
-        if (isset($this->_timeservers[$alias]) === true) {
+        if (isset($this->_timeservers[$alias])) {
             return $this->_timeservers[$alias];
         } else {
             require_once 'Zend/TimeSync/Exception.php';
@@ -273,10 +273,10 @@ class Zend_TimeSync implements IteratorAggregate
 
         if ($pos = strrpos($adress, ':')) {
             $posbr = strpos($adress, ']');
-            if ($posbr and ($pos > $posbr)) {
+            if ($posbr && $pos > $posbr) {
                 $port = substr($adress, $pos + 1);
                 $adress = substr($adress, 0, $pos);
-            } else if (!$posbr and $pos) {
+            } elseif (!$posbr && $pos) {
                 $port = substr($adress, $pos + 1);
                 $adress = substr($adress, 0, $pos);
             } else {

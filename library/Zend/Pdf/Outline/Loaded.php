@@ -103,7 +103,7 @@ class Zend_Pdf_Outline_Loaded extends Zend_Pdf_Outline
 
         $childrenCount = $this->_outlineDictionary->Count->value;
         $isOpenCurrentState = ($childrenCount > 0);
-        if ($isOpen != $isOpenCurrentState) {
+        if ($isOpen !== $isOpenCurrentState) {
             $this->_outlineDictionary->Count->touch();
             $this->_outlineDictionary->Count->value = ($isOpen? 1 : -1)*abs($childrenCount);
         }
@@ -138,9 +138,9 @@ class Zend_Pdf_Outline_Loaded extends Zend_Pdf_Outline
         } else {
             $this->_outlineDictionary->F->touch();
             if ($isItalic) {
-                $this->_outlineDictionary->F->value = $this->_outlineDictionary->F->value | 1;
+                $this->_outlineDictionary->F->value |= 1;
             } else {
-                $this->_outlineDictionary->F->value = $this->_outlineDictionary->F->value | ~1;
+                $this->_outlineDictionary->F->value |= ~1;
             }
         }
         return $this;
@@ -173,9 +173,9 @@ class Zend_Pdf_Outline_Loaded extends Zend_Pdf_Outline
         } else {
             $this->_outlineDictionary->F->touch();
             if ($isBold) {
-                $this->_outlineDictionary->F->value = $this->_outlineDictionary->F->value | 2;
+                $this->_outlineDictionary->F->value |= 2;
             } else {
-                $this->_outlineDictionary->F->value = $this->_outlineDictionary->F->value | ~2;
+                $this->_outlineDictionary->F->value |= ~2;
             }
         }
         return $this;
@@ -236,10 +236,9 @@ class Zend_Pdf_Outline_Loaded extends Zend_Pdf_Outline
                 require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Outline dictionary may contain Dest or A entry, but not both.');
             }
-
             require_once 'Zend/Pdf/Destination.php';
             return Zend_Pdf_Destination::load($this->_outlineDictionary->Dest);
-        } else if ($this->_outlineDictionary->A !== null) {
+        } elseif ($this->_outlineDictionary->A !== null) {
             require_once 'Zend/Pdf/Action.php';
             return Zend_Pdf_Action::load($this->_outlineDictionary->A);
         }
@@ -267,10 +266,10 @@ class Zend_Pdf_Outline_Loaded extends Zend_Pdf_Outline
         if ($target === null) {
             $this->_outlineDictionary->Dest = null;
             $this->_outlineDictionary->A    = null;
-        } else if ($target instanceof Zend_Pdf_Destination) {
+        } elseif ($target instanceof Zend_Pdf_Destination) {
             $this->_outlineDictionary->Dest = $target->getResource();
             $this->_outlineDictionary->A    = null;
-        } else if ($target instanceof Zend_Pdf_Action) {
+        } elseif ($target instanceof Zend_Pdf_Action) {
             $this->_outlineDictionary->Dest = null;
             $this->_outlineDictionary->A    = $target->getResource();
         } else {
@@ -389,10 +388,10 @@ class Zend_Pdf_Outline_Loaded extends Zend_Pdf_Outline
         }
 
         $updateChildNavigation = false;
-        if (count($this->_originalChildOutlines) != count($this->childOutlines)) {
+        if (count($this->_originalChildOutlines) !== count($this->childOutlines)) {
             // If original and current children arrays have different size then children list was updated
             $updateChildNavigation = true;
-        } else if ( !(array_keys($this->_originalChildOutlines) === array_keys($this->childOutlines)) ) {
+        } elseif (array_keys($this->_originalChildOutlines) !== array_keys($this->childOutlines)) {
             // If original and current children arrays have different keys (with a glance to an order) then children list was updated
             $updateChildNavigation = true;
         } else {

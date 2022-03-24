@@ -62,15 +62,12 @@ class Zend_Db_Table extends Zend_Db_Table_Abstract
                     E_USER_NOTICE
                     );
                 $config = array(self::ADAPTER => $config);
+            } elseif ($definition instanceof Zend_Db_Table_Definition
+                && $definition->hasTableConfig($config)) {
+                // this will have DEFINITION_CONFIG_NAME & DEFINITION
+                $config = $definition->getTableConfig($config);
             } else {
-                // process this as table with or without a definition
-                if ($definition instanceof Zend_Db_Table_Definition
-                    && $definition->hasTableConfig($config)) {
-                    // this will have DEFINITION_CONFIG_NAME & DEFINITION
-                    $config = $definition->getTableConfig($config);
-                } else {
-                    $config = array(self::NAME => $config);
-                }
+                $config = array(self::NAME => $config);
             }
         }
 

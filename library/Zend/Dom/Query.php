@@ -129,11 +129,11 @@ class Zend_Dom_Query
         if ($document instanceof DOMDocument) {
             return $this->setDocumentDom($document);
         }
-        if (0 === strlen($document)) {
+        if ((string) $document === '') {
             return $this;
         }
         // breaking XML declaration to make syntax highlighting work
-        if ('<' . '?xml' == substr(trim($document), 0, 5)) {
+        if ('<?xml' == substr(trim($document), 0, 5)) {
             if (preg_match('/<html[^>]*xmlns="([^"]+)"[^>]*>/i', $document, $matches)) {
                 $this->_xpathNamespaces[] = $matches[1];
                 return $this->setDocumentXhtml($document, $encoding);
@@ -272,11 +272,7 @@ class Zend_Dom_Query
 
         $encoding = $this->getEncoding();
         libxml_use_internal_errors(true);
-        if (null === $encoding) {
-            $domDoc = new DOMDocument('1.0');
-        } else {
-            $domDoc = new DOMDocument('1.0', $encoding);
-        }
+        $domDoc = null === $encoding ? new DOMDocument('1.0') : new DOMDocument('1.0', $encoding);
         $type   = $this->getDocumentType();
         switch ($type) {
             case self::DOC_DOM:
@@ -289,9 +285,7 @@ class Zend_Dom_Query
                     $success = ($domDoc !== false);
                 } catch (Zend_Xml_Exception $e) {
                     require_once 'Zend/Dom/Exception.php';
-                    throw new Zend_Dom_Exception(
-                        $e->getMessage()
-                    );
+                    throw new Zend_Dom_Exception($e->getMessage(), $e->getCode(), $e);
                 }
                 break;
             case self::DOC_HTML:

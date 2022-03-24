@@ -110,11 +110,11 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
     {
         $attributes = array();
 
-        if ($this->_forActionName) {
+        if ($this->_forActionName !== '' && $this->_forActionName !== '0') {
             $attributes['forActionName'] = $this->_forActionName;
         }
 
-        if ($this->_scriptName) {
+        if ($this->_scriptName !== '' && $this->_scriptName !== '0') {
             $attributes['scriptName'] = $this->_scriptName;
         }
 

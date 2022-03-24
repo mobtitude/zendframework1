@@ -133,12 +133,8 @@ class Zend_Cache_Manager
      */
     public function hasCache($name)
     {
-        if (isset($this->_caches[$name])
-            || $this->hasCacheTemplate($name)
-        ) {
-            return true;
-        }
-        return false;
+        return isset($this->_caches[$name])
+            || $this->hasCacheTemplate($name);
     }
 
     /**
@@ -184,7 +180,7 @@ class Zend_Cache_Manager
     public function getCaches()
     {
         $caches = $this->_caches;
-        foreach ($this->_optionTemplates as $name => $tmp) {
+        foreach (array_keys($this->_optionTemplates) as $name) {
             if (!isset($caches[$name])) {
                 $caches[$name] = $this->getCache($name);
             }
@@ -207,8 +203,7 @@ class Zend_Cache_Manager
             $options = $options->toArray();
         } elseif (!is_array($options)) {
             require_once 'Zend/Cache/Exception.php';
-            throw new Zend_Cache_Exception('Options passed must be in'
-                . ' an associative array or instance of Zend_Config');
+            throw new Zend_Cache_Exception('Options passed must be in an associative array or instance of Zend_Config');
         }
         $this->_optionTemplates[$name] = $options;
         return $this;
@@ -222,10 +217,7 @@ class Zend_Cache_Manager
      */
     public function hasCacheTemplate($name)
     {
-        if (isset($this->_optionTemplates[$name])) {
-            return true;
-        }
-        return false;
+        return isset($this->_optionTemplates[$name]);
     }
 
     /**
@@ -257,8 +249,7 @@ class Zend_Cache_Manager
             $options = $options->toArray();
         } elseif (!is_array($options)) {
             require_once 'Zend/Cache/Exception.php';
-            throw new Zend_Cache_Exception('Options passed must be in'
-                . ' an associative array or instance of Zend_Config');
+            throw new Zend_Cache_Exception('Options passed must be in an associative array or instance of Zend_Config');
         }
         if (!isset($this->_optionTemplates[$name])) {
             throw new Zend_Cache_Exception('A cache configuration template'

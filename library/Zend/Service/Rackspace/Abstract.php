@@ -163,10 +163,8 @@ abstract class Zend_Service_Rackspace_Abstract
      */
     public function getStorageUrl() 
     {
-        if (empty($this->storageUrl)) {
-            if (!$this->authenticate()) {
-                return false;
-            }
+        if (empty($this->storageUrl) && !$this->authenticate()) {
+            return false;
         }
         return $this->storageUrl;
     }
@@ -177,10 +175,8 @@ abstract class Zend_Service_Rackspace_Abstract
      */
     public function getCdnUrl() 
     {
-        if (empty($this->cdnUrl)) {
-            if (!$this->authenticate()) {
-                return false;
-            }
+        if (empty($this->cdnUrl) && !$this->authenticate()) {
+            return false;
         }
         return $this->cdnUrl;
     }
@@ -191,10 +187,8 @@ abstract class Zend_Service_Rackspace_Abstract
      */     
     public function getManagementUrl()
     {
-        if (empty($this->managementUrl)) {
-            if (!$this->authenticate()) {
-                return false;
-            }
+        if (empty($this->managementUrl) && !$this->authenticate()) {
+            return false;
         }
         return $this->managementUrl;
     }
@@ -269,10 +263,8 @@ abstract class Zend_Service_Rackspace_Abstract
      */
     public function getToken()
     {
-        if (empty($this->token)) {
-            if (!$this->authenticate()) {
-                return false;
-            }
+        if (empty($this->token) && !$this->authenticate()) {
+            return false;
         }
         return $this->token;
     }

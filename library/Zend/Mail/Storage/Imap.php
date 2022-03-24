@@ -114,7 +114,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
      */
     public function countMessages($flags = null)
     {
-        if (!$this->_currentFolder) {
+        if ($this->_currentFolder === '' || $this->_currentFolder === '0') {
             /**
              * @see Zend_Mail_Storage_Exception
              */
@@ -147,7 +147,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
      */
     public function getSize($id = 0)
     {
-        if ($id) {
+        if ($id !== 0) {
             return $this->_protocol->fetch('RFC822.SIZE', $id);
         }
         return $this->_protocol->fetch('RFC822.SIZE', 1, INF);
@@ -258,7 +258,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             return;
         }
 
-        if (!isset($params->user)) {
+        if (!(property_exists($params, 'user') && $params->user !== null)) {
             /**
              * @see Zend_Mail_Storage_Exception
              */
@@ -266,10 +266,10 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             throw new Zend_Mail_Storage_Exception('need at least user in params');
         }
 
-        $host     = isset($params->host)     ? $params->host     : 'localhost';
-        $password = isset($params->password) ? $params->password : '';
-        $port     = isset($params->port)     ? $params->port     : null;
-        $ssl      = isset($params->ssl)      ? $params->ssl      : false;
+        $host     = property_exists($params, 'host') && $params->host !== null     ? $params->host     : 'localhost';
+        $password = property_exists($params, 'password') && $params->password !== null ? $params->password : '';
+        $port     = property_exists($params, 'port') && $params->port !== null     ? $params->port     : null;
+        $ssl      = property_exists($params, 'ssl') && $params->ssl !== null      ? $params->ssl      : false;
 
         $this->_protocol = new Zend_Mail_Protocol_Imap();
         $this->_protocol->connect($host, $port, $ssl);
@@ -280,7 +280,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             require_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('cannot login, user or password wrong');
         }
-        $this->selectFolder(isset($params->folder) ? $params->folder : 'INBOX');
+        $this->selectFolder(property_exists($params, 'folder') && $params->folder !== null ? $params->folder : 'INBOX');
     }
 
     /**
@@ -397,7 +397,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
     public function getFolders($rootFolder = null)
     {
         $folders = $this->_protocol->listMailbox((string)$rootFolder);
-        if (!$folders) {
+        if ($folders === []) {
             /**
              * @see Zend_Mail_Storage_Exception
              */
@@ -416,26 +416,21 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
             do {
                 if (!$parent || strpos($globalName, $parent) === 0) {
                     $pos = strrpos($globalName, $data['delim']);
-                    if ($pos === false) {
-                        $localName = $globalName;
-                    } else {
-                        $localName = substr($globalName, $pos + 1);
-                    }
+                    $localName = $pos === false ? $globalName : substr($globalName, $pos + 1);
                     $selectable = !$data['flags'] || !in_array('\\Noselect', $data['flags']);
-
-                    array_push($stack, $parent);
+                    $stack[] = $parent;
                     $parent = $globalName . $data['delim'];
                     $folder = new Zend_Mail_Storage_Folder($localName, $globalName, $selectable);
                     $parentFolder->$localName = $folder;
-                    array_push($folderStack, $parentFolder);
+                    $folderStack[] = $parentFolder;
                     $parentFolder = $folder;
                     break;
-                } else if ($stack) {
+                } elseif ($stack !== []) {
                     $parent = array_pop($stack);
                     $parentFolder = array_pop($folderStack);
                 }
             } while ($stack);
-            if (!$stack) {
+            if ($stack === []) {
                 /**
                  * @see Zend_Mail_Storage_Exception
                  */
@@ -498,11 +493,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
         // TODO: we assume / as the hierarchy delim - need to get that from the folder class!
         if ($parentFolder instanceof Zend_Mail_Storage_Folder) {
             $folder = $parentFolder->getGlobalName() . '/' . $name;
-        } else if ($parentFolder != null) {
-            $folder = $parentFolder . '/' . $name;
-        } else {
-            $folder = $name;
-        }
+        } else $folder = $parentFolder != null ? $parentFolder . '/' . $name : $name;
 
         if (!$this->_protocol->create($folder)) {
             /**

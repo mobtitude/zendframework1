@@ -719,7 +719,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
         $options['bootstrap'] = $this;
         $className = $this->getPluginLoader()->load(strtolower($resource), false);
 
-        if (!$className) {
+        if ($className === '' || $className === '0') {
             return false;
         }
 
@@ -727,7 +727,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
 
         unset($this->_pluginResources[$resource]);
 
-        if (isset($instance->_explicitType)) {
+        if (property_exists($instance, '_explicitType') && $instance->_explicitType !== null) {
             $resource = $instance->_explicitType;
         }
         $resource = strtolower($resource);
@@ -764,7 +764,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     protected function _resolvePluginResourceName($resource)
     {
-        if (isset($resource->_explicitType)) {
+        if (property_exists($resource, '_explicitType') && $resource->_explicitType !== null) {
             $pluginName = $resource->_explicitType;
         } else  {
             $className  = get_class($resource);
@@ -778,7 +778,6 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
                 }
             }
         }
-        $pluginName = strtolower($pluginName);
-        return $pluginName;
+        return strtolower($pluginName);
     }
 }

@@ -262,21 +262,13 @@ class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstrac
             $error->exception = $exception;
             switch ($exceptionType) {
                 case 'Zend_Controller_Router_Exception':
-                    if (404 == $exception->getCode()) {
-                        $error->type = self::EXCEPTION_NO_ROUTE;
-                    } else {
-                        $error->type = self::EXCEPTION_OTHER;
-                    }
+                    $error->type = 404 == $exception->getCode() ? self::EXCEPTION_NO_ROUTE : self::EXCEPTION_OTHER;
                     break;
                 case 'Zend_Controller_Dispatcher_Exception':
                     $error->type = self::EXCEPTION_NO_CONTROLLER;
                     break;
                 case 'Zend_Controller_Action_Exception':
-                    if (404 == $exception->getCode()) {
-                        $error->type = self::EXCEPTION_NO_ACTION;
-                    } else {
-                        $error->type = self::EXCEPTION_OTHER;
-                    }
+                    $error->type = 404 == $exception->getCode() ? self::EXCEPTION_NO_ACTION : self::EXCEPTION_OTHER;
                     break;
                 default:
                     $error->type = self::EXCEPTION_OTHER;

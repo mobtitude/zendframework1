@@ -105,7 +105,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
             } else {
                 continue;
             }
-            if ($this->_ignoreExceptions === true) {
+            if ($this->_ignoreExceptions) {
                 $renderer->ignoreExceptions();
             }
             $renderer->setType($this->getType());
@@ -147,8 +147,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
     {
         if(!$this->getDataContainer()->getTitle()) {
             require_once 'Zend/Feed/Exception.php';
-            $message = 'RSS 2.0 feed elements MUST contain exactly one'
-            . ' title element but a title has not been set';
+            $message = 'RSS 2.0 feed elements MUST contain exactly one title element but a title has not been set';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
@@ -175,8 +174,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
     {
         if(!$this->getDataContainer()->getDescription()) {
             require_once 'Zend/Feed/Exception.php';
-            $message = 'RSS 2.0 feed elements MUST contain exactly one'
-            . ' description element but one has not been set';
+            $message = 'RSS 2.0 feed elements MUST contain exactly one description element but one has not been set';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
@@ -252,8 +250,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         $value = $this->getDataContainer()->getLink();
         if(!$value) {
             require_once 'Zend/Feed/Exception.php';
-            $message = 'RSS 2.0 feed elements MUST contain exactly one'
-            . ' link element but one has not been set';
+            $message = 'RSS 2.0 feed elements MUST contain exactly one link element but one has not been set';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
@@ -343,8 +340,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         if (empty($image['link']) || !is_string($image['link'])
         || !Zend_Uri::check($image['link'])) {
             require_once 'Zend/Feed/Exception.php';
-            $message = 'Invalid parameter: parameter \'link\''
-            . ' must be a non-empty string and valid URI/IRI';
+            $message = 'Invalid parameter: parameter \'link\' must be a non-empty string and valid URI/IRI';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
@@ -370,8 +366,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         if (isset($image['height'])) {
             if (!ctype_digit((string) $image['height']) || $image['height'] > 400) {
                 require_once 'Zend/Feed/Exception.php';
-                $message = 'Invalid parameter: parameter \'height\''
-                . ' must be an integer not exceeding 400';
+                $message = 'Invalid parameter: parameter \'height\' must be an integer not exceeding 400';
                 $exception = new Zend_Feed_Exception($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;
@@ -388,8 +383,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         if (isset($image['width'])) {
             if (!ctype_digit((string) $image['width']) || $image['width'] > 144) {
                 require_once 'Zend/Feed/Exception.php';
-                $message = 'Invalid parameter: parameter \'width\''
-                . ' must be an integer not exceeding 144';
+                $message = 'Invalid parameter: parameter \'width\' must be an integer not exceeding 144';
                 $exception = new Zend_Feed_Exception($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;
@@ -406,8 +400,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         if (isset($image['description'])) {
             if (empty($image['description']) || !is_string($image['description'])) {
                 require_once 'Zend/Feed/Exception.php';
-                $message = 'Invalid parameter: parameter \'description\''
-                . ' must be a non-empty string';
+                $message = 'Invalid parameter: parameter \'description\' must be a non-empty string';
                 $exception = new Zend_Feed_Exception($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;

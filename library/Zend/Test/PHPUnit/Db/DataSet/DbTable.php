@@ -38,6 +38,10 @@ require_once "Zend/Db/Table/Abstract.php";
 class Zend_Test_PHPUnit_Db_DataSet_DbTable extends PHPUnit_Extensions_Database_DataSet_QueryTable
 {
     /**
+     * @var mixed|string|null
+     */
+    public $_order;
+    /**
      * Zend_Db_Table object
      *
      * @var Zend_Db_Table_Abstract

@@ -179,8 +179,7 @@ class Zend_Gdata_Gapps_NicknameQuery extends Zend_Gdata_Gapps_Query
         if ($this->_nickname !== null) {
             $uri .= '/' . $this->_nickname;
         }
-        $uri .= $this->getQueryString();
-        return $uri;
+        return $uri . $this->getQueryString();
     }
 
 }

@@ -50,7 +50,7 @@ class Zend_Form_Decorator_Captcha_ReCaptcha extends Zend_Form_Decorator_Abstract
         }
 
         $view    = $element->getView();
-        if (null === $view) {
+        if (!$view instanceof \Zend_View_Interface) {
             return $content;
         }
 

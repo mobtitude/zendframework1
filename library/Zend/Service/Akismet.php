@@ -331,12 +331,7 @@ class Zend_Service_Akismet extends Zend_Service_Abstract
             require_once 'Zend/Service/Exception.php';
             throw new Zend_Service_Exception('Invalid API key');
         }
-
-        if ('true' == $return) {
-            return true;
-        }
-
-        return false;
+        return 'true' == $return;
     }
 
     /**

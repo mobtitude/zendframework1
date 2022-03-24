@@ -64,7 +64,7 @@ class Zend_Pdf_Destination_Zoom extends Zend_Pdf_Destination_Explicit
 
         if ($page instanceof Zend_Pdf_Page) {
             $destinationArray->items[] = $page->getPageDictionary();
-        } else if (is_integer($page)) {
+        } elseif (is_int($page)) {
             $destinationArray->items[] = new Zend_Pdf_Element_Numeric($page);
         } else {
             require_once 'Zend/Pdf/Exception.php';
@@ -73,23 +73,11 @@ class Zend_Pdf_Destination_Zoom extends Zend_Pdf_Destination_Explicit
 
         $destinationArray->items[] = new Zend_Pdf_Element_Name('XYZ');
 
-        if ($left === null) {
-            $destinationArray->items[] = new Zend_Pdf_Element_Null();
-        } else {
-            $destinationArray->items[] = new Zend_Pdf_Element_Numeric($left);
-        }
+        $destinationArray->items[] = $left === null ? new Zend_Pdf_Element_Null() : new Zend_Pdf_Element_Numeric($left);
 
-        if ($top === null) {
-            $destinationArray->items[] = new Zend_Pdf_Element_Null();
-        } else {
-            $destinationArray->items[] = new Zend_Pdf_Element_Numeric($top);
-        }
+        $destinationArray->items[] = $top === null ? new Zend_Pdf_Element_Null() : new Zend_Pdf_Element_Numeric($top);
 
-        if ($zoom === null) {
-            $destinationArray->items[] = new Zend_Pdf_Element_Null();
-        } else {
-            $destinationArray->items[] = new Zend_Pdf_Element_Numeric($zoom);
-        }
+        $destinationArray->items[] = $zoom === null ? new Zend_Pdf_Element_Null() : new Zend_Pdf_Element_Numeric($zoom);
 
         return new Zend_Pdf_Destination_Zoom($destinationArray);
     }
@@ -139,11 +127,7 @@ class Zend_Pdf_Destination_Zoom extends Zend_Pdf_Destination_Explicit
      */
     public function setTopEdge($top)
     {
-        if ($top === null) {
-            $this->_destinationArray->items[3] = new Zend_Pdf_Element_Null();
-        } else {
-            $this->_destinationArray->items[3] = new Zend_Pdf_Element_Numeric($top);
-        }
+        $this->_destinationArray->items[3] = $top === null ? new Zend_Pdf_Element_Null() : new Zend_Pdf_Element_Numeric($top);
 
         return $this;
     }

@@ -71,10 +71,8 @@ class Zend_Filter_RealPath implements Zend_Filter_Interface
             $exists = $exists->toArray();
         }
 
-        if (is_array($exists)) {
-            if (isset($exists['exists'])) {
-                $exists = (boolean) $exists['exists'];
-            }
+        if (is_array($exists) && isset($exists['exists'])) {
+            $exists = (boolean) $exists['exists'];
         }
 
         $this->_exists = (boolean) $exists;
@@ -124,7 +122,7 @@ class Zend_Filter_RealPath implements Zend_Filter_Interface
                 if ($dir == '..') {
                     array_pop($stack);
                 } else {
-                    array_push($stack, $dir);
+                    $stack[] = $dir;
                 }
             }
         }

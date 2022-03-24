@@ -297,20 +297,16 @@ class Zend_View_Helper_Navigation_Links
     protected function _findFromProperty(Zend_Navigation_Page $page, $rel, $type)
     {
         $method = 'get' . ucfirst($rel);
-        if ($result = $page->$method($type)) {
-            if ($result = $this->_convertToPages($result)) {
-                if (!is_array($result)) {
-                    $result = array($result);
-                }
-
-                foreach ($result as $key => $page) {
-                    if (!$this->accept($page)) {
-                        unset($result[$key]);
-                    }
-                }
-
-                return count($result) == 1 ? $result[0] : $result;
+        if (($result = $page->$method($type)) && ($result = $this->_convertToPages($result))) {
+            if (!is_array($result)) {
+                $result = array($result);
             }
+            foreach ($result as $key => $page) {
+                if (!$this->accept($page)) {
+                    unset($result[$key]);
+                }
+            }
+            return count($result) == 1 ? $result[0] : $result;
         }
 
         return null;
@@ -561,11 +557,9 @@ class Zend_View_Helper_Navigation_Links
     {
         $found = null;
 
-        if ($parent = $page->getParent()) {
-            if ($parent instanceof Zend_Navigation_Page &&
-                $this->_findRoot($page)->hasPage($parent)) {
-                $found = $parent;
-            }
+        if (($parent = $page->getParent()) !== null && ($parent instanceof Zend_Navigation_Page &&
+            $this->_findRoot($page)->hasPage($parent))) {
+            $found = $parent;
         }
 
         return $found;
@@ -586,14 +580,12 @@ class Zend_View_Helper_Navigation_Links
     {
         $found = null;
 
-        if ($parent = $page->getParent()) {
-            if ($parent instanceof Zend_Navigation_Page) {
-                $root = $this->_findRoot($page);
-                foreach ($root as $chapter) {
-                    if ($chapter->hasPage($parent)) {
-                        $found = $parent;
-                        break;
-                    }
+        if (($parent = $page->getParent()) !== null && $parent instanceof Zend_Navigation_Page) {
+            $root = $this->_findRoot($page);
+            foreach ($root as $chapter) {
+                if ($chapter->hasPage($parent)) {
+                    $found = $parent;
+                    break;
                 }
             }
         }
@@ -678,8 +670,7 @@ class Zend_View_Helper_Navigation_Links
             } else {
                 // pass array to factory directly
                 try {
-                    $page = Zend_Navigation_Page::factory($mixed);
-                    return $page;
+                    return Zend_Navigation_Page::factory($mixed);
                 } catch (Exception $e) {
                 }
             }
@@ -717,7 +708,7 @@ class Zend_View_Helper_Navigation_Links
             throw $e;
         }
 
-        if (!$href = $page->getHref()) {
+        if (($href = $page->getHref()) === '' || ($href = $page->getHref()) === '0') {
             return '';
         }
 
@@ -768,7 +759,7 @@ class Zend_View_Helper_Navigation_Links
         foreach ($result as $attrib => $types) {
             foreach ($types as $relation => $pages) {
                 foreach ($pages as $page) {
-                    if ($r = $this->renderLink($page, $attrib, $relation)) {
+                    if (($r = $this->renderLink($page, $attrib, $relation)) !== '' && ($r = $this->renderLink($page, $attrib, $relation)) !== '0') {
                         $output .= $indent . $r . $this->getEOL();
                     }
                 }
@@ -778,6 +769,6 @@ class Zend_View_Helper_Navigation_Links
         $this->_root = null;
 
         // return output (trim last newline by spec)
-        return strlen($output) ? rtrim($output, self::EOL) : '';
+        return strlen($output) !== 0 ? rtrim($output, self::EOL) : '';
     }
 }

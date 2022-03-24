@@ -156,8 +156,7 @@ class Zend_Gdata extends Zend_Gdata_App
         } else {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'You must specify the location as either a string URI ' .
-                    'or a child of Zend_Gdata_Query');
+                    'You must specify the location as either a string URI or a child of Zend_Gdata_Query');
         }
         return parent::getFeed($uri, $className);
     }
@@ -181,8 +180,7 @@ class Zend_Gdata extends Zend_Gdata_App
         } else {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'You must specify the location as either a string URI ' .
-                    'or a child of Zend_Gdata_Query');
+                    'You must specify the location as either a string URI or a child of Zend_Gdata_Query');
         }
         return parent::getEntry($uri, $className);
     }
@@ -230,12 +228,8 @@ class Zend_Gdata extends Zend_Gdata_App
     public function isAuthenticated()
     {
         $client = parent::getHttpClient();
-        if ($client->getClientLoginToken() ||
-            $client->getAuthSubToken()) {
-                return true;
-        }
-
-        return false;
+        return $client->getClientLoginToken() ||
+            $client->getAuthSubToken();
     }
 
 }

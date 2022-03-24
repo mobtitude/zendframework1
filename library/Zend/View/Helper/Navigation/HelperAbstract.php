@@ -218,11 +218,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      */
     public function setMinDepth($minDepth = null)
     {
-        if (null === $minDepth || is_int($minDepth)) {
-            $this->_minDepth = $minDepth;
-        } else {
-            $this->_minDepth = (int) $minDepth;
-        }
+        $this->_minDepth = null === $minDepth || is_int($minDepth) ? $minDepth : (int) $minDepth;
         return $this;
     }
 
@@ -251,11 +247,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      */
     public function setMaxDepth($maxDepth = null)
     {
-        if (null === $maxDepth || is_int($maxDepth)) {
-            $this->_maxDepth = $maxDepth;
-        } else {
-            $this->_maxDepth = (int) $maxDepth;
-        }
+        $this->_maxDepth = null === $maxDepth || is_int($maxDepth) ? $maxDepth : (int) $maxDepth;
         return $this;
     }
 
@@ -291,7 +283,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      */
     public function getIndent()
     {
-        if (false === $this->getFormatOutput()) {
+        if (!$this->getFormatOutput()) {
             return '';
         }
 
@@ -308,7 +300,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      */
     public function getEOL()
     {
-        if (false === $this->getFormatOutput()) {
+        if (!$this->getFormatOutput()) {
             return '';
         }
 
@@ -459,7 +451,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      */
     public function getAcl()
     {
-        if ($this->_acl === null && self::$_defaultAcl !== null) {
+        if (!$this->_acl instanceof \Zend_Acl && self::$_defaultAcl !== null) {
             return self::$_defaultAcl;
         }
 
@@ -490,8 +482,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
         } else {
             require_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception(sprintf(
-                '$role must be a string, null, or an instance of '
-                .  'Zend_Acl_Role_Interface; %s given',
+                '$role must be a string, null, or an instance of Zend_Acl_Role_Interface; %s given',
                 gettype($role)
             ));
             $e->setView($this->view);
@@ -858,7 +849,7 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      */
     protected function _acceptAcl(Zend_Navigation_Page $page)
     {
-        if (!$acl = $this->getAcl()) {
+        if (($acl = $this->getAcl()) === null) {
             // no acl registered means don't use acl
             return true;
         }
@@ -923,10 +914,10 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      */
     protected function _normalizeId($value)
     {        
-        if (false === $this->_skipPrefixForId) {
+        if (!$this->_skipPrefixForId) {
             $prefix = $this->getPrefixForId();
 
-            if (strlen($prefix)) {
+            if (strlen($prefix) !== 0) {
                 return $prefix . $value;
             }
         }

@@ -84,11 +84,7 @@ class Zend_Cloud_QueueService_Adapter_WindowsAzure
         }
 
         // Build Zend_Service_WindowsAzure_Storage_Blob instance
-        if (!isset($options[self::HOST])) {
-            $host = self::DEFAULT_HOST;
-        } else {
-            $host = $options[self::HOST];
-        }
+        $host = isset($options[self::HOST]) ? $options[self::HOST] : self::DEFAULT_HOST;
         if (! isset($options[self::ACCOUNT_NAME])) {
             throw new Zend_Cloud_Storage_Exception('No Windows Azure account name provided.');
         }
@@ -256,11 +252,7 @@ class Zend_Cloud_QueueService_Adapter_WindowsAzure
             if ($queueId instanceof Zend_Service_WindowsAzure_Storage_QueueInstance) {
                 $queueId = $queueId->Name;
             }
-            if (isset($options[self::VISIBILITY_TIMEOUT])) {
-                $visibility = $options[self::VISIBILITY_TIMEOUT];
-            } else {
-                $visibility = self::DEFAULT_TIMEOUT;
-            }
+            $visibility = isset($options[self::VISIBILITY_TIMEOUT]) ? $options[self::VISIBILITY_TIMEOUT] : self::DEFAULT_TIMEOUT;
             return $this->_makeMessages($this->_storageClient->getMessages($queueId, $max, $visibility, false));
         } catch (Zend_Service_WindowsAzure_Exception $e) {
             throw new Zend_Cloud_QueueService_Exception('Error on recieving messages: '.$e->getMessage(), $e->getCode(), $e);

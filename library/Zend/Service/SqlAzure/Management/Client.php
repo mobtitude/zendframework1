@@ -398,22 +398,18 @@ class Zend_Service_SqlAzure_Management_Client
                 if (!$xml->Server) {
                     return array();
 		}
-		if (count($xml->Server) > 1) {
-    		    $xmlServices = $xml->Server;
-    		} else {
-    		    $xmlServices = array($xml->Server);
-    		}
+		$xmlServices = count($xml->Server) > 1 ? $xml->Server : array($xml->Server);
     		
 		$services = array();
 		if (!is_null($xmlServices)) {				
 				
-                    for ($i = 0; $i < count($xmlServices); $i++) {
-                        $services[] = new Zend_Service_SqlAzure_Management_ServerInstance(
-                                	    (string)$xmlServices[$i]->Name,
-					    (string)$xmlServices[$i]->AdministratorLogin,
-					    (string)$xmlServices[$i]->Location
+                    foreach ($xmlServices as $i => $xmlService) {
+																					$services[] = new Zend_Service_SqlAzure_Management_ServerInstance(
+                             	    (string)$xmlService->Name,
+					    (string)$xmlService->AdministratorLogin,
+					    (string)$xmlService->Location
 					);
-                    }
+																				}
 		}
 		return $services;
             } else {
@@ -542,22 +538,18 @@ class Zend_Service_SqlAzure_Management_Client
     		if (!$xml->FirewallRule) {
                     return array();
 		}
-		if (count($xml->FirewallRule) > 1) {
-    		    $xmlServices = $xml->FirewallRule;
-    		} else {
-    		    $xmlServices = array($xml->FirewallRule);
-    		}
+		$xmlServices = count($xml->FirewallRule) > 1 ? $xml->FirewallRule : array($xml->FirewallRule);
     		
 		$services = array();
 		if (!is_null($xmlServices)) {				
                     
-                    for ($i = 0; $i < count($xmlServices); $i++) {
-                        $services[] = new Zend_Service_SqlAzure_Management_FirewallRuleInstance(
-					    (string)$xmlServices[$i]->Name,
-					    (string)$xmlServices[$i]->StartIpAddress,
-					    (string)$xmlServices[$i]->EndIpAddress
+                    foreach ($xmlServices as $i => $xmlService) {
+																					$services[] = new Zend_Service_SqlAzure_Management_FirewallRuleInstance(
+					    (string)$xmlService->Name,
+					    (string)$xmlService->StartIpAddress,
+					    (string)$xmlService->EndIpAddress
 					);
-                    }
+																				}
 		}
 		return $services;
             } else {

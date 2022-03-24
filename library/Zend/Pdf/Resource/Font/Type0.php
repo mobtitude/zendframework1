@@ -62,6 +62,7 @@ require_once 'Zend/Pdf/Resource/Font.php';
  */
 class Zend_Pdf_Resource_Font_Type0 extends Zend_Pdf_Resource_Font
 {
+    public bool $_isMonospaced;
     /**
      * Descendant CIDFont
      *

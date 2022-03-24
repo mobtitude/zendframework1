@@ -207,12 +207,11 @@ class Zend_Tool_Framework_Metadata_Tool extends Zend_Tool_Framework_Metadata_Bas
     public function __toString()
     {
         $string = parent::__toString();
-        $string .= ' (ProviderName: ' . $this->_providerName
+
+        return $string . (' (ProviderName: ' . $this->_providerName
              . ', ActionName: '     . $this->_actionName
              . ', SpecialtyName: '  . $this->_specialtyName
-             . ')';
-
-        return $string;
+             . ')');
     }
 
 }

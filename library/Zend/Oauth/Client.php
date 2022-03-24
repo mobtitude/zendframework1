@@ -76,10 +76,10 @@ class Zend_Oauth_Client extends Zend_Http_Client
      */
     public function __construct($oauthOptions, $uri = null, $config = null)
     {
-        if ($config instanceof Zend_Config && !isset($config->rfc3986_strict)) {
+        if ($config instanceof Zend_Config && !(property_exists($config, 'rfc3986_strict') && $config->rfc3986_strict !== null)) {
             $config                   = $config->toArray();
             $config['rfc3986_strict'] = true;
-        } else if (null === $config ||
+        } elseif (null === $config ||
                    (is_array($config) && !isset($config['rfc3986_strict']))) {
             $config['rfc3986_strict'] = true;
         }
@@ -265,7 +265,7 @@ class Zend_Oauth_Client extends Zend_Http_Client
         } elseif ($requestScheme == Zend_Oauth::REQUEST_SCHEME_QUERYSTRING) {
             $params = $this->paramsGet;            
             $query = $this->getUri()->getQuery();
-            if ($query) {
+            if ($query !== '' && $query !== '0') {
                 $queryParts = explode('&', $this->getUri()->getQuery());
                 foreach ($queryParts as $queryPart) {
                     $kvTuple = explode('=', $queryPart);

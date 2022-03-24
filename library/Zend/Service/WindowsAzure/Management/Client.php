@@ -625,18 +625,14 @@ class Zend_Service_WindowsAzure_Management_Client
     		if (!$result->StorageService) {
 				return array();
 			}
-		    if (count($result->StorageService) > 1) {
-    		    $xmlServices = $result->StorageService;
-    		} else {
-    		    $xmlServices = array($result->StorageService);
-    		}
+		    $xmlServices = count($result->StorageService) > 1 ? $result->StorageService : array($result->StorageService);
     		
 			$services = array();
 			if (!is_null($xmlServices)) {				
-				for ($i = 0; $i < count($xmlServices); $i++) {
+				foreach ($xmlServices as $i => $xmlService) {
 					$services[] = new Zend_Service_WindowsAzure_Management_StorageServiceInstance(
-					    (string)$xmlServices[$i]->Url,
-					    (string)$xmlServices[$i]->ServiceName
+					    (string)$xmlService->Url,
+					    (string)$xmlService->ServiceName
 					);
 				}
 			}
@@ -782,19 +778,15 @@ class Zend_Service_WindowsAzure_Management_Client
     		if (!$result->HostedService) {
 				return array();
 			}
-		    if (count($result->HostedService) > 1) {
-    		    $xmlServices = $result->HostedService;
-    		} else {
-    		    $xmlServices = array($result->HostedService);
-    		}
+		    $xmlServices = count($result->HostedService) > 1 ? $result->HostedService : array($result->HostedService);
     		
 			$services = array();
 			if (!is_null($xmlServices)) {	
 				
-				for ($i = 0; $i < count($xmlServices); $i++) {
+				foreach ($xmlServices as $i => $xmlService) {
 					$services[] = new Zend_Service_WindowsAzure_Management_HostedServiceInstance(
-					    (string)$xmlServices[$i]->Url,
-					    (string)$xmlServices[$i]->ServiceName
+					    (string)$xmlService->Url,
+					    (string)$xmlService->ServiceName
 					);
 				}
 			}
@@ -1309,11 +1301,11 @@ class Zend_Service_WindowsAzure_Management_Client
 		    		
 				$roleInstances = array();
 				if (!is_null($xmlRoleInstances)) {				
-					for ($i = 0; $i < count($xmlRoleInstances); $i++) {
+					foreach ($xmlRoleInstances as $i => $xmlRoleInstance) {
 						$roleInstances[] = array(
-						    'rolename' => (string)$xmlRoleInstances[$i]->RoleName,
-						    'instancename' => (string)$xmlRoleInstances[$i]->InstanceName,
-						    'instancestatus' => (string)$xmlRoleInstances[$i]->InstanceStatus
+						    'rolename' => (string)$xmlRoleInstance->RoleName,
+						    'instancename' => (string)$xmlRoleInstance->InstanceName,
+						    'instancestatus' => (string)$xmlRoleInstance->InstanceStatus
 						);
 					}
 				}
@@ -1330,10 +1322,10 @@ class Zend_Service_WindowsAzure_Management_Client
 	    		
 				$roles = array();
 				if (!is_null($xmlRoles)) {				
-					for ($i = 0; $i < count($xmlRoles); $i++) {
+					foreach ($xmlRoles as $i => $xmlRole) {
 						$roles[] = array(
-						    'rolename' => (string)$xmlRoles[$i]->RoleName,
-						    'osversion' => (!is_null($xmlRoles[$i]->OsVersion) ? (string)$xmlRoles[$i]->OsVersion : (string)$xmlRoles[$i]->OperatingSystemVersion)					
+						    'rolename' => (string)$xmlRole->RoleName,
+						    'osversion' => (is_null($xmlRole->OsVersion) ? (string)$xmlRole->OperatingSystemVersion : (string)$xmlRole->OsVersion)					
 						);
 					}
 				}
@@ -1435,21 +1427,17 @@ class Zend_Service_WindowsAzure_Management_Client
 		
 		// http://www.php.net/manual/en/simplexmlelement.xpath.php#97818
 		$namespaces = $xml->getDocNamespaces();
-	    $xml->registerXPathNamespace('__empty_ns', $namespaces['']); 
-	
-		for ($i = 0; $i < count($roleName); $i++) {
-			$elements = $xml->xpath('//__empty_ns:Role[@name="' . $roleName[$i] . '"]/__empty_ns:Instances');
-	
-			if (count($elements) == 1) {
-				$element = $elements[0];
-				$element['count'] = $instanceCount[$i];
-			} 
-		}
-		
-		$configuration = $xml->asXML();
+	    $xml->registerXPathNamespace('__empty_ns', $namespaces['']);
+					foreach ($roleName as $i => $singleRoleName) {
+						$elements = $xml->xpath('//__empty_ns:Role[@name="' . $singleRoleName . '"]/__empty_ns:Instances');
+						if (count($elements) == 1) {
+   				$element = $elements[0];
+   				$element['count'] = $instanceCount[$i];
+   			}
+					}
 		//$configuration = preg_replace('/(<\?xml[^?]+?)utf-8/i', '$1utf-16', $configuration);
 
-		return $configuration;
+		return $xml->asXML();
 	}
     
     /**
@@ -1669,7 +1657,7 @@ class Zend_Service_WindowsAzure_Management_Client
         $response = $this->_performRequest($operationUrl . '/', '?comp=upgrade',
     		Zend_Http_Client::POST,
     		array('Content-Type' => 'application/xml; charset=utf-8'),
-    		'<UpgradeDeployment xmlns="http://schemas.microsoft.com/windowsazure"><Mode>' . ucfirst($mode) . '</Mode><PackageUrl>' . $packageUrl . '</PackageUrl><Configuration>' . base64_encode($conformingConfiguration) . '</Configuration><Label>' . base64_encode($label) . '</Label>' . (!is_null($roleToUpgrade) ? '<RoleToUpgrade>' . $roleToUpgrade . '</RoleToUpgrade>' : '') . '</UpgradeDeployment>');		
+    		'<UpgradeDeployment xmlns="http://schemas.microsoft.com/windowsazure"><Mode>' . ucfirst($mode) . '</Mode><PackageUrl>' . $packageUrl . '</PackageUrl><Configuration>' . base64_encode($conformingConfiguration) . '</Configuration><Label>' . base64_encode($label) . '</Label>' . (is_null($roleToUpgrade) ? '' : '<RoleToUpgrade>' . $roleToUpgrade . '</RoleToUpgrade>') . '</UpgradeDeployment>');		
     		
     	if (!$response->isSuccessful()) {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
@@ -1900,21 +1888,17 @@ class Zend_Service_WindowsAzure_Management_Client
 			if (!$result->Certificate) {
 				return array();
 			}
-		    if (count($result->Certificate) > 1) {
-    		    $xmlServices = $result->Certificate;
-    		} else {
-    		    $xmlServices = array($result->Certificate);
-    		}
+		    $xmlServices = count($result->Certificate) > 1 ? $result->Certificate : array($result->Certificate);
 
 			$services = array();
 			if (!is_null($xmlServices)) {				
 				
-				for ($i = 0; $i < count($xmlServices); $i++) {
+				foreach ($xmlServices as $i => $xmlService) {
 					$services[] = new Zend_Service_WindowsAzure_Management_CertificateInstance(
-					    (string)$xmlServices[$i]->CertificateUrl,
-					    (string)$xmlServices[$i]->Thumbprint,
-					    (string)$xmlServices[$i]->ThumbprintAlgorithm,
-					    (string)$xmlServices[$i]->Data
+					    (string)$xmlService->CertificateUrl,
+					    (string)$xmlService->Thumbprint,
+					    (string)$xmlService->ThumbprintAlgorithm,
+					    (string)$xmlService->Data
 					);
 				}
 			}
@@ -2060,21 +2044,17 @@ class Zend_Service_WindowsAzure_Management_Client
     		if (!$result->AffinityGroup) {
 				return array();
 			}
-		    if (count($result->AffinityGroup) > 1) {
-    		    $xmlServices = $result->AffinityGroup;
-    		} else {
-    		    $xmlServices = array($result->AffinityGroup);
-    		}
+		    $xmlServices = count($result->AffinityGroup) > 1 ? $result->AffinityGroup : array($result->AffinityGroup);
     		
 			$services = array();
 			if (!is_null($xmlServices)) {				
 				
-				for ($i = 0; $i < count($xmlServices); $i++) {
+				foreach ($xmlServices as $i => $xmlService) {
 					$services[] = new Zend_Service_WindowsAzure_Management_AffinityGroupInstance(
-					    (string)$xmlServices[$i]->Name,
-					    (string)$xmlServices[$i]->Label,
-					    (string)$xmlServices[$i]->Description,
-					    (string)$xmlServices[$i]->Location
+					    (string)$xmlService->Name,
+					    (string)$xmlService->Label,
+					    (string)$xmlService->Description,
+					    (string)$xmlService->Location
 					);
 				}
 			}
@@ -2221,10 +2201,10 @@ class Zend_Service_WindowsAzure_Management_Client
 		    		
 			$services = array();
 			if (!is_null($xmlService)) {				
-				for ($i = 0; $i < count($xmlService); $i++) {
+				foreach ($xmlService as $i => $singleXmlService) {
 					$services[] = array(
-						'url' => (string)$xmlService[$i]->Url,
-						'name' => (string)$xmlService[$i]->ServiceName
+						'url' => (string)$singleXmlService->Url,
+						'name' => (string)$singleXmlService->ServiceName
 					);
 				}
 			}
@@ -2239,10 +2219,10 @@ class Zend_Service_WindowsAzure_Management_Client
 		    		
 			$services = array();
 			if (!is_null($xmlService)) {				
-				for ($i = 0; $i < count($xmlService); $i++) {
+				foreach ($xmlService as $i => $singleXmlService) {
 					$services[] = array(
-						'url' => (string)$xmlService[$i]->Url,
-						'name' => (string)$xmlService[$i]->ServiceName
+						'url' => (string)$singleXmlService->Url,
+						'name' => (string)$singleXmlService->ServiceName
 					);
 				}
 			}
@@ -2272,18 +2252,14 @@ class Zend_Service_WindowsAzure_Management_Client
     		if (!$result->Location) {
 				return array();
 			}
-		    if (count($result->Location) > 1) {
-    		    $xmlServices = $result->Location;
-    		} else {
-    		    $xmlServices = array($result->Location);
-    		}
+		    $xmlServices = count($result->Location) > 1 ? $result->Location : array($result->Location);
     		
 			$services = array();
 			if (!is_null($xmlServices)) {				
 				
-				for ($i = 0; $i < count($xmlServices); $i++) {
+				foreach ($xmlServices as $i => $xmlService) {
 					$services[] = new Zend_Service_WindowsAzure_Management_LocationInstance(
-					    (string)$xmlServices[$i]->Name
+					    (string)$xmlService->Name
 					);
 				}
 			}
@@ -2316,23 +2292,19 @@ class Zend_Service_WindowsAzure_Management_Client
     		if (!$result->OperatingSystem) {
 				return array();
 			}
-		    if (count($result->OperatingSystem) > 1) {
-    		    $xmlServices = $result->OperatingSystem;
-    		} else {
-    		    $xmlServices = array($result->OperatingSystem);
-    		}
+		    $xmlServices = count($result->OperatingSystem) > 1 ? $result->OperatingSystem : array($result->OperatingSystem);
     		
 			$services = array();
 			if (!is_null($xmlServices)) {				
 				
-				for ($i = 0; $i < count($xmlServices); $i++) {
+				foreach ($xmlServices as $i => $xmlService) {
 					$services[] = new Zend_Service_WindowsAzure_Management_OperatingSystemInstance(
-					    (string)$xmlServices[$i]->Version,
-					    (string)$xmlServices[$i]->Label,
-					    ((string)$xmlServices[$i]->IsDefault == 'true'),
-					    ((string)$xmlServices[$i]->IsActive == 'true'),
-					    (string)$xmlServices[$i]->Family,
-					    (string)$xmlServices[$i]->FamilyLabel
+					    (string)$xmlService->Version,
+					    (string)$xmlService->Label,
+					    ((string)$xmlService->IsDefault == 'true'),
+					    ((string)$xmlService->IsActive == 'true'),
+					    (string)$xmlService->Family,
+					    (string)$xmlService->FamilyLabel
 					);
 				}
 			}
@@ -2374,29 +2346,27 @@ class Zend_Service_WindowsAzure_Management_Client
 			$services = array();
 			if (!is_null($xmlServices)) {				
 				
-				for ($i = 0; $i < count($xmlServices); $i++) {
+				foreach ($xmlServices as $i => $xmlService) {
 					$services[] = new Zend_Service_WindowsAzure_Management_OperatingSystemFamilyInstance(
-					    (string)$xmlServices[$i]->Name,
-					    (string)$xmlServices[$i]->Label
+					    (string)$xmlService->Name,
+					    (string)$xmlService->Label
 					);
-								
-					if (count($xmlServices[$i]->OperatingSystems->OperatingSystem) > 1) {
-		    		    $xmlOperatingSystems = $xmlServices[$i]->OperatingSystems->OperatingSystem;
+					if (count($xmlService->OperatingSystems->OperatingSystem) > 1) {
+		    		    $xmlOperatingSystems = $xmlService->OperatingSystems->OperatingSystem;
 		    		} else {
-		    		    $xmlOperatingSystems = array($xmlServices[$i]->OperatingSystems->OperatingSystem);
+		    		    $xmlOperatingSystems = array($xmlService->OperatingSystems->OperatingSystem);
 		    		}
-		    		
 					$operatingSystems = array();
 					if (!is_null($xmlOperatingSystems)) {				
 						require_once 'Zend/Service/WindowsAzure/Management/OperatingSystemInstance.php';
-						for ($i = 0; $i < count($xmlOperatingSystems); $i++) {
+						foreach ($xmlOperatingSystems as $i => $xmlOperatingSystem) {
 							$operatingSystems[] = new Zend_Service_WindowsAzure_Management_OperatingSystemInstance(
-							    (string)$xmlOperatingSystems[$i]->Version,
-							    (string)$xmlOperatingSystems[$i]->Label,
-							    ((string)$xmlOperatingSystems[$i]->IsDefault == 'true'),
-							    ((string)$xmlOperatingSystems[$i]->IsActive == 'true'),
-							    (string)$xmlServices[$i]->Name,
-							    (string)$xmlServices[$i]->Label
+							    (string)$xmlOperatingSystem->Version,
+							    (string)$xmlOperatingSystem->Label,
+							    ((string)$xmlOperatingSystem->IsDefault == 'true'),
+							    ((string)$xmlOperatingSystem->IsActive == 'true'),
+							    (string)$xmlService->Name,
+							    (string)$xmlService->Label
 							);
 						}
 					}
@@ -2419,8 +2389,7 @@ class Zend_Service_WindowsAzure_Management_Client
     public function _cleanConfiguration($configuration) {
     	$configuration = str_replace('?<?', '<?', $configuration);
 		$configuration = str_replace("\r", "", $configuration);
-		$configuration = str_replace("\n", "", $configuration);
 		
-		return $configuration;
+		return str_replace("\n", "", $configuration);
     }
 }

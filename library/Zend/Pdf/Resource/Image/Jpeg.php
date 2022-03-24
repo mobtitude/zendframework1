@@ -56,7 +56,7 @@ class Zend_Pdf_Resource_Image_Jpeg extends Zend_Pdf_Resource_Image
         }
 
         $gd_options = gd_info();
-        if ( (!isset($gd_options['JPG Support'])  || $gd_options['JPG Support']  != true)  &&
+        if ( (!isset($gd_options['JPG Support'])  || $gd_options['JPG Support'] != true)  &&
              (!isset($gd_options['JPEG Support']) || $gd_options['JPEG Support'] != true)  ) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('JPG support is not configured properly.');
@@ -92,7 +92,7 @@ class Zend_Pdf_Resource_Image_Jpeg extends Zend_Pdf_Resource_Image
         $imageDictionary->BitsPerComponent = new Zend_Pdf_Element_Numeric($imageInfo['bits']);
         if ($imageInfo[2] == IMAGETYPE_JPEG) {
             $imageDictionary->Filter       = new Zend_Pdf_Element_Name('DCTDecode');
-        } else if ($imageInfo[2] == IMAGETYPE_JPEG2000){
+        } elseif ($imageInfo[2] == IMAGETYPE_JPEG2000) {
             $imageDictionary->Filter       = new Zend_Pdf_Element_Name('JPXDecode');
         }
 

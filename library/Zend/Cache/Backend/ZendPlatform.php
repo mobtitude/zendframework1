@@ -86,11 +86,7 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
     public function load($id, $doNotTestCacheValidity = false)
     {
         // doNotTestCacheValidity implemented by giving zero lifetime to the cache
-        if ($doNotTestCacheValidity) {
-            $lifetime = 0;
-        } else {
-            $lifetime = $this->_directives['lifetime'];
-        }
+        $lifetime = $doNotTestCacheValidity ? 0 : $this->_directives['lifetime'];
         $res = output_cache_get($id, $lifetime);
         if($res) {
             return $res[0];
@@ -129,7 +125,7 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
      */
     public function save($data, $id, $tags = array(), $specificLifetime = false)
     {
-        if (!($specificLifetime === false)) {
+        if ($specificLifetime !== false) {
             $this->_log("Zend_Cache_Backend_ZendPlatform::save() : non false specifc lifetime is unsuported for this backend");
         }
 
@@ -198,11 +194,7 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
                 $idlist = null;
                 foreach ($tags as $tag) {
                     $next_idlist = output_cache_get(self::TAGS_PREFIX.$tag, $this->_directives['lifetime']);
-                    if ($idlist) {
-                        $idlist = array_intersect_assoc($idlist, $next_idlist);
-                    } else {
-                        $idlist = $next_idlist;
-                    }
+                    $idlist = $idlist ? array_intersect_assoc($idlist, $next_idlist) : $next_idlist;
                     if (count($idlist) == 0) {
                         // if ID list is already empty - we may skip checking other IDs
                         $idlist = null;
@@ -224,11 +216,7 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
                 $idlist = null;
                 foreach ($tags as $tag) {
                     $next_idlist = output_cache_get(self::TAGS_PREFIX.$tag, $this->_directives['lifetime']);
-                    if ($idlist) {
-                        $idlist = array_merge_recursive($idlist, $next_idlist);
-                    } else {
-                        $idlist = $next_idlist;
-                    }
+                    $idlist = $idlist ? array_merge_recursive($idlist, $next_idlist) : $next_idlist;
                     if (count($idlist) == 0) {
                         // if ID list is already empty - we may skip checking other IDs
                         $idlist = null;
@@ -271,17 +259,10 @@ class Zend_Cache_Backend_ZendPlatform extends Zend_Cache_Backend implements Zend
             $file = $d->path . $file;
             if (is_dir($file)) {
                 $result = ($this->_clean($file .'/', $mode)) && ($result);
-            } else {
-                if ($mode == Zend_Cache::CLEANING_MODE_ALL) {
-                    $result = ($this->_remove($file)) && ($result);
-                } else if ($mode == Zend_Cache::CLEANING_MODE_OLD) {
-                    // Files older than lifetime get deleted from cache
-                    if ($this->_directives['lifetime'] !== null) {
-                        if ((time() - @filemtime($file)) > $this->_directives['lifetime']) {
-                            $result = ($this->_remove($file)) && ($result);
-                        }
-                    }
-                }
+            } elseif ($mode == Zend_Cache::CLEANING_MODE_ALL) {
+                $result = ($this->_remove($file)) && ($result);
+            } elseif ($mode == Zend_Cache::CLEANING_MODE_OLD && $this->_directives['lifetime'] !== null && (time() - @filemtime($file)) > $this->_directives['lifetime']) {
+                $result = ($this->_remove($file)) && ($result);
             }
         }
         $d->close();

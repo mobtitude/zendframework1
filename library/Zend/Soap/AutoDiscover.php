@@ -253,11 +253,7 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface
      */
     protected function getHostName()
     {
-        if(isset($_SERVER['HTTP_HOST'])) {
-            $host = $_SERVER['HTTP_HOST'];
-        } else {
-            $host = $_SERVER['SERVER_NAME'];
-        }
+        $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
         return $host;
     }
 
@@ -457,7 +453,7 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface
                 );
                 // Add the wrapper element part, which must be named 'parameters'
                 $args['parameters'] = array('element' => $wsdl->addElement($element));
-            } else if ($prototype->getReturnType() != "void") {
+            } elseif ($prototype->getReturnType() != "void") {
                 // RPC style: add the return value as a typed part
                 $args['return'] = array('type' => $wsdl->getType($prototype->getReturnType()));
             }

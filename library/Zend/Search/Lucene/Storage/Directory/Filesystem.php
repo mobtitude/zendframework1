@@ -92,7 +92,7 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
 
     public static function mkdirs($dir, $mode = 0775, $recursive = true)
     {
-        $mode = $mode & ~0002;
+        $mode &= ~0002;
 
         if (($dir === null) || $dir === '') {
             return false;
@@ -120,11 +120,9 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
             if (file_exists($path)) {
                 require_once 'Zend/Search/Lucene/Exception.php';
                 throw new Zend_Search_Lucene_Exception('Path exists, but it\'s not a directory');
-            } else {
-                if (!self::mkdirs($path)) {
-                    require_once 'Zend/Search/Lucene/Exception.php';
-                    throw new Zend_Search_Lucene_Exception("Can't create directory '$path'.");
-                }
+            } elseif (!self::mkdirs($path)) {
+                require_once 'Zend/Search/Lucene/Exception.php';
+                throw new Zend_Search_Lucene_Exception("Can't create directory '$path'.");
             }
         }
         $this->_dirPath = $path;
@@ -297,11 +295,9 @@ class Zend_Search_Lucene_Storage_Directory_Filesystem extends Zend_Search_Lucene
         }
         unset($this->_fileHandlers[$to]);
 
-        if (file_exists($this->_dirPath . '/' . $to)) {
-            if (!unlink($this->_dirPath . '/' . $to)) {
-                require_once 'Zend/Search/Lucene/Exception.php';
-                throw new Zend_Search_Lucene_Exception('Delete operation failed');
-            }
+        if (file_exists($this->_dirPath . '/' . $to) && !unlink($this->_dirPath . '/' . $to)) {
+            require_once 'Zend/Search/Lucene/Exception.php';
+            throw new Zend_Search_Lucene_Exception('Delete operation failed');
         }
 
         $trackErrors = ini_get('track_errors');

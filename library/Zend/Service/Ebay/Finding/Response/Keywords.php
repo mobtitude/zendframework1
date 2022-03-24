@@ -70,7 +70,7 @@ class Zend_Service_Ebay_Finding_Response_Keywords extends Zend_Service_Ebay_Find
     {
         // prepare options
         $options = Zend_Service_Ebay_Abstract::optionsToArray($options);
-        $options = $options + $this->_options;
+        $options += $this->_options;
 
         // find items
         return $proxy->findItemsByKeywords($this->keywords, $options);

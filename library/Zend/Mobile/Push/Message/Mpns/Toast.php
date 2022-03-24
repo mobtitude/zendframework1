@@ -148,7 +148,7 @@ class Zend_Mobile_Push_Message_Mpns_Toast extends Zend_Mobile_Push_Message_Mpns
      */
     public function getDelay()
     {
-        if (!$this->_delay) {
+        if ($this->_delay === 0) {
             return self::DELAY_IMMEDIATE;
         }
         return $this->_delay;
@@ -199,9 +199,7 @@ class Zend_Mobile_Push_Message_Mpns_Toast extends Zend_Mobile_Push_Message_Mpns
         if (!empty($this->_params)) {
             $ret .= '<wp:Param>' . htmlspecialchars($this->_params) . '</wp:Param>';
         }
-        $ret .= '</wp:Toast>'
-            . '</wp:Notification>';
-        return $ret;
+        return $ret . '</wp:Toast></wp:Notification>';
     }
 
     /**
@@ -211,7 +209,7 @@ class Zend_Mobile_Push_Message_Mpns_Toast extends Zend_Mobile_Push_Message_Mpns
      */
     public function validate()
     {
-        if (!isset($this->_token) || strlen($this->_token) === 0) {
+        if (!($this->_token !== null) || $this->_token === '') {
             return false;
         }
         if (empty($this->_title)) {

@@ -120,7 +120,7 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
             if (!$this->preparedQueue) {
                 $this->rewind();
             }
-            if (!$this->count) {
+            if ($this->count === 0) {
                 throw new OutOfBoundsException('Cannot iterate SplPriorityQueue; no elements present');
             }
 
@@ -160,7 +160,7 @@ if (!is_array($this->preparedQueue)) {
          */
         public function extract()
         {
-            if (!$this->count) {
+            if ($this->count === 0) {
                 return null;
             }
 
@@ -422,10 +422,8 @@ class Zend_Stdlib_SplPriorityQueue extends SplPriorityQueue implements Serializa
         // hack around it to ensure that items registered at the same priority
         // return in the order registered. In the userland version, this is not
         // necessary.
-        if ($this->isPhp53) {
-            if (!is_array($priority)) {
-                $priority = array($priority, $this->serial--);
-            }
+        if ($this->isPhp53 && !is_array($priority)) {
+            $priority = array($priority, $this->serial--);
         }
         parent::insert($datum, $priority);
     }

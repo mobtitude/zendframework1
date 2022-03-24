@@ -121,7 +121,7 @@ class Zend_Form_Decorator_Image extends Zend_Form_Decorator_Abstract
     {
         $element = $this->getElement();
         $view    = $element->getView();
-        if (null === $view) {
+        if (!$view instanceof \Zend_View_Interface) {
             return $content;
         }
 

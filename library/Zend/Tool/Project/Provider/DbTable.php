@@ -61,9 +61,7 @@ class Zend_Tool_Project_Provider_DbTable
             $dbTableDirectory = $modelsDirectory->createResource('DbTableDirectory');
         }
 
-        $dbTableFile = $dbTableDirectory->createResource('DbTableFile', array('dbTableName' => $dbTableName, 'actualTableName' => $actualTableName));
-
-        return $dbTableFile;
+        return $dbTableDirectory->createResource('DbTableFile', array('dbTableName' => $dbTableName, 'actualTableName' => $actualTableName));
     }
 
     public static function hasResource(Zend_Tool_Project_Profile $profile, $dbTableName, $moduleName = null)
@@ -85,7 +83,7 @@ class Zend_Tool_Project_Provider_DbTable
 
         $dbTableFile = $dbTableDirectory->search(array('DbTableFile' => array('dbTableName' => $dbTableName)));
 
-        return ($dbTableFile instanceof Zend_Tool_Project_Profile_Resource) ? true : false;
+        return $dbTableFile instanceof Zend_Tool_Project_Profile_Resource;
     }
 
 
@@ -160,7 +158,7 @@ class Zend_Tool_Project_Provider_DbTable
         try {
             $zendApp->bootstrap('db');
         } catch (Zend_Application_Exception $e) {
-            throw new Zend_Tool_Project_Provider_Exception('Db resource not available, you might need to configure a DbAdapter.');
+            throw new Zend_Tool_Project_Provider_Exception('Db resource not available, you might need to configure a DbAdapter.', $e->getCode(), $e);
             return;
         }
 

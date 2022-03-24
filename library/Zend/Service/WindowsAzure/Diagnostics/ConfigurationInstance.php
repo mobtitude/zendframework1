@@ -101,11 +101,7 @@ class Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance
 		if ($configurationXml->DataSources->WindowsEventLog->Subscriptions
 			&& $configurationXml->DataSources->WindowsEventLog->Subscriptions->string) {
 			$subscriptions = $configurationXml->DataSources->WindowsEventLog->Subscriptions;
-			if (count($subscriptions->string) > 1) {
-				$subscriptions = $subscriptions->string;
-			} else {
-				$subscriptions = array($subscriptions->string);
-			}
+			$subscriptions = count($subscriptions->string) > 1 ? $subscriptions->string : array($subscriptions->string);
 			foreach ($subscriptions as $subscription) {
 				$this->DataSources->WindowsEventLog->addSubscription((string)$subscription);
 			}

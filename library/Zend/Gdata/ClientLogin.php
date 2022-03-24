@@ -89,8 +89,7 @@ class Zend_Gdata_ClientLogin
         if (! ($email && $password)) {
             require_once 'Zend/Gdata/App/AuthException.php';
             throw new Zend_Gdata_App_AuthException(
-                   'Please set your Google credentials before trying to ' .
-                   'authenticate');
+                   'Please set your Google credentials before trying to authenticate');
         }
 
         if ($client == null) {
@@ -125,8 +124,7 @@ class Zend_Gdata_ClientLogin
             else {
                 require_once 'Zend/Gdata/App/AuthException.php';
                 throw new Zend_Gdata_App_AuthException(
-                    'Please provide both a token ID and a user\'s response ' .
-                    'to the CAPTCHA challenge.');
+                    'Please provide both a token ID and a user\'s response to the CAPTCHA challenge.');
             }
         }
 
@@ -138,16 +136,16 @@ class Zend_Gdata_ClientLogin
             $response = $client->request('POST');
         } catch (Zend_Http_Client_Exception $e) {
             require_once 'Zend/Gdata/App/HttpException.php';
-            throw new Zend_Gdata_App_HttpException($e->getMessage(), $e);
+            throw new Zend_Gdata_App_HttpException($e->getMessage(), $e, $e);
         }
         ob_end_clean();
 
         // Parse Google's response
         $goog_resp = array();
         foreach (explode("\n", $response->getBody()) as $l) {
-            $l = chop($l);
-            if ($l) {
-                list($key, $val) = explode('=', chop($l), 2);
+            $l = rtrim($l);
+            if ($l !== '' && $l !== '0') {
+                list($key, $val) = explode('=', rtrim($l), 2);
                 $goog_resp[$key] = $val;
             }
         }

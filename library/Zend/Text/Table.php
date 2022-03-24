@@ -123,7 +123,7 @@ class Zend_Text_Table
         // Set options
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Zend_Config) {
+        } elseif ($options instanceof Zend_Config) {
             $this->setConfig($options);
         }
 
@@ -187,13 +187,13 @@ class Zend_Text_Table
      */
     public function setColumnWidths(array $columnWidths)
     {
-        if (count($columnWidths) === 0) {
+        if ($columnWidths === []) {
             require_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('You must supply at least one column');
         }
 
         foreach ($columnWidths as $columnNum => $columnWidth) {
-            if (is_int($columnWidth) === false or $columnWidth < 1) {
+            if (!is_int($columnWidth) || $columnWidth < 1) {
                 require_once 'Zend/Text/Table/Exception.php';
                 throw new Zend_Text_Table_Exception('Column ' . $columnNum . ' has an invalid'
                                                     . ' column width');
@@ -347,11 +347,7 @@ class Zend_Text_Table
             $row    = new Zend_Text_Table_Row();
             $colNum = 0;
             foreach ($data as $columnData) {
-                if (isset($this->_defaultColumnAligns[$colNum])) {
-                    $align = $this->_defaultColumnAligns[$colNum];
-                } else {
-                    $align = null;
-                }
+                $align = isset($this->_defaultColumnAligns[$colNum]) ? $this->_defaultColumnAligns[$colNum] : null;
 
                 $row->appendColumn(new Zend_Text_Table_Column($columnData, $align));
                 $colNum++;
@@ -372,7 +368,7 @@ class Zend_Text_Table
     public function render()
     {
         // There should be at least one row
-        if (count($this->_rows) === 0) {
+        if ($this->_rows === []) {
             require_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('No rows were added to the table yet');
         }
@@ -387,7 +383,7 @@ class Zend_Text_Table
         $numRows = count($this->_rows);
         foreach ($this->_rows as $rowNum => $row) {
             // Get all column widths
-            if (isset($columnWidths) === true) {
+            if (isset($columnWidths)) {
                 $lastColumnWidths = $columnWidths;
             }
 
@@ -414,15 +410,11 @@ class Zend_Text_Table
                 $result .= "\n";
             } else {
                 // Else check if we have to draw the row separator
-                if ($this->_autoSeparate & self::AUTO_SEPARATE_ALL) {
+                if (($this->_autoSeparate & self::AUTO_SEPARATE_ALL) !== 0) {
                     $drawSeparator = true;
-                } else if ($rowNum === 1 && $this->_autoSeparate & self::AUTO_SEPARATE_HEADER) {
+                } elseif ($rowNum === 1 && $this->_autoSeparate & self::AUTO_SEPARATE_HEADER) {
                     $drawSeparator = true;
-                } else if ($rowNum === ($numRows - 1) && $this->_autoSeparate & self::AUTO_SEPARATE_FOOTER) {
-                    $drawSeparator = true;
-                } else {
-                    $drawSeparator = false;
-                }
+                } else $drawSeparator = $rowNum === ($numRows - 1) && $this->_autoSeparate & self::AUTO_SEPARATE_FOOTER;
 
                 if ($drawSeparator) {
                     $result .= $this->_decorator->getVerticalRight();

@@ -128,8 +128,7 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      */
     public function getError($errorCode) {
         if (array_key_exists($errorCode, $this->_errors)) {
-            $result = $this->_errors[$errorCode];
-            return $result;
+            return $this->_errors[$errorCode];
         } else {
             return null;
         }
@@ -155,7 +154,7 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      * @throws Zend_Gdata_App_Exception
      */
     public function importFromString($string) {
-        if ($string) {
+        if ($string !== '' && $string !== '0') {
             // Check to see if an AppsForYourDomainError exists
             //
             // track_errors is temporarily enabled so that if an error
@@ -176,7 +175,7 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
             // Ensure that the outermost node is an AppsForYourDomain error.
             // If it isn't, something has gone horribly wrong.
             $rootElement = $doc->getElementsByTagName($this->_rootElement)->item(0);
-            if (!$rootElement) {
+            if (!$rootElement instanceof \DOMElement) {
                 require_once 'Zend/Gdata/App/Exception.php';
                 throw new Zend_Gdata_App_Exception('No root <' . $this->_rootElement . '> element found, cannot parse feed.');
             }

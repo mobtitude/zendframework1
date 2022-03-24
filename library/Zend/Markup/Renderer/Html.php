@@ -478,12 +478,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
         if (in_array($color, $colors)) {
             return true;
         }
-
-        if (preg_match('/\#[0-9a-f]{6}/i', $color)) {
-            return true;
-        }
-
-        return false;
+        return (bool) preg_match('/\#[0-9a-f]{6}/i', $color);
     }
 
     /**
@@ -514,12 +509,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
                 if ($components === false) {
                     return false;
                 }
-
-                if (!isset($components['host'])) {
-                    return false;
-                }
-
-                return true;
+                return isset($components['host']);
 
             default:
                 return true;

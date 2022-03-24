@@ -223,12 +223,16 @@ class Zend_Db_Adapter_Pdo_Sqlite extends Zend_Db_Adapter_Pdo_Abstract
 
         $p = 1;
         foreach ($result as $key => $row) {
-            list($length, $scale, $precision, $primary, $primaryPosition, $identity) =
-                array(null, null, null, false, null, false);
+            $length = null;
+            $scale = null;
+            $precision = null;
+            $primary = false;
+            $primaryPosition = null;
+            $identity = false;
             if (preg_match('/^((?:var)?char)\((\d+)\)/i', (string) $row[$type], $matches)) {
                 $row[$type] = $matches[1];
                 $length = $matches[2];
-            } else if (preg_match('/^decimal\((\d+),(\d+)\)/i', (string) $row[$type], $matches)) {
+            } elseif (preg_match('/^decimal\((\d+),(\d+)\)/i', (string) $row[$type], $matches)) {
                 $row[$type] = 'DECIMAL';
                 $precision = $matches[1];
                 $scale = $matches[2];
@@ -272,14 +276,14 @@ class Zend_Db_Adapter_Pdo_Sqlite extends Zend_Db_Adapter_Pdo_Abstract
      */
     public function limit($sql, $count, $offset = 0)
     {
-        $count = intval($count);
+        $count = (int) $count;
         if ($count <= 0) {
             /** @see Zend_Db_Adapter_Exception */
             require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
         }
 
-        $offset = intval($offset);
+        $offset = (int) $offset;
         if ($offset < 0) {
             /** @see Zend_Db_Adapter_Exception */
             require_once 'Zend/Db/Adapter/Exception.php';

@@ -101,11 +101,7 @@ class Zend_Tool_Framework_Provider_Repository
             $provider->setRegistry($this->_registry);
         }
 
-        if (method_exists($provider, 'getName')) {
-            $providerName = $provider->getName();
-        } else {
-            $providerName = $this->_parseName($provider);
-        }
+        $providerName = method_exists($provider, 'getName') ? $provider->getName() : $this->_parseName($provider);
 
         // if a provider by the given name already exist, and its not set as overwritable, throw exception
         if (!$overwriteExistingProvider &&

@@ -27,6 +27,7 @@ require_once 'Zend/Cloud/Infrastructure/Adapter/AbstractAdapter.php';
  */
 class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Adapter_AbstractAdapter
 {
+    public bool $error;
     /**
      * AWS constants
      */
@@ -333,7 +334,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
      */ 
     public function imagesInstance()
     {
-        if (!isset($this->ec2Image)) {
+        if (!($this->ec2Image !== null)) {
             $this->ec2Image = new Zend_Service_Amazon_Ec2_Image($this->accessKey, $this->accessSecret, $this->region);
         }
 
@@ -370,7 +371,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
      */
     public function zonesInstance()
     {
-        if (!isset($this->ec2Zone)) {
+        if (!($this->ec2Zone !== null)) {
             $this->ec2Zone = new Zend_Service_Amazon_Ec2_Availabilityzones($this->accessKey,$this->accessSecret,$this->region);
         }
         $this->adapterResult = $this->ec2Zone->describe();
@@ -425,7 +426,7 @@ class Zend_Cloud_Infrastructure_Adapter_Ec2 extends Zend_Cloud_Infrastructure_Ad
             ));
         }      
 
-        if (!isset($this->ec2Monitor)) {
+        if (!($this->ec2Monitor !== null)) {
             $this->ec2Monitor = new Zend_Service_Amazon_Ec2_CloudWatch($this->accessKey, $this->accessSecret, $this->region);
         }
 

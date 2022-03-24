@@ -450,7 +450,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
         /**
          * A read-only row cannot be saved.
          */
-        if ($this->_readOnly === true) {
+        if ($this->_readOnly) {
             require_once 'Zend/Db/Table/Row/Exception.php';
             throw new Zend_Db_Table_Row_Exception('This row has been marked read-only');
         }
@@ -508,7 +508,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
         /**
          * A read-only row cannot be saved.
          */
-        if ($this->_readOnly === true) {
+        if ($this->_readOnly) {
             require_once 'Zend/Db/Table/Row/Exception.php';
             throw new Zend_Db_Table_Row_Exception('This row has been marked read-only');
         }
@@ -539,7 +539,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
          * Execute cascading updates against dependent tables.
          * Do this only if primary key value(s) were changed.
          */
-        if (count($pkDiffData) > 0) {
+        if ($pkDiffData !== []) {
             $depTables = $this->_getTable()->getDependentTables();
             if (!empty($depTables)) {
                 $pkNew = $this->_getPrimaryKey(true);
@@ -557,7 +557,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
          * Use the $diffData variable, so the UPDATE statement
          * includes SET terms only for data values that changed.
          */
-        if (count($diffData) > 0) {
+        if ($diffData !== []) {
             $this->_getTable()->update($diffData, $where);
         }
 
@@ -597,7 +597,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
         /**
          * A read-only row cannot be deleted.
          */
-        if ($this->_readOnly === true) {
+        if ($this->_readOnly) {
             require_once 'Zend/Db/Table/Row/Exception.php';
             throw new Zend_Db_Table_Row_Exception('This row has been marked read-only');
         }
@@ -712,12 +712,8 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
         }
 
         $primary = array_flip($this->_primary);
-        if ($useDirty) {
-            $array = array_intersect_key($this->_data, $primary);
-        } else {
-            $array = array_intersect_key($this->_cleanData, $primary);
-        }
-        if (count($primary) != count($array)) {
+        $array = $useDirty ? array_intersect_key($this->_data, $primary) : array_intersect_key($this->_cleanData, $primary);
+        if (count($primary) !== count($array)) {
             require_once 'Zend/Db/Table/Row/Exception.php';
             throw new Zend_Db_Table_Row_Exception("The specified Table '$this->_tableClass' does not have the same primary key as the Row");
         }
@@ -770,7 +766,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
         $where = $this->_getWhereQuery();
         $row = $this->_getTable()->fetchRow($where);
 
-        if (null === $row) {
+        if (!$row instanceof \Zend_Db_Table_Row_Abstract) {
             require_once 'Zend/Db/Table/Row/Exception.php';
             throw new Zend_Db_Table_Row_Exception('Cannot refresh row as parent is missing');
         }
@@ -852,7 +848,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
      */
     protected function _prepareReference(Zend_Db_Table_Abstract $dependentTable, Zend_Db_Table_Abstract $parentTable, $ruleKey)
     {
-        $parentTableName = (get_class($parentTable) === 'Zend_Db_Table') ? $parentTable->getDefinitionConfigName() : get_class($parentTable);
+        $parentTableName = ($parentTable instanceof \Zend_Db_Table) ? $parentTable->getDefinitionConfigName() : get_class($parentTable);
         $map = $dependentTable->getReference($parentTableName, $ruleKey);
 
         if (!isset($map[Zend_Db_Table_Abstract::REF_COLUMNS])) {
@@ -906,8 +902,9 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
         }
 
         $map = $this->_prepareReference($dependentTable, $this->_getTable(), $ruleKey);
+        $itemsCount = count($map[Zend_Db_Table_Abstract::COLUMNS]);
 
-        for ($i = 0; $i < count($map[Zend_Db_Table_Abstract::COLUMNS]); ++$i) {
+        for ($i = 0; $i < $itemsCount; ++$i) {
             $parentColumnName = $db->foldCase($map[Zend_Db_Table_Abstract::REF_COLUMNS][$i]);
             $value = $this->_data[$parentColumnName];
             // Use adapter from dependent table to ensure correct query construction
@@ -962,9 +959,10 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
         }
 
         $map = $this->_prepareReference($this->_getTable(), $parentTable, $ruleKey);
+        $itemsCount = count($map[Zend_Db_Table_Abstract::COLUMNS]);
 
         // iterate the map, creating the proper wheres
-        for ($i = 0; $i < count($map[Zend_Db_Table_Abstract::COLUMNS]); ++$i) {
+        for ($i = 0; $i < $itemsCount; ++$i) {
             $dependentColumnName = $db->foldCase($map[Zend_Db_Table_Abstract::COLUMNS][$i]);
             $value = $this->_data[$dependentColumnName];
             // Use adapter from parent table to ensure correct query construction
@@ -1059,8 +1057,9 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
         $matchSchema = isset($matchInfo['schema']) ? $matchInfo['schema'] : null;
 
         $matchMap = $this->_prepareReference($intersectionTable, $matchTable, $matchRefRule);
+        $itemsCount = count($matchMap[Zend_Db_Table_Abstract::COLUMNS]);
 
-        for ($i = 0; $i < count($matchMap[Zend_Db_Table_Abstract::COLUMNS]); ++$i) {
+        for ($i = 0; $i < $itemsCount; ++$i) {
             $interCol = $interDb->quoteIdentifier('i' . '.' . $matchMap[Zend_Db_Table_Abstract::COLUMNS][$i], true);
             $matchCol = $interDb->quoteIdentifier('m' . '.' . $matchMap[Zend_Db_Table_Abstract::REF_COLUMNS][$i], true);
             $joinCond[] = "$interCol = $matchCol";
@@ -1072,8 +1071,9 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
                ->setIntegrityCheck(false);
 
         $callerMap = $this->_prepareReference($intersectionTable, $this->_getTable(), $callerRefRule);
+        $itemsCount = count($callerMap[Zend_Db_Table_Abstract::COLUMNS]);
 
-        for ($i = 0; $i < count($callerMap[Zend_Db_Table_Abstract::COLUMNS]); ++$i) {
+        for ($i = 0; $i < $itemsCount; ++$i) {
             $callerColumnName = $db->foldCase($callerMap[Zend_Db_Table_Abstract::REF_COLUMNS][$i]);
             $value = $this->_data[$callerColumnName];
             $interColumnName = $interDb->foldCase($callerMap[Zend_Db_Table_Abstract::COLUMNS][$i]);
@@ -1103,8 +1103,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
                 throw new Zend_Db_Table_Row_Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
-        $rowset = new $rowsetClass($config);
-        return $rowset;
+        return new $rowsetClass($config);
     }
 
     /**
@@ -1120,11 +1119,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
     {
         $matches = array();
 
-        if (count($args) && $args[0] instanceof Zend_Db_Table_Select) {
-            $select = $args[0];
-        } else {
-            $select = null;
-        }
+        $select = count($args) && $args[0] instanceof Zend_Db_Table_Select ? $args[0] : null;
 
         /**
          * Recognize methods for Has-Many cases:

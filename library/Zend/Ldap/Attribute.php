@@ -56,21 +56,18 @@ class Zend_Ldap_Attribute
     {
         $attribName = strtolower($attribName);
         $valArray = array();
-        if (is_array($value) || ($value instanceof Traversable))
-        {
+        if (is_array($value) || ($value instanceof Traversable)) {
             foreach ($value as $v)
             {
                 $v = self::_valueToLdap($v);
                 if ($v !== null) $valArray[] = $v;
             }
-        }
-        else if ($value !== null)
-        {
+        } elseif ($value !== null) {
             $value = self::_valueToLdap($value);
             if ($value !== null) $valArray[] = $value;
         }
 
-        if ($append === true && isset($data[$attribName]))
+        if ($append && isset($data[$attribName]))
         {
             if (is_string($data[$attribName])) $data[$attribName] = array($data[$attribName]);
             $data[$attribName] = array_merge($data[$attribName], $valArray);
@@ -100,10 +97,10 @@ class Zend_Ldap_Attribute
                 $retArray[] = self::_valueFromLdap($v);
             }
             return $retArray;
-        } else if (is_int($index)) {
+        } elseif (is_int($index)) {
             if (!isset($data[$attribName])) {
                 return null;
-            } else if ($index >= 0 && $index<count($data[$attribName])) {
+            } elseif ($index >= 0 && $index<count($data[$attribName])) {
                 return self::_valueFromLdap($data[$attribName][$index]);
             } else {
                 return null;
@@ -274,11 +271,7 @@ class Zend_Ldap_Attribute
         $attribName = null)
     {
         if ($attribName === null) {
-            if ($hashType === self::PASSWORD_UNICODEPWD) {
-                $attribName = 'unicodePwd';
-            } else {
-                $attribName = 'userPassword';
-            }
+            $attribName = $hashType === self::PASSWORD_UNICODEPWD ? 'unicodePwd' : 'userPassword';
         }
 
         $hash = self::createPassword($password, $hashType);
@@ -302,7 +295,7 @@ class Zend_Ldap_Attribute
                 $password = '"' . $password . '"';
                 if (function_exists('mb_convert_encoding')) {
                     $password = mb_convert_encoding($password, 'UTF-16LE', 'UTF-8');
-                } else if (function_exists('iconv')) {
+                } elseif (function_exists('iconv')) {
                     $password = iconv('UTF-8', 'UTF-16LE', $password);
                 } else {
                     $len = strlen($password);
@@ -350,14 +343,12 @@ class Zend_Ldap_Attribute
         $append = false)
     {
         $convertedValues = array();
-        if (is_array($value) || ($value instanceof Traversable))
-        {
+        if (is_array($value) || ($value instanceof Traversable)) {
             foreach ($value as $v) {
                 $v = self::_valueToLdapDateTime($v, $utc);
                 if ($v !== null) $convertedValues[] = $v;
             }
-        }
-        else if ($value !== null) {
+        } elseif ($value !== null) {
             $value = self::_valueToLdapDateTime($value, $utc);
             if ($value !== null) $convertedValues[] = $value;
         }
@@ -389,7 +380,8 @@ class Zend_Ldap_Attribute
     {
         $values = self::getAttribute($data, $attribName, $index);
         if (is_array($values)) {
-            for ($i = 0; $i<count($values); $i++) {
+            $valuesCount = count($values);
+            for ($i = 0; $i<$valuesCount; $i++) {
                 $newVal = self::_valueFromLdapDateTime($values[$i]);
                 if ($newVal !== null) $values[$i] = $newVal;
             }
@@ -409,7 +401,7 @@ class Zend_Ldap_Attribute
     {
         if ($value instanceof DateTime) {
             return $value->format('U');
-        } else if (is_string($value)) {
+        } elseif (is_string($value)) {
             try {
                 return Zend_Ldap_Converter::fromLdapDateTime($value, false)->format('U');
             } catch (InvalidArgumentException $e) {

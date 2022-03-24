@@ -115,7 +115,7 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
                 }
                 $renderer = new Zend_Feed_Writer_Renderer_Entry_Atom_Deleted($entry);
             }
-            if ($this->_ignoreExceptions === true) {
+            if ($this->_ignoreExceptions) {
                 $renderer->ignoreExceptions();
             }
             $renderer->setType($this->getType());

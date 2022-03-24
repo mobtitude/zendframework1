@@ -353,7 +353,7 @@ class Zend_EventManager_EventManager implements Zend_EventManager_EventCollectio
         if (!$return) {
             return false;
         }
-        if (!count($this->events[$event])) {
+        if (count($this->events[$event]) === 0) {
             unset($this->events[$event]);
         }
         return true;
@@ -532,7 +532,7 @@ class Zend_EventManager_EventManager implements Zend_EventManager_EventCollectio
      */
     protected function insertListeners($masterListeners, $listeners)
     {
-        if (!count($listeners)) {
+        if (count($listeners) === 0) {
             return;
         }
 

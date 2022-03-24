@@ -94,11 +94,9 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
     public function getId()
     {
         $id = $this->getOption('id');
-        if (null === $id) {
-            if (null !== ($element = $this->getElement())) {
-                $id = $element->getId();
-                $this->setId($id);
-            }
+        if (null === $id && null !== ($element = $this->getElement())) {
+            $id = $element->getId();
+            $this->setId($id);
         }
 
         return $id;
@@ -112,11 +110,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
      */
     public function setTag($tag)
     {
-        if (empty($tag)) {
-            $this->_tag = null;
-        } else {
-            $this->_tag = (string) $tag;
-        }
+        $this->_tag = empty($tag) ? null : (string) $tag;
 
         $this->removeOption('tag');
 
@@ -150,11 +144,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
      */
     public function setTagClass($tagClass)
     {
-        if (empty($tagClass)) {
-            $this->_tagClass = null;
-        } else {
-            $this->_tagClass = (string) $tagClass;
-        }
+        $this->_tagClass = empty($tagClass) ? null : (string) $tagClass;
 
         $this->removeOption('tagClass');
 
@@ -264,7 +254,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
 
             switch ($head) {
                 case 'set':
-                    if (0 === count($args)) {
+                    if ([] === $args) {
                         require_once 'Zend/Form/Exception.php';
                         throw new Zend_Form_Exception(sprintf('Method "%s" requires at least one argument; none provided', $method));
                     }
@@ -313,11 +303,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
         $separator = $this->getSeparator();
 
         if (!empty($label)) {
-            if ($element->isRequired()) {
-                $label = $reqPrefix . $label . $reqSuffix;
-            } else {
-                $label = $optPrefix . $label . $optSuffix;
-            }
+            $label = $element->isRequired() ? $reqPrefix . $label . $reqSuffix : $optPrefix . $label . $optSuffix;
         }
 
         return $label;
@@ -363,7 +349,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
     {
         $element = $this->getElement();
         $view    = $element->getView();
-        if (null === $view) {
+        if (!$view instanceof \Zend_View_Interface) {
             return $content;
         }
 

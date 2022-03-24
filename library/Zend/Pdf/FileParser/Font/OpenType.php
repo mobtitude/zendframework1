@@ -316,9 +316,7 @@ abstract class Zend_Pdf_FileParser_Font_OpenType extends Zend_Pdf_FileParser_Fon
             $platformID = $this->readUInt(2);
             $encodingID = $this->readUInt(2);
 
-            if (! ( (($platformID == 3) && ($encodingID == 1)) ||    // Microsoft Unicode
-                    (($platformID == 1) && ($encodingID == 0))       // Mac Roman
-                   ) ) {
+            if (!(($platformID == 3) && ($encodingID == 1)) && !(($platformID == 1) && ($encodingID == 0)) ) {
                 $this->skipBytes(8);    // Not a supported encoding. Move on.
                 continue;
             }
@@ -896,8 +894,7 @@ abstract class Zend_Pdf_FileParser_Font_OpenType extends Zend_Pdf_FileParser_Fon
                     $cmapLength = $this->readUInt(2);
                     $language = $this->readUInt(2);
                     if ($language != 0) {
-                        $this->_debugLog('Type 0 cmap tables must be language-independent;'
-                                         . ' language: %d; skipping', $language);
+                        $this->_debugLog('Type 0 cmap tables must be language-independent; language: %d; skipping', $language);
                         break;
                     }
                     break;
@@ -907,8 +904,7 @@ abstract class Zend_Pdf_FileParser_Font_OpenType extends Zend_Pdf_FileParser_Fon
                     $cmapLength = $this->readUInt(2);
                     $language = $this->readUInt(2);
                     if ($language != 0) {
-                        $this->_debugLog('Warning: cmap tables must be language-independent - this font'
-                                         . ' may not work properly; language: %d', $language);
+                        $this->_debugLog('Warning: cmap tables must be language-independent - this font may not work properly; language: %d', $language);
                     }
                     break;
 
@@ -1050,7 +1046,8 @@ abstract class Zend_Pdf_FileParser_Font_OpenType extends Zend_Pdf_FileParser_Fon
      */
     protected function _languageCodeForPlatform($platformID, $languageID)
     {
-        if ($platformID == 3) {    // Microsoft encoding.
+        if ($platformID == 3) {
+            // Microsoft encoding.
             /* The low-order bytes specify the language, the high-order bytes
              * specify the dialect. We just care about the language. For the
              * complete list, see:
@@ -1092,8 +1089,8 @@ abstract class Zend_Pdf_FileParser_Font_OpenType extends Zend_Pdf_FileParser_Fon
                 default:
                     return null;
             }
-
-        } else if ($platformID == 1) {    // Macintosh encoding.
+        } elseif ($platformID == 1) {
+            // Macintosh encoding.
             switch ($languageID) {
                 case 0:
                     return 'en';
@@ -1129,7 +1126,6 @@ abstract class Zend_Pdf_FileParser_Font_OpenType extends Zend_Pdf_FileParser_Fon
                 default:
                     return null;
             }
-
         } else {    // Unknown encoding.
             return null;
         }

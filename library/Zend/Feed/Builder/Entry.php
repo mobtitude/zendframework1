@@ -283,11 +283,7 @@ class Zend_Feed_Builder_Entry extends ArrayObject
      */
     public function addEnclosure($url, $type = '', $length = '')
     {
-        if (!$this->offsetExists('enclosure')) {
-            $enclosure = array();
-        } else {
-            $enclosure = $this->offsetGet('enclosure');
-        }
+        $enclosure = $this->offsetExists('enclosure') ? $this->offsetGet('enclosure') : array();
         $enclosure[] = array('url' => $url,
                              'type' => $type,
                              'length' => $length);

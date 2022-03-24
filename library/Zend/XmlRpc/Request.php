@@ -211,10 +211,9 @@ class Zend_XmlRpc_Request
      * @access public
      * @return void
      */
-    public function setParams()
+    public function setParams(...$argv)
     {
         $argc = func_num_args();
-        $argv = func_get_args();
         if (0 == $argc) {
             return;
         }
@@ -333,7 +332,7 @@ class Zend_XmlRpc_Request
             $types = array();
             $argv  = array();
             foreach ($xml->params->children() as $param) {
-                if (!isset($param->value)) {
+                if (!(property_exists($param, 'value') && $param->value !== null)) {
                     $this->_fault = new Zend_XmlRpc_Fault(633);
                     $this->_fault->setEncoding($this->getEncoding());
                     return false;

@@ -118,7 +118,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
      */
     public function setAbstract($isAbstract)
     {
-        $this->_isAbstract = ($isAbstract) ? true : false;
+        $this->_isAbstract = $isAbstract;
         return $this;
     }
 
@@ -139,7 +139,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
      */
     public function setFinal($isFinal)
     {
-        $this->_isFinal = ($isFinal) ? true : false;
+        $this->_isFinal = $isFinal;
         return $this;
     }
 
@@ -161,7 +161,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract extends Zend_CodeGenerator
      */
     public function setStatic($isStatic)
     {
-        $this->_isStatic = ($isStatic) ? true : false;
+        $this->_isStatic = $isStatic;
         return $this;
     }
 

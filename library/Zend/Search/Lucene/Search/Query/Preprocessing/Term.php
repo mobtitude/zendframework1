@@ -324,11 +324,7 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Term extends Zend_Search_Luc
     public function __toString()
     {
         // It's used only for query visualisation, so we don't care about characters escaping
-        if ($this->_field !== null) {
-            $query = $this->_field . ':';
-        } else {
-            $query = '';
-        }
+        $query = $this->_field !== null ? $this->_field . ':' : '';
 
         $query .= $this->_word;
 

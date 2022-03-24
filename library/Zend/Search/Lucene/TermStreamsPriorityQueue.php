@@ -120,8 +120,7 @@ class Zend_Search_Lucene_TermStreamsPriorityQueue implements Zend_Search_Lucene_
     {
         while (($termStream = $this->_termsStreamQueue->pop()) !== null) {
             if ($this->_termsStreamQueue->top() === null ||
-                $this->_termsStreamQueue->top()->currentTerm()->key() !=
-                            $termStream->currentTerm()->key()) {
+                $this->_termsStreamQueue->top()->currentTerm()->key() != $termStream->currentTerm()->key()) {
                 // We got new term
                 $this->_lastTerm = $termStream->currentTerm();
 

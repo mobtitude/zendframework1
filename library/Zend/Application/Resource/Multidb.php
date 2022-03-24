@@ -197,7 +197,7 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
                     $metadataCache = $cacheManager->getCache($cache);
                 }
             }
-        } else if ($cache instanceof Zend_Cache_Core) {
+        } elseif ($cache instanceof Zend_Cache_Core) {
             $metadataCache = $cache;
         }
 

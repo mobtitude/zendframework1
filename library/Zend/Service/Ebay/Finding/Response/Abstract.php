@@ -123,7 +123,7 @@ abstract class Zend_Service_Ebay_Finding_Response_Abstract extends Zend_Service_
         $this->version   = $this->_query(".//$ns:version[1]", 'string');
 
         $node = $this->_xPath->query(".//$ns:errorMessage[1]", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_Error_Message
              */

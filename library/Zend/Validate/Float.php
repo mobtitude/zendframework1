@@ -62,11 +62,7 @@ class Zend_Validate_Float extends Zend_Validate_Abstract
         }
 
         if (is_array($locale)) {
-            if (array_key_exists('locale', $locale)) {
-                $locale = $locale['locale'];
-            } else {
-                $locale = null;
-            }
+            $locale = $locale['locale'] ?? null;
         }
 
         if (empty($locale)) {

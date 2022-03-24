@@ -76,7 +76,7 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
     {
         if (count($this->_headers) || (200 != $this->_httpResponseCode)) {
             $this->canSendHeaders(true);
-        } elseif (200 == $this->_httpResponseCode) {
+        } elseif (200 === $this->_httpResponseCode) {
             return;
         }
         $httpCodeSent = false;
@@ -229,7 +229,6 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
     {
         $filtered = str_replace(array('-', '_'), ' ', (string) $name);
         $filtered = ucwords(strtolower($filtered));
-        $filtered = str_replace(' ', '-', $filtered);
-        return $filtered;
+        return str_replace(' ', '-', $filtered);
     }
 }

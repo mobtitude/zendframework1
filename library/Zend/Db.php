@@ -207,14 +207,10 @@ class Zend_Db
          * adapter name and separate config object.
          */
         if ($adapter instanceof Zend_Config) {
-            if (isset($adapter->params)) {
+            if (property_exists($adapter, 'params') && $adapter->params !== null) {
                 $config = $adapter->params->toArray();
             }
-            if (isset($adapter->adapter)) {
-                $adapter = (string) $adapter->adapter;
-            } else {
-                $adapter = null;
-            }
+            $adapter = property_exists($adapter, 'adapter') && $adapter->adapter !== null ? (string) $adapter->adapter : null;
         }
 
         /*

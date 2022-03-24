@@ -227,7 +227,7 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
      */
     public function setWidth($width = null)
     {
-        if ($width === null || !is_integer($width)) {
+        if ($width === null || !is_int($width)) {
             if (substr(PHP_OS, 0, 3) === 'WIN') {
                 // We have to default to 79 on windows, because the windows
                 // terminal always has a fixed width of 80 characters and the
@@ -241,7 +241,7 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
                 // Try to determine the width through stty
                 if (preg_match('#\d+ (\d+)#', (string) @shell_exec('stty size'), $match) === 1) {
                     $this->_width = (int) $match[1];
-                } else if (preg_match('#columns = (\d+);#', (string) @shell_exec('stty'), $match) === 1) {
+                } elseif (preg_match('#columns = (\d+);#', (string) @shell_exec('stty'), $match) === 1) {
                     $this->_width = (int) $match[1];
                 }
             }
@@ -268,7 +268,7 @@ class Zend_ProgressBar_Adapter_Console extends Zend_ProgressBar_Adapter
                                  self::ELEMENT_ETA,
                                  self::ELEMENT_TEXT);
 
-        if (count(array_diff($elements, $allowedElements)) > 0) {
+        if (array_diff($elements, $allowedElements) !== []) {
             require_once 'Zend/ProgressBar/Adapter/Exception.php';
             throw new Zend_ProgressBar_Adapter_Exception('Invalid element found in $elements array');
         }

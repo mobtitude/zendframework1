@@ -184,23 +184,28 @@ class Zend_Db_Adapter_Pdo_Mysql extends Zend_Db_Adapter_Pdo_Abstract
         $i = 1;
         $p = 1;
         foreach ($result as $row) {
-            list($length, $scale, $precision, $unsigned, $primary, $primaryPosition, $identity)
-                = array(null, null, null, null, false, null, false);
+            $length = null;
+            $scale = null;
+            $precision = null;
+            $unsigned = null;
+            $primary = false;
+            $primaryPosition = null;
+            $identity = false;
             if (preg_match('/unsigned/', (string) $row[$type])) {
                 $unsigned = true;
             }
             if (preg_match('/^((?:var)?char)\((\d+)\)/', (string) $row[$type], $matches)) {
                 $row[$type] = $matches[1];
                 $length = $matches[2];
-            } else if (preg_match('/^decimal\((\d+),(\d+)\)/', (string) $row[$type], $matches)) {
+            } elseif (preg_match('/^decimal\((\d+),(\d+)\)/', (string) $row[$type], $matches)) {
                 $row[$type] = 'decimal';
                 $precision = $matches[1];
                 $scale = $matches[2];
-            } else if (preg_match('/^float\((\d+),(\d+)\)/', (string) $row[$type], $matches)) {
+            } elseif (preg_match('/^float\((\d+),(\d+)\)/', (string) $row[$type], $matches)) {
                 $row[$type] = 'float';
                 $precision = $matches[1];
                 $scale = $matches[2];
-            } else if (preg_match('/^((?:big|medium|small|tiny)?int)\((\d+)\)/', (string) $row[$type], $matches)) {
+            } elseif (preg_match('/^((?:big|medium|small|tiny)?int)\((\d+)\)/', (string) $row[$type], $matches)) {
                 $row[$type] = $matches[1];
                 // The optional argument of a MySQL int type is not precision
                 // or length; it is only a hint for display width.
@@ -208,11 +213,7 @@ class Zend_Db_Adapter_Pdo_Mysql extends Zend_Db_Adapter_Pdo_Abstract
             if (strtoupper($row[$key]) == 'PRI') {
                 $primary = true;
                 $primaryPosition = $p;
-                if ($row[$extra] == 'auto_increment') {
-                    $identity = true;
-                } else {
-                    $identity = false;
-                }
+                $identity = $row[$extra] == 'auto_increment';
                 ++$p;
             }
             $desc[$this->foldCase($row[$field])] = array(
@@ -247,14 +248,14 @@ class Zend_Db_Adapter_Pdo_Mysql extends Zend_Db_Adapter_Pdo_Abstract
      */
      public function limit($sql, $count, $offset = 0)
      {
-        $count = intval($count);
+        $count = (int) $count;
         if ($count <= 0) {
             /** @see Zend_Db_Adapter_Exception */
             require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
         }
 
-        $offset = intval($offset);
+        $offset = (int) $offset;
         if ($offset < 0) {
             /** @see Zend_Db_Adapter_Exception */
             require_once 'Zend/Db/Adapter/Exception.php';

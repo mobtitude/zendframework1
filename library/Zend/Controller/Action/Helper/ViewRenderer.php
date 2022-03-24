@@ -197,7 +197,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      */
     public function __clone()
     {
-        if (isset($this->view) && $this->view instanceof Zend_View_Interface) {
+        if ($this->view !== null && $this->view instanceof Zend_View_Interface) {
             $this->view = clone $this->view;
 
         }
@@ -362,9 +362,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
             return $default;
         }
 
-        $prefix = substr($class, 0, strpos($class, '_')) . '_View';
-
-        return $prefix;
+        return substr($class, 0, strpos($class, '_')) . '_View';
     }
 
     /**
@@ -389,9 +387,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
             'controller' => $request->getControllerName(),
             'action'     => $dispatcher->formatActionName($request->getActionName())
             );
-
-        $path = $inflector->filter($parts);
-        return $path;
+        return $inflector->filter($parts);
     }
 
     /**
@@ -410,7 +406,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
                 case 'noController':
                 case 'noRender':
                     $property = '_' . $key;
-                    $this->{$property} = ($value) ? true : false;
+                    $this->{$property} = (bool) $value;
                     break;
                 case 'responseSegment':
                 case 'scriptAction':
@@ -647,7 +643,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      */
     public function setNeverRender($flag = true)
     {
-        $this->_neverRender = ($flag) ? true : false;
+        $this->_neverRender = $flag;
         return $this;
     }
 
@@ -669,7 +665,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      */
     public function setNoRender($flag = true)
     {
-        $this->_noRender = ($flag) ? true : false;
+        $this->_noRender = $flag;
         return $this;
     }
 
@@ -713,11 +709,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      */
     public function setResponseSegment($name)
     {
-        if (null === $name) {
-            $this->_responseSegment = null;
-        } else {
-            $this->_responseSegment = (string) $name;
-        }
+        $this->_responseSegment = null === $name ? null : (string) $name;
 
         return $this;
     }
@@ -740,7 +732,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      */
     public function setNoController($flag = true)
     {
-        $this->_noController = ($flag) ? true : false;
+        $this->_noController = $flag;
         return $this;
     }
 
@@ -762,7 +754,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      */
     public function setNeverController($flag = true)
     {
-        $this->_neverController = ($flag) ? true : false;
+        $this->_neverController = $flag;
         return $this;
     }
 
@@ -857,7 +849,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         // Format action name
         $action = $dispatcher->formatActionName($request->getActionName());
 
-        $params     = compact('module', 'controller', 'action');
+        $params     = ['module' => $module, 'controller' => $controller, 'action' => $action];
         foreach ($vars as $key => $value) {
             switch ($key) {
                 case 'module':

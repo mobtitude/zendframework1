@@ -251,11 +251,7 @@ class Zend_Dojo_Data implements ArrayAccess,Iterator,Countable
      */
     public function setLabel($label)
     {
-        if (null === $label) {
-            $this->_label = null;
-        } else {
-            $this->_label = (string) $label;
-        }
+        $this->_label = null === $label ? null : (string) $label;
         return $this;
     }
 
@@ -539,11 +535,7 @@ class Zend_Dojo_Data implements ArrayAccess,Iterator,Countable
         }
 
         if (is_object($item)) {
-            if (method_exists($item, 'toArray')) {
-                $item = $item->toArray();
-            } else {
-                $item = get_object_vars($item);
-            }
+            $item = method_exists($item, 'toArray') ? $item->toArray() : get_object_vars($item);
         }
 
         if ((null === $id) && !array_key_exists($identifier, $item)) {

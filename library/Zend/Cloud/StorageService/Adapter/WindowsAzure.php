@@ -86,11 +86,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
         }
 
         // Build Zend_Service_WindowsAzure_Storage_Blob instance
-        if (!isset($options[self::HOST])) {
-            $host = self::DEFAULT_HOST;
-        } else {
-            $host = $options[self::HOST];
-        }
+        $host = isset($options[self::HOST]) ? $options[self::HOST] : self::DEFAULT_HOST;
 
         if (!isset($options[self::ACCOUNT_NAME])) {
             throw new Zend_Cloud_StorageService_Exception('No Windows Azure account name provided.');

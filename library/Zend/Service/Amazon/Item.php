@@ -31,6 +31,14 @@
  */
 class Zend_Service_Amazon_Item
 {
+    public string $CurrencyCode;
+    public int $Amount;
+    public string $FormattedPrice;
+    /**
+     * @var mixed[]|mixed|string
+     */
+    public $tagName;
+    public array $EditorialReviews;
     /**
      * @var string
      */
@@ -146,9 +154,9 @@ class Zend_Service_Amazon_Item
         $result = $xpath->query('./az:ItemAttributes/az:*/text()', $dom);
         if ($result->length >= 1) {
             foreach ($result as $v) {
-                if (isset($this->{$v->parentNode->tagName})) {
+                if (property_exists($this, 'tagName') && $this->{$v->parentNode->tagName} !== null) {
                     if (is_array($this->{$v->parentNode->tagName})) {
-                        array_push($this->{$v->parentNode->tagName}, (string) $v->data);
+                        $this->{$v->parentNode->tagName}[] = (string) $v->data;
                     } else {
                         $this->{$v->parentNode->tagName} = array($this->{$v->parentNode->tagName}, (string) $v->data);
                     }
@@ -229,7 +237,7 @@ class Zend_Service_Amazon_Item
                     $this->Tracks[] = (string) $t->data;
                 }
             }
-        } else if ($result->length == 1) {
+        } elseif ($result->length == 1) {
             foreach ($xpath->query('./*/text()', $result->item(0)) as $t) {
                 $this->Tracks[] = (string) $t->data;
             }

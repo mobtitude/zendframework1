@@ -37,6 +37,7 @@ require_once 'Zend/Pdf/StringParser.php';
  */
 class Zend_Pdf_Parser
 {
+    public array $_refTable;
     /**
      * String parser
      *
@@ -265,7 +266,8 @@ class Zend_Pdf_Parser
                 for ($count2 = 0; $count2 < $entries; $count2++) {
                     if ($entryField1Size == 0) {
                         $type = 1;
-                    } else if ($entryField1Size == 1) { // Optimyze one-byte field case
+                    } elseif ($entryField1Size == 1) {
+                        // Optimyze one-byte field case
                         $type = ord($xrefStreamData[$streamOffset++]);
                     } else {
                         $type = Zend_Pdf_StringParser::parseIntFromStream($xrefStreamData, $streamOffset, $entryField1Size);
@@ -332,7 +334,7 @@ class Zend_Pdf_Parser
          * It doesn't correspond to the actual data, but is true when trailer will be used
          * as a trailer for next generated PDF section.
          */
-        $trailerObj->Prev = new Zend_Pdf_Element_Numeric($offset);
+        $trailerObj->setPrev(new Zend_Pdf_Element_Numeric($offset));
 
         return $trailerObj;
     }

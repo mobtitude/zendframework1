@@ -275,8 +275,8 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
      */
     public function setAmbiguityIdentity($flag)
     {
-        if (is_integer($flag)) {
-            $this->_ambiguityIdentity = (1 === $flag ? true : false);
+        if (is_int($flag)) {
+            $this->_ambiguityIdentity = (1 === $flag);
         } elseif (is_bool($flag)) {
             $this->_ambiguityIdentity = $flag;
         }
@@ -371,7 +371,7 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
             return $authResult;
         }
 
-        if (true === $this->getAmbiguityIdentity()) {
+        if ($this->getAmbiguityIdentity()) {
             $validIdentities = array ();
             $zendAuthCredentialMatchColumn = $this->_zendDb->foldCase('zend_auth_credential_match');
             foreach ($resultIdentities as $identity) {
@@ -381,9 +381,7 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
             }
             $resultIdentities = $validIdentities;
         }
-
-        $authResult = $this->_authenticateValidateResult(array_shift($resultIdentities));
-        return $authResult;
+        return $this->_authenticateValidateResult(array_shift($resultIdentities));
     }
 
     /**
@@ -507,7 +505,7 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
             $this->_authenticateResultInfo['code'] = Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND;
             $this->_authenticateResultInfo['messages'][] = 'A record with the supplied identity could not be found.';
             return $this->_authenticateCreateAuthResult();
-        } elseif (count($resultIdentities) > 1 && false === $this->getAmbiguityIdentity()) {
+        } elseif (count($resultIdentities) > 1 && !$this->getAmbiguityIdentity()) {
             $this->_authenticateResultInfo['code'] = Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS;
             $this->_authenticateResultInfo['messages'][] = 'More than one record matches the supplied identity.';
             return $this->_authenticateCreateAuthResult();

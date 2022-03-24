@@ -49,7 +49,7 @@ class Zend_Dojo_Form_Decorator_DijitForm extends Zend_Dojo_Form_Decorator_DijitC
     {
         $element = $this->getElement();
         $view    = $element->getView();
-        if (null === $view) {
+        if (!$view instanceof \Zend_View_Interface) {
             return $content;
         }
 

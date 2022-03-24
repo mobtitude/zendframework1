@@ -189,7 +189,7 @@ class Zend_Search_Lucene_Index_SegmentMerger
                     $bits = $fdtFile->readByte();
                     $fieldInfo = $segmentInfo->getField($fieldNum);
 
-                    if (!($bits & 2)) { // Text data
+                    if (($bits & 2) === 0) { // Text data
                         $storedFields[] =
                                  new Zend_Search_Lucene_Field($fieldInfo->name,
                                                               $fdtFile->readString(),
@@ -246,8 +246,7 @@ class Zend_Search_Lucene_Index_SegmentMerger
             $termDocs += $segmentInfo->currentTermPositions();
 
             if ($segmentInfoQueue->top() === null ||
-                $segmentInfoQueue->top()->currentTerm()->key() !=
-                            $segmentInfo->currentTerm()->key()) {
+                $segmentInfoQueue->top()->currentTerm()->key() != $segmentInfo->currentTerm()->key()) {
                 // We got new term
                 ksort($termDocs, SORT_NUMERIC);
 

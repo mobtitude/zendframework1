@@ -66,9 +66,9 @@ class Zend_Gdata_MimeBodyString
     public function read($bytesRequested)
     {
       $len = strlen($this->_sourceString);
-      if($this->_bytesRead == $len) {
+      if ($this->_bytesRead == $len) {
           return FALSE;
-      } else if($bytesRequested > $len - $this->_bytesRead) {
+      } elseif ($bytesRequested > $len - $this->_bytesRead) {
           $bytesRequested = $len - $this->_bytesRead;
       }
 

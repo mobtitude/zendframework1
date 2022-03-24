@@ -103,7 +103,7 @@ class Zend_Pdf_Resource_Image_Tiff extends Zend_Pdf_Resource_Image
      * @throws Zend_Pdf_Exception
      */
     protected function unpackBytes($type, $bytes) {
-        if(!isset($this->_endianType)) {
+        if(!($this->_endianType !== null)) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("The unpackBytes function can only be used after the endianness of the file is known");
         }
@@ -145,9 +145,9 @@ class Zend_Pdf_Resource_Image_Tiff extends Zend_Pdf_Resource_Image
         }
 
         $byteOrderIndicator = fread($imageFile, 2);
-        if($byteOrderIndicator == 'II') {
+        if ($byteOrderIndicator == 'II') {
             $this->_endianType = Zend_Pdf_Resource_Image_Tiff::TIFF_ENDIAN_LITTLE;
-        } else if($byteOrderIndicator == 'MM') {
+        } elseif ($byteOrderIndicator == 'MM') {
             $this->_endianType = Zend_Pdf_Resource_Image_Tiff::TIFF_ENDIAN_BIG;
         } else {
             require_once 'Zend/Pdf/Exception.php';
@@ -357,7 +357,7 @@ class Zend_Pdf_Resource_Image_Tiff extends Zend_Pdf_Resource_Image
             $ifdOffset = $this->unpackBytes(Zend_Pdf_Resource_Image_Tiff::UNPACK_TYPE_LONG, fread($imageFile, 4));
         }
 
-        if(!isset($this->_imageDataOffset) || !isset($this->_imageDataLength)) {
+        if(!($this->_imageDataOffset !== null) || !($this->_imageDataLength !== null)) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("TIFF: The image processed did not contain image data as expected.");
         }
@@ -368,7 +368,7 @@ class Zend_Pdf_Resource_Image_Tiff extends Zend_Pdf_Resource_Image
                 require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception("TIFF: The image contained multiple data offsets but not multiple data lengths. Tiff may be corrupt.");
             }
-            foreach($this->_imageDataOffset as $idx => $offset) {
+            foreach(array_keys($this->_imageDataOffset) as $idx) {
                 fseek($imageFile, $this->_imageDataOffset[$idx], SEEK_SET);
                 $imageDataBytes .= fread($imageFile, $this->_imageDataLength[$idx]);
             }
@@ -386,7 +386,7 @@ class Zend_Pdf_Resource_Image_Tiff extends Zend_Pdf_Resource_Image
         parent::__construct();
 
         $imageDictionary = $this->_resource->dictionary;
-        if(!isset($this->_width) || !isset($this->_width)) {
+        if(!($this->_width !== null) || !($this->_width !== null)) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("Problem reading tiff file. Tiff is probably corrupt.");
         }
@@ -411,7 +411,7 @@ class Zend_Pdf_Resource_Image_Tiff extends Zend_Pdf_Resource_Image
         $imageDictionary->Height           = new Zend_Pdf_Element_Numeric($this->_height);
         $imageDictionary->ColorSpace       = new Zend_Pdf_Element_Name($this->_colorSpace);
         $imageDictionary->BitsPerComponent = new Zend_Pdf_Element_Numeric($this->_bitsPerSample);
-        if(isset($this->_filter) && $this->_filter != 'None') {
+        if($this->_filter !== null && $this->_filter != 'None') {
             $imageDictionary->Filter = new Zend_Pdf_Element_Name($this->_filter);
         }
 

@@ -180,7 +180,7 @@ abstract class Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 	    }
 	    
 	    // Return
-	    if (count($returnValue) > 0) {
+	    if ($returnValue !== []) {
 	    	return '?' . implode('&', $returnValue);
 	    } else {
 	    	return '';

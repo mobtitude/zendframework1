@@ -181,7 +181,7 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
      */
     public function setMin($min)
     {
-        if (!is_string($min) and !is_numeric($min)) {
+        if (!is_string($min) && !is_numeric($min)) {
             require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception ('Invalid options to validator provided');
         }
@@ -311,12 +311,7 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
                 $this->_throw($file, self::TOO_BIG);
             }
         }
-
-        if (count($this->_messages) > 0) {
-            return false;
-        }
-
-        return true;
+        return !($this->_messages !== []);
     }
 
     /**

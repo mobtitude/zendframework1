@@ -213,7 +213,7 @@ class Zend_View_Helper_Navigation_Sitemap
      */
     public function getServerUrl()
     {
-        if (!isset($this->_serverUrl)) {
+        if (!($this->_serverUrl !== null)) {
             $this->_serverUrl = $this->view->serverUrl();
         }
 
@@ -337,7 +337,7 @@ class Zend_View_Helper_Navigation_Sitemap
             }
 
             // get absolute url from page
-            if (!$url = $this->url($page)) {
+            if (($url = $this->url($page)) === '' || ($url = $this->url($page)) === '0') {
                 // skip page if it has no url (rare case)
                 continue;
             }
@@ -361,7 +361,7 @@ class Zend_View_Helper_Navigation_Sitemap
                                                         'loc', $url));
 
             // add 'lastmod' element if a valid lastmod is set in page
-            if (isset($page->lastmod)) {
+            if (property_exists($page, 'lastmod') && $page->lastmod !== null) {
                 $lastmod = strtotime((string) $page->lastmod);
 
                 // prevent 1970-01-01...
@@ -379,7 +379,7 @@ class Zend_View_Helper_Navigation_Sitemap
             }
 
             // add 'changefreq' element if a valid changefreq is set in page
-            if (isset($page->changefreq)) {
+            if (property_exists($page, 'changefreq') && $page->changefreq !== null) {
                 $changefreq = $page->changefreq;
                 if (!$this->getUseSitemapValidators() ||
                     $changefreqValidator->isValid($changefreq)) {
@@ -391,7 +391,7 @@ class Zend_View_Helper_Navigation_Sitemap
             }
 
             // add 'priority' element if a valid priority is set in page
-            if (isset($page->priority)) {
+            if (property_exists($page, 'priority') && $page->priority !== null) {
                 $priority = $page->priority;
                 if (!$this->getUseSitemapValidators() ||
                     $priorityValidator->isValid($priority)) {
@@ -404,15 +404,13 @@ class Zend_View_Helper_Navigation_Sitemap
         }
 
         // validate using schema if specified
-        if ($this->getUseSchemaValidation()) {
-            if (!@$dom->schemaValidate(self::SITEMAP_XSD)) {
-                require_once 'Zend/View/Exception.php';
-                $e = new Zend_View_Exception(sprintf(
-                        'Sitemap is invalid according to XML Schema at "%s"',
-                        self::SITEMAP_XSD));
-                $e->setView($this->view);
-                throw $e;
-            }
+        if ($this->getUseSchemaValidation() && !@$dom->schemaValidate(self::SITEMAP_XSD)) {
+            require_once 'Zend/View/Exception.php';
+            $e = new Zend_View_Exception(sprintf(
+                    'Sitemap is invalid according to XML Schema at "%s"',
+                    self::SITEMAP_XSD));
+            $e->setView($this->view);
+            throw $e;
         }
 
         return $dom;

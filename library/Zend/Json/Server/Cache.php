@@ -50,12 +50,7 @@ class Zend_Json_Server_Cache extends Zend_Server_Cache
         {
             return false;
         }
-
-        if (0 === @file_put_contents($filename, $server->getServiceMap()->toJson())) {
-            return false;
-        }
-
-        return true;
+        return 0 !== @file_put_contents($filename, $server->getServiceMap()->toJson());
     }
 
     /**

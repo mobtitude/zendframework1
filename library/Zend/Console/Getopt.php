@@ -506,9 +506,8 @@ class Zend_Console_Getopt
          * @see Zend_Json
          */
         require_once 'Zend/Json.php';
-        $json = Zend_Json::encode($j);
 
-        return $json;
+        return Zend_Json::encode($j);
     }
 
     /**
@@ -530,8 +529,7 @@ class Zend_Console_Getopt
             }
             $optionsNode->appendChild($optionNode);
         }
-        $xml = $doc->saveXML();
-        return $xml;
+        return $doc->saveXML();
     }
 
     /**
@@ -698,7 +696,7 @@ class Zend_Console_Getopt
      */
     public function parse()
     {
-        if ($this->_parsed === true) {
+        if ($this->_parsed) {
             return;
         }
         $argv = $this->_argv;
@@ -714,9 +712,9 @@ class Zend_Console_Getopt
             }
             if (substr($argv[0], 0, 2) == '--') {
                 $this->_parseLongOption($argv);
-            } else if (substr($argv[0], 0, 1) == '-' && ('-' != $argv[0] || count($argv) >1))  {
+            } elseif (substr($argv[0], 0, 1) == '-' && ('-' != $argv[0] || count($argv) >1)) {
                 $this->_parseShortOptionCluster($argv);
-            } else if($this->_getoptConfig[self::CONFIG_PARSEALL]) {
+            } elseif ($this->_getoptConfig[self::CONFIG_PARSEALL]) {
                 $this->_remainingArgs[] = array_shift($argv);
             } else {
                 /*
@@ -740,9 +738,9 @@ class Zend_Console_Getopt
             if ($rule['param'] === 'required') {
                 $defined = false;
                 foreach ($rule['alias'] as $alias) {
-                    $defined = $defined === true ? true : array_key_exists($alias, $this->_options);
+                    $defined = $defined ? true : array_key_exists($alias, $this->_options);
                 }
-                if ($defined === false) {
+                if (!$defined) {
                     require_once 'Zend/Console/Getopt/Exception.php';
                     throw new Zend_Console_Getopt_Exception(
                         'Option "$alias" requires a parameter.',

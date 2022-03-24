@@ -93,10 +93,8 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                 if ($field->isTokenized) {
                     /** Zend_Search_Lucene_Analysis_Analyzer */
                     require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
-
                     $analyzer = Zend_Search_Lucene_Analysis_Analyzer::getDefault();
                     $analyzer->setInput($field->value, $field->encoding);
-
                     $position     = 0;
                     $tokenCounter = 0;
                     while (($token = $analyzer->nextToken()) !== null) {
@@ -110,14 +108,13 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                             $this->_termDictionary[$termKey] = $term;
                             $this->_termDocs[$termKey] = array();
                             $this->_termDocs[$termKey][$this->_docCount] = array();
-                        } else if (!isset($this->_termDocs[$termKey][$this->_docCount])) {
+                        } elseif (!isset($this->_termDocs[$termKey][$this->_docCount])) {
                             // Existing term, but new term entry
                             $this->_termDocs[$termKey][$this->_docCount] = array();
                         }
                         $position += $token->getPositionIncrement();
                         $this->_termDocs[$termKey][$this->_docCount][] = $position;
                     }
-
                     if ($tokenCounter == 0) {
                         // Field contains empty value. Treat it as non-indexed and non-tokenized
                         $field = clone($field);
@@ -128,7 +125,7 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                                                                                $document->boost*
                                                                                $field->boost ));
                     }
-                } else if (($fieldUtf8Value = $field->getUtf8Value()) == '') {
+                } elseif (($fieldUtf8Value = $field->getUtf8Value()) == '') {
                     // Field contains empty value. Treat it as non-indexed and non-tokenized
                     $field = clone($field);
                     $field->isIndexed = $field->isTokenized = false;
@@ -141,7 +138,7 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                         $this->_termDictionary[$termKey] = $term;
                         $this->_termDocs[$termKey] = array();
                         $this->_termDocs[$termKey][$this->_docCount] = array();
-                    } else if (!isset($this->_termDocs[$termKey][$this->_docCount])) {
+                    } elseif (!isset($this->_termDocs[$termKey][$this->_docCount])) {
                         // Existing term, but new term entry
                         $this->_termDocs[$termKey][$this->_docCount] = array();
                     }

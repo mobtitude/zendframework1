@@ -99,11 +99,7 @@ class Zend_Gdata_Calendar extends Zend_Gdata
     {
         if ($location == null) {
             $uri = self::CALENDAR_EVENT_FEED_URI;
-        } else if ($location instanceof Zend_Gdata_Query) {
-            $uri = $location->getQueryUrl();
-        } else {
-            $uri = $location;
-        }
+        } else $uri = $location instanceof Zend_Gdata_Query ? $location->getQueryUrl() : $location;
         return parent::getFeed($uri, 'Zend_Gdata_Calendar_EventFeed');
     }
 
@@ -118,11 +114,7 @@ class Zend_Gdata_Calendar extends Zend_Gdata
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Zend_Gdata_Query) {
-            $uri = $location->getQueryUrl();
-        } else {
-            $uri = $location;
-        }
+        } else $uri = $location instanceof Zend_Gdata_Query ? $location->getQueryUrl() : $location;
         return parent::getEntry($uri, 'Zend_Gdata_Calendar_EventEntry');
     }
 
@@ -149,11 +141,7 @@ class Zend_Gdata_Calendar extends Zend_Gdata
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
-        } else if ($location instanceof Zend_Gdata_Query) {
-            $uri = $location->getQueryUrl();
-        } else {
-            $uri = $location;
-        }
+        } else $uri = $location instanceof Zend_Gdata_Query ? $location->getQueryUrl() : $location;
         return parent::getEntry($uri,'Zend_Gdata_Calendar_ListEntry');
     }
 
@@ -162,8 +150,7 @@ class Zend_Gdata_Calendar extends Zend_Gdata
         if ($uri == null) {
             $uri = $this->_defaultPostUri;
         }
-        $newEvent = $this->insertEntry($event, $uri, 'Zend_Gdata_Calendar_EventEntry');
-        return $newEvent;
+        return $this->insertEntry($event, $uri, 'Zend_Gdata_Calendar_EventEntry');
     }
 
 }

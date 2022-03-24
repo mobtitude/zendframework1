@@ -51,11 +51,7 @@ class Zend_Markup_Renderer_Html_Url extends Zend_Markup_Renderer_Html_HtmlAbstra
      */
     public function convert(Zend_Markup_Token $token, $text)
     {
-        if ($token->hasAttribute('url')) {
-            $uri = $token->getAttribute('url');
-        } else {
-            $uri = $text;
-        }
+        $uri = $token->hasAttribute('url') ? $token->getAttribute('url') : $text;
 
         if (!preg_match('/^([a-z][a-z+\-.]*):/i', $uri)) {
             $uri = 'http://' . $uri;

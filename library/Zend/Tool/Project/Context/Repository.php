@@ -107,7 +107,7 @@ class Zend_Tool_Project_Context_Repository implements Countable
         $isTopLevel     = ($context instanceof Zend_Tool_Project_Context_System_TopLevelRestrictable);
         $isOverwritable = !($context instanceof Zend_Tool_Project_Context_System_NotOverwritable);
 
-        $index = (count($this->_contexts)) ? max(array_keys($this->_contexts)) + 1 : 1;
+        $index = (count($this->_contexts) > 0) ? max(array_keys($this->_contexts)) + 1 : 1;
 
         $normalName = $this->_normalizeName($context->getName());
 
@@ -142,7 +142,7 @@ class Zend_Tool_Project_Context_Repository implements Countable
     public function hasContext($name)
     {
         $name = $this->_normalizeName($name);
-        return (isset($this->_shortContextNames[$name]) ? true : false);
+        return (isset($this->_shortContextNames[$name]));
     }
 
     public function isSystemContext($name)

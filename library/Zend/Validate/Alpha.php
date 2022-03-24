@@ -74,11 +74,7 @@ class Zend_Validate_Alpha extends Zend_Validate_Abstract
         }
 
         if (is_array($allowWhiteSpace)) {
-            if (array_key_exists('allowWhiteSpace', $allowWhiteSpace)) {
-                $allowWhiteSpace = $allowWhiteSpace['allowWhiteSpace'];
-            } else {
-                $allowWhiteSpace = false;
-            }
+            $allowWhiteSpace = array_key_exists('allowWhiteSpace', $allowWhiteSpace) ? $allowWhiteSpace['allowWhiteSpace'] : false;
         }
 
         $this->allowWhiteSpace = (boolean) $allowWhiteSpace;

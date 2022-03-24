@@ -117,8 +117,7 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Fuzzy extends Zend_Search_Lu
 
                 $rewrittenSubquery = $subquery->rewrite($index);
 
-                if ( !($rewrittenSubquery instanceof Zend_Search_Lucene_Search_Query_Insignificant  ||
-                       $rewrittenSubquery instanceof Zend_Search_Lucene_Search_Query_Empty) ) {
+                if ( !$rewrittenSubquery instanceof Zend_Search_Lucene_Search_Query_Insignificant && !$rewrittenSubquery instanceof Zend_Search_Lucene_Search_Query_Empty ) {
                     $query->addSubquery($rewrittenSubquery);
                 }
 
@@ -270,11 +269,7 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Fuzzy extends Zend_Search_Lu
     public function __toString()
     {
         // It's used only for query visualisation, so we don't care about characters escaping
-        if ($this->_field !== null) {
-            $query = $this->_field . ':';
-        } else {
-            $query = '';
-        }
+        $query = $this->_field !== null ? $this->_field . ':' : '';
 
         $query .= $this->_word;
 

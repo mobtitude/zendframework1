@@ -137,28 +137,26 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
         $sql = $this->_stripQuoted($sql);
 
         // split into text and params
-        $this->_sqlSplit = preg_split('/(\?|\:[a-zA-Z0-9_]+)/',
+        $this->_sqlSplit = preg_split('/(\?|\:\w+)/',
             $sql, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
         // map params
         $this->_sqlParam = array();
         foreach ($this->_sqlSplit as $key => $val) {
             if ($val == '?') {
-                if ($this->_adapter->supportsParameters('positional') === false) {
+                if (!$this->_adapter->supportsParameters('positional')) {
                     /**
                      * @see Zend_Db_Statement_Exception
                      */
                     require_once 'Zend/Db/Statement/Exception.php';
                     throw new Zend_Db_Statement_Exception("Invalid bind-variable position '$val'");
                 }
-            } else if ($val[0] == ':') {
-                if ($this->_adapter->supportsParameters('named') === false) {
-                    /**
-                     * @see Zend_Db_Statement_Exception
-                     */
-                    require_once 'Zend/Db/Statement/Exception.php';
-                    throw new Zend_Db_Statement_Exception("Invalid bind-variable name '$val'");
-                }
+            } elseif ($val[0] == ':' && !$this->_adapter->supportsParameters('named')) {
+                /**
+                 * @see Zend_Db_Statement_Exception
+                 */
+                require_once 'Zend/Db/Statement/Exception.php';
+                throw new Zend_Db_Statement_Exception("Invalid bind-variable name '$val'");
             }
             $this->_sqlParam[] = $val;
         }
@@ -253,11 +251,11 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
             if ($intval >= 1 || $intval <= count($this->_sqlParam)) {
                 $position = $intval;
             }
-        } else if ($this->_adapter->supportsParameters('named')) {
+        } elseif ($this->_adapter->supportsParameters('named')) {
             if ($parameter[0] != ':') {
                 $parameter = ':' . $parameter;
             }
-            if (in_array($parameter, $this->_sqlParam) !== false) {
+            if (in_array($parameter, $this->_sqlParam)) {
                 $position = $parameter;
             }
         }
@@ -318,7 +316,7 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
         } else {
             $qp->bindParams($this->_bindParam);
         }
-        $qp->start($this->_queryId);
+        $qp->start();
 
         $retval = $this->_execute($params);
 

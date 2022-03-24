@@ -135,7 +135,7 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
      */
     public function columnCount()
     {
-        if (isset($this->_meta) && $this->_meta) {
+        if ($this->_meta !== null && $this->_meta) {
             return $this->_meta->field_count;
         }
         return 0;
@@ -192,7 +192,7 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
             $params = $this->_bindParam;
         }
         // send $params as input parameters to the statement
-        if ($params) {
+        if ($params !== []) {
             array_unshift($params, str_repeat('s', count($params)));
             $stmtParams = array();
             foreach ($params as $k => &$value) {
@@ -291,9 +291,7 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
         // dereference the result values, otherwise things like fetchAll()
         // return the same values for every entry (because of the reference).
         $values = array();
-        foreach ($this->_values as $key => $val) {
-            $values[] = $val;
-        }
+        $values = $this->_values;
 
         $row = false;
         switch ($style) {

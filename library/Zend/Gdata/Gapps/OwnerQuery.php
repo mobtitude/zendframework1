@@ -139,9 +139,7 @@ class Zend_Gdata_Gapps_OwnerQuery extends Zend_Gdata_Gapps_Query
         if ($this->_ownerEmail !== null) {
             $uri .= '/' . $this->_ownerEmail;
         }
-
-        $uri .= $this->getQueryString();
-        return $uri;
+        return $uri . $this->getQueryString();
     }
 
 }

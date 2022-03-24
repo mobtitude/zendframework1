@@ -40,6 +40,10 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
 {
 
     /**
+     * @var mixed|\Zend_Tool_Project_Profile_Resource_Container
+     */
+    public $_type;
+    /**
      * @var string
      */
     protected $_filesystemName = 'application.ini';
@@ -89,11 +93,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
     public function getContents()
     {
         if ($this->_content === null) {
-            if (file_exists($this->getPath())) {
-                $this->_content = file_get_contents($this->getPath());
-            } else {
-                $this->_content = $this->_getDefaultContents();
-            }
+            $this->_content = file_exists($this->getPath()) ? file_get_contents($this->getPath()) : $this->_getDefaultContents();
 
         }
 
@@ -118,7 +118,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
     {
         // null quote value means to auto-detect
         if ($quoteValue === null) {
-            $quoteValue = preg_match('#[\"\']#', $value) ? false : true;
+            $quoteValue = !(bool) preg_match('#[\"\']#', $value);
         }
 
         if ($quoteValue == true) {
@@ -142,7 +142,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
                 if (isset($contentLines[$contentLineIndex + 1][0]) && $contentLines[$contentLineIndex + 1][0] == '[') {
                     $newLines[] = $key . ' = ' . $value;
                     $insideSection = null;
-                } else if (!isset($contentLines[$contentLineIndex + 1])){
+                } elseif (!isset($contentLines[$contentLineIndex + 1])) {
                     $newLines[] = $key . ' = ' . $value;
                     $insideSection = null;
                 }
@@ -178,7 +178,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
             $lastDepth = $rii->getDepth();
 
             if (is_array($value)) {
-                array_push($configKeyNames, $name);
+                $configKeyNames[] = $name;
             } else {
                 $stringItems[] = implode('.', $configKeyNames) . '.' . $name;
                 $stringValues[] = $value;
@@ -205,11 +205,9 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
                 $insideSection = true;
             }
 
-            if ($insideSection) {
-                // if its blank, or a section heading
-                if ((trim($contentLine) == null) || ($contentLines[$contentLineIndex + 1][0] == '[')) {
-                    $insideSection = null;
-                }
+            // if its blank, or a section heading
+            if ($insideSection && ((trim($contentLine) == null) || ($contentLines[$contentLineIndex + 1][0] == '['))) {
+                $insideSection = null;
             }
 
             if (!preg_match('#' . $key . '\s?=.*#', (string) $contentLine)) {
@@ -238,7 +236,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
             $lastDepth = $rii->getDepth();
 
             if (is_array($value)) {
-                array_push($configKeyNames, $name);
+                $configKeyNames[] = $name;
             } else {
                 $stringItems[] = implode('.', $configKeyNames) . '.' . $name;
                 $stringValues[] = $value;
@@ -255,7 +253,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
     protected function _getDefaultContents()
     {
 
-        $contents =<<<EOS
+        return <<<EOS
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -278,8 +276,6 @@ phpSettings.display_errors = 1
 resources.frontController.params.displayExceptions = 1
 
 EOS;
-
-        return $contents;
     }
 
 }

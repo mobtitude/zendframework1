@@ -138,11 +138,7 @@ class Zend_Pdf_Cmap_SegmentToDelta extends Zend_Pdf_Cmap
              * If it is smaller, our target is probably above it, so move the
              * search range to the end of the segment list.
              */
-            if ($this->_searchRangeEndCode >= $characterCode) {
-                $searchIndex = $this->_searchRange;
-            } else {
-                $searchIndex = $this->_segmentCount;
-            }
+            $searchIndex = $this->_searchRangeEndCode >= $characterCode ? $this->_searchRange : $this->_segmentCount;
 
             /* Now do a binary search to find the first segment whose end code
              * is greater or equal to our character code. No matter the number
@@ -214,11 +210,7 @@ class Zend_Pdf_Cmap_SegmentToDelta extends Zend_Pdf_Cmap
             return Zend_Pdf_Cmap::MISSING_CHARACTER_GLYPH;
         }
 
-        if ($this->_searchRangeEndCode >= $characterCode) {
-            $searchIndex = $this->_searchRange;
-        } else {
-            $searchIndex = $this->_segmentCount;
-        }
+        $searchIndex = $this->_searchRangeEndCode >= $characterCode ? $this->_searchRange : $this->_segmentCount;
 
         for ($i = 1; $i <= $this->_searchIterations; $i++) {
             if ($this->_segmentTableEndCodes[$searchIndex] >= $characterCode) {

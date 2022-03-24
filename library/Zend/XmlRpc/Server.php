@@ -117,6 +117,10 @@ require_once 'Zend/Server/Reflection/Method.php';
 class Zend_XmlRpc_Server extends Zend_Server_Abstract
 {
     /**
+     * @var mixed|\Zend_XmlRpc_Server_System
+     */
+    public $_system;
+    /**
      * Character encoding
      * @var string
      */
@@ -358,11 +362,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
     public function loadFunctions($definition)
     {
         if (!is_array($definition) && (!$definition instanceof Zend_Server_Definition)) {
-            if (is_object($definition)) {
-                $type = get_class($definition);
-            } else {
-                $type = gettype($definition);
-            }
+            $type = is_object($definition) ? get_class($definition) : gettype($definition);
             require_once 'Zend/XmlRpc/Server/Exception.php';
             throw new Zend_XmlRpc_Server_Exception('Unable to load server definition; must be an array or Zend_Server_Definition, received ' . $type, 612);
         }
@@ -458,8 +458,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
      */
     public function setResponseClass($class)
     {
-        if (!class_exists($class) or
-            ($c = new ReflectionClass($class) and !$c->isSubclassOf('Zend_XmlRpc_Response'))) {
+        if (!class_exists($class) || ($c = new ReflectionClass($class)) && !$c->isSubclassOf('Zend_XmlRpc_Response')) {
 
             require_once 'Zend/XmlRpc/Server/Exception.php';
             throw new Zend_XmlRpc_Server_Exception('Invalid response class');
@@ -565,7 +564,7 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
         $info     = $this->_table->getMethod($method);
         $params   = $request->getParams();
         $argv     = $info->getInvokeArguments();
-        if (0 < count($argv) and $this->sendArgumentsToAllMethods()) {
+        if ([] !== $argv && $this->sendArgumentsToAllMethods()) {
             $params = array_merge($params, $argv);
         }
 

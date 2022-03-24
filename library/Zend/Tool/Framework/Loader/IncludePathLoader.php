@@ -68,7 +68,7 @@ class Zend_Tool_Framework_Loader_IncludePathLoader extends Zend_Tool_Framework_L
 
             // ensure that we only traverse a single version of Zend Framework on all include paths
             if (file_exists($realIncludePath . '/Zend/Tool/Framework/Loader/IncludePathLoader.php')) {
-                if ($isZendTraversed === false) {
+                if (!$isZendTraversed) {
                     $isZendTraversed = true;
                 } else {
                     // use the deny directory pattern that includes the path to 'Zend', it will not be accepted

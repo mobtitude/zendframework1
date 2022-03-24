@@ -105,11 +105,7 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
     {
         if (null === $this->_dijitParams) {
             $attribs = $this->getElement()->getAttribs();
-            if (array_key_exists('dijitParams', $attribs)) {
-                $this->_dijitParams = $attribs['dijitParams'];
-            } else {
-                $this->_dijitParams = array();
-            }
+            $this->_dijitParams = array_key_exists('dijitParams', $attribs) ? $attribs['dijitParams'] : array();
 
             $options = $this->getOptions();
             if (array_key_exists('dijitParams', $options)) {
@@ -135,10 +131,8 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
     {
         if (null === $this->_title) {
             $title = null;
-            if (null !== ($element = $this->getElement())) {
-                if (method_exists($element, 'getLegend')) {
-                    $title = $element->getLegend();
-                }
+            if (null !== ($element = $this->getElement()) && method_exists($element, 'getLegend')) {
+                $title = $element->getLegend();
             }
             if (empty($title) && (null !== ($title = $this->getOption('legend')))) {
                 $this->removeOption('legend');
@@ -170,7 +164,7 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
     {
         $element = $this->getElement();
         $view    = $element->getView();
-        if (null === $view) {
+        if (!$view instanceof \Zend_View_Interface) {
             return $content;
         }
 

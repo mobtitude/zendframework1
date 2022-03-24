@@ -91,15 +91,12 @@ abstract class Zend_Loader_AutoloaderFactory
         foreach ($options as $class => $options) {
             if (!isset(self::$loaders[$class])) {
                 // Check class map autoloader
-                if ($class == self::CLASS_MAP_AUTOLOADER) {
-                    if (!class_exists(self::CLASS_MAP_AUTOLOADER)) {
-                        // Extract the filename from the classname
-                        $classMapLoader = substr(
-                            strrchr(self::CLASS_MAP_AUTOLOADER, '_'), 1
-                        );
-
-                        require_once dirname(__FILE__) . "/$classMapLoader.php";
-                    }
+                if ($class == self::CLASS_MAP_AUTOLOADER && !class_exists(self::CLASS_MAP_AUTOLOADER)) {
+                    // Extract the filename from the classname
+                    $classMapLoader = substr(
+                        strrchr(self::CLASS_MAP_AUTOLOADER, '_'), 1
+                    );
+                    require_once dirname(__FILE__) . "/$classMapLoader.php";
                 }
 
                 // Autoload with standard autoloader
@@ -114,14 +111,12 @@ abstract class Zend_Loader_AutoloaderFactory
 
                 // unfortunately is_subclass_of is broken on some 5.3 versions
                 // additionally instanceof is also broken for this use case
-                if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
-                        if (!is_subclass_of($class, 'Zend_Loader_SplAutoloader')) {
-                        require_once 'Exception/InvalidArgumentException.php';
-                        throw new Zend_Loader_Exception_InvalidArgumentException(sprintf(
-                            'Autoloader class %s must implement Zend\\Loader\\SplAutoloader', 
-                            $class
-                        ));
-                    }
+                if (version_compare(PHP_VERSION, '5.3.7', '>=') && !is_subclass_of($class, 'Zend_Loader_SplAutoloader')) {
+                    require_once 'Exception/InvalidArgumentException.php';
+                    throw new Zend_Loader_Exception_InvalidArgumentException(sprintf(
+                        'Autoloader class %s must implement Zend\\Loader\\SplAutoloader', 
+                        $class
+                    ));
                 }
 
                 if ($class === self::STANDARD_AUTOLOADER) {

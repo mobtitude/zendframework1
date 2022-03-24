@@ -47,15 +47,11 @@ class Zend_Oauth_Token_AuthorizedRequest extends Zend_Oauth_Token
         if ($data !== null) {
             $this->_data = $data;
             $params = $this->_parseData();
-            if (count($params) > 0) {
+            if ($params !== []) {
                 $this->setParams($params);
             }
         }
-        if ($utility !== null) {
-            $this->_httpUtility = $utility;
-        } else {
-            $this->_httpUtility = new Zend_Oauth_Http_Utility;
-        }
+        $this->_httpUtility = $utility !== null ? $utility : new Zend_Oauth_Http_Utility;
     }
 
     /**
@@ -75,12 +71,8 @@ class Zend_Oauth_Token_AuthorizedRequest extends Zend_Oauth_Token
      */
     public function isValid()
     {
-        if (isset($this->_params[self::TOKEN_PARAM_KEY])
-            && !empty($this->_params[self::TOKEN_PARAM_KEY])
-        ) {
-            return true;
-        }
-        return false;
+        return isset($this->_params[self::TOKEN_PARAM_KEY])
+            && !empty($this->_params[self::TOKEN_PARAM_KEY]);
     }
 
     /**

@@ -63,15 +63,14 @@ class Zend_View_Helper_DeclareVars extends Zend_View_Helper_Abstract
      * @param string|array variable number of arguments, all string names of variables to test
      * @return void
      */
-    public function declareVars()
+    public function declareVars(...$args)
     {
-        $args = func_get_args();
         foreach($args as $key) {
             if (is_array($key)) {
                 foreach ($key as $name => $value) {
                     $this->_declareVar($name, $value);
                 }
-            } else if (!isset($view->$key)) {
+            } elseif (!isset($view->$key)) {
                 $this->_declareVar($key);
             }
         }

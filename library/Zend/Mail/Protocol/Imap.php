@@ -57,7 +57,7 @@ class Zend_Mail_Protocol_Imap
      */
     function __construct($host = '', $port = null, $ssl = false)
     {
-        if ($host) {
+        if ($host !== '' && $host !== '0') {
             $this->connect($host, $port, $ssl);
         }
     }
@@ -204,16 +204,14 @@ class Zend_Mail_Protocol_Imap
         while (($pos = strpos($line, ' ')) !== false) {
             $token = substr($line, 0, $pos);
             while ($token[0] == '(') {
-                array_push($stack, $tokens);
+                $stack[] = $tokens;
                 $tokens = array();
                 $token = substr($token, 1);
             }
-            if ($token[0] == '"') {
-                if (preg_match('%^\(*"((.|\\\\|\\")*?)" *%', $line, $matches)) {
-                    $tokens[] = $matches[1];
-                    $line = substr($line, strlen((string) $matches[0]));
-                    continue;
-                }
+            if ($token[0] == '"' && preg_match('%^\(*"((.|\\\\|\\")*?)" *%', $line, $matches)) {
+                $tokens[] = $matches[1];
+                $line = substr($line, strlen((string) $matches[0]));
+                continue;
             }
             if ($token[0] == '{') {
                 $endPos = strpos($token, '}');
@@ -283,11 +281,7 @@ class Zend_Mail_Protocol_Imap
     public function readLine(&$tokens = array(), $wantedTag = '*', $dontParse = false)
     {
         $line = $this->_nextTaggedLine($tag);
-        if (!$dontParse) {
-            $tokens = $this->_decodeLine($line);
-        } else {
-            $tokens = $line;
-        }
+        $tokens = $dontParse ? $line : $this->_decodeLine($line);
 
         // if tag is wanted tag we might be at the end of a multiline response
         return $tag == $wantedTag;
@@ -317,8 +311,8 @@ class Zend_Mail_Protocol_Imap
         }
         // last line has response code
         if ($tokens[0] == 'OK') {
-            return $lines ? $lines : true;
-        } else if ($tokens[0] == 'NO'){
+            return $lines !== [] ? $lines : true;
+        } elseif ($tokens[0] == 'NO') {
             return false;
         }
         return null;
@@ -344,7 +338,7 @@ class Zend_Mail_Protocol_Imap
 
         foreach ($tokens as $token) {
             if (is_array($token)) {
-                if (@fputs($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
+                if (@fwrite($this->_socket, $line . ' ' . $token[0] . "\r\n") === false) {
                     /**
                      * @see Zend_Mail_Protocol_Exception
                      */
@@ -364,7 +358,7 @@ class Zend_Mail_Protocol_Imap
             }
         }
 
-        if (@fputs($this->_socket, $line . "\r\n") === false) {
+        if (@fwrite($this->_socket, $line . "\r\n") === false) {
             /**
              * @see Zend_Mail_Protocol_Exception
              */
@@ -385,9 +379,8 @@ class Zend_Mail_Protocol_Imap
     public function requestAndResponse($command, $tokens = array(), $dontParse = false)
     {
         $this->sendRequest($command, $tokens, $tag);
-        $response = $this->readResponse($tag, $dontParse);
 
-        return $response;
+        return $this->readResponse($tag, $dontParse);
     }
 
     /**
@@ -570,13 +563,9 @@ class Zend_Mail_Protocol_Imap
     {
         if (is_array($from)) {
             $set = implode(',', $from);
-        } else if ($to === null) {
+        } elseif ($to === null) {
             $set = (int)$from;
-        } else if ($to === INF) {
-            $set = (int)$from . ':*';
-        } else {
-            $set = (int)$from . ':' . (int)$to;
-        }
+        } else $set = $to === INF ? (int)$from . ':*' : (int)$from . ':' . (int)$to;
 
         $items = (array)$items;
         $itemList = $this->escapeList($items);
@@ -695,7 +684,7 @@ class Zend_Mail_Protocol_Imap
         $result = $this->requestAndResponse('STORE', array($set, $item, $flags), $silent);
 
         if ($silent) {
-            return $result ? true : false;
+            return (bool) $result;
         }
 
         $tokens = $result;

@@ -108,7 +108,7 @@ abstract class Zend_Service_Ebay_Finding_Abstract
     protected function _initXPath()
     {
         $document = $this->_dom->ownerDocument;
-        if (!isset($document->ebayFindingXPath)) {
+        if (!(property_exists($document, 'ebayFindingXPath') && $document->ebayFindingXPath !== null)) {
             $xpath = new DOMXPath($document);
             foreach (Zend_Service_Ebay_Finding::getXmlNamespaces() as $alias => $uri) {
                 $xpath->registerNamespace($alias, $uri);
@@ -154,12 +154,12 @@ abstract class Zend_Service_Ebay_Finding_Abstract
         }
 
         // array
-        if ($array) {
+        if ($array !== '' && $array !== '0') {
             return $values;
         }
 
         // single value
-        if (count($values)) {
+        if ($values !== []) {
             return reset($values);
         }
 

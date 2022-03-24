@@ -52,6 +52,7 @@ require_once "Zend/Http/Header/HeaderValue.php";
 class Zend_Http_Header_SetCookie
 {
 
+    public string $type;
     /**
      * Cookie name
      *
@@ -246,11 +247,7 @@ class Zend_Http_Header_SetCookie
         }
 
         $value = $this->getValue();
-        if (strpos($value,'"')!==false) {
-            $value = '"'.urlencode(str_replace('"', '', $value)).'"';
-        } else {
-            $value = urlencode($value);
-        }
+        $value = strpos($value,'"')!==false ? '"'.urlencode(str_replace('"', '', $value)).'"' : urlencode($value);
         $fieldValue = $this->getName() . '=' . $value;
 
         $version = $this->getVersion();
@@ -264,17 +261,17 @@ class Zend_Http_Header_SetCookie
         }
 
         $expires = $this->getExpires();
-        if ($expires) {
+        if ($expires !== 0) {
             $fieldValue .= '; Expires=' . $expires;
         }
 
         $domain = $this->getDomain();
-        if ($domain) {
+        if ($domain !== '' && $domain !== '0') {
             $fieldValue .= '; Domain=' . $domain;
         }
 
         $path = $this->getPath();
-        if ($path) {
+        if ($path !== '' && $path !== '0') {
             $fieldValue .= '; Path=' . $path;
         }
 

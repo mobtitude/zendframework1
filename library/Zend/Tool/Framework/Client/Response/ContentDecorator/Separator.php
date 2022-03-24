@@ -75,7 +75,7 @@ class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
     public function decorate($content, $decoratorValue)
     {
         $run = 1;
-        if (is_bool($decoratorValue) && $decoratorValue === false) {
+        if (is_bool($decoratorValue) && !$decoratorValue) {
             return $content;
         }
 

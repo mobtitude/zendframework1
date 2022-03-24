@@ -32,6 +32,10 @@ class Zend_Tool_Project_Profile_Iterator_ContextFilter extends RecursiveFilterIt
 {
 
     /**
+     * @var mixed|\ReflectionClass
+     */
+    public $ref;
+    /**
      * @var array
      */
     protected $_acceptTypes = array();
@@ -66,7 +70,7 @@ class Zend_Tool_Project_Profile_Iterator_ContextFilter extends RecursiveFilterIt
     {
         parent::__construct($iterator);
         $this->_rawOptions = $options;
-        if ($options) {
+        if ($options !== []) {
             $this->setOptions($options);
         }
     }

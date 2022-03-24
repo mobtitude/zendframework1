@@ -53,9 +53,7 @@ class Zend_Tool_Project_Provider_ProjectProvider extends Zend_Tool_Project_Provi
         $profileSearchParams = array();
         $profileSearchParams[] = 'projectProvidersDirectory';
 
-        $projectProvider = $profile->createResourceAt($profileSearchParams, 'projectProviderFile', array('projectProviderName' => $projectProviderName, 'actionNames' => $actionNames));
-
-        return $projectProvider;
+        return $profile->createResourceAt($profileSearchParams, 'projectProviderFile', array('projectProviderName' => $projectProviderName, 'actionNames' => $actionNames));
     }
 
     /**

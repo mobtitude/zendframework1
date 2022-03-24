@@ -259,11 +259,7 @@ class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
         $this->_connect();
         $newbind = array();
         if (is_array($bind)) {
-            foreach ($bind as $name => $value) {
-                if($value !== null) {
-                    $newbind[$name] = $value;
-                }
-            }
+            $newbind = array_filter($bind, fn($value) => $value !== null);
         }
 
         return parent::insert($table, $newbind);
@@ -304,9 +300,7 @@ class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
             return $this->lastSequenceId($sequenceName);
         }
 
-        $id = $this->getConnection()->lastInsertId();
-
-        return $id;
+        return $this->getConnection()->lastInsertId();
     }
 
     /**
@@ -344,9 +338,9 @@ class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
         try {
             $stmt = $this->query('SELECT service_level, fixpack_num FROM TABLE (sysproc.env_get_inst_info()) as INSTANCEINFO');
             $result = $stmt->fetchAll(Zend_Db::FETCH_NUM);
-            if (count($result)) {
+            if ($result !== []) {
                 $matches = null;
-                if (preg_match('/((?:[0-9]{1,2}\.){1,3}[0-9]{1,2})/', (string) $result[0][0], $matches)) {
+                if (preg_match('/((?:\d{1,2}\.){1,3}\d{1,2})/', (string) $result[0][0], $matches)) {
                     return $matches[1];
                 } else {
                     return null;

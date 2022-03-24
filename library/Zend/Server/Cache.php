@@ -67,12 +67,7 @@ class Zend_Server_Cache
             }
             $methods = $definition;
         }
-
-        if (0 === @file_put_contents($filename, serialize($methods))) {
-            return false;
-        }
-
-        return true;
+        return 0 !== @file_put_contents($filename, serialize($methods));
     }
 
     /**

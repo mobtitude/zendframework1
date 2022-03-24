@@ -119,7 +119,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         }
         $result = $this->_query($sql);
         $row = @sqlite_fetch_array($result);
-        if ($row) {
+        if ($row !== []) {
             return $row['content'];
         }
         return false;
@@ -137,7 +137,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         $sql = "SELECT lastModified FROM cache WHERE id='$id' AND (expire=0 OR expire>" . time() . ')';
         $result = $this->_query($sql);
         $row = @sqlite_fetch_array($result);
-        if ($row) {
+        if ($row !== []) {
             return ((int) $row['lastModified']);
         }
         return false;
@@ -162,11 +162,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         $lifetime = $this->getLifetime($specificLifetime);
         $data = @sqlite_escape_string($data);
         $mktime = time();
-        if ($lifetime === null) {
-            $expire = 0;
-        } else {
-            $expire = $mktime + $lifetime;
-        }
+        $expire = $lifetime === null ? 0 : $mktime + $lifetime;
         $this->_query("DELETE FROM cache WHERE id='$id'");
         $sql = "INSERT INTO cache (id, content, lastModified, expire) VALUES ('$id', '$data', $mktime, $expire)";
         $res = $this->_query($sql);
@@ -285,9 +281,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
             }
         }
         $result = array();
-        foreach ($ids as $id) {
-            $result[] = $id;
-        }
+        $result = $ids;
         return $result;
     }
 
@@ -354,9 +348,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
             }
         }
         $result = array();
-        foreach ($ids as $id) {
-            $result[] = $id;
-        }
+        $result = $ids;
         return $result;
     }
 
@@ -581,10 +573,10 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         $result = $this->_query("SELECT num FROM version");
         if (!$result) return false;
         $row = @sqlite_fetch_array($result);
-        if (!$row) {
+        if ($row === []) {
             return false;
         }
-        if (((int) $row['num']) != 1) {
+        if ((int) $row['num'] != 1) {
             // old cache structure
             $this->_log('Zend_Cache_Backend_Sqlite::_checkStructureVersion() : old cache structure version detected => the cache is going to be dropped');
             return false;

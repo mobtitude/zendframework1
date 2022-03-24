@@ -58,6 +58,10 @@ require_once 'Zend/Crypt/Hmac.php';
  */
 class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
 {
+    /**
+     * @var mixed|\Zend_Uri
+     */
+    public $_endpoint;
     /* Notes */
     // TODO SSL is required
 
@@ -158,7 +162,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
         // Return an array of arrays
         $attributes = array();
         foreach($attributeNodes as $attributeNode) {
-            $name       = (string)$attributeNode->Name;
+            $name       = (string)$attributeNode->getName();
             $valueNodes = $attributeNode->Value;
             $data       = null;
             if (is_array($valueNodes) && !empty($valueNodes)) {
@@ -391,10 +395,10 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
 
         $attributes = array();
         foreach ($xml->SelectResult->Item as $item) {
-            $itemName = (string)$item->Name;
+            $itemName = (string)$item->getName();
 
             foreach ($item->Attribute as $attribute) {
-                $attributeName = (string)$attribute->Name;
+                $attributeName = (string)$attribute->getName();
 
                 $values = array();
                 foreach ($attribute->Value as $value) {
@@ -472,11 +476,11 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
             foreach ($params as $key => $value) {
                 $params_out[] = rawurlencode($key)."=".rawurlencode($value);
             }
-            $request->setRawData(join('&', $params_out), Zend_Http_Client::ENC_URLENCODED);
+            $request->setRawData(implode('&', $params_out), Zend_Http_Client::ENC_URLENCODED);
             $httpResponse = $request->request();
         } catch (Zend_Http_Client_Exception $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
-            throw new Zend_Service_Amazon_SimpleDb_Exception($message, $zhce->getCode());
+            throw new Zend_Service_Amazon_SimpleDb_Exception($message, $zhce->getCode(), $zhce);
         }
         $response = new Zend_Service_Amazon_SimpleDb_Response($httpResponse);
         $this->_checkForErrors($response);

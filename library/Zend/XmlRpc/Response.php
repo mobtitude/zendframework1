@@ -207,7 +207,7 @@ class Zend_XmlRpc_Response
         }
 
         try {
-            if (!isset($xml->params) || !isset($xml->params->param) || !isset($xml->params->param->value)) {
+            if (!(property_exists($xml, 'params') && $xml->params !== null) || !(property_exists($xml->params, 'param') && $xml->params->param !== null) || !(property_exists($xml->params->param, 'value') && $xml->params->param->value !== null)) {
                 require_once 'Zend/XmlRpc/Value/Exception.php';
                 throw new Zend_XmlRpc_Value_Exception('Missing XML-RPC value in XML');
             }

@@ -95,8 +95,7 @@ abstract class Zend_Controller_Response_Abstract
     {
         $filtered = str_replace(array('-', '_'), ' ', (string) $name);
         $filtered = ucwords(strtolower($filtered));
-        $filtered = str_replace(' ', '-', $filtered);
-        return $filtered;
+        return str_replace(' ', '-', $filtered);
     }
 
     /**
@@ -192,7 +191,7 @@ abstract class Zend_Controller_Response_Abstract
      */
     public function clearHeader($name)
     {
-        if (! count($this->_headers)) {
+        if ($this->_headers === []) {
             return $this;
         }
 
@@ -252,7 +251,7 @@ abstract class Zend_Controller_Response_Abstract
      */
     public function clearRawHeader($headerRaw)
     {
-        if (! count($this->_headersRaw)) {
+        if ($this->_headersRaw === []) {
             return $this;
         }
 
@@ -288,11 +287,7 @@ abstract class Zend_Controller_Response_Abstract
             throw new Zend_Controller_Response_Exception('Invalid HTTP response code');
         }
 
-        if ((300 <= $code) && (307 >= $code)) {
-            $this->_isRedirect = true;
-        } else {
-            $this->_isRedirect = false;
-        }
+        $this->_isRedirect = (300 <= $code) && (307 >= $code);
 
         $this->_httpResponseCode = $code;
         return $this;
@@ -339,7 +334,7 @@ abstract class Zend_Controller_Response_Abstract
         // Only check if we can send headers if we have headers to send
         if (count($this->_headersRaw) || count($this->_headers) || (200 != $this->_httpResponseCode)) {
             $this->canSendHeaders(true);
-        } elseif (200 == $this->_httpResponseCode) {
+        } elseif (200 === $this->_httpResponseCode) {
             // Haven't changed the response code, and we have no headers
             return $this;
         }
@@ -459,11 +454,11 @@ abstract class Zend_Controller_Response_Abstract
      */
     public function getBody($spec = false)
     {
-        if (false === $spec) {
+        if (!$spec) {
             ob_start();
             $this->outputBody();
             return ob_get_clean();
-        } elseif (true === $spec) {
+        } elseif ($spec) {
             return $this->_body;
         } elseif (is_string($spec) && isset($this->_body[$spec])) {
             return $this->_body[$spec];
@@ -566,7 +561,7 @@ abstract class Zend_Controller_Response_Abstract
             $this->_body = $ins + $this->_body;
         } elseif ($loc >= (count($this->_body))) {
             // If location of key is maximal, we're appending
-            $this->_body = $this->_body + $ins;
+            $this->_body += $ins;
         } else {
             // Otherwise, insert at location specified
             $pre  = array_slice($this->_body, 0, $loc);
@@ -751,7 +746,7 @@ abstract class Zend_Controller_Response_Abstract
     public function renderExceptions($flag = null)
     {
         if (null !== $flag) {
-            $this->_renderExceptions = $flag ? true : false;
+            $this->_renderExceptions = $flag;
         }
 
         return $this->_renderExceptions;

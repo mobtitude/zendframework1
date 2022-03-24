@@ -121,14 +121,14 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
         $content = 0;
         if (isset($_SERVER['CONTENT_LENGTH'])) {
             $content = $_SERVER['CONTENT_LENGTH'];
-        } else if (!empty($_POST)) {
+        } elseif (!empty($_POST)) {
             $content = serialize($_POST);
         }
 
         // Workaround for a PHP error returning empty $_FILES when form data exceeds php settings
         if (empty($this->_files) && ($content > 0)) {
             if (is_array($files)) {
-                if (0 === count($files)) {
+                if ([] === $files) {
                     return false;
                 }
 
@@ -306,7 +306,7 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
      */
     public static function getProgress($id = null)
     {
-        if (!function_exists('apc_fetch') and !function_exists('uploadprogress_get_info')) {
+        if (!function_exists('apc_fetch') && !function_exists('uploadprogress_get_info')) {
             require_once 'Zend/File/Transfer/Exception.php';
             throw new Zend_File_Transfer_Exception('Neither APC nor uploadprogress extension installed');
         }
@@ -352,12 +352,11 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
 
         if (!empty($id)) {
             if (self::isApcAvailable()) {
-
                 $call = call_user_func(self::$_callbackApc, ini_get('apc.rfc1867_prefix') . $id);
                 if (is_array($call)) {
                     $status = $call + $status;
                 }
-            } else if (self::isUploadProgressAvailable()) {
+            } elseif (self::isUploadProgressAvailable()) {
                 $call = call_user_func(self::$_callbackUploadProgress, $id);
                 if (is_array($call)) {
                     $status = $call + $status;
@@ -373,7 +372,7 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
             if (!is_array($call)) {
                 $status['done']    = true;
                 $status['message'] = 'Failure while retrieving the upload progress';
-            } else if (!empty($status['cancel_upload'])) {
+            } elseif (!empty($status['cancel_upload'])) {
                 $status['done']    = true;
                 $status['message'] = 'The upload has been canceled';
             } else {

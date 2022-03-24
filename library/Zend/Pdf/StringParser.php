@@ -265,11 +265,7 @@ class Zend_Pdf_StringParser
         } else {
             $start = $this->offset;
             $compare = '';
-            if( version_compare( phpversion(), '5.2.5' ) >= 0) {
-                $compare = "()<>[]{}/%\x00\t\n\f\r ";
-            } else {
-                $compare = "()<>[]{}/%\x00\t\n\r ";
-            }
+            $compare = version_compare( phpversion(), '5.2.5' ) >= 0 ? "()<>[]{}/%\x00\t\n\f\r " : "()<>[]{}/%\x00\t\n\r ";
 
             $this->offset += strcspn($this->data, $compare, $this->offset);
 
@@ -331,9 +327,9 @@ class Zend_Pdf_StringParser
             default:
                 if (strcasecmp($nextLexeme, 'true') == 0) {
                     return ($this->_elements[] = new Zend_Pdf_Element_Boolean(true));
-                } else if (strcasecmp($nextLexeme, 'false') == 0) {
+                } elseif (strcasecmp($nextLexeme, 'false') == 0) {
                     return ($this->_elements[] = new Zend_Pdf_Element_Boolean(false));
-                } else if (strcasecmp($nextLexeme, 'null') == 0) {
+                } elseif (strcasecmp($nextLexeme, 'null') == 0) {
                     return ($this->_elements[] = new Zend_Pdf_Element_Null());
                 }
 
@@ -492,11 +488,7 @@ class Zend_Pdf_StringParser
     {
         $start = $this->offset;
 
-        if ($nextLexeme === null) {
-            $objNum = $this->readLexeme();
-        } else {
-            $objNum = $nextLexeme;
-        }
+        $objNum = $nextLexeme === null ? $this->readLexeme() : $nextLexeme;
         if (!ctype_digit($objNum)) { // it's not a reference
             $this->offset = $start;
             return null;
@@ -514,9 +506,7 @@ class Zend_Pdf_StringParser
             return null;
         }
 
-        $ref = new Zend_Pdf_Element_Reference((int)$objNum, (int)$genNum, $this->_context, $this->_objFactory->resolve());
-
-        return $ref;
+        return new Zend_Pdf_Element_Reference((int)$objNum, (int)$genNum, $this->_context, $this->_objFactory->resolve());
     }
 
 
@@ -618,9 +608,9 @@ class Zend_Pdf_StringParser
          * This restriction gives the possibility to recognize all cases exactly
          */
         if ($this->data[$this->offset] == "\r" &&
-            $this->data[$this->offset + 1] == "\n"    ) {
+            $this->data[$this->offset + 1] == "\n") {
             $this->offset += 2;
-        } else if ($this->data[$this->offset] == "\n"    ) {
+        } elseif ($this->data[$this->offset] == "\n") {
             $this->offset++;
         } else {
             require_once 'Zend/Pdf/Exception.php';
