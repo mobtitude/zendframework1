@@ -312,7 +312,7 @@ class Zend_Mail_Protocol_Smtp extends Zend_Mail_Protocol_Abstract
         $this->_send('DATA');
         $this->_expect(354, 120); // Timeout set for 2 minutes as per RFC 2821 4.5.3.2
 
-        foreach (explode(Zend_Mime::LINEEND, $data) as $line) {
+        foreach (explode(Zend_Mime::LINEEND, (string) $data) as $line) {
             if (strpos($line, '.') === 0) {
                 // Escape lines prefixed with a '.'
                 $line = '.' . $line;

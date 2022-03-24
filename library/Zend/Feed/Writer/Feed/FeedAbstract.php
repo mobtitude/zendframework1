@@ -324,11 +324,11 @@ class Zend_Feed_Writer_Feed_FeedAbstract
             $nvalid = false;
             $date = $matches['date'];
             $d6 = strtotime($date);
-            if ((strlen($date) == 4) && $date <= date('Y')) {
+            if ((strlen((string) $date) == 4) && $date <= date('Y')) {
                 $dvalid = true;
-            } elseif ((strlen($date) == 7) && ($d6 < strtotime("now"))) {
+            } elseif ((strlen((string) $date) == 7) && ($d6 < strtotime("now"))) {
                 $dvalid = true;
-            } elseif ((strlen($date) == 10) && ($d6 < strtotime("now"))) {
+            } elseif ((strlen((string) $date) == 10) && ($d6 < strtotime("now"))) {
                 $dvalid = true;
             }
             $validator = new Zend_Validate_EmailAddress;

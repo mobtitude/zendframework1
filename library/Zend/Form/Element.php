@@ -1269,7 +1269,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         if (!isset($this->_validators[$name])) {
             $len = strlen($name);
             foreach ($this->_validators as $localName => $validator) {
-                if ($len > strlen($localName)) {
+                if ($len > strlen((string) $localName)) {
                     continue;
                 }
                 if (0 === substr_compare($localName, $name, -$len, $len, true)) {
@@ -1321,7 +1321,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         } else {
             $len = strlen($name);
             foreach (array_keys($this->_validators) as $validator) {
-                if ($len > strlen($validator)) {
+                if ($len > strlen((string) $validator)) {
                     continue;
                 }
                 if (0 === substr_compare($validator, $name, -$len, $len, true)) {
@@ -1736,7 +1736,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         if (!isset($this->_filters[$name])) {
             $len = strlen($name);
             foreach ($this->_filters as $localName => $filter) {
-                if ($len > strlen($localName)) {
+                if ($len > strlen((string) $localName)) {
                     continue;
                 }
 
@@ -1789,7 +1789,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         } else {
             $len = strlen($name);
             foreach (array_keys($this->_filters) as $filter) {
-                if ($len > strlen($filter)) {
+                if ($len > strlen((string) $filter)) {
                     continue;
                 }
                 if (0 === substr_compare($filter, $name, -$len, $len, true)) {
@@ -1976,7 +1976,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         if (!isset($this->_decorators[$name])) {
             $len = strlen($name);
             foreach ($this->_decorators as $localName => $decorator) {
-                if ($len > strlen($localName)) {
+                if ($len > strlen((string) $localName)) {
                     continue;
                 }
 
@@ -2025,7 +2025,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         } else {
             $len = strlen($name);
             foreach (array_keys($this->_decorators) as $decorator) {
-                if ($len > strlen($decorator)) {
+                if ($len > strlen((string) $decorator)) {
                     continue;
                 }
                 if (0 === substr_compare($decorator, $name, -$len, $len, true)) {

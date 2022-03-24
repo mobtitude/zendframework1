@@ -162,7 +162,7 @@ class Zend_Service_WindowsAzure_Storage_Batch
     		if ($httpVerb != Zend_Http_Client::DELETE) {
     		    $headers['Content-Type'] = 'application/atom+xml;type=entry';
     		}
-    		$headers['Content-Length'] = strlen($rawData);
+    		$headers['Content-Length'] = strlen((string) $rawData);
 		}
 		    
 		// Generate $operation

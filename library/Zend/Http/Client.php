@@ -1340,7 +1340,7 @@ class Zend_Http_Client
 
         // Set the Content-Length if we have a body or if request is POST/PUT
         if ($body || $this->method == self::POST || $this->method == self::PUT) {
-            $this->setHeaders(self::CONTENT_LENGTH, strlen($body));
+            $this->setHeaders(self::CONTENT_LENGTH, strlen((string) $body));
         }
 
         return $body;

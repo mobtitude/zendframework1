@@ -277,7 +277,7 @@ class Zend_Service_Console_Command
 
 							// Find the $parametersFor with the same name defined
 							foreach ($parametersFor as $possibleParameterFor) {
-								$possibleParameterFor = explode(' ', $possibleParameterFor, 4);
+								$possibleParameterFor = explode(' ', (string) $possibleParameterFor, 4);
 								if ($possibleParameterFor[0] == '$' . $parameter->getName()) {
 									$parameterFor = $possibleParameterFor;
 									break;
@@ -328,7 +328,7 @@ class Zend_Service_Console_Command
 	{
 		$returnValue = array();
 
-		$commentLines = explode("\n", $docComment);
+		$commentLines = explode("\n", (string) $docComment);
 	    foreach ($commentLines as $commentLine) {
 	        if (strpos($commentLine, $docCommentName . ' ') !== false) {
 	            $returnValue[] = trim(substr($commentLine, strpos($commentLine, $docCommentName) + strlen($docCommentName) + 1));

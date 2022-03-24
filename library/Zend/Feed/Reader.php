@@ -489,7 +489,7 @@ class Zend_Feed_Reader
             $type = self::TYPE_RSS_ANY;
             $version = $xpath->evaluate('string(/rss/@version)');
 
-            if (strlen($version) > 0) {
+            if (strlen((string) $version) > 0) {
                 switch($version) {
                     case '2.0':
                         $type = self::TYPE_RSS_20;

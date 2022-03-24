@@ -63,7 +63,7 @@ class Zend_Soap_Wsdl_Strategy_DefaultComplexType extends Zend_Soap_Wsdl_Strategy
         $all = $dom->createElement('xsd:all');
 
         foreach ($class->getProperties() as $property) {
-            if ($property->isPublic() && preg_match_all('/@var\s+([^\s]+)/m', $property->getDocComment(), $matches)) {
+            if ($property->isPublic() && preg_match_all('/@var\s+([^\s]+)/m', (string) $property->getDocComment(), $matches)) {
 
                 /**
                  * @todo check if 'xsd:element' must be used here (it may not be compatible with using 'complexType'

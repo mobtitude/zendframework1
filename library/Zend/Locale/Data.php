@@ -249,7 +249,7 @@ class Zend_Locale_Data
                 }
             }
 
-            $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
+            $locale = substr($locale, 0, -strlen((string) strrchr($locale, '_')));
             if (!empty($locale)) {
                 $temp = self::_getFile($locale, $path, $attribute, $value, $temp);
             } else {
@@ -722,7 +722,7 @@ class Zend_Locale_Data
                     $_temp += self::_getFile('supplementalData', '/supplementalData/territoryContainment/group[@type=\'' . $key . '\']', 'contains', $key);
                 }
                 foreach($_temp as $key => $found) {
-                    $_temp3 = explode(" ", $found);
+                    $_temp3 = explode(" ", (string) $found);
                     foreach($_temp3 as $found3) {
                         if (!isset($temp[$found3])) {
                             $temp[$found3] = (string) $key;
@@ -750,7 +750,7 @@ class Zend_Locale_Data
                     $_temp += self::_getFile('supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'scripts', $key);
                 }
                 foreach($_temp as $key => $found) {
-                    $_temp3 = explode(" ", $found);
+                    $_temp3 = explode(" ", (string) $found);
                     foreach($_temp3 as $found3) {
                         if (empty($found3)) {
                             continue;
@@ -781,7 +781,7 @@ class Zend_Locale_Data
                     $_temp += self::_getFile('supplementalData', '/supplementalData/languageData/language[@type=\'' . $key . '\']', 'territories', $key);
                 }
                 foreach($_temp as $key => $found) {
-                    $_temp3 = explode(" ", $found);
+                    $_temp3 = explode(" ", (string) $found);
                     foreach($_temp3 as $found3) {
                         if (empty($found3)) {
                             continue;
@@ -1016,7 +1016,7 @@ class Zend_Locale_Data
                 unset($givenLocale);
                 $temp = self::_getFile('supplementalData', '/supplementalData/calendarPreferenceData/calendarPreference[contains(@territories,\'' . $territory . '\')]', 'ordering', 'ordering');
                 if (isset($temp['ordering'])) {
-                    list($temp) = explode(' ', $temp['ordering']);
+                    list($temp) = explode(' ', (string) $temp['ordering']);
                 } else {
                     $temp = 'gregorian';
                 }
@@ -1307,7 +1307,7 @@ class Zend_Locale_Data
                 }
                 $temp = array();
                 foreach($_temp as $key => $found) {
-                    $_temp3 = explode(" ", $found);
+                    $_temp3 = explode(" ", (string) $found);
                     foreach($_temp3 as $found3) {
                         if ($found3 !== $value) {
                             continue;
@@ -1333,7 +1333,7 @@ class Zend_Locale_Data
                 }
                 $temp = array();
                 foreach($_temp as $key => $found) {
-                    $_temp3 = explode(" ", $found);
+                    $_temp3 = explode(" ", (string) $found);
                     foreach($_temp3 as $found3) {
                         if ($found3 !== $value) {
                             continue;
@@ -1359,7 +1359,7 @@ class Zend_Locale_Data
                 }
                 $temp = array();
                 foreach($_temp as $key => $found) {
-                    $_temp3 = explode(" ", $found);
+                    $_temp3 = explode(" ", (string) $found);
                     foreach($_temp3 as $found3) {
                         if ($found3 !== $value) {
                             continue;
@@ -1419,7 +1419,7 @@ class Zend_Locale_Data
                 }
                 $temp = array();
                 foreach($_temp as $key => $found) {
-                    $_temp3 = explode(" ", $found);
+                    $_temp3 = explode(" ", (string) $found);
                     foreach($_temp3 as $found3) {
                         if ($found3 !== $value) {
                             continue;

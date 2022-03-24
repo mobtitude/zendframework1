@@ -146,7 +146,7 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 		if (strpos($_SERVER['RdRoleId'], 'deployment(') === false) {
 			return $_SERVER['RdRoleId'];
 		} else {
-			$roleIdParts = explode('.', $_SERVER['RdRoleId']);
+			$roleIdParts = explode('.', (string) $_SERVER['RdRoleId']);
 			return $roleIdParts[0] . '/' . $roleIdParts[2] . '/' . $_SERVER['RdRoleId'];
 		}
 

@@ -175,13 +175,13 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
         }
         $props = array();
         if (!empty($params['openid_sreg_optional'])) {
-            foreach (explode(',', $params['openid_sreg_optional']) as $prop) {
+            foreach (explode(',', (string) $params['openid_sreg_optional']) as $prop) {
                 $prop = trim($prop);
                 $props[$prop] = false;
             }
         }
         if (!empty($params['openid_sreg_required'])) {
-            foreach (explode(',', $params['openid_sreg_required']) as $prop) {
+            foreach (explode(',', (string) $params['openid_sreg_required']) as $prop) {
                 $prop = trim($prop);
                 $props[$prop] = true;
             }

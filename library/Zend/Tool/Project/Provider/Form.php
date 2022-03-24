@@ -132,7 +132,7 @@ class Zend_Tool_Project_Provider_Form extends Zend_Tool_Project_Provider_Abstrac
         }
 
         // Check that there is not a dash or underscore, return if doesnt match regex
-        if (preg_match('#[_-]#', $name)) {
+        if (preg_match('#[_-]#', (string) $name)) {
             throw new Zend_Tool_Project_Provider_Exception('Form names should be camel cased.');
         }
 

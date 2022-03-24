@@ -300,7 +300,7 @@ class Zend_Service_WindowsAzure_Storage_TableEntity
             
         // Search for @azure contents
         $azureComment = '';
-        $commentLines = explode("\n", $docComment);
+        $commentLines = explode("\n", (string) $docComment);
         foreach ($commentLines as $commentLine) {
             if (strpos($commentLine, '@azure') !== false) {
                 $azureComment = trim(substr($commentLine, strpos($commentLine, '@azure') + 6));

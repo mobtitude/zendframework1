@@ -60,7 +60,7 @@ class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
     {
         switch ($attribute->localName) {
             case 'name':
-                $name = explode(':', $attribute->nodeValue);
+                $name = explode(':', (string) $attribute->nodeValue);
                 $this->_name = end($name);
                 break;
             case 'value':

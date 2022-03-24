@@ -1478,12 +1478,12 @@ class Zend_Pdf
                 $xrefSection[]  = sprintf("%010d %05d n \n", $offset, $updateInfo->getGenNum());
 
                 $pdfBlock = $updateInfo->getObjectDump();
-                $offset += strlen($pdfBlock);
+                $offset += strlen((string) $pdfBlock);
 
                 if ($outputStream === null) {
                     $pdfSegmentBlocks[] = $pdfBlock;
                 } else {
-                    while ( strlen($pdfBlock) > 0 && ($byteCount = fwrite($outputStream, $pdfBlock)) != false ) {
+                    while ( strlen((string) $pdfBlock) > 0 && ($byteCount = fwrite($outputStream, $pdfBlock)) != false ) {
                         $pdfBlock = substr($pdfBlock, $byteCount);
                     }
                 }

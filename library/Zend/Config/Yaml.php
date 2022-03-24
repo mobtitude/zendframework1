@@ -318,7 +318,7 @@ class Zend_Config_Yaml extends Zend_Config
 
             if (preg_match("/(?!-)([\w\-]+):\s*(.*)/", $line, $m)) {
                 // key: value
-                if (strlen($m[2])) {
+                if (strlen((string) $m[2])) {
                     // simple key: value
                     $value = preg_replace("/#.*$/", "", $m[2]);
                     $value = self::_parseValue($value);

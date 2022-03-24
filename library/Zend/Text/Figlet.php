@@ -505,7 +505,7 @@ class Zend_Text_Figlet
                 } else if ($this->_outlineLength === 0) {
                     for ($i = 0; $i < $this->_charHeight; $i++) {
                         if ($this->_rightToLeft === 1 && $this->_outputWidth > 1) {
-                            $offset = (strlen($this->_currentChar[$i]) - $this->_outlineLengthLimit);
+                            $offset = (strlen((string) $this->_currentChar[$i]) - $this->_outlineLengthLimit);
                             $this->_putString(substr($this->_currentChar[$i], $offset));
                         } else {
                             $this->_putString($this->_currentChar[$i]);
@@ -701,7 +701,7 @@ class Zend_Text_Figlet
             }
         }
 
-        $this->_outlineLength                          = strlen($this->_outputLine[0]);
+        $this->_outlineLength                          = strlen((string) $this->_outputLine[0]);
         $this->_inCharLine[$this->_inCharLineLength++] = $char;
 
         return true;
@@ -718,7 +718,7 @@ class Zend_Text_Figlet
         if (array_key_exists($this->_uniOrd($char), $this->_charList)) {
             $this->_currentChar       = $this->_charList[$this->_uniOrd($char)];
             $this->_previousCharWidth = $this->_currentCharWidth;
-            $this->_currentCharWidth  = strlen($this->_currentChar[0]);
+            $this->_currentCharWidth  = strlen((string) $this->_currentChar[0]);
         } else {
             $this->_currentChar = null;
         }
@@ -741,7 +741,7 @@ class Zend_Text_Figlet
 
         for ($row = 0; $row < $this->_charHeight; $row++) {
             if ($this->_rightToLeft === 1) {
-                $charbd = strlen($this->_currentChar[$row]);
+                $charbd = strlen((string) $this->_currentChar[$row]);
                 while (true) {
                     if (!isset($this->_currentChar[$row][$charbd])) {
                         $leftChar = null;
@@ -773,7 +773,7 @@ class Zend_Text_Figlet
 
                 $amount = ($linebd + $this->_currentCharWidth - 1 - $charbd);
             } else {
-                $linebd = strlen($this->_outputLine[$row]);
+                $linebd = strlen((string) $this->_outputLine[$row]);
                 while (true) {
                     if (!isset($this->_outputLine[$row][$linebd])) {
                         $leftChar = null;
@@ -1080,7 +1080,7 @@ class Zend_Text_Figlet
         // At the end fetch all extended characters
         while (!feof($fp)) {
             // Get the Unicode
-            list($uniCode) = explode(' ', fgets($fp, 2048));
+            list($uniCode) = explode(' ', (string) fgets($fp, 2048));
 
             if (empty($uniCode)) {
                 continue;

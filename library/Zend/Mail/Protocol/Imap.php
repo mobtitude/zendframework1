@@ -211,7 +211,7 @@ class Zend_Mail_Protocol_Imap
             if ($token[0] == '"') {
                 if (preg_match('%^\(*"((.|\\\\|\\")*?)" *%', $line, $matches)) {
                     $tokens[] = $matches[1];
-                    $line = substr($line, strlen($matches[0]));
+                    $line = substr($line, strlen((string) $matches[0]));
                     continue;
                 }
             }
@@ -401,7 +401,7 @@ class Zend_Mail_Protocol_Imap
     {
         if (func_num_args() < 2) {
             if (strpos($string, "\n") !== false) {
-                return array('{' . strlen($string) . '}', $string);
+                return array('{' . strlen((string) $string) . '}', $string);
             } else {
                 return '"' . str_replace(array('\\', '"'), array('\\\\', '\\"'), $string) . '"';
             }

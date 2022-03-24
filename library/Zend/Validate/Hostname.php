@@ -1746,7 +1746,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
             do {
                 // First check TLD
                 $matches = array();
-                if (preg_match('/([^.]{2,63})$/iu', end($domainParts), $matches)
+                if (preg_match('/([^.]{2,63})$/iu', (string) end($domainParts), $matches)
                     || (array_key_exists(end($domainParts), $this->_validIdns))) {
                     reset($domainParts);
 

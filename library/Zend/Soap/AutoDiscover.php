@@ -471,7 +471,7 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface
             $portOperation = $wsdl->addPortOperation($port, $function->getName(), 'tns:' . $function->getName() . 'In', false);
         }
         $desc = $function->getDescription();
-        if (strlen($desc) > 0) {
+        if (strlen((string) $desc) > 0) {
             $wsdl->addDocumentation($portOperation, $desc);
         }
 

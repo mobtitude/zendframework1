@@ -209,9 +209,9 @@ class Zend_Loader
             // On *nix systems, include_paths which include paths with a stream
             // schema cannot be safely explode'd, so we have to be a bit more
             // intelligent in the approach.
-            $paths = preg_split('#:(?!//)#', $path);
+            $paths = preg_split('#:(?!//)#', (string) $path);
         } else {
-            $paths = explode(PATH_SEPARATOR, $path);
+            $paths = explode(PATH_SEPARATOR, (string) $path);
         }
         return $paths;
     }

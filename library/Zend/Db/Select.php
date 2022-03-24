@@ -532,7 +532,7 @@ class Zend_Db_Select
         foreach ($spec as $val) {
             // Remove comments from SQL statement
             $noComments = preg_replace(self::REGEX_SQL_COMMENTS, '$1', (string) $val);
-            if (preg_match(self::REGEX_COLUMN_EXPR_GROUP, $noComments)) {
+            if (preg_match(self::REGEX_COLUMN_EXPR_GROUP, (string) $noComments)) {
                 $val = new Zend_Db_Expr($val);
             }
             $this->_parts[self::GROUP][] = $val;
@@ -620,13 +620,13 @@ class Zend_Db_Select
                     continue;
                 }
                 $direction = self::SQL_ASC;
-                if (preg_match('/(.*\W)(' . self::SQL_ASC . '|' . self::SQL_DESC . ')\b/si', $val, $matches)) {
+                if (preg_match('/(.*\W)(' . self::SQL_ASC . '|' . self::SQL_DESC . ')\b/si', (string) $val, $matches)) {
                     $val = trim($matches[1]);
                     $direction = $matches[2];
                 }
                 // Remove comments from SQL statement
                 $noComments = preg_replace(self::REGEX_SQL_COMMENTS, '$1', (string) $val);
-                if (preg_match(self::REGEX_COLUMN_EXPR_ORDER, $noComments)) {
+                if (preg_match(self::REGEX_COLUMN_EXPR_ORDER, (string) $noComments)) {
                     $val = new Zend_Db_Expr($val);
                 }
                 $this->_parts[self::ORDER][] = array($val, $direction);
@@ -820,7 +820,7 @@ class Zend_Db_Select
 
         // Schema from table name overrides schema argument
         if (!is_object($tableName) && false !== strpos($tableName, '.')) {
-            list($schema, $tableName) = explode('.', $tableName);
+            list($schema, $tableName) = explode('.', (string) $tableName);
         }
 
         $lastFromCorrelationName = null;
@@ -971,7 +971,7 @@ class Zend_Db_Select
                 // Check for columns that look like functions and convert to Zend_Db_Expr
                 if (preg_match(self::REGEX_COLUMN_EXPR, (string) $col)) {
                     $col = new Zend_Db_Expr($col);
-                } elseif (preg_match('/(.+)\.(.+)/', $col, $m)) {
+                } elseif (preg_match('/(.+)\.(.+)/', (string) $col, $m)) {
                     $currentCorrelationName = $m[1];
                     $col = $m[2];
                 }

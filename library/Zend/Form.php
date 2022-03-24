@@ -2831,7 +2831,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
         if (!isset($this->_decorators[$name])) {
             $len = strlen($name);
             foreach ($this->_decorators as $localName => $decorator) {
-                if ($len > strlen($localName)) {
+                if ($len > strlen((string) $localName)) {
                     continue;
                 }
 

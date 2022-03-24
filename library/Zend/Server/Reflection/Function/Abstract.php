@@ -280,7 +280,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
             // Get return type(s) and description
             $return     = 'void';
             if (preg_match('/@return\s+(\S+)/', $docBlock, $matches)) {
-                $return = explode('|', $matches[1]);
+                $return = explode('|', (string) $matches[1]);
                 if (preg_match('/@return\s+\S+\s+(.*?)(@|\*\/)/s', $docBlock, $matches))
                 {
                     $value = $matches[1];
@@ -356,7 +356,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
 
         $paramTypes = array();
         foreach ($paramTypesTmp as $i => $param) {
-            $tmp = explode('|', $param);
+            $tmp = explode('|', (string) $param);
             if ($parameters[$i]->isOptional()) {
                 array_unshift($tmp, null);
             }

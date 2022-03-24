@@ -264,12 +264,12 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
         // Iterate over each set of matches
         foreach ($matches[1] as $index => $preTag) {
             // If the pre-tag text is non-empty, strip any ">" characters from it
-            if (strlen($preTag)) {
+            if (strlen((string) $preTag)) {
                 $preTag = str_replace('>', '', $preTag);
             }
             // If a tag exists in this match, then filter the tag
             $tag = $matches[2][$index];
-            if (strlen($tag)) {
+            if (strlen((string) $tag)) {
                 $tagFiltered = $this->_filterTag($tag);
             } else {
                 $tagFiltered = '';

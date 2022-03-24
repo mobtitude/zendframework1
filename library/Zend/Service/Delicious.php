@@ -204,7 +204,7 @@ class Zend_Service_Delicious
 
         $bundles = self::_xmlResponseToArray($response, 'bundles', 'bundle', 'name', 'tags');
         foreach ($bundles as &$tags) {
-            $tags = explode(' ', $tags);
+            $tags = explode(' ', (string) $tags);
         }
         return $bundles;
     }

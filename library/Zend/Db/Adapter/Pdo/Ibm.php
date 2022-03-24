@@ -346,7 +346,7 @@ class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
             $result = $stmt->fetchAll(Zend_Db::FETCH_NUM);
             if (count($result)) {
                 $matches = null;
-                if (preg_match('/((?:[0-9]{1,2}\.){1,3}[0-9]{1,2})/', $result[0][0], $matches)) {
+                if (preg_match('/((?:[0-9]{1,2}\.){1,3}[0-9]{1,2})/', (string) $result[0][0], $matches)) {
                     return $matches[1];
                 } else {
                     return null;

@@ -2044,18 +2044,18 @@ class Zend_Date extends Zend_Date_DateObject
             // date strings
             case self::ISO_8601:
                 // (-)YYYY-MM-dd
-                preg_match('/^(-{0,1}\d{4})-(\d{2})-(\d{2})/', $date, $datematch);
+                preg_match('/^(-{0,1}\d{4})-(\d{2})-(\d{2})/', (string) $date, $datematch);
                 // (-)YY-MM-dd
                 if (empty($datematch)) {
-                    preg_match('/^(-{0,1}\d{2})-(\d{2})-(\d{2})/', $date, $datematch);
+                    preg_match('/^(-{0,1}\d{2})-(\d{2})-(\d{2})/', (string) $date, $datematch);
                 }
                 // (-)YYYYMMdd
                 if (empty($datematch)) {
-                    preg_match('/^(-{0,1}\d{4})(\d{2})(\d{2})/', $date, $datematch);
+                    preg_match('/^(-{0,1}\d{4})(\d{2})(\d{2})/', (string) $date, $datematch);
                 }
                 // (-)YYMMdd
                 if (empty($datematch)) {
-                    preg_match('/^(-{0,1}\d{2})(\d{2})(\d{2})/', $date, $datematch);
+                    preg_match('/^(-{0,1}\d{2})(\d{2})(\d{2})/', (string) $date, $datematch);
                 }
                 $tmpdate = $date;
                 if (!empty($datematch)) {
@@ -2066,18 +2066,18 @@ class Zend_Date extends Zend_Date_DateObject
                                             'UTF-8');
                 }
                 // (T)hh:mm:ss
-                preg_match('/[T,\s]{0,1}(\d{2}):(\d{2}):(\d{2})/', $tmpdate, $timematch);
+                preg_match('/[T,\s]{0,1}(\d{2}):(\d{2}):(\d{2})/', (string) $tmpdate, $timematch);
                 // (T)hhmmss
                 if (empty($timematch)) {
-                    preg_match('/[T,\s]{0,1}(\d{2})(\d{2})(\d{2})/', $tmpdate, $timematch);
+                    preg_match('/[T,\s]{0,1}(\d{2})(\d{2})(\d{2})/', (string) $tmpdate, $timematch);
                 }
                 // (T)hh:mm
                 if (empty($timematch)) {
-                    preg_match('/[T,\s]{0,1}(\d{2}):(\d{2})/', $tmpdate, $timematch);
+                    preg_match('/[T,\s]{0,1}(\d{2}):(\d{2})/', (string) $tmpdate, $timematch);
                 }
                 // (T)hhmm
                 if (empty($timematch)) {
-                    preg_match('/[T,\s]{0,1}(\d{2})(\d{2})/', $tmpdate, $timematch);
+                    preg_match('/[T,\s]{0,1}(\d{2})(\d{2})/', (string) $tmpdate, $timematch);
                 }
                 if (empty($datematch) and empty($timematch)) {
                     require_once 'Zend/Date/Exception.php';
@@ -2121,7 +2121,7 @@ class Zend_Date extends Zend_Date_DateObject
             case self::RFC_2822:
                  $result = preg_match('/^\w{3},\s(\d{1,2})\s(\w{3})\s(\d{4})\s'
                                     . '(\d{2}):(\d{2}):{0,1}(\d{0,2})\s([+-]'
-                                    . '{1}\d{4}|\w{1,20})$/', $date, $match);
+                                    . '{1}\d{4}|\w{1,20})$/', (string) $date, $match);
 
                 if (!$result) {
                     require_once 'Zend/Date/Exception.php';
@@ -2477,7 +2477,7 @@ class Zend_Date extends Zend_Date_DateObject
             // ATOM and RFC_3339 are identical
             case self::ATOM:
             case self::RFC_3339:
-                $result = preg_match('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\d{0,4}([+-]{1}\d{2}:\d{2}|Z)$/', $date, $match);
+                $result = preg_match('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\d{0,4}([+-]{1}\d{2}:\d{2}|Z)$/', (string) $date, $match);
                 if (!$result) {
                     require_once 'Zend/Date/Exception.php';
                     throw new Zend_Date_Exception("invalid date ($date) operand, ATOM format expected", 0, null, $date);
@@ -2496,7 +2496,7 @@ class Zend_Date extends Zend_Date_DateObject
                 break;
 
             case self::COOKIE:
-                $result = preg_match("/^\w{6,9},\s(\d{2})-(\w{3})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})\s.{3,20}$/", $date, $match);
+                $result = preg_match("/^\w{6,9},\s(\d{2})-(\w{3})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})\s.{3,20}$/", (string) $date, $match);
                 if (!$result) {
                     require_once 'Zend/Date/Exception.php';
                     throw new Zend_Date_Exception("invalid date ($date) operand, COOKIE format expected", 0, null, $date);
@@ -2525,7 +2525,7 @@ class Zend_Date extends Zend_Date_DateObject
             case self::RFC_822:
             case self::RFC_1036:
                 // new RFC 822 format, identical to RFC 1036 standard
-                $result = preg_match('/^\w{0,3},{0,1}\s{0,1}(\d{1,2})\s(\w{3})\s(\d{2})\s(\d{2}):(\d{2}):{0,1}(\d{0,2})\s([+-]{1}\d{4}|\w{1,20})$/', $date, $match);
+                $result = preg_match('/^\w{0,3},{0,1}\s{0,1}(\d{1,2})\s(\w{3})\s(\d{2})\s(\d{2}):(\d{2}):{0,1}(\d{0,2})\s([+-]{1}\d{4}|\w{1,20})$/', (string) $date, $match);
                 if (!$result) {
                     require_once 'Zend/Date/Exception.php';
                     throw new Zend_Date_Exception("invalid date ($date) operand, RFC 822 date format expected", 0, null, $date);
@@ -2547,7 +2547,7 @@ class Zend_Date extends Zend_Date_DateObject
                 break;
 
             case self::RFC_850:
-                $result = preg_match('/^\w{6,9},\s(\d{2})-(\w{3})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})\s.{3,21}$/', $date, $match);
+                $result = preg_match('/^\w{6,9},\s(\d{2})-(\w{3})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})\s.{3,21}$/', (string) $date, $match);
                 if (!$result) {
                     require_once 'Zend/Date/Exception.php';
                     throw new Zend_Date_Exception("invalid date ($date) operand, RFC 850 date format expected", 0, null, $date);
@@ -2569,7 +2569,7 @@ class Zend_Date extends Zend_Date_DateObject
                 break;
 
             case self::RFC_1123:
-                $result = preg_match('/^\w{0,3},{0,1}\s{0,1}(\d{1,2})\s(\w{3})\s(\d{2,4})\s(\d{2}):(\d{2}):{0,1}(\d{0,2})\s([+-]{1}\d{4}|\w{1,20})$/', $date, $match);
+                $result = preg_match('/^\w{0,3},{0,1}\s{0,1}(\d{1,2})\s(\w{3})\s(\d{2,4})\s(\d{2}):(\d{2}):{0,1}(\d{0,2})\s([+-]{1}\d{4}|\w{1,20})$/', (string) $date, $match);
                 if (!$result) {
                     require_once 'Zend/Date/Exception.php';
                     throw new Zend_Date_Exception("invalid date ($date) operand, RFC 1123 date format expected", 0, null, $date);
@@ -2590,7 +2590,7 @@ class Zend_Date extends Zend_Date_DateObject
                 break;
 
             case self::RSS:
-                $result = preg_match('/^\w{3},\s(\d{2})\s(\w{3})\s(\d{2,4})\s(\d{1,2}):(\d{2}):(\d{2})\s.{1,21}$/', $date, $match);
+                $result = preg_match('/^\w{3},\s(\d{2})\s(\w{3})\s(\d{2,4})\s(\d{1,2}):(\d{2}):(\d{2})\s.{1,21}$/', (string) $date, $match);
                 if (!$result) {
                     require_once 'Zend/Date/Exception.php';
                     throw new Zend_Date_Exception("invalid date ($date) operand, RSS date format expected", 0, null, $date);
@@ -2612,7 +2612,7 @@ class Zend_Date extends Zend_Date_DateObject
                 break;
 
             case self::W3C:
-                $result = preg_match('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})[+-]{1}\d{2}:\d{2}$/', $date, $match);
+                $result = preg_match('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})[+-]{1}\d{2}:\d{2}$/', (string) $date, $match);
                 if (!$result) {
                     require_once 'Zend/Date/Exception.php';
                     throw new Zend_Date_Exception("invalid date ($date) operand, W3C date format expected", 0, null, $date);
@@ -4455,7 +4455,7 @@ class Zend_Date extends Zend_Date_DateObject
         }
 
         $this->_precision = (int) $precision;
-        if ($this->_precision < strlen($this->_fractional)) {
+        if ($this->_precision < strlen((string) $this->_fractional)) {
             $this->_fractional = substr($this->_fractional, 0, $this->_precision);
         } else {
             $this->_fractional = str_pad($this->_fractional, $this->_precision, '0', STR_PAD_RIGHT);
@@ -4567,7 +4567,7 @@ class Zend_Date extends Zend_Date_DateObject
             }
         }
 
-        if ($this->_precision > strlen($this->_fractional)) {
+        if ($this->_precision > strlen((string) $this->_fractional)) {
             $this->_fractional = str_pad($this->_fractional, $this->_precision, '0', STR_PAD_LEFT);
         }
 
@@ -4607,7 +4607,7 @@ class Zend_Date extends Zend_Date_DateObject
         }
 
         if ($precision === null) {
-            $precision = strlen($milli);
+            $precision = strlen((string) $milli);
         } else if (!is_int($precision) || $precision < 1 || $precision > 9) {
             require_once 'Zend/Date/Exception.php';
             throw new Zend_Date_Exception("precision ($precision) must be a positive integer less than 10", 0, null, $precision);

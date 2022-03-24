@@ -58,12 +58,12 @@ class Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator exten
 
         // if the current node is a directory AND doesn't match the denyDirectory pattern, accept
         if ($currentNode->isDir()
-            && !preg_match('#' . $this->_denyDirectoryPattern . '#', $currentNodeRealPath)) {
+            && !preg_match('#' . $this->_denyDirectoryPattern . '#', (string) $currentNodeRealPath)) {
             return true;
         }
 
         // if the file matches the accept file pattern, accept
-        $acceptable = (preg_match('#' . $this->_acceptFilePattern . '#', $currentNodeRealPath)) ? true : false;
+        $acceptable = (preg_match('#' . $this->_acceptFilePattern . '#', (string) $currentNodeRealPath)) ? true : false;
         return $acceptable;
     }
 

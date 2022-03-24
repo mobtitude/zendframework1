@@ -1235,7 +1235,7 @@ class Zend_Locale
         require_once 'Zend/Locale/Data/Translation.php';
 
         $language      = setlocale(LC_ALL, 0);
-        $languages     = explode(';', $language);
+        $languages     = explode(';', (string) $language);
         $languagearray = array();
 
         foreach ($languages as $locale) {
@@ -1301,12 +1301,12 @@ class Zend_Locale
             return $languages;
         }
 
-        $accepted = preg_split('/,\s*/', $httplanguages);
+        $accepted = preg_split('/,\s*/', (string) $httplanguages);
 
         foreach ($accepted as $accept) {
             $match  = null;
             $result = preg_match('/^([a-z]{1,8}(?:[-_][a-z]{1,8})*)(?:;\s*q=(0(?:\.[0-9]{1,3})?|1(?:\.0{1,3})?))?$/i',
-                                 $accept, $match);
+                                 (string) $accept, $match);
 
             if ($result < 1) {
                 continue;
@@ -1318,7 +1318,7 @@ class Zend_Locale
                 $quality = 1.0;
             }
 
-            $countrys = explode('-', $match[1]);
+            $countrys = explode('-', (string) $match[1]);
             $region   = array_shift($countrys);
 
             $country2 = explode('_', $region);
@@ -1613,8 +1613,8 @@ class Zend_Locale
         require_once 'Zend/Locale/Data.php';
         $locale            = self::findLocale($locale);
         $quest             = Zend_Locale_Data::getList($locale, 'question');
-        $yes               = explode(':', $quest['yes']);
-        $no                = explode(':', $quest['no']);
+        $yes               = explode(':', (string) $quest['yes']);
+        $no                = explode(':', (string) $quest['no']);
         $quest['yes']      = $yes[0];
         $quest['yesarray'] = $yes;
         $quest['no']       = $no[0];
@@ -1645,7 +1645,7 @@ class Zend_Locale
                 $start  = false;
                 $regex .= '(';
                 $one    = null;
-                if (strlen($row) > 2) {
+                if (strlen((string) $row) > 2) {
                     $one = true;
                 }
 
@@ -1926,7 +1926,7 @@ class Zend_Locale
             $locale = strtr($locale, '-', '_');
         }
 
-        $parts = explode('_', $locale);
+        $parts = explode('_', (string) $locale);
         if (!isset(self::$_localeData[$parts[0]])) {
             if ((count($parts) == 1) && array_key_exists($parts[0], self::$_territoryData)) {
                 return self::$_territoryData[$parts[0]];

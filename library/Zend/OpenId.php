@@ -305,7 +305,7 @@ class Zend_OpenId
         // RFC 3986, 6.2.2.3.  Path Segment Normalization
         if (!empty($path)) {
             $i = 0;
-            $n = strlen($path);
+            $n = strlen((string) $path);
             $res = "";
             while ($i < $n) {
                 if ($path[$i] == '/') {

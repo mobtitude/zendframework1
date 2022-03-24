@@ -132,7 +132,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
 
         foreach ($contentLines as $contentLineIndex => $contentLine) {
 
-            if ($insideSection === false && preg_match('#^\[' . $section . '#', $contentLine)) {
+            if ($insideSection === false && preg_match('#^\[' . $section . '#', (string) $contentLine)) {
                 $insideSection = true;
             }
 
@@ -201,7 +201,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
 
         foreach ($contentLines as $contentLineIndex => $contentLine) {
 
-            if ($insideSection === false && preg_match('#^\[' . $section . '#', $contentLine)) {
+            if ($insideSection === false && preg_match('#^\[' . $section . '#', (string) $contentLine)) {
                 $insideSection = true;
             }
 
@@ -212,7 +212,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
                 }
             }
 
-            if (!preg_match('#' . $key . '\s?=.*#', $contentLine)) {
+            if (!preg_match('#' . $key . '\s?=.*#', (string) $contentLine)) {
                 $newLines[] = $contentLine;
             }
         }

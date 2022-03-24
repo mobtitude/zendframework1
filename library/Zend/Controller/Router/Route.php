@@ -297,7 +297,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 // If it's a variable with requirement, match a regex. If not - everything matches
                 if ($part !== null
                     && !preg_match(
-                        $this->_regexDelimiter . '^' . $part . '$' . $this->_regexDelimiter . 'iu', $pathPart
+                        $this->_regexDelimiter . '^' . $part . '$' . $this->_regexDelimiter . 'iu', (string) $pathPart
                     )
                 ) {
                     return false;

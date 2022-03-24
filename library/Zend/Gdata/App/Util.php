@@ -47,7 +47,7 @@ class Zend_Gdata_App_Util
 
         if (ctype_digit((string)$timestamp)) {
             return gmdate('Y-m-d\TH:i:sP', $timestamp);
-        } elseif (preg_match($rfc3339, $timestamp) > 0) {
+        } elseif (preg_match($rfc3339, (string) $timestamp) > 0) {
             // timestamp is already properly formatted
             return $timestamp;
         } else {

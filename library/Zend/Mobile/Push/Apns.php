@@ -330,7 +330,7 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
         }
 
         $payload = pack('CNNnH*', 1, $id, $expire, 32, $message->getToken())
-            . pack('n', strlen($payload))
+            . pack('n', strlen((string) $payload))
             . $payload;
         $ret = $this->_write($payload);
         if ($ret === false) {

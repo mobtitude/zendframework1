@@ -312,7 +312,7 @@ class Zend_Currency
 
         // Validate the locale and get the country short name
         $country = null;
-        if ((Zend_Locale::isLocale($locale, true, false)) and (strlen($locale) > 4)) {
+        if ((Zend_Locale::isLocale($locale, true, false)) and (strlen((string) $locale) > 4)) {
             $country = substr($locale, (strpos($locale, '_') + 1));
         } else {
             require_once 'Zend/Currency/Exception.php';
@@ -457,7 +457,7 @@ class Zend_Currency
     public function getCurrencyList($region = null)
     {
         if (empty($region) === true) {
-            if (strlen($this->_options['locale']) > 4) {
+            if (strlen((string) $this->_options['locale']) > 4) {
                 $region = substr($this->_options['locale'], (strpos($this->_options['locale'], '_') + 1));
             }
         }

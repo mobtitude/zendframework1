@@ -242,7 +242,7 @@ abstract class Zend_Search_Lucene_Index_SegmentWriter
                          0x00; /* 0x04 - third bit, compressed (ZLIB) */
             $this->_fdtFile->writeByte($fieldBits);
             if ($field->isBinary) {
-                $this->_fdtFile->writeVInt(strlen($field->value));
+                $this->_fdtFile->writeVInt(strlen((string) $field->value));
                 $this->_fdtFile->writeBytes($field->value);
             } else {
                 $this->_fdtFile->writeString($field->getUtf8Value());

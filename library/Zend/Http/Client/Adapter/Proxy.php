@@ -159,7 +159,7 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
             $hasProxyAuthHeader = false;
             foreach ($headers as $k => $v) {
                 if ((string) $k == 'proxy-authorization'
-                    || preg_match("/^proxy-authorization:/i", $v)
+                    || preg_match("/^proxy-authorization:/i", (string) $v)
                 ) {
                     $hasProxyAuthHeader = true;
                     break;

@@ -135,7 +135,7 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
 
         // check pattern list
         foreach ($patterns as $pattern => $type) {
-            if ((strlen($this->_value) == $lengths[$pattern]) && preg_match($pattern, $this->_value)) {
+            if ((strlen((string) $this->_value) == $lengths[$pattern]) && preg_match($pattern, (string) $this->_value)) {
                 return $type;
             }
         }

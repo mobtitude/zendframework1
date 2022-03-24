@@ -240,7 +240,7 @@ class Zend_Xml_Security
     {
         foreach (self::getAsciiEncodingMap() as $encoding => $generator) {
             $prefix = call_user_func($generator, '<' . '?xml');
-            if (0 === strncmp($xml, $prefix, strlen($prefix))) {
+            if (0 === strncmp($xml, $prefix, strlen((string) $prefix))) {
                 return $encoding;
             }
         }
@@ -283,7 +283,7 @@ class Zend_Xml_Security
             return array($fileEncoding);
         }
 
-        $encPos   += strlen($encAttr);
+        $encPos   += strlen((string) $encAttr);
         $quotePos = strpos($xml, $quote, $encPos);
         if (false === $quotePos) {
             return array($fileEncoding);

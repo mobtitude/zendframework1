@@ -697,7 +697,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			$response->getHeader('Etag'),
 			$response->getHeader('Last-modified'),
 			$this->getBaseUrl() . '/' . $containerName . '/' . $blobName,
-			strlen($data),
+			strlen((string) $data),
 				'',
 				'',
 				'',
@@ -820,7 +820,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			require_once 'Zend/Service/WindowsAzure/Exception.php';
 			throw new Zend_Service_WindowsAzure_Exception('Block identifier is not specified.');
 		}
-		if (strlen($contents) > self::MAX_BLOB_TRANSFER_SIZE) {
+		if (strlen((string) $contents) > self::MAX_BLOB_TRANSFER_SIZE) {
 			require_once 'Zend/Service/WindowsAzure/Exception.php';
 			throw new Zend_Service_WindowsAzure_Exception('Block size is too big.');
 		}
@@ -1124,7 +1124,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		}
 
 		// Determine size
-		$size = strlen($contents);
+		$size = strlen((string) $contents);
 		if ($size >= self::MAX_BLOB_TRANSFER_SIZE) {
 			require_once 'Zend/Service/WindowsAzure/Exception.php';
 			throw new Zend_Service_WindowsAzure_Exception('Page blob size must not be larger than ' + self::MAX_BLOB_TRANSFER_SIZE . ' bytes.');
@@ -2133,7 +2133,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 	protected function _generateBlockId($part = 0)
 	{
 		$returnValue = $part;
-		while (strlen($returnValue) < 64) {
+		while (strlen((string) $returnValue) < 64) {
 			$returnValue = '0' . $returnValue;
 		}
 

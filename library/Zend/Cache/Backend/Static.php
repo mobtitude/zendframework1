@@ -297,7 +297,7 @@ class Zend_Cache_Backend_Static
      */
     protected function _isSerialized($data)
     {
-        return preg_match("/a:2:\{i:0;s:\d+:\"/", $data);
+        return preg_match("/a:2:\{i:0;s:\d+:\"/", (string) $data);
     }
 
     /**
@@ -507,7 +507,7 @@ class Zend_Cache_Backend_Static
     {
         $path = realpath($path);
         $base = realpath($this->_options['public_dir']);
-        return strncmp($path, $base, strlen($base)) !== 0;
+        return strncmp($path, $base, strlen((string) $base)) !== 0;
     }
 
     /**

@@ -79,7 +79,7 @@ class Zend_View_Helper_FormRadio extends Zend_View_Helper_FormElement
         $label_attribs = array();
         foreach ($attribs as $key => $val) {
             $tmp    = false;
-            $keyLen = strlen($key);
+            $keyLen = strlen((string) $key);
             if ((6 < $keyLen) && (substr($key, 0, 6) == 'label_')) {
                 $tmp = substr($key, 6);
             } elseif ((5 < $keyLen) && (substr($key, 0, 5) == 'label')) {

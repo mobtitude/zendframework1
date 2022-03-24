@@ -245,7 +245,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
         $lastMatchingRegexp = null;
         if (isset($_SERVER['REQUEST_URI'])) {
             foreach ($this->_specificOptions['regexps'] as $regexp => $conf) {
-                if (preg_match("`$regexp`", $_SERVER['REQUEST_URI'])) {
+                if (preg_match("`$regexp`", (string) $_SERVER['REQUEST_URI'])) {
                     $lastMatchingRegexp = $regexp;
                 }
             }
@@ -316,7 +316,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
         $headersList = headers_list();
         foreach($this->_specificOptions['memorize_headers'] as $key=>$headerName) {
             foreach ($headersList as $headerSent) {
-                $tmp = explode(':', $headerSent);
+                $tmp = explode(':', (string) $headerSent);
                 $headerSentName = trim(array_shift($tmp));
                 if (strtolower($headerName) == strtolower($headerSentName)) {
                     $headerSentValue = trim(implode(':', $tmp));
@@ -340,7 +340,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
     protected function _makeId()
     {
         $tmp = $_SERVER['REQUEST_URI'];
-        $array = explode('?', $tmp, 2);
+        $array = explode('?', (string) $tmp, 2);
           $tmp = $array[0];
         foreach (array('Get', 'Post', 'Session', 'Files', 'Cookie') as $arrayName) {
             $tmp2 = $this->_makePartialId($arrayName, $this->_activeOptions['cache_with_' . strtolower($arrayName) . '_variables'], $this->_activeOptions['make_id_with_' . strtolower($arrayName) . '_variables']);

@@ -343,7 +343,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
                             continue;
                         }
                     } else {
-                        $media_types = explode(',', $value);
+                        $media_types = explode(',', (string) $value);
                         $value = '';
                         foreach($media_types as $type) {
                             $type = trim($type);

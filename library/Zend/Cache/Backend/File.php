@@ -130,7 +130,7 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
             $this->setCacheDir(self::getTmpDir() . DIRECTORY_SEPARATOR, false);
         }
         if (isset($this->_options['file_name_prefix'])) { // particular case for this option
-            if (!preg_match('~^[a-zA-Z0-9_]+$~D', $this->_options['file_name_prefix'])) {
+            if (!preg_match('~^[a-zA-Z0-9_]+$~D', (string) $this->_options['file_name_prefix'])) {
                 Zend_Cache::throwException('Invalid file_name_prefix : must use only [a-zA-Z0-9_]');
             }
         }

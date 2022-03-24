@@ -197,42 +197,42 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
 
         switch($type) {
             case 'BINARY':
-                preg_match('/[01]+/', $value, $ergebnis);
+                preg_match('/[01]+/', (string) $value, $ergebnis);
                 $value = $ergebnis[0];
                 break;
 
             case 'TERNARY':
-                preg_match('/[012]+/', $value, $ergebnis);
+                preg_match('/[012]+/', (string) $value, $ergebnis);
                 $value = $ergebnis[0];
                 break;
 
             case 'QUATERNARY':
-                preg_match('/[0123]+/', $value, $ergebnis);
+                preg_match('/[0123]+/', (string) $value, $ergebnis);
                 $value = $ergebnis[0];
                 break;
 
             case 'QUINARY':
-                preg_match('/[01234]+/', $value, $ergebnis);
+                preg_match('/[01234]+/', (string) $value, $ergebnis);
                 $value = $ergebnis[0];
                 break;
 
             case 'SENARY':
-                preg_match('/[012345]+/', $value, $ergebnis);
+                preg_match('/[012345]+/', (string) $value, $ergebnis);
                 $value = $ergebnis[0];
                 break;
 
             case 'SEPTENARY':
-                preg_match('/[0123456]+/', $value, $ergebnis);
+                preg_match('/[0123456]+/', (string) $value, $ergebnis);
                 $value = $ergebnis[0];
                 break;
 
             case 'OCTAL':
-                preg_match('/[01234567]+/', $value, $ergebnis);
+                preg_match('/[01234567]+/', (string) $value, $ergebnis);
                 $value = $ergebnis[0];
                 break;
 
             case 'NONARY':
-                preg_match('/[012345678]+/', $value, $ergebnis);
+                preg_match('/[012345678]+/', (string) $value, $ergebnis);
                 $value = $ergebnis[0];
                 break;
 
@@ -281,7 +281,7 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
         // Convert base xx values
         if ($this->_units[$type][0] <= 16) {
             $split  = str_split($input);
-            $length = strlen($input);
+            $length = strlen((string) $input);
             for ($x = 0; $x < $length; ++$x) {
                 $split[$x] = hexdec($split[$x]);
                 $value     = call_user_func(Zend_Locale_Math::$add, $value,
