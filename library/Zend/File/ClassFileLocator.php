@@ -90,7 +90,7 @@ class Zend_File_ClassFileLocator extends FilterIterator
         }
 
         // If not a PHP file, skip
-        if ($file->getBasename('.php') == $file->getBasename()) {
+        if ($file->getBasename('.php') === $file->getBasename()) {
             return false;
         }
 
@@ -150,11 +150,7 @@ class Zend_File_ClassFileLocator extends FilterIterator
                     // If a classname was found, set it in the object, and
                     // return boolean true (found)
                             if (!isset($namespace) || null === $namespace) {
-                                if (isset($saveNamespace) && $saveNamespace) {
-                                    $namespace = $savedNamespace;
-                                } else {
-                                    $namespace = null;
-                    }
+                                $namespace = isset($saveNamespace) && $saveNamespace ? $savedNamespace : null;
 
                             }
                             $class = (null === $namespace) ? $content : $namespace . '\\' . $content;
@@ -169,10 +165,7 @@ class Zend_File_ClassFileLocator extends FilterIterator
             }
         }
         $classes = $file->getClasses();
-        if (!empty($classes)) {
-            return true;
-        }
         // No class-type tokens found; return false
-        return false;
+        return !empty($classes);
     }
 }

@@ -85,10 +85,10 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
 
         // Find the base feed element and create an alias to it.
         $element = $this->_element->getElementsByTagName('feed')->item(0);
-        if (!$element) {
+        if (!$element instanceof \DOMElement) {
             // Try to find a single <entry> instead.
             $element = $this->_element->getElementsByTagName($this->_entryElementName)->item(0);
-            if (!$element) {
+            if (!$element instanceof \DOMElement) {
                 /**
                  * @see Zend_Feed_Exception
                  */
@@ -198,22 +198,22 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
         $title->appendChild($this->_element->createCDATASection($array->title));
         $feed->appendChild($title);
 
-        if (isset($array->author)) {
+        if (property_exists($array, 'author') && $array->author !== null) {
             $author = $this->_element->createElement('author');
             $name = $this->_element->createElement('name', $array->author);
             $author->appendChild($name);
-            if (isset($array->email)) {
+            if (property_exists($array, 'email') && $array->email !== null) {
                 $email = $this->_element->createElement('email', $array->email);
                 $author->appendChild($email);
             }
             $feed->appendChild($author);
         }
 
-        $updated = isset($array->lastUpdate) ? $array->lastUpdate : time();
+        $updated = property_exists($array, 'lastUpdate') && $array->lastUpdate !== null ? $array->lastUpdate : time();
         $updated = $this->_element->createElement('updated', date(DATE_ATOM, $updated));
         $feed->appendChild($updated);
 
-        if (isset($array->published)) {
+        if (property_exists($array, 'published') && $array->published !== null) {
             $published = $this->_element->createElement('published', date(DATE_ATOM, $array->published));
             $feed->appendChild($published);
         }
@@ -221,28 +221,28 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
         $link = $this->_element->createElement('link');
         $link->setAttribute('rel', 'self');
         $link->setAttribute('href', $array->link);
-        if (isset($array->language)) {
+        if (property_exists($array, 'language') && $array->language !== null) {
             $link->setAttribute('hreflang', $array->language);
         }
         $feed->appendChild($link);
 
-        if (isset($array->description)) {
+        if (property_exists($array, 'description') && $array->description !== null) {
             $subtitle = $this->_element->createElement('subtitle');
             $subtitle->appendChild($this->_element->createCDATASection($array->description));
             $feed->appendChild($subtitle);
         }
 
-        if (isset($array->copyright)) {
+        if (property_exists($array, 'copyright') && $array->copyright !== null) {
             $copyright = $this->_element->createElement('rights', $array->copyright);
             $feed->appendChild($copyright);
         }
 
-        if (isset($array->image)) {
+        if (property_exists($array, 'image') && $array->image !== null) {
             $image = $this->_element->createElement('logo', $array->image);
             $feed->appendChild($image);
         }
 
-        $generator = !empty($array->generator) ? $array->generator : 'Zend_Feed';
+        $generator = empty($array->generator) ? 'Zend_Feed' : $array->generator;
         $generator = $this->_element->createElement('generator', $generator);
         $feed->appendChild($generator);
 
@@ -271,14 +271,14 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
         foreach ($array as $dataentry) {
             $entry = $this->_element->createElement('entry');
 
-            $id = $this->_element->createElement('id', isset($dataentry->guid) ? $dataentry->guid : $dataentry->link);
+            $id = $this->_element->createElement('id', property_exists($dataentry, 'guid') && $dataentry->guid !== null ? $dataentry->guid : $dataentry->link);
             $entry->appendChild($id);
 
             $title = $this->_element->createElement('title');
             $title->appendChild($this->_element->createCDATASection($dataentry->title));
             $entry->appendChild($title);
 
-            $updated = isset($dataentry->lastUpdate) ? $dataentry->lastUpdate : time();
+            $updated = property_exists($dataentry, 'lastUpdate') && $dataentry->lastUpdate !== null ? $dataentry->lastUpdate : time();
             $updated = $this->_element->createElement('updated', date(DATE_ATOM, $updated));
             $entry->appendChild($updated);
 
@@ -291,14 +291,14 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
             $summary->appendChild($this->_element->createCDATASection($dataentry->description));
             $entry->appendChild($summary);
 
-            if (isset($dataentry->content)) {
+            if (property_exists($dataentry, 'content') && $dataentry->content !== null) {
                 $content = $this->_element->createElement('content');
                 $content->setAttribute('type', 'html');
                 $content->appendChild($this->_element->createCDATASection($dataentry->content));
                 $entry->appendChild($content);
             }
 
-            if (isset($dataentry->category)) {
+            if (property_exists($dataentry, 'category') && $dataentry->category !== null) {
                 foreach ($dataentry->category as $category) {
                     $node = $this->_element->createElement('category');
                     $node->setAttribute('term', $category['term']);
@@ -309,7 +309,7 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
                 }
             }
 
-            if (isset($dataentry->source)) {
+            if (property_exists($dataentry, 'source') && $dataentry->source !== null) {
                 $source = $this->_element->createElement('source');
                 $title = $this->_element->createElement('title', $dataentry->source['title']);
                 $source->appendChild($title);
@@ -319,7 +319,7 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
                 $source->appendChild($link);
             }
 
-            if (isset($dataentry->enclosure)) {
+            if (property_exists($dataentry, 'enclosure') && $dataentry->enclosure !== null) {
                 foreach ($dataentry->enclosure as $enclosure) {
                     $node = $this->_element->createElement('link');
                     $node->setAttribute('rel', 'enclosure');
@@ -334,13 +334,13 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
                 }
             }
 
-            if (isset($dataentry->comments)) {
+            if (property_exists($dataentry, 'comments') && $dataentry->comments !== null) {
                 $comments = $this->_element->createElementNS('http://wellformedweb.org/CommentAPI/',
                                                              'wfw:comment',
                                                              $dataentry->comments);
                 $entry->appendChild($comments);
             }
-            if (isset($dataentry->commentRss)) {
+            if (property_exists($dataentry, 'commentRss') && $dataentry->commentRss !== null) {
                 $comments = $this->_element->createElementNS('http://wellformedweb.org/CommentAPI/',
                                                              'wfw:commentRss',
                                                              $dataentry->commentRss);

@@ -163,8 +163,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
     public function getStack()
     {
         $registry = $this->getRegistry();
-        $stack    = $registry[$this->getRegistryKey()];
-        return $stack;
+        return $registry[$this->getRegistryKey()];
     }
 
     /**
@@ -189,7 +188,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
     public function pushStack(Zend_Controller_Request_Abstract $next)
     {
         $stack = $this->getStack();
-        array_push($stack, $next);
+        $stack[] = $next;
         return $this->_saveStack($stack);
     }
 
@@ -214,7 +213,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
         }
         $action = $next->getActionName();
         if (empty($action)) {
-            return $this->popStack($stack);
+            return $this->popStack();
         }
 
         $request    = $this->getRequest();

@@ -114,12 +114,12 @@ class Zend_Http_Cookie
             throw new Zend_Http_Exception("Cookie name cannot contain these characters: =,; \\t\\r\\n\\013\\014 ({$name})");
         }
 
-        if (! $this->name = (string) $name) {
+        if (($this->name = (string) $name) === '' || ($this->name = (string) $name) === '0') {
             require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception('Cookies must have a name');
         }
 
-        if (! $this->domain = (string) $domain) {
+        if (($this->domain = (string) $domain) === '' || ($this->domain = (string) $domain) === '0') {
             require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception('Cookies must have a domain');
         }
@@ -247,14 +247,9 @@ class Zend_Http_Cookie
         if (! self::matchCookieDomain($this->getDomain(), $uri->getHost())) {
             return false;
         }
-
         // Check that path matches using prefix match
-        if (! self::matchCookiePath($this->getPath(), $uri->getPath())) {
-            return false;
-        }
-
         // If we didn't die until now, return true.
-        return true;
+        return self::matchCookiePath($this->getPath(), $uri->getPath());
     }
 
     /**
@@ -357,7 +352,7 @@ class Zend_Http_Cookie
 
         if ($name !== '') {
             $ret = new self($name, $value, $domain, $expires, $path, $secure);
-            $ret->encodeValue = ($encodeValue) ? true : false;
+            $ret->encodeValue = $encodeValue;
             return $ret;
         } else {
             return false;
@@ -376,12 +371,12 @@ class Zend_Http_Cookie
      */
     public static function matchCookieDomain($cookieDomain, $host)
     {
-        if (! $cookieDomain) {
+        if ($cookieDomain === '' || $cookieDomain === '0') {
             require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$cookieDomain is expected to be a cookie domain");
         }
 
-        if (! $host) {
+        if ($host === '' || $host === '0') {
             require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$host is expected to be a host name");
         }
@@ -394,8 +389,8 @@ class Zend_Http_Cookie
         }
 
         // Check for either exact match or suffix match
-        return ($cookieDomain == $host ||
-                preg_match('/\.' . preg_quote($cookieDomain) . '$/', $host));
+        return ($cookieDomain === $host ||
+                preg_match('/\.' . preg_quote($cookieDomain, '/') . '$/', $host));
     }
 
     /**
@@ -409,12 +404,12 @@ class Zend_Http_Cookie
      */
     public static function matchCookiePath($cookiePath, $path)
     {
-        if (! $cookiePath) {
+        if ($cookiePath === '' || $cookiePath === '0') {
             require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$cookiePath is expected to be a cookie path");
         }
 
-        if (! $path) {
+        if ($path === '' || $path === '0') {
             require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("\$path is expected to be a host name");
         }

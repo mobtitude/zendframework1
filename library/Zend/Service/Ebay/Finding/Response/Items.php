@@ -81,7 +81,7 @@ class Zend_Service_Ebay_Finding_Response_Items extends Zend_Service_Ebay_Finding
         );
 
         $node = $this->_xPath->query(".//$ns:searchResult[1]", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_Search_Result
              */
@@ -90,7 +90,7 @@ class Zend_Service_Ebay_Finding_Response_Items extends Zend_Service_Ebay_Finding
         }
 
         $node = $this->_xPath->query(".//$ns:paginationOutput[1]", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_PaginationOutput
              */
@@ -139,12 +139,8 @@ class Zend_Service_Ebay_Finding_Response_Items extends Zend_Service_Ebay_Finding
                 if (!is_array($productId)) {
                     $productId = array('' => $productId);
                 }
-                $arguments[] = array_key_exists('', $productId)
-                             ? $productId['']
-                             : null;
-                $arguments[] = array_key_exists('type', $productId)
-                             ? $productId['type']
-                             : null;
+                $arguments[] = $productId[''] ?? null;
+                $arguments[] = $productId['type'] ?? null;
                 break;
 
             case 'findItemsIneBayStores':

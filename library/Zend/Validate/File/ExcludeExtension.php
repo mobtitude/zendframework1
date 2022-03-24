@@ -74,16 +74,15 @@ class Zend_Validate_File_ExcludeExtension extends Zend_Validate_File_Extension
 
         $extensions = $this->getExtension();
 
-        if ($this->_case and (!in_array($info['extension'], $extensions))) {
+        if ($this->_case && !in_array($info['extension'], $extensions)) {
             return true;
-        } else if (!$this->_case) {
+        } elseif (!$this->_case) {
             $found = false;
             foreach ($extensions as $extension) {
-                if (strtolower($extension) == strtolower($info['extension'])) {
+                if (strtolower($extension) === strtolower($info['extension'])) {
                     $found = true;
                 }
             }
-
             if (!$found) {
                 return true;
             }

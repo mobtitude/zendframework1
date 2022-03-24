@@ -213,8 +213,7 @@ class Zend_Oauth_Consumer extends Zend_Oauth
             if ($authorizedToken->getToken() !== $token->getToken()) {
                 require_once 'Zend/Oauth/Exception.php';
                 throw new Zend_Oauth_Exception(
-                    'Authorized token from Service Provider does not match'
-                    . ' supplied Request Token details'
+                    'Authorized token from Service Provider does not match supplied Request Token details'
                 );
             }
         } else {

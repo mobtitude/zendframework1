@@ -214,9 +214,7 @@ class Zend_Gdata_Docs_Query extends Zend_Gdata_Query
             throw new Zend_Gdata_App_Exception(
                 'A projection must be provided for cell queries.');
         }
-
-        $uri .= $this->getQueryString();
-        return $uri;
+        return $uri . $this->getQueryString();
     }
 
 }

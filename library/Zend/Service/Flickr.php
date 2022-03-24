@@ -153,13 +153,7 @@ class Zend_Service_Flickr
 
 
         // can't access by username, must get ID first
-        if (strchr($query, '@')) {
-            // optimistically hope this is an email
-            $options['user_id'] = $this->getIdByEmail($query);
-        } else {
-            // we can safely ignore this exception here
-            $options['user_id'] = $this->getIdByUsername($query);
-        }
+        $options['user_id'] = strstr($query, '@') ? $this->getIdByEmail($query) : $this->getIdByUsername($query);
 
         $options = $this->_prepareOptions($method, $options, $defaultOptions);
         $this->_validateUserSearch($options);
@@ -612,7 +606,7 @@ class Zend_Service_Flickr
     protected function _compareOptions(array $options, array $validOptions)
     {
         $difference = array_diff(array_keys($options), $validOptions);
-        if ($difference) {
+        if ($difference !== []) {
             /**
              * @see Zend_Service_Exception
              */

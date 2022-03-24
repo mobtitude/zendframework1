@@ -71,12 +71,7 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
             ));
         }
 
-        if($nestingLevel == 1) {
-            // The following blocks define the Array of Object structure
-            $xsdComplexTypeName = $this->_addArrayOfComplexType($singularType, $type);
-        } else {
-            $xsdComplexTypeName = $singularType;
-        }
+        $xsdComplexTypeName = $nestingLevel == 1 ? $this->_addArrayOfComplexType($singularType, $type) : $singularType;
 
         // The array for the objects has been created, now build the object definition:
         if(!in_array($singularType, $this->getContext()->getTypes())) {

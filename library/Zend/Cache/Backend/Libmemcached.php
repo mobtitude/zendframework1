@@ -132,10 +132,8 @@ class Zend_Cache_Backend_Libmemcached extends Zend_Cache_Backend implements Zend
                     $this->_log("Unknown memcached client option '{$name}' ({$optConst})");
                 }
             }
-            if (null !== $optId) {
-                if (!$this->_memcache->setOption($optId, $value)) {
-                    $this->_log("Setting memcached client option '{$optId}' failed");
-                }
+            if (null !== $optId && !$this->_memcache->setOption($optId, $value)) {
+                $this->_log("Setting memcached client option '{$optId}' failed");
             }
         }
 
@@ -209,7 +207,7 @@ class Zend_Cache_Backend_Libmemcached extends Zend_Cache_Backend implements Zend
             $this->_log("Memcached::set() failed: [{$rsCode}] {$rsMsg}");
         }
 
-        if (count($tags) > 0) {
+        if ($tags !== []) {
             $this->_log(self::TAGS_UNSUPPORTED_BY_SAVE_OF_LIBMEMCACHED_BACKEND);
         }
 

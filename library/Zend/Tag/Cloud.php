@@ -147,7 +147,7 @@ class Zend_Tag_Cloud
         foreach ($tags as $tag) {
             if ($tag instanceof Zend_Tag_Taggable) {
                 $itemList[] = $tag;
-            } else if (is_array($tag)) {
+            } elseif (is_array($tag)) {
                 $itemList[] = new Zend_Tag_Item($tag);
             } else {
                 require_once 'Zend/Tag/Cloud/Exception.php';
@@ -169,7 +169,7 @@ class Zend_Tag_Cloud
         $tags = $this->getItemList();
         if ($tag instanceof Zend_Tag_Taggable) {
             $tags[] = $tag;
-        } else if (is_array($tag)) {
+        } elseif (is_array($tag)) {
             $tags[] = new Zend_Tag_Item($tag);
         } else {
             require_once 'Zend/Tag/Cloud/Exception.php';
@@ -385,9 +385,8 @@ class Zend_Tag_Cloud
         }
 
         $tagsResult  = $this->getTagDecorator()->render($tags);
-        $cloudResult = $this->getCloudDecorator()->render($tagsResult);
 
-        return $cloudResult;
+        return $this->getCloudDecorator()->render($tagsResult);
     }
 
     /**
@@ -398,8 +397,7 @@ class Zend_Tag_Cloud
     public function __toString()
     {
         try {
-            $result = $this->render();
-            return $result;
+            return $this->render();
         } catch (Exception $e) {
             $message = "Exception caught by tag cloud: " . $e->getMessage()
                      . "\nStack Trace:\n" . $e->getTraceAsString();

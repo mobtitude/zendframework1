@@ -64,13 +64,12 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['quotestyle'] = array_shift($options);
             if (!empty($options)) {
                 $temp['charset'] = array_shift($options);
             }
-
             $options = $temp;
         }
 
@@ -206,7 +205,7 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
             $enc      = $this->getEncoding();
             $value    = iconv('', $enc . '//IGNORE', (string) $value);
             $filtered = htmlentities($value, $this->getQuoteStyle(), $enc, $this->getDoubleQuote());
-            if (!strlen($filtered)) {
+            if ($filtered === '') {
                 require_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception('Encoding mismatch has resulted in htmlentities errors');
             }

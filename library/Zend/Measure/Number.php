@@ -144,7 +144,7 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
      */
     public function __construct($value, $type, $locale = null)
     {
-        if (($type !== null) and (Zend_Locale::isLocale($type, null, false))) {
+        if ($type !== null && Zend_Locale::isLocale($type, null, false)) {
             $locale = $type;
             $type = null;
         }
@@ -168,7 +168,7 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
             $type = $this->_units['STANDARD'];
         }
 
-        if (isset($this->_units[$type]) === false) {
+        if (!isset($this->_units[$type])) {
             require_once 'Zend/Measure/Exception.php';
             throw new Zend_Measure_Exception("Type ($type) is unknown");
         }
@@ -296,14 +296,15 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
             $input = preg_replace(array_keys(self::$_romanconvert), array_values(self::$_romanconvert), $input);
 
             $split = preg_split('//', strrev($input), -1, PREG_SPLIT_NO_EMPTY);
+            $splitCount = count($split);
 
-            for ($x =0; $x < sizeof($split); $x++) {
+            for ($x =0; $x < $splitCount; $x++) {
                 if ($split[$x] == '/') {
                     continue;
                 }
 
                 $num = self::$_roman[$split[$x]];
-                if (($x > 0 and ($split[$x-1] != '/') and ($num < self::$_roman[$split[$x-1]]))) {
+                if (($x > 0 && $split[$x-1] != '/' && $num < self::$_roman[$split[$x-1]])) {
                     $num -= $num;
                 }
 
@@ -332,7 +333,7 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
             $count    = 200;
             $base     = $this->_units[$type][0];
 
-            while (call_user_func(Zend_Locale_Math::$comp, $value, 0, 25) <> 0) {
+            while (call_user_func(Zend_Locale_Math::$comp, $value, 0, 25) != 0) {
                 $target = call_user_func(Zend_Locale_Math::$mod, $value, $base);
 
                 $newvalue = strtoupper(dechex($target)) . $newvalue;
@@ -358,7 +359,7 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
             $romanval = array_values(array_reverse(self::$_roman));
             $romankey = array_keys(array_reverse(self::$_roman));
             $count    = 200;
-            while (call_user_func(Zend_Locale_Math::$comp, $value, 0, 25) <> 0) {
+            while (call_user_func(Zend_Locale_Math::$comp, $value, 0, 25) != 0) {
                 while ($value >= $romanval[$i]) {
                     $value    -= $romanval[$i];
                     $newvalue .= $romankey[$i];
@@ -392,12 +393,12 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
      */
     public function setType($type)
     {
-        if (empty($this->_units[$type]) === true) {
+        if (empty($this->_units[$type])) {
             require_once 'Zend/Measure/Exception.php';
             throw new Zend_Measure_Exception('Unknown type of number:' . $type);
         }
 
-        $value = $this->_toDecimal($this->getValue(-1), $this->getType(-1));
+        $value = $this->_toDecimal($this->getValue(-1), $this->getType());
         $value = $this->_fromDecimal($value, $type);
 
         $this->_value = $value;

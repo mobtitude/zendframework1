@@ -500,11 +500,7 @@ class Zend_Service_Rackspace_Servers extends Zend_Service_Rackspace_Abstract
             require_once 'Zend/Service/Rackspace/Exception.php';
             throw new Zend_Service_Rackspace_Exception('You didn\'t specified the ID of the server');
         }
-        if (!$hard) {
-            $type= 'SOFT';
-        } else {
-            $type= 'HARD';
-        }
+        $type = $hard ? 'HARD' : 'SOFT';
         $data= array (
             'reboot' => array (
                 'type' => $type

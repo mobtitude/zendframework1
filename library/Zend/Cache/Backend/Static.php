@@ -137,11 +137,7 @@ class Zend_Cache_Backend_Static
      */
     public function load($id, $doNotTestCacheValidity = false)
     {
-        if (($id = (string)$id) === '') {
-            $id = $this->_detectId();
-        } else {
-            $id = $this->_decodeId($id);
-        }
+        $id = ($id = (string)$id) === '' ? $this->_detectId() : $this->_decodeId($id);
         if (!$this->_verifyPath($id)) {
             Zend_Cache::throwException('Invalid cache id: does not match expected public_dir path');
         }
@@ -156,8 +152,7 @@ class Zend_Cache_Backend_Static
         $pathName = $this->_options['public_dir'] . dirname($id);
         $file     = rtrim($pathName, '/') . '/' . $fileName . $this->_options['file_extension'];
         if (file_exists($file)) {
-            $content = file_get_contents($file);
-            return $content;
+            return file_get_contents($file);
         }
 
         return false;
@@ -188,16 +183,9 @@ class Zend_Cache_Backend_Static
         $pathName = $this->_options['public_dir'] . dirname($id);
 
         // Switch extension if needed
-        if (isset($this->_tagged[$id])) {
-            $extension = $this->_tagged[$id]['extension'];
-        } else {
-            $extension = $this->_options['file_extension'];
-        }
+        $extension = isset($this->_tagged[$id]) ? $this->_tagged[$id]['extension'] : $this->_options['file_extension'];
         $file     = $pathName . '/' . $fileName . $extension;
-        if (file_exists($file)) {
-            return true;
-        }
-        return false;
+        return file_exists($file);
     }
 
     /**
@@ -225,11 +213,7 @@ class Zend_Cache_Backend_Static
         }
 
         clearstatcache();
-        if (($id = (string)$id) === '') {
-            $id = $this->_detectId();
-        } else {
-            $id = $this->_decodeId($id);
-        }
+        $id = ($id = (string)$id) === '' ? $this->_detectId() : $this->_decodeId($id);
 
         $fileName = basename($id);
         if ($fileName === '') {
@@ -317,11 +301,7 @@ class Zend_Cache_Backend_Static
         } elseif (!$this->_tagged) {
             return false;
         }
-        if (isset($this->_tagged[$id])) {
-            $extension = $this->_tagged[$id]['extension'];
-        } else {
-            $extension = $this->_options['file_extension'];
-        }
+        $extension = isset($this->_tagged[$id]) ? $this->_tagged[$id]['extension'] : $this->_options['file_extension'];
         if ($fileName === '') {
             $fileName = $this->_options['index_filename'];
         }
@@ -359,10 +339,8 @@ class Zend_Cache_Backend_Static
             }
             if (is_dir($directory)) {
                 foreach (new DirectoryIterator($directory) as $file) {
-                    if (true === $file->isFile()) {
-                        if (false === unlink($file->getPathName())) {
-                            return false;
-                        }
+                    if ($file->isFile() && !unlink($file->getPathName())) {
+                        return false;
                     }
                 }
             }
@@ -560,7 +538,7 @@ class Zend_Cache_Backend_Static
      */
     protected function _octdec($val)
     {
-        if (is_string($val) && decoct(octdec($val)) == $val) {
+        if (is_string($val) && decoct(octdec($val)) === $val) {
             return octdec($val);
         }
         return $val;

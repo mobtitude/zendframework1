@@ -52,7 +52,7 @@ abstract class Zend_OpenId_Extension
                         return false;
                     }
                 }
-            } else if (!is_object($extensions) ||
+            } elseif (!is_object($extensions) ||
                        !($extensions instanceof Zend_OpenId_Extension) ||
                        !$extensions->$func($params)) {
                 return false;

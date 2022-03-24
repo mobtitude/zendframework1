@@ -133,7 +133,9 @@ abstract class Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
 		    $operation = $operations[0];
 		    $rawData .= '--' . $batchBoundary . "\n";
             $rawData .= 'Content-Type: application/http' . "\n";
-            $rawData .= 'Content-Transfer-Encoding: binary' . "\n\n";
+            $rawData .= 'Content-Transfer-Encoding: binary
+
+';
             $rawData .= $operation; 
             $rawData .= '--' . $batchBoundary . '--';
 		} else {
@@ -145,7 +147,9 @@ abstract class Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
         		{
                     $rawData .= '--' . $changesetBoundary . "\n";
                 	$rawData .= 'Content-Type: application/http' . "\n";
-                	$rawData .= 'Content-Transfer-Encoding: binary' . "\n\n";
+                	$rawData .= 'Content-Transfer-Encoding: binary
+
+';
                 	$rawData .= $operation;
         		}
         		$rawData .= '--' . $changesetBoundary . '--' . "\n";

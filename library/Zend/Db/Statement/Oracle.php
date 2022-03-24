@@ -121,7 +121,7 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
         }
 
         $retval = @oci_bind_by_name($this->_stmt, $parameter, $variable, $length, $type);
-        if ($retval === false) {
+        if (!$retval) {
             /**
              * @see Zend_Db_Adapter_Oracle_Exception
              */
@@ -255,7 +255,7 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
         }
 
         $retval = @oci_execute($this->_stmt, $this->_adapter->_getExecuteMode());
-        if ($retval === false) {
+        if (!$retval) {
             /**
              * @see Zend_Db_Adapter_Oracle_Exception
              */
@@ -264,7 +264,7 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
         }
 
         $this->_keys = Array();
-        if ($field_num = oci_num_fields($this->_stmt)) {
+        if (($field_num = oci_num_fields($this->_stmt)) !== 0) {
             for ($i = 1; $i <= $field_num; $i++) {
                 $name = oci_field_name($this->_stmt, $i);
                 $this->_keys[] = $name;
@@ -394,7 +394,7 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
             case Zend_Db::FETCH_OBJ:
                 break;
             case Zend_Db::FETCH_COLUMN:
-                $flags = $flags &~ OCI_FETCHSTATEMENT_BY_ROW;
+                $flags &= ~ OCI_FETCHSTATEMENT_BY_ROW;
                 $flags |= OCI_FETCHSTATEMENT_BY_COLUMN;
                 $flags |= OCI_NUM;
                 break;
@@ -414,7 +414,7 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
 
         $result = Array();
         if ($flags != OCI_FETCHSTATEMENT_BY_ROW) { /* not Zend_Db::FETCH_OBJ */
-            if (! ($rows = oci_fetch_all($this->_stmt, $result, 0, -1, $flags) )) {
+            if (($rows = oci_fetch_all($this->_stmt, $result, 0, -1, $flags)) === 0) {
                 if ($error = oci_error($this->_stmt)) {
                     /**
                      * @see Zend_Db_Adapter_Oracle_Exception
@@ -422,7 +422,7 @@ class Zend_Db_Statement_Oracle extends Zend_Db_Statement
                     require_once 'Zend/Db/Statement/Oracle/Exception.php';
                     throw new Zend_Db_Statement_Oracle_Exception($error);
                 }
-                if (!$rows) {
+                if ($rows === 0) {
                     return array();
                 }
             }

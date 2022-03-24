@@ -224,11 +224,7 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         }
 
         if (is_object($value)) {
-            if (!in_array('__toString', get_class_methods($value))) {
-                $value = get_class($value) . ' object';
-            } else {
-                $value = $value->__toString();
-            }
+            $value = in_array('__toString', get_class_methods($value)) ? $value->__toString() : get_class($value) . ' object';
         } elseif (is_array($value)) {
             $value = $this->_implodeRecursive($value);
         } else {
@@ -266,11 +262,7 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     {
         $values = array();
         foreach ($pieces as $item) {
-            if (is_array($item)) {
-                $values[] = $this->_implodeRecursive($item);
-            } else {
-                $values[] = $item;
-            }
+            $values[] = is_array($item) ? $this->_implodeRecursive($item) : $item;
         }
 
         return implode(', ', $values);
@@ -372,7 +364,7 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
             return null;
         }
 
-        if (null === $this->_translator) {
+        if (!$this->_translator instanceof \Zend_Translate_Adapter) {
             return self::getDefaultTranslator();
         }
 
@@ -414,7 +406,7 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
      */
     public static function getDefaultTranslator()
     {
-        if (null === self::$_defaultTranslator) {
+        if (!self::$_defaultTranslator instanceof \Zend_Translate_Adapter) {
             require_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Translate')) {
                 $translator = Zend_Registry::get('Zend_Translate');

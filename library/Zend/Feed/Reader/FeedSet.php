@@ -67,11 +67,11 @@ class Zend_Feed_Reader_FeedSet extends ArrayObject
                 || !$link->getAttribute('type') || !$link->getAttribute('href')) {
                 continue;
             }
-            if (!isset($this->rss) && $link->getAttribute('type') == 'application/rss+xml') {
+            if (!($this->rss !== null) && $link->getAttribute('type') == 'application/rss+xml') {
                 $this->rss = $this->_absolutiseUri(trim($link->getAttribute('href')), $uri);
-            } elseif(!isset($this->atom) && $link->getAttribute('type') == 'application/atom+xml') {
+            } elseif(!($this->atom !== null) && $link->getAttribute('type') == 'application/atom+xml') {
                 $this->atom = $this->_absolutiseUri(trim($link->getAttribute('href')), $uri);
-            } elseif(!isset($this->rdf) && $link->getAttribute('type') == 'application/rdf+xml') {
+            } elseif(!($this->rdf !== null) && $link->getAttribute('type') == 'application/rdf+xml') {
                 $this->rdf = $this->_absolutiseUri(trim($link->getAttribute('href')), $uri);
             }
             $this[] = new self(array(
@@ -87,18 +87,14 @@ class Zend_Feed_Reader_FeedSet extends ArrayObject
      */
     protected function _absolutiseUri($link, $uri = null)
     {
-        if (!Zend_Uri::check($link)) {
-            if ($uri !== null) {
-                $uri = Zend_Uri::factory($uri);
-
-                if ($link[0] !== '/') {
-                    $link = $uri->getPath() . '/' . $link;
-                }
-
-                $link = $uri->getScheme() . '://' . $uri->getHost() . '/' . $this->_canonicalizePath($link);
-                if (!Zend_Uri::check($link)) {
-                    $link = null;
-                }
+        if (!Zend_Uri::check($link) && $uri !== null) {
+            $uri = Zend_Uri::factory($uri);
+            if ($link[0] !== '/') {
+                $link = $uri->getPath() . '/' . $link;
+            }
+            $link = $uri->getScheme() . '://' . $uri->getHost() . '/' . $this->_canonicalizePath($link);
+            if (!Zend_Uri::check($link)) {
+                $link = null;
             }
         }
         return $link;

@@ -149,11 +149,7 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
                 // A value may be a constant.
                 if (is_string($value)) {
                     $constantName = strtoupper($value);
-                    if (defined($constantName)) {
-                        $connectionInfo[$option] = constant($constantName);
-                    } else {
-                        $connectionInfo[$option] = $value;
-                    }
+                    $connectionInfo[$option] = defined($constantName) ? constant($constantName) : $value;
                 }
             }
         }
@@ -491,11 +487,7 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
             }
 
             $isPrimary = array_key_exists($row[$column_name], $primaryKeyColumn);
-            if ($isPrimary) {
-                $primaryPosition = $primaryKeyColumn[$row[$column_name]];
-            } else {
-                $primaryPosition = null;
-            }
+            $primaryPosition = $isPrimary ? $primaryKeyColumn[$row[$column_name]] : null;
 
             $desc[$this->foldCase($row[$column_name])] = array(
                 'SCHEMA_NAME'      => null, // @todo
@@ -600,13 +592,13 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
      */
      public function limit($sql, $count, $offset = 0)
      {
-        $count = intval($count);
+        $count = (int) $count;
         if ($count <= 0) {
             require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
         }
 
-        $offset = intval($offset);
+        $offset = (int) $offset;
         if ($offset < 0) {
             /** @see Zend_Db_Adapter_Exception */
             require_once 'Zend/Db/Adapter/Exception.php';
@@ -618,11 +610,7 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
         } else {
             $orderby = stristr($sql, 'ORDER BY');
 
-            if (!$orderby) {
-                $over = 'ORDER BY (SELECT 0)';
-            } else {
-                $over = preg_replace('/\"[^,]*\".\"([^,]*)\"/i', '"inner_tbl"."$1"', $orderby);
-            }
+            $over = $orderby ? preg_replace('/\"[^,]*\".\"([^,]*)\"/i', '"inner_tbl"."$1"', $orderby) : 'ORDER BY (SELECT 0)';
 
             // Remove ORDER BY clause from $sql
             $sql = preg_replace('/\s+ORDER BY(.*)/', '', $sql);
@@ -652,12 +640,8 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
      */
     public function supportsParameters($type)
     {
-        if ($type == 'positional') {
-            return true;
-        }
-
         // if its 'named' or anything else
-        return false;
+        return $type == 'positional';
     }
 
     /**

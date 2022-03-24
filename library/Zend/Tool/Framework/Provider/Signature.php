@@ -365,7 +365,8 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
             if (($docComment = $method->getDocComment()) != '' &&
                 (preg_match_all('/@param\s+(\w+)+\s+(\$\S+)\s+(.*?)(?=(?:\*\s*@)|(?:\*\/))/s', (string) $docComment, $matches)))
             {
-                for ($i=0; $i <= count($matches[0])-1; $i++) {
+                $itemsCount = count($matches[0]);
+                for ($i=0; $i <= $itemsCount-1; $i++) {
                     $currentParam = ltrim($matches[2][$i], '$');
 
                     if ($currentParam != '' && isset($parameterInfo[$currentParam])) {

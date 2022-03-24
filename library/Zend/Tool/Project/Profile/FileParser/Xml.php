@@ -194,7 +194,7 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
             $subResource = new Zend_Tool_Project_Profile_Resource($contextName);
             $subResource->setProfile($this->_profile);
 
-            if ($resourceAttributes = $resourceData->attributes()) {
+            if (($resourceAttributes = $resourceData->attributes()) !== null) {
                 $attributes = array();
                 foreach ($resourceAttributes as $attrName => $attrValue) {
                     $attributes[$attrName] = (string) $attrValue;
@@ -202,7 +202,7 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
                 $subResource->setAttributes($attributes);
             }
 
-            if ($resource) {
+            if ($resource !== null) {
                 $resource->append($subResource, false);
             } else {
                 $this->_profile->append($subResource);

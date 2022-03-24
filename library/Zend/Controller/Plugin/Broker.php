@@ -50,14 +50,14 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
      */
     public function registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex = null)
     {
-        if (false !== array_search($plugin, $this->_plugins, true)) {
+        if (in_array($plugin, $this->_plugins, true)) {
             require_once 'Zend/Controller/Exception.php';
             throw new Zend_Controller_Exception('Plugin already registered');
         }
 
         $stackIndex = (int) $stackIndex;
 
-        if ($stackIndex) {
+        if ($stackIndex !== 0) {
             if (isset($this->_plugins[$stackIndex])) {
                 require_once 'Zend/Controller/Exception.php';
                 throw new Zend_Controller_Exception('Plugin with stackIndex "' . $stackIndex . '" already registered');

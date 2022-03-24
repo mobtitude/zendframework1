@@ -129,7 +129,7 @@ class Zend_Tool_Framework_System_Provider_Config extends Zend_Tool_Framework_Pro
         $tree = "";
         foreach($configArray AS $k => $v) {
             $i++;
-            $tree .= $this->_printTree($k, $v, 1, count($configArray)==$i);
+            $tree .= $this->_printTree($k, $v, 1, count($configArray) === $i);
         }
         $resp->appendContent("User Configuration: ".$userConfig->getConfigFilepath(), array("color" => "green"));
         $resp->appendContent($tree, array("indention" => 2));
@@ -154,11 +154,7 @@ class Zend_Tool_Framework_System_Provider_Config extends Zend_Tool_Framework_Pro
                 $prefix .= "|   ";
             }
         }
-        if ($isLast) {
-            $pointer = "`-- ";
-        } else {
-            $pointer = "|-- ";
-        }
+        $pointer = $isLast ? "`-- " : "|-- ";
 
         $tree = "";
         if (is_array($value)) {
@@ -211,20 +207,16 @@ class Zend_Tool_Framework_System_Provider_Config extends Zend_Tool_Framework_Pro
 
         $userConfig = $this->_loadUserConfigIfExists();
 
-        if (!isset($userConfig->basicloader)) {
+        if (!(property_exists($userConfig, 'basicloader') && $userConfig->basicloader !== null)) {
             $userConfig->basicloader = array();
         }
-        if (!isset($userConfig->basicloader->classes)) {
+        if (!(property_exists($userConfig->basicloader, 'classes') && $userConfig->basicloader->classes !== null)) {
             $userConfig->basicloader->classes = array();
         }
 
         $providerClasses = $userConfig->basicloader->classes->toArray();
         if (!in_array($className, $providerClasses)) {
-            if (count($providerClasses)) {
-                $pos = max(array_keys($providerClasses))+1;
-            } else {
-                $pos = 0;
-            }
+            $pos = count($providerClasses) > 0 ? max(array_keys($providerClasses))+1 : 0;
             $userConfig->basicloader->classes->$pos = $className;
 
             if ($userConfig->save()) {
@@ -275,10 +267,10 @@ class Zend_Tool_Framework_System_Provider_Config extends Zend_Tool_Framework_Pro
     {
         $userConfig = $this->_loadUserConfigIfExists();
 
-        if (!isset($userConfig->basicloader)) {
+        if (!(property_exists($userConfig, 'basicloader') && $userConfig->basicloader !== null)) {
             $userConfig->basicloader = array();
         }
-        if (!isset($userConfig->basicloader->classes)) {
+        if (!(property_exists($userConfig->basicloader, 'classes') && $userConfig->basicloader->classes !== null)) {
             $userConfig->basicloader->classes = array();
         }
 

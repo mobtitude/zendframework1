@@ -213,15 +213,13 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
 
         foreach ($lines as $line) {
             $output .= $indent . ' *';
-            if ($line) {
+            if ($line !== '' && $line !== '0') {
                 $output .= " $line";
             }
             $output .= self::LINE_FEED;
         }
 
         $output = rtrim($output, ' *' . self::LINE_FEED) . self::LINE_FEED;
-
-        $output .= $indent . ' */' . self::LINE_FEED;
-        return $output;
+        return $output . ($indent . ' */' . self::LINE_FEED);
     }
 }

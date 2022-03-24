@@ -329,8 +329,7 @@ class Zend_Feed_Writer_Entry
         }
         if (!isset($link['type']) || !in_array($link['type'], array('atom', 'rss', 'rdf'))) {
             require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Invalid parameter: "type" must be one'
-            . ' of "atom", "rss" or "rdf"');
+            throw new Zend_Feed_Exception('Invalid parameter: "type" must be one of "atom", "rss" or "rdf"');
         }
         if (!isset($this->_data['commentFeedLinks'])) {
             $this->_data['commentFeedLinks'] = array();
@@ -550,15 +549,11 @@ class Zend_Feed_Writer_Entry
             . 'contain at least a "term" element containing the machine '
             . ' readable category name');
         }
-        if (isset($category['scheme'])) {
-            if (empty($category['scheme'])
-                || !is_string($category['scheme'])
-                || !Zend_Uri::check($category['scheme'])
-            ) {
-                require_once 'Zend/Feed/Exception.php';
-                throw new Zend_Feed_Exception('The Atom scheme or RSS domain of'
-                . ' a category must be a valid URI');
-            }
+        if (isset($category['scheme']) && (empty($category['scheme'])
+            || !is_string($category['scheme'])
+            || !Zend_Uri::check($category['scheme']))) {
+            require_once 'Zend/Feed/Exception.php';
+            throw new Zend_Feed_Exception('The Atom scheme or RSS domain of a category must be a valid URI');
         }
         if (!isset($this->_data['categories'])) {
             $this->_data['categories'] = array();

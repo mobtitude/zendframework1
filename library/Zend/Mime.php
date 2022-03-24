@@ -453,9 +453,8 @@ class Zend_Mime
         }
 
         $out = rtrim($out, $lineEnd);
-        $out = rtrim($out, '=');
 
-        return $out;
+        return rtrim($out, '=');
     }
 
     /**
@@ -468,9 +467,8 @@ class Zend_Mime
     {
         $str = str_replace('=', '=3D', $str);
         $str = str_replace(self::$qpKeys, self::$qpReplaceValues, $str);
-        $str = rtrim($str);
 
-        return $str;
+        return rtrim($str);
     }
 
     /**
@@ -526,14 +524,14 @@ class Zend_Mime
                 $lines[$currentLine] .= $tmp;
             }
         }
+        $linesCount = count($lines);
 
         // assemble the lines together by pre- and appending delimiters, charset, encoding.
-        for ($i = 0; $i < count($lines); $i++) {
+        for ($i = 0; $i < $linesCount; $i++) {
             $lines[$i] = " " . $prefix . $lines[$i] . "?=";
         }
-        $str = trim(implode($lineEnd, $lines));
 
-        return $str;
+        return trim(implode($lineEnd, $lines));
     }
 
     /**
@@ -544,13 +542,7 @@ class Zend_Mime
      */
     private static function getNextQuotedPrintableToken($str)
     {
-        if (substr($str, 0, 1) == "=") {
-            $token = substr($str, 0, 3);
-        } else {
-            $token = substr($str, 0, 1);
-        }
-
-        return $token;
+        return substr($str, 0, 1) == "=" ? substr($str, 0, 3) : substr($str, 0, 1);
     }
 
     /**
@@ -574,9 +566,8 @@ class Zend_Mime
         $encodedValue = str_replace(
             $lineEnd, $suffix . $lineEnd . ' ' . $prefix, $encodedValue
         );
-        $encodedValue = $prefix . $encodedValue . $suffix;
 
-        return $encodedValue;
+        return $prefix . $encodedValue . $suffix;
     }
 
     /**
@@ -603,11 +594,7 @@ class Zend_Mime
     public function __construct($boundary = null)
     {
         // This string needs to be somewhat unique
-        if ($boundary === null) {
-            $this->_boundary = '=_' . md5(microtime(1) . self::$makeUnique++);
-        } else {
-            $this->_boundary = $boundary;
-        }
+        $this->_boundary = $boundary === null ? '=_' . md5(microtime(1) . self::$makeUnique++) : $boundary;
     }
 
     /**

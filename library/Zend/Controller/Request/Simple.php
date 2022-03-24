@@ -47,7 +47,7 @@ class Zend_Controller_Request_Simple extends Zend_Controller_Request_Abstract
             $this->setModuleName($module);
         }
 
-        if ($params) {
+        if ($params !== []) {
             $this->setParams($params);
         }
     }

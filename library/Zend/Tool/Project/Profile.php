@@ -44,6 +44,7 @@ require_once 'Zend/Tool/Project/Profile/Resource/Container.php';
 class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Container
 {
 
+    public \Zend_Tool_Project_Profile_Resource_Container $_topResources;
     /**
      * @var bool
      */
@@ -211,8 +212,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
     public function storeToData()
     {
         $parser = new Zend_Tool_Project_Profile_FileParser_Xml();
-        $xml = $parser->serialize($this);
-        return $xml;
+        return $parser->serialize($this);
     }
 
     /**

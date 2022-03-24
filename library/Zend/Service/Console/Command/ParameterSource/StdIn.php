@@ -70,7 +70,7 @@ class Zend_Service_Console_Command_ParameterSource_StdIn
 
 			if (strtolower($parameterValue) == 'true') {
 				$parameterValue = true;
-			} else if (strtolower($parameterValue) == 'false') {
+			} elseif (strtolower($parameterValue) == 'false') {
 				$parameterValue = false;
 			}
 		}

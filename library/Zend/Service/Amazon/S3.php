@@ -255,7 +255,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
 
         $buckets = array();
         foreach ($xml->Buckets->Bucket as $bucket) {
-            $buckets[] = (string)$bucket->Name;
+            $buckets[] = (string)$bucket->getName();
         }
 
         return $buckets;
@@ -311,7 +311,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         $xml = new SimpleXMLElement($response->getBody());
 
         $objects = array();
-        if (isset($xml->Contents)) {
+        if (property_exists($xml, 'Contents') && $xml->Contents !== null) {
             foreach ($xml->Contents as $contents) {
                 foreach ($contents->Key as $object) {
                     $objects[] = (string)$object;
@@ -346,7 +346,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         $xml = new SimpleXMLElement($response->getBody());
 
         $objects = array();
-        if (isset($xml->Contents)) {
+        if (property_exists($xml, 'Contents') && $xml->Contents !== null) {
             foreach ($xml->Contents as $contents) {
                 foreach ($contents->Key as $object) {
                     $objects[] = (string)$object;
@@ -354,7 +354,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             }
         }
         $prefixes = array();
-        if (isset($xml->CommonPrefixes)) {
+        if (property_exists($xml, 'CommonPrefixes') && $xml->CommonPrefixes !== null) {
             foreach ($xml->CommonPrefixes as $prefix) {
                 foreach ($prefix->Prefix as $object) {
                     $prefixes[] = (string)$object;
@@ -384,7 +384,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             return $firstpart;
         }
 
-        return $firstpart.'/'.join('/', array_map('rawurlencode', $nameparts));
+        return $firstpart.'/'.implode('/', array_map('rawurlencode', $nameparts));
     }
 
     /**
@@ -575,12 +575,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         $headers['x-amz-metadata-directive'] = $meta === null ? 'COPY' : 'REPLACE';
 
         $response = $this->_makeRequest('PUT', $destObject, null, $headers);
-
-        if ($response->getStatus() == 200 && !stristr($response->getBody(), '<Error>')) {
-            return true;
-        }
-
-        return false;
+        return $response->getStatus() == 200 && !stristr($response->getBody(), '<Error>');
     }
 
     /**
@@ -638,7 +633,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         // build the end point out
         $parts = explode('/', $path, 2);
         $endpoint = clone($this->_endpoint);
-        if ($parts[0]) {
+        if ($parts[0] !== '' && $parts[0] !== '0') {
             // prepend bucket name to the hostname
             $endpoint->setHost($parts[0].'.'.$endpoint->getHost());
         }
@@ -651,7 +646,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         }
         else {
             $endpoint->setPath('/');
-            if ($parts[0]) {
+            if ($parts[0] !== '' && $parts[0] !== '0') {
                 $path = $parts[0].'/';
             }
         }
@@ -698,12 +693,10 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
                 $retry = true;
                 $retry_count++;
                 sleep($retry_count / 4 * $retry_count);
-            }
-            else if ($response_code == 307) {
+            } elseif ($response_code == 307) {
                 // Need to redirect, new S3 endpoint given
                 // This should never happen as Zend_Http_Client will redirect automatically
-            }
-            else if ($response_code == 100) {
+            } elseif ($response_code == 100) {
                 // echo 'OK to Continue';
             }
         } while ($retry);
@@ -731,11 +724,9 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         foreach ($headers as $key=>$val) {
             if (strcasecmp($key, 'content-type') == 0) {
                 $type = $val;
-            }
-            else if (strcasecmp($key, 'content-md5') == 0) {
+            } elseif (strcasecmp($key, 'content-md5') == 0) {
                 $md5 = $val;
-            }
-            else if (strcasecmp($key, 'date') == 0) {
+            } elseif (strcasecmp($key, 'date') == 0) {
                 $date = $val;
             }
         }
@@ -770,14 +761,11 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         $sig_str .= '/'.parse_url($path, PHP_URL_PATH);
         if (strpos($path, '?location') !== false) {
             $sig_str .= '?location';
-        }
-        else if (strpos($path, '?acl') !== false) {
+        } elseif (strpos($path, '?acl') !== false) {
             $sig_str .= '?acl';
-        }
-        else if (strpos($path, '?torrent') !== false) {
+        } elseif (strpos($path, '?torrent') !== false) {
             $sig_str .= '?torrent';
-        }
-        else if (strpos($path, '?versions') !== false) {
+        } elseif (strpos($path, '?versions') !== false) {
             $sig_str .= '?versions';
         }
 
@@ -797,7 +785,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     {
         $ext = substr(strrchr($path, '.'), 1);
 
-        if(!$ext) {
+        if($ext === '' || $ext === '0') {
             // shortcut
             return 'binary/octet-stream';
         }

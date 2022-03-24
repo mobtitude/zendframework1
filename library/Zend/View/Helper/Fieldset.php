@@ -59,11 +59,7 @@ class Zend_View_Helper_Fieldset extends Zend_View_Helper_FormElement
         }
 
         // get id
-        if (!empty($id)) {
-            $id = ' id="' . $this->view->escape($id) . '"';
-        } else {
-            $id = '';
-        }
+        $id = empty($id) ? '' : ' id="' . $this->view->escape($id) . '"';
 
         // render fieldset
         $xhtml = '<fieldset'

@@ -157,14 +157,14 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
                     $i = 0;
                     foreach (array_keys($data) as $key) {
                         // check if it contains non-integer keys
-                        if (!is_numeric($key) || intval($key) != $key) {
+                        if (!is_numeric($key) || (int) $key != $key) {
                             $markerType = Zend_Amf_Constants::AMF0_OBJECT;
                             break;
                             // check if it is a sparse indexed array
-                         } else if ($key != $i) {
-                             $markerType = Zend_Amf_Constants::AMF0_MIXEDARRAY;
-                             break;
-                         }
+                        } elseif ($key != $i) {
+                            $markerType = Zend_Amf_Constants::AMF0_MIXEDARRAY;
+                            break;
+                        }
                          $i++;
                     }
                     // Dealing with a standard numeric array
@@ -337,7 +337,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
                 $className = Zend_Amf_Parse_TypeLoader::getMappedClassName(get_class($object));
                 break;
                 // Check to see if the user has defined an explicit Action Script type.
-            case isset($object->_explicitType):
+            case property_exists($object, '_explicitType') && $object->_explicitType !== null:
                 $className = $object->_explicitType;
                 break;
                 // Check if user has defined a method for accessing the Action Script type

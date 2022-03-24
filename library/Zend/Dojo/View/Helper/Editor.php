@@ -98,11 +98,7 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
         }
 
         $hiddenName = $id;
-        if (array_key_exists('id', $attribs)) {
-            $hiddenId = $attribs['id'];
-        } else {
-            $hiddenId = $hiddenName;
-        }
+        $hiddenId = array_key_exists('id', $attribs) ? $attribs['id'] : $hiddenName;
         $hiddenId = $this->_normalizeId($hiddenId);
 
         $textareaName = $this->_normalizeEditorName($hiddenName);

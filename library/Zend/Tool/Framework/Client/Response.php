@@ -137,7 +137,7 @@ class Zend_Tool_Framework_Client_Response
      */
     public function isException()
     {
-        return isset($this->_exception);
+        return $this->_exception !== null;
     }
 
     /**
@@ -208,7 +208,7 @@ class Zend_Tool_Framework_Client_Response
 
         $options = array_change_key_case($options, CASE_LOWER);
 
-        if ($options) {
+        if ($options !== []) {
             foreach ($this->_decorators as $decoratorName => $decorator) {
                 if (array_key_exists($decoratorName, $options)) {
                     $content = $decorator->decorate($content, $options[$decoratorName]);

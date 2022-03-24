@@ -66,7 +66,7 @@ class Zend_Queue_Stomp_Client
      */
     public function __destruct()
     {
-        if ($this->getConnection()) {
+        if ($this->getConnection() !== null) {
             $this->getConnection()->close(true);
         }
     }

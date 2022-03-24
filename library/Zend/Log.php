@@ -328,7 +328,7 @@ class Zend_Log
         }
 
         // empty namespace given?
-        if (strlen((string) $namespace) === 0) {
+        if ((string) $namespace === '') {
             return $className;
         }
 
@@ -479,7 +479,7 @@ class Zend_Log
         $name = strtoupper($name);
 
         if (isset($this->_priorities[$priority])
-            || false !== array_search($name, $this->_priorities)) {
+            || in_array($name, $this->_priorities)) {
             /** @see Zend_Log_Exception */
             require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception('Existing priorities cannot be overwritten');
@@ -536,8 +536,7 @@ class Zend_Log
             /** @see Zend_Log_Exception */
             require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception(
-                'Writer must be an instance of Zend_Log_Writer_Abstract'
-                . ' or you should pass a configuration array'
+                'Writer must be an instance of Zend_Log_Writer_Abstract or you should pass a configuration array'
             );
         }
 
@@ -580,7 +579,9 @@ class Zend_Log
             return $this;
         }
 
-        $this->_origErrorHandler = set_error_handler(array($this, 'errorHandler'));
+        $this->_origErrorHandler = set_error_handler(function (int $errno, string $errstr, string $errfile, int $errline, array $errcontext) : bool {
+            return $this->errorHandler($errno, $errstr, $errfile, $errline, $errcontext);
+        });
 
         // Contruct a default map of phpErrors to Zend_Log priorities.
         // Some of the errors are uncatchable, but are included for completeness
@@ -623,12 +624,8 @@ class Zend_Log
     {
         $errorLevel = error_reporting();
 
-        if ($errorLevel & $errno) {
-            if (isset($this->_errorHandlerMap[$errno])) {
-                $priority = $this->_errorHandlerMap[$errno];
-            } else {
-                $priority = Zend_Log::INFO;
-            }
+        if (($errorLevel & $errno) !== 0) {
+            $priority = isset($this->_errorHandlerMap[$errno]) ? $this->_errorHandlerMap[$errno] : Zend_Log::INFO;
             $this->log($errstr, $priority, array('errno'=>$errno, 'file'=>$errfile, 'line'=>$errline, 'context'=>$errcontext));
         }
 

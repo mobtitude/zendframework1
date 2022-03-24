@@ -271,8 +271,7 @@ class Zend_Feed_Pubsubhubbub_Publisher
         $hubs   = $this->getHubUrls();
         if (empty($hubs)) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('No Hub Server URLs'
-                . ' have been set so no notifcations can be sent');
+            throw new Zend_Feed_Pubsubhubbub_Exception('No Hub Server URLs have been set so no notifcations can be sent');
         }
         $this->_errors = array();
         foreach ($hubs as $url) {
@@ -371,10 +370,7 @@ class Zend_Feed_Pubsubhubbub_Publisher
      */
     public function isSuccess()
     {
-        if (count($this->_errors) > 0) {
-            return false;
-        }
-        return true;
+        return !($this->_errors !== []);
     }
 
     /**
@@ -408,8 +404,7 @@ class Zend_Feed_Pubsubhubbub_Publisher
         $topics   = $this->getUpdatedTopicUrls();
         if (empty($topics)) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('No updated topic URLs'
-                . ' have been set');
+            throw new Zend_Feed_Pubsubhubbub_Exception('No updated topic URLs have been set');
         }
         foreach ($topics as $topicUrl) {
             $params[] = 'hub.url=' . urlencode($topicUrl);

@@ -501,7 +501,7 @@ class Zend_Mail extends Zend_Mime_Message
      */
     protected function _encodeHeader($value)
     {
-        if (Zend_Mime::isPrintable($value) === false) {
+        if (!Zend_Mime::isPrintable($value)) {
             if ($this->getHeaderEncoding() === Zend_Mime::ENCODING_QUOTEDPRINTABLE) {
                 $value = Zend_Mime::encodeQuotedPrintableHeader($value, $this->getCharset(), Zend_Mime::LINELENGTH, Zend_Mime::LINEEND);
             } else {
@@ -977,20 +977,19 @@ class Zend_Mail extends Zend_Mime_Message
         if ($this->_date === null) {
             if ($date === null) {
                 $date = date('r');
-            } else if (is_int($date)) {
+            } elseif (is_int($date)) {
                 $date = date('r', $date);
-            } else if (is_string($date)) {
+            } elseif (is_string($date)) {
                 $date = strtotime($date);
                 if ($date === false || $date < 0) {
                     /**
                      * @see Zend_Mail_Exception
                      */
                     require_once 'Zend/Mail/Exception.php';
-                    throw new Zend_Mail_Exception('String representations of Date Header must be ' .
-                                                  'strtotime()-compatible');
+                    throw new Zend_Mail_Exception('String representations of Date Header must be strtotime()-compatible');
                 }
                 $date = date('r', $date);
-            } else if ($date instanceof Zend_Date) {
+            } elseif ($date instanceof Zend_Date) {
                 $date = $date->get(Zend_Date::RFC_2822);
             } else {
                 /**
@@ -1112,17 +1111,9 @@ class Zend_Mail extends Zend_Mime_Message
 
         $rand = mt_rand();
 
-        if ($this->_recipients !== array()) {
-            $recipient = array_rand($this->_recipients);
-        } else {
-            $recipient = 'unknown';
-        }
+        $recipient = $this->_recipients !== array() ? array_rand($this->_recipients) : 'unknown';
 
-        if (isset($_SERVER["SERVER_NAME"])) {
-            $hostName = $_SERVER["SERVER_NAME"];
-        } else {
-            $hostName = php_uname('n');
-        }
+        $hostName = isset($_SERVER["SERVER_NAME"]) ? $_SERVER["SERVER_NAME"] : php_uname('n');
 
         return sha1($time . $user . $rand . $recipient) . '@' . $hostName;
     }
@@ -1271,11 +1262,7 @@ class Zend_Mail extends Zend_Mime_Message
             return $email;
         } else {
             $encodedName = $this->_encodeHeader($name);
-            if ($encodedName === $name  &&  strcspn($name, '()<>[]:;@\\,.') != strlen($name)) {
-                $format = '"%s" <%s>';
-            } else {
-                $format = '%s <%s>';
-            }
+            $format = $encodedName === $name  &&  strcspn($name, '()<>[]:;@\\,.') != strlen($name) ? '"%s" <%s>' : '%s <%s>';
             return sprintf($format, $encodedName, $email);
         }
     }

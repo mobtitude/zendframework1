@@ -149,11 +149,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $this->logIn();
 
         foreach ($values as $value) {
-            if (is_array($value)) {
-                $method = 'multiAssocArrayToArrayOfArrayOfString';
-            } else {
-                $method = 'assocArrayToArrayOfArrayOfString';
-            }
+            $method = is_array($value) ? 'multiAssocArrayToArrayOfArrayOfString' : 'assocArrayToArrayOfArrayOfString';
             break;
         }
 
@@ -332,7 +328,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
     {
         $this->logIn();
 
-        if (count($this->_fieldValues) > 0) {
+        if ($this->_fieldValues !== []) {
             $this->setFieldValues($this->_fieldValues);
         }
 
@@ -397,7 +393,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
             'toPage'   => (integer) $toPage,
         ));
 
-        if (isset($result->GetMetafilesResult->string)) {
+        if (property_exists($result->GetMetafilesResult, 'string') && $result->GetMetafilesResult->string !== null) {
             $pageCounter = (integer) $fromPage;
             if (is_array($result->GetMetafilesResult->string)) {
                 foreach ($result->GetMetafilesResult->string as $string) {
@@ -426,7 +422,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->GetAllMetafiles();
 
-        if (isset($result->GetAllMetafilesResult->string)) {
+        if (property_exists($result->GetAllMetafilesResult, 'string') && $result->GetAllMetafilesResult->string !== null) {
             $pageCounter = 1;
             if (is_array($result->GetAllMetafilesResult->string)) {
                 foreach ($result->GetAllMetafilesResult->string as $string) {
@@ -465,7 +461,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
             'format'     => (string)  $format,
         ));
 
-        if (isset($result->GetBitmapsResult->string)) {
+        if (property_exists($result->GetBitmapsResult, 'string') && $result->GetBitmapsResult->string !== null) {
             $pageCounter = (integer) $fromPage;
             if (is_array($result->GetBitmapsResult->string)) {
                 foreach ($result->GetBitmapsResult->string as $string) {
@@ -499,7 +495,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
             'format'     => (string)  $format,
         ));
 
-        if (isset($result->GetAllBitmapsResult->string)) {
+        if (property_exists($result->GetAllBitmapsResult, 'string') && $result->GetAllBitmapsResult->string !== null) {
             $pageCounter = 1;
             if (is_array($result->GetAllBitmapsResult->string)) {
                 foreach ($result->GetAllBitmapsResult->string as $string) {
@@ -527,7 +523,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->GetFieldNames();
 
-        if (isset($result->GetFieldNamesResult->string)) {
+        if (property_exists($result->GetFieldNamesResult, 'string') && $result->GetFieldNamesResult->string !== null) {
             if (is_array($result->GetFieldNamesResult->string)) {
                 $ret = $result->GetFieldNamesResult->string;
             } else {
@@ -554,7 +550,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
             'blockName' => $blockName
         ));
 
-        if (isset($result->GetBlockFieldNamesResult->string)) {
+        if (property_exists($result->GetBlockFieldNamesResult, 'string') && $result->GetBlockFieldNamesResult->string !== null) {
             if (is_array($result->GetBlockFieldNamesResult->string)) {
                 $ret = $result->GetBlockFieldNamesResult->string;
             } else {
@@ -578,7 +574,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->GetBlockNames();
 
-        if (isset($result->GetBlockNamesResult->string)) {
+        if (property_exists($result->GetBlockNamesResult, 'string') && $result->GetBlockNamesResult->string !== null) {
             if (is_array($result->GetBlockNamesResult->string)) {
                 $ret = $result->GetBlockNamesResult->string;
             } else {
@@ -670,7 +666,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->ListTemplates();
 
-        if (isset($result->ListTemplatesResult)) {
+        if (property_exists($result, 'ListTemplatesResult') && $result->ListTemplatesResult !== null) {
             $ret = $this->_backendListArrayToMultiAssocArray($result->ListTemplatesResult);
         }
 
@@ -708,7 +704,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = null;
         $result = $this->getSoapClient()->ShareDocument();
 
-        if (isset($result->ShareDocumentResult)) {
+        if (property_exists($result, 'ShareDocumentResult') && $result->ShareDocumentResult !== null) {
             $ret = (string) $result->ShareDocumentResult;
         }
 
@@ -728,7 +724,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->ListSharedDocuments();
 
-        if (isset($result->ListSharedDocumentsResult)) {
+        if (property_exists($result, 'ListSharedDocumentsResult') && $result->ListSharedDocumentsResult !== null) {
             $ret = $this->_backendListArrayToMultiAssocArray(
                 $result->ListSharedDocumentsResult
             );
@@ -817,7 +813,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->GetTemplateFormats();
 
-        if (isset($result->GetTemplateFormatsResult->string)) {
+        if (property_exists($result->GetTemplateFormatsResult, 'string') && $result->GetTemplateFormatsResult->string !== null) {
             $ret = $result->GetTemplateFormatsResult->string;
             $ret = array_map('strtolower', $ret);
         }
@@ -838,7 +834,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->GetDocumentFormats();
 
-        if (isset($result->GetDocumentFormatsResult->string)) {
+        if (property_exists($result->GetDocumentFormatsResult, 'string') && $result->GetDocumentFormatsResult->string !== null) {
             $ret = $result->GetDocumentFormatsResult->string;
             $ret = array_map('strtolower', $ret);
         }
@@ -859,7 +855,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->GetFontNames();
 
-        if (isset($result->GetFontNamesResult->string)) {
+        if (property_exists($result->GetFontNamesResult, 'string') && $result->GetFontNamesResult->string !== null) {
             $ret = $result->GetFontNamesResult->string;
         }
 
@@ -879,7 +875,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->GetDocumentAccessOptions();
 
-        if (isset($result->GetDocumentAccessOptionsResult->string)) {
+        if (property_exists($result->GetDocumentAccessOptionsResult, 'string') && $result->GetDocumentAccessOptionsResult->string !== null) {
             $ret = $result->GetDocumentAccessOptionsResult->string;
         }
 
@@ -899,7 +895,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->GetImageImportFormats();
 
-        if (isset($result->GetImageImportFormatsResult->string)) {
+        if (property_exists($result->GetImageImportFormatsResult, 'string') && $result->GetImageImportFormatsResult->string !== null) {
             $ret = $result->GetImageImportFormatsResult->string;
             $ret = array_map('strtolower', $ret);
         }
@@ -920,7 +916,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->GetImageExportFormats();
 
-        if (isset($result->GetImageExportFormatsResult->string)) {
+        if (property_exists($result->GetImageExportFormatsResult, 'string') && $result->GetImageExportFormatsResult->string !== null) {
             $ret = $result->GetImageExportFormatsResult->string;
             $ret = array_map('strtolower', $ret);
         }
@@ -1015,7 +1011,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $ret    = array();
         $result = $this->getSoapClient()->ListImages();
 
-        if (isset($result->ListImagesResult)) {
+        if (property_exists($result, 'ListImagesResult') && $result->ListImagesResult !== null) {
             $ret = $this->_backendListArrayToMultiAssocArray($result->ListImagesResult);
         }
 
@@ -1069,7 +1065,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $this->logIn();
 
         $ret = array();
-        if (isset($list->ArrayOfString)) {
+        if (property_exists($list, 'ArrayOfString') && $list->ArrayOfString !== null) {
            foreach ($list->ArrayOfString as $a) {
                if (is_array($a)) {      // 1 template only
                    $o = new stdClass();
@@ -1079,7 +1075,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                }
                unset($a);
 
-               if (isset($o->string)) {
+               if (property_exists($o, 'string') && $o->string !== null) {
                    $date1 = new Zend_Date($o->string[3], Zend_Date::RFC_1123);
                    $date2 = new Zend_Date($o->string[1], Zend_Date::RFC_1123);
 

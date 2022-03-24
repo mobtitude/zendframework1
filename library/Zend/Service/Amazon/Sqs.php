@@ -182,7 +182,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
             $retry  = false;
             $result = $this->_makeRequest(null, 'CreateQueue', $params);
 
-            if (!isset($result->CreateQueueResult->QueueUrl)
+            if (!(property_exists($result->CreateQueueResult, 'QueueUrl') && $result->CreateQueueResult->QueueUrl !== null)
                 || empty($result->CreateQueueResult->QueueUrl)
             ) {
                 if ($result->Error->Code == 'AWS.SimpleQueueService.QueueNameExists') {
@@ -236,12 +236,12 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
     {
         $result = $this->_makeRequest(null, 'ListQueues');
 
-        if (isset($result->Error)) {
+        if (property_exists($result, 'Error') && $result->Error !== null) {
             require_once 'Zend/Service/Amazon/Sqs/Exception.php';
             throw new Zend_Service_Amazon_Sqs_Exception($result->Error->Code);
         }
 
-        if (!isset($result->ListQueuesResult->QueueUrl)
+        if (!(property_exists($result->ListQueuesResult, 'QueueUrl') && $result->ListQueuesResult->QueueUrl !== null)
             || empty($result->ListQueuesResult->QueueUrl)
         ) {
             return array();
@@ -284,12 +284,11 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
 
         $result = $this->_makeRequest($queue_url, 'SendMessage', $params);
 
-        if (!isset($result->SendMessageResult->MessageId)
-            || empty($result->SendMessageResult->MessageId)
-        ) {
+        if (!(property_exists($result->SendMessageResult, 'MessageId') && $result->SendMessageResult->MessageId !== null)
+            || empty($result->SendMessageResult->MessageId)) {
             require_once 'Zend/Service/Amazon/Sqs/Exception.php';
             throw new Zend_Service_Amazon_Sqs_Exception($result->Error->Code);
-        } else if ((string) $result->SendMessageResult->MD5OfMessageBody != $checksum) {
+        } elseif ((string) $result->SendMessageResult->MD5OfMessageBody !== $checksum) {
             require_once 'Zend/Service/Amazon/Sqs/Exception.php';
             throw new Zend_Service_Amazon_Sqs_Exception('MD5 of body does not match message sent');
         }
@@ -322,12 +321,12 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
 
         $result = $this->_makeRequest($queue_url, 'ReceiveMessage', $params);
 
-        if (isset($result->Error)) {
+        if (property_exists($result, 'Error') && $result->Error !== null) {
             require_once 'Zend/Service/Amazon/Sqs/Exception.php';
             throw new Zend_Service_Amazon_Sqs_Exception($result->Error->Code);
         }
 
-        if (!isset($result->ReceiveMessageResult->Message)
+        if (!(property_exists($result->ReceiveMessageResult, 'Message') && $result->ReceiveMessageResult->Message !== null)
             || empty($result->ReceiveMessageResult->Message)
         ) {
             // no messages found
@@ -364,15 +363,9 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
         $params['ReceiptHandle'] = (string)$handle;
 
         $result = $this->_makeRequest($queue_url, 'DeleteMessage', $params);
-
-        if (isset($result->Error->Code)
-            && !empty($result->Error->Code)
-        ) {
-            return false;
-        }
-
         // Will always return true unless ReceiptHandle is malformed
-        return true;
+        return !(property_exists($result->Error, 'Code') && $result->Error->Code !== null
+            && !empty($result->Error->Code));
     }
 
     /**
@@ -390,7 +383,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
 
         $result = $this->_makeRequest($queue_url, 'GetQueueAttributes', $params);
 
-        if (!isset($result->GetQueueAttributesResult->Attribute)
+        if (!(property_exists($result->GetQueueAttributesResult, 'Attribute') && $result->GetQueueAttributesResult->Attribute !== null)
             || empty($result->GetQueueAttributesResult->Attribute)
         ) {
             require_once 'Zend/Service/Amazon/Sqs/Exception.php';

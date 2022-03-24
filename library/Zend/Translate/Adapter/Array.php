@@ -49,12 +49,10 @@ class Zend_Translate_Adapter_Array extends Zend_Translate_Adapter
     protected function _loadTranslationData($data, $locale, array $options = array())
     {
         $this->_data = array();
-        if (!is_array($data)) {
-            if (file_exists($data)) {
-                ob_start();
-                $data = include($data);
-                ob_end_clean();
-            }
+        if (!is_array($data) && file_exists($data)) {
+            ob_start();
+            $data = include($data);
+            ob_end_clean();
         }
         if (!is_array($data)) {
             require_once 'Zend/Translate/Exception.php';

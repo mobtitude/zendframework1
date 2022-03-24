@@ -125,11 +125,11 @@ class Zend_Crypt_Hmac extends Zend_Crypt
             $hashSupported = true;
         }
 
-        if ($hashSupported === false && function_exists('mhash') && in_array($hash, self::$_supportedAlgosMhash)) {
+        if (!$hashSupported && function_exists('mhash') && in_array($hash, self::$_supportedAlgosMhash)) {
             $hashSupported = true;
         }
 
-        if ($hashSupported === false) {
+        if (!$hashSupported) {
             require_once 'Zend/Crypt/Hmac/Exception.php';
             throw new Zend_Crypt_Hmac_Exception('hash algorithm provided is not supported on this PHP installation; please enable the hash or mhash extensions');
         }

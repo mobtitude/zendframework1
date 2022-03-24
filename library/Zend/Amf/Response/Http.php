@@ -63,11 +63,7 @@ class Zend_Amf_Response_Http extends Zend_Amf_Response
         }
 
         $ua  = $_SERVER['HTTP_USER_AGENT'];
-        if (!preg_match('/; MSIE \d+\.\d+;/', (string) $ua)) {
-            // Not MicroSoft Internet Explorer
-            return false;
-        }
-
-        return true;
+        // Not MicroSoft Internet Explorer
+        return (bool) preg_match('/; MSIE \d+\.\d+;/', (string) $ua);
     }
 }

@@ -262,7 +262,7 @@ abstract class Zend_Db_Table_Abstract
             $config = array(self::ADAPTER => $config);
         }
 
-        if ($config) {
+        if ($config !== []) {
             $this->setOptions($config);
         }
 
@@ -773,7 +773,7 @@ abstract class Zend_Db_Table_Abstract
     {
         if (! $this->_name) {
             $this->_name = get_class($this);
-        } else if (strpos($this->_name, '.')) {
+        } elseif (strpos($this->_name, '.')) {
             list($this->_schema, $this->_name) = explode('.', $this->_name);
         }
     }
@@ -789,7 +789,7 @@ abstract class Zend_Db_Table_Abstract
      */
     protected function _setupMetadata()
     {
-        if ($this->metadataCacheInClass() && (count($this->_metadata) > 0)) {
+        if ($this->metadataCacheInClass() && ($this->_metadata !== [])) {
             return true;
         }
 
@@ -888,9 +888,9 @@ abstract class Zend_Db_Table_Abstract
                 require_once 'Zend/Db/Table/Exception.php';
                 throw new Zend_Db_Table_Exception("A table must have a primary key, but none was found for table '{$this->_name}'");
             }
-        } else if (!is_array($this->_primary)) {
+        } elseif (!is_array($this->_primary)) {
             $this->_primary = array(1 => $this->_primary);
-        } else if (isset($this->_primary[0])) {
+        } elseif (isset($this->_primary[0])) {
             array_unshift($this->_primary, null);
             unset($this->_primary[0]);
         }
@@ -939,11 +939,7 @@ abstract class Zend_Db_Table_Abstract
                     // normalize COLUMNS and REF_COLUMNS to arrays
                     case self::COLUMNS:
                     case self::REF_COLUMNS:
-                        if (!is_array($value)) {
-                            $referenceMapNormalized[$rule][$key] = array($value);
-                        } else {
-                            $referenceMapNormalized[$rule][$key] = $value;
-                        }
+                        $referenceMapNormalized[$rule][$key] = is_array($value) ? $value : array($value);
                         break;
 
                     // other values are copied as-is
@@ -1050,13 +1046,12 @@ abstract class Zend_Db_Table_Abstract
          * position of the data.  The following values are considered empty:
          *   null, false, true, '', array()
          */
-        if (array_key_exists($pkIdentity, $data)) {
-            if ($data[$pkIdentity] === null                                        // null
-                || $data[$pkIdentity] === ''                                       // empty string
-                || is_bool($data[$pkIdentity])                                     // boolean
-                || (is_array($data[$pkIdentity]) && empty($data[$pkIdentity]))) {  // empty array
-                unset($data[$pkIdentity]);
-            }
+        if (array_key_exists($pkIdentity, $data) && ($data[$pkIdentity] === null                                        // null
+            || $data[$pkIdentity] === ''                                       // empty string
+            || is_bool($data[$pkIdentity])                                     // boolean
+            || ($data[$pkIdentity] === []))) {
+            // empty array
+            unset($data[$pkIdentity]);
         }
 
         /**
@@ -1151,7 +1146,8 @@ abstract class Zend_Db_Table_Abstract
                     case self::CASCADE:
                         $newRefs = array();
                         $where = array();
-                        for ($i = 0; $i < count($map[self::COLUMNS]); ++$i) {
+                        $itemsCount = count($map[self::COLUMNS]);
+                        for ($i = 0; $i < $itemsCount; ++$i) {
                             $col = $this->_db->foldCase($map[self::COLUMNS][$i]);
                             $refCol = $this->_db->foldCase($map[self::REF_COLUMNS][$i]);
                             if (array_key_exists($refCol, $newPrimaryKey)) {
@@ -1230,7 +1226,8 @@ abstract class Zend_Db_Table_Abstract
 
                 // CASCADE or CASCADE_RECURSE
                 if (in_array($map[self::ON_DELETE], array(self::CASCADE, self::CASCADE_RECURSE))) {
-                    for ($i = 0; $i < count($map[self::COLUMNS]); ++$i) {
+                    $itemsCount = count($map[self::COLUMNS]);
+                    for ($i = 0; $i < $itemsCount; ++$i) {
                         $col = $this->_db->foldCase($map[self::COLUMNS][$i]);
                         $refCol = $this->_db->foldCase($map[self::REF_COLUMNS][$i]);
                         $type = $this->_metadata[$col]['DATA_TYPE'];
@@ -1285,10 +1282,9 @@ abstract class Zend_Db_Table_Abstract
      * @return Zend_Db_Table_Rowset_Abstract Row(s) matching the criteria.
      * @throws Zend_Db_Table_Exception
      */
-    public function find()
+    public function find(...$args)
     {
         $this->_setupPrimaryKey();
-        $args = func_get_args();
         $keyNames = array_values((array) $this->_primary);
 
         if (count($args) < count($keyNames)) {
@@ -1313,7 +1309,7 @@ abstract class Zend_Db_Table_Abstract
             }
             if ($numberTerms == 0) {
                 $numberTerms = $keyValuesCount;
-            } else if ($keyValuesCount != $numberTerms) {
+            } elseif ($keyValuesCount != $numberTerms) {
                 require_once 'Zend/Db/Table/Exception.php';
                 throw new Zend_Db_Table_Exception("Missing value(s) for the primary key");
             }
@@ -1327,7 +1323,7 @@ abstract class Zend_Db_Table_Abstract
         }
 
         $whereClause = null;
-        if (count($whereList)) {
+        if ($whereList !== []) {
             $whereOrTerms = array();
             $tableName = $this->_db->quoteTableAs($this->_name, null, true);
             foreach ($whereList as $keyValueSets) {
@@ -1492,7 +1488,7 @@ abstract class Zend_Db_Table_Abstract
         if ($defaultSource == self::DEFAULT_DB) {
             foreach ($this->_metadata as $metadataName => $metadata) {
                 if (($metadata['DEFAULT'] != null) &&
-                    ($metadata['NULLABLE'] !== true || ($metadata['NULLABLE'] === true && isset($this->_defaultValues[$metadataName]) && $this->_defaultValues[$metadataName] === true)) &&
+                    ($metadata['NULLABLE'] !== true || ($metadata['NULLABLE'] && isset($this->_defaultValues[$metadataName]) && $this->_defaultValues[$metadataName] === true)) &&
                     (!(isset($this->_defaultValues[$metadataName]) && $this->_defaultValues[$metadataName] === false))) {
                     $defaults[$metadataName] = $metadata['DEFAULT'];
                 }
@@ -1575,8 +1571,7 @@ abstract class Zend_Db_Table_Abstract
     protected function _fetch(Zend_Db_Table_Select $select)
     {
         $stmt = $this->_db->query($select);
-        $data = $stmt->fetchAll(Zend_Db::FETCH_ASSOC);
-        return $data;
+        return $stmt->fetchAll(Zend_Db::FETCH_ASSOC);
     }
 
     /**

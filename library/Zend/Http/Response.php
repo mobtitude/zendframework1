@@ -191,11 +191,7 @@ class Zend_Http_Response
 
         // If we got the response message, set it. Else, set it according to
         // the response code
-        if (is_string($message)) {
-            $this->message = $message;
-        } else {
-            $this->message = self::responseCodeAsText($code);
-        }
+        $this->message = is_string($message) ? $message : self::responseCodeAsText($code);
     }
 
     /**
@@ -206,11 +202,7 @@ class Zend_Http_Response
     public function isError()
     {
         $restype = floor($this->code / 100);
-        if ($restype == 4 || $restype == 5) {
-            return true;
-        }
-
-        return false;
+        return $restype == 4 || $restype == 5;
     }
 
     /**
@@ -221,11 +213,8 @@ class Zend_Http_Response
     public function isSuccessful()
     {
         $restype = floor($this->code / 100);
-        if ($restype == 2 || $restype == 1) { // Shouldn't 3xx count as success as well ???
-            return true;
-        }
-
-        return false;
+        // Shouldn't 3xx count as success as well ???
+        return $restype == 2 || $restype == 1;
     }
 
     /**
@@ -236,11 +225,7 @@ class Zend_Http_Response
     public function isRedirect()
     {
         $restype = floor($this->code / 100);
-        if ($restype == 3) {
-            return true;
-        }
-
-        return false;
+        return $restype == 3;
     }
 
     /**
@@ -504,7 +489,7 @@ class Zend_Http_Response
         // First, split body and headers. Headers are separated from the
         // message at exactly the sequence "\r\n\r\n"
         $parts = preg_split('|(?:\r\n){2}|m', $response_str, 2);
-        if (! $parts[0]) {
+        if ($parts[0] === '' || $parts[0] === '0') {
             return $headers;
         }
 

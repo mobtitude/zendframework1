@@ -299,7 +299,7 @@ class Zend_Dojo_BuildLayer
      */
     public function addProfileOptions(array $options)
     {
-        $this->_profileOptions = $this->_profileOptions + $options;
+        $this->_profileOptions += $options;
         return $this;
     }
 
@@ -475,9 +475,7 @@ class Zend_Dojo_BuildLayer
             }
         }
 
-        $content .= "})();";
-
-        return $content;
+        return $content . "})();";
     }
 
     /**
@@ -529,7 +527,6 @@ class Zend_Dojo_BuildLayer
         require_once 'Zend/Json.php';
         $profile = Zend_Json::encode($profile);
         $profile = trim($profile, '"');
-        $profile = preg_replace('/' . preg_quote('\\') . '/', '', $profile);
-        return $profile;
+        return preg_replace('/' . preg_quote('\\', '/') . '/', '', $profile);
     }
 }

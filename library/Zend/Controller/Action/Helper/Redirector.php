@@ -130,7 +130,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
      */
     public function setExit($flag)
     {
-        $this->_exit = ($flag) ? true : false;
+        $this->_exit = $flag;
         return $this;
     }
 
@@ -153,7 +153,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
      */
     public function setPrependBase($flag)
     {
-        $this->_prependBase = ($flag) ? true : false;
+        $this->_prependBase = $flag;
         return $this;
     }
 
@@ -176,7 +176,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
      */
     public function setCloseSessionOnExit($flag)
     {
-        $this->_closeSessionOnExit = ($flag) ? true : false;
+        $this->_closeSessionOnExit = $flag;
         return $this;
     }
 
@@ -198,7 +198,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
      */
     public function setUseAbsoluteUri($flag = true)
     {
-        $this->_useAbsoluteUri = ($flag) ? true : false;
+        $this->_useAbsoluteUri = $flag;
         return $this;
     }
 
@@ -214,11 +214,9 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
             $proto = (isset($_SERVER['HTTPS'])&&$_SERVER['HTTPS']!=="off") ? 'https' : 'http';
             $port  = (isset($_SERVER['SERVER_PORT'])?$_SERVER['SERVER_PORT']:80);
             $uri   = $proto . '://' . $host;
-            if ((('http' == $proto) && (80 != $port)) || (('https' == $proto) && (443 != $port))) {
-                // do not append if HTTP_HOST already contains port
-                if (strrchr($host, ':') === false) {
-                    $uri .= ':' . $port;
-                }
+            // do not append if HTTP_HOST already contains port
+            if (((('http' == $proto) && (80 != $port)) || (('https' == $proto) && (443 != $port))) && strrchr($host, ':') === false) {
+                $uri .= ':' . $port;
             }
             $url = $uri . '/' . ltrim($url, '/');
         }
@@ -248,11 +246,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
             $request = $this->getRequest();
             if ($request instanceof Zend_Controller_Request_Http) {
                 $base = rtrim($request->getBaseUrl(), '/');
-                if (!empty($base) && ('/' != $base)) {
-                    $url = $base . '/' . ltrim($url, '/');
-                } else {
-                    $url = '/' . ltrim($url, '/');
-                }
+                $url = !empty($base) && ('/' != $base) ? $base . '/' . ltrim($url, '/') : '/' . ltrim($url, '/');
             }
         }
 
@@ -283,7 +277,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
             $module = $curModule;
         }
 
-        if ($module == $dispatcher->getDefaultModule()) {
+        if ($module === $dispatcher->getDefaultModule()) {
             $module = '';
         }
 
@@ -352,10 +346,10 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
 
         if (null !== $options) {
             if (isset($options['exit'])) {
-                $this->setExit(($options['exit']) ? true : false);
+                $this->setExit((bool) $options['exit']);
             }
             if (isset($options['prependBase'])) {
-                $this->setPrependBase(($options['prependBase']) ? true : false);
+                $this->setPrependBase((bool) $options['prependBase']);
             }
             if (isset($options['code'])) {
                 $this->setCode($options['code']);
@@ -519,13 +513,19 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     {
         $method = strtolower($method);
         if ('goto' == $method) {
-            return call_user_func_array(array($this, 'gotoSimple'), $args);
+            return call_user_func_array(function (string $action, ?string $controller = \null, ?string $module = \null, array $params = array()) : void {
+                $this->gotoSimple($action, $controller, $module, $params);
+            }, $args);
         }
         if ('setgoto' == $method) {
-            return call_user_func_array(array($this, 'setGotoSimple'), $args);
+            return call_user_func_array(function (string $action, ?string $controller = \null, ?string $module = \null, array $params = array()) : void {
+                $this->setGotoSimple($action, $controller, $module, $params);
+            }, $args);
         }
         if ('gotoandexit' == $method) {
-            return call_user_func_array(array($this, 'gotoSimpleAndExit'), $args);
+            return call_user_func_array(function ($action, $controller = \null, $module = \null, array $params = array()) : void {
+                $this->gotoSimpleAndExit($action, $controller, $module, $params);
+            }, $args);
         }
 
         require_once 'Zend/Controller/Action/Exception.php';

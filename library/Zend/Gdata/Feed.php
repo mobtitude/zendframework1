@@ -112,12 +112,10 @@ class Zend_Gdata_Feed extends Zend_Gdata_App_Feed
 
         // ETags are special. We only support them in protocol >= 2.X.
         // This will be duplicated by the HTTP ETag header.
-        if ($majorVersion >= 2) {
-            if ($this->_etag != null) {
-                $element->setAttributeNS($this->lookupNamespace('gd'),
-                                         'gd:etag',
-                                         $this->_etag);
-            }
+        if ($majorVersion >= 2 && $this->_etag != null) {
+            $element->setAttributeNS($this->lookupNamespace('gd'),
+                                     'gd:etag',
+                                     $this->_etag);
         }
 
         return $element;

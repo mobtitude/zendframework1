@@ -441,8 +441,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
     public function getScriptPath($name)
     {
         try {
-            $path = $this->_script($name);
-            return $path;
+            return $this->_script($name);
         } catch (Zend_View_Exception $e) {
             if (strstr($e->getMessage(), 'no view script directory set')) {
                 throw $e;
@@ -573,7 +572,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
     /**
      * Registers a helper object, bypassing plugin loader
      *
-     * @param  Zend_View_Helper_Abstract|object $helper
+     * @param Zend_View_Helper_Abstract $helper
      * @param  string $name
      * @return Zend_View_Abstract
      * @throws Zend_View_Exception
@@ -587,15 +586,13 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
             throw $e;
         }
 
-        if (!$helper instanceof Zend_View_Interface) {
-            if (!method_exists($helper, $name)) {
-                require_once 'Zend/View/Exception.php';
-                $e =  new Zend_View_Exception(
-                    'View helper must implement Zend_View_Interface or have a method matching the name provided'
-                );
-                $e->setView($this);
-                throw $e;
-            }
+        if (!$helper instanceof Zend_View_Interface && !method_exists($helper, $name)) {
+            require_once 'Zend/View/Exception.php';
+            $e =  new Zend_View_Exception(
+                'View helper must implement Zend_View_Interface or have a method matching the name provided'
+            );
+            $e->setView($this);
+            throw $e;
         }
 
         if (method_exists($helper, 'setView')) {
@@ -845,7 +842,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
     public function getVars()
     {
         $vars   = get_object_vars($this);
-        foreach ($vars as $key => $value) {
+        foreach (array_keys($vars) as $key) {
             if ('_' == substr($key, 0, 1)) {
                 unset($vars[$key]);
             }
@@ -865,7 +862,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
     public function clearVars()
     {
         $vars   = get_object_vars($this);
-        foreach ($vars as $key => $value) {
+        foreach (array_keys($vars) as $key) {
             if ('_' != substr($key, 0, 1)) {
                 unset($this->$key);
             }
@@ -948,7 +945,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
      */
     public function strictVars($flag = true)
     {
-        $this->_strictVars = ($flag) ? true : false;
+        $this->_strictVars = $flag;
 
         return $this;
     }

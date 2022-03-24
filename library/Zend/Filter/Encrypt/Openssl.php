@@ -176,8 +176,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
      */
     public function getPublicKey()
     {
-        $key = $this->_keys['public'];
-        return $key;
+        return $this->_keys['public'];
     }
 
     /**
@@ -209,8 +208,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
      */
     public function getPrivateKey()
     {
-        $key = $this->_keys['private'];
-        return $key;
+        return $this->_keys['private'];
     }
 
     /**
@@ -247,8 +245,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
      */
     public function getEnvelopeKey()
     {
-        $key = $this->_keys['envelope'];
-        return $key;
+        return $this->_keys['envelope'];
     }
 
     /**
@@ -439,11 +436,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
 
         if ($this->_package) {
             $details = openssl_pkey_get_details($keys);
-            if ($details !== false) {
-                $fingerprint = md5($details['key']);
-            } else {
-                $fingerprint = md5("ZendFramework");
-            }
+            $fingerprint = $details !== false ? md5($details['key']) : md5("ZendFramework");
 
             $count = unpack('ncount', $value);
             $count = $count['count'];
@@ -465,7 +458,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
         $crypt  = openssl_open($value, $decrypted, $envelope, $keys);
         openssl_free_key($keys);
 
-        if ($crypt === false) {
+        if (!$crypt) {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Openssl was not able to decrypt you content with the given options');
         }

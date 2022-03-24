@@ -115,11 +115,7 @@ abstract class Zend_Application_Module_Bootstrap
     {
         if (empty($this->_moduleName)) {
             $class = get_class($this);
-            if (preg_match('/^([a-z][a-z0-9]*)_/i', $class, $matches)) {
-                $prefix = $matches[1];
-            } else {
-                $prefix = $class;
-            }
+            $prefix = preg_match('/^([a-z][a-z0-9]*)_/i', $class, $matches) ? $matches[1] : $class;
             $this->_moduleName = $prefix;
         }
         return $this->_moduleName;

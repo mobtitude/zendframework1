@@ -117,8 +117,6 @@ class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
             $request .= $key . ': ' . $value . "\n";
         }
 
-        $request .= $this->_xml;
-
-        return $request;
+        return $request . $this->_xml;
     }
 }

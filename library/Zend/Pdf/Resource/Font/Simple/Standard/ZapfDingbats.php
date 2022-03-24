@@ -48,7 +48,8 @@ require_once 'Zend/Pdf/Resource/Font/Simple/Standard.php';
  */
 class Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats extends Zend_Pdf_Resource_Font_Simple_Standard
 {
-  /**** Instance Variables ****/
+  public bool $_isMonospaced;
+    /**** Instance Variables ****/
 
 
     /**
@@ -229,21 +230,17 @@ class Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats extends Zend_Pdf_Resou
           . "\x20\x00\x43\x00\x6f\x00\x72\x00\x70\x00\x6f\x00\x72\x00\x61\x00"
           . "\x74\x00\x69\x00\x6f\x00\x6e\x00\x2e";
         $this->_fontNames[Zend_Pdf_Font::NAME_FAMILY]['en'] =
-          "\x00\x5a\x00\x61\x00\x70\x00\x66\x00\x44\x00\x69\x00\x6e\x00\x67\x00"
-          . "\x62\x00\x61\x00\x74\x00\x73";
+          ' Z a p f D i n g b a t s';
         $this->_fontNames[Zend_Pdf_Font::NAME_STYLE]['en'] =
           "\x00\x4d\x00\x65\x00\x64\x00\x69\x00\x75\x00\x6d";
         $this->_fontNames[Zend_Pdf_Font::NAME_ID]['en'] =
           "\x00\x34\x00\x33\x00\x30\x00\x38\x00\x32";
         $this->_fontNames[Zend_Pdf_Font::NAME_FULL]['en'] =
-          "\x00\x5a\x00\x61\x00\x70\x00\x66\x00\x44\x00\x69\x00\x6e\x00\x67\x00"
-          . "\x62\x00\x61\x00\x74\x00\x73\x00\x20\x00\x4d\x00\x65\x00\x64\x00"
-          . "\x69\x00\x75\x00\x6d";
+          ' Z a p f D i n g b a t s   M e d i u m';
         $this->_fontNames[Zend_Pdf_Font::NAME_VERSION]['en'] =
           "\x00\x30\x00\x30\x00\x32\x00\x2e\x00\x30\x00\x30\x00\x30";
         $this->_fontNames[Zend_Pdf_Font::NAME_POSTSCRIPT]['en'] =
-          "\x00\x5a\x00\x61\x00\x70\x00\x66\x00\x44\x00\x69\x00\x6e\x00\x67\x00"
-          . "\x62\x00\x61\x00\x74\x00\x73";
+          ' Z a p f D i n g b a t s';
 
         $this->_isBold = false;
         $this->_isItalic = false;

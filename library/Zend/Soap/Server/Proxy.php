@@ -39,11 +39,7 @@ class Zend_Soap_Server_Proxy
     {
         $class = new ReflectionClass($className);
         $constructor = $class->getConstructor();
-	if ($constructor === null) {
-            $this->_classInstance = $class->newInstance();
-	} else {
-            $this->_classInstance = $class->newInstanceArgs($classArgs);
-	}
+	$this->_classInstance = $constructor instanceof \ReflectionMethod ? $class->newInstanceArgs($classArgs) : $class->newInstance();
 	$this->_className = $className;
     }
     /**

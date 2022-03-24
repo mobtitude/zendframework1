@@ -31,6 +31,7 @@
  */
 class Zend_Service_Yahoo_ResultSet implements SeekableIterator
 {
+    public $_namespace;
     /**
      * Total number of results available
      *
@@ -127,8 +128,7 @@ class Zend_Service_Yahoo_ResultSet implements SeekableIterator
          * @see Zend_Service_Exception
          */
         require_once 'Zend/Service/Exception.php';
-        throw new Zend_Service_Exception('Zend_Service_Yahoo_ResultSet::current() must be implemented by child '
-                                       . 'classes');
+        throw new Zend_Service_Exception('Zend_Service_Yahoo_ResultSet::current() must be implemented by child classes');
     }
 
 

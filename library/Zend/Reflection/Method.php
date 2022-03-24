@@ -71,10 +71,8 @@ class Zend_Reflection_Method extends ReflectionMethod
      */
     public function getStartLine($includeDocComment = false)
     {
-        if ($includeDocComment) {
-            if ($this->getDocComment() != '') {
-                return $this->getDocblock()->getStartLine();
-            }
+        if ($includeDocComment && $this->getDocComment() != '') {
+            return $this->getDocblock()->getStartLine();
         }
 
         return parent::getStartLine();
@@ -178,7 +176,7 @@ class Zend_Reflection_Method extends ReflectionMethod
         // push them back onto the lines stack as they are part of the body
         $restOfLastLine = trim(substr($lastLine, 0, strrpos($lastLine, '}')-1));
         if (!empty($restOfLastLine)) {
-            array_push($lines, $restOfLastLine);
+            $lines[] = $restOfLastLine;
         }
 
         // just in case we had code on the bracket lines

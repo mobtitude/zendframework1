@@ -132,13 +132,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
         }
 
         $this->_determineI5();
-        if ($this->_config['persistent']) {
-            // use persistent connection
-            $conn_func_name = 'db2_pconnect';
-        } else {
-            // use "normal" connection
-            $conn_func_name = 'db2_connect';
-        }
+        $conn_func_name = $this->_config['persistent'] ? 'db2_pconnect' : 'db2_connect';
 
         if (!isset($this->_config['driver_options']['autocommit'])) {
             // set execution mode
@@ -303,11 +297,8 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
         $info = db2_server_info($this->_connection);
         if ($info) {
             $identQuote = $info->IDENTIFIER_QUOTE_CHAR;
-        } else {
-            // db2_server_info() does not return result on some i5 OS version
-            if ($this->_isI5) {
-                $identQuote ="'";
-            }
+        } elseif ($this->_isI5) {
+            $identQuote ="'";
         }
         return $identQuote;
     }
@@ -328,11 +319,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
         $tables = array();
 
         if (!$this->_isI5) {
-            if ($schema) {
-                $stmt = db2_tables($this->_connection, null, $schema);
-            } else {
-                $stmt = db2_tables($this->_connection);
-            }
+            $stmt = $schema ? db2_tables($this->_connection, null, $schema) : db2_tables($this->_connection);
             while ($row = db2_fetch_assoc($stmt)) {
                 $tables[] = $row['TABLE_NAME'];
             }
@@ -454,7 +441,9 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
         $colseq         = 11;
 
         foreach ($result as $key => $row) {
-            list ($primary, $primaryPosition, $identity) = array(false, null, false);
+            $primary = false;
+            $primaryPosition = null;
+            $identity = false;
             if ($row[$tabconstType] == 'P') {
                 $primary = true;
                 $primaryPosition = $row[$colseq];
@@ -472,7 +461,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
                 'SCHEMA_NAME'      => $this->foldCase($row[$tabschema]),
                 'TABLE_NAME'       => $this->foldCase($row[$tabname]),
                 'COLUMN_NAME'      => $this->foldCase($row[$colname]),
-                'COLUMN_POSITION'  => (!$this->_isI5) ? $row[$colno]+1 : $row[$colno],
+                'COLUMN_POSITION'  => ($this->_isI5) ? $row[$colno] : $row[$colno]+1,
                 'DATA_TYPE'        => $row[$typename],
                 'DEFAULT'          => $row[$default],
                 'NULLABLE'         => (bool) ($row[$nulls] == 'Y'),
@@ -662,7 +651,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
      */
     public function limit($sql, $count, $offset = 0)
     {
-        $count = intval($count);
+        $count = (int) $count;
         if ($count <= 0) {
             /**
              * @see Zend_Db_Adapter_Db2_Exception
@@ -671,7 +660,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
             throw new Zend_Db_Adapter_Db2_Exception("LIMIT argument count=$count is not valid");
         }
 
-        $offset = intval($offset);
+        $offset = (int) $offset;
         if ($offset < 0) {
             /**
              * @see Zend_Db_Adapter_Db2_Exception
@@ -681,8 +670,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
         }
 
         if ($offset == 0) {
-            $limit_sql = $sql . " FETCH FIRST $count ROWS ONLY";
-            return $limit_sql;
+            return $sql . " FETCH FIRST $count ROWS ONLY";
         }
 
         /**
@@ -710,12 +698,8 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
      */
     public function supportsParameters($type)
     {
-        if ($type == 'positional') {
-            return true;
-        }
-
         // if its 'named' or anything else
-        return false;
+        return $type == 'positional';
     }
 
     /**
@@ -761,16 +745,11 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
     protected function _determineI5()
     {
         // first us the compiled flag.
-        $this->_isI5 = (php_uname('s') == 'OS400') ? true : false;
+        $this->_isI5 = php_uname('s') == 'OS400';
 
         // if this is set, then us it
         if (isset($this->_config['os'])){
-            if (strtolower($this->_config['os']) === 'i5') {
-                $this->_isI5 = true;
-            } else {
-                // any other value passed in, its null
-                $this->_isI5 = false;
-            }
+            $this->_isI5 = strtolower($this->_config['os']) === 'i5';
         }
 
     }
@@ -819,8 +798,7 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
 
         if ($objectName === null) {
             $sql = 'SELECT IDENTITY_VAL_LOCAL() AS VAL FROM QSYS2.QSQPTABL';
-            $value = $this->fetchOne($sql);
-            return $value;
+            return $this->fetchOne($sql);
         }
 
         if (strtoupper($idType) === 'S'){

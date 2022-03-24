@@ -136,7 +136,7 @@ class Zend_Pdf_Element_Reference_Table
             return null;
         }
 
-        if (isset($this->_parent)) {
+        if ($this->_parent !== null) {
             return $this->_parent->getOffset($ref);
         }
 
@@ -162,7 +162,7 @@ class Zend_Pdf_Element_Reference_Table
             return $this->_free[$ref];
         }
 
-        if (isset($this->_parent)) {
+        if ($this->_parent !== null) {
             return $this->_parent->getNextFree($ref);
         }
 
@@ -188,7 +188,7 @@ class Zend_Pdf_Element_Reference_Table
             return $this->_generations[$objNum];
         }
 
-        if (isset($this->_parent)) {
+        if ($this->_parent !== null) {
             return $this->_parent->getNewGeneration($objNum);
         }
 

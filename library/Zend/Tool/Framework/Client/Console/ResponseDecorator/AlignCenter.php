@@ -53,7 +53,7 @@ class Zend_Tool_Framework_Client_Console_ResponseDecorator_AlignCenter
             $len = strlen($content);
             for($i = $len; $i < $lineLength; $i++) {
                 if($append == true) {
-                    $content = $content." ";
+                    $content .= " ";
                     $append = false;
                 } else {
                     $content = " ".$content;

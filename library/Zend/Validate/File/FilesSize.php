@@ -154,11 +154,6 @@ class Zend_Validate_File_FilesSize extends Zend_Validate_File_Size
                 $this->_throw($file, self::TOO_SMALL);
             }
         }
-
-        if (count($this->_messages) > 0) {
-            return false;
-        }
-
-        return true;
+        return !($this->_messages !== []);
     }
 }

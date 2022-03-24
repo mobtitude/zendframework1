@@ -154,7 +154,7 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
         $ssl = array(
             'local_cert' => $this->_certificate,
         );
-        if ($this->_certificatePassphrase) {
+        if ($this->_certificatePassphrase !== '' && $this->_certificatePassphrase !== '0') {
             $ssl['passphrase'] = $this->_certificatePassphrase;
         }
 
@@ -227,7 +227,7 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
             throw new Zend_Mobile_Push_Exception('$env is not a valid environment');
         }
 
-        if (!$this->_certificate) {
+        if ($this->_certificate === '' || $this->_certificate === '0') {
             throw new Zend_Mobile_Push_Exception('A certificate must be set prior to calling ::connect');
         }
 

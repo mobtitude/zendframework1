@@ -225,15 +225,15 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
             if (preg_match('/^((?:var)?char)\((\d+)\)/', (string) $row['Type'], $matches)) {
                 $row['Type'] = $matches[1];
                 $row['Length'] = $matches[2];
-            } else if (preg_match('/^decimal\((\d+),(\d+)\)/', (string) $row['Type'], $matches)) {
+            } elseif (preg_match('/^decimal\((\d+),(\d+)\)/', (string) $row['Type'], $matches)) {
                 $row['Type'] = 'decimal';
                 $row['Precision'] = $matches[1];
                 $row['Scale'] = $matches[2];
-            } else if (preg_match('/^float\((\d+),(\d+)\)/', (string) $row['Type'], $matches)) {
+            } elseif (preg_match('/^float\((\d+),(\d+)\)/', (string) $row['Type'], $matches)) {
                 $row['Type'] = 'float';
                 $row['Precision'] = $matches[1];
                 $row['Scale'] = $matches[2];
-            } else if (preg_match('/^((?:big|medium|small|tiny)?int)\((\d+)\)/', (string) $row['Type'], $matches)) {
+            } elseif (preg_match('/^((?:big|medium|small|tiny)?int)\((\d+)\)/', (string) $row['Type'], $matches)) {
                 $row['Type'] = $matches[1];
                 /**
                  * The optional argument of a MySQL int type is not precision
@@ -243,11 +243,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
             if (strtoupper($row['Key']) == 'PRI') {
                 $row['Primary'] = true;
                 $row['PrimaryPosition'] = $p;
-                if ($row['Extra'] == 'auto_increment') {
-                    $row['Identity'] = true;
-                } else {
-                    $row['Identity'] = false;
-                }
+                $row['Identity'] = $row['Extra'] == 'auto_increment';
                 ++$p;
             }
             $desc[$this->foldCase($row['Field'])] = array(
@@ -291,17 +287,9 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
             throw new Zend_Db_Adapter_Mysqli_Exception('The Mysqli extension is required for this adapter but the extension is not loaded');
         }
 
-        if (isset($this->_config['port'])) {
-            $port = (integer) $this->_config['port'];
-        } else {
-            $port = null;
-        }
+        $port = isset($this->_config['port']) ? (integer) $this->_config['port'] : null;
 
-        if (isset($this->_config['socket'])) {
-            $socket = $this->_config['socket'];
-        } else {
-            $socket = null;
-        }
+        $socket = isset($this->_config['socket']) ? $this->_config['socket'] : null;
 
         $this->_connection = mysqli_init();
 
@@ -330,7 +318,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
             $socket
         );
 
-        if ($_isConnected === false || mysqli_connect_errno()) {
+        if (!$_isConnected || mysqli_connect_errno()) {
 
             $this->closeConnection();
             /**
@@ -496,7 +484,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
      */
     public function limit($sql, $count, $offset = 0)
     {
-        $count = intval($count);
+        $count = (int) $count;
         if ($count <= 0) {
             /**
              * @see Zend_Db_Adapter_Mysqli_Exception
@@ -505,7 +493,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
             throw new Zend_Db_Adapter_Mysqli_Exception("LIMIT argument count=$count is not valid");
         }
 
-        $offset = intval($offset);
+        $offset = (int) $offset;
         if ($offset < 0) {
             /**
              * @see Zend_Db_Adapter_Mysqli_Exception

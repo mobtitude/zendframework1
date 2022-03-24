@@ -257,7 +257,7 @@ abstract class Zend_Pdf_FileParser
                     $number = ($number << 8) | ord($bytes[$i]);
                 }
             }
-        } else if ($byteOrder == Zend_Pdf_FileParser::BYTE_ORDER_LITTLE_ENDIAN) {
+        } elseif ($byteOrder == Zend_Pdf_FileParser::BYTE_ORDER_LITTLE_ENDIAN) {
             $number = ord($bytes[$size - 1]);
             if (($number & 0x80) == 0x80) {
                 /* Negative number. See discussion above.
@@ -316,7 +316,7 @@ abstract class Zend_Pdf_FileParser
             for ($i = 1; $i < $size; $i++) {
                 $number = ($number << 8) | ord($bytes[$i]);
             }
-        } else if ($byteOrder == Zend_Pdf_FileParser::BYTE_ORDER_LITTLE_ENDIAN) {
+        } elseif ($byteOrder == Zend_Pdf_FileParser::BYTE_ORDER_LITTLE_ENDIAN) {
             $number = 0;
             for ($i = --$size; $i >= 0; $i--) {
                 $number |= ord($bytes[$i]) << ($i * 8);
@@ -339,8 +339,7 @@ abstract class Zend_Pdf_FileParser
     public function isBitSet($bit, $bitField)
     {
         $bitMask = 1 << $bit;
-        $isSet = (($bitField & $bitMask) == $bitMask);
-        return $isSet;
+        return ($bitField & $bitMask) === $bitMask;
     }
 
     /**
@@ -369,8 +368,7 @@ abstract class Zend_Pdf_FileParser
             throw new Zend_Pdf_Exception('Fixed-point numbers are whole bytes',
                                          Zend_Pdf_Exception::BAD_FIXED_POINT_SIZE);
         }
-        $number = $this->readInt(($bitsToRead >> 3), $byteOrder) / (1 << $fractionBits);
-        return $number;
+        return $this->readInt(($bitsToRead >> 3), $byteOrder) / (1 << $fractionBits);
     }
 
     /**
@@ -411,7 +409,7 @@ abstract class Zend_Pdf_FileParser
                 return $bytes;
             }
             return iconv('UTF-16BE', $characterSet, $bytes);
-        } else if ($byteOrder == Zend_Pdf_FileParser::BYTE_ORDER_LITTLE_ENDIAN) {
+        } elseif ($byteOrder == Zend_Pdf_FileParser::BYTE_ORDER_LITTLE_ENDIAN) {
             if ($characterSet == 'UTF-16LE') {
                 return $bytes;
             }

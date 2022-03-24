@@ -138,7 +138,7 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
 
         if ($ip !== null) {
             $this->setIp($ip);
-        } else if (isset($_SERVER['REMOTE_ADDR'])) {
+        } elseif (isset($_SERVER['REMOTE_ADDR'])) {
             $this->setIp($_SERVER['REMOTE_ADDR']);
         }
 
@@ -389,14 +389,14 @@ class Zend_Service_ReCaptcha extends Zend_Service_Abstract
 
         $host = self::API_SERVER;
 
-        if ((bool) $this->_params['ssl'] === true) {
+        if ((bool) $this->_params['ssl']) {
             $host = self::API_SECURE_SERVER;
         }
 
         $htmlBreak = '<br>';
         $htmlInputClosing = '>';
 
-        if ((bool) $this->_params['xhtml'] === true) {
+        if ((bool) $this->_params['xhtml']) {
             $htmlBreak = '<br />';
             $htmlInputClosing = '/>';
         }

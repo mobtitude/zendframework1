@@ -50,7 +50,7 @@ class Zend_Service_Amazon_Ec2_Keypair extends Zend_Service_Amazon_Ec2_Abstract
 
         $params['Action'] = 'CreateKeyPair';
 
-        if(!$keyName) {
+        if($keyName === '' || $keyName === '0') {
             require_once 'Zend/Service/Amazon/Ec2/Exception.php';
             throw new Zend_Service_Amazon_Ec2_Exception('Invalid Key Name');
         }
@@ -120,7 +120,7 @@ class Zend_Service_Amazon_Ec2_Keypair extends Zend_Service_Amazon_Ec2_Abstract
 
         $params['Action'] = 'DeleteKeyPair';
 
-        if(!$keyName) {
+        if($keyName === '' || $keyName === '0') {
             require_once 'Zend/Service/Amazon/Ec2/Exception.php';
             throw new Zend_Service_Amazon_Ec2_Exception('Invalid Key Name');
         }

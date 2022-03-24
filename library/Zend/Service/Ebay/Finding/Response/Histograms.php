@@ -66,7 +66,7 @@ class Zend_Service_Ebay_Finding_Response_Histograms extends Zend_Service_Ebay_Fi
 
 
         $node = $this->_xPath->query(".//$ns:aspectHistogramContainer[1]", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_Aspect_Histogram_Container
              */
@@ -75,7 +75,7 @@ class Zend_Service_Ebay_Finding_Response_Histograms extends Zend_Service_Ebay_Fi
         }
 
         $node = $this->_xPath->query(".//$ns:categoryHistogramContainer[1]", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_Category_Histogram_Container
              */

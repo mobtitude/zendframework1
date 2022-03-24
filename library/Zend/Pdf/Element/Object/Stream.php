@@ -104,22 +104,20 @@ class Zend_Pdf_Element_Object_Stream extends Zend_Pdf_Element_Object
         $dictionaryArray['DecodeParms'] = array();
         if ($this->_dictionary->Filter === null) {
             // Do nothing.
-        } else if ($this->_dictionary->Filter->getType() == Zend_Pdf_Element::TYPE_ARRAY) {
+        } elseif ($this->_dictionary->Filter->getType() == Zend_Pdf_Element::TYPE_ARRAY) {
             foreach ($this->_dictionary->Filter->items as $id => $filter) {
                 $dictionaryArray['Filter'][$id]      = $filter->value;
                 $dictionaryArray['DecodeParms'][$id] = array();
 
-                if ($this->_dictionary->DecodeParms !== null ) {
-                    if ($this->_dictionary->DecodeParms->items[$id] !== null &&
-                        $this->_dictionary->DecodeParms->items[$id]->value !== null ) {
-                        foreach ($this->_dictionary->DecodeParms->items[$id]->getKeys() as $paramKey) {
-                            $dictionaryArray['DecodeParms'][$id][$paramKey] =
-                                  $this->_dictionary->DecodeParms->items[$id]->$paramKey->value;
-                        }
+                if ($this->_dictionary->DecodeParms !== null && ($this->_dictionary->DecodeParms->items[$id] !== null &&
+                    $this->_dictionary->DecodeParms->items[$id]->value !== null) ) {
+                    foreach ($this->_dictionary->DecodeParms->items[$id]->getKeys() as $paramKey) {
+                        $dictionaryArray['DecodeParms'][$id][$paramKey] =
+                              $this->_dictionary->DecodeParms->items[$id]->$paramKey->value;
                     }
                 }
             }
-        } else if ($this->_dictionary->Filter->getType() != Zend_Pdf_Element::TYPE_NULL) {
+        } elseif ($this->_dictionary->Filter->getType() != Zend_Pdf_Element::TYPE_NULL) {
             $dictionaryArray['Filter'][0]      = $this->_dictionary->Filter->value;
             $dictionaryArray['DecodeParms'][0] = array();
             if ($this->_dictionary->DecodeParms !== null ) {
@@ -138,18 +136,16 @@ class Zend_Pdf_Element_Object_Stream extends Zend_Pdf_Element_Object
         $dictionaryArray['FDecodeParms'] = array();
         if ($this->_dictionary->FFilter === null) {
             // Do nothing.
-        } else if ($this->_dictionary->FFilter->getType() == Zend_Pdf_Element::TYPE_ARRAY) {
+        } elseif ($this->_dictionary->FFilter->getType() == Zend_Pdf_Element::TYPE_ARRAY) {
             foreach ($this->_dictionary->FFilter->items as $id => $filter) {
                 $dictionaryArray['FFilter'][$id]      = $filter->value;
                 $dictionaryArray['FDecodeParms'][$id] = array();
 
-                if ($this->_dictionary->FDecodeParms !== null ) {
-                    if ($this->_dictionary->FDecodeParms->items[$id] !== null &&
-                        $this->_dictionary->FDecodeParms->items[$id]->value !== null) {
-                        foreach ($this->_dictionary->FDecodeParms->items[$id]->getKeys() as $paramKey) {
-                            $dictionaryArray['FDecodeParms'][$id][$paramKey] =
-                                  $this->_dictionary->FDecodeParms->items[$id]->items[$paramKey]->value;
-                        }
+                if ($this->_dictionary->FDecodeParms !== null && ($this->_dictionary->FDecodeParms->items[$id] !== null &&
+                    $this->_dictionary->FDecodeParms->items[$id]->value !== null) ) {
+                    foreach ($this->_dictionary->FDecodeParms->items[$id]->getKeys() as $paramKey) {
+                        $dictionaryArray['FDecodeParms'][$id][$paramKey] =
+                              $this->_dictionary->FDecodeParms->items[$id]->items[$paramKey]->value;
                     }
                 }
             }
@@ -423,9 +419,8 @@ class Zend_Pdf_Element_Object_Stream extends Zend_Pdf_Element_Object
         if ($this->_streamDecoded) {
             $this->_initialDictionaryData = $this->_extractDictionaryData();
             $this->_encodeStream();
-        } else if ($this->_initialDictionaryData != null) {
+        } elseif ($this->_initialDictionaryData != null) {
             $newDictionary   = $this->_extractDictionaryData();
-
             if ($this->_initialDictionaryData !== $newDictionary) {
                 $this->_decodeStream();
                 $this->_initialDictionaryData = $newDictionary;

@@ -120,7 +120,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
      */
     public function prepareRequest(&$params)
     {
-        if (is_array($this->_props) && count($this->_props) > 0) {
+        if (is_array($this->_props) && $this->_props !== []) {
             foreach ($this->_props as $prop => $req) {
                 if ($req) {
                     if (isset($required)) {
@@ -128,12 +128,10 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
                     } else {
                         $required = $prop;
                     }
+                } elseif (isset($optional)) {
+                    $optional .= ','.$prop;
                 } else {
-                    if (isset($optional)) {
-                        $optional .= ','.$prop;
-                    } else {
-                        $optional = $prop;
-                    }
+                    $optional = $prop;
                 }
             }
             if ($this->_version >= 1.1) {
@@ -168,11 +166,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
         } else {
             $this->_version= 1.0;
         }
-        if (!empty($params['openid_sreg_policy_url'])) {
-            $this->_policy_url = $params['openid_sreg_policy_url'];
-        } else {
-            $this->_policy_url = null;
-        }
+        $this->_policy_url = empty($params['openid_sreg_policy_url']) ? null : $params['openid_sreg_policy_url'];
         $props = array();
         if (!empty($params['openid_sreg_optional'])) {
             foreach (explode(',', (string) $params['openid_sreg_optional']) as $prop) {
@@ -193,7 +187,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
             }
         }
 
-        $this->_props = (count($props2) > 0) ? $props2 : null;
+        $this->_props = ($props2 !== []) ? $props2 : null;
         return true;
     }
 
@@ -205,7 +199,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
      */
     public function prepareResponse(&$params)
     {
-        if (is_array($this->_props) && count($this->_props) > 0) {
+        if (is_array($this->_props) && $this->_props !== []) {
             if ($this->_version >= 1.1) {
                 $params['openid.ns.sreg'] = Zend_OpenId_Extension_Sreg::NAMESPACE_1_1;
             }
@@ -239,7 +233,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
                 $props[$prop] = $params['openid_sreg_' . $prop];
             }
         }
-        if (isset($this->_props) && is_array($this->_props)) {
+        if ($this->_props !== null && is_array($this->_props)) {
             foreach (self::getSregProperties() as $prop) {
                 if (isset($this->_props[$prop]) &&
                     $this->_props[$prop] &&
@@ -248,7 +242,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
                 }
             }
         }
-        $this->_props = (count($props) > 0) ? $props : null;
+        $this->_props = ($props !== []) ? $props : null;
         return true;
     }
 
@@ -275,14 +269,10 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
      */
     public function checkTrustData($data)
     {
-        if (is_array($this->_props) && count($this->_props) > 0) {
+        if (is_array($this->_props) && $this->_props !== []) {
             $props = array();
             $name = get_class();
-            if (isset($data[$name])) {
-                $props = $data[$name];
-            } else {
-                $props = array();
-            }
+            $props = isset($data[$name]) ? $data[$name] : array();
             $props2 = array();
             foreach ($this->_props as $prop => $req) {
                 if (empty($props[$prop])) {
@@ -293,7 +283,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
                     $props2[$prop] = $props[$prop];
                 }
             }
-            $this->_props = (count($props2) > 0) ? $props2 : null;
+            $this->_props = ($props2 !== []) ? $props2 : null;
         }
         return true;
     }

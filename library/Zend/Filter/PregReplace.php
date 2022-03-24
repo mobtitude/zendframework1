@@ -72,7 +72,7 @@ class Zend_Filter_PregReplace implements Zend_Filter_Interface
      */
     static protected function _determineUnicodeSupport()
     {
-        self::$_unicodeSupportEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+        self::$_unicodeSupportEnabled = (bool) @preg_match('/\pL/u', 'a');
     }
 
     /**
@@ -88,17 +88,15 @@ class Zend_Filter_PregReplace implements Zend_Filter_Interface
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {
                 $temp['match'] = array_shift($options);
             }
-
             if (!empty($options)) {
                 $temp['replace'] = array_shift($options);
             }
-
             $options = $temp;
         }
 

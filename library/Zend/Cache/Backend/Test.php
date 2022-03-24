@@ -167,10 +167,7 @@ class Zend_Cache_Backend_Test extends Zend_Cache_Backend implements Zend_Cache_B
     public function save($data, $id, $tags = array(), $specificLifetime = false)
     {
         $this->_addLog('save', array($data, $id, $tags));
-        if (substr($id,-5)=='false') {
-            return false;
-        }
-        return true;
+        return !(substr($id,-5)=='false');
     }
 
     /**
@@ -185,10 +182,7 @@ class Zend_Cache_Backend_Test extends Zend_Cache_Backend implements Zend_Cache_B
     public function remove($id)
     {
         $this->_addLog('remove', array($id));
-        if (substr($id,-5)=='false') {
-            return false;
-        }
-        return true;
+        return !(substr($id,-5)=='false');
     }
 
     /**
@@ -212,10 +206,7 @@ class Zend_Cache_Backend_Test extends Zend_Cache_Backend implements Zend_Cache_B
     public function clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = array())
     {
         $this->_addLog('clean', array($mode, $tags));
-        if ($mode=='false') {
-            return false;
-        }
-        return true;
+        return !($mode=='false');
     }
 
     /**
@@ -410,7 +401,7 @@ class Zend_Cache_Backend_Test extends Zend_Cache_Backend implements Zend_Cache_B
             'methodName' => $methodName,
             'args' => $args
         );
-        $this->_index = $this->_index + 1;
+        $this->_index += 1;
     }
 
 }

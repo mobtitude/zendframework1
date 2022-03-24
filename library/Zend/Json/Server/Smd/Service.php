@@ -287,11 +287,9 @@ class Zend_Json_Server_Smd_Service
             'type' => $type,
         );
         foreach ($options as $key => $value) {
-            if (in_array($key, array_keys($this->_paramOptionTypes))) {
-                if (null !== ($callback = $this->_paramOptionTypes[$key])) {
-                    if (!$callback($value)) {
-                        continue;
-                    }
+            if (array_key_exists($key, $this->_paramOptionTypes)) {
+                if (null !== ($callback = $this->_paramOptionTypes[$key]) && !$callback($value)) {
+                    continue;
                 }
                 $paramOptions[$key] = $value;
             }
@@ -324,7 +322,7 @@ class Zend_Json_Server_Smd_Service
                 continue;
             }
             $type  = $options['type'];
-            $order = (array_key_exists('order', $options)) ? $options['order'] : null;
+            $order = $options['order'] ?? null;
             $this->addParam($type, $options, $order);
         }
         return $this;
@@ -415,10 +413,10 @@ class Zend_Json_Server_Smd_Service
         $returns    = $this->getReturn();
 
         if (empty($target)) {
-            return compact('envelope', 'transport', 'parameters', 'returns');
+            return ['envelope' => $envelope, 'transport' => $transport, 'parameters' => $parameters, 'returns' => $returns];
         }
 
-        return $paramInfo = compact('envelope', 'target', 'transport', 'parameters', 'returns');
+        return $paramInfo = ['envelope' => $envelope, 'target' => $target, 'transport' => $transport, 'parameters' => $parameters, 'returns' => $returns];
     }
 
     /**

@@ -102,10 +102,8 @@ class Zend_Controller_Router_Route_Static extends Zend_Controller_Router_Route_A
 
                 return $this->_defaults;
             }
-        } else {
-            if (trim($path, self::URI_DELIMITER) == $this->_route) {
-                return $this->_defaults;
-            }
+        } elseif (trim($path, self::URI_DELIMITER) == $this->_route) {
+            return $this->_defaults;
         }
 
         return false;

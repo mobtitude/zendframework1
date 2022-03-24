@@ -147,19 +147,15 @@ class Zend_Mime_Decode
         if (strpos($message, $EOL . $EOL)) {
             list($headers, $body) = explode($EOL . $EOL, $message, 2);
             // next is the standard new line
+        } elseif ($EOL != "\r\n" && strpos($message, "\r\n\r\n")) {
+            list($headers, $body) = explode("\r\n\r\n", $message, 2);
+            // next is the other "standard" new line
+        } elseif ($EOL != "\n" && strpos($message, "\n\n")) {
+            list($headers, $body) = explode("\n\n", $message, 2);
+            // at last resort find anything that looks like a new line
         } else {
-            if ($EOL != "\r\n" && strpos($message, "\r\n\r\n")) {
-                list($headers, $body) = explode("\r\n\r\n", $message, 2);
-                // next is the other "standard" new line
-            } else {
-                if ($EOL != "\n" && strpos($message, "\n\n")) {
-                    list($headers, $body) = explode("\n\n", $message, 2);
-                    // at last resort find anything that looks like a new line
-                } else {
-                    @list($headers, $body) =
-                        @preg_split("%([\r\n]+)\\1%U", $message, 2);
-                }
-            }
+            @list($headers, $body) =
+                @preg_split("%([\r\n]+)\\1%U", $message, 2);
         }
 
         $headers = iconv_mime_decode_headers(
@@ -233,9 +229,9 @@ class Zend_Mime_Decode
             throw new Zend_Exception('not a valid header field');
         }
 
-        if ($wantedPart) {
+        if ($wantedPart !== '' && $wantedPart !== '0') {
             foreach ($matches[1] as $key => $name) {
-                if (strcasecmp($name, $wantedPart)) {
+                if (strcasecmp($name, $wantedPart) !== 0) {
                     continue;
                 }
                 if ($matches[2][$key][0] != '"') {
@@ -251,11 +247,7 @@ class Zend_Mime_Decode
         $split = array();
         foreach ($matches[1] as $key => $name) {
             $name = strtolower($name);
-            if ($matches[2][$key][0] == '"') {
-                $split[$name] = substr($matches[2][$key], 1, -1);
-            } else {
-                $split[$name] = $matches[2][$key];
-            }
+            $split[$name] = $matches[2][$key][0] == '"' ? substr($matches[2][$key], 1, -1) : $matches[2][$key];
         }
 
         return $split;

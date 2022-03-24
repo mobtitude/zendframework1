@@ -258,15 +258,13 @@ class Zend_Amf_Server implements Zend_Server_Interface
         }
 
         $auth = Zend_Auth::getInstance();
-        if($auth->hasIdentity()) {
+        if ($auth->hasIdentity()) {
             $role = $auth->getIdentity()->role;
+        } elseif ($this->_acl->hasRole(Zend_Amf_Constants::GUEST_ROLE)) {
+            $role = Zend_Amf_Constants::GUEST_ROLE;
         } else {
-            if($this->_acl->hasRole(Zend_Amf_Constants::GUEST_ROLE)) {
-                $role = Zend_Amf_Constants::GUEST_ROLE;
-            } else {
-                require_once 'Zend/Amf/Server/Exception.php';
-                throw new Zend_Amf_Server_Exception("Unauthenticated access not allowed");
-            }
+            require_once 'Zend/Amf/Server/Exception.php';
+            throw new Zend_Amf_Server_Exception("Unauthenticated access not allowed");
         }
         if($this->_acl->isAllowed($role, $class, $function)) {
             return true;
@@ -301,10 +299,8 @@ class Zend_Amf_Server implements Zend_Server_Interface
      */
     protected function _dispatch($method, $params = null, $source = null)
     {
-        if($source) {
-            if(($mapped = Zend_Amf_Parse_TypeLoader::getMappedClassName($source)) !== false) {
-                $source = $mapped;
-            }
+        if($source && ($mapped = Zend_Amf_Parse_TypeLoader::getMappedClassName($source)) !== false) {
+            $source = $mapped;
         }
         $qualifiedName = empty($source) ? $method : $source . '.' . $method;
 
@@ -477,7 +473,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
             // authentication failed, good bye
             require_once 'Zend/Amf/Server/Exception.php';
             throw new Zend_Amf_Server_Exception(
-                "Authentication failed: " . join("\n",
+                "Authentication failed: " . implode("\n",
                     $result->getMessages()), $result->getCode());
         }
 
@@ -507,8 +503,8 @@ class Zend_Amf_Server implements Zend_Server_Interface
         $error   = false;
         $headers = $request->getAmfHeaders();
         if (isset($headers[Zend_Amf_Constants::CREDENTIALS_HEADER]) 
-            && isset($headers[Zend_Amf_Constants::CREDENTIALS_HEADER]->userid)
-            && isset($headers[Zend_Amf_Constants::CREDENTIALS_HEADER]->password)
+            && (property_exists($headers[Zend_Amf_Constants::CREDENTIALS_HEADER], 'userid') && $headers[Zend_Amf_Constants::CREDENTIALS_HEADER]->userid !== null)
+            && (property_exists($headers[Zend_Amf_Constants::CREDENTIALS_HEADER], 'password') && $headers[Zend_Amf_Constants::CREDENTIALS_HEADER]->password !== null)
         ) {
             try {
                 if ($this->_handleAuth(
@@ -561,7 +557,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
                         // Split the target string into its values.
                         $source = substr($targetURI, 0, strrpos($targetURI, '.'));
 
-                        if ($source) {
+                        if ($source !== '' && $source !== '0') {
                             // Break off method name from namespace into source
                             $method = substr(strrchr($targetURI, '.'), 1);
                             $return = $this->_dispatch($method, $body->getData(), $source);
@@ -588,7 +584,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
                             // Split the target string into its values.
                             $source = substr($targetURI, 0, strrpos($targetURI, '.'));
 
-                            if ($source) {
+                            if ($source !== '' && $source !== '0') {
                                 // Break off method name from namespace into source
                                 $method = substr(strrchr($targetURI, '.'), 1);
                                 $return = $this->_dispatch($method, $body->getData(), $source);
@@ -614,12 +610,8 @@ class Zend_Amf_Server implements Zend_Server_Interface
         if($this->isSession()) {
            $currentID = session_id();
            $joint = "?";
-           if(isset($_SERVER['QUERY_STRING'])) {
-               if(!strpos($_SERVER['QUERY_STRING'], $currentID) !== FALSE) {
-                   if(strrpos($_SERVER['QUERY_STRING'], "?") !== FALSE) {
-                       $joint = "&";
-                   }
-               }
+           if(isset($_SERVER['QUERY_STRING']) && !strpos($_SERVER['QUERY_STRING'], $currentID) && strrpos($_SERVER['QUERY_STRING'], "?") !== FALSE) {
+               $joint = "&";
            }
 
             // create a new AMF message header with the session id as a variable.
@@ -641,16 +633,14 @@ class Zend_Amf_Server implements Zend_Server_Interface
     public function handle($request = null)
     {
         // Check if request was passed otherwise get it from the server
-        if ($request === null || !$request instanceof Zend_Amf_Request) {
+        if (!$request instanceof \Zend_Amf_Request || !$request instanceof Zend_Amf_Request) {
             $request = $this->getRequest();
         } else {
             $this->setRequest($request);
         }
-        if ($this->isSession()) {
-             // Check if a session is being sent from the amf call
-             if (isset($_COOKIE[$this->_sessionName])) {
-                 session_id($_COOKIE[$this->_sessionName]);
-             }
+        // Check if a session is being sent from the amf call
+        if ($this->isSession() && isset($_COOKIE[$this->_sessionName])) {
+             session_id($_COOKIE[$this->_sessionName]);
         }
 
         // Check for errors that may have happend in deserialization of Request.

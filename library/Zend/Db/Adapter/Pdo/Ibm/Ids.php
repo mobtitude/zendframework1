@@ -62,8 +62,7 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
      */
     public function listTables()
     {
-        $sql = "SELECT tabname "
-        . "FROM systables ";
+        $sql = 'SELECT tabname FROM systables ';
 
         return $this->_adapter->fetchCol($sql);
     }
@@ -189,7 +188,7 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
         );
 
         if ($typeNo - 256 >= 0) {
-            $typeNo = $typeNo - 256;
+            $typeNo -= 256;
         }
 
         return $typemap[$typeNo];
@@ -219,7 +218,7 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
         // this should return only 1 row
         // unless there is no primary key,
         // in which case, the empty array is returned
-        if ($results) {
+        if ($results !== []) {
             $row = $results[0];
         } else {
             return $cols;
@@ -247,16 +246,16 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
      */
     public function limit($sql, $count, $offset = 0)
     {
-        $count = intval($count);
+        $count = (int) $count;
         if ($count < 0) {
             /** @see Zend_Db_Adapter_Exception */
             require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
-        } else if ($count == 0) {
-              $limit_sql = str_ireplace("SELECT", "SELECT * FROM (SELECT", $sql);
-              $limit_sql .= ") WHERE 0 = 1";
+        } elseif ($count == 0) {
+            $limit_sql = str_ireplace("SELECT", "SELECT * FROM (SELECT", $sql);
+            $limit_sql .= ") WHERE 0 = 1";
         } else {
-            $offset = intval($offset);
+            $offset = (int) $offset;
             if ($offset < 0) {
                 /** @see Zend_Db_Adapter_Exception */
                 require_once 'Zend/Db/Adapter/Exception.php';
@@ -281,8 +280,7 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
     {
         $sql = 'SELECT '.$this->_adapter->quoteIdentifier($sequenceName).'.CURRVAL FROM '
                .'systables WHERE tabid = 1';
-        $value = $this->_adapter->fetchOne($sql);
-        return $value;
+        return $this->_adapter->fetchOne($sql);
     }
 
      /**
@@ -295,7 +293,6 @@ class Zend_Db_Adapter_Pdo_Ibm_Ids
     {
         $sql = 'SELECT '.$this->_adapter->quoteIdentifier($sequenceName).'.NEXTVAL FROM '
                .'systables WHERE tabid = 1';
-        $value = $this->_adapter->fetchOne($sql);
-        return $value;
+        return $this->_adapter->fetchOne($sql);
     }
 }

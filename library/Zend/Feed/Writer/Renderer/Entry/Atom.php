@@ -95,8 +95,7 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
     {
         if(!$this->getDataContainer()->getTitle()) {
             require_once 'Zend/Feed/Exception.php';
-            $message = 'Atom 1.0 entry elements MUST contain exactly one'
-            . ' atom:title element but a title has not been set';
+            $message = 'Atom 1.0 entry elements MUST contain exactly one atom:title element but a title has not been set';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
@@ -322,11 +321,7 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
                 $dvalid = true;
             }
             $validator = new Zend_Validate_EmailAddress;
-            if ($validator->isValid($matches['name'])) {
-                $nvalid = true;
-            } else {
-                $nvalid = $validator->isValid('info@' . $matches['name']);
-            }
+            $nvalid = $validator->isValid($matches['name']) ? true : $validator->isValid('info@' . $matches['name']);
             return $dvalid && $nvalid;
 
         }

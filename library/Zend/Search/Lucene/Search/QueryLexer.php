@@ -308,14 +308,22 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
      */
     private function _translateInput($char)
     {
-        if        (strpos(self::QUERY_WHITE_SPACE_CHARS,    $char) !== false) { return self::IN_WHITE_SPACE;
-        } else if (strpos(self::QUERY_SYNT_CHARS,           $char) !== false) { return self::IN_SYNT_CHAR;
-        } else if (strpos(self::QUERY_MUTABLE_CHARS,        $char) !== false) { return self::IN_MUTABLE_CHAR;
-        } else if (strpos(self::QUERY_LEXEMEMODIFIER_CHARS, $char) !== false) { return self::IN_LEXEME_MODIFIER;
-        } else if (strpos(self::QUERY_ASCIIDIGITS_CHARS,    $char) !== false) { return self::IN_ASCII_DIGIT;
-        } else if ($char === '"' )                                            { return self::IN_QUOTE;
-        } else if ($char === '.' )                                            { return self::IN_DECIMAL_POINT;
-        } else if ($char === '\\')                                            { return self::IN_ESCAPE_CHAR;
+        if (strpos(self::QUERY_WHITE_SPACE_CHARS,    $char) !== false) {
+            return self::IN_WHITE_SPACE;
+        } elseif (strpos(self::QUERY_SYNT_CHARS,           $char) !== false) {
+            return self::IN_SYNT_CHAR;
+        } elseif (strpos(self::QUERY_MUTABLE_CHARS,        $char) !== false) {
+            return self::IN_MUTABLE_CHAR;
+        } elseif (strpos(self::QUERY_LEXEMEMODIFIER_CHARS, $char) !== false) {
+            return self::IN_LEXEME_MODIFIER;
+        } elseif (strpos(self::QUERY_ASCIIDIGITS_CHARS,    $char) !== false) {
+            return self::IN_ASCII_DIGIT;
+        } elseif ($char === '"') {
+            return self::IN_QUOTE;
+        } elseif ($char === '.') {
+            return self::IN_DECIMAL_POINT;
+        } elseif ($char === '\\') {
+            return self::IN_ESCAPE_CHAR;
         } else                                                                { return self::IN_CHAR;
         }
     }
@@ -348,9 +356,7 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
             $this->_queryString[$count] = iconv_substr($inputString, $count, 1, $encoding);
         }
 
-        for ($this->_queryStringPosition = 0;
-             $this->_queryStringPosition < count($this->_queryString);
-             $this->_queryStringPosition++) {
+        foreach (array_keys($this->_queryString) as $_queryStringPosition) {
             $this->process($this->_translateInput($this->_queryString[$this->_queryStringPosition]));
         }
 

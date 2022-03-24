@@ -123,32 +123,16 @@ abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
 
         $this->translate($x1, $y1);
 
-        if ($x2 === null) {
-            $with = $canvas->getWidth();
-        } else {
-            $with = $x2 - $x1;
-        }
-        if ($y2 === null) {
-            $height = $canvas->getHeight();
-        } else {
-            $height = $y2 - $y1;
-        }
+        $with = $x2 === null ? $canvas->getWidth() : $x2 - $x1;
+        $height = $y2 === null ? $canvas->getHeight() : $y2 - $y1;
 
         $this->clipRectangle(0, 0, $with, $height);
 
         if ($x2 !== null  ||  $y2 !== null) {
             // Drawn canvas has to be scaled.
-            if ($x2 !== null) {
-                $xScale = $with/$canvas->getWidth();
-            } else {
-                $xScale = 1;
-            }
+            $xScale = $x2 !== null ? $with/$canvas->getWidth() : 1;
 
-            if ($y2 !== null) {
-                $yScale = $height/$canvas->getHeight();
-            } else {
-                $yScale = 1;
-            }
+            $yScale = $y2 !== null ? $height/$canvas->getHeight() : 1;
 
             $this->scale($xScale, $yScale);
         }
@@ -274,7 +258,7 @@ abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
         if ($style->getFont() !== null) {
             $this->setFont($style->getFont(), $style->getFontSize());
         }
-        $this->_contents .= $style->instructions($this->_dictionary->Resources);
+        $this->_contents .= $style->instructions();
 
         $this->_style = $style;
 
@@ -436,7 +420,7 @@ abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
 
         if ($startAngle !== null) {
             if ($startAngle != 0) { $startAngle = fmod($startAngle, M_PI*2); }
-            if ($endAngle   != 0) { $endAngle   = fmod($endAngle,   M_PI*2); }
+            if ($endAngle != 0) { $endAngle   = fmod($endAngle,   M_PI*2); }
 
             if ($startAngle > $endAngle) {
                 $endAngle += M_PI*2;
@@ -609,7 +593,7 @@ abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
             // drawEllipse($x1, $y1, $x2, $y2);
             $startAngle = null;
             $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE;
-        } else if ($param6 === null) {
+        } elseif ($param6 === null) {
             // drawEllipse($x1, $y1, $x2, $y2, $fillType);
             $startAngle = null;
             $fillType = $param5;
@@ -619,11 +603,7 @@ abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
             $startAngle = $param5;
             $endAngle   = $param6;
 
-            if ($param7 === null) {
-                $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE;
-            } else {
-                $fillType = $param7;
-            }
+            $fillType = $param7 === null ? Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE : $param7;
         }
 
         $this->_addProcSet('PDF');
@@ -647,7 +627,7 @@ abstract class Zend_Pdf_Canvas_Abstract implements Zend_Pdf_Canvas_Interface
 
         if ($startAngle !== null) {
             if ($startAngle != 0) { $startAngle = fmod($startAngle, M_PI*2); }
-            if ($endAngle   != 0) { $endAngle   = fmod($endAngle,   M_PI*2); }
+            if ($endAngle != 0) { $endAngle   = fmod($endAngle,   M_PI*2); }
 
             if ($startAngle > $endAngle) {
                 $endAngle += M_PI*2;

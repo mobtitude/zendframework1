@@ -271,7 +271,6 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
     protected function _normalizeHeaderName($name)
     {
         $name = strtoupper((string) $name);
-        $name = str_replace('-', '_', $name);
-        return $name;
+        return str_replace('-', '_', $name);
     }
 }

@@ -114,11 +114,11 @@ class Zend_Search_Lucene_Document_Xlsx extends Zend_Search_Lucene_Document_OpenX
                 $sharedStringsPath = $workbookRelations->xpath("rel:Relationship[@Type='" . Zend_Search_Lucene_Document_Xlsx::SCHEMA_SHAREDSTRINGS . "']");
                 $sharedStringsPath = (string)$sharedStringsPath[0]['Target'];
                 $xmlStrings = Zend_Xml_Security::scan($package->getFromName( $this->absoluteZipPath(dirname($rel["Target"]) . "/" . $sharedStringsPath)) );
-                if (isset($xmlStrings) && isset($xmlStrings->si)) {
+                if (isset($xmlStrings) && (property_exists($xmlStrings, 'si') && $xmlStrings->si !== null)) {
                     foreach ($xmlStrings->si as $val) {
-                        if (isset($val->t)) {
+                        if (property_exists($val, 't') && $val->t !== null) {
                             $sharedStrings[] = (string)$val->t;
-                        } elseif (isset($val->r)) {
+                        } elseif (property_exists($val, 'r') && $val->r !== null) {
                             $sharedStrings[] = $this->_parseRichText($val);
                         }
                     }
@@ -149,11 +149,7 @@ class Zend_Search_Lucene_Document_Xlsx extends Zend_Search_Lucene_Document_OpenX
                     switch ($dataType) {
                         case "s":
                             // Value is a shared string
-                            if ((string)$c->v != '') {
-                                $value = $sharedStrings[intval($c->v)];
-                            } else {
-                                $value = '';
-                            }
+                            $value = (string)$c->v != '' ? $sharedStrings[(int) $c->v] : '';
 
                             break;
 
@@ -162,11 +158,7 @@ class Zend_Search_Lucene_Document_Xlsx extends Zend_Search_Lucene_Document_OpenX
                             $value = (string)$c->v;
                             if ($value == '0') {
                                 $value = false;
-                            } else if ($value == '1') {
-                                $value = true;
-                            } else {
-                                $value = (bool)$c->v;
-                            }
+                            } else $value = $value == '1' ? true : (bool)$c->v;
 
                             break;
 
@@ -178,11 +170,7 @@ class Zend_Search_Lucene_Document_Xlsx extends Zend_Search_Lucene_Document_OpenX
 
                         case "e":
                             // Value is an error message
-                            if ((string)$c->v != '') {
-                                $value = (string)$c->v;
-                            } else {
-                                $value = '';
-                            }
+                            $value = (string)$c->v != '' ? (string)$c->v : '';
 
                             break;
 
@@ -241,7 +229,7 @@ class Zend_Search_Lucene_Document_Xlsx extends Zend_Search_Lucene_Document_OpenX
     private function _parseRichText($is = null) {
         $value = array();
 
-        if (isset($is->t)) {
+        if (property_exists($is, 't') && $is->t !== null) {
             $value[] = (string)$is->t;
         } else {
             foreach ($is->r as $run) {

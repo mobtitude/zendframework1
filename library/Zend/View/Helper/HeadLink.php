@@ -151,11 +151,9 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
             $type   = $matches['type'];
             $index  = null;
 
-            if ('offsetSet' == $action) {
-                if (0 < $argc) {
-                    $index = array_shift($args);
-                    --$argc;
-                }
+            if ('offsetSet' == $action && 0 < $argc) {
+                $index = array_shift($args);
+                --$argc;
             }
 
             if (1 > $argc) {
@@ -201,11 +199,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
         $vars         = get_object_vars($value);
         $keys         = array_keys($vars);
         $intersection = array_intersect($this->_itemKeys, $keys);
-        if (empty($intersection)) {
-            return false;
-        }
-
-        return true;
+        return !empty($intersection);
     }
 
     /**
@@ -357,8 +351,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
      */
     public function createData(array $attributes)
     {
-        $data = (object) $attributes;
-        return $data;
+        return (object) $attributes;
     }
 
     /**
@@ -379,15 +372,11 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
             return false;
         }
 
-        if (0 < count($args)) {
+        if ([] !== $args) {
             $media = array_shift($args);
-            if(is_array($media)) {
-                $media = implode(',', $media);
-            } else {
-                $media = (string) $media;
-            }
+            $media = is_array($media) ? implode(',', $media) : (string) $media;
         }
-        if (0 < count($args)) {
+        if ([] !== $args) {
             $conditionalStylesheet = array_shift($args);
             if(!empty($conditionalStylesheet) && is_string($conditionalStylesheet)) {
                 $conditionalStylesheet = (string) $conditionalStylesheet;
@@ -396,12 +385,12 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
             }
         }
 
-        if(0 < count($args) && is_array($args[0])) {
+        if([] !== $args && is_array($args[0])) {
             $extras = array_shift($args);
             $extras = (array) $extras;
         }
 
-        $attributes = compact('rel', 'type', 'href', 'media', 'conditionalStylesheet', 'extras');
+        $attributes = ['rel' => $rel, 'type' => $type, 'href' => $href, 'media' => $media, 'conditionalStylesheet' => $conditionalStylesheet, 'extras' => $extras];
         return $this->createData($this->_applyExtras($attributes));
     }
 
@@ -441,7 +430,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
         $type  = array_shift($args);
         $title = array_shift($args);
 
-        if(0 < count($args) && is_array($args[0])) {
+        if([] !== $args && is_array($args[0])) {
             $extras = array_shift($args);
             $extras = (array) $extras;
 
@@ -454,7 +443,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
         $type  = (string) $type;
         $title = (string) $title;
 
-        $attributes = compact('rel', 'href', 'type', 'title', 'extras');
+        $attributes = ['rel' => $rel, 'href' => $href, 'type' => $type, 'title' => $title, 'extras' => $extras];
         return $this->createData($this->_applyExtras($attributes));
     }
 
@@ -466,12 +455,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
     protected function _applyExtras($attributes)
     {
         if (isset($attributes['extras'])) {
-            foreach ($attributes['extras'] as $eKey=>$eVal) {
-                if (isset($attributes[$eKey])) {
-                    $attributes[$eKey] = $eVal;
-                    unset($attributes['extras'][$eKey]);
-                }
-            }
+            $attributes = array_filter($attributes['extras'], fn($eVal) => isset($attributes[$eKey]));
         }
         return $attributes;
     }

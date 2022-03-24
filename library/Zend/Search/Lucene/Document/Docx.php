@@ -92,12 +92,7 @@ class Zend_Search_Lucene_Document_Docx extends Zend_Search_Lucene_Document_OpenX
                     }
 
                     foreach ($runs as $run) {
-                     if ($run->getName() == 'br') {
-                         // Break element
-                         $documentBody[] = ' ';
-                     } else {
-                         $documentBody[] = (string)$run;
-                     }
+                     $documentBody[] = $run->getName() == 'br' ? ' ' : (string)$run;
                     }
 
                     // Add space after each paragraph. So they are not bound together.

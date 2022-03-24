@@ -197,8 +197,8 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
                 $values[$this->_actionKey] = array_shift($path);
             }
 
-            if ($numSegs = count($path)) {
-                for ($i = 0; $i < $numSegs; $i = $i + 2) {
+            if (($numSegs = count($path)) !== 0) {
+                for ($i = 0; $i < $numSegs; $i += 2) {
                     $key          = urldecode($path[$i]);
                     $val          = isset($path[$i + 1]) ? urldecode($path[$i + 1]) : null;
                     $params[$key] = (isset($params[$key]) ? (array_merge((array)$params[$key], array($val))) : $val);
@@ -230,7 +230,7 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
             $this->_setRequestKeys();
         }
 
-        $params = (!$reset) ? $this->_values : array();
+        $params = ($reset) ? array() : $this->_values;
 
         foreach ($data as $key => $value) {
             if ($value !== null) {
@@ -244,10 +244,8 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
 
         $url = '';
 
-        if ($this->_moduleValid || array_key_exists($this->_moduleKey, $data)) {
-            if ($params[$this->_moduleKey] != $this->_defaults[$this->_moduleKey]) {
-                $module = $params[$this->_moduleKey];
-            }
+        if (($this->_moduleValid || array_key_exists($this->_moduleKey, $data)) && $params[$this->_moduleKey] != $this->_defaults[$this->_moduleKey]) {
+            $module = $params[$this->_moduleKey];
         }
         unset($params[$this->_moduleKey]);
 

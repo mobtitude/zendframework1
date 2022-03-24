@@ -255,7 +255,9 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
      */
     public function register()
     {
-        spl_autoload_register(array($this, 'autoload'));
+        spl_autoload_register(function (string $class) : string|false {
+            return $this->autoload($class);
+        });
     }
 
     /**
@@ -321,7 +323,9 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
                 return false;
             }
             $this->error = false;
-            set_error_handler(array($this, 'handleError'), E_WARNING);
+            set_error_handler(function ($errno, $errstr) : void {
+                $this->handleError($errno, $errstr);
+            }, E_WARNING);
             include $filename;
             restore_error_handler();
             if ($this->error) {
@@ -360,8 +364,7 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
             $directory[strlen($directory) - 1] = DIRECTORY_SEPARATOR;
             return $directory;
         }
-        $directory .= DIRECTORY_SEPARATOR;
-        return $directory;
+        return $directory . DIRECTORY_SEPARATOR;
     }
 
 }

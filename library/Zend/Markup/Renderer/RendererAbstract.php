@@ -253,20 +253,17 @@ abstract class Zend_Markup_Renderer_RendererAbstract
                 'type' => self::TYPE_ALIAS,
                 'name' => $options['name']
             );
+        } elseif ($type && array_key_exists('empty', $options) && $options['empty']) {
+            // add a single replace markup
+            $options['type']   = $type;
+            $options['filter'] = $filter;
+            $this->_markups[$name] = $options;
         } else {
-            if ($type && array_key_exists('empty', $options) && $options['empty']) {
-                // add a single replace markup
-                $options['type']   = $type;
-                $options['filter'] = $filter;
+            // add a replace markup
+            $options['type']   = $type;
+            $options['filter'] = $filter;
 
-                $this->_markups[$name] = $options;
-            } else {
-                // add a replace markup
-                $options['type']   = $type;
-                $options['filter'] = $filter;
-
-                $this->_markups[$name] = $options;
-            }
+            $this->_markups[$name] = $options;
         }
         return $this;
     }
@@ -301,11 +298,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      */
     public function render($value)
     {
-        if ($value instanceof Zend_Markup_TokenList) {
-            $tokenList = $value;
-        } else {
-            $tokenList = $this->getParser()->parse($value);
-        }
+        $tokenList = $value instanceof Zend_Markup_TokenList ? $value : $this->getParser()->parse($value);
 
         $root = $tokenList->current();
 
@@ -380,7 +373,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
         }
 
         $name   = $this->_getMarkupName($token);
-        $markup = (!$name) ? false : $this->_markups[$name];
+        $markup = ($name) ? $this->_markups[$name] : false;
         $empty  = (is_array($markup) && array_key_exists('empty', $markup) && $markup['empty']);
 
         // check if the tag has content
@@ -437,13 +430,10 @@ abstract class Zend_Markup_Renderer_RendererAbstract
             } else {
                 $return = $markup['callback']->convert($token, null);
             }
+        } elseif ($markup['type'] && !$empty) {
+            $return = $this->_executeReplace($token, $markup);
         } else {
-            // replace
-            if ($markup['type'] && !$empty) {
-                $return = $this->_executeReplace($token, $markup);
-            } else {
-                $return = $this->_executeSingleReplace($token, $markup);
-            }
+            $return = $this->_executeSingleReplace($token, $markup);
         }
 
         // reset to the old values

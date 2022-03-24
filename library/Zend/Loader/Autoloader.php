@@ -334,11 +334,9 @@ class Zend_Loader_Autoloader
             if ('' == $ns) {
                 continue;
             }
-            if (0 === strpos($class, $ns)) {
-                if ((false === $namespace) || (strlen((string) $ns) > strlen((string) $namespace))) {
-                    $namespace = $ns;
-                    $autoloaders = $this->getNamespaceAutoloaders($ns);
-                }
+            if (0 === strpos($class, $ns) && ((false === $namespace) || (strlen((string) $ns) > strlen((string) $namespace)))) {
+                $namespace = $ns;
+                $autoloaders = $this->getNamespaceAutoloaders($ns);
             }
         }
 
@@ -353,7 +351,7 @@ class Zend_Loader_Autoloader
 
         // Add non-namespaced autoloaders
         $autoloadersNonNamespace = $this->getNamespaceAutoloaders('');
-        if (count($autoloadersNonNamespace)) {
+        if ($autoloadersNonNamespace !== []) {
             foreach ($autoloadersNonNamespace as $ns) {
                 $autoloaders[] = $ns;
             }
@@ -401,13 +399,13 @@ class Zend_Loader_Autoloader
     public function pushAutoloader($callback, $namespace = '')
     {
         $autoloaders = $this->getAutoloaders();
-        array_push($autoloaders, $callback);
+        $autoloaders[] = $callback;
         $this->setAutoloaders($autoloaders);
 
         $namespace = (array) $namespace;
         foreach ($namespace as $ns) {
             $autoloaders = $this->getNamespaceAutoloaders($ns);
-            array_push($autoloaders, $callback);
+            $autoloaders[] = $callback;
             $this->_setNamespaceAutoloaders($autoloaders, $ns);
         }
 
@@ -460,7 +458,9 @@ class Zend_Loader_Autoloader
     protected function __construct()
     {
         spl_autoload_register(array(__CLASS__, 'autoload'));
-        $this->_internalAutoloader = array($this, '_autoload');
+        $this->_internalAutoloader = function (string $class) : bool {
+            return $this->_autoload($class);
+        };
     }
 
     /**
@@ -516,9 +516,7 @@ class Zend_Loader_Autoloader
         if (empty($availableVersions)) {
             throw new Zend_Loader_Exception('No valid ZF installations discovered');
         }
-
-        $matchedVersion = array_pop($availableVersions);
-        return $matchedVersion;
+        return array_pop($availableVersions);
     }
 
     /**

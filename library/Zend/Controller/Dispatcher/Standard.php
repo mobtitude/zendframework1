@@ -157,7 +157,7 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
      */
     public function formatModuleName($unformatted)
     {
-        if (($this->_defaultModule == $unformatted) && !$this->getParam('prefixDefaultModule')) {
+        if (($this->_defaultModule === $unformatted) && !$this->getParam('prefixDefaultModule')) {
             return $unformatted;
         }
 
@@ -207,7 +207,7 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
         }
 
         $finalClass  = $className;
-        if (($this->_defaultModule != $this->_curModule)
+        if (($this->_defaultModule !== $this->_curModule)
             || $this->getParam('prefixDefaultModule'))
         {
             $finalClass = $this->formatClassName($this->_curModule, $className);
@@ -263,7 +263,7 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
          * class name to do the class->file mapping, but the full class name to insantiate the controller
          */
         $moduleClassName = $className;
-        if (($this->_defaultModule != $this->_curModule)
+        if (($this->_defaultModule !== $this->_curModule)
             || $this->getParam('prefixDefaultModule'))
         {
             $moduleClassName = $this->formatClassName($this->_curModule, $className);
@@ -341,7 +341,7 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
     public function loadClass($className)
     {
         $finalClass  = $className;
-        if (($this->_defaultModule != $this->_curModule)
+        if (($this->_defaultModule !== $this->_curModule)
             || $this->getParam('prefixDefaultModule'))
         {
             $finalClass = $this->formatClassName($this->_curModule, $className);
@@ -422,7 +422,7 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
         $module        = strtolower($module);
         $controllerDir = $this->getControllerDirectory();
         foreach (array_keys($controllerDir) as $moduleName) {
-            if ($module == strtolower($moduleName)) {
+            if ($module === strtolower($moduleName)) {
                 return true;
             }
         }

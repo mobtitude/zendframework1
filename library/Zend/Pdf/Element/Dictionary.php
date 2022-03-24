@@ -56,7 +56,7 @@ class Zend_Pdf_Element_Dictionary extends Zend_Pdf_Element
     {
         if ($val === null) {
             return;
-        } else if (!is_array($val)) {
+        } elseif (!is_array($val)) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Argument must be an array');
         }
@@ -106,10 +106,8 @@ class Zend_Pdf_Element_Dictionary extends Zend_Pdf_Element
      */
     public function __get($item)
     {
-        $element = isset($this->_items[$item]) ? $this->_items[$item]
+        return isset($this->_items[$item]) ? $this->_items[$item]
                                                : null;
-
-        return $element;
     }
 
     /**
@@ -163,9 +161,8 @@ class Zend_Pdf_Element_Dictionary extends Zend_Pdf_Element
             $nameObj = new Zend_Pdf_Element_Name($name);
             $outStr .= $nameObj->toString($factory) . ' ' . $element->toString($factory) . ' ';
         }
-        $outStr .= '>>';
 
-        return $outStr;
+        return $outStr . '>>';
     }
 
     /**

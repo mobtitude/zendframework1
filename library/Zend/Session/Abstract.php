@@ -78,7 +78,7 @@ abstract class Zend_Session_Abstract
      */
     protected static function _namespaceIsset($namespace, $name = null)
     {
-        if (self::$_readable === false) {
+        if (!self::$_readable) {
             /**
              * @see Zend_Session_Exception
              */
@@ -104,7 +104,7 @@ abstract class Zend_Session_Abstract
      */
     protected static function _namespaceUnset($namespace, $name = null)
     {
-        if (self::$_writable === false) {
+        if (!self::$_writable) {
             /**
              * @see Zend_Session_Exception
              */
@@ -139,7 +139,7 @@ abstract class Zend_Session_Abstract
      */
     protected static function & _namespaceGet($namespace, $name = null)
     {
-        if (self::$_readable === false) {
+        if (!self::$_readable) {
             /**
              * @see Zend_Session_Exception
              */
@@ -155,14 +155,13 @@ abstract class Zend_Session_Abstract
             } else {
                 return $_SESSION[$namespace]; // satisfy return by reference
             }
+        } elseif (isset($_SESSION[$namespace][$name])) {
+            // check session first
+            return $_SESSION[$namespace][$name];
+        } elseif (isset(self::$_expiringData[$namespace][$name])) { // check expiring data
+            return self::$_expiringData[$namespace][$name];
         } else {
-            if (isset($_SESSION[$namespace][$name])) { // check session first
-                return $_SESSION[$namespace][$name];
-            } elseif (isset(self::$_expiringData[$namespace][$name])) { // check expiring data
-                return self::$_expiringData[$namespace][$name];
-            } else {
-                return $_SESSION[$namespace][$name]; // satisfy return by reference
-            }
+            return $_SESSION[$namespace][$name]; // satisfy return by reference
         }
     }
 

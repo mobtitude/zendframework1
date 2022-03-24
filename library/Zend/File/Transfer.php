@@ -109,11 +109,7 @@ class Zend_File_Transfer
      */
     public function __call($method, array $options)
     {
-        if (array_key_exists('direction', $options)) {
-            $direction = (integer) $options['direction'];
-        } else {
-            $direction = 0;
-        }
+        $direction = array_key_exists('direction', $options) ? (integer) $options['direction'] : 0;
 
         if (method_exists($this->_adapter[$direction], $method)) {
             return call_user_func_array(array($this->_adapter[$direction], $method), $options);

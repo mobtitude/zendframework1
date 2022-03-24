@@ -83,9 +83,7 @@ class Zend_Tool_Framework_Client_Console_ResponseDecorator_Colorizer
             }
         }
 
-        $newContent .= $content . "\033[m";
-
-        return $newContent;
+        return $newContent . ($content . "\033[m");
     }
 
 

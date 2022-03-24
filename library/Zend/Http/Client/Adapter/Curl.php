@@ -218,7 +218,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         // Do the actual connection
         $this->_curl = curl_init();
         if ($port != 80) {
-            curl_setopt($this->_curl, CURLOPT_PORT, intval($port));
+            curl_setopt($this->_curl, CURLOPT_PORT, (int) $port);
         }
 
         // Set connection timeout
@@ -251,7 +251,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
             throw new Zend_Http_Client_Adapter_Exception('Unable to Connect to ' .  $host . ':' . $port);
         }
 
-        if ($secure !== false) {
+        if ($secure) {
             // Behave the same like Zend_Http_Adapter_Socket on SSL options.
             if (isset($this->_config['sslcert'])) {
                 curl_setopt($this->_curl, CURLOPT_SSLCERT, $this->_config['sslcert']);
@@ -383,7 +383,9 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         if($this->out_stream) {
             // headers will be read into the response
             curl_setopt($this->_curl, CURLOPT_HEADER, false);
-            curl_setopt($this->_curl, CURLOPT_HEADERFUNCTION, array($this, "readHeader"));
+            curl_setopt($this->_curl, CURLOPT_HEADERFUNCTION, function ($curl, string $header) : int {
+                return $this->readHeader($curl, $header);
+            });
             // and data will be written into the file
             curl_setopt($this->_curl, CURLOPT_FILE, $this->out_stream);
         } else {
@@ -430,11 +432,9 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         // set additional curl options
         if (isset($this->_config['curloptions'])) {
             foreach ((array)$this->_config['curloptions'] as $k => $v) {
-                if (!in_array($k, $this->_invalidOverwritableCurlOptions)) {
-                    if (curl_setopt($this->_curl, $k, $v) == false) {
-                        require_once 'Zend/Http/Client/Exception.php';
-                        throw new Zend_Http_Client_Exception(sprintf("Unknown or erroreous cURL option '%s' set", $k));
-                    }
+                if (!in_array($k, $this->_invalidOverwritableCurlOptions) && curl_setopt($this->_curl, $k, $v) == false) {
+                    require_once 'Zend/Http/Client/Exception.php';
+                    throw new Zend_Http_Client_Exception(sprintf("Unknown or erroreous cURL option '%s' set", $k));
                 }
             }
         }

@@ -109,7 +109,7 @@ abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
         // override with named args
         if (is_array($name)) {
             // only set keys that are already in info
-            foreach ($info as $key => $val) {
+            foreach (array_keys($info) as $key) {
                 if (isset($name[$key])) {
                     $info[$key] = $name[$key];
                 }
@@ -132,17 +132,17 @@ abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
         // Disable attribute
         if (array_key_exists('disable', $attribs)) {
            if (is_scalar($attribs['disable'])) {
-                // disable the element
-                $info['disable'] = (bool)$attribs['disable'];
-            } else if (is_array($attribs['disable'])) {
-                $info['disable'] = $attribs['disable'];
-            }
+               // disable the element
+               $info['disable'] = (bool)$attribs['disable'];
+           } elseif (is_array($attribs['disable'])) {
+               $info['disable'] = $attribs['disable'];
+           }
         }
 
         // Set ID for element
         if (array_key_exists('id', $attribs)) {
             $info['id'] = (string)$attribs['id'];
-        } else if ('' !== $info['name']) {
+        } elseif ('' !== $info['name']) {
             $info['id'] = trim(strtr($info['name'],
                                      array('[' => '-', ']' => '')), '-');
         }
@@ -169,7 +169,7 @@ abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
 
         // Remove attribs that might overwrite the other keys. We do this LAST
         // because we needed the other attribs values earlier.
-        foreach ($info as $key => $val) {
+        foreach (array_keys($info) as $key) {
             if (array_key_exists($key, $attribs)) {
                 unset($attribs[$key]);
             }

@@ -145,10 +145,8 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
                     $this->setOption($name, $value);
             }
         }
-        if (isset($this->_specificOptions['http_conditional'])) {
-            if ($this->_specificOptions['http_conditional']) {
-                Zend_Cache::throwException('http_conditional is not implemented for the moment !');
-            }
+        if (isset($this->_specificOptions['http_conditional']) && $this->_specificOptions['http_conditional']) {
+            Zend_Cache::throwException('http_conditional is not implemented for the moment !');
         }
         $this->setOption('automatic_serialization', true);
     }
@@ -195,10 +193,8 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             if (!$found) {
                 $this->_specificOptions['memorize_headers'][] = 'Content-Type';
             }
-        } else {
-            if ($found) {
-                unset($this->_specificOptions['memorize_headers'][$found]);
-            }
+        } elseif ($found) {
+            unset($this->_specificOptions['memorize_headers'][$found]);
         }
     }
 
@@ -260,7 +256,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
         if (!($this->_activeOptions['cache'])) {
             return false;
         }
-        if (!$id) {
+        if ($id === '' || $id === '0') {
             $id = $this->_makeId();
             if (!$id) {
                 return false;
@@ -286,7 +282,9 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             }
             die();
         }
-        ob_start(array($this, '_flush'));
+        ob_start(function (string $data) : string {
+            return $this->_flush($data);
+        });
         ob_implicit_flush(false);
         return false;
     }
@@ -318,7 +316,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             foreach ($headersList as $headerSent) {
                 $tmp = explode(':', (string) $headerSent);
                 $headerSentName = trim(array_shift($tmp));
-                if (strtolower($headerName) == strtolower($headerSentName)) {
+                if (strtolower($headerName) === strtolower($headerSentName)) {
                     $headerSentValue = trim(implode(':', $tmp));
                     $storedHeaders[] = array($headerSentName, $headerSentValue);
                 }
@@ -347,7 +345,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             if ($tmp2===false) {
                 return false;
             }
-            $tmp = $tmp . $tmp2;
+            $tmp .= $tmp2;
         }
         return md5($tmp);
     }
@@ -370,18 +368,10 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             $var = $_POST;
             break;
         case 'Session':
-            if (isset($_SESSION)) {
-                $var = $_SESSION;
-            } else {
-                $var = null;
-            }
+            $var = isset($_SESSION) ? $_SESSION : null;
             break;
         case 'Cookie':
-            if (isset($_COOKIE)) {
-                $var = $_COOKIE;
-            } else {
-                $var = null;
-            }
+            $var = isset($_COOKIE) ? $_COOKIE : null;
             break;
         case 'Files':
             $var = $_FILES;

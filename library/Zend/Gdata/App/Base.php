@@ -300,7 +300,7 @@ abstract class Zend_Gdata_App_Base
      */
     public function transferFromXML($xml)
     {
-        if ($xml) {
+        if ($xml !== '' && $xml !== '0') {
             // Load the feed as an XML DOMDocument object
             @ini_set('track_errors', 1);
             $doc = new DOMDocument();
@@ -311,7 +311,7 @@ abstract class Zend_Gdata_App_Base
                 throw new Zend_Gdata_App_Exception("DOMDocument cannot parse XML: $php_errormsg");
             }
             $element = $doc->getElementsByTagName($this->_rootElement)->item(0);
-            if (!$element) {
+            if (!$element instanceof \DOMElement) {
                 require_once 'Zend/Gdata/App/Exception.php';
                 throw new Zend_Gdata_App_Exception('No root <' . $this->_rootElement . '> element');
             }
@@ -480,7 +480,7 @@ abstract class Zend_Gdata_App_Base
         $method = 'get'.ucfirst($name);
         if (method_exists($this, $method)) {
             return call_user_func(array(&$this, $method));
-        } else if (property_exists($this, "_${name}")) {
+        } elseif (property_exists($this, "_${name}")) {
             return $this->{'_' . $name};
         } else {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
@@ -506,7 +506,7 @@ abstract class Zend_Gdata_App_Base
         $method = 'set'.ucfirst($name);
         if (method_exists($this, $method)) {
             return call_user_func(array(&$this, $method), $val);
-        } else if (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
+        } elseif (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
             $this->{'_' . $name} = $val;
         } else {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
@@ -528,20 +528,18 @@ abstract class Zend_Gdata_App_Base
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Property ' . $name . ' does not exist');
-        } else {
-            if (isset($this->{$privName})) {
-                if (is_array($this->{$privName})) {
-                    if (count($this->{$privName}) > 0) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
+        } elseif (isset($this->{$privName})) {
+            if (is_array($this->{$privName})) {
+                if ($this->{$privName} !== []) {
                     return true;
+                } else {
+                    return false;
                 }
             } else {
-                return false;
+                return true;
             }
+        } else {
+            return false;
         }
     }
 
@@ -553,11 +551,7 @@ abstract class Zend_Gdata_App_Base
     public function __unset($name)
     {
         if (isset($this->{'_' . $name})) {
-            if (is_array($this->{'_' . $name})) {
-                $this->{'_' . $name} = array();
-            } else {
-                $this->{'_' . $name} = null;
-            }
+            $this->{'_' . $name} = is_array($this->{'_' . $name}) ? array() : null;
         }
     }
 

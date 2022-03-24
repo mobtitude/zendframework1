@@ -110,7 +110,7 @@ class Zend_Validate_File_Upload extends Zend_Validate_Abstract
                 }
             }
 
-            if (count($return) === 0) {
+            if ($return === []) {
                 require_once 'Zend/Validate/Exception.php';
                 throw new Zend_Validate_Exception("The file '$file' was not found");
             }
@@ -129,11 +129,7 @@ class Zend_Validate_File_Upload extends Zend_Validate_Abstract
      */
     public function setFiles($files = array())
     {
-        if (count($files) === 0) {
-            $this->_files = $_FILES;
-        } else {
-            $this->_files = $files;
-        }
+        $this->_files = $files === [] ? $_FILES : $files;
 
         // see ZF-10738
         if (is_null($this->_files)) {
@@ -239,10 +235,8 @@ class Zend_Validate_File_Upload extends Zend_Validate_Abstract
      */
     protected function _throw($file, $errorType)
     {
-        if ($file !== null) {
-            if (is_array($file) and !empty($file['name'])) {
-                $this->_value = $file['name'];
-            }
+        if ($file !== null && (is_array($file) && !empty($file['name']))) {
+            $this->_value = $file['name'];
         }
 
         $this->_error($errorType);

@@ -421,14 +421,11 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
             }
         } elseif (!is_string($requestUri)) {
             return $this;
-        } else {
-            // Set GET items, if available
-            if (false !== ($pos = strpos($requestUri, '?'))) {
-                // Get key => value pairs and set $_GET
-                $query = substr($requestUri, $pos + 1);
-                parse_str($query, $vars);
-                $this->setQuery($vars);
-            }
+        } elseif (false !== ($pos = strpos($requestUri, '?'))) {
+            // Get key => value pairs and set $_GET
+            $query = substr($requestUri, $pos + 1);
+            parse_str($query, $vars);
+            $this->setQuery($vars);
         }
 
         $this->_requestUri = $requestUri;
@@ -577,11 +574,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
                 return $this;
             }
 
-            if (basename($baseUrl) === $filename) {
-                $basePath = dirname($baseUrl);
-            } else {
-                $basePath = $baseUrl;
-            }
+            $basePath = basename($baseUrl) === $filename ? dirname($baseUrl) : $baseUrl;
         }
 
         if (substr(PHP_OS, 0, 3) === 'WIN') {
@@ -840,11 +833,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      */
     public function isPost()
     {
-        if ('POST' == $this->getMethod()) {
-            return true;
-        }
-
-        return false;
+        return 'POST' == $this->getMethod();
     }
 
     /**
@@ -854,11 +843,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      */
     public function isGet()
     {
-        if ('GET' == $this->getMethod()) {
-            return true;
-        }
-
-        return false;
+        return 'GET' == $this->getMethod();
     }
 
     /**
@@ -868,11 +853,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      */
     public function isPut()
     {
-        if ('PUT' == $this->getMethod()) {
-            return true;
-        }
-
-        return false;
+        return 'PUT' == $this->getMethod();
     }
 
     /**
@@ -882,11 +863,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      */
     public function isDelete()
     {
-        if ('DELETE' == $this->getMethod()) {
-            return true;
-        }
-
-        return false;
+        return 'DELETE' == $this->getMethod();
     }
 
     /**
@@ -896,11 +873,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      */
     public function isHead()
     {
-        if ('HEAD' == $this->getMethod()) {
-            return true;
-        }
-
-        return false;
+        return 'HEAD' == $this->getMethod();
     }
 
     /**
@@ -910,11 +883,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      */
     public function isOptions()
     {
-        if ('OPTIONS' == $this->getMethod()) {
-            return true;
-        }
-
-        return false;
+        return 'OPTIONS' == $this->getMethod();
     }
 
     /**
@@ -924,11 +893,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      */
     public function isPatch()
     {
-        if ('PATCH' == $this->getMethod()) {
-            return true;
-        }
-
-        return false;
+        return 'PATCH' == $this->getMethod();
     }
 
     /**
@@ -951,7 +916,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
     public function isFlashRequest()
     {
         $header = strtolower($this->getHeader('USER_AGENT'));
-        return (strstr($header, ' flash')) ? true : false;
+        return (bool) strstr($header, ' flash');
     }
 
     /**
@@ -974,11 +939,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
         if (null === $this->_rawBody) {
             $body = file_get_contents('php://input');
 
-            if (strlen(trim($body)) > 0) {
-                $this->_rawBody = $body;
-            } else {
-                $this->_rawBody = false;
-            }
+            $this->_rawBody = strlen(trim($body)) > 0 ? $body : false;
         }
         return $this->_rawBody;
     }
@@ -1024,7 +985,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
             }
             $header = strtolower($header);
             foreach ($headers as $key => $value) {
-                if (strtolower($key) == $header) {
+                if (strtolower($key) === $header) {
                     return $value;
                 }
             }
@@ -1083,7 +1044,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
     {
         if ($checkProxy && $this->getServer('HTTP_CLIENT_IP') != null) {
             $ip = $this->getServer('HTTP_CLIENT_IP');
-        } else if ($checkProxy && $this->getServer('HTTP_X_FORWARDED_FOR') != null) {
+        } elseif ($checkProxy && $this->getServer('HTTP_X_FORWARDED_FOR') != null) {
             $ip = $this->getServer('HTTP_X_FORWARDED_FOR');
         } else {
             $ip = $this->getServer('REMOTE_ADDR');

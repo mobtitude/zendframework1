@@ -188,7 +188,7 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
         if (!($this->_connection instanceof Zend_Mail_Protocol_Smtp)) {
             // Check if authentication is required and determine required class
             $connectionClass = 'Zend_Mail_Protocol_Smtp';
-            if ($this->_auth) {
+            if ($this->_auth !== '' && $this->_auth !== '0') {
                 $connectionClass .= '_Auth_' . ucwords($this->_auth);
             }
             if (!class_exists($connectionClass)) {

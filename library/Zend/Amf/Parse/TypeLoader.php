@@ -94,7 +94,7 @@ final class Zend_Amf_Parse_TypeLoader
     public static function loadType($className)
     {
         $class    = self::getMappedClassName($className);
-        if(!$class) {
+        if($class === '' || $class === '0') {
             $class = str_replace('.', '_', $className);
         }
         if (!class_exists($class)) {
@@ -206,7 +206,7 @@ final class Zend_Amf_Parse_TypeLoader
         try {
             while(is_resource($resource)) {
                 $resclass = self::getResourceParser($resource);
-                if(!$resclass) {
+                if($resclass === '' || $resclass === '0') {
                     require_once 'Zend/Amf/Exception.php';
                     throw new Zend_Amf_Exception('Can not serialize resource type: '. get_resource_type($resource));
                 }

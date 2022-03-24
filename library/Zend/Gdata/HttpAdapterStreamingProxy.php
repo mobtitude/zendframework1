@@ -76,8 +76,7 @@ class Zend_Gdata_HttpAdapterStreamingProxy extends Zend_Http_Client_Adapter_Prox
         if ($this->connected_to[0] != $host || $this->connected_to[1] != $port) {
             require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception(
-                'Trying to write but we are connected to the wrong proxy ' .
-                'server');
+                'Trying to write but we are connected to the wrong proxy server');
         }
 
         // Add Proxy-Authorization header

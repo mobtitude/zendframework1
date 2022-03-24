@@ -100,11 +100,9 @@ class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
     public function getLegend()
     {
         $legend = $this->_legend;
-        if ((null === $legend) && (null !== ($element = $this->getElement()))) {
-            if (method_exists($element, 'getLegend')) {
-                $legend = $element->getLegend();
-                $this->setLegend($legend);
-            }
+        if ((null === $legend) && (null !== ($element = $this->getElement())) && method_exists($element, 'getLegend')) {
+            $legend = $element->getLegend();
+            $this->setLegend($legend);
         }
         if ((null === $legend) && (null !== ($legend = $this->getOption('legend')))) {
             $this->setLegend($legend);
@@ -124,7 +122,7 @@ class Zend_Form_Decorator_Fieldset extends Zend_Form_Decorator_Abstract
     {
         $element = $this->getElement();
         $view    = $element->getView();
-        if (null === $view) {
+        if (!$view instanceof \Zend_View_Interface) {
             return $content;
         }
 

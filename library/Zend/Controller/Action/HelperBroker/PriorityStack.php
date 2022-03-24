@@ -158,7 +158,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
         $this->_helpersByPriority[$priority] = $helper;
         $this->_helpersByNameRef[$helper->getName()] = $helper;
 
-        if ($priority == ($nextFreeDefault = $this->getNextFreeHigherPriority($this->_nextDefaultPriority))) {
+        if ($priority === ($nextFreeDefault = $this->getNextFreeHigherPriority($this->_nextDefaultPriority))) {
             $this->_nextDefaultPriority = $nextFreeDefault;
         }
 
@@ -216,9 +216,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
             $indexPriority = $this->_nextDefaultPriority;
         }
 
-        $priorities = array_keys($this->_helpersByPriority);
-
-        while (in_array($indexPriority, $priorities)) {
+        while (array_key_exists($indexPriority, $this->_helpersByPriority)) {
             $indexPriority++;
         }
 
@@ -238,9 +236,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
             $indexPriority = $this->_nextDefaultPriority;
         }
 
-        $priorities = array_keys($this->_helpersByPriority);
-
-        while (in_array($indexPriority, $priorities)) {
+        while (array_key_exists($indexPriority, $this->_helpersByPriority)) {
             $indexPriority--;
         }
 

@@ -98,15 +98,15 @@ abstract class Zend_Uri
         // Separate the scheme from the scheme-specific parts
         $uri            = explode(':', $uri, 2);
         $scheme         = strtolower($uri[0]);
-        $schemeSpecific = isset($uri[1]) === true ? $uri[1] : '';
+        $schemeSpecific = isset($uri[1]) ? $uri[1] : '';
 
-        if (strlen($scheme) === 0) {
+        if ($scheme === '') {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception('An empty string was supplied for the scheme');
         }
 
         // Security check: $scheme is used to load a class file, so only alphanumerics are allowed.
-        if (ctype_alnum($scheme) === false) {
+        if (!ctype_alnum($scheme)) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception('Illegal scheme supplied, only alphanumeric characters are permitted');
         }
@@ -137,7 +137,7 @@ abstract class Zend_Uri
             Zend_Loader::loadClass($className);
         } catch (Exception $e) {
             require_once 'Zend/Uri/Exception.php';
-            throw new Zend_Uri_Exception("\"$className\" not found");
+            throw new Zend_Uri_Exception("\"$className\" not found", $e->getCode(), $e);
         }
 
         $schemeHandler = new $className($scheme, $schemeSpecific);
@@ -157,7 +157,7 @@ abstract class Zend_Uri
      */
     public function getScheme()
     {
-        if (empty($this->_scheme) === false) {
+        if (!empty($this->_scheme)) {
             return $this->_scheme;
         } else {
             return false;

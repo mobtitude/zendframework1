@@ -204,16 +204,7 @@ class Zend_Loader
         if (null === $path) {
             $path = get_include_path();
         }
-
-        if (PATH_SEPARATOR == ':') {
-            // On *nix systems, include_paths which include paths with a stream
-            // schema cannot be safely explode'd, so we have to be a bit more
-            // intelligent in the approach.
-            $paths = preg_split('#:(?!//)#', (string) $path);
-        } else {
-            $paths = explode(PATH_SEPARATOR, (string) $path);
-        }
-        return $paths;
+        return PATH_SEPARATOR == ':' ? preg_split('#:(?!//)#', (string) $path) : explode(PATH_SEPARATOR, (string) $path);
     }
 
     /**
@@ -337,7 +328,6 @@ class Zend_Loader
             $fileName = substr($fileName, $lastNsPos + 1);
             $file      = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
         }
-        $file .= str_replace('_', DIRECTORY_SEPARATOR, $fileName) . '.php';
-        return $file;    
+        return $file . (str_replace('_', DIRECTORY_SEPARATOR, $fileName) . '.php');    
     }
 }

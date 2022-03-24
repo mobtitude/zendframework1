@@ -78,9 +78,9 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
         }
 
         $this->_resource = $pdf;
-        $this->_page     = intval($page);
+        $this->_page     = (int) $page;
 
-        if (!count($this->_resource->pages)) {
+        if ($this->_resource->pages === []) {
             $this->_page = 0;
             $this->_resource->pages[] = new Zend_Pdf_Page(
                 Zend_Pdf_Page::SIZE_A4
@@ -140,11 +140,11 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
             $y[] = $page->getHeight() - $point[1] * $this->_moduleSize - $this->_topOffset;
         }
         if (count($y) == 4) {
-            if ($x[0] != $x[3] && $y[0] == $y[3]) {
+            if ($x[0] !== $x[3] && $y[0] === $y[3]) {
                 $y[0] -= ($this->_moduleSize / 2);
                 $y[3] -= ($this->_moduleSize / 2);
             }
-            if ($x[1] != $x[2] && $y[1] == $y[2]) {
+            if ($x[1] !== $x[2] && $y[1] === $y[2]) {
                 $y[1] += ($this->_moduleSize / 2);
                 $y[2] += ($this->_moduleSize / 2);
             }
@@ -239,7 +239,6 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
         }
         $glyphs = $font->glyphNumbersForCharacters($characters);
         $widths = $font->widthsForGlyphs($glyphs);
-        $stringWidth = (array_sum($widths) / $font->getUnitsPerEm()) * $fontSize;
-        return $stringWidth;
+        return (array_sum($widths) / $font->getUnitsPerEm()) * $fontSize;
     }
 }

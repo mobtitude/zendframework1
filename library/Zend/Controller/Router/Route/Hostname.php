@@ -133,7 +133,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
      */
     public function getRequest()
     {
-        if ($this->_request === null) {
+        if (!$this->_request instanceof \Zend_Controller_Request_Abstract) {
             require_once 'Zend/Controller/Front.php';
             $this->_request = Zend_Controller_Front::getInstance()->getRequest();
         }
@@ -151,7 +151,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
     {
         $reqs   = ($config->reqs instanceof Zend_Config) ? $config->reqs->toArray() : array();
         $defs   = ($config->defaults instanceof Zend_Config) ? $config->defaults->toArray() : array();
-        $scheme = (isset($config->scheme)) ? $config->scheme : null;
+        $scheme = (property_exists($config, 'scheme') && $config->scheme !== null) ? $config->scheme : null;
 
         return new self($config->route, $defs, $reqs, $scheme);
     }
@@ -175,7 +175,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
 
         if ($route != '') {
             foreach (explode('.', $route) as $pos => $part) {
-                if (substr($part, 0, 1) == $this->_hostVariable) {
+                if (substr($part, 0, 1) === $this->_hostVariable) {
                     $name                   = substr($part, 1);
                     $this->_parts[$pos]     = (isset($reqs[$name]) ? $reqs[$name] : $this->_defaultRegex);
                     $this->_variables[$pos] = $name;
@@ -331,16 +331,10 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
             $scheme = $this->_scheme;
         } else {
             $request = $this->getRequest();
-            if ($request instanceof Zend_Controller_Request_Http) {
-                $scheme = $request->getScheme();
-            } else {
-                $scheme = 'http';
-            }
+            $scheme = $request instanceof Zend_Controller_Request_Http ? $request->getScheme() : 'http';
         }
 
-        $url = $scheme . '://' . $url;
-
-        return $url;
+        return $scheme . '://' . $url;
     }
 
     /**

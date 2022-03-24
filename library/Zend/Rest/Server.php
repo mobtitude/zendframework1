@@ -104,7 +104,9 @@ class Zend_Rest_Server implements Zend_Server_Interface
      */
     public function __construct()
     {
-        set_exception_handler(array($this, "fault"));
+        set_exception_handler(function ($exception = \null, ?int $code = \null) : \DOMDocument {
+            return $this->fault($exception, $code);
+        });
         $this->_reflection = new Zend_Server_Reflection();
     }
 
@@ -162,7 +164,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
             return $this->_returnResponse;
         }
 
-        $this->_returnResponse = ($flag) ? true : false;
+        $this->_returnResponse = $flag;
         return $this;
     }
 
@@ -176,7 +178,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
     public function handle($request = false)
     {
         $this->_headers = array('Content-Type: text/xml');
-        if (!$request) {
+        if ($request === []) {
             $request = $_REQUEST;
         }
         if (isset($request['method'])) {
@@ -346,11 +348,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
     protected function _handleStruct($struct)
     {
         $function = $this->_functions[$this->_method];
-        if ($function instanceof Zend_Server_Reflection_Method) {
-            $class = $function->getDeclaringClass()->getName();
-        } else {
-            $class = false;
-        }
+        $class = $function instanceof Zend_Server_Reflection_Method ? $function->getDeclaringClass()->getName() : false;
 
         $method = $function->getName();
 
@@ -427,11 +425,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
     protected function _handleScalar($value)
     {
         $function = $this->_functions[$this->_method];
-        if ($function instanceof Zend_Server_Reflection_Method) {
-            $class = $function->getDeclaringClass()->getName();
-        } else {
-            $class = false;
-        }
+        $class = $function instanceof Zend_Server_Reflection_Method ? $function->getDeclaringClass()->getName() : false;
 
         $method = $function->getName();
 
@@ -480,23 +474,15 @@ class Zend_Rest_Server implements Zend_Server_Interface
     {
         if (isset($this->_functions[$this->_method])) {
             $function = $this->_functions[$this->_method];
-        } elseif (isset($this->_method)) {
+        } elseif ($this->_method !== null) {
             $function = $this->_method;
         } else {
             $function = 'rest';
         }
 
-        if ($function instanceof Zend_Server_Reflection_Method) {
-            $class = $function->getDeclaringClass()->getName();
-        } else {
-            $class = false;
-        }
+        $class = $function instanceof Zend_Server_Reflection_Method ? $function->getDeclaringClass()->getName() : false;
 
-        if ($function instanceof Zend_Server_Reflection_Function_Abstract) {
-            $method = $function->getName();
-        } else {
-            $method = $function;
-        }
+        $method = $function instanceof Zend_Server_Reflection_Function_Abstract ? $function->getName() : $function;
 
         $dom = new DOMDocument('1.0', $this->getEncoding());
         if ($class) {
@@ -539,11 +525,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
         $xmlMethod->appendChild($dom->createElement('status', 'failed'));
 
         // Headers to send
-        if ($code === null || (404 != $code)) {
-            $this->_headers[] = 'HTTP/1.0 400 Bad Request';
-        } else {
-            $this->_headers[] = 'HTTP/1.0 404 File Not Found';
-        }
+        $this->_headers[] = $code === null || (404 != $code) ? 'HTTP/1.0 400 Bad Request' : 'HTTP/1.0 404 File Not Found';
 
         return $dom;
     }

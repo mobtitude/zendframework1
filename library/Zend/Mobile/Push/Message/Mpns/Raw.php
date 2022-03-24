@@ -59,7 +59,7 @@ class Zend_Mobile_Push_Message_Mpns_Raw extends Zend_Mobile_Push_Message_Mpns
      */
     public function getDelay()
     {
-        if (!$this->_delay) {
+        if ($this->_delay === 0) {
             return self::DELAY_IMMEDIATE;
         }
         return $this->_delay;
@@ -141,7 +141,7 @@ class Zend_Mobile_Push_Message_Mpns_Raw extends Zend_Mobile_Push_Message_Mpns
      */
     public function validate()
     {
-        if (!isset($this->_token) || strlen($this->_token) === 0) {
+        if (!($this->_token !== null) || $this->_token === '') {
             return false;
         }
         if (empty($this->_msg)) {

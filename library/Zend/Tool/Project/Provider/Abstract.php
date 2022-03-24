@@ -200,10 +200,8 @@ abstract class Zend_Tool_Project_Provider_Abstract
      */
     protected function _getProfile($loadProfileFlag = self::NO_PROFILE_THROW_EXCEPTION)
     {
-        if (!$this->_loadedProfile) {
-            if (($this->_loadProfile($loadProfileFlag) === false) && ($loadProfileFlag === self::NO_PROFILE_RETURN_FALSE)) {
-                return false;
-            }
+        if (!$this->_loadedProfile && (($this->_loadProfile($loadProfileFlag) === false) && ($loadProfileFlag === self::NO_PROFILE_RETURN_FALSE))) {
+            return false;
         }
 
         return $this->_loadedProfile;
@@ -253,12 +251,7 @@ abstract class Zend_Tool_Project_Provider_Abstract
         if (strstr($contents, '<projectProvidersDirectory') === false) {
             return false;
         }
-
-        if (strstr($contents, '<projectProvidersDirectory enabled="false"')) {
-            return false;
-        }
-
-        return true;
+        return !strstr($contents, '<projectProvidersDirectory enabled="false"');
     }
 
     /**

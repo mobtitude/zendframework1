@@ -30,6 +30,7 @@
  */
 abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObject
 {
+    public $view;
     /**
      * Whether or not to override all contents of placeholder
      * @const string
@@ -369,8 +370,7 @@ abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObje
                 . $this->getPrefix()
                 . implode($this->getSeparator(), $items)
                 . $this->getPostfix();
-        $return = preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
-        return $return;
+        return preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
     }
 
     /**

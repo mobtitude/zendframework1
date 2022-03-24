@@ -149,11 +149,9 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
             $argc   = count($args);
             $index  = null;
 
-            if ('offsetSet' == $action) {
-                if (0 < $argc) {
-                    $index = array_shift($args);
-                    --$argc;
-                }
+            if ('offsetSet' == $action && 0 < $argc) {
+                $index = array_shift($args);
+                --$argc;
             }
 
             if (2 > $argc) {
@@ -208,26 +206,21 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
     protected function _isValid($item)
     {
         if ((!$item instanceof stdClass)
-            || !isset($item->type)
-            || !isset($item->modifiers))
+            || !(property_exists($item, 'type') && $item->type !== null)
+            || !(property_exists($item, 'modifiers') && $item->modifiers !== null))
         {
             return false;
         }
 
         $isHtml5 = is_null($this->view) ? false : $this->view->doctype()->isHtml5();
 
-        if (!isset($item->content)
+        if (!(property_exists($item, 'content') && $item->content !== null)
         && (! $isHtml5 || (! $isHtml5 && $item->type !== 'charset'))) {
             return false;
         }
-
         // <meta property= ... /> is only supported with doctype RDFa
-        if ( !is_null($this->view) && !$this->view->doctype()->isRdfa()
-            && $item->type === 'property') {
-            return false;
-        }
-
-        return true;
+        return !(!is_null($this->view) && !$this->view->doctype()->isRdfa()
+            && $item->type === 'property');
     }
 
     /**
@@ -356,8 +349,7 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
             if (!is_null($this->view) && $this->view->doctype()->isHtml5()
             && $key == 'scheme') {
                 require_once 'Zend/View/Exception.php';
-                throw new Zend_View_Exception('Invalid modifier '
-                . '"scheme" provided; not supported by HTML5');
+                throw new Zend_View_Exception('Invalid modifier "scheme" provided; not supported by HTML5');
             }
             if (!in_array($key, $this->_modifierKeys)) {
                 continue;

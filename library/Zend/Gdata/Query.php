@@ -89,7 +89,7 @@ class Zend_Gdata_Query
             }
             $queryArray[] = urlencode($name) . '=' . urlencode($value);
         }
-        if (count($queryArray) > 0) {
+        if ($queryArray !== []) {
             return '?' . implode('&', $queryArray);
         } else {
             return '';
@@ -109,16 +109,11 @@ class Zend_Gdata_Query
      */
     public function getQueryUrl()
     {
-        if ($this->_url == null) {
-            $url = $this->_defaultFeedUri;
-        } else {
-            $url = $this->_url;
-        }
+        $url = $this->_url == null ? $this->_defaultFeedUri : $this->_url;
         if ($this->getCategory() !== null) {
             $url .= '/-/' . $this->getCategory();
         }
-        $url .= $this->getQueryString();
-        return $url;
+        return $url . $this->getQueryString();
     }
 
     /**
@@ -284,7 +279,7 @@ class Zend_Gdata_Query
     public function getMaxResults()
     {
         if (array_key_exists('max-results', $this->_params)) {
-            return intval($this->_params['max-results']);
+            return (int) $this->_params['max-results'];
         } else {
             return null;
         }
@@ -308,7 +303,7 @@ class Zend_Gdata_Query
     public function getStartIndex()
     {
         if (array_key_exists('start-index', $this->_params)) {
-            return intval($this->_params['start-index']);
+            return (int) $this->_params['start-index'];
         } else {
             return null;
         }

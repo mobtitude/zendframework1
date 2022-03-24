@@ -305,11 +305,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 
 				$entries = null;
 				if ($result->SignedIdentifier) {
-					if (count($result->SignedIdentifier) > 1) {
-						$entries = $result->SignedIdentifier;
-					} else {
-						$entries = array($result->SignedIdentifier);
-					}
+					$entries = count($result->SignedIdentifier) > 1 ? $result->SignedIdentifier : array($result->SignedIdentifier);
 				}
 
 				require_once 'Zend/Service/WindowsAzure/Storage/SignedIdentifier.php';
@@ -362,24 +358,31 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 
 		// Policies
 		$policies = null;
-		if (is_array($signedIdentifiers) && count($signedIdentifiers) > 0) {
+		if (is_array($signedIdentifiers) && $signedIdentifiers !== []) {
 			$policies  = '';
-			$policies .= '<?xml version="1.0" encoding="utf-8"?>' . "\r\n";
-			$policies .= '<SignedIdentifiers>' . "\r\n";
+			$policies .= '<?xml version="1.0" encoding="utf-8"?>
+';
+			$policies .= '<SignedIdentifiers>
+';
 			foreach ($signedIdentifiers as $signedIdentifier) {
-				$policies .= '  <SignedIdentifier>' . "\r\n";
+				$policies .= '  <SignedIdentifier>
+';
 				$policies .= '    <Id>' . $signedIdentifier->Id . '</Id>' . "\r\n";
-				$policies .= '    <AccessPolicy>' . "\r\n";
+				$policies .= '    <AccessPolicy>
+';
 				if ($signedIdentifier->Start != '')
 				$policies .= '      <Start>' . $signedIdentifier->Start . '</Start>' . "\r\n";
 				if ($signedIdentifier->Expiry != '')
 				$policies .= '      <Expiry>' . $signedIdentifier->Expiry . '</Expiry>' . "\r\n";
 				if ($signedIdentifier->Permissions != '')
 				$policies .= '      <Permission>' . $signedIdentifier->Permissions . '</Permission>' . "\r\n";
-				$policies .= '    </AccessPolicy>' . "\r\n";
-				$policies .= '  </SignedIdentifier>' . "\r\n";
+				$policies .= '    </AccessPolicy>
+';
+				$policies .= '  </SignedIdentifier>
+';
 			}
-			$policies .= '</SignedIdentifiers>' . "\r\n";
+			$policies .= '</SignedIdentifiers>
+';
 		}
 
 		// Perform request
@@ -562,21 +565,18 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 
 			$containers = array();
 			if (!is_null($xmlContainers)) {
-				for ($i = 0; $i < count($xmlContainers); $i++) {
-					
+				foreach ($xmlContainers as $i => $xmlContainer) {
 					$containers[] = new Zend_Service_WindowsAzure_Storage_BlobContainer(
-					(string)$xmlContainers[$i]->Name,
-					(string)$xmlContainers[$i]->Etag,
-					(string)$xmlContainers[$i]->LastModified,
-					$this->_parseMetadataElement($xmlContainers[$i])
+					(string)$xmlContainer->Name,
+					(string)$xmlContainer->Etag,
+					(string)$xmlContainer->LastModified,
+					$this->_parseMetadataElement($xmlContainer)
 					);
 				}
 			}
-			$currentResultCount = $currentResultCount + count($containers);
-			if (!is_null($maxResults) && $currentResultCount < $maxResults) {
-				if (!is_null($xmlMarker) && $xmlMarker != '') {
-					$containers = array_merge($containers, $this->listContainers($prefix, $maxResults, $xmlMarker, $include, $currentResultCount));
-				}
+			$currentResultCount += count($containers);
+			if (!is_null($maxResults) && $currentResultCount < $maxResults && (!is_null($xmlMarker) && $xmlMarker != '')) {
+				$containers = array_merge($containers, $this->listContainers($prefix, $maxResults, $xmlMarker, $include, $currentResultCount));
 			}
 			if (!is_null($maxResults) && count($containers) > $maxResults) {
 				$containers = array_slice($containers, 0, $maxResults);
@@ -1215,19 +1215,15 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		if ($response->isSuccessful()) {
 			$result = $this->_parseResponse($response);
 			$xmlRanges = null;
-			if (count($result->PageRange) > 1) {
-				$xmlRanges = $result->PageRange;
-			} else {
-				$xmlRanges = array($result->PageRange);
-			}
+			$xmlRanges = count($result->PageRange) > 1 ? $result->PageRange : array($result->PageRange);
 			
 			
 			$ranges = array();
 			
-			for ($i = 0; $i < count($xmlRanges); $i++) {
+			foreach ($xmlRanges as $i => $xmlRange) {
 				$ranges[] = new Zend_Service_WindowsAzure_Storage_PageRegionInstance(
-				(int)$xmlRanges[$i]->Start,
-				(int)$xmlRanges[$i]->End
+				(int)$xmlRange->Start,
+				(int)$xmlRange->End
 				);
 			}
 			 
@@ -1887,16 +1883,15 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			$xmlBlobs = $this->_parseResponse($response)->Blobs->Blob;
 			if (!is_null($xmlBlobs)) {
 				
-				for ($i = 0; $i < count($xmlBlobs); $i++) {
-					$properties = (array)$xmlBlobs[$i]->Properties;
-						
+				foreach ($xmlBlobs as $i => $xmlBlob) {
+					$properties = (array)$xmlBlob->Properties;
 					$blobs[] = new Zend_Service_WindowsAzure_Storage_BlobInstance(
 					$containerName,
-					(string)$xmlBlobs[$i]->Name,
-					(string)$xmlBlobs[$i]->Snapshot,
+					(string)$xmlBlob->Name,
+					(string)$xmlBlob->Snapshot,
 					(string)$properties['Etag'],
 					(string)$properties['Last-Modified'],
-					(string)$xmlBlobs[$i]->Url,
+					(string)$xmlBlob->Url,
 					(string)$properties['Content-Length'],
 					(string)$properties['Content-Type'],
 					(string)$properties['Content-Encoding'],
@@ -1905,7 +1900,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 					(string)$properties['BlobType'],
 					(string)$properties['LeaseStatus'],
 					false,
-					$this->_parseMetadataElement($xmlBlobs[$i])
+					$this->_parseMetadataElement($xmlBlob)
 					);
 				}
 			}
@@ -1915,10 +1910,10 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 				
 			if (!is_null($xmlBlobs)) {
 				
-				for ($i = 0; $i < count($xmlBlobs); $i++) {
+				foreach ($xmlBlobs as $i => $xmlBlob) {
 					$blobs[] = new Zend_Service_WindowsAzure_Storage_BlobInstance(
 					$containerName,
-					(string)$xmlBlobs[$i]->Name,
+					(string)$xmlBlob->Name,
 					null,
 						'',
 						'',
@@ -1931,18 +1926,16 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 						'',
 						'',
 					true,
-					$this->_parseMetadataElement($xmlBlobs[$i])
+					$this->_parseMetadataElement($xmlBlob)
 					);
 				}
 			}
 				
 			// More blobs?
 			$xmlMarker = (string)$this->_parseResponse($response)->NextMarker;
-			$currentResultCount = $currentResultCount + count($blobs);
-			if (!is_null($maxResults) && $currentResultCount < $maxResults) {
-				if (!is_null($xmlMarker) && $xmlMarker != '') {
-					$blobs = array_merge($blobs, $this->listBlobs($containerName, $prefix, $delimiter, $maxResults, $marker, $include, $currentResultCount));
-				}
+			$currentResultCount += count($blobs);
+			if (!is_null($maxResults) && $currentResultCount < $maxResults && (!is_null($xmlMarker) && $xmlMarker != '')) {
+				$blobs = array_merge($blobs, $this->listBlobs($containerName, $prefix, $delimiter, $maxResults, $marker, $include, $currentResultCount));
 			}
 			if (!is_null($maxResults) && count($blobs) > $maxResults) {
 				$blobs = array_slice($blobs, 0, $maxResults);
@@ -2092,19 +2085,14 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			return false;
 		}
 
-		if (strtolower($containerName) != $containerName) {
+		if (strtolower($containerName) !== $containerName) {
 			return false;
 		}
 
 		if (strlen($containerName) < 3 || strlen($containerName) > 63) {
 			return false;
 		}
-
-		if (substr($containerName, -1) == '-') {
-			return false;
-		}
-
-		return true;
+		return !(substr($containerName, -1) == '-');
 	}
 
 	/**

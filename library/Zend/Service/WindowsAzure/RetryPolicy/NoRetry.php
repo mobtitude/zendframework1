@@ -47,8 +47,7 @@ class Zend_Service_WindowsAzure_RetryPolicy_NoRetry extends Zend_Service_Windows
         
         try
         {
-            $returnValue = call_user_func_array($function, $parameters);
-            return $returnValue;
+            return call_user_func_array($function, $parameters);
         }
         catch (Exception $ex)
         {

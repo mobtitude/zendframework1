@@ -82,13 +82,9 @@ abstract class Zend_Feed_Reader_EntryAbstract
         $this->_entry       = $entry;
         $this->_entryKey    = $entryKey;
         $this->_domDocument = $entry->ownerDocument;
-        if ($type !== null) {
-            $this->_data['type'] = $type;
-        } else {
-            $this->_data['type'] = Zend_Feed_Reader::detectType(
-                $this->_domDocument
-            );
-        }
+        $this->_data['type'] = $type !== null ? $type : Zend_Feed_Reader::detectType(
+            $this->_domDocument
+        );
         $this->_loadExtensions();
     }
 

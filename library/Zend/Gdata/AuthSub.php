@@ -119,16 +119,16 @@ class Zend_Gdata_AuthSub
             $response = $client->request('GET');
         } catch (Zend_Http_Client_Exception $e) {
             require_once 'Zend/Gdata/App/HttpException.php';
-            throw new Zend_Gdata_App_HttpException($e->getMessage(), $e);
+            throw new Zend_Gdata_App_HttpException($e->getMessage(), $e, $e);
         }
 
         // Parse Google's response
         if ($response->isSuccessful()) {
             $goog_resp = array();
             foreach (explode("\n", (string) $response->getBody()) as $l) {
-                $l = chop($l);
-                if ($l) {
-                    list($key, $val) = explode('=', chop($l), 2);
+                $l = rtrim($l);
+                if ($l !== '' && $l !== '0') {
+                    list($key, $val) = explode('=', rtrim($l), 2);
                     $goog_resp[$key] = $val;
                 }
             }
@@ -171,7 +171,7 @@ class Zend_Gdata_AuthSub
         } catch (Zend_Http_Client_Exception $e) {
             ob_end_clean();
             require_once 'Zend/Gdata/App/HttpException.php';
-            throw new Zend_Gdata_App_HttpException($e->getMessage(), $e);
+            throw new Zend_Gdata_App_HttpException($e->getMessage(), $e, $e);
         }
         ob_end_clean();
         // Parse Google's response
@@ -213,7 +213,7 @@ class Zend_Gdata_AuthSub
         } catch (Zend_Http_Client_Exception $e) {
             ob_end_clean();
             require_once 'Zend/Gdata/App/HttpException.php';
-            throw new Zend_Gdata_App_HttpException($e->getMessage(), $e);
+            throw new Zend_Gdata_App_HttpException($e->getMessage(), $e, $e);
         }
         ob_end_clean();
         return $response->getBody();

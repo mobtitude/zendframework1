@@ -93,11 +93,7 @@ class Zend_Form_Element_Captcha extends Zend_Form_Element_Xhtml
                 $instance = new $name;
             } else {
                 $r = new ReflectionClass($name);
-                if ($r->hasMethod('__construct')) {
-                    $instance = $r->newInstanceArgs(array($options));
-                } else {
-                    $instance = $r->newInstance();
-                }
+                $instance = $r->hasMethod('__construct') ? $r->newInstanceArgs(array($options)) : $r->newInstance();
             }
         }
 

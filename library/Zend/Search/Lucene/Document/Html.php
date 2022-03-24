@@ -91,11 +91,7 @@ class Zend_Search_Lucene_Document_Html extends Zend_Search_Lucene_Document
         $this->_doc = new DOMDocument();
         $this->_doc->substituteEntities = true;
 
-        if ($isFile) {
-            $htmlData = file_get_contents($data);
-        } else {
-            $htmlData = $data;
-        }
+        $htmlData = $isFile ? file_get_contents($data) : $data;
         @$this->_doc->loadHTML($htmlData);
 
         if ($this->_doc->encoding === null) {
@@ -220,7 +216,7 @@ class Zend_Search_Lucene_Document_Html extends Zend_Search_Lucene_Document
             if(!in_array($node->parentNode->tagName, $this->_inlineTags)) {
                 $text .= ' ';
             }
-        } else if ($node->nodeType == XML_ELEMENT_NODE  &&  $node->nodeName != 'script') {
+        } elseif ($node->nodeType == XML_ELEMENT_NODE  &&  $node->nodeName != 'script') {
             foreach ($node->childNodes as $childNode) {
                 $this->_retrieveNodeText($childNode, $text);
             }
@@ -362,11 +358,8 @@ class Zend_Search_Lucene_Document_Html extends Zend_Search_Lucene_Document
             if ($childNode->nodeType == XML_TEXT_NODE) {
                 // process node later to leave childNodes structure untouched
                 $textNodes[] = $childNode;
-            } else {
-                // Process node if it's not a script node
-                if ($childNode->nodeName != 'script') {
-                    $this->_highlightNodeRecursive($childNode, $wordsToHighlight, $callback, $params);
-                }
+            } elseif ($childNode->nodeName != 'script') {
+                $this->_highlightNodeRecursive($childNode, $wordsToHighlight, $callback, $params);
             }
         }
 
@@ -396,7 +389,9 @@ class Zend_Search_Lucene_Document_Html extends Zend_Search_Lucene_Document
      */
     public function highlight($words, $colour = '#66ffff')
     {
-        return $this->highlightExtended($words, array($this, 'applyColour'), array($colour));
+        return $this->highlightExtended($words, function (string $stringToHighlight, $colour) : string {
+            return $this->applyColour($stringToHighlight, $colour);
+        }, array($colour));
     }
 
 

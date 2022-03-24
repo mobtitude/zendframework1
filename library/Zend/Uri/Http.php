@@ -143,7 +143,7 @@ class Zend_Uri_Http extends Zend_Uri
 
         // If no scheme-specific part was supplied, the user intends to create
         // a new URI with this object.  No further parsing is required.
-        if (strlen($schemeSpecific) === 0) {
+        if ((string) $schemeSpecific === '') {
             return;
         }
 
@@ -151,7 +151,7 @@ class Zend_Uri_Http extends Zend_Uri
         $this->_parseUri($schemeSpecific);
 
         // Validate the URI
-        if ($this->valid() === false) {
+        if (!$this->valid()) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception('Invalid URI supplied');
         }
@@ -169,22 +169,20 @@ class Zend_Uri_Http extends Zend_Uri
      */
     public static function fromString($uri)
     {
-        if (is_string($uri) === false) {
+        if (!is_string($uri)) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception('$uri is not a string');
         }
 
         $uri            = explode(':', $uri, 2);
         $scheme         = strtolower($uri[0]);
-        $schemeSpecific = isset($uri[1]) === true ? $uri[1] : '';
+        $schemeSpecific = isset($uri[1]) ? $uri[1] : '';
 
-        if (in_array($scheme, array('http', 'https')) === false) {
+        if (!in_array($scheme, array('http', 'https'))) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception("Invalid scheme: '$scheme'");
         }
-
-        $schemeHandler = new Zend_Uri_Http($scheme, $schemeSpecific);
-        return $schemeHandler;
+        return new Zend_Uri_Http($scheme, $schemeSpecific);
     }
 
     /**
@@ -211,12 +209,12 @@ class Zend_Uri_Http extends Zend_Uri
         }
 
         // Save URI components that need no further decomposition
-        $this->_path     = isset($matches[4]) === true ? $matches[4] : '';
-        $this->_query    = isset($matches[6]) === true ? $matches[6] : '';
-        $this->_fragment = isset($matches[8]) === true ? $matches[8] : '';
+        $this->_path     = isset($matches[4]) ? $matches[4] : '';
+        $this->_query    = isset($matches[6]) ? $matches[6] : '';
+        $this->_fragment = isset($matches[8]) ? $matches[8] : '';
 
         // Additional decomposition to get username, password, host, and port
-        $combo   = isset($matches[3]) === true ? $matches[3] : '';
+        $combo   = isset($matches[3]) ? $matches[3] : '';
         $pattern = '~^(([^:@]*)(:([^@]*))?@)?((?(?=[[])[[][^]]+[]]|[^:]+))(:(.*))?$~';        
         $status  = @preg_match($pattern, (string) $combo, $matches);
         if ($status === false) {
@@ -225,12 +223,12 @@ class Zend_Uri_Http extends Zend_Uri
         }
         
         // Save remaining URI components
-        $this->_username = isset($matches[2]) === true ? $matches[2] : '';
-        $this->_password = isset($matches[4]) === true ? $matches[4] : '';
-        $this->_host     = isset($matches[5]) === true 
+        $this->_username = isset($matches[2]) ? $matches[2] : '';
+        $this->_password = isset($matches[4]) ? $matches[4] : '';
+        $this->_host     = isset($matches[5]) 
                          ? preg_replace('~^\[([^]]+)\]$~', '\1', $matches[5])  // Strip wrapper [] from IPv6 literal
                          : '';
-        $this->_port     = isset($matches[7]) === true ? $matches[7] : '';
+        $this->_port     = isset($matches[7]) ? $matches[7] : '';
     }
 
     /**
@@ -242,7 +240,7 @@ class Zend_Uri_Http extends Zend_Uri
      */
     public function getUri()
     {
-        if ($this->valid() === false) {
+        if (!$this->valid()) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception('One or more parts of the URI are invalid');
         }
@@ -272,13 +270,7 @@ class Zend_Uri_Http extends Zend_Uri
     public function valid()
     {
         // Return true if and only if all parts of the URI have passed validation
-        return $this->validateUsername()
-           and $this->validatePassword()
-           and $this->validateHost()
-           and $this->validatePort()
-           and $this->validatePath()
-           and $this->validateQuery()
-           and $this->validateFragment();
+        return $this->validateUsername() && $this->validatePassword() && $this->validateHost() && $this->validatePort() && $this->validatePath() && $this->validateQuery() && $this->validateFragment();
     }
 
     /**
@@ -307,7 +299,7 @@ class Zend_Uri_Http extends Zend_Uri
         }
 
         // If the username is empty, then it is considered valid
-        if (strlen($username) === 0) {
+        if ((string) $username === '') {
             return true;
         }
 
@@ -332,7 +324,7 @@ class Zend_Uri_Http extends Zend_Uri
      */
     public function setUsername($username)
     {
-        if ($this->validateUsername($username) === false) {
+        if (!$this->validateUsername($username)) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception("Username \"$username\" is not a valid HTTP username");
         }
@@ -369,12 +361,12 @@ class Zend_Uri_Http extends Zend_Uri
         }
 
         // If the password is empty, then it is considered valid
-        if (strlen($password) === 0) {
+        if ((string) $password === '') {
             return true;
         }
 
         // If the password is nonempty, but there is no username, then it is considered invalid
-        if (strlen($password) > 0 and strlen($this->_username) === 0) {
+        if (strlen($password) > 0 && $this->_username === '') {
             return false;
         }
 
@@ -399,7 +391,7 @@ class Zend_Uri_Http extends Zend_Uri
      */
     public function setPassword($password)
     {
-        if ($this->validatePassword($password) === false) {
+        if (!$this->validatePassword($password)) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception("Password \"$password\" is not a valid HTTP password.");
         }
@@ -435,7 +427,7 @@ class Zend_Uri_Http extends Zend_Uri
         }
 
         // If the host is empty, then it is considered invalid
-        if (strlen($host) === 0) {
+        if ((string) $host === '') {
             return false;
         }
 
@@ -454,7 +446,7 @@ class Zend_Uri_Http extends Zend_Uri
      */
     public function setHost($host)
     {
-        if ($this->validateHost($host) === false) {
+        if (!$this->validateHost($host)) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception("Host \"$host\" is not a valid HTTP host");
         }
@@ -489,12 +481,12 @@ class Zend_Uri_Http extends Zend_Uri
         }
 
         // If the port is empty, then it is considered valid
-        if (strlen($port) === 0) {
+        if ((string) $port === '') {
             return true;
         }
 
         // Check the port against the allowed values
-        return ctype_digit((string) $port) and 1 <= $port and $port <= 65535;
+        return ctype_digit((string) $port) && 1 <= $port && $port <= 65535;
     }
 
     /**
@@ -506,7 +498,7 @@ class Zend_Uri_Http extends Zend_Uri
      */
     public function setPort($port)
     {
-        if ($this->validatePort($port) === false) {
+        if (!$this->validatePort($port)) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception("Port \"$port\" is not a valid HTTP port.");
         }
@@ -542,7 +534,7 @@ class Zend_Uri_Http extends Zend_Uri
         }
 
         // If the path is empty, then it is considered valid
-        if (strlen($path) === 0) {
+        if ((string) $path === '') {
             return true;
         }
 
@@ -566,7 +558,7 @@ class Zend_Uri_Http extends Zend_Uri
      */
     public function setPath($path)
     {
-        if ($this->validatePath($path) === false) {
+        if (!$this->validatePath($path)) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception("Path \"$path\" is not a valid HTTP path");
         }
@@ -620,7 +612,7 @@ class Zend_Uri_Http extends Zend_Uri
         }
 
         // If query is empty, it is considered to be valid
-        if (strlen($query) === 0) {
+        if ((string) $query === '') {
             return true;
         }
 
@@ -674,25 +666,25 @@ class Zend_Uri_Http extends Zend_Uri
         $oldQuery = $this->_query;
 
         // If query is empty, set an empty string
-        if (empty($query) === true) {
+        if (empty($query)) {
             $this->_query = '';
             return $oldQuery;
         }
 
         // If query is an array, make a string out of it
-        if (is_array($query) === true) {
+        if (is_array($query)) {
             $query = http_build_query($query, '', '&');
         } else {
             // If it is a string, make sure it is valid. If not parse and encode it
             $query = (string) $query;
-            if ($this->validateQuery($query) === false) {
+            if (!$this->validateQuery($query)) {
                 parse_str($query, $queryArray);
                 $query = http_build_query($queryArray, '', '&');
             }
         }
 
         // Make sure the query is valid, and set it
-        if ($this->validateQuery($query) === false) {
+        if (!$this->validateQuery($query)) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception("'$query' is not a valid query string");
         }
@@ -728,7 +720,7 @@ class Zend_Uri_Http extends Zend_Uri
         }
 
         // If fragment is empty, it is considered to be valid
-        if (strlen($fragment) === 0) {
+        if ((string) $fragment === '') {
             return true;
         }
 
@@ -752,7 +744,7 @@ class Zend_Uri_Http extends Zend_Uri
      */
     public function setFragment($fragment)
     {
-        if ($this->validateFragment($fragment) === false) {
+        if (!$this->validateFragment($fragment)) {
             require_once 'Zend/Uri/Exception.php';
             throw new Zend_Uri_Exception("Fragment \"$fragment\" is not a valid HTTP fragment");
         }

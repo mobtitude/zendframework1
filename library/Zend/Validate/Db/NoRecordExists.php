@@ -41,7 +41,7 @@ class Zend_Validate_Db_NoRecordExists extends Zend_Validate_Db_Abstract
         $this->_setValue($value);
 
         $result = $this->_query($value);
-        if ($result) {
+        if ($result !== []) {
             $valid = false;
             $this->_error(self::ERROR_RECORD_FOUND);
         }

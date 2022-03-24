@@ -304,7 +304,7 @@ class Zend_Cloud_StorageService_Adapter_S3
     {
         if (isset($options[self::BUCKET_NAME])) {
             $bucket = $options[self::BUCKET_NAME];
-        } else if (isset($this->_defaultBucketName)) {
+        } elseif ($this->_defaultBucketName !== null) {
             $bucket = $this->_defaultBucketName;
         } else {
             require_once 'Zend/Cloud/StorageService/Exception.php';

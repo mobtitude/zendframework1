@@ -71,15 +71,11 @@ abstract class Zend_Oauth_Token
         if ($response !== null) {
             $this->_response = $response;
             $params = $this->_parseParameters($response);
-            if (count($params) > 0) {
+            if ($params !== []) {
                 $this->setParams($params);
             }
         }
-        if ($utility !== null) {
-            $this->_httpUtility = $utility;
-        } else {
-            $this->_httpUtility = new Zend_Oauth_Http_Utility;
-        }
+        $this->_httpUtility = $utility !== null ? $utility : new Zend_Oauth_Http_Utility;
     }
 
     /**
@@ -90,13 +86,9 @@ abstract class Zend_Oauth_Token
      */
     public function isValid()
     {
-        if (isset($this->_params[self::TOKEN_PARAM_KEY])
+        return isset($this->_params[self::TOKEN_PARAM_KEY])
             && !empty($this->_params[self::TOKEN_PARAM_KEY])
-            && isset($this->_params[self::TOKEN_SECRET_PARAM_KEY])
-        ) {
-            return true;
-        }
-        return false;
+            && isset($this->_params[self::TOKEN_SECRET_PARAM_KEY]);
     }
 
     /**

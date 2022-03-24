@@ -80,7 +80,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
 
         $authors = array();
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             foreach ($list as $author) {
                 $author = $this->_getAuthor($author);
                 if (!empty($author)) {
@@ -305,11 +305,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
 
         $imageUrl = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:logo)');
 
-        if (!$imageUrl) {
-            $image = null;
-        } else {
-            $image = array('uri'=>$imageUrl);
-        }
+        $image = $imageUrl ? array('uri'=>$imageUrl) : null;
 
         $this->_data['image'] = $image;
 
@@ -329,11 +325,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
 
         $imageUrl = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:icon)');
 
-        if (!$imageUrl) {
-            $image = null;
-        } else {
-            $image = array('uri'=>$imageUrl);
-        }
+        $image = $imageUrl ? array('uri'=>$imageUrl) : null;
 
         $this->_data['icon'] = $image;
 
@@ -379,7 +371,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
             $this->getXpathPrefix() . '/atom:link[not(@rel)]/@href'
         );
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             $link = $list->item(0)->nodeValue;
             $link = $this->_absolutiseUri($link);
         }
@@ -424,7 +416,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
         $list = $this->_xpath->query($this->getXpathPrefix()
             . '//atom:link[@rel="hub"]/@href');
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             foreach ($list as $uri) {
                 $hubs[] = $this->_absolutiseUri($uri->nodeValue);
             }
@@ -482,7 +474,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
             $list = $this->_xpath->query($this->getXpathPrefix() . '/atom10:category');
         }
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             $categoryCollection = new Zend_Feed_Reader_Collection_Category;
             foreach ($list as $category) {
                 $categoryCollection[] = array(
@@ -538,12 +530,10 @@ class Zend_Feed_Reader_Extension_Atom_Feed
      */
     protected function _absolutiseUri($link)
     {
-        if (!Zend_Uri::check($link)) {
-            if ($this->getBaseUrl() !== null) {
-                $link = $this->getBaseUrl() . $link;
-                if (!Zend_Uri::check($link)) {
-                    $link = null;
-                }
+        if (!Zend_Uri::check($link) && $this->getBaseUrl() !== null) {
+            $link = $this->getBaseUrl() . $link;
+            if (!Zend_Uri::check($link)) {
+                $link = null;
             }
         }
         return $link;

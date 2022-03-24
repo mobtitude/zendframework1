@@ -272,8 +272,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
     {
         if (trim($feed) == '') {
             require_once 'Zend/Feed/Exception.php';
-            throw new Zend_Feed_Exception('Remote feed being imported'
-            . ' is an Empty string or comes from an empty HTTP response');
+            throw new Zend_Feed_Exception('Remote feed being imported is an Empty string or comes from an empty HTTP response');
         }
         $doc = new DOMDocument;
         $doc = Zend_Xml_Security::scan($feed, $doc);

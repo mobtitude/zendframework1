@@ -221,36 +221,31 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
 
         if (isset($options['type'])) {
             $type = $options['type'];
-        } elseif(self::getDefaultPageType()!= null) {
+        } elseif(self::getDefaultPageType() != null) {
             $type = self::getDefaultPageType();
         }
 
-        if(isset($type)) {
-            if (is_string($type) && !empty($type)) {
-                switch (strtolower($type)) {
-                    case 'mvc':
-                        $type = 'Zend_Navigation_Page_Mvc';
-                        break;
-                    case 'uri':
-                        $type = 'Zend_Navigation_Page_Uri';
-                        break;
-                }
-
-                if (!class_exists($type)) {
-                    require_once 'Zend/Loader.php';
-                    @Zend_Loader::loadClass($type);
-                }
-
-                $page = new $type($options);
-                if (!$page instanceof Zend_Navigation_Page) {
-                    require_once 'Zend/Navigation/Exception.php';
-                    throw new Zend_Navigation_Exception(sprintf(
-                            'Invalid argument: Detected type "%s", which ' .
-                            'is not an instance of Zend_Navigation_Page',
-                            $type));
-                }
-                return $page;
+        if (isset($type) && (is_string($type) && !empty($type))) {
+            switch (strtolower($type)) {
+                case 'mvc':
+                    $type = 'Zend_Navigation_Page_Mvc';
+                    break;
+                case 'uri':
+                    $type = 'Zend_Navigation_Page_Uri';
+                    break;
             }
+            if (!class_exists($type)) {
+                require_once 'Zend/Loader.php';
+                @Zend_Loader::loadClass($type);
+            }
+            $page = new $type($options);
+            if (!$page instanceof Zend_Navigation_Page) {
+                require_once 'Zend/Navigation/Exception.php';
+                throw new Zend_Navigation_Exception(sprintf(
+                        'Invalid argument: Detected type "%s", which is not an instance of Zend_Navigation_Page',
+                        $type));
+            }
+            return $page;
         }
 
         $hasUri = isset($options['uri']);
@@ -576,8 +571,7 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
             if (!is_array($relations)) {
                 require_once 'Zend/Navigation/Exception.php';
                 throw new Zend_Navigation_Exception(
-                        'Invalid argument: $relations must be an ' .
-                        'array or an instance of Zend_Config');
+                        'Invalid argument: $relations must be an array or an instance of Zend_Config');
             }
 
             foreach ($relations as $name => $relation) {
@@ -639,8 +633,7 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
             if (!is_array($relations)) {
                 require_once 'Zend/Navigation/Exception.php';
                 throw new Zend_Navigation_Exception(
-                        'Invalid argument: $relations must be an ' .
-                        'array or an instance of Zend_Config');
+                        'Invalid argument: $relations must be an array or an instance of Zend_Config');
             }
 
             foreach ($relations as $name => $relation) {
@@ -812,14 +805,13 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
         if (null !== $order && !is_int($order)) {
             require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
-                    'Invalid argument: $order must be an integer or null, ' .
-                    'or a string that casts to an integer');
+                    'Invalid argument: $order must be an integer or null, or a string that casts to an integer');
         }
 
         $this->_order = $order;
 
         // notify parent, if any
-        if (isset($this->_parent)) {
+        if ($this->_parent !== null) {
             $this->_parent->notifyOrderUpdated();
         }
 
@@ -857,8 +849,7 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
         } else {
             require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
-                    'Invalid argument: $resource must be null, a string, ' .
-                    ' or an instance of Zend_Acl_Resource_Interface');
+                    'Invalid argument: $resource must be null, a string,  or an instance of Zend_Acl_Resource_Interface');
         }
 
         return $this;
@@ -972,11 +963,9 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
      */
     public function isVisible($recursive = false)
     {
-        if ($recursive && isset($this->_parent) &&
-            $this->_parent instanceof Zend_Navigation_Page) {
-            if (!$this->_parent->isVisible(true)) {
-                return false;
-            }
+        if ($recursive && $this->_parent !== null &&
+            $this->_parent instanceof Zend_Navigation_Page && !$this->_parent->isVisible(true)) {
+            return false;
         }
 
         return $this->_visible;

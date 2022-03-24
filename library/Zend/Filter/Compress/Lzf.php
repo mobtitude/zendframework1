@@ -54,7 +54,7 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     public function compress($content)
     {
         $compressed = lzf_compress($content);
-        if (!$compressed) {
+        if ($compressed === '' || $compressed === '0') {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Error during compression');
         }
@@ -71,7 +71,7 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     public function decompress($content)
     {
         $compressed = lzf_decompress($content);
-        if (!$compressed) {
+        if ($compressed === '' || $compressed === '0') {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Error during compression');
         }

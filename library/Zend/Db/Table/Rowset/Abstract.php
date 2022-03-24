@@ -242,7 +242,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      */
     public function current()
     {
-        if ($this->valid() === false) {
+        if (!$this->valid()) {
             return null;
         }
 
@@ -431,10 +431,8 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
             if ( $this->_table instanceof Zend_Db_Table_Abstract ) {
                 $info = $this->_table->info();
 
-                if ( $this->_rows[$position] instanceof Zend_Db_Table_Row_Abstract ) {
-                    if ($info['cols'] == array_keys($this->_data[$position])) {
-                        $this->_rows[$position]->setTable($this->getTable());
-                    }
+                if ( $this->_rows[$position] instanceof Zend_Db_Table_Row_Abstract && $info['cols'] == array_keys($this->_data[$position]) ) {
+                    $this->_rows[$position]->setTable($this->getTable());
                 }
             } else {
                 $this->_rows[$position]->setTable(null);

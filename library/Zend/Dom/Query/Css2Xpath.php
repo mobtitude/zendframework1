@@ -71,7 +71,7 @@ class Zend_Dom_Query_Css2Xpath
                     $paths[]      = $xpath . $pathSegment;
                 }
             } else {
-                foreach ($paths as $key => $xpath) {
+                foreach (array_keys($paths) as $key) {
                     $paths[$key] .= '//' . $pathSegment;
                 }
             }

@@ -37,6 +37,10 @@ require_once 'Zend/Search/Lucene/Search/Weight.php';
 class Zend_Search_Lucene_Search_Weight_Phrase extends Zend_Search_Lucene_Search_Weight
 {
     /**
+     * @var mixed
+     */
+    public $_queryWeight;
+    /**
      * IndexReader.
      *
      * @var Zend_Search_Lucene_Interface

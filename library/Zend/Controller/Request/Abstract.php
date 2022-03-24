@@ -310,7 +310,7 @@ abstract class Zend_Controller_Request_Abstract
      */
     public function setParams(array $array)
     {
-        $this->_params = $this->_params + (array) $array;
+        $this->_params += (array) $array;
 
         foreach ($array as $key => $value) {
             if (null === $value) {
@@ -340,7 +340,7 @@ abstract class Zend_Controller_Request_Abstract
      */
     public function setDispatched($flag = true)
     {
-        $this->_dispatched = $flag ? true : false;
+        $this->_dispatched = $flag;
         return $this;
     }
 

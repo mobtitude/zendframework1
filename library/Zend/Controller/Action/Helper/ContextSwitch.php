@@ -260,11 +260,8 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
 
         // Return if invalid context parameter provided and no format or invalid
         // format provided
-        if (!$this->hasContext($context)) {
-            if (empty($format) || !$this->hasContext($format)) {
-
-                return;
-            }
+        if (!$this->hasContext($context) && (empty($format) || !$this->hasContext($format))) {
+            return;
         }
 
         // Use provided format if passed
@@ -453,11 +450,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
             if (isset($suffix['prependViewRendererSuffix'])) {
                 $prependViewRendererSuffix = $suffix['prependViewRendererSuffix'];
             }
-            if (isset($suffix['suffix'])) {
-                $suffix = $suffix['suffix'];
-            } else {
-                $suffix = '';
-            }
+            $suffix = isset($suffix['suffix']) ? $suffix['suffix'] : '';
         }
 
         $suffix = (string) $suffix;
@@ -516,7 +509,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
                     break;
                 }
             }
-            if (false === $error) {
+            if (!$error) {
                 return true;
             }
             $context = $error;
@@ -746,14 +739,12 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
         $this->hasContext($context, true);
         $trigger = $this->_validateTrigger($trigger);
 
-        if (!is_string($callback)) {
-            if (!is_array($callback) || (2 != count($callback))) {
-                /**
-                 * @see Zend_Controller_Action_Exception
-                 */
-                require_once 'Zend/Controller/Action/Exception.php';
-                throw new Zend_Controller_Action_Exception('Invalid callback specified');
-            }
+        if (!is_string($callback) && (!is_array($callback) || (2 != count($callback)))) {
+            /**
+             * @see Zend_Controller_Action_Exception
+             */
+            require_once 'Zend/Controller/Action/Exception.php';
+            throw new Zend_Controller_Action_Exception('Invalid callback specified');
         }
 
         $this->_contexts[$context]['callbacks'][$trigger] = $callback;
@@ -924,7 +915,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
      */
     public function setAutoDisableLayout($flag)
     {
-        $this->_disableLayout = ($flag) ? true : false;
+        $this->_disableLayout = $flag;
         return $this;
     }
 
@@ -1078,21 +1069,19 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
     public function postDispatch()
     {
         $context = $this->getCurrentContext();
-        if (null !== $context) {
-            if (null !== ($callback = $this->getCallback($context, self::TRIGGER_POST))) {
-                if (is_string($callback) && method_exists($this, $callback)) {
-                    $this->$callback();
-                } elseif (is_string($callback) && function_exists($callback)) {
-                    $callback();
-                } elseif (is_array($callback)) {
-                    call_user_func($callback);
-                } else {
-                    /**
-                     * @see Zend_Controller_Action_Exception
-                     */
-                    require_once 'Zend/Controller/Action/Exception.php';
-                    throw new Zend_Controller_Action_Exception(sprintf('Invalid postDispatch context callback registered for context "%s"', $context));
-                }
+        if (null !== $context && null !== ($callback = $this->getCallback($context, self::TRIGGER_POST))) {
+            if (is_string($callback) && method_exists($this, $callback)) {
+                $this->$callback();
+            } elseif (is_string($callback) && function_exists($callback)) {
+                $callback();
+            } elseif (is_array($callback)) {
+                call_user_func($callback);
+            } else {
+                /**
+                 * @see Zend_Controller_Action_Exception
+                 */
+                require_once 'Zend/Controller/Action/Exception.php';
+                throw new Zend_Controller_Action_Exception(sprintf('Invalid postDispatch context callback registered for context "%s"', $context));
             }
         }
     }

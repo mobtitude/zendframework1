@@ -73,12 +73,11 @@ class Zend_Service_WindowsAzure_RetryPolicy_RetryN extends Zend_Service_WindowsA
         
         for ($retriesLeft = $this->_retryCount; $retriesLeft >= 0; --$retriesLeft) {
             try {
-                $returnValue = call_user_func_array($function, $parameters);
-                return $returnValue;
+                return call_user_func_array($function, $parameters);
             } catch (Exception $ex) {
                 if ($retriesLeft == 1) {
                     require_once 'Zend/Service/WindowsAzure/RetryPolicy/Exception.php';
-                    throw new Zend_Service_WindowsAzure_RetryPolicy_Exception("Exceeded retry count of " . $this->_retryCount . ". " . $ex->getMessage());
+                    throw new Zend_Service_WindowsAzure_RetryPolicy_Exception("Exceeded retry count of " . $this->_retryCount . ". " . $ex->getMessage(), $ex->getCode(), $ex);
                 }
                     
                 usleep($this->_retryInterval * 1000);

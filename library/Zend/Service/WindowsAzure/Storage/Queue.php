@@ -179,7 +179,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 		        $queueName,
 		        $metadata
 		    );
-		    $queue->ApproximateMessageCount = intval($response->getHeader('x-ms-approximate-message-count'));
+		    $queue->ApproximateMessageCount = (int) $response->getHeader('x-ms-approximate-message-count');
 		    return $queue;
 		} else {
 			require_once 'Zend/Service/WindowsAzure/Exception.php';
@@ -307,18 +307,16 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 			$queues = array();
 			if (!is_null($xmlQueues)) {
 				
-				for ($i = 0; $i < count($xmlQueues); $i++) {
+				foreach ($xmlQueues as $i => $xmlQueue) {
 					$queues[] = new Zend_Service_WindowsAzure_Storage_QueueInstance(
-						(string)$xmlQueues[$i]->Name,
-						$this->_parseMetadataElement($xmlQueues[$i])
+						(string)$xmlQueue->Name,
+						$this->_parseMetadataElement($xmlQueue)
 					);
 				}
 			}
-			$currentResultCount = $currentResultCount + count($queues);
-			if (!is_null($maxResults) && $currentResultCount < $maxResults) {
-    			if (!is_null($xmlMarker) && $xmlMarker != '') {
-    			    $queues = array_merge($queues, $this->listQueues($prefix, $maxResults, $xmlMarker, $include, $currentResultCount));
-    			}
+			$currentResultCount += count($queues);
+			if (!is_null($maxResults) && $currentResultCount < $maxResults && (!is_null($xmlMarker) && $xmlMarker != '')) {
+    			$queues = array_merge($queues, $this->listQueues($prefix, $maxResults, $xmlMarker, $include, $currentResultCount));
 			}
 			if (!is_null($maxResults) && count($queues) > $maxResults) {
 			    $queues = array_slice($queues, 0, $maxResults);
@@ -404,7 +402,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 			require_once 'Zend/Service/WindowsAzure/Exception.php';
 		    throw new Zend_Service_WindowsAzure_Exception('Queue name does not adhere to queue naming conventions. See http://msdn.microsoft.com/en-us/library/dd179349.aspx for more information.');
 		}
-		if ($numOfMessages < 1 || $numOfMessages > 32 || intval($numOfMessages) != $numOfMessages) {
+		if ($numOfMessages < 1 || $numOfMessages > 32 || (int) $numOfMessages != $numOfMessages) {
 			require_once 'Zend/Service/WindowsAzure/Exception.php';
 		    throw new Zend_Service_WindowsAzure_Exception('Invalid number of messages to retrieve.');
 		}
@@ -415,7 +413,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 		    
 	    // Build query string
 		$queryString = array();
-    	if ($peek) {
+    	if ($peek !== '' && $peek !== '0') {
     	    $queryString[] = 'peekonly=true';
     	}
     	if ($numOfMessages > 1) {
@@ -436,22 +434,18 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 		    }
 
 		    $xmlMessages = null;
-		    if (count($result->QueueMessage) > 1) {
-    		    $xmlMessages = $result->QueueMessage;
-    		} else {
-    		    $xmlMessages = array($result->QueueMessage);
-    		}
+		    $xmlMessages = count($result->QueueMessage) > 1 ? $result->QueueMessage : array($result->QueueMessage);
 			
 			$messages = array();
-			for ($i = 0; $i < count($xmlMessages); $i++) {
+			foreach ($xmlMessages as $i => $xmlMessage) {
 				$messages[] = new Zend_Service_WindowsAzure_Storage_QueueMessage(
-					(string)$xmlMessages[$i]->MessageId,
-					(string)$xmlMessages[$i]->InsertionTime,
-					(string)$xmlMessages[$i]->ExpirationTime,
-					($peek ? '' : (string)$xmlMessages[$i]->PopReceipt),
-					($peek ? '' : (string)$xmlMessages[$i]->TimeNextVisible),
-					(string)$xmlMessages[$i]->DequeueCount,
-					base64_decode((string)$xmlMessages[$i]->MessageText)
+					(string)$xmlMessage->MessageId,
+					(string)$xmlMessage->InsertionTime,
+					(string)$xmlMessage->ExpirationTime,
+					($peek !== '' && $peek !== '0' ? '' : (string)$xmlMessage->PopReceipt),
+					($peek !== '' && $peek !== '0' ? '' : (string)$xmlMessage->TimeNextVisible),
+					(string)$xmlMessage->DequeueCount,
+					base64_decode((string)$xmlMessage->MessageText)
 			    );
 			}
 			    
@@ -484,7 +478,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 	 */
 	public function hasMessages($queueName = '')
 	{
-		return count($this->peekMessages($queueName)) > 0;
+		return $this->peekMessages($queueName) !== [];
 	}
 	
 	/**
@@ -558,19 +552,14 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
             return false;
         }
     
-        if (strtolower($queueName) != $queueName) {
+        if (strtolower($queueName) !== $queueName) {
             return false;
         }
     
         if (strlen($queueName) < 3 || strlen($queueName) > 63) {
             return false;
         }
-            
-        if (substr($queueName, -1) == '-') {
-            return false;
-        }
-    
-        return true;
+								return !(substr($queueName, -1) == '-');
     }
     
 	/**

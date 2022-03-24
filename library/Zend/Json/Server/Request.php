@@ -221,11 +221,7 @@ class Zend_Json_Server_Request
      */
     public function setVersion($version)
     {
-        if ('2.0' == $version) {
-            $this->_version = '2.0';
-        } else {
-            $this->_version = '1.0';
-        }
+        $this->_version = '2.0' == $version ? '2.0' : '1.0';
         return $this;
     }
 

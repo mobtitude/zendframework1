@@ -137,11 +137,7 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
     public function setDirectOnly($value)
     {
         if ($value !== null) {
-            if($value == true) {
-                $this->_params['directOnly'] = 'true';
-            } else {
-                $this->_params['directOnly'] = 'false';
-            }
+            $this->_params['directOnly'] = $value == true ? 'true' : 'false';
         } else {
             unset($this->_params['directOnly']);
         }
@@ -218,9 +214,7 @@ class Zend_Gdata_Gapps_GroupQuery extends Zend_Gdata_Gapps_Query
         if(array_key_exists('member', $this->_params)) {
             $uri .= '/';
         }
-
-        $uri .= $this->getQueryString();
-        return $uri;
+        return $uri . $this->getQueryString();
     }
 
 }

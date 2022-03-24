@@ -192,9 +192,7 @@ class Zend_View_Helper_FormSelect extends Zend_View_Helper_FormElement
             $opt .= ' disabled="disabled"';
         }
 
-        $opt .= '>' . $this->view->escape($label) . "</option>";
-
-        return $opt;
+        return $opt . ('>' . $this->view->escape($label) . "</option>");
     }
 
 }

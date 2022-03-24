@@ -131,13 +131,12 @@ class Zend_Service_Amazon_Ec2_Instance_Reserved extends Zend_Service_Amazon_Ec2_
         $params = array();
         $params['Action'] = 'PurchaseReservedInstancesOffering';
         $params['OfferingId.1'] = $offeringId;
-        $params['instanceCount.1'] = intval($intanceCount);
+        $params['instanceCount.1'] = (int) $intanceCount;
 
         $response = $this->sendRequest($params);
 
         $xpath = $response->getXPath();
-        $reservedInstancesId = $xpath->evaluate('string(//ec2:reservedInstancesId/text())');
 
-        return $reservedInstancesId;
+        return $xpath->evaluate('string(//ec2:reservedInstancesId/text())');
     }
 }

@@ -205,7 +205,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
             $boolSlow = $this->_slowBackend->save($preparedData, $id, $tags, $lifetime);
         } else {
             $boolSlow = $this->_slowBackend->save($preparedData, $id, $tags, $lifetime);
-            if ($boolSlow === true) {
+            if ($boolSlow) {
                 $boolFast = $this->_fastBackend->remove($id);
                 if (!$boolFast && !$this->_fastBackend->test($id)) {
                     // some backends return false on remove() even if the key never existed. (and it won't if fast is full)
@@ -492,14 +492,7 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      */
     private function _getFastLifetime($lifetime, $priority, $maxLifetime = null)
     {
-        if ($lifetime <= 0) {
-            // if no lifetime, we have an infinite lifetime
-            // we need to use arbitrary lifetimes
-            $fastLifetime = (int) (2592000 / (11 - $priority));
-        } else {
-            // prevent computed infinite lifetime (0) by ceil
-            $fastLifetime = (int) ceil($lifetime / (11 - $priority));
-        }
+        $fastLifetime = $lifetime <= 0 ? (int) (2592000 / (11 - $priority)) : (int) ceil($lifetime / (11 - $priority));
 
         if ($maxLifetime >= 0 && $fastLifetime > $maxLifetime) {
             return $maxLifetime;
@@ -535,12 +528,8 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
                     $this->_fastBackendFillingPercentage = $this->_fastBackend->getFillingPercentage();
                 }
             }
-        } else {
-            // mode loading
-            // we compute the percentage only if it's not available in cache
-            if ($this->_fastBackendFillingPercentage === null) {
-                $this->_fastBackendFillingPercentage = $this->_fastBackend->getFillingPercentage();
-            }
+        } elseif ($this->_fastBackendFillingPercentage === null) {
+            $this->_fastBackendFillingPercentage = $this->_fastBackend->getFillingPercentage();
         }
         return $this->_fastBackendFillingPercentage;
     }

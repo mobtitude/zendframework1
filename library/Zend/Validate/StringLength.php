@@ -85,17 +85,15 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options     = func_get_args();
             $temp['min'] = array_shift($options);
             if (!empty($options)) {
                 $temp['max'] = array_shift($options);
             }
-
             if (!empty($options)) {
                 $temp['encoding'] = array_shift($options);
             }
-
             $options = $temp;
         }
 
@@ -165,7 +163,7 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
     {
         if (null === $max) {
             $this->_max = null;
-        } else if ($max < $this->_min) {
+        } elseif ($max < $this->_min) {
             /**
              * @see Zend_Validate_Exception
              */
@@ -203,11 +201,7 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
                         ? iconv_get_encoding('internal_encoding')
                         : ini_get('default_charset');
             if (PHP_VERSION_ID < 50600) {
-                if ($encoding) {
-                    $result = iconv_set_encoding('internal_encoding', $encoding);
-                } else {
-                    $result = false;
-                }
+                $result = $encoding !== '' && $encoding !== '0' ? iconv_set_encoding('internal_encoding', $encoding) : false;
             } else {
                 ini_set('default_charset', $encoding);
                 $result = ini_get('default_charset');
@@ -244,11 +238,7 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
         }
 
         $this->_setValue($value);
-        if ($this->_encoding !== null) {
-            $length = iconv_strlen($value, $this->_encoding);
-        } else {
-            $length = iconv_strlen($value);
-        }
+        $length = $this->_encoding !== null ? iconv_strlen($value, $this->_encoding) : iconv_strlen($value);
 
         if ($length < $this->_min) {
             $this->_error(self::TOO_SHORT);
@@ -258,7 +248,7 @@ class Zend_Validate_StringLength extends Zend_Validate_Abstract
             $this->_error(self::TOO_LONG);
         }
 
-        if (count($this->_messages)) {
+        if ($this->_messages !== []) {
             return false;
         } else {
             return true;

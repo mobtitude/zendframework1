@@ -133,7 +133,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
             throw new Zend_Session_Exception("A session namespace object already exists for this namespace ('$namespace'), and no additional accessors (session namespace objects) for this namespace are permitted.");
         }
 
-        if ($singleInstance === true) {
+        if ($singleInstance) {
             self::$_singleInstances[$namespace] = true;
         }
 
@@ -142,7 +142,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
         // Process metadata specific only to this namespace.
         Zend_Session::start(true); // attempt auto-start (throws exception if strict option set)
 
-        if (self::$_readable === false) {
+        if (!self::$_readable) {
             /**
              * @see Zend_Session_Exception
              */
@@ -155,7 +155,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
         }
 
         // do not allow write access to namespaces, after stop() or writeClose()
-        if (parent::$_writable === true) {
+        if (parent::$_writable) {
             if (isset($_SESSION['__ZF'][$namespace])) {
 
                 // Expire Namespace by Namespace Hop (ENNH)
@@ -312,7 +312,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
             throw new Zend_Session_Exception("The '$name' key must be a non-empty string");
         }
 
-        if (parent::$_writable === false) {
+        if (!parent::$_writable) {
             /**
              * @see Zend_Session_Exception
              */
@@ -425,7 +425,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      */
     public function setExpirationSeconds($seconds, $variables = null)
     {
-        if (parent::$_writable === false) {
+        if (!parent::$_writable) {
             /**
              * @see Zend_Session_Exception
              */
@@ -473,7 +473,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      */
     public function setExpirationHops($hops, $variables = null, $hopCountOnUsageOnly = false)
     {
-        if (parent::$_writable === false) {
+        if (!parent::$_writable) {
             /**
              * @see Zend_Session_Exception
              */
@@ -492,7 +492,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
         if ($variables === null) {
 
             // apply expiration to entire namespace
-            if ($hopCountOnUsageOnly === false) {
+            if (!$hopCountOnUsageOnly) {
                 $_SESSION['__ZF'][$this->_namespace]['ENGH'] = $hops;
             } else {
                 $_SESSION['__ZF'][$this->_namespace]['ENNH'] = $hops;
@@ -506,7 +506,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
 
             foreach ($variables as $variable) {
                 if (!empty($variable)) {
-                    if ($hopCountOnUsageOnly === false) {
+                    if (!$hopCountOnUsageOnly) {
                         $_SESSION['__ZF'][$this->_namespace]['ENVGH'][$variable] = $hops;
                     } else {
                         $_SESSION['__ZF'][$this->_namespace]['ENVNH'][$variable] = $hops;

@@ -392,11 +392,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 }
             } elseif ($part != '*') {
                 if ($this->_isTranslated && substr($part, 0, 1) === '@') {
-                    if (substr($part, 1, 1) !== '@') {
-                        $url[$key] = $translator->translate(substr($part, 1), $locale);
-                    } else {
-                        $url[$key] = substr($part, 1);
-                    }
+                    $url[$key] = substr($part, 1, 1) !== '@' ? $translator->translate(substr($part, 1), $locale) : substr($part, 1);
                 } else {
                     if (substr($part, 0, 2) === '@@') {
                         $part = substr($part, 1);
@@ -523,19 +519,17 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
     {
         if ($this->_translator !== null) {
             return $this->_translator;
+        } elseif (($translator = self::getDefaultTranslator()) !== null) {
+            return $translator;
         } else {
-            if (($translator = self::getDefaultTranslator()) !== null) {
-                return $translator;
-            } else {
-                try {
-                    $translator = Zend_Registry::get('Zend_Translate');
-                } catch (Zend_Exception $e) {
-                    $translator = null;
-                }
+            try {
+                $translator = Zend_Registry::get('Zend_Translate');
+            } catch (Zend_Exception $e) {
+                $translator = null;
+            }
 
-                if ($translator instanceof Zend_Translate) {
-                    return $translator;
-                }
+            if ($translator instanceof Zend_Translate) {
+                return $translator;
             }
         }
 
@@ -582,24 +576,6 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
      */
     public function getLocale()
     {
-        if ($this->_locale !== null) {
-            return $this->_locale;
-        } else {
-            if (($locale = self::getDefaultLocale()) !== null) {
-                return $locale;
-            } else {
-                try {
-                    $locale = Zend_Registry::get('Zend_Locale');
-                } catch (Zend_Exception $e) {
-                    $locale = null;
-                }
-
-                if ($locale !== null) {
-                    return $locale;
-                }
-            }
-        }
-
-        return null;
+        return $this->_locale;
     }
 }

@@ -156,15 +156,11 @@ class Zend_Pdf_FileParser_Image_Png extends Zend_Pdf_FileParser_Image
 
     protected function _parseSignature() {
          $this->moveToOffset(1); //Skip the first byte (%)
-         if('PNG' != $this->readBytes(3)) {
-               $this->_isPNG = false;
-         } else {
-               $this->_isPNG = true;
-         }
+         $this->_isPNG = 'PNG' == $this->readBytes(3);
     }
 
     protected function _checkSignature() {
-         if(!isset($this->_isPNG)) {
+         if(!($this->_isPNG !== null)) {
               $this->_parseSignature();
          }
          return $this->_isPNG;
@@ -235,7 +231,7 @@ class Zend_Pdf_FileParser_Image_Png extends Zend_Pdf_FileParser_Image
 
     protected function _parseIDATChunk($chunkOffset, $chunkLength) {
          $this->moveToOffset($chunkOffset);
-         if(!isset($this->_imageData)) {
+         if(!($this->_imageData !== null)) {
               $this->_imageData = $this->readBytes($chunkLength);
          } else {
               $this->_imageData .= $this->readBytes($chunkLength);

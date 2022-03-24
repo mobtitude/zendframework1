@@ -167,7 +167,7 @@ abstract class Zend_Search_Lucene_Storage_File
      */
     public function writeInt($value)
     {
-        settype($value, 'integer');
+        $value = (int) $value;
         $this->_fwrite( chr($value>>24 & 0xFF) .
                         chr($value>>16 & 0xFF) .
                         chr($value>>8  & 0xFF) .
@@ -217,7 +217,7 @@ abstract class Zend_Search_Lucene_Storage_File
          * fseek() and ftell() use long for offset. Thus, largest index segment file size in 32bit mode is 2Gb
          */
         if (PHP_INT_SIZE > 4) {
-            settype($value, 'integer');
+            $value = (int) $value;
             $this->_fwrite( chr($value>>56 & 0xFF) .
                             chr($value>>48 & 0xFF) .
                             chr($value>>40 & 0xFF) .
@@ -244,9 +244,9 @@ abstract class Zend_Search_Lucene_Storage_File
         $wordHigh = $this->readInt();
         $wordLow  = $this->readInt();
 
-        if ($wordHigh & (int)0x80000000) {
+        if (($wordHigh & (int)0x80000000) !== 0) {
             // It's a negative value since the highest bit is set
-            if ($wordHigh == (int)0xFFFFFFFF  &&  ($wordLow & (int)0x80000000)) {
+            if ($wordHigh === (int)0xFFFFFFFF  &&  ($wordLow & (int)0x80000000)) {
                 return $wordLow;
             } else {
                 require_once 'Zend/Search/Lucene/Exception.php';
@@ -327,7 +327,7 @@ abstract class Zend_Search_Lucene_Storage_File
      */
     public function writeVInt($value)
     {
-        settype($value, 'integer');
+        $value = (int) $value;
         while ($value > 0x7F) {
             $this->_fwrite(chr( ($value & 0x7F)|0x80 ));
             $value >>= 7;
@@ -366,11 +366,11 @@ abstract class Zend_Search_Lucene_Storage_File
             for ($count = 0; $count < $strlen; $count++ ) {
                 if (( ord($str_val[$count]) & 0xC0 ) == 0xC0) {
                     $addBytes = 1;
-                    if (ord($str_val[$count]) & 0x20 ) {
+                    if ((ord($str_val[$count]) & 0x20) !== 0 ) {
                         $addBytes++;
 
                         // Never used. Java2 doesn't encode strings in four bytes
-                        if (ord($str_val[$count]) & 0x10 ) {
+                        if ((ord($str_val[$count]) & 0x10) !== 0 ) {
                             $addBytes++;
                         }
                     }
@@ -415,7 +415,7 @@ abstract class Zend_Search_Lucene_Storage_File
          */
 
         // convert input to a string before iterating string characters
-        settype($str, 'string');
+        $str = (string) $str;
 
         $chars = $strlen = strlen($str);
         $containNullChars = false;
@@ -428,12 +428,12 @@ abstract class Zend_Search_Lucene_Storage_File
              */
             if ((ord($str[$count]) & 0xC0) == 0xC0) {
                 $addBytes = 1;
-                if (ord($str[$count]) & 0x20 ) {
+                if ((ord($str[$count]) & 0x20) !== 0 ) {
                     $addBytes++;
 
                     // Never used. Java2 doesn't encode strings in four bytes
                     // and we dont't support non-BMP characters
-                    if (ord($str[$count]) & 0x10 ) {
+                    if ((ord($str[$count]) & 0x10) !== 0 ) {
                         $addBytes++;
                     }
                 }

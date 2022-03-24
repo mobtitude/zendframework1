@@ -278,32 +278,23 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
     public static function match($userAgent, $server)
     {
         //  To have a quick identification, try light-weight tests first
-        if (isset($server['all_http'])) {
-            if (strpos(strtolower(str_replace(' ', '', $server['all_http'])), 'operam') !== false) {
-                // Opera Mini or Opera Mobi
-                return true;
-            }
+        if (isset($server['all_http']) && stripos(str_replace(' ', '', $server['all_http']), 'operam') !== false) {
+            // Opera Mini or Opera Mobi
+            return true;
         }
 
         if (isset($server['http_x_wap_profile']) || isset($server['http_profile'])) {
             return true;
         }
 
-        if (isset($server['http_accept'])) {
-            if (self::_matchAgentAgainstSignatures($server['http_accept'], self::$_haTerms)) {
-                return true;
-            }
-        }
-
-        if (self::userAgentStart($userAgent)) {
+        if (isset($server['http_accept']) && self::_matchAgentAgainstSignatures($server['http_accept'], self::$_haTerms)) {
             return true;
         }
 
-        if (self::_matchAgentAgainstSignatures($userAgent, self::$_uaSignatures)) {
+        if (self::userAgentStart($userAgent) !== '' && self::userAgentStart($userAgent) !== '0') {
             return true;
         }
-
-        return false;
+        return self::_matchAgentAgainstSignatures($userAgent, self::$_uaSignatures);
     }
 
     /**

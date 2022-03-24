@@ -60,7 +60,7 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
     public function spreadWeightValues(array $values)
     {
         // Don't allow an empty value list
-        if (count($values) === 0) {
+        if ($values === []) {
             require_once 'Zend/Tag/Exception.php';
             throw new Zend_Tag_Exception('Value list may not be empty');
         }

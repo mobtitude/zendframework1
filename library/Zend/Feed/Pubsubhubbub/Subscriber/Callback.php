@@ -178,15 +178,11 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
         if (!Zend_Uri::check($httpGetData['hub_topic'])) {
             return false;
         }
-
         /**
          * Attempt to retrieve any Verification Token Key attached to Callback
          * URL's path by our Subscriber implementation
          */
-        if (!$this->_hasValidVerifyToken($httpGetData)) {
-            return false;
-        }
-        return true;
+        return $this->_hasValidVerifyToken($httpGetData);
     }
 
     /**
@@ -209,10 +205,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
      */
     public function hasFeedUpdate()
     {
-        if ($this->_feedUpdate === null) {
-            return false;
-        }
-        return true;
+        return $this->_feedUpdate !== null;
     }
 
     /**
@@ -269,7 +262,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
         /**
          * Available when sub keys encoding in Callback URL path
          */
-        if (isset($this->_subscriptionKey)) {
+        if ($this->_subscriptionKey !== null) {
             return $this->_subscriptionKey;
         }
 

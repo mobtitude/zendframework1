@@ -159,7 +159,7 @@ class Zend_Tool_Project_Context_Zf_ActionMethod implements Zend_Tool_Project_Con
      */
     public function create()
     {
-        if (self::createActionMethod($this->_controllerPath, $this->_actionName) === false) {
+        if (!self::createActionMethod($this->_controllerPath, $this->_actionName)) {
             require_once 'Zend/Tool/Project/Context/Exception.php';
             throw new Zend_Tool_Project_Context_Exception(
                 'Could not create action within controller ' . $this->_controllerPath

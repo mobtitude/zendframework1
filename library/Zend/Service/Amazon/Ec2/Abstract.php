@@ -98,14 +98,11 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
      */
     public function __construct($accessKey=null, $secretKey=null, $region=null)
     {
-        if(!$region) {
+        if (!$region) {
             $region = self::$_defaultRegion;
-        } else {
-            // make rue the region is valid
-            if(!empty($region) && !in_array(strtolower($region), self::$_validEc2Regions, true)) {
-                require_once 'Zend/Service/Amazon/Exception.php';
-                throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
-            }
+        } elseif (!empty($region) && !in_array(strtolower($region), self::$_validEc2Regions, true)) {
+            require_once 'Zend/Service/Amazon/Exception.php';
+            throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
         }
 
         $this->_region = $region;
@@ -136,7 +133,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
      */
     protected function _getRegion()
     {
-        return (!empty($this->_region)) ? $this->_region . '.' : '';
+        return (empty($this->_region)) ? '' : $this->_region . '.';
     }
 
     /**

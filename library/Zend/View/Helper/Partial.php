@@ -34,6 +34,14 @@ require_once 'Zend/View/Helper/Abstract.php';
 class Zend_View_Helper_Partial extends Zend_View_Helper_Abstract
 {
     /**
+     * @var mixed
+     */
+    public $partialCounter;
+    /**
+     * @var mixed
+     */
+    public $partialTotalCount;
+    /**
      * Variable to which object will be assigned
      * @var string
      */
@@ -68,10 +76,10 @@ class Zend_View_Helper_Partial extends Zend_View_Helper_Abstract
         }
 
         $view = $this->cloneView();
-        if (isset($this->partialCounter)) {
+        if (property_exists($this, 'partialCounter') && $this->partialCounter !== null) {
             $view->partialCounter = $this->partialCounter;
         }
-        if (isset($this->partialTotalCount)) {
+        if (property_exists($this, 'partialTotalCount') && $this->partialTotalCount !== null) {
             $view->partialTotalCount = $this->partialTotalCount;
         }
 
@@ -129,11 +137,7 @@ class Zend_View_Helper_Partial extends Zend_View_Helper_Abstract
      */
     public function setObjectKey($key)
     {
-        if (null === $key) {
-            $this->_objectKey = null;
-        } else {
-            $this->_objectKey = (string) $key;
-        }
+        $this->_objectKey = null === $key ? null : (string) $key;
 
         return $this;
     }

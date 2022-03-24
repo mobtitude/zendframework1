@@ -172,8 +172,7 @@ abstract class Zend_Gdata_App_FeedEntryParent extends Zend_Gdata_App_Base
         if (!$this->_service) {
             $this->_service = new Zend_Gdata_App();
         }
-        $client = $this->_service->getHttpClient();
-        return $client;
+        return $this->_service->getHttpClient();
     }
 
     /**
@@ -592,7 +591,7 @@ abstract class Zend_Gdata_App_FeedEntryParent extends Zend_Gdata_App_Base
      */
     public function setMajorProtocolVersion($value)
     {
-        if (!($value >= 1) && ($value !== null)) {
+        if ($value < 1 && ($value !== null)) {
             require_once('Zend/Gdata/App/InvalidArgumentException.php');
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Major protocol version must be >= 1');
@@ -622,7 +621,7 @@ abstract class Zend_Gdata_App_FeedEntryParent extends Zend_Gdata_App_Base
      */
     public function setMinorProtocolVersion($value)
     {
-        if (!($value >= 0)) {
+        if ($value < 0) {
             require_once('Zend/Gdata/App/InvalidArgumentException.php');
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Minor protocol version must be >= 0 or null');

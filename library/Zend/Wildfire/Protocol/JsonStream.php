@@ -107,7 +107,7 @@ class Zend_Wildfire_Protocol_JsonStream
         $uri = $plugin->getUri();
 
         $present = false;
-        foreach ($this->_messages as $structure => $messages) {
+        foreach (array_keys($this->_messages) as $structure) {
 
             if(!isset($this->_messages[$structure][$uri])) {
                 continue;
@@ -193,10 +193,9 @@ class Zend_Wildfire_Protocol_JsonStream
 
                     $parts = explode("\n",chunk_split($message, 5000, "\n"));
 
-                    for ($i=0 ; $i<count($parts) ; $i++) {
-
-                        $part = $parts[$i];
-                        if ($part) {
+                    foreach ($parts as $i => $part) {
+                        $part = $part;
+                        if ($part !== '' && $part !== '0') {
 
                             $msg = '';
 

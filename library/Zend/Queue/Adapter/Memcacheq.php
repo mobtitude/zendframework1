@@ -269,7 +269,7 @@ class Zend_Queue_Adapter_Memcacheq extends Zend_Queue_Adapter_AdapterAbstract
         );
 
         $result = $this->_cache->set($queue->getName(), $message, 0, 0);
-        if ($result === false) {
+        if (!$result) {
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('failed to insert message into queue:' . $queue->getName());
         }

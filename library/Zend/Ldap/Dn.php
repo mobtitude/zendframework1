@@ -66,7 +66,7 @@ class Zend_Ldap_Dn implements ArrayAccess
     {
         if (is_array($dn)) {
             return self::fromArray($dn, $caseFold);
-        } else if (is_string($dn)) {
+        } elseif (is_string($dn)) {
             return self::fromString($dn, $caseFold);
         } else {
             /**
@@ -88,11 +88,7 @@ class Zend_Ldap_Dn implements ArrayAccess
     public static function fromString($dn, $caseFold = null)
     {
         $dn = trim($dn);
-        if (empty($dn)) {
-            $dnArray = array();
-        } else {
-            $dnArray = self::explodeDn((string)$dn);
-        }
+        $dnArray = empty($dn) ? array() : self::explodeDn((string)$dn);
         return new self($dnArray, $caseFold);
     }
 
@@ -527,7 +523,7 @@ class Zend_Ldap_Dn implements ArrayAccess
                     $val = '\20' . $val;
                 }
                 for ($i = 0; $i<strlen((string) $matches[3]); $i++) {
-                    $val = $val . '\20';
+                    $val .= '\20';
                 }
             }
             if (null === $val) $val = '\0';  // apply escaped "null" if string is empty
@@ -597,17 +593,18 @@ class Zend_Ldap_Dn implements ArrayAccess
             throw new Zend_Ldap_Exception(null, 'DN is malformed');
         }
         $ret = array();
-        for ($i = 0; $i < count($k); $i++) {
-            if (is_array($k[$i]) && is_array($v[$i]) && (count($k[$i]) === count($v[$i]))) {
+        foreach ($k as $i => $singleK) {
+            if (is_array($singleK) && is_array($v[$i]) && (count($k[$i]) === count($v[$i]))) {
                 $multi = array();
-                for ($j = 0; $j < count($k[$i]); $j++) {
-                    $key=$k[$i][$j];
+                $itemsCount = count($k[$i]);
+                for ($j = 0; $j < $itemsCount; $j++) {
+                    $key=$singleK[$j];
                     $val=$v[$i][$j];
                     $multi[$key] = $val;
                 }
                 $ret[] = $multi;
-            } else if (is_string($k[$i]) && is_string($v[$i])) {
-                $ret[] = array($k[$i] => $v[$i]);
+            } elseif (is_string($singleK) && is_string($v[$i])) {
+                $ret[] = array($singleK => $v[$i]);
             }
         }
         if ($keys !== null) $keys = $k;
@@ -641,13 +638,16 @@ class Zend_Ldap_Dn implements ArrayAccess
         $ka = array();
         $va = array();
         for ($di = 0; $di <= $slen; $di++) {
-            $ch = ($di == $slen) ? 0 : $dn[$di];
+            $ch = ($di === $slen) ? 0 : $dn[$di];
             switch ($state) {
                 case 1: // collect key
                     if ($ch === '=') {
                         $key = trim(substr($dn, $ko, $di - $ko));
-                        if ($caseFold == self::ATTR_CASEFOLD_LOWER) $key = strtolower($key);
-                        else if ($caseFold == self::ATTR_CASEFOLD_UPPER) $key = strtoupper($key);
+                        if ($caseFold == self::ATTR_CASEFOLD_LOWER) {
+                            $key = strtolower($key);
+                        } elseif ($caseFold == self::ATTR_CASEFOLD_UPPER) {
+                            $key = strtoupper($key);
+                        }
                         if (is_array($multi)) {
                             $keyId = strtolower($key);
                             if (in_array($keyId, $multi)) {
@@ -660,14 +660,14 @@ class Zend_Ldap_Dn implements ArrayAccess
                         }
                         $state = 2;
                         $vo = $di + 1;
-                    } else if ($ch === ',' || $ch === ';' || $ch === '+') {
+                    } elseif ($ch === ',' || $ch === ';' || $ch === '+') {
                         return false;
                     }
                     break;
                 case 2: // collect value
                     if ($ch === '\\') {
                         $state = 3;
-                    } else if ($ch === ',' || $ch === ';' || $ch === 0 || $ch === '+') {
+                    } elseif ($ch === ',' || $ch === ';' || $ch === 0 || $ch === '+') {
                         $value = self::unescapeValue(trim(substr($dn, $vo, $di - $vo)));
                         if (is_array($multi)) {
                             $va[count($va)-1][] = $value;
@@ -682,10 +682,10 @@ class Zend_Ldap_Dn implements ArrayAccess
                             $ka[] = array($lastKey);
                             $va[] = array($lastVal);
                             $multi = array(strtolower($lastKey));
-                        } else if ($ch === ','|| $ch === ';' || $ch === 0) {
+                        } elseif ($ch === ','|| $ch === ';' || $ch === 0) {
                             $multi = false;
                         }
-                    } else if ($ch === '=') {
+                    } elseif ($ch === '=') {
                         return false;
                     }
                     break;
@@ -786,8 +786,8 @@ class Zend_Ldap_Dn implements ArrayAccess
 
         $startIndex = count($cdn)-count($pdn);
         if ($startIndex<0) return false;
-        for ($i = 0; $i<count($pdn); $i++) {
-            if ($cdn[$i+$startIndex] != $pdn[$i]) return false;
+        foreach ($pdn as $i => $singlePdn) {
+            if ($cdn[$i+$startIndex] != $singlePdn) return false;
         }
         return true;
     }

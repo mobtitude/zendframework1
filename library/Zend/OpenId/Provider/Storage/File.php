@@ -68,12 +68,10 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
             $dir = $tmp . '/openid/provider';
         }
         $this->_dir = $dir;
-        if (!is_dir($this->_dir)) {
-            if (!@mkdir($this->_dir, 0700, 1)) {
-                throw new Zend_OpenId_Exception(
-                    "Cannot access storage directory $dir",
-                    Zend_OpenId_Exception::ERROR_STORAGE);
-            }
+        if (!is_dir($this->_dir) && !@mkdir($this->_dir, 0700, 1)) {
+            throw new Zend_OpenId_Exception(
+                "Cannot access storage directory $dir",
+                Zend_OpenId_Exception::ERROR_STORAGE);
         }
         if (($f = fopen($this->_dir.'/assoc.lock', 'w+')) === null) {
             throw new Zend_OpenId_Exception(

@@ -197,8 +197,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
         $encodedData = $convertedChars * $characterLength;
         // ...except the STOP character (13)
         $encodedData += $characterLength + 2 * $this->_barThinWidth * $this->_factor;
-        $width = $quietZone + $encodedData + $quietZone;
-        return $width;
+        return $quietZone + $encodedData + $quietZone;
     }
 
     /**
@@ -266,7 +265,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
     protected function _convertToBarcodeChars($string)
     {
         $string = (string) $string;
-        if (!strlen($string)) {
+        if ($string === '') {
             return array();
         }
 
@@ -298,7 +297,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
                     $result[] = $code;
                     $currentCharset = 'C';
                 }
-            } else if (in_array($char, $this->_charSets['B']) && $currentCharset != 'B'
+            } elseif (in_array($char, $this->_charSets['B']) && $currentCharset != 'B'
                   && !(in_array($char, $this->_charSets['A']) && $currentCharset == 'A')) {
                 /**
                  * Switch to B as B contains the char and B is not the current charset.
@@ -310,7 +309,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
                 }
                 $result[] = $code;
                 $currentCharset = 'B';
-            } else if (array_key_exists($char, $this->_charSets['A']) && $currentCharset != 'A'
+            } elseif (array_key_exists($char, $this->_charSets['A']) && $currentCharset != 'A'
                   && !(array_key_exists($char, $this->_charSets['B']) && $currentCharset == 'B')) {
                 /**
                  * Switch to C as C contains the char and C is not the current charset.
@@ -375,9 +374,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
             $sum += ($k++) * $char;
         }
 
-        $checksum = $sum % 103;
-
-        return $checksum;
+        return $sum % 103;
     }
 
     /**

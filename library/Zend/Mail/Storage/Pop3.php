@@ -75,7 +75,7 @@ class Zend_Mail_Storage_Pop3 extends Zend_Mail_Storage_Abstract
      */
     public function getSize($id = 0)
     {
-        $id = $id ? $id : null;
+        $id = $id !== 0 ? $id : null;
         return $this->_protocol->getList($id);
     }
 
@@ -173,7 +173,7 @@ class Zend_Mail_Storage_Pop3 extends Zend_Mail_Storage_Abstract
             return;
         }
 
-        if (!isset($params->user)) {
+        if (!(property_exists($params, 'user') && $params->user !== null)) {
             /**
              * @see Zend_Mail_Storage_Exception
              */
@@ -181,10 +181,10 @@ class Zend_Mail_Storage_Pop3 extends Zend_Mail_Storage_Abstract
             throw new Zend_Mail_Storage_Exception('need at least user in params');
         }
 
-        $host     = isset($params->host)     ? $params->host     : 'localhost';
-        $password = isset($params->password) ? $params->password : '';
-        $port     = isset($params->port)     ? $params->port     : null;
-        $ssl      = isset($params->ssl)      ? $params->ssl      : false;
+        $host     = property_exists($params, 'host') && $params->host !== null     ? $params->host     : 'localhost';
+        $password = property_exists($params, 'password') && $params->password !== null ? $params->password : '';
+        $port     = property_exists($params, 'port') && $params->port !== null     ? $params->port     : null;
+        $ssl      = property_exists($params, 'ssl') && $params->ssl !== null      ? $params->ssl      : false;
 
         $this->_protocol = new Zend_Mail_Protocol_Pop3();
         $this->_protocol->connect($host, $port, $ssl);
@@ -319,7 +319,7 @@ class Zend_Mail_Storage_Pop3 extends Zend_Mail_Storage_Abstract
             } catch(Zend_Mail_Exception $e) {
                 // ignoring error
             }
-            $this->_has['uniqueid'] = $id ? true : false;
+            $this->_has['uniqueid'] = (bool) $id;
             return $this->_has['uniqueid'];
         }
 

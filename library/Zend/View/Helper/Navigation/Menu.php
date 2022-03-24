@@ -436,7 +436,7 @@ class Zend_View_Helper_Navigation_Menu
      */
     public function getInnerIndent()
     {
-        if (false === $this->getFormatOutput()) {
+        if (!$this->getFormatOutput()) {
             return '';
         }
 
@@ -476,12 +476,12 @@ class Zend_View_Helper_Navigation_Menu
             'title'  => $title,
         );
 
-        if (false === $this->getAddPageClassToLi()) {
+        if (!$this->getAddPageClassToLi()) {
             $attribs['class'] = $page->getClass();
         }
 
         // does page have a href?
-        if ($href = $page->getHref()) {
+        if (($href = $page->getHref()) !== '' && ($href = $page->getHref()) !== '0') {
             $element              = 'a';
             $attribs['href']      = $href;
             $attribs['target']    = $page->getTarget();
@@ -507,11 +507,7 @@ class Zend_View_Helper_Navigation_Menu
     protected function _normalizeOptions(array $options = array())
     {
         // Ident
-        if (isset($options['indent'])) {
-            $options['indent'] = $this->_getWhitespace($options['indent']);
-        } else {
-            $options['indent'] = $this->getIndent();
-        }
+        $options['indent'] = isset($options['indent']) ? $this->_getWhitespace($options['indent']) : $this->getIndent();
 
         // Inner ident
         if (isset($options['innerIndent'])) {
@@ -529,11 +525,7 @@ class Zend_View_Helper_Navigation_Menu
         }
 
         // UL id
-        if (isset($options['ulId']) && $options['ulId'] !== null) {
-            $options['ulId'] = (string) $options['ulId'];
-        } else {
-            $options['ulId'] = $this->getUlId();
-        }
+        $options['ulId'] = isset($options['ulId']) && $options['ulId'] !== null ? (string) $options['ulId'] : $this->getUlId();
 
         // Active class
         if (isset($options['activeClass']) && $options['activeClass'] !== null
@@ -644,10 +636,10 @@ class Zend_View_Helper_Navigation_Menu
             if (!$active['page']->hasPages()) {
                 return '';
             }
-        } else if (!$active['page']->hasPages()) {
+        } elseif (!$active['page']->hasPages()) {
             // found pages has no children; render siblings
             $active['page'] = $active['page']->getParent();
-        } else if (is_int($maxDepth) && $active['depth'] + 1 > $maxDepth) {
+        } elseif (is_int($maxDepth) && $active['depth'] + 1 > $maxDepth) {
             // children are below max depth; render siblings
             $active['page'] = $active['page']->getParent();
         }
@@ -679,9 +671,9 @@ class Zend_View_Helper_Navigation_Menu
                 $liClass = $this->_htmlAttribs(
                     array('class' => $activeClass . ' ' . $subPage->getClass())
                 );
-            } else if ($subPage->isActive(true)) {
+            } elseif ($subPage->isActive(true)) {
                 $liClass = $this->_htmlAttribs(array('class' => $activeClass));
-            } else if ($addPageClassToLi) {
+            } elseif ($addPageClassToLi) {
                 $liClass = $this->_htmlAttribs(
                     array('class' => $subPage->getClass())
                 );
@@ -692,9 +684,7 @@ class Zend_View_Helper_Navigation_Menu
             $html .= $indent . $innerIndent . '</li>' . $this->getEOL();
         }
 
-        $html .= $indent . '</ul>';
-
-        return $html;
+        return $html . ($indent . '</ul>');
     }
 
     /**
@@ -759,14 +749,14 @@ class Zend_View_Helper_Navigation_Menu
             if ($depth < $minDepth || !$this->accept($page)) {
                 // page is below minDepth or not accepted by acl/visibilty
                 continue;
-            } else if ($expandSibs && $depth > $minDepth) {
+            } elseif ($expandSibs && $depth > $minDepth) {
                 // page is not active itself, but might be in the active branch
                 $accept = false;
                 if ($foundPage) {
                     if ($foundPage->hasPage($page)) {
                         // accept if page is a direct child of the active page
                         $accept = true;
-                    } else if ($page->getParent()->isActive(true)) {
+                    } elseif ($page->getParent()->isActive(true)) {
                         // page is a sibling of the active branch...
                         $accept = true;
                     }
@@ -774,24 +764,20 @@ class Zend_View_Helper_Navigation_Menu
                 if (!$isActive && !$accept) {
                     continue;
                 }
-            } else if ($onlyActive && !$isActive) {
+            } elseif ($onlyActive && !$isActive) {
                 // page is not active itself, but might be in the active branch
                 $accept = false;
                 if ($foundPage) {
                     if ($foundPage->hasPage($page)) {
                         // accept if page is a direct child of the active page
                         $accept = true;
-                    } else if ($foundPage->getParent()->hasPage($page)) {
-                        // page is a sibling of the active page...
-                        if (!$foundPage->hasPages() ||
-                            is_int($maxDepth) && $foundDepth + 1 > $maxDepth) {
-                            // accept if active page has no children, or the
-                            // children are too deep to be rendered
-                            $accept = true;
-                        }
+                    } elseif ($foundPage->getParent()->hasPage($page) && (!$foundPage->hasPages() ||
+                        is_int($maxDepth) && $foundDepth + 1 > $maxDepth)) {
+                        // accept if active page has no children, or the
+                        // children are too deep to be rendered
+                        $accept = true;
                     }
                 }
-
                 if (!$accept) {
                     continue;
                 }
@@ -803,7 +789,6 @@ class Zend_View_Helper_Navigation_Menu
 
             if ($depth > $prevDepth) {
                 $attribs = array();
-
                 // start new ul tag
                 if (0 == $depth) {
                     $attribs = array(
@@ -811,19 +796,16 @@ class Zend_View_Helper_Navigation_Menu
                         'id'    => $ulId,
                     );
                 }
-
                 // We don't need a prefix for the menu ID (backup)
                 $skipValue = $this->_skipPrefixForId;
                 $this->skipPrefixForId();
-
                 $html .= $myIndent . '<ul'
                                    . $this->_htmlAttribs($attribs)
                                    . '>'
                                    . $this->getEOL();
-
                 // Reset prefix for IDs
                 $this->_skipPrefixForId = $skipValue;
-            } else if ($prevDepth > $depth) {
+            } elseif ($prevDepth > $depth) {
                 // close li/ul tags until we're at current depth
                 for ($i = $prevDepth; $i > $depth; $i--) {
                     $ind   = $indent . str_repeat($innerIndent, $i * 2);
@@ -848,13 +830,10 @@ class Zend_View_Helper_Navigation_Menu
                 $liClasses[] = $page->getClass();
             }
             // Add CSS class for parents to LI?
-            if ($renderParentClass && $page->hasChildren()) {
-                // Check max depth
-                if ((is_int($maxDepth) && ($depth + 1 < $maxDepth))
-                    || !is_int($maxDepth)
-                ) {
-                    $liClasses[] = $parentClass;
-                }
+            // Check max depth
+            if ($renderParentClass && $page->hasChildren() && ((is_int($maxDepth) && ($depth + 1 < $maxDepth))
+                || !is_int($maxDepth))) {
+                $liClasses[] = $parentClass;
             }
 
             $html .= $myIndent . $innerIndent . '<li'
@@ -868,7 +847,7 @@ class Zend_View_Helper_Navigation_Menu
             $prevDepth = $depth;
         }
 
-        if ($html) {
+        if ($html !== '' && $html !== '0') {
             // done iterating container; close open ul/li tags
             for ($i = $prevDepth+1; $i > 0; $i--) {
                 $myIndent = $indent . str_repeat($innerIndent . $innerIndent, $i - 1);

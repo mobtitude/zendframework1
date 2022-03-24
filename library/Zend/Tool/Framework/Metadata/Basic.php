@@ -67,7 +67,7 @@ class Zend_Tool_Framework_Metadata_Basic
      */
     public function __construct(Array $options = array())
     {
-        if ($options) {
+        if ($options !== []) {
             $this->setOptions($options);
         }
     }

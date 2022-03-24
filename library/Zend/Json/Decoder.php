@@ -35,6 +35,10 @@ require_once 'Zend/Json.php';
 class Zend_Json_Decoder
 {
     /**
+     * @var bool|float|int|mixed|string|null
+     */
+    public $_tokenValue;
+    /**
      * Parse tokens used to decode the JSON object. These are not
      * for public consumption, they are just used internally to the
      * class.
@@ -433,7 +437,7 @@ class Zend_Json_Decoder
 
         $chr = $str[$i];
         if ($chr == '-' || $chr == '.' || ($chr >= '0' && $chr <= '9')) {
-            if (preg_match('/-?([0-9])*(\.[0-9]*)?((e|E)((-|\+)?)[0-9]+)?/s',
+            if (preg_match('/-?(\d)*(\.\d*)?((e|E)((-|\+)?)\d+)?/s',
                 $str, $matches, PREG_OFFSET_CAPTURE, $start) && $matches[0][1] == $start) {
 
                 $datum = $matches[0][0];
@@ -443,7 +447,7 @@ class Zend_Json_Decoder
                         require_once 'Zend/Json/Exception.php';
                         throw new Zend_Json_Exception("Octal notation not supported by JSON (value: $datum)");
                     } else {
-                        $val  = intval($datum);
+                        $val  = (int) $datum;
                         $fVal = floatval($datum);
                         $this->_tokenValue = ($val == $fVal ? $val : $fVal);
                     }
@@ -555,18 +559,18 @@ class Zend_Json_Decoder
         $bytes = (ord($utf16[0]) << 8) | ord($utf16[1]);
 
         switch (true) {
-            case ((0x7F & $bytes) == $bytes):
+            case ((0x7F & $bytes) === $bytes):
                 // this case should never be reached, because we are in ASCII range
                 // see: http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                 return chr(0x7F & $bytes);
 
-            case (0x07FF & $bytes) == $bytes:
+            case (0x07FF & $bytes) === $bytes:
                 // return a 2-byte UTF-8 character
                 // see: http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                 return chr(0xC0 | (($bytes >> 6) & 0x1F))
                      . chr(0x80 | ($bytes & 0x3F));
 
-            case (0xFFFF & $bytes) == $bytes:
+            case (0xFFFF & $bytes) === $bytes:
                 // return a 3-byte UTF-8 character
                 // see: http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                 return chr(0xE0 | (($bytes >> 12) & 0x0F))

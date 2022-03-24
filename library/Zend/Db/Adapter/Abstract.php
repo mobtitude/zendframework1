@@ -199,12 +199,10 @@ abstract class Zend_Db_Adapter_Abstract
                 $options[$key] = $value;
             }
         }
-        if (array_key_exists('driver_options', $config)) {
-            if (!empty($config['driver_options'])) {
-                // can't use array_merge() because keys might be integers
-                foreach ((array) $config['driver_options'] as $key => $value) {
-                    $driverOptions[$key] = $value;
-                }
+        if (array_key_exists('driver_options', $config) && !empty($config['driver_options'])) {
+            // can't use array_merge() because keys might be integers
+            foreach ((array) $config['driver_options'] as $key => $value) {
+                $driverOptions[$key] = $value;
             }
         }
 
@@ -364,7 +362,7 @@ abstract class Zend_Db_Adapter_Abstract
         if ($profilerIsObject = is_object($profiler)) {
             if ($profiler instanceof Zend_Db_Profiler) {
                 $profilerInstance = $profiler;
-            } else if ($profiler instanceof Zend_Config) {
+            } elseif ($profiler instanceof Zend_Config) {
                 $profiler = $profiler->toArray();
             } else {
                 /**
@@ -386,7 +384,7 @@ abstract class Zend_Db_Adapter_Abstract
             if (isset($profiler['instance'])) {
                 $profilerInstance = $profiler['instance'];
             }
-        } else if (!$profilerIsObject) {
+        } elseif (!$profilerIsObject) {
             $enabled = (bool) $profiler;
         }
 
@@ -545,21 +543,17 @@ abstract class Zend_Db_Adapter_Abstract
             if ($val instanceof Zend_Db_Expr) {
                 $vals[] = $val->__toString();
                 unset($bind[$col]);
+            } elseif ($this->supportsParameters('positional')) {
+                $vals[] = '?';
+            } elseif ($this->supportsParameters('named')) {
+                unset($bind[$col]);
+                $bind[':col'.$i] = $val;
+                $vals[] = ':col'.$i;
+                $i++;
             } else {
-                if ($this->supportsParameters('positional')) {
-                    $vals[] = '?';
-                } else {
-                    if ($this->supportsParameters('named')) {
-                        unset($bind[$col]);
-                        $bind[':col'.$i] = $val;
-                        $vals[] = ':col'.$i;
-                        $i++;
-                    } else {
-                        /** @see Zend_Db_Adapter_Exception */
-                        require_once 'Zend/Db/Adapter/Exception.php';
-                        throw new Zend_Db_Adapter_Exception(get_class($this) ." doesn't support positional or named binding");
-                    }
-                }
+                /** @see Zend_Db_Adapter_Exception */
+                require_once 'Zend/Db/Adapter/Exception.php';
+                throw new Zend_Db_Adapter_Exception(get_class($this) ." doesn't support positional or named binding");
             }
         }
 
@@ -574,8 +568,7 @@ abstract class Zend_Db_Adapter_Abstract
             $bind = array_values($bind);
         }
         $stmt = $this->query($sql, $bind);
-        $result = $stmt->rowCount();
-        return $result;
+        return $stmt->rowCount();
     }
 
     /**
@@ -599,21 +592,17 @@ abstract class Zend_Db_Adapter_Abstract
             if ($val instanceof Zend_Db_Expr) {
                 $val = $val->__toString();
                 unset($bind[$col]);
+            } elseif ($this->supportsParameters('positional')) {
+                $val = '?';
+            } elseif ($this->supportsParameters('named')) {
+                unset($bind[$col]);
+                $bind[':col'.$i] = $val;
+                $val = ':col'.$i;
+                $i++;
             } else {
-                if ($this->supportsParameters('positional')) {
-                    $val = '?';
-                } else {
-                    if ($this->supportsParameters('named')) {
-                        unset($bind[$col]);
-                        $bind[':col'.$i] = $val;
-                        $val = ':col'.$i;
-                        $i++;
-                    } else {
-                        /** @see Zend_Db_Adapter_Exception */
-                        require_once 'Zend/Db/Adapter/Exception.php';
-                        throw new Zend_Db_Adapter_Exception(get_class($this) ." doesn't support positional or named binding");
-                    }
-                }
+                /** @see Zend_Db_Adapter_Exception */
+                require_once 'Zend/Db/Adapter/Exception.php';
+                throw new Zend_Db_Adapter_Exception(get_class($this) ." doesn't support positional or named binding");
             }
             $set[] = $this->quoteIdentifier($col, true) . ' = ' . $val;
         }
@@ -626,18 +615,12 @@ abstract class Zend_Db_Adapter_Abstract
         $sql = "UPDATE "
              . $this->quoteIdentifier($table, true)
              . ' SET ' . implode(', ', $set)
-             . (($where) ? " WHERE $where" : '');
-
+             . (($where !== '' && $where !== '0') ? " WHERE $where" : '');
         /**
          * Execute the statement and return the number of affected rows
          */
-        if ($this->supportsParameters('positional')) {
-            $stmt = $this->query($sql, array_values($bind));
-        } else {
-            $stmt = $this->query($sql, $bind);
-        }
-        $result = $stmt->rowCount();
-        return $result;
+        $stmt = $this->supportsParameters('positional') ? $this->query($sql, array_values($bind)) : $this->query($sql, $bind);
+        return $stmt->rowCount();
     }
 
     /**
@@ -656,14 +639,13 @@ abstract class Zend_Db_Adapter_Abstract
          */
         $sql = "DELETE FROM "
              . $this->quoteIdentifier($table, true)
-             . (($where) ? " WHERE $where" : '');
+             . (($where !== '' && $where !== '0') ? " WHERE $where" : '');
 
         /**
          * Execute the statement and return the number of affected rows
          */
         $stmt = $this->query($sql);
-        $result = $stmt->rowCount();
-        return $result;
+        return $stmt->rowCount();
     }
 
     /**
@@ -695,9 +677,7 @@ abstract class Zend_Db_Adapter_Abstract
             }
             $term = '(' . $term . ')';
         }
-
-        $where = implode(' AND ', $where);
-        return $where;
+        return implode(' AND ', $where);
     }
 
     /**
@@ -735,8 +715,7 @@ abstract class Zend_Db_Adapter_Abstract
             $fetchMode = $this->_fetchMode;
         }
         $stmt = $this->query($sql, $bind);
-        $result = $stmt->fetchAll($fetchMode);
-        return $result;
+        return $stmt->fetchAll($fetchMode);
     }
 
     /**
@@ -754,8 +733,7 @@ abstract class Zend_Db_Adapter_Abstract
             $fetchMode = $this->_fetchMode;
         }
         $stmt = $this->query($sql, $bind);
-        $result = $stmt->fetch($fetchMode);
-        return $result;
+        return $stmt->fetch($fetchMode);
     }
 
     /**
@@ -792,8 +770,7 @@ abstract class Zend_Db_Adapter_Abstract
     public function fetchCol($sql, $bind = array())
     {
         $stmt = $this->query($sql, $bind);
-        $result = $stmt->fetchAll(Zend_Db::FETCH_COLUMN, 0);
-        return $result;
+        return $stmt->fetchAll(Zend_Db::FETCH_COLUMN, 0);
     }
 
     /**
@@ -826,8 +803,7 @@ abstract class Zend_Db_Adapter_Abstract
     public function fetchOne($sql, $bind = array())
     {
         $stmt = $this->query($sql, $bind);
-        $result = $stmt->fetchColumn(0);
-        return $result;
+        return $stmt->fetchColumn(0);
     }
 
     /**
@@ -879,7 +855,7 @@ abstract class Zend_Db_Adapter_Abstract
             $quotedValue = '0';
             switch ($this->_numericDataTypes[$type]) {
                 case Zend_Db::INT_TYPE: // 32-bit integer
-                    $quotedValue = (string) intval($value);
+                    $quotedValue = (string) (int) $value;
                     break;
                 case Zend_Db::BIGINT_TYPE: // 64-bit integer
                     // ANSI SQL-style hex literals (e.g. x'[\dA-F]+')
@@ -1009,11 +985,7 @@ abstract class Zend_Db_Adapter_Abstract
             if (is_array($ident)) {
                 $segments = array();
                 foreach ($ident as $segment) {
-                    if ($segment instanceof Zend_Db_Expr) {
-                        $segments[] = $segment->__toString();
-                    } else {
-                        $segments[] = $this->_quoteIdentifier($segment, $auto);
-                    }
+                    $segments[] = $segment instanceof Zend_Db_Expr ? $segment->__toString() : $this->_quoteIdentifier($segment, $auto);
                 }
                 if ($alias !== null && end($ident) == $alias) {
                     $alias = null;
@@ -1038,7 +1010,7 @@ abstract class Zend_Db_Adapter_Abstract
      */
     protected function _quoteIdentifier($value, $auto=false)
     {
-        if ($auto === false || $this->_autoQuoteIdentifiers === true) {
+        if (!$auto || $this->_autoQuoteIdentifiers) {
             $q = $this->getQuoteIdentifierSymbol();
             return ($q . str_replace("$q", "$q$q", $value) . $q);
         }

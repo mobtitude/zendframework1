@@ -100,7 +100,9 @@ class Zend_Config_Xml extends Zend_Config
             }
         }
 
-        set_error_handler(array($this, '_loadFileErrorHandler')); // Warnings and errors are suppressed
+        set_error_handler(function (int $errno, string $errstr, string $errfile, int $errline) {
+            return $this->_loadFileErrorHandler($errno, $errstr, $errfile, $errline);
+        }); // Warnings and errors are suppressed
         if (strstr($xml, '<?xml')) {
             $config = Zend_Xml_Security::scan($xml);
         } else {
@@ -113,9 +115,7 @@ class Zend_Config_Xml extends Zend_Config
                 }
             } catch (Zend_Xml_Exception $e) {
                 require_once 'Zend/Config/Exception.php';
-                throw new Zend_Config_Exception(
-                    $e->getMessage()
-                );
+                throw new Zend_Config_Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
 
@@ -131,9 +131,8 @@ class Zend_Config_Xml extends Zend_Config
             foreach ($config as $sectionName => $sectionData) {
                 $dataArray[$sectionName] = $this->_processExtends($config, $sectionName);
             }
-
             parent::__construct($dataArray, $allowModifications);
-        } else if (is_array($section)) {
+        } elseif (is_array($section)) {
             $dataArray = array();
             foreach ($section as $sectionName) {
                 if (!isset($config->$sectionName)) {
@@ -143,7 +142,6 @@ class Zend_Config_Xml extends Zend_Config
 
                 $dataArray = array_merge($this->_processExtends($config, $sectionName), $dataArray);
             }
-
             parent::__construct($dataArray, $allowModifications);
         } else {
             if (!isset($config->$section)) {
@@ -192,9 +190,7 @@ class Zend_Config_Xml extends Zend_Config
             }
         }
 
-        $config = $this->_arrayMergeRecursive($config, $this->_toArray($thisSection));
-
-        return $config;
+        return $this->_arrayMergeRecursive($config, $this->_toArray($thisSection));
     }
 
     /**
@@ -282,13 +278,9 @@ class Zend_Config_Xml extends Zend_Config
             foreach ($xmlObject->children() as $key => $value) {
                 if (count($value->children()) > 0 || count($value->children(self::XML_NAMESPACE)) > 0) {
                     $value = $this->_toArray($value);
-                } else if (count($value->attributes()) > 0) {
+                } elseif (count($value->attributes()) > 0) {
                     $attributes = $value->attributes();
-                    if (isset($attributes['value'])) {
-                        $value = (string) $attributes['value'];
-                    } else {
-                        $value = $this->_toArray($value);
-                    }
+                    $value = isset($attributes['value']) ? (string) $attributes['value'] : $this->_toArray($value);
                 } else {
                     $value = (string) $value;
                 }
@@ -303,7 +295,7 @@ class Zend_Config_Xml extends Zend_Config
                     $config[$key] = $value;
                 }
             }
-        } else if (!isset($xmlObject['extends']) && !isset($nsAttributes['extends']) && (count($config) === 0)) {
+        } elseif (!isset($xmlObject['extends']) && !isset($nsAttributes['extends']) && ($config === [])) {
             // Object has no children nor attributes and doesn't use the extends
             // attribute: it's a string
             $config = (string) $xmlObject;

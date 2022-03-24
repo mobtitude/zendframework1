@@ -89,7 +89,7 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
         }
 
         $view = $form->getView();
-        if (null === $view) {
+        if (!$view instanceof \Zend_View_Interface) {
             return $content;
         }
 
@@ -493,16 +493,15 @@ class Zend_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
         foreach ($form->getElementsAndSubFormsOrdered() as $subitem) {
             if ($subitem instanceof Zend_Form_Element && !$this->getOnlyCustomFormErrors()) {
                 $messages = $subitem->getMessages();
-                if (count($messages)) {
+                if ($messages !== []) {
                     $subitem->setView($view);
                     $content .= $this->getMarkupListItemStart()
                              .  $this->renderLabel($subitem, $view)
                              .  $view->formErrors($messages, $this->getOptions())
                              .  $this->getMarkupListItemEnd();
                 }
-            } else if ($subitem instanceof Zend_Form && !$this->ignoreSubForms()) {
+            } elseif ($subitem instanceof Zend_Form && !$this->ignoreSubForms()) {
                 $markup = $this->_recurseForm($subitem, $view);
-
                 if (!empty($markup)) {
                     $content .= $this->getMarkupListStart()
                               . $markup

@@ -98,7 +98,7 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
 
         $flags = array_flip($flags);
            foreach ($this->_files as $file) {
-               foreach ($flags as $flag => $v) {
+               foreach (array_keys($flags) as $flag) {
                    if (!isset($file['flaglookup'][$flag])) {
                        continue 2;
                    }
@@ -209,7 +209,7 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
         $content = '';
         while (!feof($fh)) {
             $line = fgets($fh);
-            if (!trim($line)) {
+            if (trim($line) === '' || trim($line) === '0') {
                 break;
             }
             $content .= $line;
@@ -266,7 +266,7 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
             $params = (object)$params;
         }
 
-        if (!isset($params->dirname) || !is_dir($params->dirname)) {
+        if (!(property_exists($params, 'dirname') && $params->dirname !== null) || !is_dir($params->dirname)) {
             /**
              * @see Zend_Mail_Storage_Exception
              */
@@ -332,7 +332,7 @@ class Zend_Mail_Storage_Maildir extends Zend_Mail_Storage_Abstract
         if ($dh) {
             $this->_getMaildirFiles($dh, $dirname . '/new/', array(Zend_Mail_Storage::FLAG_RECENT));
             closedir($dh);
-        } else if (file_exists($dirname . '/new/')) {
+        } elseif (file_exists($dirname . '/new/')) {
             /**
              * @see Zend_Mail_Storage_Exception
              */

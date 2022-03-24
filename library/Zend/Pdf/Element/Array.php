@@ -62,7 +62,7 @@ class Zend_Pdf_Element_Array extends Zend_Pdf_Element
                 }
                 $this->items[] = $element;
             }
-        } else if ($val !== null){
+        } elseif ($val !== null) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Argument must be an array');
         }
@@ -123,9 +123,8 @@ class Zend_Pdf_Element_Array extends Zend_Pdf_Element
 
             $outStr .= $element->toString($factory) . ' ';
         }
-        $outStr .= ']';
 
-        return $outStr;
+        return $outStr . ']';
     }
 
     /**

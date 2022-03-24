@@ -114,7 +114,7 @@ abstract class Zend_Service_Ebay_Abstract
     {
         if (null === $options) {
             $options = array();
-        } else if ($options instanceof Zend_Config) {
+        } elseif ($options instanceof Zend_Config) {
             $options = $options->toArray();
         }
 
@@ -199,7 +199,7 @@ abstract class Zend_Service_Ebay_Abstract
                 // parse an array value, check if it is associative
                 $keyRaw    = array_keys($value);
                 $keyNumber = range(0, count($value) - 1);
-                $isAssoc   = count(array_diff($keyRaw, $keyNumber)) > 0;
+                $isAssoc   = array_diff($keyRaw, $keyNumber) !== [];
                 // check for tag representation, like <name att="sometinhg"></value>
                 // empty key refers to text value
                 // when there is a root tag, attributes receive flags
@@ -254,13 +254,9 @@ abstract class Zend_Service_Ebay_Abstract
     {
         if (is_bool($value)) {
             $value = $value ? '1' : '0';
-        } else if ($value instanceof Zend_Date) {
+        } elseif ($value instanceof Zend_Date) {
             $value = $value->getIso();
-        } else if ($value instanceof DateTime) {
-            $value = $value->format(DateTime::ISO8601);
-        } else {
-            $value = (string) $value;
-        }
+        } else $value = $value instanceof DateTime ? $value->format(DateTime::ISO8601) : (string) $value;
         return $value;
     }
 

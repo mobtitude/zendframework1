@@ -258,8 +258,7 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
     {
         $this->_connect();
         $sql = 'SELECT '.$this->quoteIdentifier($sequenceName, true).'.CURRVAL FROM dual';
-        $value = $this->fetchOne($sql);
-        return $value;
+        return $this->fetchOne($sql);
     }
 
     /**
@@ -274,8 +273,7 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
     {
         $this->_connect();
         $sql = 'SELECT '.$this->quoteIdentifier($sequenceName, true).'.NEXTVAL FROM dual';
-        $value = $this->fetchOne($sql);
-        return $value;
+        return $this->fetchOne($sql);
     }
 
     /**
@@ -318,8 +316,7 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
     public function listTables()
     {
         $this->_connect();
-        $data = $this->fetchCol('SELECT table_name FROM all_tables');
-        return $data;
+        return $this->fetchCol('SELECT table_name FROM all_tables');
     }
 
     /**
@@ -417,7 +414,9 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
 
         $desc = array();
         foreach ($result as $key => $row) {
-            list ($primary, $primaryPosition, $identity) = array(false, null, false);
+            $primary = false;
+            $primaryPosition = null;
+            $identity = false;
             if ($row[$constraint_type] == 'P') {
                 $primary = true;
                 $primaryPosition = $row[$position];
@@ -538,7 +537,7 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
      */
     public function limit($sql, $count, $offset = 0)
     {
-        $count = intval($count);
+        $count = (int) $count;
         if ($count <= 0) {
             /**
              * @see Zend_Db_Adapter_Oracle_Exception
@@ -547,7 +546,7 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
             throw new Zend_Db_Adapter_Oracle_Exception("LIMIT argument count=$count is not valid");
         }
 
-        $offset = intval($offset);
+        $offset = (int) $offset;
         if ($offset < 0) {
             /**
              * @see Zend_Db_Adapter_Oracle_Exception
@@ -631,7 +630,7 @@ class Zend_Db_Adapter_Oracle extends Zend_Db_Adapter_Abstract
         $version = oci_server_version($this->_connection);
         if ($version !== false) {
             $matches = null;
-            if (preg_match('/((?:[0-9]{1,2}\.){1,3}[0-9]{1,2})/', $version, $matches)) {
+            if (preg_match('/((?:\d{1,2}\.){1,3}\d{1,2})/', $version, $matches)) {
                 return $matches[1];
             } else {
                 return null;

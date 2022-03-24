@@ -234,11 +234,7 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
     {
         Zend_Feed_Writer::registerCoreExtensions();
         $all = Zend_Feed_Writer::getExtensions();
-        if (stripos(get_class($this), 'entry')) {
-            $exts = $all['entryRenderer'];
-        } else {
-            $exts = $all['feedRenderer'];
-        }
+        $exts = stripos(get_class($this), 'entry') ? $all['entryRenderer'] : $all['feedRenderer'];
         foreach ($exts as $extension) {
             $className = Zend_Feed_Writer::getPluginLoader()->getClassName($extension);
             $this->_extensions[$extension] = new $className(

@@ -310,15 +310,13 @@ class Zend_Json_Server extends Zend_Server_Abstract
      */
     public function __call($method, $args)
     {
-        if (preg_match('/^(set|get)/', $method, $matches)) {
-            if (in_array($method, $this->_getSmdMethods())) {
-                if ('set' == $matches[1]) {
-                    $value = array_shift($args);
-                    $this->getServiceMap()->$method($value);
-                    return $this;
-                } else {
-                    return $this->getServiceMap()->$method();
-                }
+        if (preg_match('/^(set|get)/', $method, $matches) && in_array($method, $this->_getSmdMethods())) {
+            if ('set' == $matches[1]) {
+                $value = array_shift($args);
+                $this->getServiceMap()->$method($value);
+                return $this;
+            } else {
+                return $this->getServiceMap()->$method();
             }
         }
         return null;
@@ -385,7 +383,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
             if (array_key_exists('default', $param)) {
                 $value = $param['default'];
             }
-            array_push($args, $value);
+            $args[] = $value;
         }
         return $args;
     }
@@ -425,7 +423,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
                 } elseif (in_array($newType, $params[$key]['type'])) {
                     continue;
                 }
-                array_push($params[$key]['type'], $parameter->getType());
+                $params[$key]['type'][] = $parameter->getType();
             }
         }
         return $params;

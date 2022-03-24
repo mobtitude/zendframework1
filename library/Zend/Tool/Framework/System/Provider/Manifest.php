@@ -40,6 +40,10 @@ class Zend_Tool_Framework_System_Provider_Manifest
     implements Zend_Tool_Framework_Provider_Interface, Zend_Tool_Framework_Registry_EnabledInterface
 {
 
+    /**
+     * @var mixed|\Zend_Tool_Framework_Registry_Interface
+     */
+    public $_registry;
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
     {
         $this->_registry = $registry;
@@ -66,11 +70,7 @@ class Zend_Tool_Framework_System_Provider_Manifest
             $metadataName  = $metadata->getName();
             $metadataAttrs = $metadata->getAttributes('attributesParent');
 
-            if (!$metadataAttrs) {
-                $metadataAttrs = '(None)';
-            } else {
-                $metadataAttrs = urldecode(http_build_query($metadataAttrs, null, ', '));
-            }
+            $metadataAttrs = $metadataAttrs ? urldecode(http_build_query($metadataAttrs, null, ', ')) : '(None)';
 
             if (!array_key_exists($metadataType, $metadataTree)) {
                 $metadataTree[$metadataType] = array();
@@ -87,7 +87,7 @@ class Zend_Tool_Framework_System_Provider_Manifest
             $longestAttrNameLen = (strlen($metadataAttrs) > $longestAttrNameLen) ? strlen($metadataAttrs) : $longestAttrNameLen;
 
             $metadataValue = $metadata->getValue();
-            if (is_array($metadataValue) && count($metadataValue) > 0) {
+            if (is_array($metadataValue) && $metadataValue !== []) {
                 $metadataValue = urldecode(http_build_query($metadataValue, null, ', '));
             } elseif (is_array($metadataValue)) {
                 $metadataValue = '(empty array)';

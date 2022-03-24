@@ -147,10 +147,8 @@ class Zend_Mail_Protocol_Smtp extends Zend_Mail_Protocol_Abstract
         }
 
         // If no port has been specified then check the master PHP ini file. Defaults to 25 if the ini setting is null.
-        if ($port == null) {
-            if (($port = ini_get('smtp_port')) == '') {
-                $port = 25;
-            }
+        if ($port == null && ($port = ini_get('smtp_port')) == '') {
+            $port = 25;
         }
 
         parent::__construct($host, $port);
@@ -178,7 +176,7 @@ class Zend_Mail_Protocol_Smtp extends Zend_Mail_Protocol_Abstract
     public function helo($host = '127.0.0.1')
     {
         // Respect RFC 2821 and disallow HELO attempts if session is already initiated.
-        if ($this->_sess === true) {
+        if ($this->_sess) {
             /**
              * @see Zend_Mail_Protocol_Exception
              */
@@ -192,7 +190,7 @@ class Zend_Mail_Protocol_Smtp extends Zend_Mail_Protocol_Abstract
              * @see Zend_Mail_Protocol_Exception
              */
             require_once 'Zend/Mail/Protocol/Exception.php';
-            throw new Zend_Mail_Protocol_Exception(join(', ', $this->_validHost->getMessages()));
+            throw new Zend_Mail_Protocol_Exception(implode(', ', $this->_validHost->getMessages()));
         }
 
         // Initiate helo sequence
@@ -249,7 +247,7 @@ class Zend_Mail_Protocol_Smtp extends Zend_Mail_Protocol_Abstract
      */
     public function mail($from)
     {
-        if ($this->_sess !== true) {
+        if (!$this->_sess) {
             /**
              * @see Zend_Mail_Protocol_Exception
              */

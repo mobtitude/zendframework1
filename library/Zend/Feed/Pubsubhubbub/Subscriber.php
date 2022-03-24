@@ -234,8 +234,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
     {
         if (empty($this->_topicUrl)) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('A valid Topic (RSS or Atom'
-                . ' feed) URL MUST be set before attempting any operation');
+            throw new Zend_Feed_Pubsubhubbub_Exception('A valid Topic (RSS or Atom feed) URL MUST be set before attempting any operation');
         }
         return $this->_topicUrl;
     }
@@ -249,11 +248,10 @@ class Zend_Feed_Pubsubhubbub_Subscriber
      */
     public function setLeaseSeconds($seconds)
     {
-        $seconds = intval($seconds);
+        $seconds = (int) $seconds;
         if ($seconds <= 0) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('Expected lease seconds'
-                . ' must be an integer greater than zero');
+            throw new Zend_Feed_Pubsubhubbub_Exception('Expected lease seconds must be an integer greater than zero');
         }
         $this->_leaseSeconds = $seconds;
         return $this;
@@ -300,8 +298,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
     {
         if (empty($this->_callbackUrl)) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('A valid Callback URL MUST be'
-                . ' set before attempting any operation');
+            throw new Zend_Feed_Pubsubhubbub_Exception('A valid Callback URL MUST be set before attempting any operation');
         }
         return $this->_callbackUrl;
     }
@@ -560,8 +557,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
     {
         if ($this->_storage === null) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('No storage vehicle '
-                . 'has been set.');
+            throw new Zend_Feed_Pubsubhubbub_Exception('No storage vehicle has been set.');
         }
         return $this->_storage;
     }
@@ -592,10 +588,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
      */
     public function isSuccess()
     {
-        if (count($this->_errors) > 0) {
-            return false;
-        }
-        return true;
+        return !($this->_errors !== []);
     }
 
     /**
@@ -636,8 +629,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
         $hubs   = $this->getHubUrls();
         if (empty($hubs)) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Zend_Feed_Pubsubhubbub_Exception('No Hub Server URLs'
-                . ' have been set so no subscriptions can be attempted');
+            throw new Zend_Feed_Pubsubhubbub_Exception('No Hub Server URLs have been set so no subscriptions can be attempted');
         }
         $this->_errors = array();
         $this->_asyncHubs = array();
@@ -725,9 +717,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
             );
         }
         $params['hub.verify'] = array();
-        foreach($vmodes as $vmode) {
-            $params['hub.verify'][] = $vmode;
-        }
+        $params['hub.verify'] = $vmodes;
 
         /**
          * Establish a persistent verify_token and attach key to callback
@@ -738,7 +728,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
         $params['hub.verify_token'] = $token;
 
         // Note: query string only usable with PuSH 0.2 Hubs
-        if (!$this->_usePathParameter) {
+        if ($this->_usePathParameter === '' || $this->_usePathParameter === '0') {
             $params['hub.callback'] = $this->getCallbackUrl()
                 . '?xhub.subscription=' . Zend_Feed_Pubsubhubbub::urlencode($key);
         } else {
@@ -806,8 +796,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
     protected function _generateSubscriptionKey(array $params, $hubUrl)
     {
         $keyBase = $params['hub.topic'] . $hubUrl;
-        $key     = md5($keyBase);
-        return $key;
+        return md5($keyBase);
     }
 
     /**

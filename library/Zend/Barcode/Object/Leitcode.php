@@ -57,7 +57,7 @@ class Zend_Barcode_Object_Leitcode extends Zend_Barcode_Object_Identcode
      */
     public function getTextToDisplay()
     {
-        return preg_replace('/([0-9]{5})([0-9]{3})([0-9]{3})([0-9]{2})([0-9])/',
+        return preg_replace('/(\d{5})(\d{3})(\d{3})(\d{2})(\d)/',
                             '$1.$2.$3.$4 $5',
                             $this->getText());
     }

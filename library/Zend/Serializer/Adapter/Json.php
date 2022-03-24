@@ -54,7 +54,7 @@ class Zend_Serializer_Adapter_Json extends Zend_Serializer_Adapter_AdapterAbstra
      */
     public function serialize($value, array $opts = array())
     {
-        $opts = $opts + $this->_options;
+        $opts += $this->_options;
 
         try  {
             return Zend_Json::encode($value, $opts['cycleCheck'], $opts);
@@ -73,13 +73,13 @@ class Zend_Serializer_Adapter_Json extends Zend_Serializer_Adapter_AdapterAbstra
      */
     public function unserialize($json, array $opts = array())
     {
-        $opts = $opts + $this->_options;
+        $opts += $this->_options;
 
         try {
             $ret = Zend_Json::decode($json, $opts['objectDecodeType']);
         } catch (Zend_Json_Exception $e) {
             require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception('Invalid json data');
+            throw new Zend_Serializer_Exception('Invalid json data', $e->getCode(), $e);
         } catch (Exception $e) {
             require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('Unserialization failed by previous error', 0, $e);

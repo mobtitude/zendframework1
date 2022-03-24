@@ -60,8 +60,7 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
         for ($i = 1; $i < $i2; $i++) {
             $rand .= mt_rand(0, 9);
         }
-        $rand .= mt_rand(0, 9);
-        return $rand;
+        return $rand . mt_rand(0, 9);
     }
 
     /**
@@ -92,7 +91,7 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
                 return fread($frandom, $length);
             }
         }
-        if (true === $strong) {
+        if ($strong) {
             require_once 'Zend/Crypt/Exception.php';
             throw new Zend_Crypt_Exception(
                 'This PHP environment doesn\'t support secure random number generation. ' .

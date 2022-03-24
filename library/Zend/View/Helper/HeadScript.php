@@ -299,14 +299,9 @@ class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container
      */
     protected function _isValid($value)
     {
-        if ((!$value instanceof stdClass)
-            || !isset($value->type)
-            || (!isset($value->source) && !isset($value->attributes)))
-        {
-            return false;
-        }
-
-        return true;
+        return !((!$value instanceof stdClass)
+            || !(property_exists($value, 'type') && $value->type !== null)
+            || (!(property_exists($value, 'source') && $value->source !== null) && !(property_exists($value, 'attributes') && $value->attributes !== null)));
     }
 
     /**
@@ -479,11 +474,7 @@ class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container
                 ? $this->getWhitespace($indent)
                 : $this->getIndent();
 
-        if ($this->view) {
-            $useCdata = $this->view->doctype()->isXhtml() ? true : false;
-        } else {
-            $useCdata = $this->useCdata ? true : false;
-        }
+        $useCdata = $this->view ? (bool) $this->view->doctype()->isXhtml() : $this->useCdata;
         $escapeStart = ($useCdata) ? '//<![CDATA[' : '//<!--';
         $escapeEnd   = ($useCdata) ? '//]]>'       : '//-->';
 
@@ -496,9 +487,7 @@ class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container
 
             $items[] = $this->itemToString($item, $indent, $escapeStart, $escapeEnd);
         }
-
-        $return = implode($this->getSeparator(), $items);
-        return $return;
+        return implode($this->getSeparator(), $items);
     }
 
     /**

@@ -135,9 +135,8 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
     	$stringToSign[] = $identifier;
 
     	$stringToSign = implode("\n", $stringToSign);
-    	$signature    = base64_encode(hash_hmac('sha256', $stringToSign, $this->_accountKey, true));
 	
-    	return $signature;
+    	return base64_encode(hash_hmac('sha256', $stringToSign, $this->_accountKey, true));
     }
 
     /**
@@ -178,9 +177,8 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
         if ($queryString != '') {
             $queryString .= '&';
 	    }
-        $queryString .= implode('&', $parts);
 
-        return $queryString;
+        return $queryString . implode('&', $parts);
     }
     
     /**
@@ -249,7 +247,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	) {
 	    // Look for a matching permission
 	    foreach ($this->getPermissionSet() as $permittedUrl) {
-	        if ($this->permissionMatchesRequest($permittedUrl, $requestUrl, $resourceType, $requiredPermission)) {
+	        if ($this->permissionMatchesRequest($permittedUrl, $requestUrl, $resourceType, $requiredPermission) !== '' && $this->permissionMatchesRequest($permittedUrl, $requestUrl, $resourceType, $requiredPermission) !== '0') {
 	            // This matches, append signature data
 	            $parsedPermittedUrl = parse_url($permittedUrl);
 
@@ -258,11 +256,9 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	            } else {
 	                $requestUrl .= '&';
 	            }
-	            
-	            $requestUrl .= $parsedPermittedUrl['query'];
 
 	            // Return url
-	            return $requestUrl;
+	            return $requestUrl . $parsedPermittedUrl['query'];
 	        }
 	    }
 	    

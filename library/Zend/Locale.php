@@ -1152,13 +1152,12 @@ class Zend_Locale
      *
      * @return array Returns an array of all locale string
      */
-    public static function getDefault()
+    public static function getDefault(...$params)
     {
-        if ((self::$compatibilityMode === true) or (func_num_args() > 0)) {
+        if (self::$compatibilityMode || func_num_args() > 0) {
             if (!self::$_breakChain) {
                 self::$_breakChain = true;
                 trigger_error('You are running Zend_Locale in compatibility mode... please migrate your scripts', E_USER_NOTICE);
-                $params = func_get_args();
                 $param = null;
                 if (isset($params[0])) {
                     $param = $params[0];
@@ -1186,13 +1185,12 @@ class Zend_Locale
      */
     public static function setDefault($locale, $quality = 1)
     {
-        if (($locale === 'auto') or ($locale === 'root') or ($locale === 'default') or
-            ($locale === 'environment') or ($locale === 'browser')) {
+        if ($locale === 'auto' || $locale === 'root' || $locale === 'default' || $locale === 'environment' || $locale === 'browser') {
             require_once 'Zend/Locale/Exception.php';
             throw new Zend_Locale_Exception('Only full qualified locales can be used as default!');
         }
 
-        if (($quality < 0.1) or ($quality > 100)) {
+        if ($quality < 0.1 || $quality > 100) {
             require_once 'Zend/Locale/Exception.php';
             throw new Zend_Locale_Exception("Quality must be between 0.1 and 100");
         }
@@ -1202,11 +1200,11 @@ class Zend_Locale
         }
 
         $locale = self::_prepareLocale($locale);
-        if (isset(self::$_localeData[(string) $locale]) === true) {
+        if (isset(self::$_localeData[(string) $locale])) {
             self::$_default = array((string) $locale => $quality);
         } else {
             $elocale = explode('_', (string) $locale);
-            if (isset(self::$_localeData[$elocale[0]]) === true) {
+            if (isset(self::$_localeData[$elocale[0]])) {
                 self::$_default = array($elocale[0] => $quality);
             } else {
                 require_once 'Zend/Locale/Exception.php';
@@ -1247,7 +1245,7 @@ class Zend_Locale
             if ($language !== 'C') {
                 if (strpos($language, '.') !== false) {
                     $language = substr($language, 0, strpos($language, '.'));
-                } else if (strpos($language, '@') !== false) {
+                } elseif (strpos($language, '@') !== false) {
                     $language = substr($language, 0, strpos($language, '@'));
                 }
 
@@ -1263,7 +1261,7 @@ class Zend_Locale
                     $language
                 );
 
-                if (isset(self::$_localeData[$language]) === true) {
+                if (isset(self::$_localeData[$language])) {
                     $languagearray[$language] = 1;
                     if (strpos($language, '_') !== false) {
                         $languagearray[substr($language, 0, strpos($language, '_'))] = 1;
@@ -1305,18 +1303,14 @@ class Zend_Locale
 
         foreach ($accepted as $accept) {
             $match  = null;
-            $result = preg_match('/^([a-z]{1,8}(?:[-_][a-z]{1,8})*)(?:;\s*q=(0(?:\.[0-9]{1,3})?|1(?:\.0{1,3})?))?$/i',
+            $result = preg_match('/^([a-z]{1,8}(?:[-_][a-z]{1,8})*)(?:;\s*q=(0(?:\.\d{1,3})?|1(?:\.0{1,3})?))?$/i',
                                  (string) $accept, $match);
 
             if ($result < 1) {
                 continue;
             }
 
-            if (isset($match[2]) === true) {
-                $quality = (float) $match[2];
-            } else {
-                $quality = 1.0;
-            }
+            $quality = isset($match[2]) ? (float) $match[2] : 1.0;
 
             $countrys = explode('-', (string) $match[1]);
             $region   = array_shift($countrys);
@@ -1332,7 +1326,7 @@ class Zend_Locale
                 $languages[$region . '_' . strtoupper($country)] = $quality;
             }
 
-            if ((isset($languages[$region]) === false) || ($languages[$region] < $quality)) {
+            if ((!isset($languages[$region])) || ($languages[$region] < $quality)) {
                 $languages[$region] = $quality;
             }
         }
@@ -1351,25 +1345,19 @@ class Zend_Locale
     {
         $locale = self::_prepareLocale($locale);
 
-        if (isset(self::$_localeData[(string) $locale]) === false) {
+        if (!isset(self::$_localeData[(string) $locale])) {
             // Is it an alias? If so, we can use this locale
-            if (isset(self::$_localeAliases[$locale]) === true) {
+            if (isset(self::$_localeAliases[$locale])) {
                 $this->_locale = $locale;
                 return;
             }
 
             $region = substr((string) $locale, 0, 3);
-            if (isset($region[2]) === true) {
-                if (($region[2] === '_') or ($region[2] === '-')) {
-                    $region = substr($region, 0, 2);
-                }
+            if (isset($region[2]) && ($region[2] === '_' || $region[2] === '-')) {
+                $region = substr($region, 0, 2);
             }
 
-            if (isset(self::$_localeData[(string) $region]) === true) {
-                $this->_locale = $region;
-            } else {
-                $this->_locale = 'root';
-            }
+            $this->_locale = isset(self::$_localeData[(string) $region]) ? $region : 'root';
         } else {
             $this->_locale = $locale;
         }
@@ -1394,7 +1382,7 @@ class Zend_Locale
     public function getRegion()
     {
         $locale = explode('_', $this->_locale);
-        if (isset($locale[1]) === true) {
+        if (isset($locale[1])) {
             return $locale[1];
         }
 
@@ -1417,7 +1405,7 @@ class Zend_Locale
 
         $accepted = preg_split('/,\s*/', $httpcharsets);
         foreach ($accepted as $accept) {
-            if (empty($accept) === true) {
+            if (empty($accept)) {
                 continue;
             }
 
@@ -1442,11 +1430,7 @@ class Zend_Locale
      */
     public function equals(Zend_Locale $object)
     {
-        if ($object->toString() === $this->toString()) {
-            return true;
-        }
-
-        return false;
+        return $object->toString() === $this->toString();
     }
 
     /**
@@ -1464,7 +1448,7 @@ class Zend_Locale
         require_once 'Zend/Locale/Data.php';
         $locale = self::findLocale($locale);
         $result = Zend_Locale_Data::getList($locale, $path, $value);
-        if (empty($result) === true) {
+        if (empty($result)) {
             return false;
         }
 
@@ -1538,7 +1522,7 @@ class Zend_Locale
         require_once 'Zend/Locale/Data.php';
         $locale = self::findLocale($locale);
         $result = Zend_Locale_Data::getContent($locale, $path, $value);
-        if (empty($result) === true && '0' !== $result) {
+        if (empty($result) && '0' !== $result) {
             return false;
         }
 
@@ -1634,11 +1618,11 @@ class Zend_Locale
     private static function _prepareQuestionString($input)
     {
         $regex = '';
-        if (is_array($input) === true) {
+        if (is_array($input)) {
             $regex = '^';
             $start = true;
             foreach ($input as $row) {
-                if ($start === false) {
+                if (!$start) {
                     $regex .= '|';
                 }
 
@@ -1693,7 +1677,7 @@ class Zend_Locale
             return true;
         }
 
-        if (($locale === null) || (!is_string($locale) and !is_array($locale))) {
+        if (($locale === null) || (!is_string($locale) && !is_array($locale))) {
             return false;
         }
 
@@ -1703,24 +1687,22 @@ class Zend_Locale
             return false;
         }
 
-        if (($compatible === true) and (self::$compatibilityMode === true)) {
+        if ($compatible && self::$compatibilityMode) {
             trigger_error('You are running Zend_Locale in compatibility mode... please migrate your scripts', E_USER_NOTICE);
-            if (isset(self::$_localeData[$locale]) === true) {
+            if (isset(self::$_localeData[$locale])) {
                 return $locale;
-            } else if (!$strict) {
+            } elseif (!$strict) {
                 $locale = explode('_', $locale);
-                if (isset(self::$_localeData[$locale[0]]) === true) {
+                if (isset(self::$_localeData[$locale[0]])) {
                     return $locale[0];
                 }
             }
-        } else {
-            if (isset(self::$_localeData[$locale]) === true) {
+        } elseif (isset(self::$_localeData[$locale])) {
+            return true;
+        } elseif (!$strict) {
+            $locale = explode('_', $locale);
+            if (isset(self::$_localeData[$locale[0]])) {
                 return true;
-            } else if (!$strict) {
-                $locale = explode('_', $locale);
-                if (isset(self::$_localeData[$locale[0]]) === true) {
-                    return true;
-                }
             }
         }
 
@@ -1854,7 +1836,7 @@ class Zend_Locale
     public static function clearCache($tag = null)
     {
         require_once 'Zend/Locale/Data.php';
-        Zend_Locale_Data::clearCache($tag);
+        Zend_Locale_Data::clearCache();
     }
 
     /**
@@ -1887,7 +1869,7 @@ class Zend_Locale
             return '';
         }
 
-        if (empty(self::$_auto) === true) {
+        if (empty(self::$_auto)) {
             self::$_browser     = self::getBrowser();
             self::$_environment = self::getEnvironment();
             self::$_breakChain  = true;
@@ -1907,11 +1889,11 @@ class Zend_Locale
                 $locale = self::$_default;
             }
 
-            if (($locale === 'auto') or ($locale === null)) {
+            if ($locale === 'auto' || $locale === null) {
                 $locale = self::$_auto;
             }
 
-            if (is_array($locale) === true) {
+            if (is_array($locale)) {
                 $locale = key($locale);
             }
         }
@@ -2003,7 +1985,7 @@ class Zend_Locale
             $locale = $locale->toString();
         }
 
-        if (isset(self::$_localeAliases[$locale]) === true) {
+        if (isset(self::$_localeAliases[$locale])) {
             return self::$_localeAliases[$locale];
         }
 

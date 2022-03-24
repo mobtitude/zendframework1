@@ -154,11 +154,10 @@ class Zend_Filter_Compress_Gz extends Zend_Filter_Compress_CompressAbstract
                 require_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception("Error opening the archive '" . $this->_options['archive'] . "'");
             }
-
             gzwrite($file, $content);
             gzclose($file);
             $compressed = true;
-        } else if ($this->_options['mode'] == 'deflate') {
+        } elseif ($this->_options['mode'] == 'deflate') {
             $compressed = gzdeflate($content, $this->getLevel());
         } else {
             $compressed = gzcompress($content, $this->getLevel());
@@ -202,11 +201,7 @@ class Zend_Filter_Compress_Gz extends Zend_Filter_Compress_CompressAbstract
             $file       = gzopen($archive, 'r');
             $compressed = gzread($file, $size);
             gzclose($file);
-        } else if ($mode == 'deflate') {
-            $compressed = gzinflate($content);
-        } else {
-            $compressed = gzuncompress($content);
-        }
+        } else $compressed = $mode == 'deflate' ? gzinflate($content) : gzuncompress($content);
 
         if (!$compressed) {
             require_once 'Zend/Filter/Exception.php';

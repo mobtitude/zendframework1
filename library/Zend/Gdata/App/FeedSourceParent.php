@@ -131,10 +131,7 @@ abstract class Zend_Gdata_App_FeedSourceParent extends Zend_Gdata_App_FeedEntryP
      */
     public function __get($var)
     {
-        switch ($var) {
-            default:
-                return parent::__get($var);
-        }
+        return parent::__get($var);
     }
 
 

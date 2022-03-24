@@ -45,11 +45,7 @@ class Zend_Controller_Action_Helper_AutoCompleteScriptaculous extends Zend_Contr
      */
     public function validateData($data)
     {
-        if (!is_array($data) && !is_scalar($data)) {
-            return false;
-        }
-
-        return true;
+        return !(!is_array($data) && !is_scalar($data));
     }
 
     /**

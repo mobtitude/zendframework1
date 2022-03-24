@@ -255,12 +255,12 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
         $username = $this->_username;
         $password = $this->_password;
 
-        if (!$username) {
+        if ($username === '' || $username === '0') {
             $code = Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND;
             $messages[0] = 'A username is required';
             return new Zend_Auth_Result($code, '', $messages);
         }
-        if (!$password) {
+        if ($password === '' || $password === '0') {
             /* A password is required because some servers will
              * treat an empty password as an anonymous bind.
              */
@@ -333,7 +333,7 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
                     $messages[0] = '';
                     $messages[1] = '';
                     $messages[] = "$canonicalName authentication successful";
-                    if ($requireRebind === true) {
+                    if ($requireRebind) {
                         // rebinding with authenticated user
                         $ldap->bind($dn, $password);
                     }
@@ -353,21 +353,21 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
                 $err = $zle->getCode();
 
                 if ($err == Zend_Ldap_Exception::LDAP_X_DOMAIN_MISMATCH) {
-                    /* This error indicates that the domain supplied in the
-                     * username did not match the domains in the server options
-                     * and therefore we should just skip to the next set of
-                     * server options.
-                     */
-                    continue;
-                } else if ($err == Zend_Ldap_Exception::LDAP_NO_SUCH_OBJECT) {
-                    $code = Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND;
-                    $messages[0] = "Account not found: $username";
-                    $failedAuthorities[$dname] = $zle->getMessage();
-                } else if ($err == Zend_Ldap_Exception::LDAP_INVALID_CREDENTIALS) {
-                    $code = Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID;
-                    $messages[0] = 'Invalid credentials';
-                    $failedAuthorities[$dname] = $zle->getMessage();
-                } else {
+																	/* This error indicates that the domain supplied in the
+																	 * username did not match the domains in the server options
+																	 * and therefore we should just skip to the next set of
+																	 * server options.
+																	 */
+																	continue;
+																} elseif ($err == Zend_Ldap_Exception::LDAP_NO_SUCH_OBJECT) {
+																	$code = Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND;
+																	$messages[0] = "Account not found: $username";
+																	$failedAuthorities[$dname] = $zle->getMessage();
+																} elseif ($err == Zend_Ldap_Exception::LDAP_INVALID_CREDENTIALS) {
+																	$code = Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID;
+																	$messages[0] = 'Invalid credentials';
+																	$failedAuthorities[$dname] = $zle->getMessage();
+																} else {
                     $line = $zle->getLine();
                     $messages[] = $zle->getFile() . "($line): " . $zle->getMessage();
                     $messages[] = preg_replace(
@@ -446,11 +446,7 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
             return true;
         }
 
-        if ($adapterOptions['memberIsDn'] === false) {
-            $user = $canonicalName;
-        } else {
-            $user = $dn;
-        }
+        $user = $adapterOptions['memberIsDn'] === false ? $canonicalName : $dn;
 
         /**
          * @see Zend_Ldap_Filter
@@ -485,7 +481,7 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
      */
     public function getAccountObject(array $returnAttribs = array(), array $omitAttribs = array())
     {
-        if (!$this->_authenticatedDn) {
+        if ($this->_authenticatedDn === '' || $this->_authenticatedDn === '0') {
             return false;
         }
 
@@ -522,7 +518,7 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
         foreach ($options as $key => $val) {
             if ($key === 'password')
                 $val = '*****';
-            if ($str)
+            if ($str !== '' && $str !== '0')
                 $str .= ',';
             $str .= $key . '=' . $val;
         }

@@ -81,12 +81,8 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
 
         // Find the base channel element and create an alias to it.
         $rdfTags = $this->_element->getElementsByTagNameNS('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'RDF');
-        if ($rdfTags->length != 0) {
-            $this->_element = $rdfTags->item(0);
-        } else  {
-            $this->_element = $this->_element->getElementsByTagName('channel')->item(0);
-        }
-        if (!$this->_element) {
+        $this->_element = $rdfTags->length != 0 ? $rdfTags->item(0) : $this->_element->getElementsByTagName('channel')->item(0);
+        if (!$this->_element instanceof \DOMElement) {
             /**
              * @see Zend_Feed_Exception
              */
@@ -141,16 +137,16 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
         $link = $this->_element->createElement('link', $array->link);
         $channel->appendChild($link);
 
-        $desc = isset($array->description) ? $array->description : '';
+        $desc = property_exists($array, 'description') && $array->description !== null ? $array->description : '';
         $description = $this->_element->createElement('description');
         $description->appendChild($this->_element->createCDATASection($desc));
         $channel->appendChild($description);
 
-        $pubdate = isset($array->lastUpdate) ? $array->lastUpdate : time();
+        $pubdate = property_exists($array, 'lastUpdate') && $array->lastUpdate !== null ? $array->lastUpdate : time();
         $pubdate = $this->_element->createElement('pubDate', date(DATE_RSS, $pubdate));
         $channel->appendChild($pubdate);
 
-        if (isset($array->published)) {
+        if (property_exists($array, 'published') && $array->published !== null) {
             $lastBuildDate = $this->_element->createElement('lastBuildDate', date(DATE_RSS, $array->published));
             $channel->appendChild($lastBuildDate);
         }
@@ -166,7 +162,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $author = $this->_element->createElement('managingEditor', ltrim($editor));
             $channel->appendChild($author);
         }
-        if (isset($array->webmaster)) {
+        if (property_exists($array, 'webmaster') && $array->webmaster !== null) {
             $channel->appendChild($this->_element->createElement('webMaster', $array->webmaster));
         }
 
@@ -175,7 +171,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $channel->appendChild($copyright);
         }
 
-        if (isset($array->category)) {
+        if (property_exists($array, 'category') && $array->category !== null) {
             $category = $this->_element->createElement('category', $array->category);
             $channel->appendChild($category);
         }
@@ -193,7 +189,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $channel->appendChild($image);
         }
 
-        $generator = !empty($array->generator) ? $array->generator : 'Zend_Feed';
+        $generator = empty($array->generator) ? 'Zend_Feed' : $array->generator;
         $generator = $this->_element->createElement('generator', $generator);
         $channel->appendChild($generator);
 
@@ -205,7 +201,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
         $doc = $this->_element->createElement('docs', 'http://blogs.law.harvard.edu/tech/rss');
         $channel->appendChild($doc);
 
-        if (isset($array->cloud)) {
+        if (property_exists($array, 'cloud') && $array->cloud !== null) {
             $cloud = $this->_element->createElement('cloud');
             $cloud->setAttribute('domain', $array->cloud['uri']->getHost());
             $cloud->setAttribute('port', $array->cloud['uri']->getPort());
@@ -215,17 +211,17 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $channel->appendChild($cloud);
         }
 
-        if (isset($array->ttl)) {
+        if (property_exists($array, 'ttl') && $array->ttl !== null) {
             $ttl = $this->_element->createElement('ttl', $array->ttl);
             $channel->appendChild($ttl);
         }
 
-        if (isset($array->rating)) {
+        if (property_exists($array, 'rating') && $array->rating !== null) {
             $rating = $this->_element->createElement('rating', $array->rating);
             $channel->appendChild($rating);
         }
 
-        if (isset($array->textInput)) {
+        if (property_exists($array, 'textInput') && $array->textInput !== null) {
             $textinput = $this->_element->createElement('textInput');
             $textinput->appendChild($this->_element->createElement('title', $array->textInput['title']));
             $textinput->appendChild($this->_element->createElement('description', $array->textInput['description']));
@@ -234,7 +230,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $channel->appendChild($textinput);
         }
 
-        if (isset($array->skipHours)) {
+        if (property_exists($array, 'skipHours') && $array->skipHours !== null) {
             $skipHours = $this->_element->createElement('skipHours');
             foreach ($array->skipHours as $hour) {
                 $skipHours->appendChild($this->_element->createElement('hour', $hour));
@@ -242,7 +238,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $channel->appendChild($skipHours);
         }
 
-        if (isset($array->skipDays)) {
+        if (property_exists($array, 'skipDays') && $array->skipDays !== null) {
             $skipDays = $this->_element->createElement('skipDays');
             foreach ($array->skipDays as $day) {
                 $skipDays->appendChild($this->_element->createElement('day', $day));
@@ -250,7 +246,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $channel->appendChild($skipDays);
         }
 
-        if (isset($array->itunes)) {
+        if (property_exists($array, 'itunes') && $array->itunes !== null) {
             $this->_buildiTunes($channel, $array);
         }
 
@@ -268,9 +264,9 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
     {
         /* author node */
         $author = '';
-        if (isset($array->itunes->author)) {
+        if (property_exists($array->itunes, 'author') && $array->itunes->author !== null) {
             $author = $array->itunes->author;
-        } elseif (isset($array->author)) {
+        } elseif (property_exists($array, 'author') && $array->author !== null) {
             $author = $array->author;
         }
         if (!empty($author)) {
@@ -281,7 +277,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
         /* owner node */
         $author = '';
         $email = '';
-        if (isset($array->itunes->owner)) {
+        if (property_exists($array->itunes, 'owner') && $array->itunes->owner !== null) {
             if (isset($array->itunes->owner['name'])) {
                 $author = $array->itunes->owner['name'];
             }
@@ -289,10 +285,10 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
                 $email = $array->itunes->owner['email'];
             }
         }
-        if (empty($author) && isset($array->author)) {
+        if (empty($author) && (property_exists($array, 'author') && $array->author !== null)) {
             $author = $array->author;
         }
-        if (empty($email) && isset($array->email)) {
+        if (empty($email) && (property_exists($array, 'email') && $array->email !== null)) {
             $email = $array->email;
         }
         if (!empty($author) || !empty($email)) {
@@ -308,9 +304,9 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $root->appendChild($owner);
         }
         $image = '';
-        if (isset($array->itunes->image)) {
+        if (property_exists($array->itunes, 'image') && $array->itunes->image !== null) {
             $image = $array->itunes->image;
-        } elseif (isset($array->image)) {
+        } elseif (property_exists($array, 'image') && $array->image !== null) {
             $image = $array->image;
         }
         if (!empty($image)) {
@@ -319,9 +315,9 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $root->appendChild($node);
         }
         $subtitle = '';
-        if (isset($array->itunes->subtitle)) {
+        if (property_exists($array->itunes, 'subtitle') && $array->itunes->subtitle !== null) {
             $subtitle = $array->itunes->subtitle;
-        } elseif (isset($array->description)) {
+        } elseif (property_exists($array, 'description') && $array->description !== null) {
             $subtitle = $array->description;
         }
         if (!empty($subtitle)) {
@@ -329,32 +325,32 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $root->appendChild($node);
         }
         $summary = '';
-        if (isset($array->itunes->summary)) {
+        if (property_exists($array->itunes, 'summary') && $array->itunes->summary !== null) {
             $summary = $array->itunes->summary;
-        } elseif (isset($array->description)) {
+        } elseif (property_exists($array, 'description') && $array->description !== null) {
             $summary = $array->description;
         }
         if (!empty($summary)) {
             $node = $this->_element->createElementNS('http://www.itunes.com/DTDs/Podcast-1.0.dtd', 'itunes:summary', $summary);
             $root->appendChild($node);
         }
-        if (isset($array->itunes->block)) {
+        if (property_exists($array->itunes, 'block') && $array->itunes->block !== null) {
             $node = $this->_element->createElementNS('http://www.itunes.com/DTDs/Podcast-1.0.dtd', 'itunes:block', $array->itunes->block);
             $root->appendChild($node);
         }
-        if (isset($array->itunes->explicit)) {
+        if (property_exists($array->itunes, 'explicit') && $array->itunes->explicit !== null) {
             $node = $this->_element->createElementNS('http://www.itunes.com/DTDs/Podcast-1.0.dtd', 'itunes:explicit', $array->itunes->explicit);
             $root->appendChild($node);
         }
-        if (isset($array->itunes->keywords)) {
+        if (property_exists($array->itunes, 'keywords') && $array->itunes->keywords !== null) {
             $node = $this->_element->createElementNS('http://www.itunes.com/DTDs/Podcast-1.0.dtd', 'itunes:keywords', $array->itunes->keywords);
             $root->appendChild($node);
         }
-        if (isset($array->itunes->new_feed_url)) {
+        if (property_exists($array->itunes, 'new_feed_url') && $array->itunes->new_feed_url !== null) {
             $node = $this->_element->createElementNS('http://www.itunes.com/DTDs/Podcast-1.0.dtd', 'itunes:new-feed-url', $array->itunes->new_feed_url);
             $root->appendChild($node);
         }
-        if (isset($array->itunes->category)) {
+        if (property_exists($array->itunes, 'category') && $array->itunes->category !== null) {
             foreach ($array->itunes->category as $i => $category) {
                 $node = $this->_element->createElementNS('http://www.itunes.com/DTDs/Podcast-1.0.dtd', 'itunes:category');
                 $node->setAttribute('text', $category['main']);
@@ -401,7 +397,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $title->appendChild($this->_element->createCDATASection($dataentry->title));
             $item->appendChild($title);
 
-            if (isset($dataentry->author)) {
+            if (property_exists($dataentry, 'author') && $dataentry->author !== null) {
                 $author = $this->_element->createElement('author', $dataentry->author);
                 $item->appendChild($author);
             }
@@ -409,7 +405,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $link = $this->_element->createElement('link', $dataentry->link);
             $item->appendChild($link);
 
-            if (isset($dataentry->guid)) {
+            if (property_exists($dataentry, 'guid') && $dataentry->guid !== null) {
                 $guid = $this->_element->createElement('guid', $dataentry->guid);
                 if (!Zend_Uri::check($dataentry->guid)) {
                     $guid->setAttribute('isPermaLink', 'false');
@@ -421,17 +417,17 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $description->appendChild($this->_element->createCDATASection($dataentry->description));
             $item->appendChild($description);
 
-            if (isset($dataentry->content)) {
+            if (property_exists($dataentry, 'content') && $dataentry->content !== null) {
                 $content = $this->_element->createElement('content:encoded');
                 $content->appendChild($this->_element->createCDATASection($dataentry->content));
                 $item->appendChild($content);
             }
 
-            $pubdate = isset($dataentry->lastUpdate) ? $dataentry->lastUpdate : time();
+            $pubdate = property_exists($dataentry, 'lastUpdate') && $dataentry->lastUpdate !== null ? $dataentry->lastUpdate : time();
             $pubdate = $this->_element->createElement('pubDate', date(DATE_RSS, $pubdate));
             $item->appendChild($pubdate);
 
-            if (isset($dataentry->category)) {
+            if (property_exists($dataentry, 'category') && $dataentry->category !== null) {
                 foreach ($dataentry->category as $category) {
                     $node = $this->_element->createElement('category');
                     $node->appendChild($this->_element->createCDATASection($category['term']));
@@ -442,17 +438,17 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
                 }
             }
 
-            if (isset($dataentry->source)) {
+            if (property_exists($dataentry, 'source') && $dataentry->source !== null) {
                 $source = $this->_element->createElement('source', $dataentry->source['title']);
                 $source->setAttribute('url', $dataentry->source['url']);
                 $item->appendChild($source);
             }
 
-            if (isset($dataentry->comments)) {
+            if (property_exists($dataentry, 'comments') && $dataentry->comments !== null) {
                 $comments = $this->_element->createElement('comments', $dataentry->comments);
                 $item->appendChild($comments);
             }
-            if (isset($dataentry->commentRss)) {
+            if (property_exists($dataentry, 'commentRss') && $dataentry->commentRss !== null) {
                 $comments = $this->_element->createElementNS('http://wellformedweb.org/CommentAPI/',
                                                              'wfw:commentRss',
                                                              $dataentry->commentRss);
@@ -460,7 +456,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             }
 
 
-            if (isset($dataentry->enclosure)) {
+            if (property_exists($dataentry, 'enclosure') && $dataentry->enclosure !== null) {
                 foreach ($dataentry->enclosure as $enclosure) {
                     $node = $this->_element->createElement('enclosure');
                     $node->setAttribute('url', $enclosure['url']);

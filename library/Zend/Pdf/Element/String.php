@@ -173,7 +173,7 @@ class Zend_Pdf_Element_String extends Zend_Pdf_Element
         while ($offset < strlen($str)) {
             // Searche for the next escaped character/sequence
             $escapeCharOffset = strpos($str, '\\', $offset);
-            if ($escapeCharOffset === false  ||  $escapeCharOffset == strlen($str) - 1) {
+            if ($escapeCharOffset === false  ||  $escapeCharOffset === strlen($str) - 1) {
                 // There are no escaped characters or '\' char has came at the end of string
                 $outEntries[] = substr($str, $offset);
                 break;

@@ -88,10 +88,10 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
             $found = true;
         } elseif ($length == 'even') {
             $count = $fixum % 2;
-            $found = ($count == 0) ? true : false;
+            $found = $count == 0;
         } elseif ($length == 'odd') {
             $count = $fixum % 2;
-            $found = ($count == 1) ? true : false;
+            $found = $count == 1;
         }
 
         return $found;
@@ -120,12 +120,7 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
                 $value = str_replace($char, '', $value);
             }
         }
-
-        if (strlen($value) > 0) {
-            return false;
-        }
-
-        return true;
+        return !(strlen($value) > 0);
     }
 
     /**
@@ -137,10 +132,8 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
     public function checksum($value)
     {
         $checksum = $this->getChecksum();
-        if (!empty($checksum)) {
-            if (method_exists($this, $checksum)) {
-                return call_user_func(array($this, $checksum), $value);
-            }
+        if (!empty($checksum) && method_exists($this, $checksum)) {
+            return call_user_func(array($this, $checksum), $value);
         }
 
         return false;
@@ -306,10 +299,6 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
 
         $check %= 10;
         $check = 10 - $check;
-        if ($check == $checksum) {
-            return true;
-        }
-
-        return false;
+        return $check == $checksum;
     }
 }

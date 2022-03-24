@@ -494,7 +494,7 @@ class Zend_Service_WindowsAzure_Storage
 	protected function _parseMetadataElement($element = null)
 	{
 		// Metadata present?
-		if (!is_null($element) && isset($element->Metadata) && !is_null($element->Metadata)) {
+		if (!is_null($element) && (property_exists($element, 'Metadata') && $element->Metadata !== null) && !is_null($element->Metadata)) {
 			return get_object_vars($element->Metadata);
 		}
 
@@ -543,12 +543,7 @@ class Zend_Service_WindowsAzure_Storage
         if (preg_match("/^[a-zA-Z0-9_@][a-zA-Z0-9_]*$/", $metadataName) === 0) {
             return false;
         }
-    
-        if ($metadataName == '') {
-            return false;
-        }
-
-        return true;
+								return !($metadataName == '');
     }
     
     /**

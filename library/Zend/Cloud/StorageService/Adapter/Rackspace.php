@@ -91,7 +91,7 @@ class Zend_Cloud_StorageService_Adapter_Rackspace
     public function fetchItem($path, $options = null)
     {
         $item = $this->_rackspace->getObject($this->_container,$path, $options);
-        if (!$this->_rackspace->isSuccessful() && ($this->_rackspace->getErrorCode()!='404')) {
+        if (!$this->_rackspace->isSuccessful() && ($this->_rackspace->getErrorCode() != '404')) {
             throw new Zend_Cloud_StorageService_Exception('Error on fetch: '.$this->_rackspace->getErrorMsg());
         }
         if (!empty($item)) {
@@ -163,13 +163,13 @@ class Zend_Cloud_StorageService_Adapter_Rackspace
         try {
             $this->copyItem($sourcePath, $destinationPath, $options);
         } catch (Zend_Service_Rackspace_Exception $e) {
-            throw new Zend_Cloud_StorageService_Exception('Error on move: '.$e->getMessage());
+            throw new Zend_Cloud_StorageService_Exception('Error on move: '.$e->getMessage(), $e->getCode(), $e);
         }    
         try {
             $this->deleteItem($sourcePath);
         } catch (Zend_Service_Rackspace_Exception $e) {
             $this->deleteItem($destinationPath);
-            throw new Zend_Cloud_StorageService_Exception('Error on move: '.$e->getMessage());
+            throw new Zend_Cloud_StorageService_Exception('Error on move: '.$e->getMessage(), $e->getCode(), $e);
         }    
     }
 
@@ -247,19 +247,19 @@ class Zend_Cloud_StorageService_Adapter_Rackspace
             try {
                 $this->storeMetadata($path, $newMetadata);
             } catch (Zend_Service_Rackspace_Exception $e) {
-                throw new Zend_Cloud_StorageService_Exception('Error on delete metadata: '.$e->getMessage());
+                throw new Zend_Cloud_StorageService_Exception('Error on delete metadata: '.$e->getMessage(), $e->getCode(), $e);
             }
         } else {
             try {
                 $oldMetadata = $this->fetchMetadata($path);
             } catch (Zend_Service_Rackspace_Exception $e) {
-                throw new Zend_Cloud_StorageService_Exception('Error on delete metadata: '.$e->getMessage());
+                throw new Zend_Cloud_StorageService_Exception('Error on delete metadata: '.$e->getMessage(), $e->getCode(), $e);
             }
             $newMetadata = array_diff_assoc($oldMetadata, $metadata);
             try {
                 $this->storeMetadata($path, $newMetadata);
             } catch (Zend_Service_Rackspace_Exception $e) {
-                throw new Zend_Cloud_StorageService_Exception('Error on delete metadata: '.$e->getMessage());
+                throw new Zend_Cloud_StorageService_Exception('Error on delete metadata: '.$e->getMessage(), $e->getCode(), $e);
             }
         }
     }

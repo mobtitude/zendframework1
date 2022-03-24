@@ -44,7 +44,7 @@ class Zend_Service_Ebay_Finding_Aspect_Histogram_Value_Set extends Zend_Service_
     {
         // check node
         $node = $this->_nodes->item($this->_key);
-        if (!$node) {
+        if (!$node instanceof \DOMNode) {
             return null;
         }
 

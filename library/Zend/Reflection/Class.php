@@ -87,10 +87,8 @@ class Zend_Reflection_Class extends ReflectionClass
      */
     public function getStartLine($includeDocComment = false)
     {
-        if ($includeDocComment) {
-            if ($this->getDocComment() != '') {
-                return $this->getDocblock()->getStartLine();
-            }
+        if ($includeDocComment && $this->getDocComment() != '') {
+            return $this->getDocblock()->getStartLine();
         }
 
         return parent::getStartLine();

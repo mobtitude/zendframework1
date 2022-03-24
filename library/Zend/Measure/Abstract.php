@@ -81,7 +81,7 @@ abstract class Zend_Measure_Abstract
      */
     public function __construct($value, $type = null, $locale = null)
     {
-        if (($type !== null) and (Zend_Locale::isLocale($type, null, false))) {
+        if ($type !== null && Zend_Locale::isLocale($type, null, false)) {
             $locale = $type;
             $type = null;
         }
@@ -91,7 +91,7 @@ abstract class Zend_Measure_Abstract
             $type = $this->_units['STANDARD'];
         }
 
-        if (isset($this->_units[$type]) === false) {
+        if (!isset($this->_units[$type])) {
             require_once 'Zend/Measure/Exception.php';
             throw new Zend_Measure_Exception("Type ($type) is unknown");
         }
@@ -120,7 +120,7 @@ abstract class Zend_Measure_Abstract
     {
         if (empty($locale)) {
             require_once 'Zend/Registry.php';
-            if (Zend_Registry::isRegistered('Zend_Locale') === true) {
+            if (Zend_Registry::isRegistered('Zend_Locale')) {
                 $locale = Zend_Registry::get('Zend_Locale');
             }
         }
@@ -154,11 +154,7 @@ abstract class Zend_Measure_Abstract
      */
     public function getValue($round = -1, $locale = null)
     {
-        if ($round < 0) {
-            $return = $this->_value;
-        } else {
-            $return = Zend_Locale_Math::round($this->_value, $round);
-        }
+        $return = $round < 0 ? $this->_value : Zend_Locale_Math::round($this->_value, $round);
 
         if ($locale !== null) {
             $this->setLocale($locale, true);
@@ -179,7 +175,7 @@ abstract class Zend_Measure_Abstract
      */
     public function setValue($value, $type = null, $locale = null)
     {
-        if (($type !== null) and (Zend_Locale::isLocale($type, null, false))) {
+        if ($type !== null && Zend_Locale::isLocale($type, null, false)) {
             $locale = $type;
             $type = null;
         }
@@ -309,11 +305,7 @@ abstract class Zend_Measure_Abstract
      */
     public function equals($object)
     {
-        if ((string) $object == $this->toString()) {
-            return true;
-        }
-
-        return false;
+        return (string) $object === $this->toString();
     }
 
     /**
@@ -409,7 +401,7 @@ abstract class Zend_Measure_Abstract
 
         if ($value < 0) {
             return -1;
-        } else if ($value > 0) {
+        } elseif ($value > 0) {
             return 1;
         }
 

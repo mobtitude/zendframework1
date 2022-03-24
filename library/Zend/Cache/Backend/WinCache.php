@@ -110,7 +110,7 @@ class Zend_Cache_Backend_WinCache extends Zend_Cache_Backend implements Zend_Cac
     {
         $lifetime = $this->getLifetime($specificLifetime);
         $result = wincache_ucache_set($id, array($data, time(), $lifetime), $lifetime);
-        if (count($tags) > 0) {
+        if ($tags !== []) {
             $this->_log(self::TAGS_UNSUPPORTED_BY_SAVE_OF_WINCACHE_BACKEND);
         }
         return $result;

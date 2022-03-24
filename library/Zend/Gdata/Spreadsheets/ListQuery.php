@@ -288,9 +288,7 @@ class Zend_Gdata_Spreadsheets_ListQuery extends Zend_Gdata_Query
         if ($this->_rowId != null) {
             $uri .= '/'.$this->_rowId;
         }
-
-        $uri .= $this->getQueryString();
-        return $uri;
+        return $uri . $this->getQueryString();
     }
 
     /**

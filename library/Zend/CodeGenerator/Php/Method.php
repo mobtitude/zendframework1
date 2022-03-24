@@ -110,7 +110,7 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
      */
     public function setFinal($isFinal)
     {
-        $this->_isFinal = ($isFinal) ? true : false;
+        $this->_isFinal = $isFinal;
         return $this;
     }
 
@@ -225,13 +225,11 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
             $output .= '        '
                     .  str_replace(self::LINE_FEED, self::LINE_FEED . $indent . $indent, trim($this->_body))
                     .  self::LINE_FEED;
-        } elseif ($this->_body) {
+        } elseif ($this->_body !== '' && $this->_body !== '0') {
             $output .= $this->_body . self::LINE_FEED;
         }
 
-        $output .= $indent . '}' . self::LINE_FEED;
-
-        return $output;
+        return $output . ($indent . '}' . self::LINE_FEED);
     }
 
 }

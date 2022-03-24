@@ -108,7 +108,7 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
      */
     public function normalizeTag($tag)
     {
-        if (!isset($this->_tagFilter)) {
+        if (!($this->_tagFilter !== null)) {
             require_once 'Zend/Filter.php';
             require_once 'Zend/Filter/Alnum.php';
             require_once 'Zend/Filter/StringToLower.php';
@@ -165,8 +165,7 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
         if (null !== $attribs) {
             $html .= $this->_htmlAttribs($attribs);
         }
-        $html .= '>';
-        return $html;
+        return $html . '>';
     }
 
     /**

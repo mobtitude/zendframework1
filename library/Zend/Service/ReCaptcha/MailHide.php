@@ -102,11 +102,7 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
         }
 
         /* Merge if needed */
-        if (is_array($options)) {
-            $options = array_merge($this->getDefaultOptions(), $options);
-        } else {
-            $options = $this->getDefaultOptions();
-        }
+        $options = is_array($options) ? array_merge($this->getDefaultOptions(), $options) : $this->getDefaultOptions();
 
         parent::__construct($publicKey, $privateKey, null, $options);
 
@@ -235,11 +231,7 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
         /* Decide on how much of the local part we want to reveal */
         if (strlen($emailParts[0]) <= 4) {
             $emailParts[0] = substr($emailParts[0], 0, 1);
-        } else if (strlen($emailParts[0]) <= 6) {
-            $emailParts[0] = substr($emailParts[0], 0, 3);
-        } else {
-            $emailParts[0] = substr($emailParts[0], 0, 4);
-        }
+        } else $emailParts[0] = strlen($emailParts[0]) <= 6 ? substr($emailParts[0], 0, 3) : substr($emailParts[0], 0, 4);
 
         $this->_emailLocalPart = $emailParts[0];
         $this->_emailDomainPart = $emailParts[1];

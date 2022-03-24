@@ -150,10 +150,7 @@ class Zend_Cloud_Infrastructure_ImageList implements Countable, Iterator, ArrayA
     public function valid()
     {
         $numItems = $this->count();
-        if ($numItems > 0 && $this->iteratorKey < $numItems) {
-            return true;
-        }
-        return false;
+        return $numItems > 0 && $this->iteratorKey < $numItems;
     }
 
     /**

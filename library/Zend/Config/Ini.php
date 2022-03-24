@@ -169,7 +169,9 @@ class Zend_Config_Ini extends Zend_Config
      */
     protected function _parseIniFile($filename)
     {
-        set_error_handler(array($this, '_loadFileErrorHandler'));
+        set_error_handler(function (int $errno, string $errstr, string $errfile, int $errline) {
+            return $this->_loadFileErrorHandler($errno, $errstr, $errfile, $errline);
+        });
         $iniArray = parse_ini_file($filename, true); // Warnings and errors are suppressed
         restore_error_handler();
 

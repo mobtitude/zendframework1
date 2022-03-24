@@ -110,11 +110,7 @@ class Zend_Cache_Frontend_File extends Zend_Cache_Core
         clearstatcache();
         $i = 0;
         foreach ($masterFiles as $masterFile) {
-            if (file_exists($masterFile)) {
-                $mtime = filemtime($masterFile);
-            } else {
-                $mtime = false;
-            }
+            $mtime = file_exists($masterFile) ? filemtime($masterFile) : false;
 
             if (!$this->_specificOptions['ignore_missing_master_files'] && !$mtime) {
                 Zend_Cache::throwException('Unable to read master_file : ' . $masterFile);
@@ -157,7 +153,7 @@ class Zend_Cache_Frontend_File extends Zend_Cache_Core
     {
         if ($name == 'master_file') {
             $this->setMasterFile($value);
-        } else if ($name == 'master_files') {
+        } elseif ($name == 'master_files') {
             $this->setMasterFiles($value);
         } else {
             parent::setOption($name, $value);
@@ -196,20 +192,16 @@ class Zend_Cache_Frontend_File extends Zend_Cache_Core
             if ($this->_specificOptions['master_files_mode'] == self::MODE_AND) {
                 // MODE_AND
                 foreach($this->_masterFile_mtimes as $masterFileMTime) {
-                    if ($masterFileMTime) {
-                        if ($lastModified > $masterFileMTime) {
-                            return $lastModified;
-                        }
+                    if ($masterFileMTime && $lastModified > $masterFileMTime) {
+                        return $lastModified;
                     }
                 }
             } else {
                 // MODE_OR
                 $res = true;
                 foreach($this->_masterFile_mtimes as $masterFileMTime) {
-                    if ($masterFileMTime) {
-                        if ($lastModified <= $masterFileMTime) {
-                            return false;
-                        }
+                    if ($masterFileMTime && $lastModified <= $masterFileMTime) {
+                        return false;
                     }
                 }
                 return $lastModified;

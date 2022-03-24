@@ -153,10 +153,8 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
             unset($attribs['helper']);
         }
 
-        if (method_exists($element, 'getSeparator')) {
-            if (null !== ($listsep = $element->getSeparator())) {
-                $attribs['listsep'] = $listsep;
-            }
+        if (method_exists($element, 'getSeparator') && null !== ($listsep = $element->getSeparator())) {
+            $attribs['listsep'] = $listsep;
         }
 
         if (isset($attribs['id'])) {
@@ -165,11 +163,9 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
 
         $id = $element->getName();
 
-        if ($element instanceof Zend_Form_Element) {
-            if (null !== ($belongsTo = $element->getBelongsTo())) {
-                $belongsTo = preg_replace('/\[([^\]]+)\]/', '-$1', $belongsTo);
-                $id = $belongsTo . '-' . $id;
-            }
+        if ($element instanceof Zend_Form_Element && null !== ($belongsTo = $element->getBelongsTo())) {
+            $belongsTo = preg_replace('/\[([^\]]+)\]/', '-$1', $belongsTo);
+            $id = $belongsTo . '-' . $id;
         }
 
         $element->setAttrib('id', $id);
@@ -222,7 +218,7 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
         $element = $this->getElement();
 
         $view = $element->getView();
-        if (null === $view) {
+        if (!$view instanceof \Zend_View_Interface) {
             require_once 'Zend/Form/Decorator/Exception.php';
             throw new Zend_Form_Decorator_Exception('ViewHelper decorator cannot render without a registered view object');
         }

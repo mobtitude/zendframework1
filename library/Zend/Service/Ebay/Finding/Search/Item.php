@@ -318,7 +318,7 @@ class Zend_Service_Ebay_Finding_Search_Item extends Zend_Service_Ebay_Finding_Ab
         );
 
         $node = $this->_xPath->query(".//$ns:listingInfo[1]", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_ListingInfo
              */
@@ -327,7 +327,7 @@ class Zend_Service_Ebay_Finding_Search_Item extends Zend_Service_Ebay_Finding_Ab
         }
 
         $node = $this->_xPath->query(".//$ns:primaryCategory[1]", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_Category
              */
@@ -336,7 +336,7 @@ class Zend_Service_Ebay_Finding_Search_Item extends Zend_Service_Ebay_Finding_Ab
         }
 
         $node = $this->_xPath->query(".//$ns:secondaryCategory[1]", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_Category
              */
@@ -345,7 +345,7 @@ class Zend_Service_Ebay_Finding_Search_Item extends Zend_Service_Ebay_Finding_Ab
         }
 
         $node = $this->_xPath->query(".//$ns:sellerInfo[1]", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_SellerInfo
              */
@@ -354,7 +354,7 @@ class Zend_Service_Ebay_Finding_Search_Item extends Zend_Service_Ebay_Finding_Ab
         }
 
         $node = $this->_xPath->query(".//$ns:sellingStatus[1]", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_SellingStatus
              */
@@ -363,7 +363,7 @@ class Zend_Service_Ebay_Finding_Search_Item extends Zend_Service_Ebay_Finding_Ab
         }
 
         $node = $this->_xPath->query("./$ns:shippingInfo", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_ShippingInfo
              */
@@ -372,7 +372,7 @@ class Zend_Service_Ebay_Finding_Search_Item extends Zend_Service_Ebay_Finding_Ab
         }
 
         $node = $this->_xPath->query(".//$ns:storeInfo[1]", $this->_dom)->item(0);
-        if ($node) {
+        if ($node !== null) {
             /**
              * @see Zend_Service_Ebay_Finding_Storefront
              */

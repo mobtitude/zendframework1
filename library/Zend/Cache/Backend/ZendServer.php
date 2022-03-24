@@ -146,7 +146,7 @@ abstract class Zend_Cache_Backend_ZendServer extends Zend_Cache_Backend implemen
             'expire' => $this->_expireTime($lifetime),
         );
 
-        if (count($tags) > 0) {
+        if ($tags !== []) {
             $this->_log('Zend_Cache_Backend_ZendServer::save() : tags are unsupported by the ZendServer backends');
         }
 

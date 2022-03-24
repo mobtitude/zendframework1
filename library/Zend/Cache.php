@@ -92,21 +92,17 @@ abstract class Zend_Cache
     {
         if (is_string($backend)) {
             $backendObject = self::_makeBackend($backend, $backendOptions, $customBackendNaming, $autoload);
+        } elseif ((is_object($backend)) && (in_array('Zend_Cache_Backend_Interface', class_implements($backend)))) {
+            $backendObject = $backend;
         } else {
-            if ((is_object($backend)) && (in_array('Zend_Cache_Backend_Interface', class_implements($backend)))) {
-                $backendObject = $backend;
-            } else {
-                self::throwException('backend must be a backend name (string) or an object which implements Zend_Cache_Backend_Interface');
-            }
+            self::throwException('backend must be a backend name (string) or an object which implements Zend_Cache_Backend_Interface');
         }
         if (is_string($frontend)) {
             $frontendObject = self::_makeFrontend($frontend, $frontendOptions, $customFrontendNaming, $autoload);
+        } elseif (is_object($frontend)) {
+            $frontendObject = $frontend;
         } else {
-            if (is_object($frontend)) {
-                $frontendObject = $frontend;
-            } else {
-                self::throwException('frontend must be a frontend name (string) or an object');
-            }
+            self::throwException('frontend must be a frontend name (string) or an object');
         }
         $frontendObject->setBackend($backendObject);
         return $frontendObject;
@@ -136,12 +132,7 @@ abstract class Zend_Cache
             if (!preg_match('~^[\w\\\\]+$~D', $backend)) {
                 Zend_Cache::throwException("Invalid backend name [$backend]");
             }
-            if (!$customBackendNaming) {
-                // we use this boolean to avoid an API break
-                $backendClass = 'Zend_Cache_Backend_' . $backend;
-            } else {
-                $backendClass = $backend;
-            }
+            $backendClass = $customBackendNaming ? $backend : 'Zend_Cache_Backend_' . $backend;
             if (!$autoload) {
                 $file = str_replace('_', DIRECTORY_SEPARATOR, $backendClass) . '.php';
                 if (!(self::_isReadable($file))) {
@@ -178,12 +169,7 @@ abstract class Zend_Cache
             if (!preg_match('~^[\w\\\\]+$~D', $frontend)) {
                 Zend_Cache::throwException("Invalid frontend name [$frontend]");
             }
-            if (!$customFrontendNaming) {
-                // we use this boolean to avoid an API break
-                $frontendClass = 'Zend_Cache_Frontend_' . $frontend;
-            } else {
-                $frontendClass = $frontend;
-            }
+            $frontendClass = $customFrontendNaming ? $frontend : 'Zend_Cache_Frontend_' . $frontend;
             if (!$autoload) {
                 $file = str_replace('_', DIRECTORY_SEPARATOR, $frontendClass) . '.php';
                 if (!(self::_isReadable($file))) {

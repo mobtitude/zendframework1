@@ -127,8 +127,7 @@ class Zend_Markup
 
         $parser            = new $parserClass();
         $options['parser'] = $parser;
-        $renderer          = new $rendererClass($options);
 
-        return $renderer;
+        return new $rendererClass($options);
     }
 }

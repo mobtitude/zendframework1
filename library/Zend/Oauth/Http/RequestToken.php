@@ -49,8 +49,7 @@ class Zend_Oauth_Http_RequestToken extends Zend_Oauth_Http
     {
         $params   = $this->assembleParams();
         $response = $this->startRequestCycle($params);
-        $return   = new Zend_Oauth_Token_Request($response);
-        return $return;
+        return new Zend_Oauth_Token_Request($response);
     }
 
     /**
@@ -69,11 +68,7 @@ class Zend_Oauth_Http_RequestToken extends Zend_Oauth_Http
         );
 
         // indicates we support 1.0a
-        if ($this->_consumer->getCallbackUrl()) {
-            $params['oauth_callback'] = $this->_consumer->getCallbackUrl();
-        } else {
-            $params['oauth_callback'] = 'oob';
-        }
+        $params['oauth_callback'] = $this->_consumer->getCallbackUrl() ? $this->_consumer->getCallbackUrl() : 'oob';
 
         if (!empty($this->_parameters)) {
             $params = array_merge($params, $this->_parameters);

@@ -46,11 +46,7 @@ class Zend_View_Helper_Form extends Zend_View_Helper_FormElement
         $info = $this->_getInfo($name, $content, $attribs);
         extract($info);
 
-        if (!empty($id)) {
-            $id = ' id="' . $this->view->escape($id) . '"';
-        } else {
-            $id = '';
-        }
+        $id = empty($id) ? '' : ' id="' . $this->view->escape($id) . '"';
 
         if (array_key_exists('id', $attribs) && empty($attribs['id'])) {
             unset($attribs['id']);

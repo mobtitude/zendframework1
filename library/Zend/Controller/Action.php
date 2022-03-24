@@ -167,7 +167,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
         }
 
         require_once 'Zend/View/Interface.php';
-        if (isset($this->view) && ($this->view instanceof Zend_View_Interface)) {
+        if ($this->view !== null && ($this->view instanceof Zend_View_Interface)) {
             return $this->view;
         }
 
@@ -562,7 +562,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
         if (empty($action)) {
             $action = 'index';
         }
-        $action = $action . 'Action';
+        $action .= 'Action';
 
         $request->setDispatched(true);
         $this->dispatch($action);

@@ -81,7 +81,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
     {
         if (is_null($this->_storageClient)) {
             $url = explode(':', $path);
-            if (!$url) {
+            if ($url === []) {
                 throw new Zend_Service_WindowsAzure_Exception('Could not parse path "' . $path . '".');
             }
 
@@ -103,7 +103,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
     protected function _getContainerName($path)
     {
         $url = parse_url($path);
-        if ($url['host']) {
+        if ($url['host'] !== '' && $url['host'] !== '0') {
             return $url['host'];
         }
 
@@ -119,7 +119,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
     protected function _getFileName($path)
     {
         $url = parse_url($path);
-        if ($url['host']) {
+        if ($url['host'] !== '' && $url['host'] !== '0') {
             $fileName = isset($url['path']) ? $url['path'] : $url['host'];
     	    if (strpos($fileName, '/') === 0) {
     	        $fileName = substr($fileName, 1);
@@ -152,11 +152,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
         fclose($fh);
         
         // Write mode?
-        if (strpbrk($mode, 'wax+')) {
-            $this->_writeMode = true;
-    	} else {
-            $this->_writeMode = false;
-        }
+        $this->_writeMode = (bool) strpbrk($mode, 'wax+');
         
         // If read/append, fetch the file
         if (!$this->_writeMode || strpbrk($mode, 'ra+')) {
@@ -366,11 +362,11 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
      */
     public function rename($path_from, $path_to)
     {
-        if ($this->_getContainerName($path_from) != $this->_getContainerName($path_to)) {
+        if ($this->_getContainerName($path_from) !== $this->_getContainerName($path_to)) {
             throw new Zend_Service_WindowsAzure_Exception('Container name can not be changed.');
         }
         
-        if ($this->_getFileName($path_from) == $this->_getContainerName($path_to)) {
+        if ($this->_getFileName($path_from) === $this->_getContainerName($path_to)) {
             return true;
         }
             
@@ -448,7 +444,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
      */
     public function mkdir($path, $mode, $options)
     {
-        if ($this->_getContainerName($path) == $this->_getFileName($path)) {
+        if ($this->_getContainerName($path) === $this->_getFileName($path)) {
             // Create container
             try {
                 $this->_getStorageClient($path)->createContainer(
@@ -472,7 +468,7 @@ class Zend_Service_WindowsAzure_Storage_Blob_Stream
      */
     public function rmdir($path, $options)
     {
-        if ($this->_getContainerName($path) == $this->_getFileName($path)) {
+        if ($this->_getContainerName($path) === $this->_getFileName($path)) {
             // Clear the stat cache so that affected paths are refreshed.
             clearstatcache();
 

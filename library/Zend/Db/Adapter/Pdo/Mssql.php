@@ -121,9 +121,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
         foreach ($dsn as $key => $val) {
             $dsn[$key] = "$key=$val";
         }
-
-        $dsn = $this->_pdoType . ':' . implode(';', $dsn);
-        return $dsn;
+        return $this->_pdoType . ':' . implode(';', $dsn);
     }
 
     /**
@@ -220,11 +218,9 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
      */
     public function describeTable($tableName, $schemaName = null)
     {
-        if ($schemaName != null) {
-            if (strpos($schemaName, '.') !== false) {
-                $result = explode('.', $schemaName);
-                $schemaName = $result[1];
-            }
+        if ($schemaName != null && strpos($schemaName, '.') !== false) {
+            $result = explode('.', $schemaName);
+            $schemaName = $result[1];
         }
         /**
          * Discover metadata information about this table.
@@ -277,11 +273,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
             }
 
             $isPrimary = array_key_exists($row[$column_name], $primaryKeyColumn);
-            if ($isPrimary) {
-                $primaryPosition = $primaryKeyColumn[$row[$column_name]];
-            } else {
-                $primaryPosition = null;
-            }
+            $primaryPosition = $isPrimary ? $primaryKeyColumn[$row[$column_name]] : null;
 
             $desc[$this->foldCase($row[$column_name])] = array(
                 'SCHEMA_NAME'      => null, // @todo
@@ -316,14 +308,14 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
      */
      public function limit($sql, $count, $offset = 0)
      {
-        $count = intval($count);
+        $count = (int) $count;
         if ($count <= 0) {
             /** @see Zend_Db_Adapter_Exception */
             require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
         }
 
-        $offset = intval($offset);
+        $offset = (int) $offset;
         if ($offset < 0) {
             /** @see Zend_Db_Adapter_Exception */
             require_once 'Zend/Db/Adapter/Exception.php';
@@ -412,7 +404,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
         try {
             $stmt = $this->query("SELECT CAST(SERVERPROPERTY('productversion') AS VARCHAR)");
             $result = $stmt->fetchAll(Zend_Db::FETCH_NUM);
-            if (count($result)) {
+            if ($result !== []) {
                 return $result[0][0];
             }
             return null;

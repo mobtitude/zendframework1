@@ -78,7 +78,7 @@ abstract class Zend_Cloud_Infrastructure_Adapter_AbstractAdapter implements Zend
         }
 
         $num = 0;
-        while (($num<$timeout) && ($this->statusInstance($id) != $status)) {
+        while (($num<$timeout) && ($this->statusInstance($id) !== $status)) {
             sleep(self::TIME_STEP_STATUS_CHANGE);
             $num += self::TIME_STEP_STATUS_CHANGE;
         }
@@ -147,11 +147,7 @@ abstract class Zend_Cloud_Infrastructure_Adapter_AbstractAdapter implements Zend
                 $output = stream_get_contents($stream);
                 $error  = stream_get_contents($errorStream);
                 
-                if (empty($error)) {
-                    $result[$command] = $output;
-                } else {
-                    $result[$command] = $error;
-                }
+                $result[$command] = empty($error) ? $output : $error;
             }
         } else {
             $stream      = ssh2_exec($conn, $cmd);
@@ -164,11 +160,7 @@ abstract class Zend_Cloud_Infrastructure_Adapter_AbstractAdapter implements Zend
             $output = stream_get_contents($stream);
             $error  = stream_get_contents($errorStream);
             
-            if (empty($error)) {
-                $result = $output;
-            } else {
-                $result = $error;
-            }
+            $result = empty($error) ? $output : $error;
         }    
         return $result;
     }

@@ -96,7 +96,7 @@ abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_
         // Set options
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Zend_Config) {
+        } elseif ($options instanceof Zend_Config) {
             $this->setConfig($options);
         }
     }

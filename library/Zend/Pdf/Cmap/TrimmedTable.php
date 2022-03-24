@@ -205,7 +205,7 @@ class Zend_Pdf_Cmap_TrimmedTable extends Zend_Pdf_Cmap
 
         $entryCount = $this->_extractUInt2($cmapData, 8);
         $expectedCount = ($length - 10) >> 1;
-        if ($entryCount != $expectedCount) {
+        if ($entryCount !== $expectedCount) {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("Entry count is wrong; expected: $expectedCount; actual: $entryCount",
                                          Zend_Pdf_Exception::CMAP_WRONG_ENTRY_COUNT);

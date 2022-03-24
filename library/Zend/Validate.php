@@ -222,11 +222,7 @@ class Zend_Validate implements Zend_Validate_Interface
                         }
                     }
 
-                    if ($numeric) {
-                        $object = $class->newInstanceArgs($args);
-                    } else {
-                        $object = $class->newInstance($args);
-                    }
+                    $object = $numeric ? $class->newInstanceArgs($args) : $class->newInstance($args);
                 } else {
                     $object = $class->newInstance();
                 }

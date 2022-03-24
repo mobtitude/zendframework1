@@ -66,20 +66,16 @@ class Zend_Barcode
          * barcode name and separate config object.
          */
         if ($barcode instanceof Zend_Config) {
-            if (isset($barcode->rendererParams)) {
+            if (property_exists($barcode, 'rendererParams') && $barcode->rendererParams !== null) {
                 $rendererConfig = $barcode->rendererParams->toArray();
             }
-            if (isset($barcode->renderer)) {
+            if (property_exists($barcode, 'renderer') && $barcode->renderer !== null) {
                 $renderer = (string) $barcode->renderer;
             }
-            if (isset($barcode->barcodeParams)) {
+            if (property_exists($barcode, 'barcodeParams') && $barcode->barcodeParams !== null) {
                 $barcodeConfig = $barcode->barcodeParams->toArray();
             }
-            if (isset($barcode->barcode)) {
-                $barcode = (string) $barcode->barcode;
-            } else {
-                $barcode = null;
-            }
+            $barcode = property_exists($barcode, 'barcode') && $barcode->barcode !== null ? (string) $barcode->barcode : null;
         }
 
         try {
@@ -119,14 +115,10 @@ class Zend_Barcode
          * barcode name and separate config object.
          */
         if ($barcode instanceof Zend_Config) {
-            if (isset($barcode->barcodeParams) && $barcode->barcodeParams instanceof Zend_Config) {
+            if (property_exists($barcode, 'barcodeParams') && $barcode->barcodeParams !== null && $barcode->barcodeParams instanceof Zend_Config) {
                 $barcodeConfig = $barcode->barcodeParams->toArray();
             }
-            if (isset($barcode->barcode)) {
-                $barcode = (string) $barcode->barcode;
-            } else {
-                $barcode = null;
-            }
+            $barcode = property_exists($barcode, 'barcode') && $barcode->barcode !== null ? (string) $barcode->barcode : null;
         }
         if ($barcodeConfig instanceof Zend_Config) {
             $barcodeConfig = $barcodeConfig->toArray();
@@ -218,10 +210,10 @@ class Zend_Barcode
          * barcode name and separate config object.
          */
         if ($renderer instanceof Zend_Config) {
-            if (isset($renderer->rendererParams)) {
+            if (property_exists($renderer, 'rendererParams') && $renderer->rendererParams !== null) {
                 $rendererConfig = $renderer->rendererParams->toArray();
             }
-            if (isset($renderer->renderer)) {
+            if (property_exists($renderer, 'renderer') && $renderer->renderer !== null) {
                 $renderer = (string) $renderer->renderer;
             }
         }

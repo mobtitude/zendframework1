@@ -132,10 +132,8 @@ class Zend_Ldap_Exception extends Zend_Exception
                 $code = $oldCode;
             }
         }
-        if (empty($message)) {
-            if ($code > 0) {
-                $message = '0x' . dechex($code) . ': ';
-            }
+        if (empty($message) && $code > 0) {
+            $message = '0x' . dechex($code) . ': ';
         }
 
         if (!empty($str)) {

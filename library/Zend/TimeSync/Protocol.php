@@ -29,6 +29,7 @@
  */
 abstract class Zend_TimeSync_Protocol
 {
+    public $_port;
     /**
      * Holds the current socket connection
      *
@@ -123,7 +124,7 @@ abstract class Zend_TimeSync_Protocol
      */
     public function getInfo()
     {
-        if (empty($this->_info) === true) {
+        if (empty($this->_info)) {
             $this->_write($this->_prepare());
             $timestamp = $this->_extract($this->_read());
         }
@@ -141,8 +142,6 @@ abstract class Zend_TimeSync_Protocol
     {
         $this->_write($this->_prepare());
         $timestamp = $this->_extract($this->_read());
-
-        $date = new Zend_Date($this, null, $locale);
-        return $date;
+        return new Zend_Date($this, null, $locale);
     }
 }

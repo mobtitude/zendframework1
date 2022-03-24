@@ -60,10 +60,8 @@ class Zend_Reflection_Function extends ReflectionFunction
      */
     public function getStartLine($includeDocComment = false)
     {
-        if ($includeDocComment) {
-            if ($this->getDocComment() != '') {
-                return $this->getDocblock()->getStartLine();
-            }
+        if ($includeDocComment && $this->getDocComment() != '') {
+            return $this->getDocblock()->getStartLine();
         }
 
         return parent::getStartLine();
@@ -123,7 +121,6 @@ class Zend_Reflection_Function extends ReflectionFunction
             throw new Zend_Reflection_Exception('Function does not specify an @return annotation tag; cannot determine return type');
         }
         $tag    = $docblock->getTag('return');
-        $return = Zend_Reflection_Docblock_Tag::factory('@return ' . $tag->getDescription());
-        return $return;
+        return Zend_Reflection_Docblock_Tag::factory('@return ' . $tag->getDescription());
     }
 }

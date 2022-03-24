@@ -40,6 +40,7 @@ require_once 'Zend/Pdf/Target.php';
  */
 abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveIterator, Countable
 {
+    public $childOutlines;
     /**
      * Action dictionary
      *
@@ -86,7 +87,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
                     $processedActions->attach($dictionary->Next);
                     $this->next[] = Zend_Pdf_Action::load($dictionary->Next, $processedActions);
                 }
-            } else if ($dictionary->Next instanceof Zend_Pdf_Element_Array) {
+            } elseif ($dictionary->Next instanceof Zend_Pdf_Element_Array) {
                 foreach ($dictionary->Next->items as $chainedActionDictionary) {
                     // Check if dictionary object is not already processed
                     if (!$processedActions->contains($chainedActionDictionary)) {
@@ -123,7 +124,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('$dictionary mast be a direct or an indirect dictionary object.');
         }
-        if (isset($dictionary->Type)  &&  $dictionary->Type->value != 'Action') {
+        if (property_exists($dictionary, 'Type') && $dictionary->Type !== null  &&  $dictionary->Type->value != 'Action') {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Action dictionary Type entry must be set to \'Action\'.');
         }
@@ -264,10 +265,10 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
         $processedActions->attach($this);
 
         $childListUpdated = false;
-        if (count($this->_originalNextList) != count($this->next)) {
+        if (count($this->_originalNextList) !== count($this->next)) {
             // If original and current children arrays have different size then children list was updated
             $childListUpdated = true;
-        } else if ( !(array_keys($this->_originalNextList) === array_keys($this->next)) ) {
+        } elseif (array_keys($this->_originalNextList) !== array_keys($this->next)) {
             // If original and current children arrays have different keys (with a glance to an order) then children list was updated
             $childListUpdated = true;
         } else {
@@ -384,7 +385,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
      */
     public function hasChildren()
     {
-        return count($this->next) > 0;
+        return $this->next !== [];
     }
 
 

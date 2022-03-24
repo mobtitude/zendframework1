@@ -69,9 +69,9 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
     {
         if ($directory instanceof Zend_Config) {
             $directory = $directory->toArray();
-        } else if (is_string($directory)) {
+        } elseif (is_string($directory)) {
             $directory = explode(',', $directory);
-        } else if (!is_array($directory)) {
+        } elseif (!is_array($directory)) {
             require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception ('Invalid options to validator provided');
         }
@@ -122,7 +122,7 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
 
         if (is_string($directory)) {
             $directory = explode(',', $directory);
-        } else if (!is_array($directory)) {
+        } elseif (!is_array($directory)) {
             require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception ('Invalid options to validator provided');
         }
@@ -160,9 +160,9 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
     public function isValid($value, $file = null)
     {
         $directories = $this->getDirectory(true);
-        if (($file !== null) and (!empty($file['destination']))) {
+        if ($file !== null && !empty($file['destination'])) {
             $directories[] = $file['destination'];
-        } else if (!isset($file['name'])) {
+        } elseif (!isset($file['name'])) {
             $file['name'] = $value;
         }
 

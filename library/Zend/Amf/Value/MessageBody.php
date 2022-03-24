@@ -176,7 +176,7 @@ class Zend_Amf_Value_MessageBody
         if (!preg_match('#^[/?]#', $methodName)) {
             $this->_targetUri = rtrim($this->_targetUri, '/') . '/';
         }
-        $this->_targetUri = $this->_targetUri . $methodName;
+        $this->_targetUri .= $methodName;
         return $this;
     }
 }

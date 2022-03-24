@@ -108,11 +108,6 @@ class Zend_Validate_Barcode_Code93 extends Zend_Validate_Barcode_AdapterAbstract
             --$length;
         }
         $check .= array_search(($count % 47), $this->_check);
-
-        if ($check == $checksum) {
-            return true;
-        }
-
-        return false;
+        return $check === $checksum;
     }
 }

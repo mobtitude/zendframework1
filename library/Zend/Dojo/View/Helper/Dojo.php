@@ -151,7 +151,7 @@ class Zend_Dojo_View_Helper_Dojo
      */
     public static function useDeclarative()
     {
-        return (false === self::$_useProgrammatic);
+        return (!self::$_useProgrammatic);
     }
 
     /**
@@ -161,7 +161,7 @@ class Zend_Dojo_View_Helper_Dojo
      */
     public static function useProgrammatic()
     {
-        return (false !== self::$_useProgrammatic);
+        return (self::$_useProgrammatic);
     }
 
     /**

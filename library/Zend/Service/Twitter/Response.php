@@ -147,7 +147,7 @@ class Zend_Service_Twitter_Response
             return array();
         }
         if (null === $this->jsonBody
-            || !isset($this->jsonBody->errors)
+            || !(property_exists($this->jsonBody, 'errors') && $this->jsonBody->errors !== null)
         ) {
             require_once 'Zend/Service/Twitter/Exception.php';
             throw new Zend_Service_Twitter_Exception(

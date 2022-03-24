@@ -118,8 +118,7 @@ abstract class Zend_Navigation_Container implements RecursiveIterator, Countable
         } elseif (!$page instanceof Zend_Navigation_Page) {
             require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
-                    'Invalid argument: $page must be an instance of ' .
-                    'Zend_Navigation_Page or Zend_Config, or an array');
+                    'Invalid argument: $page must be an instance of Zend_Navigation_Page or Zend_Config, or an array');
         }
 
         $hash = $page->hashCode();
@@ -280,7 +279,7 @@ abstract class Zend_Navigation_Container implements RecursiveIterator, Countable
      */
     public function hasPages()
     {
-        return count($this->_index) > 0;
+        return $this->_index !== [];
     }
 
     /**
@@ -308,28 +307,21 @@ abstract class Zend_Navigation_Container implements RecursiveIterator, Countable
                 foreach ($pageProperty as $item) {
                     if (is_array($item)) {
                         // Use regex?
-                        if (true === $useRegex) {
+                        if ($useRegex) {
                             foreach ($item as $item2) {
                                 if (0 !== preg_match($value, (string) $item2)) {
                                     return $page;
                                 }
                             }
-                        } else {
-                            if (in_array($value, $item)) {
-                                return $page;
-                            }
+                        } elseif (in_array($value, $item)) {
+                            return $page;
                         }
-                    } else {
-                        // Use regex?
-                        if (true === $useRegex) {
-                            if (0 !== preg_match($value, (string) $item)) {
-                                return $page;
-                            }
-                        } else {
-                            if ($item == $value) {
-                                return $page;
-                            }
+                    } elseif ($useRegex) {
+                        if (0 !== preg_match($value, (string) $item)) {
+                            return $page;
                         }
+                    } elseif ($item == $value) {
+                        return $page;
                     }
                 }
                 
@@ -337,14 +329,12 @@ abstract class Zend_Navigation_Container implements RecursiveIterator, Countable
             }
             
             // Use regex?
-            if (true === $useRegex) {
+            if ($useRegex) {
                 if (preg_match($value, (string) $pageProperty)) {
                     return $page;
                 }
-            } else {
-                if ($pageProperty == $value) {
-                    return $page;
-                }
+            } elseif ($pageProperty == $value) {
+                return $page;
             }
         }
         
@@ -379,28 +369,21 @@ abstract class Zend_Navigation_Container implements RecursiveIterator, Countable
                 foreach ($pageProperty as $item) {
                     if (is_array($item)) {
                         // Use regex?
-                        if (true === $useRegex) {
+                        if ($useRegex) {
                             foreach ($item as $item2) {
                                 if (0 !== preg_match($value, (string) $item2)) {
                                     $found[] = $page;
                                 }
                             }
-                        } else {
-                            if (in_array($value, $item)) {
-                                $found[] = $page;
-                            }
+                        } elseif (in_array($value, $item)) {
+                            $found[] = $page;
                         }
-                    } else {
-                        // Use regex?
-                        if (true === $useRegex) {
-                            if (0 !== preg_match($value, (string) $item)) {
-                                $found[] = $page;
-                            }
-                        } else {
-                            if ($item == $value) {
-                                $found[] = $page;
-                            }
+                    } elseif ($useRegex) {
+                        if (0 !== preg_match($value, (string) $item)) {
+                            $found[] = $page;
                         }
+                    } elseif ($item == $value) {
+                        $found[] = $page;
                     }
                 }
                 
@@ -408,14 +391,12 @@ abstract class Zend_Navigation_Container implements RecursiveIterator, Countable
             }
             
             // Use regex?
-            if (true === $useRegex) {
+            if ($useRegex) {
                 if (0 !== preg_match($value, (string) $pageProperty)) {
                     $found[] = $page;
                 }
-            } else {
-                if ($pageProperty == $value) {
-                    $found[] = $page;
-                }
+            } elseif ($pageProperty == $value) {
+                $found[] = $page;
             }
         }
 
@@ -520,8 +501,7 @@ abstract class Zend_Navigation_Container implements RecursiveIterator, Countable
         } else {
             require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
-                    'Corruption detected in container; ' .
-                    'invalid key found in internal iterator');
+                    'Corruption detected in container; invalid key found in internal iterator');
         }
     }
 

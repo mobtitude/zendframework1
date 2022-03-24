@@ -103,14 +103,15 @@ class Zend_Gdata_Extension_Reminder extends Zend_Gdata_Extension
     public function __toString()
     {
         $s = '';
-        if ($this->_absoluteTime)
+        if ($this->_absoluteTime) {
             $s = " at " . $this->_absoluteTime;
-        else if ($this->_days)
+        } elseif ($this->_days) {
             $s = " in " . $this->_days . " days";
-        else if ($this->_hours)
+        } elseif ($this->_hours) {
             $s = " in " . $this->_hours . " hours";
-        else if ($this->_minutes)
+        } elseif ($this->_minutes) {
             $s = " in " . $this->_minutes . " minutes";
+        }
         return $this->_method . $s;
     }
 

@@ -135,7 +135,7 @@ class Zend_Service_WindowsAzure_Storage_TableEntityQuery
 	    
 		if (count($this->_where) == 0) {
 			$cond = '';
-		} else if ($cond !== '') {
+		} elseif ($cond !== '') {
 			$cond = ' ' . strtolower(trim($cond)) . ' ';
 		}
 		
@@ -309,9 +309,8 @@ class Zend_Service_WindowsAzure_Storage_TableEntityQuery
 	    
 	    $text = str_replace('&&', 'and', $text);
 	    $text = str_replace('||', 'or',  $text);
-	    $text = str_replace('!',  'not', $text);
 	    
-	    return $text;
+	    return str_replace('!',  'not', $text);
 	}
 	
 	/**
@@ -333,10 +332,8 @@ class Zend_Service_WindowsAzure_Storage_TableEntityQuery
 		$query = str_replace('$', '%24', $query);
 		$query = str_replace('{', '%7B', $query);
 		$query = str_replace('}', '%7D', $query);
-
-		$query = str_replace(' ', '%20', $query);
 		
-		return $query;
+		return str_replace(' ', '%20', $query);
 	}
 	
 	/**

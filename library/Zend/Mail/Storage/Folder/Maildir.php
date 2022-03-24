@@ -86,7 +86,7 @@ class Zend_Mail_Storage_Folder_Maildir extends Zend_Mail_Storage_Maildir impleme
             $params = (object)$params;
         }
 
-        if (!isset($params->dirname) || !is_dir($params->dirname)) {
+        if (!(property_exists($params, 'dirname') && $params->dirname !== null) || !is_dir($params->dirname)) {
             /**
              * @see Zend_Mail_Storage_Exception
              */
@@ -96,10 +96,10 @@ class Zend_Mail_Storage_Folder_Maildir extends Zend_Mail_Storage_Maildir impleme
 
         $this->_rootdir = rtrim($params->dirname, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
-        $this->_delim = isset($params->delim) ? $params->delim : '.';
+        $this->_delim = property_exists($params, 'delim') && $params->delim !== null ? $params->delim : '.';
 
         $this->_buildFolderTree();
-        $this->selectFolder(!empty($params->folder) ? $params->folder : 'INBOX');
+        $this->selectFolder(empty($params->folder) ? 'INBOX' : $params->folder);
         $this->_has['top'] = true;
         $this->_has['flags'] = true;
     }
@@ -155,19 +155,19 @@ class Zend_Mail_Storage_Folder_Maildir extends Zend_Mail_Storage_Maildir impleme
                         require_once 'Zend/Mail/Storage/Exception.php';
                         throw new Zend_Mail_Storage_Exception('error while reading maildir');
                     }
-                    array_push($stack, $parent);
+                    $stack[] = $parent;
                     $parent = $dir . $this->_delim;
                     $folder = new Zend_Mail_Storage_Folder($local, substr($dir, 1), true);
                     $parentFolder->$local = $folder;
-                    array_push($folderStack, $parentFolder);
+                    $folderStack[] = $parentFolder;
                     $parentFolder = $folder;
                     break;
-                } else if ($stack) {
+                } elseif ($stack !== []) {
                     $parent = array_pop($stack);
                     $parentFolder = array_pop($folderStack);
                 }
             } while ($stack);
-            if (!$stack) {
+            if ($stack === []) {
                 /**
                  * @see Zend_Mail_Storage_Exception
                  */
@@ -242,7 +242,7 @@ class Zend_Mail_Storage_Folder_Maildir extends Zend_Mail_Storage_Maildir impleme
                 throw new Zend_Mail_Storage_Exception("{$this->_currentFolder} is not selectable", 0, $e);
             }
             // seems like file has vanished; rebuilding folder tree - but it's still an exception
-            $this->_buildFolderTree($this->_rootdir);
+            $this->_buildFolderTree();
             /**
              * @see Zend_Mail_Storage_Exception
              */

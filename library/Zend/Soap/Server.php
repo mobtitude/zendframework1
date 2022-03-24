@@ -590,7 +590,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
      */
     public function setClass($class, $namespace = '', $argv = null)
     {
-        if (isset($this->_class)) {
+        if ($this->_class !== null) {
             require_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('A class has already been registered with this soap server instance');
         }
@@ -630,7 +630,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
             throw new Zend_Soap_Server_Exception('Invalid object argument ('.gettype($object).')');
         }
 
-        if(isset($this->_object)) {
+        if($this->_object !== null) {
             require_once 'Zend/Soap/Server/Exception.php';
             throw new Zend_Soap_Server_Exception('An object has already been registered with this soap server instance');
         }
@@ -729,11 +729,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
         } elseif ($request instanceof SimpleXMLElement) {
             $xml = $request->asXML();
         } elseif (is_object($request) || is_string($request)) {
-            if (is_object($request)) {
-                $xml = $request->__toString();
-            } else {
-                $xml = $request;
-            }
+            $xml = is_object($request) ? $request->__toString() : $request;
 
             $dom = new DOMDocument();
             try {
@@ -743,9 +739,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
                 }
             } catch (Zend_Xml_Exception $e) {
                 require_once 'Zend/Soap/Server/Exception.php';
-                throw new Zend_Soap_Server_Exception(
-                    $e->getMessage()
-                );
+                throw new Zend_Soap_Server_Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
         $this->_request = $xml;
@@ -775,7 +769,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
      */
     public function setReturnResponse($flag)
     {
-        $this->_returnResponse = ($flag) ? true : false;
+        $this->_returnResponse = $flag;
         return $this;
     }
 

@@ -74,26 +74,21 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
-
             if (!empty($options)) {
                 $temp['target'] = array_shift($options);
             }
-
             if (!empty($options)) {
                 $temp['rules'] = array_shift($options);
             }
-
             if (!empty($options)) {
                 $temp['throwTargetExceptionsOn'] = array_shift($options);
             }
-
             if (!empty($options)) {
                 $temp['targetReplacementIdentifier'] = array_shift($options);
             }
-
             $options = $temp;
         }
 
@@ -150,11 +145,9 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
         }
 
         // Set Präfix Path
-        if (array_key_exists('filterPrefixPath', $options)) {
-            if (!is_scalar($options['filterPrefixPath'])) {
-                foreach ($options['filterPrefixPath'] as $prefix => $path) {
-                    $this->addFilterPrefixPath($prefix, $path);
-                }
+        if (array_key_exists('filterPrefixPath', $options) && !is_scalar($options['filterPrefixPath'])) {
+            foreach ($options['filterPrefixPath'] as $prefix => $path) {
+                $this->addFilterPrefixPath($prefix, $path);
             }
         }
 
@@ -199,7 +192,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      */
     public function setThrowTargetExceptionsOn($throwTargetExceptionsOn)
     {
-        $this->_throwTargetExceptionsOn = ($throwTargetExceptionsOn == true) ? true : false;
+        $this->_throwTargetExceptionsOn = $throwTargetExceptionsOn == true;
         return $this;
     }
 
@@ -221,7 +214,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      */
     public function setTargetReplacementIdentifier($targetReplacementIdentifier)
     {
-        if ($targetReplacementIdentifier) {
+        if ($targetReplacementIdentifier !== '' && $targetReplacementIdentifier !== '0') {
             $this->_targetReplacementIdentifier = (string) $targetReplacementIdentifier;
         }
 
@@ -349,10 +342,8 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     public function getRule($spec, $index)
     {
         $spec = $this->_normalizeSpec($spec);
-        if (isset($this->_rules[$spec]) && is_array($this->_rules[$spec])) {
-            if (isset($this->_rules[$spec][$index])) {
-                return $this->_rules[$spec][$index];
-            }
+        if (isset($this->_rules[$spec]) && is_array($this->_rules[$spec]) && isset($this->_rules[$spec][$index])) {
+            return $this->_rules[$spec][$index];
         }
         return false;
     }

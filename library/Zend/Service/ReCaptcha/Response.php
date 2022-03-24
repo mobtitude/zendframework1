@@ -80,11 +80,7 @@ class Zend_Service_ReCaptcha_Response
      */
     public function setStatus($status)
     {
-        if ($status === 'true') {
-            $this->_status = true;
-        } else {
-            $this->_status = false;
-        }
+        $this->_status = $status === 'true';
 
         return $this;
     }

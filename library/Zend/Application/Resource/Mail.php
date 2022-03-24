@@ -133,8 +133,7 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
             case 'Zend_Mail_Transport_Smtp':
                 if (!isset($options['host'])) {
                     throw new Zend_Application_Resource_Exception(
-                        'A host is necessary for smtp transport,'
-                        . ' but none was given'
+                        'A host is necessary for smtp transport, but none was given'
                     );
                 }
 

@@ -94,7 +94,7 @@ class Zend_Service_Console_Command
 		if (error_reporting() === 0) {
 			return;
 		}
-		file_put_contents('php://stderr', $errorMessage . ($newLine ? "\r\n" : ''));
+		file_put_contents('php://stderr', $errorMessage . ($newLine !== '' && $newLine !== '0' ? "\r\n" : ''));
 	}
 
 	/**
@@ -166,7 +166,7 @@ class Zend_Service_Console_Command
 			}
 			if (is_null($value) && $parameter->required) {
 				$missingParameterValues[] = $parameter->aliases[0];
-			} else if (is_null($value)) {
+			} elseif (is_null($value)) {
 				$value = $parameter->defaultvalue;
 			}
 
@@ -176,7 +176,7 @@ class Zend_Service_Console_Command
 		}
 
 		// Mising parameters?
-		if (count($missingParameterValues) > 0) {
+		if ($missingParameterValues !== []) {
 			self::stderr("Some parameters are missing:\r\n" . implode("\r\n", $missingParameterValues));
 			die();
 		}
@@ -217,8 +217,9 @@ class Zend_Service_Console_Command
 			$handlerDescriptions = self::_findValueForDocComment('@command-handler-description', $type->getDocComment());
 			$handlerHeaders = self::_findValueForDocComment('@command-handler-header', $type->getDocComment());
 			$handlerFooters = self::_findValueForDocComment('@command-handler-footer', $type->getDocComment());
+			$handlersCount = count($handlers);
 
-			for ($hi = 0; $hi < count($handlers); $hi++) {
+			for ($hi = 0; $hi < $handlersCount; $hi++) {
 				$handler = $handlers[$hi];
 				$handlerDescription = isset($handlerDescriptions[$hi]) ? $handlerDescriptions[$hi] : (isset($handlerDescriptions[0]) ? $handlerDescriptions[0] : '');
 				$handlerDescription = str_replace('\r\n', "\r\n", $handlerDescription);
@@ -241,14 +242,15 @@ class Zend_Service_Console_Command
 						// register it as a command.
 						$commands[] = substr($method->getName(), 0, -7);
 					}
-			       	for ($x = 0; $x < count($commands); $x++) {
+								$commandsCount = count($commands);
+			       	for ($x = 0; $x < $commandsCount; $x++) {
 			       		$commands[$x] = strtolower($commands[$x]);
 			       	}
 			       	$commands = array_unique($commands);
 			       	$commandDescriptions = self::_findValueForDocComment('@command-description', $method->getDocComment());
 			       	$commandExamples = self::_findValueForDocComment('@command-example', $method->getDocComment());
 
-			       	if (count($commands) > 0) {
+			       	if ($commands !== []) {
 						$command = $commands[0];
 						$commandDescription = isset($commandDescriptions[0]) ? $commandDescriptions[0] : '';
 
@@ -264,7 +266,8 @@ class Zend_Service_Console_Command
 
 						$parameters = $method->getParameters();
 						$parametersFor = self::_findValueForDocComment('@command-parameter-for', $method->getDocComment());
-						for ($pi = 0; $pi < count($parameters); $pi++) {
+						$parametersCount = count($parameters);
+						for ($pi = 0; $pi < $parametersCount; $pi++) {
 							// Initialize
 							$parameter = $parameters[$pi];
 							$parameterFor = null;
@@ -278,7 +281,7 @@ class Zend_Service_Console_Command
 							// Find the $parametersFor with the same name defined
 							foreach ($parametersFor as $possibleParameterFor) {
 								$possibleParameterFor = explode(' ', (string) $possibleParameterFor, 4);
-								if ($possibleParameterFor[0] == '$' . $parameter->getName()) {
+								if ($possibleParameterFor[0] === '$' . $parameter->getName()) {
 									$parameterFor = $possibleParameterFor;
 									break;
 								}
@@ -297,7 +300,7 @@ class Zend_Service_Console_Command
 								'valueproviders' => explode('|', $parameterFor[1]),
 								'aliases'        => explode('|', $parameterFor[2]),
 								'description'    => (isset($parameterFor[3]) ? $parameterFor[3] : ''),
-								'required'       => (isset($parameterFor[3]) ? strpos(strtolower($parameterFor[3]), 'required') !== false && strpos(strtolower($parameterFor[3]), 'required if') === false : false),
+								'required'       => (isset($parameterFor[3]) ? stripos($parameterFor[3], 'required') !== false && stripos($parameterFor[3], 'required if') === false : false),
 							);
 
 							// Add to model
@@ -347,7 +350,8 @@ class Zend_Service_Console_Command
 	protected function _displayObjectInformation($object, $propertiesToDump = array())
 	{
 		foreach ($propertiesToDump as $property) {
-			printf('%-16s: %s' . "\r\n", $property, $object->$property);
+			printf('%-16s: %s
+', $property, $object->$property);
 		}
 		printf("\r\n");
 	}
@@ -376,7 +380,8 @@ class Zend_Service_Console_Command
 		foreach ($handler->commands as $command) {
 			$description = str_split($command->description, 50);
 			printf('  %-25s %s%s', implode(', ', $command->aliases), $description[0], $newline);
-			for ($di = 1; $di < count($description); $di++) {
+			$descriptionCount = count($description);
+			for ($di = 1; $di < $descriptionCount; $di++) {
 				printf('  %-25s %s%s', '', $description[$di], $newline);
 			}
 			printf($newline);
@@ -385,7 +390,8 @@ class Zend_Service_Console_Command
 				foreach ($command->parameters as $parameter) {
 					$description = str_split($parameter->description, 50);
 					printf('    %-23s %s%s', implode(', ', $parameter->aliases), $description[0], $newline);
-					for ($di = 1; $di < count($description); $di++) {
+					$descriptionCount = count($description);
+					for ($di = 1; $di < $descriptionCount; $di++) {
 						printf('    %-23s %s%s', '', $description[$di], $newline);
 					}
 					printf($newline);

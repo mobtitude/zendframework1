@@ -84,18 +84,16 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if ((!is_array($options)) || (is_array($options) && !array_key_exists('allowTags', $options) &&
+        } elseif ((!is_array($options)) || (is_array($options) && !array_key_exists('allowTags', $options) &&
             !array_key_exists('allowAttribs', $options) && !array_key_exists('allowComments', $options))) {
             $options = func_get_args();
             $temp['allowTags'] = array_shift($options);
             if (!empty($options)) {
                 $temp['allowAttribs'] = array_shift($options);
             }
-
             if (!empty($options)) {
                 $temp['allowComments'] = array_shift($options);
             }
-
             $options = $temp;
         }
 
@@ -169,9 +167,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
                 $tagName = strtolower($element);
                 // Store the tag as allowed with no attributes
                 $this->_tagsAllowed[$tagName] = array();
-            }
-            // Otherwise, if a tag was provided with attributes
-            else if (is_string($index) && (is_array($element) || is_string($element))) {
+            } elseif (is_string($index) && (is_array($element) || is_string($element))) {
                 // Canonicalize the tag name
                 $tagName = strtolower($index);
                 // Canonicalize the attributes
@@ -246,11 +242,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
             $value = substr($value, $pos);
 
             // If there is no comment closing tag, strip whole text
-            if (!preg_match('/--\s*>/s', $value)) {
-                $value = '';
-            } else {
-                $value = preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/s', '',  $value);
-            }
+            $value = preg_match('/--\s*>/s', $value) ? preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/s', '',  $value) : '';
 
             $value = $start . $value;
         }
@@ -264,16 +256,12 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
         // Iterate over each set of matches
         foreach ($matches[1] as $index => $preTag) {
             // If the pre-tag text is non-empty, strip any ">" characters from it
-            if (strlen((string) $preTag)) {
+            if (strlen((string) $preTag) !== 0) {
                 $preTag = str_replace('>', '', $preTag);
             }
             // If a tag exists in this match, then filter the tag
             $tag = $matches[2][$index];
-            if (strlen((string) $tag)) {
-                $tagFiltered = $this->_filterTag($tag);
-            } else {
-                $tagFiltered = '';
-            }
+            $tagFiltered = strlen((string) $tag) !== 0 ? $this->_filterTag($tag) : '';
             // Add the filtered pre-tag text and filtered tag to the data buffer
             $dataFiltered .= $preTag . $tagFiltered;
         }
@@ -317,7 +305,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
         $tagAttributes = trim($tagAttributes);
 
         // If there are non-whitespace characters in the attribute string
-        if (strlen($tagAttributes)) {
+        if (strlen($tagAttributes) !== 0) {
             // Parse iteratively for well-formed attributes
             preg_match_all('/([\w-]+)\s*=\s*(?:(")(.*?)"|(\')(.*?)\')/s', $tagAttributes, $matches);
 

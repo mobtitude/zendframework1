@@ -320,7 +320,7 @@ class Zend_Feed_Builder_Header extends ArrayObject
             require_once 'Zend/Feed/Builder/Exception.php';
             throw new Zend_Feed_Builder_Exception('Passed parameter is not a valid HTTP URI');
         }
-        if (!$uri->getPort()) {
+        if ($uri->getPort() === '' || $uri->getPort() === '0') {
             $uri->setPort(80);
         }
         $this->offsetSet('cloud', array('uri' => $uri,

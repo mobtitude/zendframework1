@@ -72,7 +72,7 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Array expected as parameter');
         } else {
@@ -188,14 +188,12 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
                     if ($element === $value) {
                         return true;
                     }
-                } else if ($element == $value) {
+                } elseif ($element == $value) {
                     return true;
                 }
             }
-        } else {
-            if (in_array($value, $this->_haystack, $this->_strict)) {
-                return true;
-            }
+        } elseif (in_array($value, $this->_haystack, $this->_strict)) {
+            return true;
         }
 
         $this->_error(self::NOT_IN_ARRAY);

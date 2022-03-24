@@ -72,6 +72,10 @@ require_once 'Zend/Http/Response/Stream.php';
 class Zend_Http_Client
 {
     /**
+     * @var bool|mixed|string
+     */
+    public $_stream_name;
+    /**
      * HTTP request methods
      */
     const GET     = 'GET';
@@ -324,7 +328,7 @@ class Zend_Http_Client
         }
 
         // We have no ports, set the defaults
-        if (! $uri->getPort()) {
+        if ($uri->getPort() === '' || $uri->getPort() === '0') {
             $uri->setPort(($uri->getScheme() == 'https' ? 443 : 80));
         }
 
@@ -645,7 +649,7 @@ class Zend_Http_Client
 
         if ($cookiejar instanceof Zend_Http_CookieJar) {
             $this->cookiejar = $cookiejar;
-        } elseif ($cookiejar === true) {
+        } elseif ($cookiejar) {
             $this->cookiejar = new Zend_Http_CookieJar();
         } elseif (! $cookiejar) {
             $this->cookiejar = null;
@@ -697,7 +701,7 @@ class Zend_Http_Client
             $value = urlencode($value);
         }
 
-        if (isset($this->cookiejar)) {
+        if ($this->cookiejar !== null) {
             if ($cookie instanceof Zend_Http_Cookie) {
                 $this->cookiejar->addCookie($cookie);
             } elseif (is_string($cookie) && $value !== null) {
@@ -1049,9 +1053,9 @@ class Zend_Http_Client
                 // @see ZF-11671 to unmask for some services to foo=val1&foo=val2
                 if ($this->getUnmaskStatus()) {
                     if ($this->_queryBracketsEscaped) {
-                        $query = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query);
+                        $query = preg_replace('/%5B(?:\d|[1-9]\d+)%5D=/', '=', $query);
                     } else {
-                        $query = preg_replace('/\\[(?:[0-9]|[1-9][0-9]+)\\]=/', '=', $query);
+                        $query = preg_replace('/\[(?:\d|[1-9]\d+)\]=/', '=', $query);
                     }
                 }
 
@@ -1070,7 +1074,7 @@ class Zend_Http_Client
 
             // Open the connection, send the request and read the response
             $this->adapter->connect($uri->getHost(), $uri->getPort(),
-                ($uri->getScheme() == 'https' ? true : false));
+                ($uri->getScheme() == 'https'));
 
             if($this->config['output_stream']) {
                 if($this->adapter instanceof Zend_Http_Client_Adapter_Stream) {
@@ -1087,7 +1091,7 @@ class Zend_Http_Client
                 $uri, $this->config['httpversion'], $headers, $body);
 
             $response = $this->adapter->read();
-            if (! $response) {
+            if ($response === '' || $response === '0') {
                 /** @see Zend_Http_Client_Exception */
                 require_once 'Zend/Http/Client/Exception.php';
                 throw new Zend_Http_Client_Exception('Unable to read response, or response is empty');
@@ -1115,7 +1119,7 @@ class Zend_Http_Client
             }
 
             // Load cookies into cookie jar
-            if (isset($this->cookiejar)) {
+            if ($this->cookiejar !== null) {
                 $this->cookiejar->addCookiesFromResponse($response, $uri, $this->config['encodecookies']);
             }
 
@@ -1189,8 +1193,7 @@ class Zend_Http_Client
             $host = $this->uri->getHost();
 
             // If the port is not default, add it
-            if (! (($this->uri->getScheme() == 'http' && $this->uri->getPort() == 80) ||
-                  ($this->uri->getScheme() == 'https' && $this->uri->getPort() == 443))) {
+            if (!($this->uri->getScheme() == 'http' && $this->uri->getPort() == 80) && !($this->uri->getScheme() == 'https' && $this->uri->getPort() == 443)) {
                 $host .= ':' . $this->uri->getPort();
             }
 
@@ -1198,25 +1201,19 @@ class Zend_Http_Client
         }
 
         // Set the connection header
-        if (! isset($this->headers['connection'])) {
-            if (! $this->config['keepalive']) {
-                $headers[] = "Connection: close";
-            }
+        if (! isset($this->headers['connection']) && ! $this->config['keepalive']) {
+            $headers[] = "Connection: close";
         }
 
         // Set the Accept-encoding header if not set - depending on whether
         // zlib is available or not.
         if (! isset($this->headers['accept-encoding'])) {
-            if (function_exists('gzinflate')) {
-                $headers[] = 'Accept-encoding: gzip, deflate';
-            } else {
-                $headers[] = 'Accept-encoding: identity';
-            }
+            $headers[] = function_exists('gzinflate') ? 'Accept-encoding: gzip, deflate' : 'Accept-encoding: identity';
         }
 
         // Set the Content-Type header
         if (($this->method == self::POST || $this->method == self::PUT) &&
-           (! isset($this->headers[strtolower(self::CONTENT_TYPE)]) && isset($this->enctype))) {
+           (! isset($this->headers[strtolower(self::CONTENT_TYPE)]) && $this->enctype !== null)) {
 
             $headers[] = self::CONTENT_TYPE . ': ' . $this->enctype;
         }
@@ -1233,7 +1230,7 @@ class Zend_Http_Client
         }
 
         // Load cookies from cookie jar
-        if (isset($this->cookiejar)) {
+        if ($this->cookiejar !== null) {
             $cookstr = $this->cookiejar->getMatchingCookies($this->uri,
                 true, Zend_Http_CookieJar::COOKIE_STRING_CONCAT);
 
@@ -1268,12 +1265,12 @@ class Zend_Http_Client
             return '';
         }
 
-        if (isset($this->raw_post_data) && is_resource($this->raw_post_data)) {
+        if ($this->raw_post_data !== null && is_resource($this->raw_post_data)) {
             return $this->raw_post_data;
         }
 
         // If we have raw_post_data set, just use it as the body.
-        if (isset($this->raw_post_data)) {
+        if ($this->raw_post_data !== null) {
             $this->setHeaders(self::CONTENT_LENGTH, strlen($this->raw_post_data));
 
             return $this->raw_post_data;
@@ -1282,12 +1279,12 @@ class Zend_Http_Client
         $body = '';
 
         // If we have files to upload, force enctype to multipart/form-data
-        if (count ($this->files) > 0) {
+        if ($this->files !== []) {
             $this->setEncType(self::ENC_FORMDATA);
         }
 
         // If we have POST parameters or files, encode and add them to the body
-        if (count($this->paramsPost) > 0 || count($this->files) > 0) {
+        if ($this->paramsPost !== [] || $this->files !== []) {
             switch($this->enctype) {
                 case self::ENC_FORMDATA:
                     // Encode body as multipart/form-data
@@ -1537,11 +1534,7 @@ class Zend_Http_Client
 
             // Calculate array key
             if ($prefix) {
-                if (is_int($name)) {
-                    $key = $prefix . '[]';
-                } else {
-                    $key = $prefix . "[$name]";
-                }
+                $key = is_int($name) ? $prefix . '[]' : $prefix . "[$name]";
             } else {
                 $key = $name;
             }

@@ -56,12 +56,10 @@ class Zend_Tool_Project_Provider_Controller
             throw new Zend_Tool_Project_Provider_Exception($exceptionMessage);
         }
 
-        $newController = $controllersDirectory->createResource(
+        return $controllersDirectory->createResource(
             'controllerFile',
             array('controllerName' => $controllerName, 'moduleName' => $moduleName)
             );
-
-        return $newController;
     }
 
     /**

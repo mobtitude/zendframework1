@@ -252,11 +252,11 @@ class Zend_Mime_Part
         $headers = array();
 
         $contentType = $this->type;
-        if ($this->charset) {
+        if ($this->charset !== '' && $this->charset !== '0') {
             $contentType .= '; charset=' . $this->charset;
         }
 
-        if ($this->boundary) {
+        if ($this->boundary !== '' && $this->boundary !== '0') {
             $contentType .= ';' . $EOL
                             . " boundary=\"" . $this->boundary . '"';
         }
@@ -266,23 +266,23 @@ class Zend_Mime_Part
             $contentType
         );
 
-        if ($this->encoding) {
+        if ($this->encoding !== '' && $this->encoding !== '0') {
             $headers[] = array(
                 'Content-Transfer-Encoding',
                 $this->encoding
             );
         }
 
-        if ($this->id) {
+        if ($this->id !== '' && $this->id !== '0') {
             $headers[] = array(
                 'Content-ID',
                 '<' . $this->id . '>'
             );
         }
 
-        if ($this->disposition) {
+        if ($this->disposition !== '' && $this->disposition !== '0') {
             $disposition = $this->disposition;
-            if ($this->filename) {
+            if ($this->filename !== '' && $this->filename !== '0') {
                 $disposition .= '; filename="' . $this->filename . '"';
             }
             $headers[] = array(
@@ -291,21 +291,21 @@ class Zend_Mime_Part
             );
         }
 
-        if ($this->description) {
+        if ($this->description !== '' && $this->description !== '0') {
             $headers[] = array(
                 'Content-Description',
                 $this->description
             );
         }
 
-        if ($this->location) {
+        if ($this->location !== '' && $this->location !== '0') {
             $headers[] = array(
                 'Content-Location',
                 $this->location
             );
         }
 
-        if ($this->language) {
+        if ($this->language !== '' && $this->language !== '0') {
             $headers[] = array(
                 'Content-Language',
                 $this->language

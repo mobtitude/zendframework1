@@ -395,7 +395,7 @@ class Zend_Json_Server_Smd
         $envelope    = $this->getEnvelope();
         $contentType = $this->getContentType();
         $SMDVersion  = self::SMD_VERSION;
-        $service = compact('transport', 'envelope', 'contentType', 'SMDVersion');
+        $service = ['transport' => $transport, 'envelope' => $envelope, 'contentType' => $contentType, 'SMDVersion' => $SMDVersion];
 
         if (null !== ($target = $this->getTarget())) {
             $service['target']     = $target;
@@ -426,7 +426,7 @@ class Zend_Json_Server_Smd
     {
         $SMDVersion  = '.1';
         $serviceType = 'JSON-RPC';
-        $service = compact('SMDVersion', 'serviceType');
+        $service = ['SMDVersion' => $SMDVersion, 'serviceType' => $serviceType];
 
         $target = $this->getTarget();
 

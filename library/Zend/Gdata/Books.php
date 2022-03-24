@@ -105,11 +105,7 @@ class Zend_Gdata_Books extends Zend_Gdata
     {
         if ($location == null) {
             $uri = self::VOLUME_FEED_URI;
-        } else if ($location instanceof Zend_Gdata_Query) {
-            $uri = $location->getQueryUrl();
-        } else {
-            $uri = $location;
-        }
+        } else $uri = $location instanceof Zend_Gdata_Query ? $location->getQueryUrl() : $location;
         return parent::getFeed($uri, 'Zend_Gdata_Books_VolumeFeed');
     }
 
@@ -127,11 +123,7 @@ class Zend_Gdata_Books extends Zend_Gdata
     {
         if ($volumeId !== null) {
             $uri = self::VOLUME_FEED_URI . "/" . $volumeId;
-        } else if ($location instanceof Zend_Gdata_Query) {
-            $uri = $location->getQueryUrl();
-        } else {
-            $uri = $location;
-        }
+        } else $uri = $location instanceof Zend_Gdata_Query ? $location->getQueryUrl() : $location;
         return parent::getEntry($uri, 'Zend_Gdata_Books_VolumeEntry');
     }
 
@@ -145,11 +137,7 @@ class Zend_Gdata_Books extends Zend_Gdata
      */
     public function getUserLibraryFeed($location = null)
     {
-        if ($location == null) {
-            $uri = self::MY_LIBRARY_FEED_URI;
-        } else {
-            $uri = $location;
-        }
+        $uri = $location == null ? self::MY_LIBRARY_FEED_URI : $location;
         return parent::getFeed($uri, 'Zend_Gdata_Books_VolumeFeed');
     }
 
@@ -163,11 +151,7 @@ class Zend_Gdata_Books extends Zend_Gdata
      */
     public function getUserAnnotationFeed($location = null)
     {
-        if ($location == null) {
-            $uri = self::MY_ANNOTATION_FEED_URI;
-        } else {
-            $uri = $location;
-        }
+        $uri = $location == null ? self::MY_ANNOTATION_FEED_URI : $location;
         return parent::getFeed($uri, 'Zend_Gdata_Books_VolumeFeed');
     }
 
@@ -181,11 +165,7 @@ class Zend_Gdata_Books extends Zend_Gdata
      */
     public function insertVolume($entry, $location = null)
     {
-        if ($location == null) {
-            $uri = self::MY_LIBRARY_FEED_URI;
-        } else {
-            $uri = $location;
-        }
+        $uri = $location == null ? self::MY_LIBRARY_FEED_URI : $location;
         return parent::insertEntry(
             $entry, $uri, 'Zend_Gdata_Books_VolumeEntry');
     }

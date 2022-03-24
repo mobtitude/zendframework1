@@ -130,7 +130,7 @@ abstract class Zend_Tool_Project_Context_Filesystem_Abstract implements Zend_Too
     public function getPath()
     {
         $path = $this->_baseDirectory;
-        if ($this->_filesystemName) {
+        if ($this->_filesystemName !== '' && $this->_filesystemName !== '0') {
             $path .= '/' . $this->_filesystemName;
         }
         return $path;

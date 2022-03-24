@@ -47,7 +47,7 @@ abstract class Zend_Service_WindowsAzure_CommandLine_PackageScaffolder_PackageSc
 		if (error_reporting() === 0) {
 			return;
 		}
-		file_put_contents('php://stderr', $message . ($newLine ? "\r\n" : ''));
+		file_put_contents('php://stderr', $message . ($newLine !== '' && $newLine !== '0' ? "\r\n" : ''));
 	}
 	
 	/**
@@ -143,7 +143,7 @@ abstract class Zend_Service_WindowsAzure_CommandLine_PackageScaffolder_PackageSc
      * @return boolean
      */
     protected function copyDirectory($sourcePath, $destinationPath, $abortIfExists = true, $mode = '0775') {
-        $mode = $mode & ~0002;
+        $mode &= ~0002;
 
         if (is_null($sourcePath) || !is_string($sourcePath) || empty($sourcePath)) {
             throw new InvalidArgumentException("Undefined \"sourcePath\"");
@@ -158,44 +158,42 @@ abstract class Zend_Service_WindowsAzure_CommandLine_PackageScaffolder_PackageSc
         }
                         
         if (is_dir($sourcePath)) {
-            if (!is_dir($destinationPath) && !mkdir($destinationPath, $mode)) {
-                throw new RuntimeException("Failed to create target directory \"{$destinationPath}\"" );
-            }
-            $d = dir($sourcePath);
-            while ( false !== ( $entry = $d->read() ) ) {
-                if ( $entry == '.' || $entry == '..' ) {
-                    continue;
-                }
-                $strSourceEntry = $sourcePath . '/' . $entry; 
-                $strTargetEntry = $destinationPath . '/' . $entry;
-                if (is_dir($strSourceEntry) ) {
-                    $this->copyDirectory(
-                    	$strSourceEntry, 
-                    	$strTargetEntry, 
-                    	false, 
-                    	$mode
-                    );
-                    continue;
-                }
-                if (!copy($strSourceEntry, $strTargetEntry) ) {
-                    throw new RuntimeException (
-                        "Failed to copy"
-                        . " file \"{$strSourceEntry}\""
-                        . " to \"{$strTargetEntry}\"" 
-                    );
-                }
-            }
-            $d->close();
-        } else {
-            if (!copy($sourcePath, $destinationPath)) {
-                throw new RuntimeException (
-                    "Failed to copy"
-                    . " file \"{$sourcePath}\""
-                    . " to \"{$destinationPath}\"" 
-                    
-                );
-            }
-        }
+									if (!is_dir($destinationPath) && !mkdir($destinationPath, $mode)) {
+             throw new RuntimeException("Failed to create target directory \"{$destinationPath}\"" );
+         }
+									$d = dir($sourcePath);
+									while ( false !== ( $entry = $d->read() ) ) {
+             if ( $entry == '.' || $entry == '..' ) {
+                 continue;
+             }
+             $strSourceEntry = $sourcePath . '/' . $entry; 
+             $strTargetEntry = $destinationPath . '/' . $entry;
+             if (is_dir($strSourceEntry) ) {
+                 $this->copyDirectory(
+                 	$strSourceEntry, 
+                 	$strTargetEntry, 
+                 	false, 
+                 	$mode
+                 );
+                 continue;
+             }
+             if (!copy($strSourceEntry, $strTargetEntry) ) {
+                 throw new RuntimeException (
+                     "Failed to copy"
+                     . " file \"{$strSourceEntry}\""
+                     . " to \"{$strTargetEntry}\"" 
+                 );
+             }
+         }
+									$d->close();
+								} elseif (!copy($sourcePath, $destinationPath)) {
+									throw new RuntimeException (
+             "Failed to copy"
+             . " file \"{$sourcePath}\""
+             . " to \"{$destinationPath}\"" 
+             
+         );
+								}
         
         return true;
     }

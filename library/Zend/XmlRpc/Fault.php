@@ -207,12 +207,12 @@ class Zend_XmlRpc_Fault
         }
 
         // Check for fault
-        if (!$xml->fault) {
+        if ($xml->fault === null) {
             // Not a fault
             return false;
         }
 
-        if (!$xml->fault->value->struct) {
+        if ($xml->fault->value->struct === null) {
             // not a proper fault
             require_once 'Zend/XmlRpc/Exception.php';
             throw new Zend_XmlRpc_Exception('Invalid fault structure', 500);
@@ -239,11 +239,7 @@ class Zend_XmlRpc_Fault
         }
 
         if (empty($message)) {
-            if (isset($this->_internal[$code])) {
-                $message = $this->_internal[$code];
-            } else {
-                $message = 'Unknown Error';
-            }
+            $message = isset($this->_internal[$code]) ? $this->_internal[$code] : 'Unknown Error';
         }
 
         $this->setCode($code);

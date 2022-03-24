@@ -71,7 +71,7 @@ class Zend_Ldap_Node_Schema_AttributeType_OpenLdap extends Zend_Ldap_Node_Schema
     {
         if ($this->syntax === null) {
             $parent = $this->getParent();
-            if ($parent === null) return null;
+            if (!$parent instanceof \Zend_Ldap_Node_Schema_AttributeType_OpenLdap) return null;
             else return $parent->getSyntax();
         } else {
             return $this->syntax;
@@ -88,7 +88,7 @@ class Zend_Ldap_Node_Schema_AttributeType_OpenLdap extends Zend_Ldap_Node_Schema
         $maxLength = $this->{'max-length'};
         if ($maxLength === null) {
             $parent = $this->getParent();
-            if ($parent === null) return null;
+            if (!$parent instanceof \Zend_Ldap_Node_Schema_AttributeType_OpenLdap) return null;
             else return $parent->getMaxLength();
         } else {
             return (int)$maxLength;

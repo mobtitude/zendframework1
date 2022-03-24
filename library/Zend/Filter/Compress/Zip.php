@@ -149,7 +149,7 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
                         }
 
                         if (is_dir($current . $node)) {
-                            array_push($stack, $current . $node . DIRECTORY_SEPARATOR);
+                            $stack[] = $current . $node . DIRECTORY_SEPARATOR;
                         }
 
                         if (is_file($current . $node)) {
@@ -162,7 +162,7 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
 
                     foreach ($files as $file) {
                         $zip->addFile($current . $file, $local . $file);
-                        if ($res !== true) {
+                        if (!$res) {
                             require_once 'Zend/Filter/Exception.php';
                             throw new Zend_Filter_Exception($this->_errorString($res));
                         }
@@ -170,21 +170,17 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
                 }
             } else {
                 $res = $zip->addFile($content, $basename);
-                if ($res !== true) {
+                if (!$res) {
                     require_once 'Zend/Filter/Exception.php';
                     throw new Zend_Filter_Exception($this->_errorString($res));
                 }
             }
         } else {
             $file = $this->getTarget();
-            if (!is_dir($file)) {
-                $file = basename($file);
-            } else {
-                $file = "zip.tmp";
-            }
+            $file = is_dir($file) ? "zip.tmp" : basename($file);
 
             $res = $zip->addFromString($file, $content);
-            if ($res !== true) {
+            if (!$res) {
                 require_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception($this->_errorString($res));
             }
@@ -252,7 +248,7 @@ class Zend_Filter_Compress_Zip extends Zend_Filter_Compress_CompressAbstract
         }
 
         $res = @$zip->extractTo($target);
-        if ($res !== true) {
+        if (!$res) {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception($this->_errorString($res));
         }

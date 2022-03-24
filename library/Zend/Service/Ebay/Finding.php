@@ -390,18 +390,14 @@ class Zend_Service_Ebay_Finding extends Zend_Service_Ebay_Abstract
         $nsMs         = self::XMLNS_MS;
         $expression   = "//$nsMs:errorMessage[1]/$ns:error/$ns:severity[.='Error']";
         $severityNode = $xpath->query($expression)->item(0);
-        if ($severityNode) {
+        if ($severityNode !== null) {
             $errorNode = $severityNode->parentNode;
             // ebay message
             $messageNode = $xpath->query("//$ns:message[1]", $errorNode)->item(0);
-            if ($messageNode) {
-                $message = 'eBay error: ' . $messageNode->nodeValue;
-            } else {
-                $message = 'eBay error: unknown';
-            }
+            $message = $messageNode !== null ? 'eBay error: ' . $messageNode->nodeValue : 'eBay error: unknown';
             // ebay error id
             $errorIdNode = $xpath->query("//$ns:errorId[1]", $errorNode)->item(0);
-            if ($errorIdNode) {
+            if ($errorIdNode !== null) {
                 $message .= ' (#' . $errorIdNode->nodeValue . ')';
             }
         }

@@ -89,14 +89,14 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         $authors = array();
         $list = $this->getXpath()->query($this->getXpathPrefix() . '//atom:author');
 
-        if (!$list->length) {
+        if ($list->length === 0) {
             /**
              * TODO: Limit query to feed level els only!
              */
             $list = $this->getXpath()->query('//atom:author');
         }
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             foreach ($list as $author) {
                 $author = $this->_getAuthor($author);
                 if (!empty($author)) {
@@ -173,7 +173,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
      */
     protected function _collectXhtml($xhtml, $prefix)
     {
-        if (!empty($prefix)) $prefix = $prefix . ':';
+        if (!empty($prefix)) $prefix .= ':';
         $matches = array(
             "/<\?xml[^<]*>[^<]*<" . $prefix . "div[^<]*/",
             "/<\/" . $prefix . "div>\s*$/"
@@ -306,9 +306,9 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:id)');
 
         if (!$id) {
-            if ($this->getPermalink()) {
+            if ($this->getPermalink() !== '' && $this->getPermalink() !== '0') {
                 $id = $this->getPermalink();
-            } elseif ($this->getTitle()) {
+            } elseif ($this->getTitle() !== '' && $this->getTitle() !== '0') {
                 $id = $this->getTitle();
             } else {
                 $id = null;
@@ -385,7 +385,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             $this->getXpathPrefix() . '//atom:link[not(@rel)]/@href'
         );
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             foreach ($list as $link) {
                 $links[] = $this->_absolutiseUri($link->value);
             }
@@ -446,7 +446,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             $this->getXpathPrefix() . '//atom:link[@rel="replies"]/@thread10:count'
         );
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             $count = $list->item(0)->value;
         }
 
@@ -472,7 +472,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             $this->getXpathPrefix() . '//atom:link[@rel="replies" and @type="text/html"]/@href'
         );
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             $link = $list->item(0)->value;
             $link = $this->_absolutiseUri($link);
         }
@@ -499,7 +499,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             $this->getXpathPrefix() . '//atom:link[@rel="replies" and @type="application/'.$type.'+xml"]/@href'
         );
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             $link = $list->item(0)->value;
             $link = $this->_absolutiseUri($link);
         }
@@ -532,7 +532,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             $list = $this->getXpath()->query($this->getXpathPrefix() . '//atom10:category');
         }
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             $categoryCollection = new Zend_Feed_Reader_Collection_Category;
             foreach ($list as $category) {
                 $categoryCollection[] = array(
@@ -565,7 +565,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         // TODO: Investigate why _getAtomType() fails here. Is it even needed?
         if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10) {
             $list = $this->getXpath()->query($this->getXpathPrefix() . '/atom:source[1]');
-            if ($list->length) {
+            if ($list->length !== 0) {
                 $element = $list->item(0);
                 $source = new Zend_Feed_Reader_Feed_Atom_Source($element, $this->getXpathPrefix());
             }
@@ -581,12 +581,10 @@ class Zend_Feed_Reader_Extension_Atom_Entry
      */
     protected function _absolutiseUri($link)
     {
-        if (!Zend_Uri::check($link)) {
-            if ($this->getBaseUrl() !== null) {
-                $link = $this->getBaseUrl() . $link;
-                if (!Zend_Uri::check($link)) {
-                    $link = null;
-                }
+        if (!Zend_Uri::check($link) && $this->getBaseUrl() !== null) {
+            $link = $this->getBaseUrl() . $link;
+            if (!Zend_Uri::check($link)) {
+                $link = null;
             }
         }
         return $link;

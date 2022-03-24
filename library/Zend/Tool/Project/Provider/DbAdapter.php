@@ -65,11 +65,11 @@ class Zend_Tool_Project_Provider_DbAdapter
             $this->_sectionName = $sectionName;
         }
 
-        if (!isset($this->_config->{$this->_sectionName})) {
+        if (!(property_exists($this->_config, '_sectionName') && $this->_config->{$this->_sectionName} !== null)) {
             throw new Zend_Tool_Project_Exception('The config does not have a ' . $this->_sectionName . ' section.');
         }
 
-        if (isset($this->_config->{$this->_sectionName}->resources->db)) {
+        if (property_exists($this->_config->{$this->_sectionName}->resources, 'db') && $this->_config->{$this->_sectionName}->resources->db !== null) {
             throw new Zend_Tool_Project_Exception('The config already has a db resource configured in section ' . $this->_sectionName . '.');
         }
 

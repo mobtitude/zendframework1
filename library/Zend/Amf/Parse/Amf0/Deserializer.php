@@ -238,8 +238,7 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
         $offset = $this->_stream->readInt();
 
         require_once 'Zend/Date.php';
-        $date   = new Zend_Date($timestamp);
-        return $date;
+        return new Zend_Date($timestamp);
     }
 
     /**
@@ -272,7 +271,7 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
         $returnObject = new $loader();
         $properties = get_object_vars($this->readObject());
         foreach($properties as $key=>$value) {
-            if($key) {
+            if($key !== '' && $key !== '0') {
                 $returnObject->$key = $value;
             }
         }

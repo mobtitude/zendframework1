@@ -73,7 +73,7 @@ class Zend_Json_Encoder
      */
     public static function encode($value, $cycleCheck = false, $options = array())
     {
-        $encoder = new self(($cycleCheck) ? true : false, $options);
+        $encoder = new self($cycleCheck, $options);
         return $encoder->_encodeValue($value);
     }
 
@@ -91,7 +91,7 @@ class Zend_Json_Encoder
     {
         if (is_object($value)) {
             return $this->_encodeObject($value);
-        } else if (is_array($value)) {
+        } elseif (is_array($value)) {
             return $this->_encodeArray($value);
         }
 
@@ -168,11 +168,7 @@ class Zend_Json_Encoder
      */
     protected function _wasVisited(&$value)
     {
-        if (in_array($value, $this->_visited, true)) {
-            return true;
-        }
-
-        return false;
+        return in_array($value, $this->_visited, true);
     }
 
 

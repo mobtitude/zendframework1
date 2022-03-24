@@ -74,7 +74,7 @@ class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstra
      */
     public function serialize($value, array $opts = array())
     {
-        $opts = $opts + $this->_options;
+        $opts += $this->_options;
 
         if (isset($opts['comment']) && $opts['comment']) {
             $wddx = wddx_serialize_value($value, (string)$opts['comment']);

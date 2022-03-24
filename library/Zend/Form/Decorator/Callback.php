@@ -83,11 +83,9 @@ class Zend_Form_Decorator_Callback extends Zend_Form_Decorator_Abstract
      */
     public function getCallback()
     {
-        if (null === $this->_callback) {
-            if (null !== ($callback = $this->getOption('callback'))) {
-                $this->setCallback($callback);
-                $this->removeOption('callback');
-            }
+        if (null === $this->_callback && null !== ($callback = $this->getOption('callback'))) {
+            $this->setCallback($callback);
+            $this->removeOption('callback');
         }
 
         return $this->_callback;

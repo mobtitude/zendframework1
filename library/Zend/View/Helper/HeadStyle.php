@@ -142,11 +142,9 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
             $argc   = count($args);
             $action = $matches['action'];
 
-            if ('offsetSet' == $action) {
-                if (0 < $argc) {
-                    $index = array_shift($args);
-                    --$argc;
-                }
+            if ('offsetSet' == $action && 0 < $argc) {
+                $index = array_shift($args);
+                --$argc;
             }
 
             if (1 > $argc) {
@@ -185,14 +183,9 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
      */
     protected function _isValid($value)
     {
-        if ((!$value instanceof stdClass)
-            || !isset($value->content)
-            || !isset($value->attributes))
-        {
-            return false;
-        }
-
-        return true;
+        return !((!$value instanceof stdClass)
+            || !(property_exists($value, 'content') && $value->content !== null)
+            || !(property_exists($value, 'attributes') && $value->attributes !== null));
     }
 
     /**
@@ -405,8 +398,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
         }
 
         $return = $indent . implode($this->getSeparator() . $indent, $items);
-        $return = preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
-        return $return;
+        return preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
     }
 
     /**
@@ -420,7 +412,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     {
         if (!isset($attributes['media'])) {
             $attributes['media'] = 'screen';
-        } else if(is_array($attributes['media'])) {
+        } elseif (is_array($attributes['media'])) {
             $attributes['media'] = implode(',', $attributes['media']);
         }
 

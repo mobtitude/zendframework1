@@ -95,7 +95,7 @@ class Zend_Mobile_Push_Message_Gcm extends Zend_Mobile_Push_Message_Abstract
         $this->clearToken();
         if (is_string($token)) {
             $this->addToken($token);
-        } else if (is_array($token)) {
+        } elseif (is_array($token)) {
             foreach ($token as $t) {
                 $this->addToken($t);
             }
@@ -237,7 +237,7 @@ class Zend_Mobile_Push_Message_Gcm extends Zend_Mobile_Push_Message_Abstract
         }
         if ($this->_ttl !== 2419200 &&
             (!is_scalar($this->_id) ||
-            strlen((string) $this->_id) === 0)) {
+            (string) $this->_id === '')) {
             return false;
         }
         return true;

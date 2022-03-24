@@ -83,7 +83,8 @@ require_once 'Zend/Pdf/Element/String.php';
  */
 class Zend_Pdf
 {
-  /**** Class Constants ****/
+  public string $_pdfHeaderVersion;
+    /**** Class Constants ****/
 
     /**
      * Version number of generated PDF documents.
@@ -480,7 +481,7 @@ class Zend_Pdf
         foreach ($pages->Kids->items as $child) {
             if ($child->Type->value == 'Pages') {
                 $this->_loadPages($child, $attributes);
-            } else if ($child->Type->value == 'Page') {
+            } elseif ($child->Type->value == 'Page') {
                 foreach (self::$_inheritableAttributes as $property) {
                     if ($child->$property === null && array_key_exists($property, $attributes)) {
                         /**
@@ -496,7 +497,6 @@ class Zend_Pdf
                         }
                     }
                 }
-
                 require_once 'Zend/Pdf/Page.php';
                 $this->pages[] = new Zend_Pdf_Page($child, $this->_objFactory);
             }
@@ -528,19 +528,14 @@ class Zend_Pdf
                     $this->_namedTargets[$name] = Zend_Pdf_Target::load($destination);
                 }
             }
-        } else {
-            // PDF version is 1.1 (or earlier)
-            // Look for Destinations sructure at Dest entry of document catalog
-            if ($root->Dests !== null) {
-                if ($root->Dests->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
-                    require_once 'Zend/Pdf/Exception.php';
-                    throw new Zend_Pdf_Exception('Document catalog Dests entry must be a dictionary.');
-                }
-
-                require_once 'Zend/Pdf/Target.php';
-                foreach ($root->Dests->getKeys() as $destKey) {
-                    $this->_namedTargets[$destKey] = Zend_Pdf_Target::load($root->Dests->$destKey);
-                }
+        } elseif ($root->Dests !== null) {
+            if ($root->Dests->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
+                require_once 'Zend/Pdf/Exception.php';
+                throw new Zend_Pdf_Exception('Document catalog Dests entry must be a dictionary.');
+            }
+            require_once 'Zend/Pdf/Target.php';
+            foreach ($root->Dests->getKeys() as $destKey) {
+                $this->_namedTargets[$destKey] = Zend_Pdf_Target::load($root->Dests->$destKey);
             }
         }
     }
@@ -752,7 +747,7 @@ class Zend_Pdf
                 if ($this->resolveDestination($namedTarget, false) === null) {
                     unset($this->_namedTargets[$name]);
                 }
-            } else if ($namedTarget instanceof Zend_Pdf_Action) {
+            } elseif ($namedTarget instanceof Zend_Pdf_Action) {
                 // Named target is an action
                 if ($this->_cleanUpAction($namedTarget, false) === null) {
                     // Action is a GoTo action with an unresolved destination
@@ -776,7 +771,7 @@ class Zend_Pdf
                     if ($this->resolveDestination($target, false) === null) {
                         $outline->setTarget(null);
                     }
-                } else if ($target instanceof Zend_Pdf_Action) {
+                } elseif ($target instanceof Zend_Pdf_Action) {
                     // Outline target is an action
                     if ($this->_cleanUpAction($target, false) === null) {
                         // Action is a GoTo action with an unresolved destination
@@ -797,7 +792,7 @@ class Zend_Pdf
                     // Action is a GoTo action with an unresolved destination
                     $this->setOpenAction(null);
                 }
-            } else if ($openAction instanceof Zend_Pdf_Destination) {
+            } elseif ($openAction instanceof Zend_Pdf_Destination) {
                 // OpenAction target is a destination
                 if ($this->resolveDestination($openAction, false) === null) {
                     $this->setOpenAction(null);
@@ -862,10 +857,10 @@ class Zend_Pdf
             }
         } else {
             $updateOutlinesNavigation = false;
-            if (count($this->_originalOutlines) != count($this->outlines)) {
+            if (count($this->_originalOutlines) !== count($this->outlines)) {
                 // If original and current outlines arrays have different size then outlines list was updated
                 $updateOutlinesNavigation = true;
-            } else if ( !(array_keys($this->_originalOutlines) === array_keys($this->outlines)) ) {
+            } elseif (array_keys($this->_originalOutlines) !== array_keys($this->outlines)) {
                 // If original and current outlines arrays have different keys (with a glance to an order) then outlines list was updated
                 $updateOutlinesNavigation = true;
             } else {
@@ -1234,8 +1229,7 @@ class Zend_Pdf
             foreach ($fontResources->getKeys() as $fontResourceName) {
                 $fontDictionary = $fontResources->$fontResourceName;
 
-                if (! ($fontDictionary instanceof Zend_Pdf_Element_Reference  ||
-                       $fontDictionary instanceof Zend_Pdf_Element_Object) ) {
+                if (!$fontDictionary instanceof Zend_Pdf_Element_Reference && !$fontDictionary instanceof Zend_Pdf_Element_Object ) {
                     require_once 'Zend/Pdf/Exception.php';
                     throw new Zend_Pdf_Exception('Font dictionary has to be an indirect object or object reference.');
                 }
@@ -1289,8 +1283,7 @@ class Zend_Pdf
             foreach ($fontResources->getKeys() as $fontResourceName) {
                 $fontDictionary = $fontResources->$fontResourceName;
 
-                if (! ($fontDictionary instanceof Zend_Pdf_Element_Reference  ||
-                       $fontDictionary instanceof Zend_Pdf_Element_Object) ) {
+                if (!$fontDictionary instanceof Zend_Pdf_Element_Reference && !$fontDictionary instanceof Zend_Pdf_Element_Object ) {
                     require_once 'Zend/Pdf/Exception.php';
                     throw new Zend_Pdf_Exception('Font dictionary has to be an indirect object or object reference.');
                 }
@@ -1342,7 +1335,7 @@ class Zend_Pdf
         }
 
         // Save document properties if necessary
-        if ($this->properties != $this->_originalProperties) {
+        if ($this->properties !== $this->_originalProperties) {
             $docInfo = $this->_objFactory->newObject(new Zend_Pdf_Element_Dictionary());
 
             foreach ($this->properties as $key => $value) {
@@ -1384,7 +1377,7 @@ class Zend_Pdf
                     case 'Creator':
                         // break intentionally omitted
                     case 'Producer':
-                        if (extension_loaded('mbstring') === true) {
+                        if (extension_loaded('mbstring')) {
                             $detected = mb_detect_encoding($value);
                             if ($detected !== 'ASCII') {
                                 $value = "\xfe\xff" . mb_convert_encoding($value, 'UTF-16', $detected);
@@ -1572,11 +1565,7 @@ class Zend_Pdf
             $javaScript = array($javaScript);
         }
 
-        if (null === $this->_javaScript) {
-            $this->_javaScript = $javaScript;
-        } else {
-            $this->_javaScript = array_merge($this->_javaScript, $javaScript);
-        }
+        $this->_javaScript = null === $this->_javaScript ? $javaScript : array_merge($this->_javaScript, $javaScript);
 
         if (!empty($this->_javaScript)) {
             $items = array();
@@ -1624,11 +1613,7 @@ class Zend_Pdf
      */
     public static function pdfDate($timestamp = null)
     {
-        if ($timestamp === null) {
-            $date = date('\D\:YmdHisO');
-        } else {
-            $date = date('\D\:YmdHisO', $timestamp);
-        }
+        $date = $timestamp === null ? date('\D\:YmdHisO') : date('\D\:YmdHisO', $timestamp);
         return substr_replace($date, '\'', -2, 0) . '\'';
     }
 

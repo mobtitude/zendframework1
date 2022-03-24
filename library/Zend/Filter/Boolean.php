@@ -247,11 +247,11 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
                 require_once 'Zend/Locale.php';
                 $locales = $this->getLocale();
                 foreach ($locales as $locale) {
-                    if ($this->_getLocalizedQuestion($value, false, $locale) === false) {
+                    if (!$this->_getLocalizedQuestion($value, false, $locale)) {
                         return false;
                     }
 
-                    if (!$casting && ($this->_getLocalizedQuestion($value, true, $locale) === true)) {
+                    if (!$casting && ($this->_getLocalizedQuestion($value, true, $locale))) {
                         return true;
                     }
                 }
@@ -366,7 +366,7 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
         $str = explode(':', (string) $str);
         if (!empty($str)) {
             foreach($str as $no) {
-                if (($no == $value) || (strtolower($no) == strtolower($value))) {
+                if (($no === $value) || (strtolower($no) === strtolower($value))) {
                     return $return;
                 }
             }

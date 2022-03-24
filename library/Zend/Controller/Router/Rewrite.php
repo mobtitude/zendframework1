@@ -175,16 +175,12 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             $route = $this->_getRouteFromConfig($info);
 
             if ($route instanceof Zend_Controller_Router_Route_Chain) {
-                if (!isset($info->chain)) {
+                if (!(property_exists($info, 'chain') && $info->chain !== null)) {
                     require_once 'Zend/Controller/Router/Exception.php';
                     throw new Zend_Controller_Router_Exception("No chain defined");
                 }
 
-                if ($info->chain instanceof Zend_Config) {
-                    $childRouteNames = $info->chain;
-                } else {
-                    $childRouteNames = explode(',', (string) $info->chain);
-                }
+                $childRouteNames = $info->chain instanceof Zend_Config ? $info->chain : explode(',', (string) $info->chain);
 
                 foreach ($childRouteNames as $childRouteName) {
                     $childRoute = $this->getRoute(trim($childRouteName));
@@ -192,7 +188,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
                 }
 
                 $this->addRoute($name, $route);
-            } elseif (isset($info->chains) && $info->chains instanceof Zend_Config) {
+            } elseif (property_exists($info, 'chains') && $info->chains !== null && $info->chains instanceof Zend_Config) {
                 $this->_addChainRoutesFromConfig($name, $route, $info->chains);
             } else {
                 $this->addRoute($name, $route);
@@ -210,7 +206,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
      */
     protected function _getRouteFromConfig(Zend_Config $info)
     {
-        $class = (isset($info->type)) ? $info->type : 'Zend_Controller_Router_Route';
+        $class = (property_exists($info, 'type') && $info->type !== null) ? $info->type : 'Zend_Controller_Router_Route';
         if (!class_exists($class)) {
             require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($class);
@@ -223,7 +219,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             ), $info
         );
 
-        if (isset($info->abstract) && $info->abstract && method_exists($route, 'isAbstract')) {
+        if (property_exists($info, 'abstract') && $info->abstract !== null && $info->abstract && method_exists($route, 'isAbstract')) {
             $route->isAbstract(true);
         }
 
@@ -261,7 +257,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
 
             $chainName = $name . $this->_chainNameSeparator . $childRouteName;
 
-            if (isset($childRouteInfo->chains)) {
+            if (property_exists($childRouteInfo, 'chains') && $childRouteInfo->chains !== null) {
                 $this->_addChainRoutesFromConfig($chainName, $chainRoute, $childRouteInfo->chains);
             } else {
                 $this->addRoute($chainName, $chainRoute);
@@ -336,7 +332,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
      */
     public function getCurrentRoute()
     {
-        if (!isset($this->_currentRoute)) {
+        if (!($this->_currentRoute !== null)) {
             require_once 'Zend/Controller/Router/Exception.php';
             throw new Zend_Controller_Router_Exception("Current route is not defined");
         }
@@ -352,7 +348,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
      */
     public function getCurrentRouteName()
     {
-        if (!isset($this->_currentRoute)) {
+        if (!($this->_currentRoute !== null)) {
             require_once 'Zend/Controller/Router/Exception.php';
             throw new Zend_Controller_Router_Exception("Current route is not defined");
         }
@@ -401,11 +397,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             }
 
             // TODO: Should be an interface method. Hack for 1.0 BC
-            if (!method_exists($route, 'getVersion') || $route->getVersion() == 1) {
-                $match = $request->getPathInfo();
-            } else {
-                $match = $request;
-            }
+            $match = !method_exists($route, 'getVersion') || $route->getVersion() == 1 ? $request->getPathInfo() : $request;
 
             if ($params = $route->match($match)) {
                 $this->_setRequestParams($request, $params);

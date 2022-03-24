@@ -74,18 +74,18 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
         $authors = array();
         $list    = $this->_xpath->query('//dc11:creator');
 
-        if (!$list->length) {
+        if ($list->length === 0) {
             $list = $this->_xpath->query('//dc10:creator');
         }
-        if (!$list->length) {
+        if ($list->length === 0) {
             $list = $this->_xpath->query('//dc11:publisher');
 
-            if (!$list->length) {
+            if ($list->length === 0) {
                 $list = $this->_xpath->query('//dc10:publisher');
             }
         }
 
-        if ($list->length) {
+        if ($list->length !== 0) {
             foreach ($list as $author) {
                 $authors[] = array(
                     'name' => $author->nodeValue

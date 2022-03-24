@@ -79,7 +79,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
     {
         $defs    = ($config->defaults instanceof Zend_Config) ? $config->defaults->toArray() : array();
         $map     = ($config->map instanceof Zend_Config) ? $config->map->toArray() : array();
-        $reverse = (isset($config->reverse)) ? $config->reverse : null;
+        $reverse = (property_exists($config, 'reverse') && $config->reverse !== null) ? $config->reverse : null;
 
         return new self($config->route, $defs, $map, $reverse);
     }
@@ -147,9 +147,8 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
 
         $values   = $this->_getMappedValues($values);
         $defaults = $this->_getMappedValues($this->_defaults, false, true);
-        $return   = $values + $defaults;
 
-        return $return;
+        return $values + $defaults;
     }
 
     /**
@@ -185,11 +184,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
             } elseif ($reversed) {
                 $index = $key;
                 if (!is_int($key)) {
-                    if (array_key_exists($key, $this->_map)) {
-                        $index = $this->_map[$key];
-                    } else {
-                        $index = array_search($key, $this->_map, true);
-                    }
+                    $index = array_key_exists($key, $this->_map) ? $this->_map[$key] : array_search($key, $this->_map, true);
                 }
                 if (false !== $index) {
                     $return[$index] = $values[$key];
@@ -289,11 +284,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
         $variables = array();
 
         foreach ($this->_map as $key => $value) {
-            if (is_numeric($key)) {
-                $variables[] = $value;
-            } else {
-                $variables[] = $key;
-            }
+            $variables[] = is_numeric($key) ? $value : $key;
         }
 
         return $variables;

@@ -243,27 +243,23 @@ abstract class Zend_Form_Element_Multi extends Zend_Form_Element_Xhtml
      */
     public function isValid($value, $context = null)
     {
-        if ($this->registerInArrayValidator()) {
-            if (!$this->getValidator('InArray')) {
-                $multiOptions = $this->getMultiOptions();
-                $options      = array();
-
-                foreach ($multiOptions as $opt_value => $opt_label) {
-                    // optgroup instead of option label
-                    if (is_array($opt_label)) {
-                        $options = array_merge($options, array_keys($opt_label));
-                    }
-                    else {
-                        $options[] = $opt_value;
-                    }
+        if ($this->registerInArrayValidator() && !$this->getValidator('InArray')) {
+            $multiOptions = $this->getMultiOptions();
+            $options      = array();
+            foreach ($multiOptions as $opt_value => $opt_label) {
+                // optgroup instead of option label
+                if (is_array($opt_label)) {
+                    $options = array_merge($options, array_keys($opt_label));
                 }
-
-                $this->addValidator(
-                    'InArray',
-                    true,
-                    array($options)
-                );
+                else {
+                    $options[] = $opt_value;
+                }
             }
+            $this->addValidator(
+                'InArray',
+                true,
+                array($options)
+            );
         }
         return parent::isValid($value, $context);
     }

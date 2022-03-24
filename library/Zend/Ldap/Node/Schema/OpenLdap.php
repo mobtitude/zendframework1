@@ -199,12 +199,10 @@ class Zend_Ldap_Node_Schema_OpenLdap extends Zend_Ldap_Node_Schema
         $attributeType['oid'] = array_shift($tokens); // first token is the oid
         $this->_parseLdapSchemaSyntax($attributeType, $tokens);
 
-        if (array_key_exists('syntax', $attributeType)) {
-            // get max length from syntax
-            if (preg_match('/^(.+){(\d+)}$/', (string) $attributeType['syntax'], $matches)) {
-                $attributeType['syntax'] = $matches[1];
-                $attributeType['max-length'] = $matches[2];
-            }
+        // get max length from syntax
+        if (array_key_exists('syntax', $attributeType) && preg_match('/^(.+){(\d+)}$/', (string) $attributeType['syntax'], $matches)) {
+            $attributeType['syntax'] = $matches[1];
+            $attributeType['max-length'] = $matches[2];
         }
 
         $this->_ensureNameAttribute($attributeType);
@@ -444,7 +442,7 @@ class Zend_Ldap_Node_Schema_OpenLdap extends Zend_Ldap_Node_Schema
         // tokens that can have multiple values
         $multiValue = array('must', 'may', 'sup');
 
-        while (count($tokens) > 0) {
+        while ($tokens !== []) {
             $token = strtolower(array_shift($tokens));
             if (in_array($token, $noValue)) {
                 $data[$token] = true; // single value token

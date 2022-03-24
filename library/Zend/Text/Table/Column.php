@@ -111,24 +111,18 @@ class Zend_Text_Table_Column
      */
     public function setContent($content, $charset = null)
     {
-        if (is_string($content) === false) {
+        if (!is_string($content)) {
             require_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('$content must be a string');
         }
 
-        if ($charset === null) {
-            $inputCharset = Zend_Text_Table::getInputCharset();
-        } else {
-            $inputCharset = strtolower($charset);
-        }
+        $inputCharset = $charset === null ? Zend_Text_Table::getInputCharset() : strtolower($charset);
 
         $outputCharset = Zend_Text_Table::getOutputCharset();
 
-        if ($inputCharset !== $outputCharset) {
-            if (PHP_OS !== 'AIX') {
-                // AIX does not understand these character sets
-                $content = iconv($inputCharset, $outputCharset, $content);
-            }
+        if ($inputCharset !== $outputCharset && PHP_OS !== 'AIX') {
+            // AIX does not understand these character sets
+            $content = iconv($inputCharset, $outputCharset, $content);
 
         }
 
@@ -146,7 +140,7 @@ class Zend_Text_Table_Column
      */
     public function setAlign($align)
     {
-        if (in_array($align, $this->_allowedAligns) === false) {
+        if (!in_array($align, $this->_allowedAligns)) {
             require_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('Invalid align supplied');
         }
@@ -165,7 +159,7 @@ class Zend_Text_Table_Column
      */
     public function setColSpan($colSpan)
     {
-        if (is_int($colSpan) === false or $colSpan < 1) {
+        if (!is_int($colSpan) || $colSpan < 1) {
             require_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('$colSpan must be an integer and greater than 0');
         }
@@ -196,7 +190,7 @@ class Zend_Text_Table_Column
      */
     public function render($columnWidth, $padding = 0)
     {
-        if (is_int($columnWidth) === false or $columnWidth < 1) {
+        if (!is_int($columnWidth) || $columnWidth < 1) {
             require_once 'Zend/Text/Table/Exception.php';
             throw new Zend_Text_Table_Exception('$columnWidth must be an integer and greater than 0');
         }
@@ -236,8 +230,6 @@ class Zend_Text_Table_Column
                            . str_repeat(' ', $padding);
         }
 
-        $result = implode("\n", $paddedLines);
-
-        return $result;
+        return implode("\n", $paddedLines);
     }
 }

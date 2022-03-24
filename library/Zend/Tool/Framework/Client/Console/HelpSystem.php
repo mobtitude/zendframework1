@@ -202,8 +202,8 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
         $displayActionMetadatas = $manifest->getMetadatas($actionMetadatasSearch);
 
         // create index of actionNames
-        for ($i = 0; $i < count($displayActionMetadatas); $i++) {
-            $displayActionNames[] = $displayActionMetadatas[$i]->getActionName();
+        foreach ($displayActionMetadatas as $i => $displayActionMetadata) {
+            $displayActionNames[] = $displayActionMetadata->getActionName();
         }
 
         foreach ($displayProviderMetadatas as $providerMetadata) {

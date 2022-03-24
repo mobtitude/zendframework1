@@ -1521,21 +1521,18 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['allow'] = array_shift($options);
             if (!empty($options)) {
                 $temp['idn'] = array_shift($options);
             }
-
             if (!empty($options)) {
                 $temp['tld'] = array_shift($options);
             }
-
             if (!empty($options)) {
                 $temp['ip'] = array_shift($options);
             }
-
             $options = $temp;
         }
 
@@ -1694,7 +1691,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         // Check input against IP address schema
         if (preg_match('/^[0-9a-f:.]*$/i', $value) &&
             $this->_options['ip']->setTranslator($this->getTranslator())->isValid($value)) {
-            if (!($this->_options['allow'] & self::ALLOW_IP)) {
+            if (($this->_options['allow'] & self::ALLOW_IP) === 0) {
                 $this->_error(self::IP_ADDRESS_NOT_ALLOWED);
                 return false;
             } else {
@@ -1712,14 +1709,12 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         // (see ZF-6363)
 
         // Local hostnames are allowed to be partitial (ending '.')
-        if ($this->_options['allow'] & self::ALLOW_LOCAL) {
+        if (($this->_options['allow'] & self::ALLOW_LOCAL) !== 0 && substr($value, -1) === '.') {
+            $value = substr($value, 0, -1);
             if (substr($value, -1) === '.') {
-                $value = substr($value, 0, -1);
-                if (substr($value, -1) === '.') {
-                    // Empty hostnames (ending '..') are not allowed
-                    $this->_error(self::INVALID_LOCAL_NAME);
-                    return false;
-                }
+                // Empty hostnames (ending '..') are not allowed
+                $this->_error(self::INVALID_LOCAL_NAME);
+                return false;
             }
         }
 
@@ -1734,7 +1729,6 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         // Check input against DNS hostname schema
         if ((count($domainParts) > 1) && (strlen($value) >= 4) && (strlen($value) <= 254)) {
             $status = false;
-
             $origenc = PHP_VERSION_ID < 50600
                         ? iconv_get_encoding('internal_encoding')
                         : ini_get('default_charset');
@@ -1845,7 +1839,6 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
                     $status = false;
                 }
             } while (false);
-
             if (PHP_VERSION_ID < 50600) {
                 iconv_set_encoding('internal_encoding', $origenc);
             } else {
@@ -1856,12 +1849,12 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
             if ($status && ($this->_options['allow'] & self::ALLOW_DNS)) {
                 return true;
             }
-        } else if ($this->_options['allow'] & self::ALLOW_DNS) {
+        } elseif (($this->_options['allow'] & self::ALLOW_DNS) !== 0) {
             $this->_error(self::INVALID_HOSTNAME);
         }
 
         // Check for URI Syntax (RFC3986)
-        if ($this->_options['allow'] & self::ALLOW_URI) {
+        if (($this->_options['allow'] & self::ALLOW_URI) !== 0) {
             if (preg_match("/^([a-zA-Z0-9-._~!$&\'()*+,;=]|%[[:xdigit:]]{2}){1,254}$/i", $value)) {
                 return true;
             } else {
@@ -1943,13 +1936,13 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
                 $pos = (int) ($pos * (36 - $tag));
             }
 
-            $delta   = intval($init ? (($index - $old_index) / 700) : (($index - $old_index) / 2));
-            $delta  += intval($delta / ($lengthd + 1));
+            $delta   = (int) ($init ? (($index - $old_index) / 700) : (($index - $old_index) / 2));
+            $delta  += (int) ($delta / ($lengthd + 1));
             for ($key = 0; $delta > 910 / 2; $key += 36) {
-                $delta = intval($delta / 35);
+                $delta = (int) ($delta / 35);
             }
 
-            $base   = intval($key + 36 * $delta / ($delta + 38));
+            $base   = (int) ($key + 36 * $delta / ($delta + 38));
             $init   = false;
             $char  += (int) ($index / ($lengthd + 1));
             $index %= ($lengthd + 1);

@@ -118,17 +118,13 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
     {
         if ($rowCount instanceof Zend_Db_Select) {
             $columns = $rowCount->getPart(Zend_Db_Select::COLUMNS);
-
             $countColumnPart = empty($columns[0][2])
                              ? $columns[0][1]
                              : $columns[0][2];
-
             if ($countColumnPart instanceof Zend_Db_Expr) {
                 $countColumnPart = $countColumnPart->__toString();
             }
-
             $rowCountColumn = $this->_select->getAdapter()->foldCase(self::ROW_COUNT_COLUMN);
-
             // The select query can contain only one column, which should be the row count column
             if (false === strpos($countColumnPart, $rowCountColumn)) {
                 /**
@@ -138,11 +134,9 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
 
                 throw new Zend_Paginator_Exception('Row count column not found');
             }
-
             $result = $rowCount->query(Zend_Db::FETCH_ASSOC)->fetch();
-
             $this->_rowCount = count($result) > 0 ? $result[$rowCountColumn] : 0;
-        } else if (is_integer($rowCount)) {
+        } elseif (is_int($rowCount)) {
             $this->_rowCount = $rowCount;
         } else {
             /**
@@ -244,9 +238,8 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
                                ->select()
                                ->bind($rowCount->getBind())
                                ->from($rowCount);
-            } else if ($isDistinct) {
+            } elseif ($isDistinct) {
                 $part = $columnParts[0];
-
                 if ($part[1] !== Zend_Db_Select::SQL_WILDCARD && !($part[1] instanceof Zend_Db_Expr)) {
                     $column = $db->quoteIdentifier($part[1], true);
 
@@ -256,7 +249,7 @@ class Zend_Paginator_Adapter_DbSelect implements Zend_Paginator_Adapter_Interfac
 
                     $groupPart = $column;
                 }
-            } else if (!empty($groupParts)) {
+            } elseif (!empty($groupParts)) {
                 $groupPart = $db->quoteIdentifier($groupParts[0], true);
             }
 

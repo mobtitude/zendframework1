@@ -82,7 +82,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
             self::$_session = new Zend_Session_Namespace($this->getName());
             foreach (self::$_session as $namespace => $messages) {
                 self::$_messages[$namespace] = $messages;
-                unset(self::$_session->{$namespace});
+                unset(self::$_session->getNamespace());
             }
         }
     }
@@ -146,7 +146,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
             $namespace = $this->getNamespace();
         }
         
-        if (self::$_messageAdded === false) {
+        if (!self::$_messageAdded) {
             self::$_session->setExpirationHops(1, null, true);
         }
 

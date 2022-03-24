@@ -89,7 +89,7 @@ class Zend_Memory_Container_Movable extends Zend_Memory_Container {
      */
     public function lock()
     {
-        if ( !($this->_state & self::LOADED) ) {
+        if ( ($this->_state & self::LOADED) === 0 ) {
             $this->_memManager->load($this, $this->_id);
             $this->_state |= self::LOADED;
         }
@@ -139,7 +139,7 @@ class Zend_Memory_Container_Movable extends Zend_Memory_Container {
             throw new Zend_Memory_Exception('Unknown property: Zend_Memory_container::$' . $property);
         }
 
-        if ( !($this->_state & self::LOADED) ) {
+        if ( ($this->_state & self::LOADED) === 0 ) {
             $this->_memManager->load($this, $this->_id);
             $this->_state |= self::LOADED;
         }
@@ -178,7 +178,7 @@ class Zend_Memory_Container_Movable extends Zend_Memory_Container {
      */
     public function &getRef()
     {
-        if ( !($this->_state & self::LOADED) ) {
+        if ( ($this->_state & self::LOADED) === 0 ) {
             $this->_memManager->load($this, $this->_id);
             $this->_state |= self::LOADED;
         }
@@ -217,7 +217,7 @@ class Zend_Memory_Container_Movable extends Zend_Memory_Container {
      */
     public function startTrace()
     {
-        if ( !($this->_state & self::LOADED) ) {
+        if ( ($this->_state & self::LOADED) === 0 ) {
             $this->_memManager->load($this, $this->_id);
             $this->_state |= self::LOADED;
         }

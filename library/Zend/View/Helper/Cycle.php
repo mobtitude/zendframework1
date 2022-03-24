@@ -157,10 +157,7 @@ class Zend_View_Helper_Cycle implements Iterator
     public function next()
     {
         $count = count($this->_data[$this->_name]);
-        if ($this->_pointers[$this->_name] == ($count - 1))
-            $this->_pointers[$this->_name] = 0;
-        else
-            $this->_pointers[$this->_name] = ++$this->_pointers[$this->_name];
+        $this->_pointers[$this->_name] = $this->_pointers[$this->_name] == ($count - 1) ? 0 : ++$this->_pointers[$this->_name];
         return $this;
     }
 
@@ -172,10 +169,7 @@ class Zend_View_Helper_Cycle implements Iterator
     public function prev()
     {
         $count = count($this->_data[$this->_name]);
-        if ($this->_pointers[$this->_name] <= 0)
-            $this->_pointers[$this->_name] = $count - 1;
-        else
-            $this->_pointers[$this->_name] = --$this->_pointers[$this->_name];
+        $this->_pointers[$this->_name] = $this->_pointers[$this->_name] <= 0 ? $count - 1 : --$this->_pointers[$this->_name];
         return $this;
     }
 

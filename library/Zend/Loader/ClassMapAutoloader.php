@@ -157,9 +157,13 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
     public function register()
     {
         if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
-            spl_autoload_register(array($this, 'autoload'), true, true);
+            spl_autoload_register(function (string $class) : void {
+                $this->autoload($class);
+            }, true, true);
         } else {
-            spl_autoload_register(array($this, 'autoload'), true);
+            spl_autoload_register(function (string $class) : void {
+                $this->autoload($class);
+            }, true);
         }
     }
 
@@ -181,7 +185,7 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
             throw new Zend_Loader_Exception_InvalidArgumentException('Map file provided does not exist');
         }
 
-        if (!$path = self::realPharPath($location)) {
+        if (($path = self::realPharPath($location)) === '' || ($path = self::realPharPath($location)) === '0') {
             $path = realpath($location);
         }
 
@@ -190,9 +194,7 @@ class Zend_Loader_ClassMapAutoloader implements Zend_Loader_SplAutoloader
             return $this;
         }
 
-        $map = include $path;
-
-        return $map;
+        return include $path;
     }
 
     /**

@@ -210,11 +210,7 @@ class Zend_Filter_Compress_Rar extends Zend_Filter_Compress_CompressAbstract
         }
 
         $password = $this->getPassword();
-        if ($password !== null) {
-            $archive = rar_open($archive, $password);
-        } else {
-            $archive = rar_open($archive);
-        }
+        $archive = $password !== null ? rar_open($archive, $password) : rar_open($archive);
 
         if (!$archive) {
             require_once 'Zend/Filter/Exception.php';

@@ -328,7 +328,7 @@ class Zend_Queue implements Countable
             throw new Zend_Queue_Exception('$name is not a string');
         }
 
-        if ((null !== $timeout) && !is_integer($timeout)) {
+        if ((null !== $timeout) && !is_int($timeout)) {
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('$timeout must be an integer');
         }
@@ -368,12 +368,7 @@ class Zend_Queue implements Countable
      */
     public function deleteQueue()
     {
-        if ($this->isSupported('delete')) {
-            $deleted = $this->getAdapter()->delete($this->getName());
-        }
-        else {
-            $deleted = true;
-        }
+        $deleted = $this->isSupported('delete') ? $this->getAdapter()->delete($this->getName()) : true;
 
         /**
          * @see Zend_Queue_Adapter_Null
@@ -438,12 +433,12 @@ class Zend_Queue implements Countable
      */
     public function receive($maxMessages=null, $timeout=null)
     {
-        if (($maxMessages !== null) && !is_integer($maxMessages)) {
+        if (($maxMessages !== null) && !is_int($maxMessages)) {
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('$maxMessages must be an integer or null');
         }
 
-        if (($timeout !== null) && !is_integer($timeout)) {
+        if (($timeout !== null) && !is_int($timeout)) {
             require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('$timeout must be an integer or null');
         }
@@ -528,14 +523,11 @@ class Zend_Queue implements Countable
             throw new Zend_Queue_Exception("$name is not a string");
         }
 
-        if ($this->getAdapter()->isSupported('create')) {
-            if (!$this->getAdapter()->isExists($name)) {
-                $timeout = $this->getOption(self::TIMEOUT);
-
-                if (!$this->getAdapter()->create($name, $timeout)) {
-                    // Unable to create the new queue
-                    return false;
-                }
+        if ($this->getAdapter()->isSupported('create') && !$this->getAdapter()->isExists($name)) {
+            $timeout = $this->getOption(self::TIMEOUT);
+            if (!$this->getAdapter()->create($name, $timeout)) {
+                // Unable to create the new queue
+                return false;
             }
         }
 

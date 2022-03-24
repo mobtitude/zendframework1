@@ -163,9 +163,9 @@ class Zend_Tool_Framework_Client_Console
         }
 
         // add classes to the basic loader from the config file basicloader.classes.1 ..
-        if (isset($config->basicloader) && isset($config->basicloader->classes)) {
+        if (property_exists($config, 'basicloader') && $config->basicloader !== null && (property_exists($config->basicloader, 'classes') && $config->basicloader->classes !== null)) {
             foreach ($config->basicloader->classes as $classKey => $className) {
-                array_push($classesToLoad, $className);
+                $classesToLoad[] = $className;
             }
         }
 

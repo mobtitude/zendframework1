@@ -43,6 +43,14 @@ require_once 'Zend/Server/Reflection/Parameter.php';
 class Zend_Server_Reflection_Prototype
 {
     /**
+     * @var mixed|\Zend_Server_Reflection_ReturnValue
+     */
+    public $_return;
+    /**
+     * @var mixed[]|mixed|null
+     */
+    public $_params;
+    /**
      * Constructor
      *
      * @param Zend_Server_Reflection_ReturnValue $return

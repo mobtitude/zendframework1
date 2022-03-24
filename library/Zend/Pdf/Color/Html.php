@@ -93,7 +93,7 @@ class Zend_Pdf_Color_Html extends Zend_Pdf_Color
             $r = round((hexdec($matches[1]) / 255), 3);
             $g = round((hexdec($matches[2]) / 255), 3);
             $b = round((hexdec($matches[3]) / 255), 3);
-            if (($r == $g) && ($g == $b)) {
+            if (($r === $g) && ($g === $b)) {
                 require_once 'Zend/Pdf/Color/GrayScale.php';
                 return new Zend_Pdf_Color_GrayScale($r);
             } else {

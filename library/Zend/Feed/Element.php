@@ -227,7 +227,7 @@ class Zend_Feed_Element implements ArrayAccess
         $this->ensureAppended();
 
         $nodes = $this->_children($var);
-        if (!$nodes) {
+        if ($nodes === []) {
             if (strpos($var, ':') !== false) {
                 list($ns, $elt) = explode(':', $var, 2);
                 $node = $this->_element->ownerDocument->createElementNS(Zend_Feed::lookupNamespace($ns),
@@ -293,7 +293,7 @@ class Zend_Feed_Element implements ArrayAccess
     {
         $nodes = $this->_children($var);
 
-        if (!$nodes) {
+        if ($nodes === []) {
             return null;
         } elseif (count($nodes) > 1) {
             return $nodes;
