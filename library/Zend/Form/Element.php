@@ -1090,7 +1090,9 @@ class Zend_Form_Element implements Zend_Validate_Interface
      */
     public function addPrefixPath($prefix, $path, $type = null)
     {
-        $type = strtoupper($type);
+        if (null !== $type) {
+            $type = strtoupper($type);
+        }
         switch ($type) {
             case self::DECORATOR:
             case self::FILTER:
