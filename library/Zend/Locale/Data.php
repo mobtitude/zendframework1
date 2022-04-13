@@ -234,7 +234,7 @@ class Zend_Locale_Data
             // Search for parent locale
             if (false !== strpos($locale, '_')) {
                 $parentLocale = self::getContent($locale, 'parentlocale');
-                if ($parentLocale !== '' && $parentLocale !== '0') {
+                if ($parentLocale) {
                     $temp = self::_getFile($parentLocale, $path, $attribute, $value, $temp);
                 }
             }
