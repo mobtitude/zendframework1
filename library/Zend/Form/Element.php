@@ -2103,7 +2103,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
             $instance = new $name;
         } else {
             $r = new ReflectionClass($name);
-            $instance = $r->hasMethod('__construct') ? $r->newInstanceArgs((array) $filter['options']) : $r->newInstance();
+            $instance = $r->hasMethod('__construct') ? $r->newInstanceArgs(array_values((array) $filter['options'])) : $r->newInstance();
         }
 
         if ($origName != $name) {
