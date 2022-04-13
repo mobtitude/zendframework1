@@ -175,7 +175,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             $route = $this->_getRouteFromConfig($info);
 
             if ($route instanceof Zend_Controller_Router_Route_Chain) {
-                if (!(property_exists($info, 'chain') && $info->chain !== null)) {
+                if (!isset($info->chain)) {
                     require_once 'Zend/Controller/Router/Exception.php';
                     throw new Zend_Controller_Router_Exception("No chain defined");
                 }
@@ -188,7 +188,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
                 }
 
                 $this->addRoute($name, $route);
-            } elseif (property_exists($info, 'chains') && $info->chains !== null && $info->chains instanceof Zend_Config) {
+            } elseif (isset($info->chains) && $info->chains instanceof Zend_Config) {
                 $this->_addChainRoutesFromConfig($name, $route, $info->chains);
             } else {
                 $this->addRoute($name, $route);
@@ -206,7 +206,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
      */
     protected function _getRouteFromConfig(Zend_Config $info)
     {
-        $class = (property_exists($info, 'type') && $info->type !== null) ? $info->type : 'Zend_Controller_Router_Route';
+        $class = (isset($info->type)) ? $info->type : 'Zend_Controller_Router_Route';
         if (!class_exists($class)) {
             require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($class);
@@ -219,7 +219,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             ), $info
         );
 
-        if (property_exists($info, 'abstract') && $info->abstract !== null && $info->abstract && method_exists($route, 'isAbstract')) {
+        if (isset($info->abstract) && $info->abstract && method_exists($route, 'isAbstract')) {
             $route->isAbstract(true);
         }
 
@@ -257,7 +257,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
 
             $chainName = $name . $this->_chainNameSeparator . $childRouteName;
 
-            if (property_exists($childRouteInfo, 'chains') && $childRouteInfo->chains !== null) {
+            if (isset($childRouteInfo->chains)) {
                 $this->_addChainRoutesFromConfig($chainName, $chainRoute, $childRouteInfo->chains);
             } else {
                 $this->addRoute($chainName, $chainRoute);
@@ -332,7 +332,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
      */
     public function getCurrentRoute()
     {
-        if (!($this->_currentRoute !== null)) {
+        if (!isset($this->_currentRoute)) {
             require_once 'Zend/Controller/Router/Exception.php';
             throw new Zend_Controller_Router_Exception("Current route is not defined");
         }
@@ -348,7 +348,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
      */
     public function getCurrentRouteName()
     {
-        if (!($this->_currentRoute !== null)) {
+        if (!isset($this->_currentRoute)) {
             require_once 'Zend/Controller/Router/Exception.php';
             throw new Zend_Controller_Router_Exception("Current route is not defined");
         }
