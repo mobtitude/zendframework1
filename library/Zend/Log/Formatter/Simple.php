@@ -100,7 +100,9 @@ class Zend_Log_Formatter_Simple extends Zend_Log_Formatter_Abstract
                 $value = gettype($value);
             }
 
-            $output = str_replace("%$name%", $value, $output);
+            if (null !== $value) {
+                $output = str_replace("%$name%", $value, $output);
+            }
         }
 
         return $output;
