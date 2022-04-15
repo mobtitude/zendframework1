@@ -285,8 +285,8 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                     }
                 }
 
-                if (substr($part, 0, 2) === '@@') {
-                    $part = substr($part, 1);
+                if (substr((string) $part, 0, 2) === '@@') {
+                    $part = substr((string) $part, 1);
                 }
 
                 // If it's a static part, match directly
