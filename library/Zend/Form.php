@@ -910,7 +910,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             return $id;
         }
 
-        $id = $this->getFullyQualifiedName();
+        $id = (string) $this->getFullyQualifiedName();
 
         // Bail early if no array notation detected
         if (!strstr($id, '[')) {
