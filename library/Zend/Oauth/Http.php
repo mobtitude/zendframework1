@@ -253,7 +253,7 @@ class Zend_Oauth_Http
         $headerValue = array();
         $headerValue[] = 'OAuth realm="' . $realm . '"';
         foreach ($params as $key => $value) {
-            if (!preg_match("/^oauth_/", $key)) {
+            if (!preg_match("/^oauth_/", (string) $key)) {
                 continue;
             }
             $headerValue[] = Zend_Oauth_Http_Utility::urlEncode($key)

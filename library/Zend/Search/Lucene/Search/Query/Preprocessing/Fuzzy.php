@@ -173,7 +173,7 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Fuzzy extends Zend_Search_Lu
 
         /** @todo check for PCRE unicode support may be performed through Zend_Environment in some future */
         if (@preg_match('/\pL/u', 'a') == 1) {
-            $subPatterns = preg_split('/[*?]/u', iconv($this->_encoding, 'UTF-8', $this->_word));
+            $subPatterns = preg_split('/[*?]/u', (string) iconv($this->_encoding, 'UTF-8', $this->_word));
         } else {
             $subPatterns = preg_split('/[*?]/', $this->_word);
         }
@@ -229,7 +229,7 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Fuzzy extends Zend_Search_Lu
 
         /** @todo check for PCRE unicode support may be performed through Zend_Environment in some future */
         if (@preg_match('/\pL/u', 'a') == 1) {
-            $subPatterns = preg_split('/[*?]/u', iconv($this->_encoding, 'UTF-8', $this->_word));
+            $subPatterns = preg_split('/[*?]/u', (string) iconv($this->_encoding, 'UTF-8', $this->_word));
         } else {
             $subPatterns = preg_split('/[*?]/', $this->_word);
         }

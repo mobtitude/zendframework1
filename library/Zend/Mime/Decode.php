@@ -126,7 +126,7 @@ class Zend_Mime_Decode
     {
         // check for valid header at first line
         $firstline = strtok($message, "\n");
-        if (!preg_match('%^[^\s]+[^:]*:%', $firstline)) {
+        if (!preg_match('%^[^\s]+[^:]*:%', (string) $firstline)) {
             $headers = array();
             // TODO: we're ignoring \r for now - is this function fast enough and is it safe to asume noone needs \r?
             $body = str_replace(

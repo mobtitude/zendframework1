@@ -145,6 +145,13 @@ abstract class Zend_Date_DateObject {
      */
     protected function mktime($hour, $minute, $second, $month, $day, $year, $gmt = false)
     {
+        $hour = (int) $hour;
+        $minute = (int) $minute;
+        $second = (int) $second;
+        $month = (int) $month;
+        $day = (int) $day;
+        $year = (int) $year;
+
         // complete date but in 32bit timestamp - use PHP internal
         if ((1901 < $year) and ($year < 2038)) {
 
@@ -464,7 +471,7 @@ abstract class Zend_Date_DateObject {
                     break;
 
                 case 'y':  // year number, 2 digits
-                    $output .= substr($date['year'], strlen($date['year']) - 2, 2);
+                    $output .= substr($date['year'], strlen((string) $date['year']) - 2, 2);
                     break;
 
 

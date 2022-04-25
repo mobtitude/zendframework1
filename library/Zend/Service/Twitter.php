@@ -735,9 +735,9 @@ class Zend_Service_Twitter
                             '"geocode" must be of the format "latitude,longitude,radius"'
                         );
                     }
-                    list($latitude, $longitude, $radius) = explode(',', $value);
+                    list($latitude, $longitude, $radius) = explode(',', (string) $value);
                     $radius = trim($radius);
-                    if (!preg_match('/^\d+(mi|km)$/', $radius)) {
+                    if (!preg_match('/^\d+(mi|km)$/', (string) $radius)) {
                         require_once 'Zend/Service/Twitter/Exception.php';
                         throw new Zend_Service_Twitter_Exception(
                             'Radius segment of "geocode" must be of the format "[unit](mi|km)"'
@@ -748,7 +748,7 @@ class Zend_Service_Twitter
                     $params['geocode'] = $latitude . ',' . $longitude . ',' . $radius;
                     break;
                 case 'lang':
-                    if (strlen($value) > 2) {
+                    if (strlen((string) $value) > 2) {
                         require_once 'Zend/Service/Twitter/Exception.php';
                         throw new Zend_Service_Twitter_Exception(
                             'Query language must be a 2 character string'
@@ -757,7 +757,7 @@ class Zend_Service_Twitter
                     $params['lang'] = strtolower($value);
                     break;
                 case 'locale':
-                    if (strlen($value) > 2) {
+                    if (strlen((string) $value) > 2) {
                         require_once 'Zend/Service/Twitter/Exception.php';
                         throw new Zend_Service_Twitter_Exception(
                             'Query locale must be a 2 character string'
@@ -786,7 +786,7 @@ class Zend_Service_Twitter
                     $params['count'] = $value;
                     break;
                 case 'until':
-                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
+                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) $value)) {
                         require_once 'Zend/Service/Twitter/Exception.php';
                         throw new Zend_Service_Twitter_Exception(
                             '"until" must be a date in the format YYYY-MM-DD'
@@ -1187,7 +1187,7 @@ class Zend_Service_Twitter
      */
     protected function validInteger($int)
     {
-        if (preg_match("/(\d+)/", $int)) {
+        if (preg_match("/(\d+)/", (string) $int)) {
             return $int;
         }
         return 0;

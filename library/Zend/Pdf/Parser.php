@@ -251,7 +251,7 @@ class Zend_Pdf_Parser
             $streamOffset = 0;
 
             $size    = $entryField1Size + $entryField2Size + $entryField3Size;
-            $entries = strlen($xrefStreamData)/$size;
+            $entries = strlen((string) $xrefStreamData)/$size;
 
             for ($count = 0; $count < $sections; $count++) {
                 if ($trailerDict->Index !== null) {

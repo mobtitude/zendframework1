@@ -295,7 +295,7 @@ class Zend_Dojo_View_Helper_Dojo_Container
         $modules = (array) $modules;
 
         foreach ($modules as $mod) {
-            if (!preg_match('/^[a-z][a-z0-9._-]+$/i', $mod)) {
+            if (!preg_match('/^[a-z][a-z0-9._-]+$/i', (string) $mod)) {
                 require_once 'Zend/Dojo/View/Exception.php';
                 throw new Zend_Dojo_View_Exception(sprintf('Module name specified, "%s", contains invalid characters', (string) $mod));
             }
@@ -430,7 +430,7 @@ class Zend_Dojo_View_Helper_Dojo_Container
     public function setCdnVersion($version = null)
     {
         $this->enable();
-        if (preg_match('/^[1-9]\.[0-9]{1,2}(\.[0-9]{1,2})?$/', $version)) {
+        if (preg_match('/^[1-9]\.[0-9]{1,2}(\.[0-9]{1,2})?$/', (string) $version)) {
             $this->_cdnVersion = $version;
         }
         return $this;

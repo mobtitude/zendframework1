@@ -743,7 +743,7 @@ class Zend_Wildfire_Plugin_FirePhp implements Zend_Wildfire_Plugin_Interface
                 $name = $raw_name = $just_name;
 
                 if ($name[0] == "\0") {
-                    $parts = explode("\0", $name);
+                    $parts = explode("\0", (string) $name);
                     $name = $parts[2];
                 }
                 if (!isset($properties[$name])) {

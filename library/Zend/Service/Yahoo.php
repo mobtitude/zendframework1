@@ -627,7 +627,7 @@ class Zend_Service_Yahoo
             throw new Zend_Service_Exception("Invalid value for option 'latitude': {$options['latitude']}");
         }
 
-        if (isset($options['zip']) && !preg_match('/(^\d{5}$)|(^\d{5}-\d{4}$)/', $options['zip'])) {
+        if (isset($options['zip']) && !preg_match('/(^\d{5}$)|(^\d{5}-\d{4}$)/', (string) $options['zip'])) {
             /**
              * @see Zend_Service_Exception
              */

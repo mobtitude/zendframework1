@@ -410,7 +410,7 @@ class Zend_Cloud_Infrastructure_Adapter_Rackspace extends Zend_Cloud_Infrastruct
         $num     = 0;
         $average = 0;
 
-        $outputs= explode("\n",$result);
+        $outputs= explode("\n",(string) $result);
         foreach ($outputs as $output) {
             if (!empty($output)) {
                 switch ($metric) {

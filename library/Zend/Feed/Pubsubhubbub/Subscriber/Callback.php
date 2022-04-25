@@ -310,7 +310,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
         if (empty($queryString)) {
             return array();
         }
-        $parts = explode('&', $queryString);
+        $parts = explode('&', (string) $queryString);
         foreach ($parts as $kvpair) {
             $pair  = explode('=', $kvpair);
             $key   = rawurldecode($pair[0]);

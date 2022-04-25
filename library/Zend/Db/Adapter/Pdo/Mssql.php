@@ -268,7 +268,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
         $p = 1;
         foreach ($result as $key => $row) {
             $identity = false;
-            $words = explode(' ', $row[$type_name], 2);
+            $words = explode(' ', (string) $row[$type_name], 2);
             if (isset($words[0])) {
                 $type = $words[0];
                 if (isset($words[1])) {

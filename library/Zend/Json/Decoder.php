@@ -299,7 +299,7 @@ class Zend_Json_Decoder
                 $this->_offset)
             && $matches[0][1] == $this->_offset)
         {
-            $this->_offset += strlen($matches[0][0]);
+            $this->_offset += strlen((string) $matches[0][0]);
         }
     }
 
@@ -439,7 +439,7 @@ class Zend_Json_Decoder
                 $datum = $matches[0][0];
 
                 if (is_numeric($datum)) {
-                    if (preg_match('/^0\d+$/', $datum)) {
+                    if (preg_match('/^0\d+$/', (string) $datum)) {
                         require_once 'Zend/Json/Exception.php';
                         throw new Zend_Json_Exception("Octal notation not supported by JSON (value: $datum)");
                     } else {
@@ -453,7 +453,7 @@ class Zend_Json_Decoder
                 }
 
                 $this->_token = self::DATUM;
-                $this->_offset = $start + strlen($datum);
+                $this->_offset = $start + strlen((string) $datum);
             }
         } else {
             require_once 'Zend/Json/Exception.php';
@@ -478,7 +478,7 @@ class Zend_Json_Decoder
     {
         $delim       = substr($chrs, 0, 1);
         $utf8        = '';
-        $strlen_chrs = strlen($chrs);
+        $strlen_chrs = strlen((string) $chrs);
 
         for($i = 0; $i < $strlen_chrs; $i++) {
 

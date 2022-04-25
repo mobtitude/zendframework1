@@ -96,7 +96,7 @@ class Zend_Controller_Router_Route_Static extends Zend_Controller_Router_Route_A
     {
         if ($partial) {
             if ((empty($path) && empty($this->_route))
-                || (substr($path, 0, strlen($this->_route)) === $this->_route)
+                || (substr($path, 0, strlen((string) $this->_route)) === $this->_route)
             ) {
                 $this->setMatchedPath($this->_route);
 

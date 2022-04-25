@@ -183,7 +183,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
                 if ($info->chain instanceof Zend_Config) {
                     $childRouteNames = $info->chain;
                 } else {
-                    $childRouteNames = explode(',', $info->chain);
+                    $childRouteNames = explode(',', (string) $info->chain);
                 }
 
                 foreach ($childRouteNames as $childRouteName) {
@@ -487,7 +487,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
         $route = $this->getRoute($name);
         $url   = $route->assemble($params, $reset, $encode);
 
-        if (!preg_match('|^[a-z]+://|', $url)) {
+        if (!preg_match('|^[a-z]+://|', (string) $url)) {
             $url = rtrim($this->getFrontController()->getBaseUrl(), self::URI_DELIMITER) . self::URI_DELIMITER . $url;
         }
 

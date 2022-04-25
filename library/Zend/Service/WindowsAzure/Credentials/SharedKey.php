@@ -136,7 +136,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedKey
 			$contentLength = 0;
 			
 			if (!is_null($rawData)) {
-				$contentLength = strlen($rawData);
+				$contentLength = strlen((string) $rawData);
 			}
 		}
 

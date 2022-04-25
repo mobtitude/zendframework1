@@ -416,10 +416,8 @@ class Zend_Feed_Reader
         }
         $responseHtml = $response->getBody();
         $libxml_errflag = libxml_use_internal_errors(true);
-        $oldValue = libxml_disable_entity_loader(true);
         $dom = new DOMDocument;
         $status = $dom->loadHTML($responseHtml);
-        libxml_disable_entity_loader($oldValue);
         libxml_use_internal_errors($libxml_errflag);
         if (!$status) {
             // Build error message
@@ -489,7 +487,7 @@ class Zend_Feed_Reader
             $type = self::TYPE_RSS_ANY;
             $version = $xpath->evaluate('string(/rss/@version)');
 
-            if (strlen($version) > 0) {
+            if (strlen((string) $version) > 0) {
                 switch($version) {
                     case '2.0':
                         $type = self::TYPE_RSS_20;

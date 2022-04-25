@@ -237,7 +237,7 @@ class Zend_Mobile_Push_Message_Gcm extends Zend_Mobile_Push_Message_Abstract
         }
         if ($this->_ttl !== 2419200 &&
             (!is_scalar($this->_id) ||
-            strlen($this->_id) === 0)) {
+            strlen((string) $this->_id) === 0)) {
             return false;
         }
         return true;

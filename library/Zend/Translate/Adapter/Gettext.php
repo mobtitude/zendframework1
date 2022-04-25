@@ -113,7 +113,7 @@ class Zend_Translate_Adapter_Gettext extends Zend_Translate_Adapter {
             if ($origtemp[$count * 2 + 1] != 0) {
                 fseek($this->_file, $origtemp[$count * 2 + 2]);
                 $original = @fread($this->_file, $origtemp[$count * 2 + 1]);
-                $original = explode("\0", $original);
+                $original = explode("\0", (string) $original);
             } else {
                 $original[0] = '';
             }
@@ -121,7 +121,7 @@ class Zend_Translate_Adapter_Gettext extends Zend_Translate_Adapter {
             if ($transtemp[$count * 2 + 1] != 0) {
                 fseek($this->_file, $transtemp[$count * 2 + 2]);
                 $translate = fread($this->_file, $transtemp[$count * 2 + 1]);
-                $translate = explode("\0", $translate);
+                $translate = explode("\0", (string) $translate);
                 if ((count($original) > 1)) {
                     $this->_data[$locale][$original[0]] = $translate;
                     array_shift($original);

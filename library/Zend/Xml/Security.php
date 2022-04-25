@@ -83,7 +83,6 @@ class Zend_Xml_Security
         }
 
         if (!self::isPhpFpm()) {
-            $loadEntities = libxml_disable_entity_loader(true);
             $useInternalXmlErrors = libxml_use_internal_errors(true);
         }
 
@@ -97,7 +96,6 @@ class Zend_Xml_Security
         if (!$result) {
             // Entity load to previous setting
             if (!self::isPhpFpm()) {
-                libxml_disable_entity_loader($loadEntities);
                 libxml_use_internal_errors($useInternalXmlErrors);
             }
             return false;
@@ -117,7 +115,6 @@ class Zend_Xml_Security
 
         // Entity load to previous setting
         if (!self::isPhpFpm()) {
-            libxml_disable_entity_loader($loadEntities);
             libxml_use_internal_errors($useInternalXmlErrors);
         }
 
@@ -167,10 +164,10 @@ class Zend_Xml_Security
     public static function isPhpFpm()
     {
         $isVulnerableVersion = (
-            version_compare(PHP_VERSION, '5.5.22', 'lt')
+            PHP_VERSION_ID < 50522
             || (
-                version_compare(PHP_VERSION, '5.6', 'gte')
-                && version_compare(PHP_VERSION, '5.6.6', 'lt')
+                PHP_VERSION_ID >= 50600
+                && PHP_VERSION_ID < 50606
             )
         );
 
@@ -240,7 +237,7 @@ class Zend_Xml_Security
     {
         foreach (self::getAsciiEncodingMap() as $encoding => $generator) {
             $prefix = call_user_func($generator, '<' . '?xml');
-            if (0 === strncmp($xml, $prefix, strlen($prefix))) {
+            if (0 === strncmp($xml, $prefix, strlen((string) $prefix))) {
                 return $encoding;
             }
         }
@@ -283,7 +280,7 @@ class Zend_Xml_Security
             return array($fileEncoding);
         }
 
-        $encPos   += strlen($encAttr);
+        $encPos   += strlen((string) $encAttr);
         $quotePos = strpos($xml, $quote, $encPos);
         if (false === $quotePos) {
             return array($fileEncoding);

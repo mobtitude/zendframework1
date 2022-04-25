@@ -335,7 +335,7 @@ class Zend_Loader_Autoloader
                 continue;
             }
             if (0 === strpos($class, $ns)) {
-                if ((false === $namespace) || (strlen($ns) > strlen($namespace))) {
+                if ((false === $namespace) || (strlen((string) $ns) > strlen((string) $namespace))) {
                     $namespace = $ns;
                     $autoloaders = $this->getNamespaceAutoloaders($ns);
                 }
@@ -575,7 +575,7 @@ class Zend_Loader_Autoloader
             $matchedVersion = $matches[1];
 
             if (('latest' == $version)
-                || ((strlen($matchedVersion) >= $versionLen)
+                || ((strlen((string) $matchedVersion) >= $versionLen)
                     && (0 === strpos($matchedVersion, $version)))
             ) {
                 $versions[$matchedVersion] = $dir . '/library';

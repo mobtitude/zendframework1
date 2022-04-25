@@ -514,7 +514,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
      *
      * @return integer
      */
-    public function count()
+    public function count(): int
     {
         if (!$this->_pageCount) {
             $this->_pageCount = $this->_calculatePageCount();
@@ -560,7 +560,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
 
         if (null === $pageNumber) {
             foreach (self::$_cache->getIdsMatchingTags(array($this->_getCacheInternalId())) as $id) {
-                if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
+                if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", (string) $id, $page)) {
                     self::$_cache->remove($this->_getCacheId($page[1]));
                 }
             }
@@ -818,7 +818,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
      *
      * @return Traversable
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return $this->getCurrentItems();
     }
@@ -896,7 +896,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
         $data = array();
         if ($this->_cacheEnabled()) {
             foreach (self::$_cache->getIdsMatchingTags(array($this->_getCacheInternalId())) as $id) {
-                    if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
+                    if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", (string) $id, $page)) {
                         $data[$page[1]] = self::$_cache->load($this->_getCacheId($page[1]));
                     }
             }

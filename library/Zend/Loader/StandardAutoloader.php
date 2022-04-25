@@ -334,7 +334,7 @@ class Zend_Loader_StandardAutoloader implements Zend_Loader_SplAutoloader
         foreach ($this->$type as $leader => $path) {
             if (0 === strpos($class, $leader)) {
                 // Trim off leader (namespace or prefix)
-                $trimmedClass = substr($class, strlen($leader));
+                $trimmedClass = substr($class, strlen((string) $leader));
 
                 // create filename
                 $filename = $this->transformClassNameToFilename($trimmedClass, $path);

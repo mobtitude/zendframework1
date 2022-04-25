@@ -125,7 +125,7 @@ class Zend_Http_Header_SetCookie
      */
     public static function fromString($headerLine, $bypassHeaderFieldName = false)
     {
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = explode(': ', (string) $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'set-cookie') {
@@ -136,10 +136,10 @@ class Zend_Http_Header_SetCookie
         $headers = array();
         foreach ($multipleHeaders as $headerLine) {
             $header = new self();
-            $keyValuePairs = preg_split('#;\s*#', $headerLine);
+            $keyValuePairs = preg_split('#;\s*#', (string) $headerLine);
             foreach ($keyValuePairs as $keyValue) {
                 if (strpos($keyValue, '=')) {
-                    list($headerKey, $headerValue) = preg_split('#=\s*#', $keyValue, 2);
+                    list($headerKey, $headerValue) = preg_split('#=\s*#', (string) $keyValue, 2);
                 } else {
                     $headerKey = $keyValue;
                     $headerValue = null;

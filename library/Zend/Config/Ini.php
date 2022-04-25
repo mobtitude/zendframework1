@@ -203,7 +203,7 @@ class Zend_Config_Ini extends Zend_Config
         $iniArray = array();
         foreach ($loaded as $key => $data)
         {
-            $pieces = explode($this->_sectionSeparator, $key);
+            $pieces = explode($this->_sectionSeparator, (string) $key);
             $thisSection = trim($pieces[0]);
             switch (count($pieces)) {
                 case 1:

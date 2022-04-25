@@ -169,7 +169,7 @@ class Zend_Service_Rackspace_Servers extends Zend_Service_Rackspace_Abstract
                             sprintf("The file %s doesn't exist",$filePath));
                 }
                 $content= file_get_contents($filePath);
-                if (strlen($content) > self::LIMIT_FILE_SIZE) {
+                if (strlen((string) $content) > self::LIMIT_FILE_SIZE) {
                     require_once 'Zend/Service/Rackspace/Exception.php';
                     throw new Zend_Service_Rackspace_Exception(
                             sprintf("The size of the file %s is greater than the max size of %d bytes",

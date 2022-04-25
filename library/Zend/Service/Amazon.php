@@ -236,7 +236,7 @@ class Zend_Service_Amazon
 
         // de-canonicalize out sort key
         if (isset($options['ResponseGroup'])) {
-            $responseGroup = explode(',', $options['ResponseGroup']);
+            $responseGroup = explode(',', (string) $options['ResponseGroup']);
 
             if (!in_array('Request', $responseGroup)) {
                 $responseGroup[] = 'Request';

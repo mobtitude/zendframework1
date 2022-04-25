@@ -811,7 +811,7 @@ class Zend_Http_UserAgent implements Serializable
         }
 
         // Get sequence against which to match
-        $sequence = explode(',', $this->_config['identification_sequence']);
+        $sequence = explode(',', (string) $this->_config['identification_sequence']);
 
         // If a browser type is already configured, push that to the front of the list
         if (null !== ($browserType = $this->getBrowserType())) {

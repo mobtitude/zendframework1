@@ -482,7 +482,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
             require_once 'Zend/Json/Server/Smd.php';
             $methods = get_class_methods('Zend_Json_Server_Smd');
             foreach ($methods as $key => $method) {
-                if (!preg_match('/^(set|get)/', $method)) {
+                if (!preg_match('/^(set|get)/', (string) $method)) {
                     continue;
                 }
                 if (strstr($method, 'Service')) {

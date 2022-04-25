@@ -265,7 +265,7 @@ class Zend_Validate_CreditCard extends Zend_Validate_Abstract
         $foundl = false;
         foreach ($types as $type) {
             foreach ($this->_cardType[$type] as $prefix) {
-                if (substr($value, 0, strlen($prefix)) == $prefix) {
+                if (substr($value, 0, strlen((string) $prefix)) == $prefix) {
                     $foundp = true;
                     if (in_array($length, $this->_cardLength[$type])) {
                         $foundl = true;

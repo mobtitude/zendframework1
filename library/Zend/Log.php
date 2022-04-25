@@ -328,7 +328,7 @@ class Zend_Log
         }
 
         // empty namespace given?
-        if (strlen($namespace) === 0) {
+        if (strlen((string) $namespace) === 0) {
             return $className;
         }
 

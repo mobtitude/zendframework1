@@ -363,7 +363,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
                 $server['os'] = 'windows';
             }
 
-            if (preg_match('/Apache\/([0-9\.]*)/', $this->_server['server_software'], $arr)) {
+            if (preg_match('/Apache\/([0-9\.]*)/', (string) $this->_server['server_software'], $arr)) {
                 if ($arr[1]) {
                     $server['version'] = $arr[1];
                     $server['server']  = 'apache';
@@ -410,11 +410,11 @@ abstract class Zend_Http_UserAgent_AbstractDevice
 
         $comment = array();
         if (isset($match[7])) {
-            $comment = explode(';', $match[7]);
+            $comment = explode(';', (string) $match[7]);
         }
 
         // second part if exists
-        $end = substr($userAgent, strlen($match[0]));
+        $end = substr($userAgent, strlen((string) $match[0]));
         if (!empty($end)) {
             $result['others']['full'] = $end;
         }
@@ -614,7 +614,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
 
                 // For Safari < 2.2, AppleWebKit version gives the Safari version
                 if (strpos($result['browser_version'], '.') > 2 || (int) $result['browser_version'] > 20) {
-                    $temp = explode('.', $result['browser_version']);
+                    $temp = explode('.', (string) $result['browser_version']);
                     $build = (int) $temp[0];
                     $awkVersion = array(
                         48  => '0.8',

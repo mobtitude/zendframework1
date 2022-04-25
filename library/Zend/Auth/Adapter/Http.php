@@ -187,7 +187,7 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
             throw new Zend_Auth_Adapter_Exception('Config key \'accept_schemes\' is required');
         }
 
-        $schemes = explode(' ', $config['accept_schemes']);
+        $schemes = explode(' ', (string) $config['accept_schemes']);
         $this->_acceptSchemes = array_intersect($schemes, $this->_supportedSchemes);
         if (empty($this->_acceptSchemes)) {
             /**
@@ -760,7 +760,7 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
         if (!$ret || empty($temp[1])) {
             return false;
         }
-        if (32 != strlen($temp[1]) || !ctype_xdigit($temp[1])) {
+        if (32 != strlen((string) $temp[1]) || !ctype_xdigit($temp[1])) {
             return false;
         } else {
             $data['response'] = $temp[1];
@@ -806,7 +806,7 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
             }
             // This implementation only sends MD5 hex strings in the opaque value
             if (!$this->_ieNoOpaque &&
-                (32 != strlen($temp[1]) || !ctype_xdigit($temp[1]))) {
+                (32 != strlen((string) $temp[1]) || !ctype_xdigit($temp[1]))) {
                 return false;
             } else {
                 $data['opaque'] = $temp[1];
@@ -834,7 +834,7 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
         if (!$ret || empty($temp[1])) {
             return false;
         }
-        if (8 != strlen($temp[1]) || !ctype_xdigit($temp[1])) {
+        if (8 != strlen((string) $temp[1]) || !ctype_xdigit($temp[1])) {
             return false;
         } else {
             $data['nc'] = $temp[1];

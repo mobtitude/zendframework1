@@ -51,7 +51,7 @@ class Zend_Translate_Plural
         }
 
         if (strlen($locale) > 3) {
-            $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
+            $locale = substr($locale, 0, -strlen((string) strrchr($locale, '_')));
         }
 
         if (isset(self::$_plural[$locale])) {
@@ -211,7 +211,7 @@ class Zend_Translate_Plural
         }
 
         if (strlen($locale) > 3) {
-            $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
+            $locale = substr($locale, 0, -strlen((string) strrchr($locale, '_')));
         }
 
         if (!is_callable($rule)) {

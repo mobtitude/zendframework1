@@ -231,7 +231,7 @@ class Zend_Json
     protected static function _getXmlValue($simpleXmlElementObject) {
         $pattern = '/^[\s]*new Zend_Json_Expr[\s]*\([\s]*[\"\']{1}(.*)[\"\']{1}[\s]*\)[\s]*$/';
         $matchings = array();
-        $match = preg_match ($pattern, $simpleXmlElementObject, $matchings);
+        $match = preg_match ($pattern, (string) $simpleXmlElementObject, $matchings);
         if ($match) {
             return new Zend_Json_Expr($matchings[1]);
         } else {

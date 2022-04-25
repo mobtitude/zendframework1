@@ -326,7 +326,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
 
         // if there is notation for specialties? If so, break them up
         if (strstr($consoleProviderFull, '.')) {
-            list($consoleProviderName, $consoleSpecialtyName) = explode('.', $consoleProviderFull);
+            list($consoleProviderName, $consoleSpecialtyName) = explode('.', (string) $consoleProviderFull);
         } else {
             $consoleProviderName = $consoleProviderFull;
         }

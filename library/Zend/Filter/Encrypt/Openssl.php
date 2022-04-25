@@ -400,7 +400,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
         if ($this->_package) {
             $header = pack('n', count($this->_keys['envelope']));
             foreach($this->_keys['envelope'] as $key => $envKey) {
-                $header .= pack('H32n', $fingerprints[$key], strlen($envKey)) . $envKey;
+                $header .= pack('H32n', $fingerprints[$key], strlen((string) $envKey)) . $envKey;
             }
 
             $encrypted = $header . $encrypted;

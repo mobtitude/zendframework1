@@ -968,7 +968,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
         }
         if ($fh) {
             $maildirsize = fread($fh, 5120);
-            if (strlen($maildirsize) >= 5120) {
+            if (strlen((string) $maildirsize) >= 5120) {
                 fclose($fh);
                 $fh = null;
                 $maildirsize = '';
@@ -980,7 +980,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
             $messages   = $result['count'];
             $quota      = $result['quota'];
         } else {
-            $maildirsize = explode("\n", $maildirsize);
+            $maildirsize = explode("\n", (string) $maildirsize);
             if (is_array($this->_quota)) {
                 $quota = $this->_quota;
             } else {

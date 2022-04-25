@@ -781,7 +781,7 @@ class Zend_Gdata_App
         if ($protocolVersionStr !== null) {
             // Extract protocol major and minor version from header
             $delimiterPos = strpos($protocolVersionStr, '.');
-            $length = strlen($protocolVersionStr);
+            $length = strlen((string) $protocolVersionStr);
             $major = substr($protocolVersionStr, 0, $delimiterPos);
             $minor = substr($protocolVersionStr, $delimiterPos + 1, $length);
             $majorProtocolVersion = $major;

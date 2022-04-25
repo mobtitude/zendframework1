@@ -225,10 +225,10 @@ class Zend_Db_Adapter_Pdo_Sqlite extends Zend_Db_Adapter_Pdo_Abstract
         foreach ($result as $key => $row) {
             list($length, $scale, $precision, $primary, $primaryPosition, $identity) =
                 array(null, null, null, false, null, false);
-            if (preg_match('/^((?:var)?char)\((\d+)\)/i', $row[$type], $matches)) {
+            if (preg_match('/^((?:var)?char)\((\d+)\)/i', (string) $row[$type], $matches)) {
                 $row[$type] = $matches[1];
                 $length = $matches[2];
-            } else if (preg_match('/^decimal\((\d+),(\d+)\)/i', $row[$type], $matches)) {
+            } else if (preg_match('/^decimal\((\d+),(\d+)\)/i', (string) $row[$type], $matches)) {
                 $row[$type] = 'DECIMAL';
                 $precision = $matches[1];
                 $scale = $matches[2];

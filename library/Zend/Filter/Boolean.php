@@ -363,7 +363,7 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
             $return   = false;
         }
         $str = Zend_Locale::getTranslation($question, 'question', $locale);
-        $str = explode(':', $str);
+        $str = explode(':', (string) $str);
         if (!empty($str)) {
             foreach($str as $no) {
                 if (($no == $value) || (strtolower($no) == strtolower($value))) {

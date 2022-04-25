@@ -216,9 +216,9 @@ class Zend_Locale_Math
             return $value;
         }
 
-        $split = explode('e', $value);
+        $split = explode('e', (string) $value);
         if (count($split) == 1) {
-            $split = explode('E', $value);
+            $split = explode('E', (string) $value);
         }
 
         if (count($split) > 1) {

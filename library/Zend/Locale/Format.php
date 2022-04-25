@@ -545,7 +545,7 @@ class Zend_Locale_Format
     {
         $decimal  = Zend_Locale_Data::getContent($options['locale'], $type);
         $decimal  = preg_replace('/[^#0,;\.\-Ee]/u', '',$decimal);
-        $patterns = explode(';', $decimal);
+        $patterns = explode(';', (string) $decimal);
 
         if (count($patterns) == 1) {
             $patterns[1] = '-' . $patterns[0];
@@ -905,7 +905,7 @@ class Zend_Locale_Format
 
         // split number parts
         $split = false;
-        preg_match_all('/\d+/u', $number, $splitted);
+        preg_match_all('/\d+/u', (string) $number, $splitted);
 
         if (count($splitted[0]) == 0) {
             self::_setEncoding($oenc);

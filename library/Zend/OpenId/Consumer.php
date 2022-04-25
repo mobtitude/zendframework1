@@ -301,7 +301,7 @@ class Zend_OpenId_Consumer
                 $this->_setError("The op_endpoint URI is not the same of URI associated with the assoc_handle");
                 return false;
             }       
-            $signed = explode(',', $params['openid_signed']);
+            $signed = explode(',', (string) $params['openid_signed']);
             // Check the parameters for the signature
             // @see https://openid.net/specs/openid-authentication-2_0.html#positive_assertions
             $toCheck = $this->_signParams;
@@ -603,10 +603,10 @@ class Zend_OpenId_Consumer
 
             $r = array();
             $bad_response = false;
-            foreach(explode("\n", $ret) as $line) {
+            foreach(explode("\n", (string) $ret) as $line) {
                 $line = trim($line);
                 if (!empty($line)) {
-                    $x = explode(':', $line, 2);
+                    $x = explode(':', (string) $line, 2);
                     if (is_array($x) && count($x) == 2) {
                         list($key, $value) = $x;
                         $r[trim($key)] = trim($value);
@@ -765,7 +765,7 @@ class Zend_OpenId_Consumer
             $response = $this->_httpRequest($XRDS); 
             if (preg_match(
                     '/<URI>([^\t]*)<\/URI>/i',
-                    $response,
+                    (string) $response,
                     $x)) {
                 $server = $x[1];
                 // $realId 
@@ -807,24 +807,24 @@ class Zend_OpenId_Consumer
         if ($version >= 2.0) {
             if (preg_match(
                     '/<link[^>]*rel=(["\'])[ \t]*(?:[^ \t"\']+[ \t]+)*?openid2.local_id[ \t]*[^"\']*\\1[^>]*href=(["\'])([^"\']+)\\2[^>]*\/?>/i',
-                    $response,
+                    (string) $response,
                     $r)) {
                 $realId = $r[3];
             } else if (preg_match(
                     '/<link[^>]*href=(["\'])([^"\']+)\\1[^>]*rel=(["\'])[ \t]*(?:[^ \t"\']+[ \t]+)*?openid2.local_id[ \t]*[^"\']*\\3[^>]*\/?>/i',
-                    $response,
+                    (string) $response,
                     $r)) {
                 $realId = $r[2];
             }
         } else {
             if (preg_match(
                     '/<link[^>]*rel=(["\'])[ \t]*(?:[^ \t"\']+[ \t]+)*?openid.delegate[ \t]*[^"\']*\\1[^>]*href=(["\'])([^"\']+)\\2[^>]*\/?>/i',
-                    $response,
+                    (string) $response,
                     $r)) {
                 $realId = $r[3];
             } else if (preg_match(
                     '/<link[^>]*href=(["\'])([^"\']+)\\1[^>]*rel=(["\'])[ \t]*(?:[^ \t"\']+[ \t]+)*?openid.delegate[ \t]*[^"\']*\\3[^>]*\/?>/i',
-                    $response,
+                    (string) $response,
                     $r)) {
                 $realId = $r[2];
             }

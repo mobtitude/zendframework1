@@ -585,7 +585,7 @@ class Zend_OpenId_Provider
                                . '[A-Za-z1-9_\.]+?'
                                . preg_quote(substr($site, $n+4), '/')
                                . '/';
-                        if (preg_match($regex, $root)) {
+                        if (preg_match($regex, (string) $root)) {
                             $trusted = $t;
                             break;
                         }
@@ -760,7 +760,7 @@ class Zend_OpenId_Provider
             return $ret;
         }
 
-        $signed = explode(',', $params['openid_signed']);
+        $signed = explode(',', (string) $params['openid_signed']);
         $data = '';
         foreach ($signed as $key) {
             $data .= $key . ':';

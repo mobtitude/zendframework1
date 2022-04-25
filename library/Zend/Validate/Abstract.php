@@ -249,7 +249,7 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         }
 
         $length = self::getMessageLength();
-        if (($length > -1) && (strlen($message) > $length)) {
+        if (($length > -1) && (strlen((string) $message) > $length)) {
             $message = substr($message, 0, (self::getMessageLength() - 3)) . '...';
         }
 

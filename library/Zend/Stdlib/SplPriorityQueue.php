@@ -305,7 +305,7 @@ if (!is_array($this->preparedQueue)) {
             $this->sort();
             $keys = array_keys($this->queue);
             $key  = array_shift($keys);
-            if (preg_match('/^(a|O):/', $key)) {
+            if (preg_match('/^(a|O):/', (string) $key)) {
                 $key = unserialize($key);
             }
 
@@ -355,7 +355,7 @@ if (!is_array($this->preparedQueue)) {
             $queue = array();
             foreach ($this->queue as $priority => $values) {
                 $priorityKey = $priority;
-                if (preg_match('/^(a|O):/', $priority)) {
+                if (preg_match('/^(a|O):/', (string) $priority)) {
                     $priority = unserialize($priority);
                 }
                 foreach ($values as $key => $value) {

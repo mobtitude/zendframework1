@@ -219,21 +219,21 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
         $p = 1;
         foreach ($result as $key => $row) {
             $row = array_merge($row_defaults, $row);
-            if (preg_match('/unsigned/', $row['Type'])) {
+            if (preg_match('/unsigned/', (string) $row['Type'])) {
                 $row['Unsigned'] = true;
             }
-            if (preg_match('/^((?:var)?char)\((\d+)\)/', $row['Type'], $matches)) {
+            if (preg_match('/^((?:var)?char)\((\d+)\)/', (string) $row['Type'], $matches)) {
                 $row['Type'] = $matches[1];
                 $row['Length'] = $matches[2];
-            } else if (preg_match('/^decimal\((\d+),(\d+)\)/', $row['Type'], $matches)) {
+            } else if (preg_match('/^decimal\((\d+),(\d+)\)/', (string) $row['Type'], $matches)) {
                 $row['Type'] = 'decimal';
                 $row['Precision'] = $matches[1];
                 $row['Scale'] = $matches[2];
-            } else if (preg_match('/^float\((\d+),(\d+)\)/', $row['Type'], $matches)) {
+            } else if (preg_match('/^float\((\d+),(\d+)\)/', (string) $row['Type'], $matches)) {
                 $row['Type'] = 'float';
                 $row['Precision'] = $matches[1];
                 $row['Scale'] = $matches[2];
-            } else if (preg_match('/^((?:big|medium|small|tiny)?int)\((\d+)\)/', $row['Type'], $matches)) {
+            } else if (preg_match('/^((?:big|medium|small|tiny)?int)\((\d+)\)/', (string) $row['Type'], $matches)) {
                 $row['Type'] = $matches[1];
                 /**
                  * The optional argument of a MySQL int type is not precision

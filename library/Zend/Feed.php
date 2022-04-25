@@ -299,7 +299,7 @@ class Zend_Feed
         // Parse the contents for appropriate <link ... /> tags
         @ini_set('track_errors', 1);
         $pattern = '~(<link[^>]+)/?>~i';
-        $result = @preg_match_all($pattern, $contents, $matches);
+        $result = @preg_match_all($pattern, (string) $contents, $matches);
         @ini_restore('track_errors');
         if ($result === false) {
             /**
@@ -322,11 +322,11 @@ class Zend_Feed
                     continue;
                 }
                 $attributes = $xml->attributes();
-                if (!isset($attributes['rel']) || !@preg_match('~^(?:alternate|service\.feed)~i', $attributes['rel'])) {
+                if (!isset($attributes['rel']) || !@preg_match('~^(?:alternate|service\.feed)~i', (string) $attributes['rel'])) {
                     continue;
                 }
                 if (!isset($attributes['type']) ||
-                        !@preg_match('~^application/(?:atom|rss|rdf)\+xml~', $attributes['type'])) {
+                        !@preg_match('~^application/(?:atom|rss|rdf)\+xml~', (string) $attributes['type'])) {
                     continue;
                 }
                 if (!isset($attributes['href'])) {

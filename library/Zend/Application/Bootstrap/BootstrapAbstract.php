@@ -239,7 +239,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
 
             $this->_classResources = array();
             foreach ($methodNames as $method) {
-                if (5 < strlen($method) && '_init' === substr($method, 0, 5)) {
+                if (5 < strlen((string) $method) && '_init' === substr($method, 0, 5)) {
                     $this->_classResources[strtolower(substr($method, 5))] = $method;
                 }
             }
@@ -772,7 +772,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
             $loader     = $this->getPluginLoader();
             foreach ($loader->getPaths() as $prefix => $paths) {
                 if (0 === strpos($className, $prefix)) {
-                    $pluginName = substr($className, strlen($prefix));
+                    $pluginName = substr($className, strlen((string) $prefix));
                     $pluginName = trim($pluginName, '_');
                     break;
                 }

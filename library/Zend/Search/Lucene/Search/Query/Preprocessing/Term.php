@@ -155,7 +155,7 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Term extends Zend_Search_Luc
             $subPatternsEncoding = $this->_encoding;
         }
 
-        $subPatterns = preg_split($wildcardsPattern, $word, -1, PREG_SPLIT_OFFSET_CAPTURE);
+        $subPatterns = preg_split($wildcardsPattern, (string) $word, -1, PREG_SPLIT_OFFSET_CAPTURE);
 
         if (count($subPatterns) > 1) {
             // Wildcard query is recognized
@@ -259,7 +259,7 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Term extends Zend_Search_Luc
             $wildcardsPattern = '/[*?]/';
             $subPatternsEncoding = $this->_encoding;
         }
-        $subPatterns = preg_split($wildcardsPattern, $word, -1, PREG_SPLIT_OFFSET_CAPTURE);
+        $subPatterns = preg_split($wildcardsPattern, (string) $word, -1, PREG_SPLIT_OFFSET_CAPTURE);
         if (count($subPatterns) > 1) {
             // Wildcard query is recognized
 

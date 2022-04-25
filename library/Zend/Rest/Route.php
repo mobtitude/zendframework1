@@ -103,7 +103,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
             } elseif ($key == 'defaults') {
                 $defaultsArray = $values->toArray();
             } else {
-                $restfulConfigArray[$key] = explode(',', $values);
+                $restfulConfigArray[$key] = explode(',', (string) $values);
             }
         }
         $instance = new self($frontController, $defaultsArray, $restfulConfigArray);

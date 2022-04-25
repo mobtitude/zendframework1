@@ -272,12 +272,12 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 // Translate value if required
                 $part = $this->_parts[$pos];
                 if ($this->_isTranslated
-                    && (substr($part, 0, 1) === '@' && substr($part, 1, 1) !== '@'
+                    && (substr((string) $part, 0, 1) === '@' && substr((string) $part, 1, 1) !== '@'
                         && $name === null)
                     || $name !== null && in_array($name, $this->_translatable)
                 ) {
-                    if (substr($part, 0, 1) === '@') {
-                        $part = substr($part, 1);
+                    if (substr((string) $part, 0, 1) === '@') {
+                        $part = substr((string) $part, 1);
                     }
 
                     if (($originalPathPart = array_search($pathPart, $translateMessages)) !== false) {
@@ -285,8 +285,8 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                     }
                 }
 
-                if (substr($part, 0, 2) === '@@') {
-                    $part = substr($part, 1);
+                if (substr((string) $part, 0, 2) === '@@') {
+                    $part = substr((string) $part, 1);
                 }
 
                 // If it's a static part, match directly
@@ -297,7 +297,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 // If it's a variable with requirement, match a regex. If not - everything matches
                 if ($part !== null
                     && !preg_match(
-                        $this->_regexDelimiter . '^' . $part . '$' . $this->_regexDelimiter . 'iu', $pathPart
+                        $this->_regexDelimiter . '^' . $part . '$' . $this->_regexDelimiter . 'iu', (string) $pathPart
                     )
                 ) {
                     return false;
