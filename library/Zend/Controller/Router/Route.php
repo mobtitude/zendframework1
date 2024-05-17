@@ -174,7 +174,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
         $route, $defaults = array(), $reqs = array(), Zend_Translate $translator = null, $locale = null
     )
     {
-        $route               = trim($route, $this->_urlDelimiter);
+        $route               = trim($route ?? '', $this->_urlDelimiter);
         $this->_defaults     = (array)$defaults;
         $this->_requirements = (array)$reqs;
         $this->_translator   = $translator;
