@@ -72,7 +72,7 @@ class Zend_Loader
                 if ($dir == '.') {
                     $dirs[$key] = $dirPath;
                 } else {
-                    $dir = rtrim($dir, '\\/');
+                    $dir = rtrim((string) $dir, '\\/');
                     $dirs[$key] = $dir . DIRECTORY_SEPARATOR . $dirPath;
                 }
             }

@@ -419,11 +419,11 @@ class Zend_Feed_Writer_Feed_FeedAbstract
             require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Invalid parameter: "link"" must be a non-empty string and valid URI/IRI');
         }
-        if (!in_array(strtolower($type), array('rss', 'rdf', 'atom'))) {
+        if (!in_array(strtolower((string) $type), array('rss', 'rdf', 'atom'))) {
             require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Invalid parameter: "type"; You must declare the type of feed the link points to, i.e. RSS, RDF or Atom');
         }
-        $this->_data['feedLinks'][strtolower($type)] = $link;
+        $this->_data['feedLinks'][strtolower((string) $type)] = $link;
     }
 
     /**

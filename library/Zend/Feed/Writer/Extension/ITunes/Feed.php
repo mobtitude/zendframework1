@@ -71,12 +71,12 @@ class Zend_Feed_Writer_Extension_ITunes_Feed
      */
     public function setItunesBlock($value)
     {
-        if (!ctype_alpha($value) && strlen((string) $value) > 0) {
+        if (!ctype_alpha((string) $value) && strlen((string) $value) > 0) {
             require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('invalid parameter: "block" may only'
             . ' contain alphabetic characters');
         }
-        if (iconv_strlen($value, $this->getEncoding()) > 255) {
+        if (iconv_strlen((string) $value, $this->getEncoding()) > 255) {
             require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('invalid parameter: "block" may only'
             . ' contain a maximum of 255 characters');
@@ -132,7 +132,7 @@ class Zend_Feed_Writer_Extension_ITunes_Feed
         }
         foreach ($values as $key=>$value) {
             if (!is_array($value)) {
-                if (iconv_strlen($value, $this->getEncoding()) > 255) {
+                if (iconv_strlen((string) $value, $this->getEncoding()) > 255) {
                     require_once 'Zend/Feed/Exception.php';
                     throw new Zend_Feed_Exception('invalid parameter: any "category" may only'
                     . ' contain a maximum of 255 characters each');
@@ -146,7 +146,7 @@ class Zend_Feed_Writer_Extension_ITunes_Feed
                 }
                 $this->_data['categories'][$key] = array();
                 foreach ($value as $val) {
-                    if (iconv_strlen($val, $this->getEncoding()) > 255) {
+                    if (iconv_strlen((string) $val, $this->getEncoding()) > 255) {
                         require_once 'Zend/Feed/Exception.php';
                         throw new Zend_Feed_Exception('invalid parameter: any "category" may only'
                         . ' contain a maximum of 255 characters each');
@@ -287,8 +287,8 @@ class Zend_Feed_Writer_Extension_ITunes_Feed
             throw new Zend_Feed_Exception('invalid parameter: any "owner" must'
             . ' be an array containing keys "name" and "email"');
         }
-        if (iconv_strlen($value['name'], $this->getEncoding()) > 255
-            || iconv_strlen($value['email'], $this->getEncoding()) > 255
+        if (iconv_strlen((string) $value['name'], $this->getEncoding()) > 255
+            || iconv_strlen((string) $value['email'], $this->getEncoding()) > 255
         ) {
             require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('invalid parameter: any "owner" may only'
@@ -345,8 +345,8 @@ class Zend_Feed_Writer_Extension_ITunes_Feed
     public function __call($method, array $params)
     {
         $point = Zend_Feed_Writer::lcfirst(substr($method, 9));
-        if (!method_exists($this, 'setItunes' . ucfirst($point))
-            && !method_exists($this, 'addItunes' . ucfirst($point))
+        if (!method_exists($this, 'setItunes' . ucfirst((string) $point))
+            && !method_exists($this, 'addItunes' . ucfirst((string) $point))
         ) {
             require_once 'Zend/Feed/Writer/Exception/InvalidMethodException.php';
             throw new Zend_Feed_Writer_Exception_InvalidMethodException(

@@ -126,7 +126,7 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
         $parity = $this->_parities[$system][$checksum];
 
         for ($i = 1; $i < 7; $i++) {
-            $bars = str_split($this->_codingMap[$parity[$i - 1]][$textTable[$i]]);
+            $bars = str_split((string) $this->_codingMap[$parity[$i - 1]][$textTable[$i]]);
             foreach ($bars as $b) {
                 $barcodeTable[] = array($b , $this->_barThinWidth , 0 , 1);
             }

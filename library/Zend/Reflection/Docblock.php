@@ -120,7 +120,7 @@ class Zend_Reflection_Docblock implements Reflector
             }
             $docComment = $commentOrReflector->getDocComment();
 
-            $lineCount = substr_count($docComment, "\n");
+            $lineCount = substr_count((string) $docComment, "\n");
 
             $this->_startLine = $this->_reflector->getStartLine() - $lineCount - 1;
             $this->_endLine   = $this->_reflector->getStartLine() - 1;
@@ -256,7 +256,7 @@ class Zend_Reflection_Docblock implements Reflector
 
         // First remove doc block line starters
         $docComment = preg_replace('#[ \t]*(?:\/\*\*|\*\/|\*)?[ ]{0,1}(.*)?#', '$1', $docComment);
-        $docComment = ltrim($docComment, "\r\n"); // @todo should be changed to remove first and last empty line
+        $docComment = ltrim((string) $docComment, "\r\n"); // @todo should be changed to remove first and last empty line
 
         $this->_cleanDocComment = $docComment;
 

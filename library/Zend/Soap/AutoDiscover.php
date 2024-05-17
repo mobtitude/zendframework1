@@ -279,8 +279,8 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface
         } else {
             $requestUri = $_SERVER['SCRIPT_NAME'];
         }
-        if( ($pos = strpos($requestUri, "?")) !== false) {
-            $requestUri = substr($requestUri, 0, $pos);
+        if( ($pos = strpos((string) $requestUri, "?")) !== false) {
+            $requestUri = substr((string) $requestUri, 0, $pos);
         }
 
         return $requestUri;
@@ -352,7 +352,7 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface
         $uri = $this->getUri();
 
         if (!($this->_wsdl instanceof Zend_Soap_Wsdl)) {
-            $parts = explode('.', basename($_SERVER['SCRIPT_NAME']));
+            $parts = explode('.', basename((string) $_SERVER['SCRIPT_NAME']));
             $name = $parts[0];
             $wsdl = new Zend_Soap_Wsdl($name, $uri, $this->_strategy);
 

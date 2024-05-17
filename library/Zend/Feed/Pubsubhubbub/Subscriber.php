@@ -768,7 +768,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
             'hub_url'            => $hubUrl,
             'created_time'       => $now->get('yyyy-MM-dd HH:mm:ss'),
             'lease_seconds'      => $expires,
-            'verify_token'       => hash('sha256', $params['hub.verify_token']),
+            'verify_token'       => hash('sha256', (string) $params['hub.verify_token']),
             'secret'             => null,
             'expiration_time'    => $expires,
             'subscription_state' => Zend_Feed_Pubsubhubbub::SUBSCRIPTION_NOTVERIFIED,

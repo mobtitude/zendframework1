@@ -101,7 +101,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
         // this driver supports multiple DSN prefixes
         // @see http://www.php.net/manual/en/ref.pdo-dblib.connection.php
         if (isset($dsn['pdoType'])) {
-            switch (strtolower($dsn['pdoType'])) {
+            switch (strtolower((string) $dsn['pdoType'])) {
                 case 'freetds':
                 case 'sybase':
                     $this->_pdoType = 'sybase';
@@ -337,7 +337,7 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
             );
 
         if ($offset > 0) {
-            $orderby = stristr($sql, 'ORDER BY');
+            $orderby = stristr((string) $sql, 'ORDER BY');
 
             if ($orderby !== false) {
                 $orderParts = explode(',', substr($orderby, 8));

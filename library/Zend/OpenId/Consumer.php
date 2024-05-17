@@ -255,9 +255,9 @@ class Zend_OpenId_Consumer
         }
         if ($params['openid_return_to'] != Zend_OpenId::selfUrl()) {
             /* Ignore query part in openid.return_to */
-            $pos = strpos($params['openid_return_to'], '?');
+            $pos = strpos((string) $params['openid_return_to'], '?');
             if ($pos === false ||
-                SUBSTR($params['openid_return_to'], 0 , $pos) != Zend_OpenId::selfUrl()) {
+                SUBSTR((string) $params['openid_return_to'], 0 , $pos) != Zend_OpenId::selfUrl()) {
 
                 $this->_setError("Wrong openid.return_to '".
                     $params['openid_return_to']."' != '" . Zend_OpenId::selfUrl() ."'");
@@ -319,7 +319,7 @@ class Zend_OpenId_Consumer
             foreach ($signed as $key) {
                 $data .= $key . ':' . $params['openid_' . strtr($key,'.','_')] . "\n";
             }
-            if (base64_decode($params['openid_sig']) ==
+            if (base64_decode((string) $params['openid_sig']) ==
                 Zend_OpenId::hashHmac($macFunc, $data, $secret)) {
                 if (!Zend_OpenId_Extension::forAll($extensions, 'parseResponse', $params)) {
                     $this->_setError("Extension::parseResponse failure");
@@ -615,7 +615,7 @@ class Zend_OpenId_Consumer
                     }
                 }
             }
-            if ($bad_response && strpos($ret, 'Unknown session type') !== false) {
+            if ($bad_response && strpos((string) $ret, 'Unknown session type') !== false) {
                 $r['error_code'] = 'unsupported-type';
             }
             $ret = $r;
@@ -676,7 +676,7 @@ class Zend_OpenId_Consumer
         if ((empty($ret['session_type']) ||
              ($version >= 2.0 && $ret['session_type'] == 'no-encryption')) &&
              isset($ret['mac_key'])) {
-            $secret = base64_decode($ret['mac_key']);
+            $secret = base64_decode((string) $ret['mac_key']);
         } else if (isset($ret['session_type']) &&
             $ret['session_type'] == 'DH-SHA1' &&
             !empty($ret['dh_server_public']) &&
@@ -693,7 +693,7 @@ class Zend_OpenId_Consumer
             return false;
         }
         if (isset($dhFunc)) {
-            $serverPub = base64_decode($ret['dh_server_public']);
+            $serverPub = base64_decode((string) $ret['dh_server_public']);
             $dhSec = Zend_OpenId::computeDhSecret($serverPub, $dh);
             if ($dhSec === false) {
                 $this->_setError("DH secret comutation failed");
@@ -704,7 +704,7 @@ class Zend_OpenId_Consumer
                 $this->_setError("Could not create digest");
                 return false;
             }
-            $secret = $sec ^ base64_decode($ret['enc_mac_key']);
+            $secret = $sec ^ base64_decode((string) $ret['enc_mac_key']);
         }
         if ($macFunc == 'sha1') {
             if (Zend_OpenId::strlen($secret) != 20) {

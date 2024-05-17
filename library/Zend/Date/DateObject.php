@@ -471,7 +471,7 @@ abstract class Zend_Date_DateObject {
                     break;
 
                 case 'y':  // year number, 2 digits
-                    $output .= substr($date['year'], strlen((string) $date['year']) - 2, 2);
+                    $output .= substr((string) $date['year'], strlen((string) $date['year']) - 2, 2);
                     break;
 
 

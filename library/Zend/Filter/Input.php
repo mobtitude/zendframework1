@@ -1188,7 +1188,7 @@ class Zend_Filter_Input
         }
 
         $interfaceName = 'Zend_' . ucfirst($type) . '_Interface';
-        $className = $this->getPluginLoader($type)->load(ucfirst($classBaseName));
+        $className = $this->getPluginLoader($type)->load(ucfirst((string) $classBaseName));
 
         $class = new ReflectionClass($className);
 

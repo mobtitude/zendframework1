@@ -418,7 +418,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
 
         // correct style attribute
         if (isset($tokenAttributes['style'])) {
-            $tokenAttributes['style'] = trim($tokenAttributes['style']);
+            $tokenAttributes['style'] = trim((string) $tokenAttributes['style']);
 
             if ($tokenAttributes['style'][strlen($tokenAttributes['style']) - 1] != ';') {
                 $tokenAttributes['style'] .= ';';
@@ -445,11 +445,11 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
          */
         foreach ($attributes as $attribute => $value) {
             if (isset($tokenAttributes[$attribute]) && !empty($tokenAttributes[$attribute])) {
-                $return .= ' ' . $attribute . '="' . htmlentities($tokenAttributes[$attribute],
+                $return .= ' ' . $attribute . '="' . htmlentities((string) $tokenAttributes[$attribute],
                                                                   ENT_QUOTES,
                                                                   self::getEncoding()) . '"';
             } elseif (!empty($value)) {
-                $return .= ' ' . $attribute . '="' . htmlentities($value, ENT_QUOTES, self::getEncoding()) . '"';
+                $return .= ' ' . $attribute . '="' . htmlentities((string) $value, ENT_QUOTES, self::getEncoding()) . '"';
             }
         }
 

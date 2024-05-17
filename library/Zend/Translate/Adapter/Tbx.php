@@ -104,7 +104,7 @@ class Zend_Translate_Adapter_Tbx extends Zend_Translate_Adapter {
             }
             $this->_content .= ">";
         } else {
-            switch(strtolower($name)) {
+            switch(strtolower((string) $name)) {
                 case 'termentry':
                     $this->_termentry = null;
                     break;
@@ -131,7 +131,7 @@ class Zend_Translate_Adapter_Tbx extends Zend_Translate_Adapter {
         if (($this->_term !== null) and ($name != "term")) {
             $this->_content .= "</".$name.">";
         } else {
-            switch (strtolower($name)) {
+            switch (strtolower((string) $name)) {
                 case 'langset':
                     $this->_langset = null;
                     break;

@@ -402,7 +402,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
         // Add file docblock, if any
         if (null !== ($docblock = $this->getDocblock())) {
             $docblock->setIndentation('');
-            $regex = preg_quote(self::$_markerDocblock, '#');
+            $regex = preg_quote((string) self::$_markerDocblock, '#');
             if (preg_match('#'.$regex.'#', $output)) {
                 $output  = preg_replace('#'.$regex.'#', $docblock->generate(), $output, 1);
             } else {

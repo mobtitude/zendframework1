@@ -285,7 +285,7 @@ class Zend_Service_Amazon
         ksort($options);
         $params = array();
         foreach($options AS $k => $v) {
-            $params[] = $k."=".rawurlencode($v);
+            $params[] = $k."=".rawurlencode((string) $v);
         }
 
         return sprintf("GET\n%s\n/onca/xml\n%s",

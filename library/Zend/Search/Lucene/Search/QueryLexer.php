@@ -384,7 +384,7 @@ class Zend_Search_Lucene_Search_QueryLexer extends Zend_Search_Lucene_FSM
         $lexeme = $this->_queryString[$this->_queryStringPosition];
 
         // Process two char lexemes
-        if (strpos(self::QUERY_DOUBLECHARLEXEME_CHARS, $lexeme) !== false) {
+        if (strpos(self::QUERY_DOUBLECHARLEXEME_CHARS, (string) $lexeme) !== false) {
             // increase current position in a query string
             $this->_queryStringPosition++;
 

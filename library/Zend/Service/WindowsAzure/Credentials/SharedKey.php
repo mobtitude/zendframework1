@@ -124,7 +124,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedKey
 		if ($queryString !== '') {
 		    $queryStringItems = $this->_makeArrayOfQueryString($queryString);
 		    foreach ($queryStringItems as $key => $value) {
-		    	$canonicalizedResource .= "\n" . strtolower($key) . ':' . urldecode($value);
+		    	$canonicalizedResource .= "\n" . strtolower($key) . ':' . urldecode((string) $value);
 		    }
 		}
 		

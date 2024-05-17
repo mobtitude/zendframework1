@@ -102,7 +102,7 @@ class Zend_Translate_Adapter_Qt extends Zend_Translate_Adapter {
 
     private function _startElement($file, $name, $attrib)
     {
-        switch(strtolower($name)) {
+        switch(strtolower((string) $name)) {
             case 'message':
                 $this->_source = null;
                 $this->_stag = false;
@@ -123,7 +123,7 @@ class Zend_Translate_Adapter_Qt extends Zend_Translate_Adapter {
 
     private function _endElement($file, $name)
     {
-        switch (strtolower($name)) {
+        switch (strtolower((string) $name)) {
             case 'source':
                 $this->_stag = false;
                 break;

@@ -187,7 +187,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
                 }
 
                 foreach ($childRouteNames as $childRouteName) {
-                    $childRoute = $this->getRoute(trim($childRouteName));
+                    $childRoute = $this->getRoute(trim((string) $childRouteName));
                     $route->chain($childRoute);
                 }
 

@@ -421,7 +421,7 @@ class Zend_Reflection_File implements Reflector
                 continue;
             } elseif ($type == T_DOC_COMMENT) {
                 $this->_docComment = $value;
-                $this->_startLine  = $lineNum + substr_count($value, "\n") + 1;
+                $this->_startLine  = $lineNum + substr_count((string) $value, "\n") + 1;
                 return;
             } else {
                 // Only whitespace is allowed before file docblocks

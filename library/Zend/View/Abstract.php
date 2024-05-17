@@ -1031,7 +1031,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
         foreach ((array) $path as $dir) {
             // attempt to strip any possible separator and
             // append the system directory separator
-            $dir  = rtrim($dir, '/');
+            $dir  = rtrim((string) $dir, '/');
             $dir  = rtrim($dir, '\\');
             $dir .= '/';
 

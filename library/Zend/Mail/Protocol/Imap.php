@@ -313,7 +313,7 @@ class Zend_Mail_Protocol_Imap
 
         if ($dontParse) {
             // last to chars are still needed for response code
-            $tokens = array(substr($tokens, 0, 2));
+            $tokens = array(substr((string) $tokens, 0, 2));
         }
         // last line has response code
         if ($tokens[0] == 'OK') {
@@ -512,7 +512,7 @@ class Zend_Mail_Protocol_Imap
             switch ($tokens[1]) {
                 case 'EXISTS':
                 case 'RECENT':
-                    $result[strtolower($tokens[1])] = $tokens[0];
+                    $result[strtolower((string) $tokens[1])] = $tokens[0];
                     break;
                 case '[UIDVALIDITY':
                     $result['uidvalidity'] = (int)$tokens[2];

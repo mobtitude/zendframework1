@@ -493,7 +493,7 @@ class Zend_Dojo_BuildLayer
         $profilePrefixes = $this->getProfilePrefixes();
 
         if (!array_key_exists('releaseName', $profileOptions)) {
-            $profileOptions['releaseName'] = substr($layerName, 0, strpos($layerName, '.'));
+            $profileOptions['releaseName'] = substr((string) $layerName, 0, strpos((string) $layerName, '.'));
         }
 
         $profile = $profileOptions;

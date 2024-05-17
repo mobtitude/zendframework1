@@ -316,13 +316,13 @@ class Zend_Cloud_Infrastructure_Adapter_Rackspace extends Zend_Cloud_Infrastruct
         $result= array();
         
         foreach ($images as $image) {
-            if (strtolower($image['status'])==='active') {
-                if (strpos($image['name'],'Windows')!==false) {
+            if (strtolower((string) $image['status'])==='active') {
+                if (strpos((string) $image['name'],'Windows')!==false) {
                     $platform = Zend_Cloud_Infrastructure_Image::IMAGE_WINDOWS;
                 } else {
                     $platform = Zend_Cloud_Infrastructure_Image::IMAGE_LINUX;
                 }
-                if (strpos($image['name'],'x64')!==false) {
+                if (strpos((string) $image['name'],'x64')!==false) {
                     $arch = Zend_Cloud_Infrastructure_Image::ARCH_64BIT;
                 } else {
                     $arch = Zend_Cloud_Infrastructure_Image::ARCH_32BIT;

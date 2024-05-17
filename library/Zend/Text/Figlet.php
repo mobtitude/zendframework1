@@ -461,7 +461,7 @@ class Zend_Text_Figlet
                     $nextChar = null;
                 }
 
-                $char = (ctype_space($nextChar)) ? "\n" : ' ';
+                $char = (ctype_space((string) $nextChar)) ? "\n" : ' ';
             }
 
             $lastCharWasEol = (ctype_space($char) && $char !== "\t" && $char !== ' ');
@@ -506,7 +506,7 @@ class Zend_Text_Figlet
                     for ($i = 0; $i < $this->_charHeight; $i++) {
                         if ($this->_rightToLeft === 1 && $this->_outputWidth > 1) {
                             $offset = (strlen((string) $this->_currentChar[$i]) - $this->_outlineLengthLimit);
-                            $this->_putString(substr($this->_currentChar[$i], $offset));
+                            $this->_putString(substr((string) $this->_currentChar[$i], $offset));
                         } else {
                             $this->_putString($this->_currentChar[$i]);
                         }
@@ -680,7 +680,7 @@ class Zend_Text_Figlet
                     $tempLine[$position] = $this->_smushem($tempLine[$position], $this->_outputLine[$row][$k]);
                 }
 
-                $this->_outputLine[$row] = $tempLine . substr($this->_outputLine[$row], $smushAmount);
+                $this->_outputLine[$row] = $tempLine . substr((string) $this->_outputLine[$row], $smushAmount);
             } else {
                 for ($k = 0; $k < $smushAmount; $k++) {
                     if (($this->_outlineLength - $smushAmount + $k) < 0) {
@@ -697,7 +697,7 @@ class Zend_Text_Figlet
                     $this->_outputLine[$row][$position] = $this->_smushem($leftChar, $this->_currentChar[$row][$k]);
                 }
 
-                $this->_outputLine[$row] .= substr($this->_currentChar[$row], $smushAmount);
+                $this->_outputLine[$row] .= substr((string) $this->_currentChar[$row], $smushAmount);
             }
         }
 

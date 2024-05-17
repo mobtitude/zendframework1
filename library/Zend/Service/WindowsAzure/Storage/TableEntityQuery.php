@@ -278,14 +278,14 @@ class Zend_Service_WindowsAzure_Storage_TableEntityQuery
 	protected function _quoteInto($text, $value = null)
 	{
 		if (!is_array($value)) {
-	        $text = str_replace('?', '\'' . addslashes($value) . '\'', $text);
+	        $text = str_replace('?', '\'' . addslashes((string) $value) . '\'', $text);
 	    } else {
 	        $i = 0;
 	        while(strpos($text, '?') !== false) {
 	            if (is_numeric($value[$i])) {
 	                $text = substr_replace($text, $value[$i++], strpos($text, '?'), 1);
 	            } else {
-	                $text = substr_replace($text, '\'' . addslashes($value[$i++]) . '\'', strpos($text, '?'), 1);
+	                $text = substr_replace($text, '\'' . addslashes((string) $value[$i++]) . '\'', strpos($text, '?'), 1);
 	            }
 	        }
 	    }

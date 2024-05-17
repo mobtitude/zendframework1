@@ -247,7 +247,7 @@ class Zend_Queue_Adapter_Activemq extends Zend_Queue_Adapter_AdapterAbstract
                                 'message_id' => $response->getHeader('message-id'),
                                 'handle'     => $response->getHeader('message-id'),
                                 'body'       => $response->getBody(),
-                                'md5'        => md5($response->getBody())
+                                'md5'        => md5((string) $response->getBody())
                             );
                             $data[] = $datum;
                             break;

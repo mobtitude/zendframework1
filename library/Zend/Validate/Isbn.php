@@ -203,7 +203,7 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
         }
 
         // validate
-        if (substr($this->_value, -1) != $checksum) {
+        if (substr((string) $this->_value, -1) != $checksum) {
             $this->_error(self::NO_ISBN);
             return false;
         }

@@ -99,7 +99,7 @@ class Zend_Tool_Project_Provider_DbTable
         }
 
         $originalName = $name;
-        $name = ucfirst($name);
+        $name = ucfirst((string) $name);
 
         if ($actualTableName == '') {
             throw new Zend_Tool_Project_Provider_Exception('You must provide both the DbTable name as well as the actual db table\'s name.');

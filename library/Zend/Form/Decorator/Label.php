@@ -332,7 +332,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
     {
         $placement = $this->_placement;
         if (null !== ($placementOpt = $this->getOption('placement'))) {
-            $placementOpt = strtoupper($placementOpt);
+            $placementOpt = strtoupper((string) $placementOpt);
             switch ($placementOpt) {
                 case self::APPEND:
                 case self::PREPEND:

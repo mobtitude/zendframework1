@@ -255,7 +255,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      */
     public function addPrefixPath($prefix, $path, $type = null)
     {
-        $type = strtoupper($type);
+        $type = strtoupper((string) $type);
         switch ($type) {
             case self::FILTER:
             case self::VALIDATE:
@@ -637,7 +637,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 if (array_key_exists('destination', $content)) {
                     $checkit = $content['destination'];
                 } else {
-                    $checkit = dirname($content['tmp_name']);
+                    $checkit = dirname((string) $content['tmp_name']);
                 }
 
                 $checkit .= DIRECTORY_SEPARATOR . $content['name'];
@@ -1356,8 +1356,8 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                     try {
                         $result = $filter->filter($this->getFileName($name));
 
-                        $this->_files[$name]['destination'] = dirname($result);
-                        $this->_files[$name]['name']        = basename($result);
+                        $this->_files[$name]['destination'] = dirname((string) $result);
+                        $this->_files[$name]['name']        = basename((string) $result);
                     } catch (Zend_Filter_Exception $e) {
                         $this->_messages += array($e->getMessage());
                     }

@@ -470,7 +470,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
             $request->setUri($this->getEndpoint());
             $request->setMethod(Zend_Http_Client::POST);
             foreach ($params as $key => $value) {
-                $params_out[] = rawurlencode($key)."=".rawurlencode($value);
+                $params_out[] = rawurlencode($key)."=".rawurlencode((string) $value);
             }
             $request->setRawData(join('&', $params_out), Zend_Http_Client::ENC_URLENCODED);
             $httpResponse = $request->request();
@@ -543,7 +543,7 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
 
         $arrData = array();
         foreach ($parameters as $key => $value) {
-            $value = urlencode($value);
+            $value = urlencode((string) $value);
             $value = str_replace("%7E", "~", $value);
             $value = str_replace("+", "%20", $value);
             $arrData[] = urlencode($key) . '=' . $value;

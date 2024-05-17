@@ -126,7 +126,7 @@ class Zend_Ldap_Ldif_Encoder
         $type = $attribute[1];
         $value = $attribute[2];
         if ($type === '::') {
-            $value = base64_decode($value);
+            $value = base64_decode((string) $value);
         }
         if ($name === 'dn') {
             $entry[$name] = $value;

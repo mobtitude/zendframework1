@@ -87,7 +87,7 @@ class Zend_Gdata_Query
             if (substr($name, 0, 1) == '_') {
                 continue;
             }
-            $queryArray[] = urlencode($name) . '=' . urlencode($value);
+            $queryArray[] = urlencode($name) . '=' . urlencode((string) $value);
         }
         if (count($queryArray) > 0) {
             return '?' . implode('&', $queryArray);
@@ -395,7 +395,7 @@ class Zend_Gdata_Query
 
     public function __get($name)
     {
-        $method = 'get'.ucfirst($name);
+        $method = 'get'.ucfirst((string) $name);
         if (method_exists($this, $method)) {
             return call_user_func(array(&$this, $method));
         } else {
@@ -406,7 +406,7 @@ class Zend_Gdata_Query
 
     public function __set($name, $val)
     {
-        $method = 'set'.ucfirst($name);
+        $method = 'set'.ucfirst((string) $name);
         if (method_exists($this, $method)) {
             return call_user_func(array(&$this, $method), $val);
         } else {

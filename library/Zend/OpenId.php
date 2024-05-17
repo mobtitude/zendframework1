@@ -99,14 +99,14 @@ class Zend_OpenId
         $url = '';
         $port = '';
         if (isset($_SERVER['HTTP_HOST'])) {
-            if (($pos = strpos($_SERVER['HTTP_HOST'], ':')) === false) {
+            if (($pos = strpos((string) $_SERVER['HTTP_HOST'], ':')) === false) {
                 if (isset($_SERVER['SERVER_PORT'])) {
                     $port = ':' . $_SERVER['SERVER_PORT'];
                 }
                 $url = $_SERVER['HTTP_HOST'];
             } else {
-                $url = substr($_SERVER['HTTP_HOST'], 0, $pos);
-                $port = substr($_SERVER['HTTP_HOST'], $pos);
+                $url = substr((string) $_SERVER['HTTP_HOST'], 0, $pos);
+                $port = substr((string) $_SERVER['HTTP_HOST'], $pos);
             }
         } else if (isset($_SERVER['SERVER_NAME'])) {
             $url = $_SERVER['SERVER_NAME'];
@@ -134,11 +134,11 @@ class Zend_OpenId
             // IIS with ISAPI_Rewrite 
             $url .= $_SERVER['HTTP_X_REWRITE_URL'];
         } elseif (isset($_SERVER['REQUEST_URI'])) {
-            $query = strpos($_SERVER['REQUEST_URI'], '?');
+            $query = strpos((string) $_SERVER['REQUEST_URI'], '?');
             if ($query === false) {
                 $url .= $_SERVER['REQUEST_URI'];
             } else {
-                $url .= substr($_SERVER['REQUEST_URI'], 0, $query);
+                $url .= substr((string) $_SERVER['REQUEST_URI'], 0, $query);
             }
         } else if (isset($_SERVER['SCRIPT_URL'])) {
             $url .= $_SERVER['SCRIPT_URL'];
@@ -206,9 +206,9 @@ class Zend_OpenId
     {
         foreach($params as $key => $value) {
             if (isset($query)) {
-                $query .= '&' . $key . '=' . urlencode($value);
+                $query .= '&' . $key . '=' . urlencode((string) $value);
             } else {
-                $query = $key . '=' . urlencode($value);
+                $query = $key . '=' . urlencode((string) $value);
             }
         }
         return isset($query) ? $query : '';
@@ -587,7 +587,7 @@ class Zend_OpenId
             }
             return pack("H*", $s);
         } else if (extension_loaded('bcmath')) {
-            $cmp = bccomp($bn, 0);
+            $cmp = bccomp((string) $bn, 0);
             if ($cmp == 0) {
                 return "\0";
             } else if ($cmp < 0) {
@@ -597,9 +597,9 @@ class Zend_OpenId
                     Zend_OpenId_Exception::ERROR_LONG_MATH);
             }
             $bin = "";
-            while (bccomp($bn, 0) > 0) {
-                $bin = chr(bcmod($bn, 256)) . $bin;
-                $bn = bcdiv($bn, 256);
+            while (bccomp((string) $bn, 0) > 0) {
+                $bin = chr(bcmod((string) $bn, 256)) . $bin;
+                $bn = bcdiv((string) $bn, 256);
             }
             if (ord($bin[0]) > 127) {
                 $bin = "\0" . $bin;
@@ -645,7 +645,7 @@ class Zend_OpenId
             if (extension_loaded('gmp')) {
                 $bn_pub_key  = gmp_powm($bn_g, $bn_priv_key, $bn_p);
             } else if (extension_loaded('bcmath')) {
-                $bn_pub_key  = bcpowmod($bn_g, $bn_priv_key, $bn_p);
+                $bn_pub_key  = bcpowmod((string) $bn_g, (string) $bn_priv_key, (string) $bn_p);
             }
             $pub_key     = self::bigNumToBin($bn_pub_key);
 
@@ -706,7 +706,7 @@ class Zend_OpenId
             return self::bigNumToBin($bn_secret);
         } else if (extension_loaded('bcmath')) {
             $bn_pub_key = self::binToBigNum($pub_key);
-            $bn_secret  = bcpowmod($bn_pub_key, $dh['priv_key'], $dh['p']);
+            $bn_secret  = bcpowmod((string) $bn_pub_key, (string) $dh['priv_key'], (string) $dh['p']);
             return self::bigNumToBin($bn_secret);
         }
         require_once "Zend/OpenId/Exception.php";

@@ -103,7 +103,7 @@ class Zend_Barcode_Object_Ean5 extends Zend_Barcode_Object_Ean13
                 $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
                 $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , 1);
             }
-            $bars = str_split($this->_codingMap[$this->_getParity($i)][$textTable[$i]]);
+            $bars = str_split((string) $this->_codingMap[$this->_getParity($i)][$textTable[$i]]);
             foreach ($bars as $b) {
                 $barcodeTable[] = array($b , $this->_barThinWidth , 0 , 1);
             }

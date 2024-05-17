@@ -122,7 +122,7 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
             }
             $this->_tcontent .= ">";
         } else {
-            switch(strtolower($name)) {
+            switch(strtolower((string) $name)) {
                 case 'file':
                     $this->_source = $attrib['source-language'];
                     if (isset($attrib['target-language'])) {
@@ -169,7 +169,7 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
         } else if (($this->_ttag === true) and ($name !== 'target')) {
             $this->_tcontent .= "</".$name.">";
         } else {
-            switch (strtolower($name)) {
+            switch (strtolower((string) $name)) {
                 case 'trans-unit':
                     $this->_transunit = null;
                     $this->_langId    = null;

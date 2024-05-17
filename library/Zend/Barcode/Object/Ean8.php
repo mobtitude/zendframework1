@@ -83,7 +83,7 @@ class Zend_Barcode_Object_Ean8 extends Zend_Barcode_Object_Ean13
 
         // First part
         for ($i = 0; $i < 4; $i++) {
-            $bars = str_split($this->_codingMap['A'][$textTable[$i]]);
+            $bars = str_split((string) $this->_codingMap['A'][$textTable[$i]]);
             foreach ($bars as $b) {
                 $barcodeTable[] = array($b , $this->_barThinWidth , 0 , 1);
             }
@@ -98,7 +98,7 @@ class Zend_Barcode_Object_Ean8 extends Zend_Barcode_Object_Ean13
 
         // Second part
         for ($i = 4; $i < 8; $i++) {
-            $bars = str_split($this->_codingMap['C'][$textTable[$i]]);
+            $bars = str_split((string) $this->_codingMap['C'][$textTable[$i]]);
             foreach ($bars as $b) {
                 $barcodeTable[] = array($b , $this->_barThinWidth , 0 , 1);
             }

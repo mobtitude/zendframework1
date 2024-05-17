@@ -875,7 +875,7 @@ abstract class Zend_Db_Adapter_Abstract
             return implode(', ', $value);
         }
 
-        if ($type !== null && array_key_exists($type = strtoupper($type), $this->_numericDataTypes)) {
+        if ($type !== null && array_key_exists($type = strtoupper((string) $type), $this->_numericDataTypes)) {
             $quotedValue = '0';
             switch ($this->_numericDataTypes[$type]) {
                 case Zend_Db::INT_TYPE: // 32-bit integer

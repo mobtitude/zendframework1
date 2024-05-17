@@ -73,7 +73,7 @@ class Zend_Controller_Request_Apache404 extends Zend_Controller_Request_Http
 
         if ($parseUriGetVars) {
             // Set GET items, if available
-            parse_str($parseUriGetVars, $_GET);
+            parse_str((string) $parseUriGetVars, $_GET);
         }
 
         $this->_requestUri = $requestUri;

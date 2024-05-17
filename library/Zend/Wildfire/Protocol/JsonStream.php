@@ -191,7 +191,7 @@ class Zend_Wildfire_Protocol_JsonStream
 
                 foreach ($messages as $message) {
 
-                    $parts = explode("\n",chunk_split($message, 5000, "\n"));
+                    $parts = explode("\n",chunk_split((string) $message, 5000, "\n"));
 
                     for ($i=0 ; $i<count($parts) ; $i++) {
 

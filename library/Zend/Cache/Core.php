@@ -489,8 +489,8 @@ class Zend_Cache_Core
             $prefix    = & $this->_options['cache_id_prefix'];
             $prefixLen = strlen((string) $prefix);
             foreach ($ids as &$id) {
-                if (strpos($id, $prefix) === 0) {
-                    $id = substr($id, $prefixLen);
+                if (strpos((string) $id, (string) $prefix) === 0) {
+                    $id = substr((string) $id, $prefixLen);
                 }
             }
         }
@@ -522,8 +522,8 @@ class Zend_Cache_Core
             $prefix    = & $this->_options['cache_id_prefix'];
             $prefixLen = strlen((string) $prefix);
             foreach ($ids as &$id) {
-                if (strpos($id, $prefix) === 0) {
-                    $id = substr($id, $prefixLen);
+                if (strpos((string) $id, (string) $prefix) === 0) {
+                    $id = substr((string) $id, $prefixLen);
                 }
             }
         }
@@ -555,8 +555,8 @@ class Zend_Cache_Core
             $prefix    = & $this->_options['cache_id_prefix'];
             $prefixLen = strlen((string) $prefix);
             foreach ($ids as &$id) {
-                if (strpos($id, $prefix) === 0) {
-                    $id = substr($id, $prefixLen);
+                if (strpos((string) $id, (string) $prefix) === 0) {
+                    $id = substr((string) $id, $prefixLen);
                 }
             }
         }
@@ -582,8 +582,8 @@ class Zend_Cache_Core
             $prefix    = & $this->_options['cache_id_prefix'];
             $prefixLen = strlen((string) $prefix);
             foreach ($ids as &$id) {
-                if (strpos($id, $prefix) === 0) {
-                    $id = substr($id, $prefixLen);
+                if (strpos((string) $id, (string) $prefix) === 0) {
+                    $id = substr((string) $id, $prefixLen);
                 }
             }
         }

@@ -71,7 +71,7 @@ class Zend_Locale_Math
             }
         }
 
-        if (strpos($op1, 'E') !== false) {
+        if (strpos((string) $op1, 'E') !== false) {
             $op1 = self::floatalize($op1);
         }
 
@@ -177,7 +177,7 @@ class Zend_Locale_Math
         $value = str_replace($convert['thousands_sep'], "",(string) $value);
         $value = str_replace($convert['positive_sign'], "", $value);
         $value = str_replace($convert['decimal_point'], ".",$value);
-        if (!empty($convert['negative_sign']) and (strpos($value, $convert['negative_sign']))) {
+        if (!empty($convert['negative_sign']) and (strpos($value, (string) $convert['negative_sign']))) {
             $value = str_replace($convert['negative_sign'], "", $value);
             $value = "-" . $value;
         }

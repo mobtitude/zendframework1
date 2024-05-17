@@ -559,11 +559,11 @@ class Zend_Amf_Server implements Zend_Server_Interface
                         $message = '';
 
                         // Split the target string into its values.
-                        $source = substr($targetURI, 0, strrpos($targetURI, '.'));
+                        $source = substr((string) $targetURI, 0, strrpos((string) $targetURI, '.'));
 
                         if ($source) {
                             // Break off method name from namespace into source
-                            $method = substr(strrchr($targetURI, '.'), 1);
+                            $method = substr(strrchr((string) $targetURI, '.'), 1);
                             $return = $this->_dispatch($method, $body->getData(), $source);
                         } else {
                             // Just have a method name.
@@ -586,11 +586,11 @@ class Zend_Amf_Server implements Zend_Server_Interface
                             $targetURI = $body->getTargetURI();
 
                             // Split the target string into its values.
-                            $source = substr($targetURI, 0, strrpos($targetURI, '.'));
+                            $source = substr((string) $targetURI, 0, strrpos((string) $targetURI, '.'));
 
                             if ($source) {
                                 // Break off method name from namespace into source
-                                $method = substr(strrchr($targetURI, '.'), 1);
+                                $method = substr(strrchr((string) $targetURI, '.'), 1);
                                 $return = $this->_dispatch($method, $body->getData(), $source);
                             } else {
                                 // Just have a method name.
@@ -615,8 +615,8 @@ class Zend_Amf_Server implements Zend_Server_Interface
            $currentID = session_id();
            $joint = "?";
            if(isset($_SERVER['QUERY_STRING'])) {
-               if(!strpos($_SERVER['QUERY_STRING'], $currentID) !== FALSE) {
-                   if(strrpos($_SERVER['QUERY_STRING'], "?") !== FALSE) {
+               if(!strpos((string) $_SERVER['QUERY_STRING'], $currentID) !== FALSE) {
+                   if(strrpos((string) $_SERVER['QUERY_STRING'], "?") !== FALSE) {
                        $joint = "&";
                    }
                }
@@ -999,7 +999,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
         foreach ($prototypes as $prototype) {
             foreach ($prototype->getParameters() as $parameter) {
                 $type = $parameter->getType();
-                if (in_array(strtolower($type), $nonObjectTypes)) {
+                if (in_array(strtolower((string) $type), $nonObjectTypes)) {
                     continue;
                 }
                 $position = $parameter->getPosition();

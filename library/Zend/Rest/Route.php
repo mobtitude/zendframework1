@@ -178,7 +178,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
                 $specialGetTarget = 'edit';
                 $params['id'] = urldecode($path[$pathElementCount-2]);
             } elseif ($pathElementCount == 1) {
-                $params['id'] = urldecode(array_shift($path));
+                $params['id'] = urldecode((string) array_shift($path));
             } elseif ($pathElementCount == 0 && !isset($params['id'])) {
                 $specialGetTarget = 'index';
             }
@@ -188,7 +188,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
                 for ($i = 0; $i < $numSegs; $i = $i + 2) {
                     $key = urldecode($path[$i]);
                     $val = isset($path[$i + 1]) ? $path[$i + 1] : null;
-                    $params[$key] = urldecode($val);
+                    $params[$key] = urldecode((string) $val);
                 }
             }
 
@@ -196,7 +196,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
             $requestMethod = strtolower($request->getMethod());
             if ($requestMethod != 'get') {
                 if ($request->getParam('_method')) {
-                    $values[$this->_actionKey] = strtolower($request->getParam('_method'));
+                    $values[$this->_actionKey] = strtolower((string) $request->getParam('_method'));
                 } elseif ( $request->getHeader('X-HTTP-Method-Override') ) {
                     $values[$this->_actionKey] = strtolower($request->getHeader('X-HTTP-Method-Override'));
                 } else {
@@ -289,7 +289,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
                 unset($params['id']);
             }
             foreach ($params as $key => $value) {
-                if ($encode) $value = urlencode($value);
+                if ($encode) $value = urlencode((string) $value);
                 $url .= '/' . $key . '/' . $value;
             }
         } elseif (! empty($action) && isset($params['id'])) {

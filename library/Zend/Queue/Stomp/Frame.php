@@ -354,7 +354,7 @@ class Zend_Queue_Stomp_Frame
         // crop the body if content-length is present
         if ($this->getHeader(self::CONTENT_LENGTH) !== false ) {
             $length = (int) $this->getHeader(self::CONTENT_LENGTH);
-            $body   = substr($body, 0, $length);
+            $body   = substr((string) $body, 0, $length);
         }
 
         $this->setBody($body);

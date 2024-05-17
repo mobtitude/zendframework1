@@ -729,7 +729,7 @@ class Zend_Service_Twitter
         foreach ($options as $key => $value) {
             switch (strtolower($key)) {
                 case 'geocode':
-                    if (!substr_count($value, ',') !== 2) {
+                    if (!substr_count((string) $value, ',') !== 2) {
                         require_once 'Zend/Service/Twitter/Exception.php';
                         throw new Zend_Service_Twitter_Exception(
                             '"geocode" must be of the format "latitude,longitude,radius"'
@@ -754,7 +754,7 @@ class Zend_Service_Twitter
                             'Query language must be a 2 character string'
                         );
                     }
-                    $params['lang'] = strtolower($value);
+                    $params['lang'] = strtolower((string) $value);
                     break;
                 case 'locale':
                     if (strlen((string) $value) > 2) {
@@ -763,10 +763,10 @@ class Zend_Service_Twitter
                             'Query locale must be a 2 character string'
                         );
                     }
-                    $params['locale'] = strtolower($value);
+                    $params['locale'] = strtolower((string) $value);
                     break;
                 case 'result_type':
-                    $value = strtolower($value);
+                    $value = strtolower((string) $value);
                     if (!in_array($value, array('mixed', 'recent', 'popular'))) {
                         require_once 'Zend/Service/Twitter/Exception.php';
                         throw new Zend_Service_Twitter_Exception(

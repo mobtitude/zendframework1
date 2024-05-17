@@ -439,7 +439,7 @@ class Zend_OpenId_Provider
 
         if (empty($params['openid_session_type']) ||
             $params['openid_session_type'] == 'no-encryption') {
-            $ret['mac_key'] = base64_encode($secret);
+            $ret['mac_key'] = base64_encode((string) $secret);
         } else if (isset($params['openid_session_type']) &&
             $params['openid_session_type'] == 'DH-SHA1') {
             $dhFunc = 'sha1';
@@ -465,19 +465,19 @@ class Zend_OpenId_Provider
             if (empty($params['openid_dh_gen'])) {
                 $g = pack('H*', Zend_OpenId::DH_G);
             } else {
-                $g = base64_decode($params['openid_dh_gen']);
+                $g = base64_decode((string) $params['openid_dh_gen']);
             }
             if (empty($params['openid_dh_modulus'])) {
                 $p = pack('H*', Zend_OpenId::DH_P);
             } else {
-                $p = base64_decode($params['openid_dh_modulus']);
+                $p = base64_decode((string) $params['openid_dh_modulus']);
             }
 
             $dh = Zend_OpenId::createDhKey($p, $g);
             $dh_details = Zend_OpenId::getDhKeyDetails($dh);
 
             $sec = Zend_OpenId::computeDhSecret(
-                base64_decode($params['openid_dh_consumer_public']), $dh);
+                base64_decode((string) $params['openid_dh_consumer_public']), $dh);
             if ($sec === false) {
                 $ret['error'] = 'Wrong "openid.session_type"';
                 $ret['error-code'] = 'unsupported-type';
@@ -486,7 +486,7 @@ class Zend_OpenId_Provider
             $sec = Zend_OpenId::digest($dhFunc, $sec);
             $ret['dh_server_public'] = base64_encode(
                 Zend_OpenId::btwoc($dh_details['pub_key']));
-            $ret['enc_mac_key']      = base64_encode($secret ^ $sec);
+            $ret['enc_mac_key']      = base64_encode((string) ($secret ^ $sec));
         }
 
         $handle = uniqid();
@@ -573,7 +573,7 @@ class Zend_OpenId_Provider
             $trusted = $sites[$root];
         } else {
             foreach ($sites as $site => $t) {
-                if (strpos($root, $site) === 0) {
+                if (strpos((string) $root, $site) === 0) {
                     $trusted = $t;
                     break;
                 } else {
@@ -607,12 +607,12 @@ class Zend_OpenId_Provider
             /* Redirect to Server Trust Screen */
             $params2 = array();
             foreach ($params as $key => $val) {
-                if (strpos($key, 'openid_ns_') === 0) {
-                    $key = 'openid.ns.' . substr($key, strlen('openid_ns_'));
-                } else if (strpos($key, 'openid_sreg_') === 0) {
-                    $key = 'openid.sreg.' . substr($key, strlen('openid_sreg_'));
-                } else if (strpos($key, 'openid_') === 0) {
-                    $key = 'openid.' . substr($key, strlen('openid_'));
+                if (strpos((string) $key, 'openid_ns_') === 0) {
+                    $key = 'openid.ns.' . substr((string) $key, strlen('openid_ns_'));
+                } else if (strpos((string) $key, 'openid_sreg_') === 0) {
+                    $key = 'openid.sreg.' . substr((string) $key, strlen('openid_sreg_'));
+                } else if (strpos((string) $key, 'openid_') === 0) {
+                    $key = 'openid.' . substr((string) $key, strlen('openid_'));
                 }
                 $params2[$key] = $val;
             }
@@ -715,8 +715,8 @@ class Zend_OpenId_Provider
         $signed = '';
         $data = '';
         foreach ($ret as $key => $val) {
-            if (strpos($key, 'openid.') === 0) {
-                $key = substr($key, strlen('openid.'));
+            if (strpos((string) $key, 'openid.') === 0) {
+                $key = substr((string) $key, strlen('openid.'));
                 if (!empty($signed)) {
                     $signed .= ',';
                 }
@@ -770,7 +770,7 @@ class Zend_OpenId_Provider
                 $data .= $params['openid_' . strtr($key,'.','_')]."\n";
             }
         }
-        if ($this->_secureStringCompare(base64_decode($params['openid_sig']),
+        if ($this->_secureStringCompare(base64_decode((string) $params['openid_sig']),
             Zend_OpenId::hashHmac($macFunc, $data, $secret))) {
             $ret['is_valid'] = 'true';
         } else {

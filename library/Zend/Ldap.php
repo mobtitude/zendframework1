@@ -301,10 +301,10 @@ class Zend_Ldap
                     case 'optReferrals':
                     case 'tryUsernameSplit':
                         $permittedOptions[$key] = ($val === true ||
-                                $val === '1' || strcasecmp($val, 'true') == 0);
+                                $val === '1' || strcasecmp((string) $val, 'true') == 0);
                         break;
                     default:
-                        $permittedOptions[$key] = trim($val);
+                        $permittedOptions[$key] = trim((string) $val);
                         break;
                 }
             }
@@ -591,9 +591,9 @@ class Zend_Ldap
         }
 
         if (function_exists('mb_strtolower')) {
-            $uname = mb_strtolower($uname, 'UTF-8');
+            $uname = mb_strtolower((string) $uname, 'UTF-8');
         } else {
-            $uname = strtolower($uname);
+            $uname = strtolower((string) $uname);
         }
 
         if ($form === 0) {

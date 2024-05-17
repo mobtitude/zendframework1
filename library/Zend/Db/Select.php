@@ -819,7 +819,7 @@ class Zend_Db_Select
         }
 
         // Schema from table name overrides schema argument
-        if (!is_object($tableName) && false !== strpos($tableName, '.')) {
+        if (!is_object($tableName) && false !== strpos((string) $tableName, '.')) {
             list($schema, $tableName) = explode('.', (string) $tableName);
         }
 
@@ -1150,7 +1150,7 @@ class Zend_Db_Select
 
             // Add join clause (if applicable)
             if (! empty($from)) {
-                $tmp .= ' ' . strtoupper($joinType) . ' ';
+                $tmp .= ' ' . strtoupper((string) $joinType) . ' ';
             }
 
             $tmp .= $this->_getQuotedSchema($table['schema']);

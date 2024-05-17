@@ -764,7 +764,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
         $filedata = $this->_getFileData($id);
 
         // NOTE: double dirname to make sure we always move to cur. if recent flag has been set (message is in new) it will be moved to cur.
-        $new_filename = dirname(dirname($filedata['filename'])) . DIRECTORY_SEPARATOR . 'cur' . DIRECTORY_SEPARATOR . "$filedata[uniq]$info";
+        $new_filename = dirname(dirname((string) $filedata['filename'])) . DIRECTORY_SEPARATOR . 'cur' . DIRECTORY_SEPARATOR . "$filedata[uniq]$info";
 
         if (!@rename($filedata['filename'], $new_filename)) {
             /**

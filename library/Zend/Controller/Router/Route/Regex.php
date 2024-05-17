@@ -240,7 +240,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
 
         if ($encode) {
             foreach ($mergedData as $key => &$value) {
-                $value = urlencode($value);
+                $value = urlencode((string) $value);
             }
         }
 

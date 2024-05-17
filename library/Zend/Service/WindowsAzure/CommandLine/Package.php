@@ -83,7 +83,7 @@ class Zend_Service_WindowsAzure_CommandLine_Package
 		// Cleanup $argv
 		$options = array();
 		foreach ($argv as $arg) {
-			list($key, $value) = explode(':', $arg, 2);
+			list($key, $value) = explode(':', (string) $arg, 2);
 			while (substr($key, 0, 1) == '-') {
 				$key = substr($key, 1);
 			}
@@ -112,7 +112,7 @@ class Zend_Service_WindowsAzure_CommandLine_Package
 		if ($outputPath == '') {
 			$outputPath = realpath($path . '/../');
 		}
-		$packageOut = $outputPath . '/' . basename($path) . '.cspkg';
+		$packageOut = $outputPath . '/' . basename((string) $path) . '.cspkg';
 
 		// Find Windows Azure SDK bin folder
 		$windowsAzureSdkFolderCandidates = array_merge(

@@ -104,7 +104,7 @@ class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
 
         try {
             if ($this->_serverType === null) {
-                $server = substr($this->getConnection()->getAttribute(PDO::ATTR_SERVER_INFO), 0, 3);
+                $server = substr((string) $this->getConnection()->getAttribute(PDO::ATTR_SERVER_INFO), 0, 3);
 
                 switch ($server) {
                     case 'DB2':

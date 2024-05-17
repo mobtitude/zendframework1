@@ -184,7 +184,7 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
         // get the value used as an escaped quote,
         // e.g. \' or ''
         $qe = $this->_adapter->quote($q);
-        $qe = substr($qe, 1, 2);
+        $qe = substr((string) $qe, 1, 2);
         $qe = preg_quote($qe);
         $escapeChar = substr($qe,0,1);
         // remove 'foo\'bar'

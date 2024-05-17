@@ -128,7 +128,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
         }
 
         foreach ($keys as $type => $key) {
-            if (ctype_print($key) && is_file(realpath($key)) && is_readable($key)) {
+            if (ctype_print((string) $key) && is_file(realpath($key)) && is_readable($key)) {
                 $file = fopen($key, 'r');
                 $cert = fread($file, 8192);
                 fclose($file);
@@ -373,7 +373,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
                 }
 
                 ++$count;
-                $fingerprints[$count] = md5($details['key']);
+                $fingerprints[$count] = md5((string) $details['key']);
             }
         }
 
@@ -440,7 +440,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
         if ($this->_package) {
             $details = openssl_pkey_get_details($keys);
             if ($details !== false) {
-                $fingerprint = md5($details['key']);
+                $fingerprint = md5((string) $details['key']);
             } else {
                 $fingerprint = md5("ZendFramework");
             }

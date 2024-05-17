@@ -189,8 +189,8 @@ class Zend_Locale_Data
                     if ($newpath != '//ldml') {
                         // other path - parse to make real path
 
-                        while (substr($newpath,0,3) == '../') {
-                            $newpath = substr($newpath, 3);
+                        while (substr((string) $newpath,0,3) == '../') {
+                            $newpath = substr((string) $newpath, 3);
                             $search = substr($search, 0, strrpos($search, '/'));
                         }
 

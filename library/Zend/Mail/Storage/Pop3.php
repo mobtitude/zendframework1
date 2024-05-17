@@ -312,7 +312,7 @@ class Zend_Mail_Storage_Pop3 extends Zend_Mail_Storage_Abstract
             return $this->_protocol->hasTop;
         }
 
-        if (strtolower($var) == 'hasuniqueid') {
+        if (strtolower((string) $var) == 'hasuniqueid') {
             $id = null;
             try {
                 $id = $this->_protocol->uniqueid(1);
