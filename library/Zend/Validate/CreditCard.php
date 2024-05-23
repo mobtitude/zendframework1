@@ -197,7 +197,7 @@ class Zend_Validate_CreditCard extends Zend_Validate_Abstract
         }
 
         foreach($type as $typ) {
-            if (defined('self::' . strtoupper($typ)) && !in_array($typ, $this->_type)) {
+            if (defined('self::' . strtoupper((string) $typ)) && !in_array($typ, $this->_type)) {
                 $this->_type[] = $typ;
             }
 

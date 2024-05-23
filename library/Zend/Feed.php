@@ -342,7 +342,7 @@ class Zend_Feed
                         $query = $fragment = '';
                         if (substr($path, 0, 1) != '/') {
                             // add the current root path to this one
-                            $path = rtrim($client->getUri()->getPath(), '/') . '/' . $path;
+                            $path = rtrim((string) $client->getUri()->getPath(), '/') . '/' . $path;
                         }
                         if (strpos($path, '?') !== false) {
                             list($path, $query) = explode('?', $path, 2);

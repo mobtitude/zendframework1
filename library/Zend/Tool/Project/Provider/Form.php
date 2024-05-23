@@ -136,7 +136,7 @@ class Zend_Tool_Project_Provider_Form extends Zend_Tool_Project_Provider_Abstrac
             throw new Zend_Tool_Project_Provider_Exception('Form names should be camel cased.');
         }
 
-        $name = ucwords($name);
+        $name = ucwords((string) $name);
 
         try {
             $formResource = self::createResource($this->_loadedProfile, $name, $module);

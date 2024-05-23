@@ -237,7 +237,7 @@ class Zend_Feed_Reader
         $client->setHeaders('If-None-Match', null);
         $client->setHeaders('If-Modified-Since', null);
         $client->setUri($uri);
-        $cacheId = 'Zend_Feed_Reader_' . md5($uri);
+        $cacheId = 'Zend_Feed_Reader_' . md5((string) $uri);
 
         if (self::$_httpConditionalGet && $cache) {
             $data = $cache->load($cacheId);

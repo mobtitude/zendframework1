@@ -719,7 +719,7 @@ class Zend_Http_Client
                 throw new Zend_Http_Client_Exception("Cookie name cannot contain these characters: =,; \t\r\n\013\014 ({$cookie})");
             }
 
-            $value = addslashes($value);
+            $value = addslashes((string) $value);
 
             if (! isset($this->headers['cookie'])) {
                 $this->headers['cookie'] = array('Cookie', '');
@@ -1384,13 +1384,13 @@ class Zend_Http_Client
                 $name .= ($urlencode ? '%5B%5D' : '[]');
                 foreach ($value as $subval) {
                     if ($urlencode) {
-                        $subval = urlencode($subval);
+                        $subval = urlencode((string) $subval);
                     }
                     $parameters[] = array($name, $subval);
                 }
             } else {
                 if ($urlencode) {
-                    $value = urlencode($value);
+                    $value = urlencode((string) $value);
                 }
                 $parameters[] = array($name, $value);
             }

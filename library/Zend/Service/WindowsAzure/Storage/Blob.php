@@ -883,7 +883,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		// Generate block list
 		$blocks = '';
 		foreach ($blockList as $block) {
-			$blocks .= '  <Latest>' . base64_encode($block) . '</Latest>' . "\n";
+			$blocks .= '  <Latest>' . base64_encode((string) $block) . '</Latest>' . "\n";
 		}
 
 		// Generate block list request

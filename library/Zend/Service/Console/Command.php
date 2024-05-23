@@ -105,7 +105,7 @@ class Zend_Service_Console_Command
 	public static function bootstrap($argv)
 	{
 		// Abort bootstrapping depending on the MICROSOFT_CONSOLE_COMMAND_HOST constant.
-		if (defined('MICROSOFT_CONSOLE_COMMAND_HOST') && strtolower(MICROSOFT_CONSOLE_COMMAND_HOST) != 'console') {
+		if (defined('MICROSOFT_CONSOLE_COMMAND_HOST') && strtolower((string) MICROSOFT_CONSOLE_COMMAND_HOST) != 'console') {
 			return;
 		}
 
@@ -117,7 +117,7 @@ class Zend_Service_Console_Command
 		$model = self::_buildModel();
 
 		// Find a class that corresponds to the $argv[0] script name
-		$requiredHandlerName = str_replace('.bat', '', str_replace('.sh', '', str_replace('.php', '', strtolower(basename($argv[0])))));
+		$requiredHandlerName = str_replace('.bat', '', str_replace('.sh', '', str_replace('.php', '', strtolower(basename((string) $argv[0])))));
 		$handler = null;
 		foreach ($model as $possibleHandler) {
 			if ($possibleHandler->handler == strtolower($requiredHandlerName)) {
@@ -140,7 +140,7 @@ class Zend_Service_Console_Command
 		}
 		if (is_null($command)) {
 			$commandName = (isset($argv[1]) ? $argv[1] : '<default>');
-			self::stderr("No method found that implements command " . $commandName . ". Create a method in class '" . $handler->class . "' that is named '" . strtolower($commandName) . "Command' or is decorated with a docblock comment '@command-name " . $commandName . "'.");
+			self::stderr("No method found that implements command " . $commandName . ". Create a method in class '" . $handler->class . "' that is named '" . strtolower((string) $commandName) . "Command' or is decorated with a docblock comment '@command-name " . $commandName . "'.");
 			die();
 		}
 
@@ -225,7 +225,7 @@ class Zend_Service_Console_Command
 				$handlerDescription = str_replace('\n', "\n", $handlerDescription);
 
 				$handlerModel = (object)array(
-					'handler'     => strtolower($handler),
+					'handler'     => strtolower((string) $handler),
 					'description' => $handlerDescription,
 					'headers'     => $handlerHeaders,
 					'footers'     => $handlerFooters,
@@ -242,7 +242,7 @@ class Zend_Service_Console_Command
 						$commands[] = substr($method->getName(), 0, -7);
 					}
 			       	for ($x = 0; $x < count($commands); $x++) {
-			       		$commands[$x] = strtolower($commands[$x]);
+			       		$commands[$x] = strtolower((string) $commands[$x]);
 			       	}
 			       	$commands = array_unique($commands);
 			       	$commandDescriptions = self::_findValueForDocComment('@command-description', $method->getDocComment());

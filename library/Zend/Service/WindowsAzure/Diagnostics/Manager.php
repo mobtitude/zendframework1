@@ -143,7 +143,7 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 			throw new Zend_Service_WindowsAzure_Diagnostics_Exception('Server variable \'RdRoleId\' is unknown. Please verify the application is running in Development Fabric or Windows Azure Fabric.');
 		}
 		
-		if (strpos($_SERVER['RdRoleId'], 'deployment(') === false) {
+		if (strpos((string) $_SERVER['RdRoleId'], 'deployment(') === false) {
 			return $_SERVER['RdRoleId'];
 		} else {
 			$roleIdParts = explode('.', (string) $_SERVER['RdRoleId']);
@@ -154,7 +154,7 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 			throw new Exception('Server variables \'RoleDeploymentID\', \'RoleInstanceID\' and \'RoleName\' are unknown. Please verify the application is running in Development Fabric or Windows Azure Fabric.');
 		}
 		
-		if (strpos($_SERVER['RdRoleId'], 'deployment(') === false) {
+		if (strpos((string) $_SERVER['RdRoleId'], 'deployment(') === false) {
 			return $_SERVER['RdRoleId'];
 		} else {
 			return $_SERVER['RoleDeploymentID'] . '/' . $_SERVER['RoleInstanceID'] . '/' . $_SERVER['RoleName'];

@@ -344,7 +344,7 @@ class Zend_Loader_Autoloader
 
         // Add internal namespaced autoloader
         foreach ($this->getRegisteredNamespaces() as $ns) {
-            if (0 === strpos($class, $ns)) {
+            if (0 === strpos($class, (string) $ns)) {
                 $namespace     = $ns;
                 $autoloaders[] = $this->_internalAutoloader;
                 break;

@@ -123,7 +123,7 @@ class Zend_Mail_Protocol_Smtp extends Zend_Mail_Protocol_Abstract
     public function __construct($host = '127.0.0.1', $port = null, array $config = array())
     {
         if (isset($config['ssl'])) {
-            switch (strtolower($config['ssl'])) {
+            switch (strtolower((string) $config['ssl'])) {
                 case 'tls':
                     $this->_secure = 'tls';
                     break;

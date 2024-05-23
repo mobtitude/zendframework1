@@ -1385,7 +1385,7 @@ class Zend_Pdf
                         // break intentionally omitted
                     case 'Producer':
                         if (extension_loaded('mbstring') === true) {
-                            $detected = mb_detect_encoding($value);
+                            $detected = mb_detect_encoding((string) $value);
                             if ($detected !== 'ASCII') {
                                 $value = "\xfe\xff" . mb_convert_encoding($value, 'UTF-16', $detected);
                             }
@@ -1483,8 +1483,8 @@ class Zend_Pdf
                 if ($outputStream === null) {
                     $pdfSegmentBlocks[] = $pdfBlock;
                 } else {
-                    while ( strlen((string) $pdfBlock) > 0 && ($byteCount = fwrite($outputStream, $pdfBlock)) != false ) {
-                        $pdfBlock = substr($pdfBlock, $byteCount);
+                    while ( strlen((string) $pdfBlock) > 0 && ($byteCount = fwrite($outputStream, (string) $pdfBlock)) != false ) {
+                        $pdfBlock = substr((string) $pdfBlock, $byteCount);
                     }
                 }
             }

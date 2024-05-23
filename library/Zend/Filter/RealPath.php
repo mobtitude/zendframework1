@@ -104,12 +104,12 @@ class Zend_Filter_RealPath implements Zend_Filter_Interface
         $drive = '';
         if (substr(PHP_OS, 0, 3) == 'WIN') {
             $path = preg_replace('/[\\\\\/]/', DIRECTORY_SEPARATOR, $path);
-            if (preg_match('/([a-zA-Z]\:)(.*)/', $path, $matches)) {
+            if (preg_match('/([a-zA-Z]\:)(.*)/', (string) $path, $matches)) {
                 list($fullMatch, $drive, $path) = $matches;
             } else {
                 $cwd   = getcwd();
                 $drive = substr($cwd, 0, 2);
-                if (substr($path, 0, 1) != DIRECTORY_SEPARATOR) {
+                if (substr((string) $path, 0, 1) != DIRECTORY_SEPARATOR) {
                     $path = substr($cwd, 3) . DIRECTORY_SEPARATOR . $path;
                 }
             }

@@ -113,7 +113,7 @@ abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
         foreach ((array) $attribs as $key => $val) {
             $key = $this->view->escape($key);
 
-            if (('on' == substr($key, 0, 2)) || ('constraints' == $key)) {
+            if (('on' == substr((string) $key, 0, 2)) || ('constraints' == $key)) {
                 // Don't escape event attributes; _do_ substitute double quotes with singles
                 if (!is_scalar($val)) {
                     // non-scalar data should be cast to JSON first
@@ -136,7 +136,7 @@ abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
                 $val = $this->_normalizeId($val);
             }
 
-            if (strpos($val, '"') !== false) {
+            if (strpos((string) $val, '"') !== false) {
                 $xhtml .= " $key='$val'";
             } else {
                 $xhtml .= " $key=\"$val\"";

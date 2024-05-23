@@ -177,7 +177,7 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
                         $filename = $tmp;
                     }
 
-                    if (dirname($filename) == '.') {
+                    if (dirname((string) $filename) == '.') {
                         $filename = $directory . $filename;
                     }
 
@@ -198,8 +198,8 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
                 }
 
                 if ($rename !== null) {
-                    $this->_files[$file]['destination'] = dirname($filename);
-                    $this->_files[$file]['name']        = basename($filename);
+                    $this->_files[$file]['destination'] = dirname((string) $filename);
+                    $this->_files[$file]['name']        = basename((string) $filename);
                 }
 
                 $this->_files[$file]['tmp_name'] = $filename;

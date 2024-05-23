@@ -380,7 +380,7 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
 
         $registry  = array_reverse($registry, true);
         $found     = false;
-        if (false !== strpos($name, '\\')) {
+        if (false !== strpos((string) $name, '\\')) {
             $classFile = str_replace('\\', DIRECTORY_SEPARATOR, $name) . '.php';
         } else {
             $classFile = str_replace('_', DIRECTORY_SEPARATOR, $name) . '.php';

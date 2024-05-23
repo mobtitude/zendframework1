@@ -340,26 +340,26 @@ abstract class Zend_Http_UserAgent_AbstractDevice
 
         /* sets the server infos */
         if (isset($this->_server['server_software'])) {
-            if (strpos($this->_server['server_software'], 'Apache') !== false || strpos($this->_server['server_software'], 'LiteSpeed') !== false) {
+            if (strpos((string) $this->_server['server_software'], 'Apache') !== false || strpos((string) $this->_server['server_software'], 'LiteSpeed') !== false) {
                 $server['version'] = 1;
-                if (strpos($this->_server['server_software'], 'Apache/2') !== false) {
+                if (strpos((string) $this->_server['server_software'], 'Apache/2') !== false) {
                     $server['version'] = 2;
                 }
                 $server['server'] = 'apache';
             }
 
-            if (strpos($this->_server['server_software'], 'Microsoft-IIS') !== false) {
+            if (strpos((string) $this->_server['server_software'], 'Microsoft-IIS') !== false) {
                 $server['server'] = 'iis';
             }
 
-            if (strpos($this->_server['server_software'], 'Unix') !== false) {
+            if (strpos((string) $this->_server['server_software'], 'Unix') !== false) {
                 $server['os'] = 'unix';
                 if (isset($_ENV['MACHTYPE'])) {
-                    if (strpos($_ENV['MACHTYPE'], 'linux') !== false) {
+                    if (strpos((string) $_ENV['MACHTYPE'], 'linux') !== false) {
                         $server['os'] = 'linux';
                     }
                 }
-            } elseif (strpos($this->_server['server_software'], 'Win') !== false) {
+            } elseif (strpos((string) $this->_server['server_software'], 'Win') !== false) {
                 $server['os'] = 'windows';
             }
 
@@ -986,7 +986,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
         $userAgent = strtolower($userAgent);
         foreach ($signatures as $signature) {
             if (!empty($signature)) {
-                if (strpos($userAgent, $signature) !== false) {
+                if (strpos($userAgent, (string) $signature) !== false) {
                     // Browser signature was found in user agent string
                     return true;
                 }

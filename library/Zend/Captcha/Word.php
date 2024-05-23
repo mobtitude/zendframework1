@@ -395,7 +395,7 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
             $this->_error(self::MISSING_VALUE);
             return false;
         }
-        $input = strtolower($value['input']);
+        $input = strtolower((string) $value['input']);
         $this->_setValue($input);
 
         if (!isset($value['id'])) {

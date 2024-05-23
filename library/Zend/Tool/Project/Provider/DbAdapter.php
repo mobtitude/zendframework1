@@ -88,13 +88,13 @@ class Zend_Tool_Project_Provider_DbAdapter
     {
         $dsnVars = array();
 
-        if (strpos($dsn, '=') === false) {
+        if (strpos((string) $dsn, '=') === false) {
             throw new Zend_Tool_Project_Provider_Exception('At least one name value pair is expected, typcially '
                 . 'in the format of "adapter=Mysqli&username=uname&password=mypass&dbname=mydb"'
                 );
         }
 
-        parse_str($dsn, $dsnVars);
+        parse_str((string) $dsn, $dsnVars);
 
         // parse_str suffers when magic_quotes is enabled
         if (get_magic_quotes_gpc()) {
@@ -133,7 +133,7 @@ class Zend_Tool_Project_Provider_DbAdapter
 
     protected function _cleanMagicQuotesInValues(&$value, $key)
     {
-        $value = stripslashes($value);
+        $value = stripslashes((string) $value);
     }
 
 }

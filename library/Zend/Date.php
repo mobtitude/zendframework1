@@ -247,7 +247,7 @@ class Zend_Date extends Zend_Date_DateObject
             if (array_key_exists($name, self::$_options)) {
                 switch($name) {
                     case 'format_type' :
-                        if ((strtolower($value) != 'php') && (strtolower($value) != 'iso')) {
+                        if ((strtolower((string) $value) != 'php') && (strtolower((string) $value) != 'iso')) {
                             require_once 'Zend/Date/Exception.php';
                             throw new Zend_Date_Exception("Unknown format type ($value) for dates, only 'iso' and 'php' supported", 0, null, $value);
                         }
@@ -1461,7 +1461,7 @@ class Zend_Date extends Zend_Date_DateObject
                 $cnt = 0;
 
                 foreach ($daylist as $key => $value) {
-                    if (strtoupper(iconv_substr($value, 0, 3, 'UTF-8')) == strtoupper($date)) {
+                    if (strtoupper(iconv_substr((string) $value, 0, 3, 'UTF-8')) == strtoupper((string) $date)) {
                          $found = $cnt;
                         break;
                     }
@@ -1495,7 +1495,7 @@ class Zend_Date extends Zend_Date_DateObject
                 $cnt = 0;
 
                 foreach ($daylist as $key => $value) {
-                    if (strtoupper($value) == strtoupper($date)) {
+                    if (strtoupper((string) $value) == strtoupper((string) $date)) {
                         $found = $cnt;
                         break;
                     }
@@ -1563,7 +1563,7 @@ class Zend_Date extends Zend_Date_DateObject
                 $weekday = (int) $this->toString(self::WEEKDAY_DIGIT, 'iso', $locale);
                 $cnt = 0;
                 foreach ($daylist as $key => $value) {
-                    if (strtoupper(iconv_substr($value, 0, 1, 'UTF-8')) == strtoupper($date)) {
+                    if (strtoupper(iconv_substr((string) $value, 0, 1, 'UTF-8')) == strtoupper((string) $date)) {
                         $found = $cnt;
                         break;
                     }
@@ -1586,7 +1586,7 @@ class Zend_Date extends Zend_Date_DateObject
                 $weekday = (int) $this->toString(self::WEEKDAY_DIGIT, 'iso', $locale);
                 $cnt = 0;
                 foreach ($daylist as $key => $value) {
-                    if (strtoupper($value) == strtoupper($date)) {
+                    if (strtoupper((string) $value) == strtoupper((string) $date)) {
                         $found = $cnt;
                         break;
                     }
@@ -1621,7 +1621,7 @@ class Zend_Date extends Zend_Date_DateObject
                 $monthlist = Zend_Locale_Data::getList($locale, 'month');
                 $cnt = 0;
                 foreach ($monthlist as $key => $value) {
-                    if (strtoupper($value) == strtoupper($date)) {
+                    if (strtoupper((string) $value) == strtoupper((string) $date)) {
                         $found = $key;
                         break;
                     }
@@ -1694,7 +1694,7 @@ class Zend_Date extends Zend_Date_DateObject
                 $monthlist = Zend_Locale_Data::getList($locale, 'month', array('gregorian', 'format', 'abbreviated'));
                 $cnt = 0;
                 foreach ($monthlist as $key => $value) {
-                    if (strtoupper($value) == strtoupper($date)) {
+                    if (strtoupper((string) $value) == strtoupper((string) $date)) {
                         $found = $key;
                         break;
                     }
@@ -1773,7 +1773,7 @@ class Zend_Date extends Zend_Date_DateObject
                 $monthlist = Zend_Locale_Data::getList($locale, 'month', array('gregorian', 'stand-alone', 'narrow'));
                 $cnt       = 0;
                 foreach ($monthlist as $key => $value) {
-                    if (strtoupper($value) === strtoupper($date)) {
+                    if (strtoupper((string) $value) === strtoupper((string) $date)) {
                         $found = $key;
                         break;
                     }
@@ -2060,9 +2060,9 @@ class Zend_Date extends Zend_Date_DateObject
                 $tmpdate = $date;
                 if (!empty($datematch)) {
                     $dateMatchCharCount = iconv_strlen($datematch[0], 'UTF-8');
-                    $tmpdate = iconv_substr($date,
+                    $tmpdate = iconv_substr((string) $date,
                                             $dateMatchCharCount,
-                                            iconv_strlen($date, 'UTF-8') - $dateMatchCharCount,
+                                            iconv_strlen((string) $date, 'UTF-8') - $dateMatchCharCount,
                                             'UTF-8');
                 }
                 // (T)hh:mm:ss
@@ -2085,9 +2085,9 @@ class Zend_Date extends Zend_Date_DateObject
                 }
                 if (!empty($timematch)) {
                     $timeMatchCharCount = iconv_strlen($timematch[0], 'UTF-8');
-                    $tmpdate = iconv_substr($tmpdate,
+                    $tmpdate = iconv_substr((string) $tmpdate,
                                             $timeMatchCharCount,
-                                            iconv_strlen($tmpdate, 'UTF-8') - $timeMatchCharCount,
+                                            iconv_strlen((string) $tmpdate, 'UTF-8') - $timeMatchCharCount,
                                             'UTF-8');
                 }
                 if (empty($datematch)) {
@@ -2825,9 +2825,9 @@ class Zend_Date extends Zend_Date_DateObject
                 $parsed['second'] = 0;
             }
 
-            $time  = str_pad($parsed['hour'], 2, '0', STR_PAD_LEFT) . ":";
-            $time .= str_pad($parsed['minute'], 2, '0', STR_PAD_LEFT) . ":";
-            $time .= str_pad($parsed['second'], 2, '0', STR_PAD_LEFT);
+            $time  = str_pad((string) $parsed['hour'], 2, '0', STR_PAD_LEFT) . ":";
+            $time .= str_pad((string) $parsed['minute'], 2, '0', STR_PAD_LEFT) . ":";
+            $time .= str_pad((string) $parsed['second'], 2, '0', STR_PAD_LEFT);
         }
 
         $return = $this->_calcdetail($calc, $time, self::TIMES, 'de');
@@ -3695,7 +3695,7 @@ class Zend_Date extends Zend_Date_DateObject
                 $found = 0;
                 $cnt = 0;
                 foreach ($monthlist as $key => $value) {
-                    if (strtoupper($value) == strtoupper($month)) {
+                    if (strtoupper((string) $value) == strtoupper($month)) {
                         $found = ($key % 12) + 1;
                         break;
                     }
@@ -3703,7 +3703,7 @@ class Zend_Date extends Zend_Date_DateObject
                 }
                 if ($found == 0) {
                     foreach ($monthlist2 as $key => $value) {
-                        if (strtoupper(iconv_substr($value, 0, 1, 'UTF-8')) == strtoupper($month)) {
+                        if (strtoupper(iconv_substr((string) $value, 0, 1, 'UTF-8')) == strtoupper($month)) {
                             $found = $key + 1;
                             break;
                         }
@@ -4456,9 +4456,9 @@ class Zend_Date extends Zend_Date_DateObject
 
         $this->_precision = (int) $precision;
         if ($this->_precision < strlen((string) $this->_fractional)) {
-            $this->_fractional = substr($this->_fractional, 0, $this->_precision);
+            $this->_fractional = substr((string) $this->_fractional, 0, $this->_precision);
         } else {
-            $this->_fractional = str_pad($this->_fractional, $this->_precision, '0', STR_PAD_RIGHT);
+            $this->_fractional = str_pad((string) $this->_fractional, $this->_precision, '0', STR_PAD_RIGHT);
         }
 
         return $this;

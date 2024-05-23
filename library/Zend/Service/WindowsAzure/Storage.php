@@ -447,7 +447,7 @@ class Zend_Service_WindowsAzure_Storage
 		// Return headers
 		$headers = array();
 		foreach ($metadata as $key => $value) {
-			if (strpos($value, "\r") !== false || strpos($value, "\n") !== false) {
+			if (strpos((string) $value, "\r") !== false || strpos((string) $value, "\n") !== false) {
                             require_once 'Zend/Service/WindowsAzure/Exception.php';
                             throw new Zend_Service_WindowsAzure_Exception('Metadata cannot contain newline characters.');
 			}

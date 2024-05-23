@@ -318,7 +318,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
                 || $partial
             ) {
                 if ($encode) {
-                    $value = urlencode($value);
+                    $value = urlencode((string) $value);
                 }
                 $return = '.' . $value . $return;
                 $flag   = true;

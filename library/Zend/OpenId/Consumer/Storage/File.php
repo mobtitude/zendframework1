@@ -203,7 +203,7 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
                 if ($url === $storedUrl && $expires > time()) {
                     $ret = true;
                 } else {
-                    $name2 = $this->_dir . '/assoc_handle_' . md5($handle);
+                    $name2 = $this->_dir . '/assoc_handle_' . md5((string) $handle);
                     fclose($f);
                     @unlink($name2);
                     @unlink($name1);
@@ -258,7 +258,7 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
                 } else {
                     fclose($f);
                     @unlink($name2);
-                    $name1 = $this->_dir . '/assoc_url_' . md5($url);
+                    $name1 = $this->_dir . '/assoc_url_' . md5((string) $url);
                     @unlink($name1);
                     fclose($lock);
                     return false;
@@ -300,7 +300,7 @@ class Zend_OpenId_Consumer_Storage_File extends Zend_OpenId_Consumer_Storage
             if (!empty($data)) {
                 list($storedUrl, $handle, $macFunc, $secret, $expires) = unserialize($data);
                 if ($url === $storedUrl) {
-                    $name2 = $this->_dir . '/assoc_handle_' . md5($handle);
+                    $name2 = $this->_dir . '/assoc_handle_' . md5((string) $handle);
                     fclose($f);
                     @unlink($name2);
                     @unlink($name1);

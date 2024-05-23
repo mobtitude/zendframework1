@@ -198,8 +198,8 @@ class Zend_Rest_Server implements Zend_Server_Interface
                     $callingArgs = array();
                     $missingArgs = array();
                     foreach ($funcArgs as $i => $arg) {
-                        if (isset($request[strtolower($arg->getName())])) {
-                            $callingArgs[$i] = $request[strtolower($arg->getName())];
+                        if (isset($request[strtolower((string) $arg->getName())])) {
+                            $callingArgs[$i] = $request[strtolower((string) $arg->getName())];
                         } elseif ($arg->isOptional()) {
                             $callingArgs[$i] = $arg->getDefaultValue();
                         } else {

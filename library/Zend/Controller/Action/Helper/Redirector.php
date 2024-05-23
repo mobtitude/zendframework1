@@ -216,11 +216,11 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
             $uri   = $proto . '://' . $host;
             if ((('http' == $proto) && (80 != $port)) || (('https' == $proto) && (443 != $port))) {
                 // do not append if HTTP_HOST already contains port
-                if (strrchr($host, ':') === false) {
+                if (strrchr((string) $host, ':') === false) {
                     $uri .= ':' . $port;
                 }
             }
-            $url = $uri . '/' . ltrim($url, '/');
+            $url = $uri . '/' . ltrim((string) $url, '/');
         }
         $this->_redirectUrl = $url;
         $this->getResponse()->setRedirect($url, $this->getCode());

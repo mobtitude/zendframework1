@@ -103,7 +103,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
          * to avoid holding up responses to the Hub.
          */
         $contentType = $this->_getHeader('Content-Type');
-        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post'
+        if (strtolower((string) $_SERVER['REQUEST_METHOD']) == 'post'
             && $this->_hasValidVerifyToken(null, false)
             && (stripos($contentType, 'application/atom+xml') === 0
                 || stripos($contentType, 'application/rss+xml') === 0
@@ -151,7 +151,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
          * always send a hub.verify_token parameter to be echoed back
          * by the Hub Server. Therefore, its absence is considered invalid.
          */
-        if (strtolower($_SERVER['REQUEST_METHOD']) !== 'get') {
+        if (strtolower((string) $_SERVER['REQUEST_METHOD']) !== 'get') {
             return false;
         }
         $required = array(
@@ -247,7 +247,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
         if ($checkValue) {
             $data = $this->getStorage()->getSubscription($verifyTokenKey);
             $verifyToken = $data['verify_token'];
-            if ($verifyToken !== hash('sha256', $httpGetData['hub_verify_token'])) {
+            if ($verifyToken !== hash('sha256', (string) $httpGetData['hub_verify_token'])) {
                 return false;
             }
             $this->_currentSubscriptionData = $data;
@@ -287,7 +287,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
          */
         $params = $this->_parseQueryString();
         if (isset($params['xhub.subscription'])) {
-            return rawurldecode($params['xhub.subscription']);
+            return rawurldecode((string) $params['xhub.subscription']);
         }
 
         return false;

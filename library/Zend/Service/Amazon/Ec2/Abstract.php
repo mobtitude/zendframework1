@@ -240,7 +240,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
 
         $arrData = array();
         foreach($paramaters as $key => $value) {
-            $arrData[] = $key . '=' . str_replace("%7E", "~", rawurlencode($value));
+            $arrData[] = $key . '=' . str_replace("%7E", "~", rawurlencode((string) $value));
         }
 
         $data .= implode('&', $arrData);

@@ -509,11 +509,11 @@ class Zend_Http_Header_SetCookie
 
     public function isValidForRequest($requestDomain, $path, $isSecure = false)
     {
-        if ($this->getDomain() && (strrpos($requestDomain, $this->getDomain()) !== false)) {
+        if ($this->getDomain() && (strrpos((string) $requestDomain, $this->getDomain()) !== false)) {
             return false;
         }
 
-        if ($this->getPath() && (strpos($path, $this->getPath()) !== 0)) {
+        if ($this->getPath() && (strpos((string) $path, $this->getPath()) !== 0)) {
             return false;
         }
 

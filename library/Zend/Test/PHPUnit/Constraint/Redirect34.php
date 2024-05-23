@@ -107,7 +107,7 @@ class Zend_Test_PHPUnit_Constraint_Redirect34 extends PHPUnit_Framework_Constrai
             throw new Zend_Test_PHPUnit_Constraint_Exception('Redirect constraint assertions require a response object');
         }
 
-        if (strstr($assertType, 'Not')) {
+        if (strstr((string) $assertType, 'Not')) {
             $this->setNegate(true);
             $assertType = str_replace('Not', '', $assertType);
         }

@@ -99,7 +99,7 @@ class Zend_View_Helper_FormRadio extends Zend_View_Helper_FormElement
             switch (strtolower($key)) {
                 case 'placement':
                     unset($label_attribs[$key]);
-                    $val = strtolower($val);
+                    $val = strtolower((string) $val);
                     if (in_array($val, array('prepend', 'append'))) {
                         $labelPlacement = $val;
                     }
@@ -116,7 +116,7 @@ class Zend_View_Helper_FormRadio extends Zend_View_Helper_FormElement
 
         // should the name affect an array collection?
         $name = $this->view->escape($name);
-        if ($this->_isArray && ('[]' != substr($name, -2))) {
+        if ($this->_isArray && ('[]' != substr((string) $name, -2))) {
             $name .= '[]';
         }
 
@@ -175,7 +175,7 @@ class Zend_View_Helper_FormRadio extends Zend_View_Helper_FormElement
         }
         
         // XHTML or HTML for standard list separator?
-        if (!$this->_isXhtml() && false !== strpos($listsep, '<br />')) {
+        if (!$this->_isXhtml() && false !== strpos((string) $listsep, '<br />')) {
             $listsep = str_replace('<br />', '<br>', $listsep);
         }
 

@@ -329,11 +329,11 @@ class Zend_Pdf_StringParser
                                                 $this->offset));
 
             default:
-                if (strcasecmp($nextLexeme, 'true') == 0) {
+                if (strcasecmp((string) $nextLexeme, 'true') == 0) {
                     return ($this->_elements[] = new Zend_Pdf_Element_Boolean(true));
-                } else if (strcasecmp($nextLexeme, 'false') == 0) {
+                } else if (strcasecmp((string) $nextLexeme, 'false') == 0) {
                     return ($this->_elements[] = new Zend_Pdf_Element_Boolean(false));
-                } else if (strcasecmp($nextLexeme, 'null') == 0) {
+                } else if (strcasecmp((string) $nextLexeme, 'null') == 0) {
                     return ($this->_elements[] = new Zend_Pdf_Element_Null());
                 }
 

@@ -181,7 +181,7 @@ class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container
             case Zend_View_Helper_Placeholder_Container_Abstract::SET:
             case Zend_View_Helper_Placeholder_Container_Abstract::PREPEND:
             case Zend_View_Helper_Placeholder_Container_Abstract::APPEND:
-                $action = strtolower($this->_captureType) . 'Script';
+                $action = strtolower((string) $this->_captureType) . 'Script';
                 break;
             default:
                 $action = 'appendScript';

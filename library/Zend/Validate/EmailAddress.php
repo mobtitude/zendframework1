@@ -359,7 +359,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
             foreach ((array)$this->_invalidIp[$octet[0]] as $subnetData) {
                 // we skip the first loop as we already know that octet matches
                 for ($i = 1; $i < 4; $i++) {
-                    if (strpos($subnetData, $octet[$i]) !== $i * 4) {
+                    if (strpos((string) $subnetData, $octet[$i]) !== $i * 4) {
                         break;
                     }
                 }

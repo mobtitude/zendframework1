@@ -155,7 +155,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
         $text         = str_split($this->getText());
         $barcodeTable = array();
         foreach ($text as $char) {
-            $barcodeChar = str_split($this->_codingMap[$char]);
+            $barcodeChar = str_split((string) $this->_codingMap[$char]);
             $visible     = true;
             foreach ($barcodeChar as $c) {
                 /* visible, width, top, length */

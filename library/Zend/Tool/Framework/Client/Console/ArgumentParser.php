@@ -325,7 +325,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
         $consoleSpecialtyName = '_global';
 
         // if there is notation for specialties? If so, break them up
-        if (strstr($consoleProviderFull, '.')) {
+        if (strstr((string) $consoleProviderFull, '.')) {
             list($consoleProviderName, $consoleSpecialtyName) = explode('.', (string) $consoleProviderFull);
         } else {
             $consoleProviderName = $consoleProviderFull;
@@ -470,7 +470,7 @@ class Zend_Tool_Framework_Client_Console_ArgumentParser implements Zend_Tool_Fra
         // if non-option arguments exist, attempt to process them before processing options
         $wordStack = array();
         while (($wordOnTop = array_shift($this->_argumentsWorking))) {
-            if (substr($wordOnTop, 0, 1) != '-') {
+            if (substr((string) $wordOnTop, 0, 1) != '-') {
                 array_push($wordStack, $wordOnTop);
             } else {
                 // put word back on stack and move on

@@ -440,7 +440,7 @@ class Zend_Console_Getopt
                  * The developer should subclass Getopt and
                  * provide this method.
                  */
-                $method = '_addRulesMode' . ucfirst($ruleMode);
+                $method = '_addRulesMode' . ucfirst((string) $ruleMode);
                 $this->$method($rules);
         }
         $this->_parsed = false;
@@ -526,7 +526,7 @@ class Zend_Console_Getopt
             $optionNode = $doc->createElement('option');
             $optionNode->setAttribute('flag', utf8_encode($flag));
             if ($value !== true) {
-                $optionNode->setAttribute('parameter', utf8_encode($value));
+                $optionNode->setAttribute('parameter', utf8_encode((string) $value));
             }
             $optionsNode->appendChild($optionNode);
         }
@@ -647,7 +647,7 @@ class Zend_Console_Getopt
         {
             if ($this->_getoptConfig[self::CONFIG_IGNORECASE]) {
                 $flag = strtolower($flag);
-                $alias = strtolower($alias);
+                $alias = strtolower((string) $alias);
             }
             if (!isset($this->_ruleMap[$flag])) {
                 continue;
@@ -712,9 +712,9 @@ class Zend_Console_Getopt
                     break;
                 }
             }
-            if (substr($argv[0], 0, 2) == '--') {
+            if (substr((string) $argv[0], 0, 2) == '--') {
                 $this->_parseLongOption($argv);
-            } else if (substr($argv[0], 0, 1) == '-' && ('-' != $argv[0] || count($argv) >1))  {
+            } else if (substr((string) $argv[0], 0, 1) == '-' && ('-' != $argv[0] || count($argv) >1))  {
                 $this->_parseShortOptionCluster($argv);
             } else if($this->_getoptConfig[self::CONFIG_PARSEALL]) {
                 $this->_remainingArgs[] = array_shift($argv);
@@ -763,7 +763,7 @@ class Zend_Console_Getopt
      */
     protected function _parseLongOption(&$argv)
     {
-        $optionWithParam = ltrim(array_shift($argv), '-');
+        $optionWithParam = ltrim((string) array_shift($argv), '-');
         $l = explode('=', $optionWithParam, 2);
         $flag = array_shift($l);
         $param = array_shift($l);
@@ -783,7 +783,7 @@ class Zend_Console_Getopt
      */
     protected function _parseShortOptionCluster(&$argv)
     {
-        $flagCluster = ltrim(array_shift($argv), '-');
+        $flagCluster = ltrim((string) array_shift($argv), '-');
         foreach (str_split($flagCluster) as $flag) {
             $this->_parseSingleOption($flag, $argv);
         }
@@ -811,7 +811,7 @@ class Zend_Console_Getopt
         $realFlag = $this->_ruleMap[$flag];
         switch ($this->_rules[$realFlag]['param']) {
             case 'required':
-                if (count($argv) > 0 && substr($argv[0], 0, 1) != '-') {
+                if (count($argv) > 0 && substr((string) $argv[0], 0, 1) != '-') {
                     $param = array_shift($argv);
                     $this->_checkParameterType($realFlag, $param);
                 } else {
@@ -822,7 +822,7 @@ class Zend_Console_Getopt
                 }
                 break;
             case 'optional':
-                if (count($argv) > 0 && substr($argv[0], 0, 1) != '-') {
+                if (count($argv) > 0 && substr((string) $argv[0], 0, 1) != '-') {
                     $param = array_shift($argv);
                     $this->_checkParameterType($realFlag, $param);
                 } else {

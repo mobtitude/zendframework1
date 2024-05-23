@@ -90,7 +90,7 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
         if (isset($options[$key]['email'])
             && !is_numeric($options[$key]['email'])
         ) {
-            $method = array('Zend_Mail', 'setDefault' . ucfirst($type));
+            $method = array('Zend_Mail', 'setDefault' . ucfirst((string) $type));
             if (isset($options[$key]['name'])
                 && !is_numeric(
                     $options[$key]['name']
@@ -113,7 +113,7 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
 
         $transportName = $options['type'];
         if (!Zend_Loader_Autoloader::autoload($transportName)) {
-            $transportName = ucfirst(strtolower($transportName));
+            $transportName = ucfirst(strtolower((string) $transportName));
 
             if (!Zend_Loader_Autoloader::autoload($transportName)) {
                 $transportName = 'Zend_Mail_Transport_' . $transportName;

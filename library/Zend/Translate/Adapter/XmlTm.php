@@ -97,7 +97,7 @@ class Zend_Translate_Adapter_XmlTm extends Zend_Translate_Adapter {
 
     private function _startElement($file, $name, $attrib)
     {
-        switch(strtolower($name)) {
+        switch(strtolower((string) $name)) {
             case 'tm:tu':
                 $this->_tag     = $attrib['id'];
                 $this->_content = null;
@@ -109,7 +109,7 @@ class Zend_Translate_Adapter_XmlTm extends Zend_Translate_Adapter {
 
     private function _endElement($file, $name)
     {
-        switch (strtolower($name)) {
+        switch (strtolower((string) $name)) {
             case 'tm:tu':
                 if (!empty($this->_tag) and !empty($this->_content) or
                     (isset($this->_data[$this->_lang][$this->_tag]) === false)) {

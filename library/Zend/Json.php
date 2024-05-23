@@ -412,7 +412,7 @@ class Zend_Json
                 continue;
             }
 
-            $prefix = str_repeat($ind, $indent);
+            $prefix = str_repeat((string) $ind, $indent);
             if (!$inLiteral && ($token == '{' || $token == '[')) {
                 $indent++;
                 if (($result != '') && ($result[(strlen($result)-1)] == $lineBreak)) {
@@ -421,7 +421,7 @@ class Zend_Json
                 $result .= $token . $lineBreak;
             } elseif (!$inLiteral && ($token == '}' || $token == ']')) {
                 $indent--;
-                $prefix = str_repeat($ind, $indent);
+                $prefix = str_repeat((string) $ind, $indent);
                 $result .= $lineBreak . $prefix . $token;
             } elseif (!$inLiteral && $token == ',') {
                 $result .= $token . $lineBreak;

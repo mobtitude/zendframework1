@@ -458,7 +458,7 @@ class Zend_Currency
     {
         if (empty($region) === true) {
             if (strlen((string) $this->_options['locale']) > 4) {
-                $region = substr($this->_options['locale'], (strpos($this->_options['locale'], '_') + 1));
+                $region = substr((string) $this->_options['locale'], (strpos((string) $this->_options['locale'], '_') + 1));
             }
         }
 

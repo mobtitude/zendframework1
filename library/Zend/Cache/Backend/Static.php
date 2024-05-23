@@ -220,7 +220,7 @@ class Zend_Cache_Backend_Static
         $extension = null;
         if ($this->_isSerialized($data)) {
             $data = unserialize($data);
-            $extension = '.' . ltrim($data[1], '.');
+            $extension = '.' . ltrim((string) $data[1], '.');
             $data = $data[0];
         }
 

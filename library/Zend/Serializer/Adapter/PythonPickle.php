@@ -987,7 +987,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     {
         $nBin = $this->_read(4);
         if (self::$_isLittleEndian === false) {
-            $nBin = strrev($$nBin);
+            $nBin = strrev((string) $$nBin);
         }
         list(, $n) = unpack('l', $nBin);
         $data = $this->_read($n);
@@ -1067,7 +1067,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         // read byte length
         $nBin = $this->_read(4);
         if (self::$_isLittleEndian === false) {
-            $nBin = strrev($$nBin);
+            $nBin = strrev((string) $$nBin);
         }
         list(, $n)      = unpack('l', $nBin);
         $this->_stack[] = $this->_read($n);
@@ -1118,7 +1118,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
      */
     protected function _hex2Utf8($hex)
     {
-        $uniCode = hexdec($hex);
+        $uniCode = hexdec((string) $hex);
 
         if ($uniCode < 0x80) { // 1Byte
             $utf8Char = chr($uniCode);
@@ -1373,7 +1373,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
         }
 
         $this->_pos+= $len;
-        return substr($this->_pickle, ($this->_pos - $len), $len);
+        return substr((string) $this->_pickle, ($this->_pos - $len), $len);
     }
 
     /**
@@ -1385,9 +1385,9 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     protected function _readline()
     {
         $eolLen = 2;
-        $eolPos = strpos($this->_pickle, "\r\n", $this->_pos);
+        $eolPos = strpos((string) $this->_pickle, "\r\n", $this->_pos);
         if ($eolPos === false) {
-            $eolPos = strpos($this->_pickle, "\n", $this->_pos);
+            $eolPos = strpos((string) $this->_pickle, "\n", $this->_pos);
             $eolLen = 1;
         }
 
@@ -1395,7 +1395,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
             require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('No new line found');
         }
-        $ret        = substr($this->_pickle, $this->_pos, $eolPos-$this->_pos);
+        $ret        = substr((string) $this->_pickle, $this->_pos, $eolPos-$this->_pos);
         $this->_pos = $eolPos + $eolLen;
 
         return $ret;

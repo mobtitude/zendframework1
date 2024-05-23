@@ -368,7 +368,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      */
     public function getFillingPercentage()
     {
-        $dir = dirname($this->_options['cache_db_complete_path']);
+        $dir = dirname((string) $this->_options['cache_db_complete_path']);
         $free = disk_free_space($dir);
         $total = disk_total_space($dir);
         if ($total == 0) {

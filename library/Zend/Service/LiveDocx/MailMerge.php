@@ -401,7 +401,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
             $pageCounter = (integer) $fromPage;
             if (is_array($result->GetMetafilesResult->string)) {
                 foreach ($result->GetMetafilesResult->string as $string) {
-                    $ret[$pageCounter] = base64_decode($string);
+                    $ret[$pageCounter] = base64_decode((string) $string);
                     $pageCounter++;
                 }
             } else {
@@ -430,7 +430,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
             $pageCounter = 1;
             if (is_array($result->GetAllMetafilesResult->string)) {
                 foreach ($result->GetAllMetafilesResult->string as $string) {
-                    $ret[$pageCounter] = base64_decode($string);
+                    $ret[$pageCounter] = base64_decode((string) $string);
                     $pageCounter++;
                 }
             } else {
@@ -469,7 +469,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
             $pageCounter = (integer) $fromPage;
             if (is_array($result->GetBitmapsResult->string)) {
                 foreach ($result->GetBitmapsResult->string as $string) {
-                    $ret[$pageCounter] = base64_decode($string);
+                    $ret[$pageCounter] = base64_decode((string) $string);
                     $pageCounter++;
                 }
             } else {
@@ -503,7 +503,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
             $pageCounter = 1;
             if (is_array($result->GetAllBitmapsResult->string)) {
                 foreach ($result->GetAllBitmapsResult->string as $string) {
-                    $ret[$pageCounter] = base64_decode($string);
+                    $ret[$pageCounter] = base64_decode((string) $string);
                     $pageCounter++;
                 }
             } else {
@@ -767,7 +767,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
 
         try {
             $result = $this->getSoapClient()->DownloadSharedDocument(array(
-                'filename' => basename($filename),
+                'filename' => basename((string) $filename),
             ));
         } catch (Exception $e) {
             require_once 'Zend/Service/LiveDocx/Exception.php';

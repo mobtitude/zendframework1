@@ -93,7 +93,7 @@ class Zend_Tool_Project_Context_Zf_ZfStandardLibraryDirectory extends Zend_Tool_
                 continue;
             }
 
-            if (realpath($checkedPath = rtrim($includePath, '\\/') . '/Zend/Loader.php') !== false && file_exists($checkedPath)) {
+            if (realpath($checkedPath = rtrim((string) $includePath, '\\/') . '/Zend/Loader.php') !== false && file_exists($checkedPath)) {
                 return dirname($checkedPath);
             }
         }

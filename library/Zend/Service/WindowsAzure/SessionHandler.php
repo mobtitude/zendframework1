@@ -179,7 +179,7 @@ class Zend_Service_WindowsAzure_SessionHandler
     				$this->_sessionContainer,
     				$this->_sessionContainerPartition . '/' . $id
     			);
-	            return unserialize(base64_decode($data));
+	            return unserialize(base64_decode((string) $data));
 	        }
 	        catch (Zend_Service_WindowsAzure_Exception $ex)
 	        {

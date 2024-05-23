@@ -174,7 +174,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
         $route, $defaults = array(), $reqs = array(), Zend_Translate $translator = null, $locale = null
     )
     {
-        $route               = trim($route, $this->_urlDelimiter);
+        $route               = trim($route ?? '', $this->_urlDelimiter);
         $this->_defaults     = (array)$defaults;
         $this->_requirements = (array)$reqs;
         $this->_translator   = $translator;
@@ -391,15 +391,15 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                     $url[$key] = $value;
                 }
             } elseif ($part != '*') {
-                if ($this->_isTranslated && substr($part, 0, 1) === '@') {
-                    if (substr($part, 1, 1) !== '@') {
-                        $url[$key] = $translator->translate(substr($part, 1), $locale);
+                if ($this->_isTranslated && substr((string) $part, 0, 1) === '@') {
+                    if (substr((string) $part, 1, 1) !== '@') {
+                        $url[$key] = $translator->translate(substr((string) $part, 1), $locale);
                     } else {
-                        $url[$key] = substr($part, 1);
+                        $url[$key] = substr((string) $part, 1);
                     }
                 } else {
-                    if (substr($part, 0, 2) === '@@') {
-                        $part = substr($part, 1);
+                    if (substr((string) $part, 0, 2) === '@@') {
+                        $part = substr((string) $part, 1);
                     }
 
                     $url[$key] = $part;
@@ -436,7 +436,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
 
             if ($flag || $value !== $defaultValue || $partial) {
                 if ($encode) {
-                    $value = urlencode($value);
+                    $value = urlencode((string) $value);
                 }
                 $return = $this->_urlDelimiter . $value . $return;
                 $flag   = true;

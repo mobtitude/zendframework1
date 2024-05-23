@@ -259,7 +259,7 @@ class Zend_Http_CookieJar implements Countable, IteratorAggregate
                     break;
 
                 case self::COOKIE_STRING_CONCAT_STRICT:
-                    return rtrim(trim($cookie->__toString()), ';');
+                    return rtrim(trim((string) $cookie->__toString()), ';');
                     break;
 
                 case self::COOKIE_STRING_ARRAY:

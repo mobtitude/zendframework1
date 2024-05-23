@@ -129,7 +129,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
                 return false;
             }
         } else {
-            $projectProfileFilePath = rtrim($this->_attributes['projectDirectory'], '/\\') . '/.zfproject.xml';
+            $projectProfileFilePath = rtrim((string) $this->_attributes['projectDirectory'], '/\\') . '/.zfproject.xml';
             if (!file_exists($projectProfileFilePath)) {
                 return false;
             }
@@ -160,9 +160,9 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
                 require_once 'Zend/Tool/Project/Exception.php';
                 throw new Zend_Tool_Project_Exception('"projectProfileFile" was supplied but file was not found at location ' . $projectProfileFilePath);
             }
-            $this->_attributes['projectDirectory'] = dirname($projectProfileFilePath);
+            $this->_attributes['projectDirectory'] = dirname((string) $projectProfileFilePath);
         } else {
-            $projectProfileFilePath = rtrim($this->_attributes['projectDirectory'], '/\\') . '/.zfproject.xml';
+            $projectProfileFilePath = rtrim((string) $this->_attributes['projectDirectory'], '/\\') . '/.zfproject.xml';
             if (!file_exists($projectProfileFilePath)) {
                 require_once 'Zend/Tool/Project/Exception.php';
                 throw new Zend_Tool_Project_Exception('"projectDirectory" was supplied but no profile file file was not found at location ' . $projectProfileFilePath);

@@ -263,7 +263,7 @@ class Zend_Locale_Format
         }
 
         $input = str_replace($symbols['group'],'', $input);
-        if (strpos($input, $symbols['decimal']) !== false) {
+        if (strpos($input, (string) $symbols['decimal']) !== false) {
             if ($symbols['decimal'] != '.') {
                 $input = str_replace($symbols['decimal'], ".", $input);
             }
@@ -369,7 +369,7 @@ class Zend_Locale_Format
 
         if ($options['precision'] === null) {
             if (isset($precstr)) {
-                $options['precision'] = iconv_strlen($precstr);
+                $options['precision'] = iconv_strlen((string) $precstr);
             } else {
                 $options['precision'] = 0;
             }
@@ -824,23 +824,23 @@ class Zend_Locale_Format
 
         $oenc = self::_getEncoding();
         self::_setEncoding('UTF-8');
-        $day   = iconv_strpos($format, 'd');
-        $month = iconv_strpos($format, 'M');
-        $year  = iconv_strpos($format, 'y');
-        $hour  = iconv_strpos($format, 'H');
-        $min   = iconv_strpos($format, 'm');
-        $sec   = iconv_strpos($format, 's');
+        $day   = iconv_strpos((string) $format, 'd');
+        $month = iconv_strpos((string) $format, 'M');
+        $year  = iconv_strpos((string) $format, 'y');
+        $hour  = iconv_strpos((string) $format, 'H');
+        $min   = iconv_strpos((string) $format, 'm');
+        $sec   = iconv_strpos((string) $format, 's');
         $am    = null;
         if ($hour === false) {
-            $hour = iconv_strpos($format, 'h');
+            $hour = iconv_strpos((string) $format, 'h');
         }
         if ($year === false) {
-            $year = iconv_strpos($format, 'Y');
+            $year = iconv_strpos((string) $format, 'Y');
         }
         if ($day === false) {
-            $day = iconv_strpos($format, 'E');
+            $day = iconv_strpos((string) $format, 'E');
             if ($day === false) {
-                $day = iconv_strpos($format, 'D');
+                $day = iconv_strpos((string) $format, 'D');
             }
         }
 
@@ -851,7 +851,7 @@ class Zend_Locale_Format
                 // erase day string
                     $daylist = Zend_Locale_Data::getList($options['locale'], 'day');
                 foreach($daylist as $key => $name) {
-                    if (iconv_strpos($number, $name) !== false) {
+                    if (iconv_strpos($number, (string) $name) !== false) {
                         $number = str_replace($name, "EEEE", $number);
                         break;
                     }
@@ -895,10 +895,10 @@ class Zend_Locale_Format
         ksort($parse);
 
         // get daytime
-        if (iconv_strpos($format, 'a') !== false) {
-            if (iconv_strpos(strtoupper($number), strtoupper(Zend_Locale_Data::getContent($options['locale'], 'am'))) !== false) {
+        if (iconv_strpos((string) $format, 'a') !== false) {
+            if (iconv_strpos(strtoupper((string) $number), strtoupper(Zend_Locale_Data::getContent($options['locale'], 'am'))) !== false) {
                 $am = true;
-            } else if (iconv_strpos(strtoupper($number), strtoupper(Zend_Locale_Data::getContent($options['locale'], 'pm'))) !== false) {
+            } else if (iconv_strpos(strtoupper((string) $number), strtoupper(Zend_Locale_Data::getContent($options['locale'], 'pm'))) !== false) {
                 $am = false;
             }
         }
@@ -943,8 +943,8 @@ class Zend_Locale_Format
                     break;
                 case 'y':
                     $length = 2;
-                    if ((iconv_substr($format, $year, 4) == 'yyyy')
-                     || (iconv_substr($format, $year, 4) == 'YYYY')) {
+                    if ((iconv_substr((string) $format, $year, 4) == 'yyyy')
+                     || (iconv_substr((string) $format, $year, 4) == 'YYYY')) {
                         $length = 4;
                     }
 
@@ -1077,8 +1077,8 @@ class Zend_Locale_Format
 
         if (isset($result['year'])) {
             if (((iconv_strlen($result['year']) == 2) && ($result['year'] < 10)) ||
-                (((iconv_strpos($format, 'yy') !== false) && (iconv_strpos($format, 'yyyy') === false)) ||
-                ((iconv_strpos($format, 'YY') !== false) && (iconv_strpos($format, 'YYYY') === false)))) {
+                (((iconv_strpos((string) $format, 'yy') !== false) && (iconv_strpos((string) $format, 'yyyy') === false)) ||
+                ((iconv_strpos((string) $format, 'YY') !== false) && (iconv_strpos((string) $format, 'YYYY') === false)))) {
                 if (($result['year'] >= 0) && ($result['year'] < 100)) {
                     if ($result['year'] < 70) {
                         $result['year'] = (int) $result['year'] + 100;
@@ -1110,7 +1110,7 @@ class Zend_Locale_Format
         $position = false;
         if ($monthlist && $monthlist[1] != 1) {
             foreach($monthlist as $key => $name) {
-                if (($position = iconv_strpos($number, $name, 0, 'UTF-8')) !== false) {
+                if (($position = iconv_strpos($number, (string) $name, 0, 'UTF-8')) !== false) {
                     $number   = str_ireplace($name, $key, $number);
                     return $position;
                 }
@@ -1186,34 +1186,34 @@ class Zend_Locale_Format
         $options = self::_checkOptions($options) + self::$_options;
 
         // day expected but not parsed
-        if ((iconv_strpos($options['date_format'], 'd', 0, 'UTF-8') !== false) and (!isset($date['day']) or ($date['day'] === ""))) {
+        if ((iconv_strpos((string) $options['date_format'], 'd', 0, 'UTF-8') !== false) and (!isset($date['day']) or ($date['day'] === ""))) {
             return false;
         }
 
         // month expected but not parsed
-        if ((iconv_strpos($options['date_format'], 'M', 0, 'UTF-8') !== false) and (!isset($date['month']) or ($date['month'] === ""))) {
+        if ((iconv_strpos((string) $options['date_format'], 'M', 0, 'UTF-8') !== false) and (!isset($date['month']) or ($date['month'] === ""))) {
             return false;
         }
 
         // year expected but not parsed
-        if (((iconv_strpos($options['date_format'], 'Y', 0, 'UTF-8') !== false) or
-             (iconv_strpos($options['date_format'], 'y', 0, 'UTF-8') !== false)) and (!isset($date['year']) or ($date['year'] === ""))) {
+        if (((iconv_strpos((string) $options['date_format'], 'Y', 0, 'UTF-8') !== false) or
+             (iconv_strpos((string) $options['date_format'], 'y', 0, 'UTF-8') !== false)) and (!isset($date['year']) or ($date['year'] === ""))) {
             return false;
         }
 
         // second expected but not parsed
-        if ((iconv_strpos($options['date_format'], 's', 0, 'UTF-8') !== false) and (!isset($date['second']) or ($date['second'] === ""))) {
+        if ((iconv_strpos((string) $options['date_format'], 's', 0, 'UTF-8') !== false) and (!isset($date['second']) or ($date['second'] === ""))) {
             return false;
         }
 
         // minute expected but not parsed
-        if ((iconv_strpos($options['date_format'], 'm', 0, 'UTF-8') !== false) and (!isset($date['minute']) or ($date['minute'] === ""))) {
+        if ((iconv_strpos((string) $options['date_format'], 'm', 0, 'UTF-8') !== false) and (!isset($date['minute']) or ($date['minute'] === ""))) {
             return false;
         }
 
         // hour expected but not parsed
-        if (((iconv_strpos($options['date_format'], 'H', 0, 'UTF-8') !== false) or
-             (iconv_strpos($options['date_format'], 'h', 0, 'UTF-8') !== false)) and (!isset($date['hour']) or ($date['hour'] === ""))) {
+        if (((iconv_strpos((string) $options['date_format'], 'H', 0, 'UTF-8') !== false) or
+             (iconv_strpos((string) $options['date_format'], 'h', 0, 'UTF-8') !== false)) and (!isset($date['hour']) or ($date['hour'] === ""))) {
             return false;
         }
 

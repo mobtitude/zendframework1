@@ -441,9 +441,9 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
         foreach ($tokens as $token) {
             $termText = $token->getTermText();
 
-            if (substr($termText, 0, $prefixByteLength) == $prefix) {
+            if (substr((string) $termText, 0, $prefixByteLength) == $prefix) {
                 // Calculate similarity
-                $target = substr($termText, $prefixByteLength);
+                $target = substr((string) $termText, $prefixByteLength);
 
                 $maxDistance = isset($this->_maxDistances[strlen($target)])?
                                    $this->_maxDistances[strlen($target)] :

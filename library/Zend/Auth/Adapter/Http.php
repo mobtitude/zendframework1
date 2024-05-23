@@ -201,9 +201,9 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
         // Double-quotes are used to delimit the realm string in the HTTP header,
         // and colons are field delimiters in the password file.
         if (empty($config['realm']) ||
-            !ctype_print($config['realm']) ||
-            strpos($config['realm'], ':') !== false ||
-            strpos($config['realm'], '"') !== false) {
+            !ctype_print((string) $config['realm']) ||
+            strpos((string) $config['realm'], ':') !== false ||
+            strpos((string) $config['realm'], '"') !== false) {
             /**
              * @see Zend_Auth_Adapter_Exception
              */
@@ -216,8 +216,8 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
 
         if (in_array('digest', $this->_acceptSchemes)) {
             if (empty($config['digest_domains']) ||
-                !ctype_print($config['digest_domains']) ||
-                strpos($config['digest_domains'], '"') !== false) {
+                !ctype_print((string) $config['digest_domains']) ||
+                strpos((string) $config['digest_domains'], '"') !== false) {
                 /**
                  * @see Zend_Auth_Adapter_Exception
                  */

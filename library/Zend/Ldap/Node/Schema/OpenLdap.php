@@ -445,7 +445,7 @@ class Zend_Ldap_Node_Schema_OpenLdap extends Zend_Ldap_Node_Schema
         $multiValue = array('must', 'may', 'sup');
 
         while (count($tokens) > 0) {
-            $token = strtolower(array_shift($tokens));
+            $token = strtolower((string) array_shift($tokens));
             if (in_array($token, $noValue)) {
                 $data[$token] = true; // single value token
             } else {

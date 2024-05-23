@@ -133,7 +133,7 @@ class Zend_Tool_Project_Profile_Iterator_ContextFilter extends RecursiveFilterIt
         }
 
         foreach ($acceptNames as $n => $v) {
-            $acceptNames[$n] = strtolower($v);
+            $acceptNames[$n] = strtolower((string) $v);
         }
 
         $this->_acceptNames = $acceptNames;
@@ -153,7 +153,7 @@ class Zend_Tool_Project_Profile_Iterator_ContextFilter extends RecursiveFilterIt
         }
 
         foreach ($denyNames as $n => $v) {
-            $denyNames[$n] = strtolower($v);
+            $denyNames[$n] = strtolower((string) $v);
         }
 
         $this->_denyNames = $denyNames;
@@ -169,9 +169,9 @@ class Zend_Tool_Project_Profile_Iterator_ContextFilter extends RecursiveFilterIt
     {
         $currentItem = $this->current();
 
-        if (in_array(strtolower($currentItem->getName()), $this->_acceptNames)) {
+        if (in_array(strtolower((string) $currentItem->getName()), $this->_acceptNames)) {
             return true;
-        } elseif (in_array(strtolower($currentItem->getName()), $this->_denyNames)) {
+        } elseif (in_array(strtolower((string) $currentItem->getName()), $this->_denyNames)) {
             return false;
         }
 

@@ -530,7 +530,7 @@ class Zend_Service_Amazon_Sqs extends Zend_Service_Amazon_Abstract
 
         $arrData = array();
         foreach($paramaters as $key => $value) {
-            $arrData[] = $key . '=' . str_replace('%7E', '~', urlencode($value));
+            $arrData[] = $key . '=' . str_replace('%7E', '~', urlencode((string) $value));
         }
 
         $data .= implode('&', $arrData);

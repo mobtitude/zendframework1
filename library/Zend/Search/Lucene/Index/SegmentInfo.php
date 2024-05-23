@@ -847,7 +847,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
             $fieldNum = $this->_getFieldPosition($midTerm[0] /* field */);
             $delta = $searchDicField - $fieldNum;
             if ($delta == 0) {
-                $delta = strcmp($term->text, $midTerm[1] /* text */);
+                $delta = strcmp($term->text, (string) $midTerm[1] /* text */);
             }
 
             if ($delta < 0) {
@@ -900,7 +900,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
              $count <= $termCount &&
              ( $this->_getFieldPosition($termFieldNum) < $searchDicField ||
               ($this->_getFieldPosition($termFieldNum) == $searchDicField &&
-               strcmp($termValue, $term->text) < 0) );
+               strcmp((string) $termValue, $term->text) < 0) );
              $count++) {
             $termPrefixLength = $tisFile->readVInt();
             $termSuffix       = $tisFile->readString();
@@ -1904,7 +1904,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
             $fieldNum = $this->_getFieldPosition($midTerm[0] /* field */);
             $delta = $searchDicField - $fieldNum;
             if ($delta == 0) {
-                $delta = strcmp($prefix->text, $midTerm[1] /* text */);
+                $delta = strcmp($prefix->text, (string) $midTerm[1] /* text */);
             }
 
             if ($delta < 0) {
@@ -1996,7 +1996,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
 
         // Search term matching specified prefix
         while ($this->_lastTerm !== null) {
-            if ( strcmp($this->_lastTerm->field, $prefix->field) > 0  ||
+            if ( strcmp((string) $this->_lastTerm->field, (string) $prefix->field) > 0  ||
                  ($prefix->field == $this->_lastTerm->field  &&  strcmp($this->_lastTerm->text, $prefix->text) >= 0) ) {
                     // Current term matches or greate than the pattern
                     return;

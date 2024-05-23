@@ -264,13 +264,13 @@ abstract class Zend_Translate_Adapter {
                                 // ignore files matching the given regex from option 'ignore' and all files below
                                 continue 2;
                             }
-                        } else if (strpos($directory, DIRECTORY_SEPARATOR . $ignore) !== false) {
+                        } else if (strpos((string) $directory, DIRECTORY_SEPARATOR . $ignore) !== false) {
                             // ignore files matching first characters from option 'ignore' and all files below
                             continue 2;
                         }
                     }
                 } else {
-                    if (strpos($directory, DIRECTORY_SEPARATOR . $options['ignore']) !== false) {
+                    if (strpos((string) $directory, DIRECTORY_SEPARATOR . $options['ignore']) !== false) {
                         // ignore files matching first characters from option 'ignore' and all files below
                         continue;
                     }

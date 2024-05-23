@@ -153,7 +153,7 @@ abstract class Zend_Tool_Project_Provider_Abstract
 
         $profile = new Zend_Tool_Project_Profile();
 
-        $parentDirectoriesArray = explode(DIRECTORY_SEPARATOR, ltrim($projectDirectory, DIRECTORY_SEPARATOR));
+        $parentDirectoriesArray = explode(DIRECTORY_SEPARATOR, ltrim((string) $projectDirectory, DIRECTORY_SEPARATOR));
         while ($parentDirectoriesArray) {
             $projectDirectoryAssembled = implode(DIRECTORY_SEPARATOR, $parentDirectoriesArray);
 

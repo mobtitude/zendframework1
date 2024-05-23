@@ -326,7 +326,7 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
          *
          * Identifies the particular reference clock.
          */
-        $refid = strtoupper($binary['referenceid']);
+        $refid = strtoupper((string) $binary['referenceid']);
         switch($binary['stratum']) {
             case 0:
                 if (substr($refid, 0, 3) === 'DCN') {
@@ -357,13 +357,13 @@ class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol
                 break;
 
             default:
-                $ntpserviceid  = ord(substr($binary['referenceid'], 0, 1));
+                $ntpserviceid  = ord(substr((string) $binary['referenceid'], 0, 1));
                 $ntpserviceid .= '.';
-                $ntpserviceid .= ord(substr($binary['referenceid'], 1, 1));
+                $ntpserviceid .= ord(substr((string) $binary['referenceid'], 1, 1));
                 $ntpserviceid .= '.';
-                $ntpserviceid .= ord(substr($binary['referenceid'], 2, 1));
+                $ntpserviceid .= ord(substr((string) $binary['referenceid'], 2, 1));
                 $ntpserviceid .= '.';
-                $ntpserviceid .= ord(substr($binary['referenceid'], 3, 1));
+                $ntpserviceid .= ord(substr((string) $binary['referenceid'], 3, 1));
                 break;
         }
 

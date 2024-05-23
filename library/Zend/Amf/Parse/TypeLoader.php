@@ -185,7 +185,7 @@ final class Zend_Amf_Parse_TypeLoader
     {
         if(self::$_resourceLoader) {
             $type = preg_replace("/[^A-Za-z0-9_]/", " ", get_resource_type($resource));
-            $type = str_replace(" ","", ucwords($type));
+            $type = str_replace(" ","", ucwords((string) $type));
             return self::$_resourceLoader->load($type);
         }
         return false;

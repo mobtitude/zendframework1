@@ -82,7 +82,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
     public function setPermissionSet($value = array())
 	{
 		foreach ($value as $url) {
-			if (strpos($url, $this->_accountName) === false) {
+			if (strpos((string) $url, $this->_accountName) === false) {
 				require_once 'Zend/Service/WindowsAzure/Exception.php';
 				throw new Zend_Service_WindowsAzure_Exception('The permission set can only contain URLs for the account name specified in the Zend_Service_WindowsAzure_Credentials_SharedAccessSignature instance.');
 			}
@@ -251,7 +251,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	    foreach ($this->getPermissionSet() as $permittedUrl) {
 	        if ($this->permissionMatchesRequest($permittedUrl, $requestUrl, $resourceType, $requiredPermission)) {
 	            // This matches, append signature data
-	            $parsedPermittedUrl = parse_url($permittedUrl);
+	            $parsedPermittedUrl = parse_url((string) $permittedUrl);
 
 	            if (strpos($requestUrl, '?') === false) {
 	                $requestUrl .= '?';

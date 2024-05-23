@@ -408,8 +408,8 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
                 $requestUri = $_SERVER['REQUEST_URI'];
                 // Http proxy reqs setup request uri with scheme and host [and port] + the url path, only use url path
                 $schemeAndHttpHost = $this->getScheme() . '://' . $this->getHttpHost();
-                if (strpos($requestUri, $schemeAndHttpHost) === 0) {
-                    $requestUri = substr($requestUri, strlen($schemeAndHttpHost));
+                if (strpos((string) $requestUri, $schemeAndHttpHost) === 0) {
+                    $requestUri = substr((string) $requestUri, strlen($schemeAndHttpHost));
                 }
             } elseif (isset($_SERVER['ORIG_PATH_INFO'])) { // IIS 5.0, PHP as CGI
                 $requestUri = $_SERVER['ORIG_PATH_INFO'];
@@ -477,20 +477,20 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
         }
 
         if ($baseUrl === null) {
-            $filename = (isset($_SERVER['SCRIPT_FILENAME'])) ? basename($_SERVER['SCRIPT_FILENAME']) : '';
+            $filename = (isset($_SERVER['SCRIPT_FILENAME'])) ? basename((string) $_SERVER['SCRIPT_FILENAME']) : '';
 
-            if (isset($_SERVER['SCRIPT_NAME']) && basename($_SERVER['SCRIPT_NAME']) === $filename) {
+            if (isset($_SERVER['SCRIPT_NAME']) && basename((string) $_SERVER['SCRIPT_NAME']) === $filename) {
                 $baseUrl = $_SERVER['SCRIPT_NAME'];
-            } elseif (isset($_SERVER['PHP_SELF']) && basename($_SERVER['PHP_SELF']) === $filename) {
+            } elseif (isset($_SERVER['PHP_SELF']) && basename((string) $_SERVER['PHP_SELF']) === $filename) {
                 $baseUrl = $_SERVER['PHP_SELF'];
-            } elseif (isset($_SERVER['ORIG_SCRIPT_NAME']) && basename($_SERVER['ORIG_SCRIPT_NAME']) === $filename) {
+            } elseif (isset($_SERVER['ORIG_SCRIPT_NAME']) && basename((string) $_SERVER['ORIG_SCRIPT_NAME']) === $filename) {
                 $baseUrl = $_SERVER['ORIG_SCRIPT_NAME']; // 1and1 shared hosting compatibility
             } else {
                 // Backtrack up the script_filename to find the portion matching
                 // php_self
                 $path    = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : '';
                 $file    = isset($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '';
-                $segs    = explode('/', trim($file, '/'));
+                $segs    = explode('/', trim((string) $file, '/'));
                 $segs    = array_reverse($segs);
                 $index   = 0;
                 $last    = count($segs);
@@ -499,21 +499,21 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
                     $seg     = $segs[$index];
                     $baseUrl = '/' . $seg . $baseUrl;
                     ++$index;
-                } while (($last > $index) && (false !== ($pos = strpos($path, $baseUrl))) && (0 != $pos));
+                } while (($last > $index) && (false !== ($pos = strpos((string) $path, $baseUrl))) && (0 != $pos));
             }
 
             // Does the baseUrl have anything in common with the request_uri?
             $requestUri = $this->getRequestUri();
 
-            if (0 === strpos($requestUri, $baseUrl)) {
+            if (0 === strpos($requestUri, (string) $baseUrl)) {
                 // full $baseUrl matches
                 $this->_baseUrl = $baseUrl;
                 return $this;
             }
 
-            if (0 === strpos($requestUri, dirname($baseUrl))) {
+            if (0 === strpos($requestUri, dirname((string) $baseUrl))) {
                 // directory portion of $baseUrl matches
-                $this->_baseUrl = rtrim(dirname($baseUrl), '/');
+                $this->_baseUrl = rtrim(dirname((string) $baseUrl), '/');
                 return $this;
             }
 
@@ -522,7 +522,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
                 $truncatedRequestUri = substr($requestUri, 0, $pos);
             }
 
-            $basename = basename($baseUrl);
+            $basename = basename((string) $baseUrl);
             if (empty($basename) || !strpos($truncatedRequestUri, $basename)) {
                 // no match whatsoever; set it blank
                 $this->_baseUrl = '';
@@ -533,13 +533,13 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
             // out of baseUrl. $pos !== 0 makes sure it is not matching a value
             // from PATH_INFO or QUERY_STRING
             if ((strlen($requestUri) >= strlen((string) $baseUrl))
-                && ((false !== ($pos = strpos($requestUri, $baseUrl))) && ($pos !== 0)))
+                && ((false !== ($pos = strpos($requestUri, (string) $baseUrl))) && ($pos !== 0)))
             {
                 $baseUrl = substr($requestUri, 0, $pos + strlen((string) $baseUrl));
             }
         }
 
-        $this->_baseUrl = rtrim($baseUrl, '/');
+        $this->_baseUrl = rtrim((string) $baseUrl, '/');
         return $this;
     }
 
@@ -568,7 +568,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
     {
         if ($basePath === null) {
             $filename = (isset($_SERVER['SCRIPT_FILENAME']))
-                      ? basename($_SERVER['SCRIPT_FILENAME'])
+                      ? basename((string) $_SERVER['SCRIPT_FILENAME'])
                       : '';
 
             $baseUrl = $this->getBaseUrl();

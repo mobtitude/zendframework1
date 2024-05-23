@@ -89,8 +89,8 @@ class Zend_Filter_Encrypt implements Zend_Filter_Interface
             $options = array();
         }
 
-        if (Zend_Loader::isReadable('Zend/Filter/Encrypt/' . ucfirst($adapter). '.php')) {
-            $adapter = 'Zend_Filter_Encrypt_' . ucfirst($adapter);
+        if (Zend_Loader::isReadable('Zend/Filter/Encrypt/' . ucfirst((string) $adapter). '.php')) {
+            $adapter = 'Zend_Filter_Encrypt_' . ucfirst((string) $adapter);
         }
 
         if (!class_exists($adapter)) {

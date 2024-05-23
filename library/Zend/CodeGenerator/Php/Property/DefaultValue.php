@@ -270,7 +270,7 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
                 $output .= ( $value ? 'true' : 'false' );
                 break;
             case self::TYPE_STRING:
-                $output .= "'" . addcslashes($value, "'") . "'";
+                $output .= "'" . addcslashes((string) $value, "'") . "'";
                 break;
             case self::TYPE_NULL:
                 $output .= 'null';
@@ -295,12 +295,12 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
                 foreach ($value as $n => $v) {
                     $v->setArrayDepth($this->_arrayDepth + 1);
                     $partV = $v->generate();
-                    $partV = substr($partV, 0, strlen((string) $partV)-1);
+                    $partV = substr((string) $partV, 0, strlen((string) $partV)-1);
                     if ($n === $noKeyIndex) {
                         $outputParts[] = $partV;
                         $noKeyIndex++;
                     } else {
-                        $outputParts[] = (is_int($n) ? $n : "'" . addcslashes($n, "'") . "'") . ' => ' . $partV;
+                        $outputParts[] = (is_int($n) ? $n : "'" . addcslashes((string) $n, "'") . "'") . ' => ' . $partV;
                     }
 
                 }
