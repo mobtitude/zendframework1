@@ -148,10 +148,10 @@ class Zend_Oauth_Http_Utility
         $hashAlgo  = null;
         $parts     = explode('-', $signatureMethod);
         if (count($parts) > 1) {
-            $className = 'Zend_Oauth_Signature_' . ucfirst(strtolower($parts[0]));
+            $className = 'Zend_Oauth_Signature_' . ucfirst(strtolower((string)$parts[0]));
             $hashAlgo  = $parts[1];
         } else {
-            $className = 'Zend_Oauth_Signature_' . ucfirst(strtolower($signatureMethod));
+            $className = 'Zend_Oauth_Signature_' . ucfirst(strtolower((string)$signatureMethod));
         }
 
         require_once str_replace('_', '/', $className) . '.php';

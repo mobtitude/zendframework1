@@ -221,7 +221,7 @@ class Zend_Queue implements Countable
                     str_replace(
                         '_',
                         ' ',
-                        strtolower($adapterNamespace . '_' . $adapter)
+                        strtolower((string)$adapterNamespace . '_' . $adapter)
                     )
                 )
             );

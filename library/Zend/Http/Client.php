@@ -367,7 +367,7 @@ class Zend_Http_Client
         }
 
         foreach ($config as $k => $v) {
-            $this->config[strtolower($k)] = $v;
+            $this->config[strtolower((string)$k)] = $v;
         }
 
         // Pass configuration options to the adapter if it exists
@@ -455,7 +455,7 @@ class Zend_Http_Client
             throw new Zend_Http_Client_Exception("{$name} is not a valid HTTP header name");
         }
 
-        $normalized_name = strtolower($name);
+        $normalized_name = strtolower((string)$name);
 
         // If $value is null or false, unset the header
         if ($value === null || $value === false) {
@@ -486,7 +486,7 @@ class Zend_Http_Client
      */
     public function getHeader($key)
     {
-        $key = strtolower($key);
+        $key = strtolower((string)$key);
         if (isset($this->headers[$key])) {
             return $this->headers[$key][1];
         } else {
@@ -543,7 +543,7 @@ class Zend_Http_Client
     protected function _setParameter($type, $name, $value)
     {
         $parray = array();
-        $type = strtolower($type);
+        $type = strtolower((string)$type);
         switch ($type) {
             case 'get':
                 $parray = &$this->paramsGet;

@@ -750,7 +750,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         // alphabetically and remove excess spaces around values
         $amz_headers = array();
         foreach ($headers as $key=>$val) {
-            $key = strtolower($key);
+            $key = strtolower((string)$key);
             if (substr($key, 0, 6) == 'x-amz-') {
                 if (is_array($val)) {
                     $amz_headers[$key] = $val;
@@ -802,7 +802,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             return 'binary/octet-stream';
         }
 
-        switch (strtolower($ext)) {
+        switch (strtolower((string)$ext)) {
             case 'xls':
                 $content_type = 'application/excel';
                 break;

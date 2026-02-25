@@ -334,7 +334,7 @@ class Zend_Test_PHPUnit_Constraint_ResponseHeader37 extends PHPUnit_Framework_Co
     protected function _getHeader(Zend_Controller_Response_Abstract $response, $header)
     {
         $headers = $response->sendHeaders();
-        $header  = strtolower($header);
+        $header  = strtolower((string)$header);
         if (property_exists($headers, $header)) {
             return $headers[$header];
         }

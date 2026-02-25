@@ -419,7 +419,7 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
             return false;
         }
 
-        $module        = strtolower($module);
+        $module        = strtolower((string)$module);
         $controllerDir = $this->getControllerDirectory();
         foreach (array_keys($controllerDir) as $moduleName) {
             if ($module == strtolower((string) $moduleName)) {

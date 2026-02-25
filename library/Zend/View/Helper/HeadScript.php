@@ -122,8 +122,8 @@ class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container
     public function headScript($mode = Zend_View_Helper_HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
     {
         if ((null !== $spec) && is_string($spec)) {
-            $action    = ucfirst(strtolower($mode));
-            $placement = strtolower($placement);
+            $action    = ucfirst(strtolower((string)$mode));
+            $placement = strtolower((string)$placement);
             switch ($placement) {
                 case 'set':
                 case 'prepend':
@@ -219,7 +219,7 @@ class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container
             }
 
             $action  = $matches['action'];
-            $mode    = strtolower($matches['mode']);
+            $mode    = strtolower((string)$matches['mode']);
             $type    = 'text/javascript';
             $attrs   = array();
 

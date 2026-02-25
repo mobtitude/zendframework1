@@ -217,7 +217,7 @@ abstract class Zend_Cache
      */
     protected static function _normalizeName($name)
     {
-        $name = ucfirst(strtolower($name));
+        $name = ucfirst(strtolower((string)$name));
         $name = str_replace(array('-', '_', '.'), ' ', $name);
         $name = ucwords($name);
         $name = str_replace(' ', '', $name);

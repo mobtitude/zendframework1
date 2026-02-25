@@ -299,7 +299,7 @@ class Zend_Mail_Storage_Pop3 extends Zend_Mail_Storage_Abstract
             return $result;
         }
 
-        if (strtolower($var) == 'hastop') {
+        if (strtolower((string)$var) == 'hastop') {
             if ($this->_protocol->hasTop === null) {
                 // need to make a real call, because not all server are honest in their capas
                 try {

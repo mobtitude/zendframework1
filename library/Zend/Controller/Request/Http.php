@@ -950,7 +950,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      */
     public function isFlashRequest()
     {
-        $header = strtolower($this->getHeader('USER_AGENT'));
+        $header = strtolower((string)$this->getHeader('USER_AGENT'));
         return (strstr($header, ' flash')) ? true : false;
     }
 
@@ -1022,9 +1022,9 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
             if (isset($headers[$header])) {
                 return $headers[$header];
             }
-            $header = strtolower($header);
+            $header = strtolower((string)$header);
             foreach ($headers as $key => $value) {
-                if (strtolower($key) == $header) {
+                if (strtolower((string)$key) == $header) {
                     return $value;
                 }
             }

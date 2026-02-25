@@ -89,7 +89,7 @@ class Zend_Ldap_Ldif_Encoder
             } else if (substr($line, 0, 1) === '#') {
                 continue;
             } else if (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^:<]*)$/i', $line, $matches)) {
-                $name = strtolower($matches[1]);
+                $name = strtolower((string)$matches[1]);
                 $type = trim($matches[2]);
                 $value = $matches[3];
                 if ($last !== null) {

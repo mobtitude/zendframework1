@@ -95,7 +95,7 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence extends Zend_Soap_Wsdl_Strateg
      */
     protected function _getStrippedXsdType($singularType)
     {
-        return ucfirst(substr(strtolower($singularType), 4));
+        return ucfirst(substr(strtolower((string)$singularType), 4));
     }
 
     /**

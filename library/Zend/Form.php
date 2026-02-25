@@ -509,7 +509,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 $prefix = rtrim($prefix, $nsSeparator);
                 $path   = rtrim($path, DIRECTORY_SEPARATOR);
                 foreach (array(self::DECORATOR, self::ELEMENT) as $type) {
-                    $cType        = ucfirst(strtolower($type));
+                    $cType        = ucfirst(strtolower((string)$type));
                     $pluginPath   = $path . DIRECTORY_SEPARATOR . $cType . DIRECTORY_SEPARATOR;
                     $pluginPrefix = $prefix . $nsSeparator . $cType;
                     $loader       = $this->getPluginLoader($type);
@@ -794,7 +794,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      */
     public function setMethod($method)
     {
-        $method = strtolower($method);
+        $method = strtolower((string)$method);
         if (!in_array($method, $this->_methods)) {
             require_once 'Zend/Form/Exception.php';
             throw new Zend_Form_Exception(sprintf('"%s" is an invalid form method', $method));

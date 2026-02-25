@@ -1142,7 +1142,7 @@ class Zend_Mail extends Zend_Mime_Message
                           'reply-to', 'return-path',
                           'date', 'message-id',
                          );
-        if (in_array(strtolower($name), $prohibit)) {
+        if (in_array(strtolower((string)$name), $prohibit)) {
             /**
              * @see Zend_Mail_Exception
              */

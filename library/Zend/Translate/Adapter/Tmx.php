@@ -116,7 +116,7 @@ class Zend_Translate_Adapter_Tmx extends Zend_Translate_Adapter {
             }
             $this->_content .= ">";
         } else {
-            switch(strtolower($name)) {
+            switch(strtolower((string)$name)) {
                 case 'header':
                     if (empty($this->_useId) && isset($attrib['srclang'])) {
                         if (Zend_Locale::isLocale($attrib['srclang'])) {
@@ -182,7 +182,7 @@ class Zend_Translate_Adapter_Tmx extends Zend_Translate_Adapter {
         if (($this->_seg !== null) and ($name !== 'seg')) {
             $this->_content .= "</".$name.">";
         } else {
-            switch (strtolower($name)) {
+            switch (strtolower((string)$name)) {
                 case 'tu':
                     $this->_tu = null;
                     break;

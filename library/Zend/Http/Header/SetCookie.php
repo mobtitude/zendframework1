@@ -128,7 +128,7 @@ class Zend_Http_Header_SetCookie
         list($name, $value) = explode(': ', (string) $headerLine, 2);
 
         // check to ensure proper header type for this factory
-        if (strtolower($name) !== 'set-cookie') {
+        if (strtolower((string)$name) !== 'set-cookie') {
             throw new Zend_Http_Header_Exception_InvalidArgumentException('Invalid header line for Set-Cookie string: "' . $name . '"');
         }
 
@@ -153,7 +153,7 @@ class Zend_Http_Header_SetCookie
                 }
 
                 // Process the remanining elements
-                switch (str_replace(array('-', '_'), '', strtolower($headerKey))) {
+                switch (str_replace(array('-', '_'), '', strtolower((string)$headerKey))) {
                     case 'expires' : $header->setExpires($headerValue); break;
                     case 'domain'  : $header->setDomain($headerValue); break;
                     case 'path'    : $header->setPath($headerValue); break;

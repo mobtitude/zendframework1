@@ -70,14 +70,14 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
      */
     public function setAzureProperty($name, $value = '', $type = null)
     {
-        if (strtolower($name) == 'partitionkey') {
+        if (strtolower((string)$name) == 'partitionkey') {
             $this->setPartitionKey($value);
-        } else if (strtolower($name) == 'rowkey') {
+        } else if (strtolower((string)$name) == 'rowkey') {
             $this->setRowKey($value);
-        } else if (strtolower($name) == 'etag') {
+        } else if (strtolower((string)$name) == 'etag') {
             $this->setEtag($value);
         } else {
-            if (!array_key_exists(strtolower($name), $this->_dynamicProperties)) {
+            if (!array_key_exists(strtolower((string)$name), $this->_dynamicProperties)) {
                 // Determine type?
                 if (is_null($type)) {
                     $type = 'Edm.String';
@@ -96,7 +96,7 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
                 }
                 
                 // Set dynamic property
-                $this->_dynamicProperties[strtolower($name)] = (object)array(
+                $this->_dynamicProperties[strtolower((string)$name)] = (object)array(
                         'Name'  => $name,
                     	'Type'  => $type,
                     	'Value' => $value,
@@ -105,7 +105,7 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
             
             // Set type?
             if (!is_null($type)) {
-            	$this->_dynamicProperties[strtolower($name)]->Type = $type;
+            	$this->_dynamicProperties[strtolower((string)$name)]->Type = $type;
             	
             	// Try to convert the type
             	if ($type == 'Edm.Int32' || $type == 'Edm.Int64') {
@@ -124,7 +124,7 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
             }
        
     		// Set value
-            $this->_dynamicProperties[strtolower($name)]->Value = $value;
+            $this->_dynamicProperties[strtolower((string)$name)]->Value = $value;
         }
         return $this;
     }
@@ -138,10 +138,10 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
      */
     public function setAzurePropertyType($name, $type = 'Edm.String')
     {
-        if (!array_key_exists(strtolower($name), $this->_dynamicProperties)) {
+        if (!array_key_exists(strtolower((string)$name), $this->_dynamicProperties)) {
             $this->setAzureProperty($name, '', $type);            
         } else {
-            $this->_dynamicProperties[strtolower($name)]->Type = $type;   
+            $this->_dynamicProperties[strtolower((string)$name)]->Type = $type;   
         }
         return $this;
     }
@@ -156,21 +156,21 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
      */
     public function getAzureProperty($name)
     {
-        if (strtolower($name) == 'partitionkey') {
+        if (strtolower((string)$name) == 'partitionkey') {
             return $this->getPartitionKey();
         }
-        if (strtolower($name) == 'rowkey') {
+        if (strtolower((string)$name) == 'rowkey') {
             return $this->getRowKey();
         }
-        if (strtolower($name) == 'etag') {
+        if (strtolower((string)$name) == 'etag') {
             return $this->getEtag();
         }
 
-        if (!array_key_exists(strtolower($name), $this->_dynamicProperties)) {
+        if (!array_key_exists(strtolower((string)$name), $this->_dynamicProperties)) {
             $this->setAzureProperty($name);            
         }
 
-        return $this->_dynamicProperties[strtolower($name)]->Value;
+        return $this->_dynamicProperties[strtolower((string)$name)]->Value;
     }
     
     /**
@@ -181,11 +181,11 @@ class Zend_Service_WindowsAzure_Storage_DynamicTableEntity extends Zend_Service_
      */
     public function getAzurePropertyType($name)
     {
-        if (!array_key_exists(strtolower($name), $this->_dynamicProperties)) {
+        if (!array_key_exists(strtolower((string)$name), $this->_dynamicProperties)) {
             $this->setAzureProperty($name, '', $type);            
         }
         
-        return $this->_dynamicProperties[strtolower($name)]->Type;
+        return $this->_dynamicProperties[strtolower((string)$name)]->Type;
     }
     
     /**

@@ -184,7 +184,7 @@ class Zend_Rest_Client_Result implements IteratorAggregate {
         $status = $this->_sxml->xpath('//status/text()');
         if ( !isset($status[0]) ) return false;
         
-        $status = strtolower($status[0]);
+        $status = strtolower((string)$status[0]);
 
         if (ctype_alpha($status) && $status == 'success') {
             return true;

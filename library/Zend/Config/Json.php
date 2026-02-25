@@ -91,7 +91,7 @@ class Zend_Config_Json extends Zend_Config
             $allowModifications = $options;
         } elseif (is_array($options)) {
             foreach ($options as $key => $value) {
-                switch (strtolower($key)) {
+                switch (strtolower((string)$key)) {
                     case 'allow_modifications':
                     case 'allowmodifications':
                         $allowModifications = (bool) $value;

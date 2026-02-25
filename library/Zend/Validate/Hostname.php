@@ -1758,7 +1758,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
                     // Match TLD against known list
                     $this->_tld = $matches[1];
                     if ($this->_options['tld']) {
-                        if (!in_array(strtolower($this->_tld), $this->_validTlds)
+                        if (!in_array(strtolower((string)$this->_tld), $this->_validTlds)
                             && !in_array($this->_tld, $this->_validTlds)) {
                             $this->_error(self::UNKNOWN_TLD);
                             $status = false;

@@ -108,11 +108,11 @@ class Zend_Tool_Framework_Action_Repository
      */
     public function getAction($actionName)
     {
-        if (!array_key_exists(strtolower($actionName), $this->_actions)) {
+        if (!array_key_exists(strtolower((string)$actionName), $this->_actions)) {
             return null;
         }
 
-        return $this->_actions[strtolower($actionName)];
+        return $this->_actions[strtolower((string)$actionName)];
     }
 
     /**

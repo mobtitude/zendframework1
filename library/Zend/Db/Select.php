@@ -687,7 +687,7 @@ class Zend_Db_Select
      */
     public function getPart($part)
     {
-        $part = strtolower($part);
+        $part = strtolower((string)$part);
         if (!array_key_exists($part, $this->_parts)) {
             require_once 'Zend/Db/Select/Exception.php';
             throw new Zend_Db_Select_Exception("Invalid Select part '$part'");
@@ -1341,7 +1341,7 @@ class Zend_Db_Select
          * Use the non-greedy pattern repeat modifier e.g. \w+?
          */
         if (preg_match('/^join([a-zA-Z]*?)Using$/', $method, $matches)) {
-            $type = strtolower($matches[1]);
+            $type = strtolower((string)$matches[1]);
             if ($type) {
                 $type .= ' join';
                 if (!in_array($type, self::$_joinTypes)) {

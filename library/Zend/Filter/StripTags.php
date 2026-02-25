@@ -166,14 +166,14 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
             // If the tag was provided without attributes
             if (is_int($index) && is_string($element)) {
                 // Canonicalize the tag name
-                $tagName = strtolower($element);
+                $tagName = strtolower((string)$element);
                 // Store the tag as allowed with no attributes
                 $this->_tagsAllowed[$tagName] = array();
             }
             // Otherwise, if a tag was provided with attributes
             else if (is_string($index) && (is_array($element) || is_string($element))) {
                 // Canonicalize the tag name
-                $tagName = strtolower($index);
+                $tagName = strtolower((string)$index);
                 // Canonicalize the attributes
                 if (is_string($element)) {
                     $element = array($element);
@@ -183,7 +183,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
                 foreach ($element as $attribute) {
                     if (is_string($attribute)) {
                         // Canonicalize the attribute name
-                        $attributeName = strtolower($attribute);
+                        $attributeName = strtolower((string)$attribute);
                         $this->_tagsAllowed[$tagName][$attributeName] = null;
                     }
                 }
@@ -219,7 +219,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
         foreach ($attributesAllowed as $attribute) {
             if (is_string($attribute)) {
                 // Canonicalize the attribute name
-                $attributeName = strtolower($attribute);
+                $attributeName = strtolower((string)$attribute);
                 $this->_attributesAllowed[$attributeName] = null;
             }
         }
@@ -304,7 +304,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
 
         // Save the matches to more meaningfully named variables
         $tagStart      = $matches[1];
-        $tagName       = strtolower($matches[2]);
+        $tagName       = strtolower((string)$matches[2]);
         $tagAttributes = $matches[3];
         $tagEnd        = $matches[5];
 
@@ -326,7 +326,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
 
             // Iterate over each matched attribute
             foreach ($matches[1] as $index => $attributeName) {
-                $attributeName      = strtolower($attributeName);
+                $attributeName      = strtolower((string)$attributeName);
                 $attributeDelimiter = empty($matches[2][$index]) ? $matches[4][$index] : $matches[2][$index];
                 $attributeValue     = empty($matches[3][$index]) ? $matches[5][$index] : $matches[3][$index];
 

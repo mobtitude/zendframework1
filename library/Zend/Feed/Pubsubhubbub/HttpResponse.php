@@ -228,7 +228,7 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
     protected function _normalizeHeader($name)
     {
         $filtered = str_replace(array('-', '_'), ' ', (string) $name);
-        $filtered = ucwords(strtolower($filtered));
+        $filtered = ucwords(strtolower((string)$filtered));
         $filtered = str_replace(' ', '-', $filtered);
         return $filtered;
     }

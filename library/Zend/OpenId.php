@@ -299,8 +299,8 @@ class Zend_OpenId
         }
 
         // RFC 3986, 6.2.2.1.  Case Normalization
-        $scheme = strtolower($scheme);
-        $host = strtolower($host);
+        $scheme = strtolower((string)$scheme);
+        $host = strtolower((string)$host);
 
         // RFC 3986, 6.2.2.3.  Path Segment Normalization
         if (!empty($path)) {

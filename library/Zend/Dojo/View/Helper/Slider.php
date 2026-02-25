@@ -63,7 +63,7 @@ abstract class Zend_Dojo_View_Helper_Slider extends Zend_Dojo_View_Helper_Dijit
      */
     public function prepareSlider($id, $value = null, array $params = array(), array $attribs = array())
     {
-        $this->_sliderType = strtolower($this->_sliderType);
+        $this->_sliderType = strtolower((string)$this->_sliderType);
 
         // Prepare two items: a hidden element to store the value, and the slider
         $hidden = $this->_renderHiddenElement($id, $value);

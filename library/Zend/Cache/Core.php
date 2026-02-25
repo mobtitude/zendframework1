@@ -213,7 +213,7 @@ class Zend_Cache_Core
         if (!is_string($name)) {
             Zend_Cache::throwException("Incorrect option name!");
         }
-        $name = strtolower($name);
+        $name = strtolower((string)$name);
         if (array_key_exists($name, $this->_options)) {
             // This is a Core option
             $this->_setOption($name, $value);
@@ -235,7 +235,7 @@ class Zend_Cache_Core
      */
     public function getOption($name)
     {
-        $name = strtolower($name);
+        $name = strtolower((string)$name);
 
         if (array_key_exists($name, $this->_options)) {
             // This is a Core option

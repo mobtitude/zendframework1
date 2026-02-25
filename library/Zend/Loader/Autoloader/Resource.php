@@ -281,7 +281,7 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
      */
     public function addResourceType($type, $path, $namespace = null)
     {
-        $type = strtolower($type);
+        $type = strtolower((string)$type);
         if (!isset($this->_resourceTypes[$type])) {
             if (null === $namespace) {
                 require_once 'Zend/Loader/Exception.php';

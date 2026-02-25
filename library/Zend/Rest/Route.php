@@ -193,12 +193,12 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
             }
 
             // Determine Action
-            $requestMethod = strtolower($request->getMethod());
+            $requestMethod = strtolower((string)$request->getMethod());
             if ($requestMethod != 'get') {
                 if ($request->getParam('_method')) {
                     $values[$this->_actionKey] = strtolower((string) $request->getParam('_method'));
                 } elseif ( $request->getHeader('X-HTTP-Method-Override') ) {
-                    $values[$this->_actionKey] = strtolower($request->getHeader('X-HTTP-Method-Override'));
+                    $values[$this->_actionKey] = strtolower((string)$request->getHeader('X-HTTP-Method-Override'));
                 } else {
                     $values[$this->_actionKey] = $requestMethod;
                 }

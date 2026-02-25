@@ -117,7 +117,7 @@ class Zend_Cache_Backend_Static
      */
     public function getOption($name)
     {
-        $name = strtolower($name);
+        $name = strtolower((string)$name);
 
         if ($name == 'tag_cache') {
             return $this->getInnerCache();

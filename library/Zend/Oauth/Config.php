@@ -325,7 +325,7 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      */
     public function setRequestScheme($scheme)
     {
-        $scheme = strtolower($scheme);
+        $scheme = strtolower((string)$scheme);
         if (!in_array($scheme, array(
                 Zend_Oauth::REQUEST_SCHEME_HEADER,
                 Zend_Oauth::REQUEST_SCHEME_POSTBODY,

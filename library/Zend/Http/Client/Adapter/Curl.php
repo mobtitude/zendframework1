@@ -147,7 +147,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         }
 
         foreach ($config as $k => $v) {
-            $option = strtolower($k);
+            $option = strtolower((string)$k);
             switch($option) {
                 case 'proxy_host':
                     $this->setCurlOption(CURLOPT_PROXY, $v);

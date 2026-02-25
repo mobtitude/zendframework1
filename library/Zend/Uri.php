@@ -97,7 +97,7 @@ abstract class Zend_Uri
     {
         // Separate the scheme from the scheme-specific parts
         $uri            = explode(':', $uri, 2);
-        $scheme         = strtolower($uri[0]);
+        $scheme         = strtolower((string)$uri[0]);
         $schemeSpecific = isset($uri[1]) === true ? $uri[1] : '';
 
         if (strlen($scheme) === 0) {

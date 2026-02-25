@@ -130,7 +130,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
     public function __construct(array $options = array())
     {
         foreach ($options as $name => $value) {
-            $name = strtolower($name);
+            $name = strtolower((string)$name);
             switch ($name) {
                 case 'regexps':
                     $this->_setRegexps($value);
@@ -169,7 +169,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             if (!is_string($key)) {
                 Zend_Cache::throwException("invalid option [$key] !");
             }
-            $key = strtolower($key);
+            $key = strtolower((string)$key);
             if (isset($this->_specificOptions['default_options'][$key])) {
                 $this->_specificOptions['default_options'][$key] = $value;
             }
@@ -318,7 +318,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
             foreach ($headersList as $headerSent) {
                 $tmp = explode(':', (string) $headerSent);
                 $headerSentName = trim(array_shift($tmp));
-                if (strtolower((string) $headerName) == strtolower($headerSentName)) {
+                if (strtolower((string) $headerName) == strtolower((string)$headerSentName)) {
                     $headerSentValue = trim(implode(':', $tmp));
                     $storedHeaders[] = array($headerSentName, $headerSentValue);
                 }
@@ -343,7 +343,7 @@ class Zend_Cache_Frontend_Page extends Zend_Cache_Core
         $array = explode('?', (string) $tmp, 2);
           $tmp = $array[0];
         foreach (array('Get', 'Post', 'Session', 'Files', 'Cookie') as $arrayName) {
-            $tmp2 = $this->_makePartialId($arrayName, $this->_activeOptions['cache_with_' . strtolower($arrayName) . '_variables'], $this->_activeOptions['make_id_with_' . strtolower($arrayName) . '_variables']);
+            $tmp2 = $this->_makePartialId($arrayName, $this->_activeOptions['cache_with_' . strtolower((string)$arrayName) . '_variables'], $this->_activeOptions['make_id_with_' . strtolower((string)$arrayName) . '_variables']);
             if ($tmp2===false) {
                 return false;
             }

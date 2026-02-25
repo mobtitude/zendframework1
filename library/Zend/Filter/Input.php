@@ -235,7 +235,7 @@ class Zend_Filter_Input
      */
     public function setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type)
     {
-        $type = strtolower($type);
+        $type = strtolower((string)$type);
         switch ($type) {
             case self::FILTER:
             case self::VALIDATE:
@@ -265,7 +265,7 @@ class Zend_Filter_Input
      */
     public function getPluginLoader($type)
     {
-        $type = strtolower($type);
+        $type = strtolower((string)$type);
         if (!isset($this->_loaders[$type])) {
             switch ($type) {
                 case self::FILTER:

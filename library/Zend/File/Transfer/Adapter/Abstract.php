@@ -213,7 +213,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
         switch ($type) {
             case self::FILTER:
             case self::VALIDATE:
-                $prefixSegment = ucfirst(strtolower($type));
+                $prefixSegment = ucfirst(strtolower((string)$type));
                 $pathSegment   = $prefixSegment;
                 if (!isset($this->_loaders[$type])) {
                     $paths         = array(
@@ -266,7 +266,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 $prefix = rtrim($prefix, '_');
                 $path   = rtrim($path, DIRECTORY_SEPARATOR);
                 foreach (array(self::FILTER, self::VALIDATE) as $type) {
-                    $cType        = ucfirst(strtolower($type));
+                    $cType        = ucfirst(strtolower((string)$type));
                     $pluginPath   = $path . DIRECTORY_SEPARATOR . $cType . DIRECTORY_SEPARATOR;
                     $pluginPrefix = $prefix . '_' . $cType;
                     $loader       = $this->getPluginLoader($type);

@@ -471,7 +471,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
      */
     public function setPluginLoader(Zend_Loader_PluginLoader $loader, $type)
     {
-        $type = strtolower($type);
+        $type = strtolower((string)$type);
         if (!in_array($type, $this->_loaderTypes)) {
             require_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception(sprintf('Invalid plugin loader type "%s"', $type));
@@ -491,7 +491,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
      */
     public function getPluginLoader($type)
     {
-        $type = strtolower($type);
+        $type = strtolower((string)$type);
         if (!in_array($type, $this->_loaderTypes)) {
             require_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception(sprintf('Invalid plugin loader type "%s"; cannot retrieve', $type));

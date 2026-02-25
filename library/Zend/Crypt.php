@@ -80,7 +80,7 @@ class Zend_Crypt
      */
     public static function hash($algorithm, $data, $binaryOutput = false)
     {
-        $algorithm = strtolower($algorithm);
+        $algorithm = strtolower((string)$algorithm);
         if (function_exists($algorithm)) {
             return $algorithm($data, $binaryOutput);
         }

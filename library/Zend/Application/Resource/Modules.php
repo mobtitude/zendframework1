@@ -149,7 +149,7 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
      */
     protected function _formatModuleName($name)
     {
-        $name = strtolower($name);
+        $name = strtolower((string)$name);
         $name = str_replace(array('-', '.'), ' ', $name);
         $name = ucwords($name);
         $name = str_replace(' ', '', $name);

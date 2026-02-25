@@ -94,7 +94,7 @@ abstract class Zend_Controller_Response_Abstract
     protected function _normalizeHeader($name)
     {
         $filtered = str_replace(array('-', '_'), ' ', (string) $name);
-        $filtered = ucwords(strtolower($filtered));
+        $filtered = ucwords(strtolower((string)$filtered));
         $filtered = str_replace(' ', '-', $filtered);
         return $filtered;
     }

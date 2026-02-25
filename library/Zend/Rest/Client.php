@@ -254,7 +254,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     {
         $methods = array('post', 'get', 'delete', 'put');
 
-        if (in_array(strtolower($method), $methods)) {
+        if (in_array(strtolower((string)$method), $methods)) {
             if (!isset($args[0])) {
                 $args[0] = $this->_uri->getPath();
             }

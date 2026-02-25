@@ -499,7 +499,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
             return false;
         }
 
-        $scheme = strtolower($matches[1]);
+        $scheme = strtolower((string)$matches[1]);
 
         switch ($scheme) {
             case 'javascript':

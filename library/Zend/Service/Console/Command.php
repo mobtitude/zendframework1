@@ -120,7 +120,7 @@ class Zend_Service_Console_Command
 		$requiredHandlerName = str_replace('.bat', '', str_replace('.sh', '', str_replace('.php', '', strtolower(basename((string) $argv[0])))));
 		$handler = null;
 		foreach ($model as $possibleHandler) {
-			if ($possibleHandler->handler == strtolower($requiredHandlerName)) {
+			if ($possibleHandler->handler == strtolower((string)$requiredHandlerName)) {
 				$handler = $possibleHandler;
 				break;
 			}
@@ -297,7 +297,7 @@ class Zend_Service_Console_Command
 								'valueproviders' => explode('|', $parameterFor[1]),
 								'aliases'        => explode('|', $parameterFor[2]),
 								'description'    => (isset($parameterFor[3]) ? $parameterFor[3] : ''),
-								'required'       => (isset($parameterFor[3]) ? strpos(strtolower($parameterFor[3]), 'required') !== false && strpos(strtolower($parameterFor[3]), 'required if') === false : false),
+								'required'       => (isset($parameterFor[3]) ? strpos(strtolower((string)$parameterFor[3]), 'required') !== false && strpos(strtolower((string)$parameterFor[3]), 'required if') === false : false),
 							);
 
 							// Add to model

@@ -242,7 +242,7 @@ class Zend_Date extends Zend_Date_DateObject
         }
 
         foreach ($options as $name => $value) {
-            $name  = strtolower($name);
+            $name  = strtolower((string)$name);
 
             if (array_key_exists($name, self::$_options)) {
                 switch($name) {
@@ -600,7 +600,7 @@ class Zend_Date extends Zend_Date_DateObject
                 break;
 
             case self::WEEKDAY_SHORT :
-                $weekday = strtolower($this->date('D', $this->getUnixTimestamp(), false));
+                $weekday = strtolower((string)$this->date('D', $this->getUnixTimestamp(), false));
                 $day     = Zend_Locale_Data::getContent($locale, 'day', array('gregorian', 'format', 'wide', $weekday));
                 return $this->_toComment(iconv_substr($day, 0, 3, 'UTF-8'));
                 break;
@@ -610,7 +610,7 @@ class Zend_Date extends Zend_Date_DateObject
                 break;
 
             case self::WEEKDAY :
-                $weekday = strtolower($this->date('D', $this->getUnixTimestamp(), false));
+                $weekday = strtolower((string)$this->date('D', $this->getUnixTimestamp(), false));
                 return $this->_toComment(Zend_Locale_Data::getContent($locale, 'day', array('gregorian', 'format', 'wide', $weekday)));
                 break;
 
@@ -644,13 +644,13 @@ class Zend_Date extends Zend_Date_DateObject
 
             case self::WEEKDAY_NARROW :
             case 'EEEEE' :
-                $weekday = strtolower($this->date('D', $this->getUnixTimestamp(), false));
+                $weekday = strtolower((string)$this->date('D', $this->getUnixTimestamp(), false));
                 $day = Zend_Locale_Data::getContent($locale, 'day', array('gregorian', 'format', 'abbreviated', $weekday));
                 return $this->_toComment(iconv_substr($day, 0, 1, 'UTF-8'));
                 break;
 
             case self::WEEKDAY_NAME :
-                $weekday = strtolower($this->date('D', $this->getUnixTimestamp(), false));
+                $weekday = strtolower((string)$this->date('D', $this->getUnixTimestamp(), false));
                 return $this->_toComment(Zend_Locale_Data::getContent($locale, 'day', array('gregorian', 'format', 'abbreviated', $weekday)));
                 break;
 

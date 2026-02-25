@@ -517,7 +517,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
      */
     public function __call($method, $args)
     {
-        $method = strtolower($method);
+        $method = strtolower((string)$method);
         if ('goto' == $method) {
             return call_user_func_array(array($this, 'gotoSimple'), $args);
         }

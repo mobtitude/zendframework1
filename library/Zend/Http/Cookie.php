@@ -316,7 +316,7 @@ class Zend_Http_Cookie
         // Set other cookie parameters
         foreach ($parts as $part) {
             $part = trim($part);
-            if (strtolower($part) == 'secure') {
+            if (strtolower((string)$part) == 'secure') {
                 $secure = true;
                 continue;
             }
@@ -324,7 +324,7 @@ class Zend_Http_Cookie
             $keyValue = explode('=', $part, 2);
             if (count($keyValue) == 2) {
                 list($k, $v) = $keyValue;
-                switch (strtolower($k))    {
+                switch (strtolower((string)$k))    {
                     case 'expires':
                         if(($expires = strtotime($v)) === false) {
                             /**
@@ -386,8 +386,8 @@ class Zend_Http_Cookie
             throw new Zend_Http_Exception("\$host is expected to be a host name");
         }
 
-        $cookieDomain = strtolower($cookieDomain);
-        $host = strtolower($host);
+        $cookieDomain = strtolower((string)$cookieDomain);
+        $host = strtolower((string)$host);
 
         if ($cookieDomain[0] == '.') {
             $cookieDomain = substr($cookieDomain, 1);

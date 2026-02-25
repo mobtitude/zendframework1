@@ -128,7 +128,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
 
         $methods = get_class_methods($this);
         foreach ($methods as $key => $method) {
-            $methods[$key] = strtolower($method);
+            $methods[$key] = strtolower((string)$method);
         }
 
         if (array_key_exists('pluginpaths', $options)) {
@@ -141,7 +141,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
         }
 
         foreach ($options as $key => $value) {
-            $method = 'set' . strtolower($key);
+            $method = 'set' . strtolower((string)$key);
 
             if (in_array($method, $methods)) {
                 $this->$method($value);
@@ -172,7 +172,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     public function hasOption($key)
     {
-        return in_array(strtolower($key), $this->_optionKeys);
+        return in_array(strtolower((string)$key), $this->_optionKeys);
     }
 
     /**
@@ -186,7 +186,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
         if ($this->hasOption($key)) {
             $options = $this->getOptions();
             $options = array_change_key_case($options, CASE_LOWER);
-            return $options[strtolower($key)];
+            return $options[strtolower((string)$key)];
         }
         return null;
     }
@@ -304,7 +304,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
             throw new Zend_Application_Bootstrap_Exception('Unknown resource type provided to ' . __METHOD__);
         }
 
-        $resource = strtolower($resource);
+        $resource = strtolower((string)$resource);
         if (array_key_exists($resource, $this->_pluginResources)) {
             unset($this->_pluginResources[$resource]);
         }
@@ -332,8 +332,8 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     public function getPluginResource($resource)
     {
-        if (array_key_exists(strtolower($resource), $this->_pluginResources)) {
-            $resource = strtolower($resource);
+        if (array_key_exists(strtolower((string)$resource), $this->_pluginResources)) {
+            $resource = strtolower((string)$resource);
             if (!$this->_pluginResources[$resource] instanceof Zend_Application_Resource_Resource) {
                 $resourceName = $this->_loadPluginResource($resource, $this->_pluginResources[$resource]);
                 if (!$resourceName) {
@@ -528,7 +528,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     public function hasResource($name)
     {
-        $resource  = strtolower($name);
+        $resource  = strtolower((string)$name);
         $container = $this->getContainer();
         return isset($container->{$resource});
     }
@@ -547,7 +547,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     public function getResource($name)
     {
-        $resource  = strtolower($name);
+        $resource  = strtolower((string)$name);
         $container = $this->getContainer();
         if ($this->hasResource($resource)) {
             return $container->{$resource};
@@ -664,7 +664,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     protected function _executeResource($resource)
     {
-        $resourceName = strtolower($resource);
+        $resourceName = strtolower((string)$resource);
 
         if (in_array($resourceName, $this->_run)) {
             return;
@@ -717,7 +717,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
     {
         $options   = (array) $options;
         $options['bootstrap'] = $this;
-        $className = $this->getPluginLoader()->load(strtolower($resource), false);
+        $className = $this->getPluginLoader()->load(strtolower((string)$resource), false);
 
         if (!$className) {
             return false;
@@ -778,7 +778,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
                 }
             }
         }
-        $pluginName = strtolower($pluginName);
+        $pluginName = strtolower((string)$pluginName);
         return $pluginName;
     }
 }

@@ -377,7 +377,7 @@ class Zend_Feed
      */
     public static function importArray(array $data, $format = 'atom')
     {
-        $obj = 'Zend_Feed_' . ucfirst(strtolower($format));
+        $obj = 'Zend_Feed_' . ucfirst(strtolower((string)$format));
         if (!class_exists($obj)) {
             require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($obj);
@@ -399,7 +399,7 @@ class Zend_Feed
      */
     public static function importBuilder(Zend_Feed_Builder_Interface $builder, $format = 'atom')
     {
-        $obj = 'Zend_Feed_' . ucfirst(strtolower($format));
+        $obj = 'Zend_Feed_' . ucfirst(strtolower((string)$format));
         if (!class_exists($obj)) {
             require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($obj);

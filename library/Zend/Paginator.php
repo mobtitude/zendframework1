@@ -470,7 +470,7 @@ class Zend_Paginator implements Countable, IteratorAggregate
             $setupMethods = array('ItemCountPerPage', 'PageRange');
 
             foreach ($setupMethods as $setupMethod) {
-                $value = $config->get(strtolower($setupMethod));
+                $value = $config->get(strtolower((string)$setupMethod));
 
                 if ($value != null) {
                     $setupMethod = 'set' . $setupMethod;

@@ -541,7 +541,7 @@ class Zend_Soap_Wsdl
      */
     public function getType($type)
     {
-        switch (strtolower($type)) {
+        switch (strtolower((string)$type)) {
             case 'string':
             case 'str':
                 return 'xsd:string';

@@ -457,7 +457,7 @@ class Zend_Service_WindowsAzure_Storage
                             throw new Zend_Service_WindowsAzure_Exception('Metadata name does not adhere to metadata naming conventions. See http://msdn.microsoft.com/en-us/library/aa664670(VS.71).aspx for more information.');
 			}
 			
-		    $headers["x-ms-meta-" . strtolower($key)] = $value;
+		    $headers["x-ms-meta-" . strtolower((string)$key)] = $value;
 		}
 		return $headers;
 	}
@@ -478,8 +478,8 @@ class Zend_Service_WindowsAzure_Storage
 		// Return metadata
 		$metadata = array();
 		foreach ($headers as $key => $value) {
-		    if (substr(strtolower($key), 0, 10) == "x-ms-meta-") {
-		        $metadata[str_replace("x-ms-meta-", '', strtolower($key))] = $value;
+		    if (substr(strtolower((string)$key), 0, 10) == "x-ms-meta-") {
+		        $metadata[str_replace("x-ms-meta-", '', strtolower((string)$key))] = $value;
 		    }
 		}
 		return $metadata;

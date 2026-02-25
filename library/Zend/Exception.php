@@ -61,7 +61,7 @@ class Zend_Exception extends Exception
      */
     public function __call($method, array $args)
     {
-        if ('getprevious' == strtolower($method)) {
+        if ('getprevious' == strtolower((string)$method)) {
             return $this->_getPrevious();
         }
         return null;

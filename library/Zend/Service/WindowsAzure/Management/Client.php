@@ -438,7 +438,7 @@ class Zend_Service_WindowsAzure_Management_Client
     		throw new Zend_Service_WindowsAzure_Management_Exception('End time should be specified.');
     	}
     	if ($operationResultFilter != '' && !is_null($operationResultFilter)) {
-	        $operationResultFilter = strtolower($operationResultFilter);
+	        $operationResultFilter = strtolower((string)$operationResultFilter);
 	    	if ($operationResultFilter != 'succeeded' && $operationResultFilter != 'failed' && $operationResultFilter != 'inprogress') {
 				require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
 	    		throw new Zend_Service_WindowsAzure_Management_Exception('OperationResultFilter should be succeeded|failed|inprogress.');
@@ -734,7 +734,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Service name should be specified.');
     	}
-    	$key = strtolower($key);
+    	$key = strtolower((string)$key);
     	if ($key != 'primary' && $key != 'secondary') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Key identifier should be primary|secondary.');
@@ -981,7 +981,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Service name should be specified.');
     	}
-    	$deploymentSlot = strtolower($deploymentSlot);
+    	$deploymentSlot = strtolower((string)$deploymentSlot);
     	if ($deploymentSlot != 'production' && $deploymentSlot != 'staging') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Deployment slot should be production|staging.');
@@ -1041,7 +1041,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Service name should be specified.');
     	}
-    	$deploymentSlot = strtolower($deploymentSlot);
+    	$deploymentSlot = strtolower((string)$deploymentSlot);
     	if ($deploymentSlot != 'production' && $deploymentSlot != 'staging') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Deployment slot should be production|staging.');
@@ -1149,7 +1149,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Service name should be specified.');
     	}
-    	$deploymentSlot = strtolower($deploymentSlot);
+    	$deploymentSlot = strtolower((string)$deploymentSlot);
     	if ($deploymentSlot != 'production' && $deploymentSlot != 'staging') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Deployment slot should be production|staging.');
@@ -1211,12 +1211,12 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Service name should be specified.');
     	}
-    	$deploymentSlot = strtolower($deploymentSlot);
+    	$deploymentSlot = strtolower((string)$deploymentSlot);
     	if ($deploymentSlot != 'production' && $deploymentSlot != 'staging') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Deployment slot should be production|staging.');
     	}
-    	$status = strtolower($status);
+    	$status = strtolower((string)$status);
     	if ($status != 'running' && $status != 'suspended') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Status should be running|suspended.');
@@ -1244,7 +1244,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Deployment ID should be specified.');
     	}
-        $status = strtolower($status);
+        $status = strtolower((string)$status);
     	if ($status != 'running' && $status != 'suspended') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Status should be running|suspended.');
@@ -1359,7 +1359,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Service name should be specified.');
     	}
-    	$deploymentSlot = strtolower($deploymentSlot);
+    	$deploymentSlot = strtolower((string)$deploymentSlot);
     	if ($deploymentSlot != 'production' && $deploymentSlot != 'staging') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Deployment slot should be production|staging.');
@@ -1468,7 +1468,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Service name should be specified.');
     	}
-    	$deploymentSlot = strtolower($deploymentSlot);
+    	$deploymentSlot = strtolower((string)$deploymentSlot);
     	if ($deploymentSlot != 'production' && $deploymentSlot != 'staging') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Deployment slot should be production|staging.');
@@ -1562,7 +1562,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Service name should be specified.');
     	}
-    	$deploymentSlot = strtolower($deploymentSlot);
+    	$deploymentSlot = strtolower((string)$deploymentSlot);
     	if ($deploymentSlot != 'production' && $deploymentSlot != 'staging') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Deployment slot should be production|staging.');
@@ -1583,7 +1583,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Configuration should be specified.');
     	}
-    	$mode = strtolower($mode);
+    	$mode = strtolower((string)$mode);
     	if ($mode != 'auto' && $mode != 'manual') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Mode should be auto|manual.');
@@ -1635,7 +1635,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Configuration should be specified.');
     	}
-    	$mode = strtolower($mode);
+    	$mode = strtolower((string)$mode);
     	if ($mode != 'auto' && $mode != 'manual') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Mode should be auto|manual.');
@@ -1691,7 +1691,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Service name should be specified.');
     	}
-    	$deploymentSlot = strtolower($deploymentSlot);
+    	$deploymentSlot = strtolower((string)$deploymentSlot);
     	if ($deploymentSlot != 'production' && $deploymentSlot != 'staging') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Deployment slot should be production|staging.');
@@ -1760,7 +1760,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Service name should be specified.');
     	}
-    	$deploymentSlot = strtolower($deploymentSlot);
+    	$deploymentSlot = strtolower((string)$deploymentSlot);
     	if ($deploymentSlot != 'production' && $deploymentSlot != 'staging') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Deployment slot should be production|staging.');
@@ -1817,7 +1817,7 @@ class Zend_Service_WindowsAzure_Management_Client
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Service name should be specified.');
     	}
-    	$deploymentSlot = strtolower($deploymentSlot);
+    	$deploymentSlot = strtolower((string)$deploymentSlot);
     	if ($deploymentSlot != 'production' && $deploymentSlot != 'staging') {
 			require_once 'Zend/Service/WindowsAzure/Management/Exception.php';
     		throw new Zend_Service_WindowsAzure_Management_Exception('Deployment slot should be production|staging.');

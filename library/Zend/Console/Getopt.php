@@ -559,7 +559,7 @@ class Zend_Console_Getopt
     {
         $this->parse();
         if ($this->_getoptConfig[self::CONFIG_IGNORECASE]) {
-            $flag = strtolower($flag);
+            $flag = strtolower((string)$flag);
         }
         if (isset($this->_ruleMap[$flag])) {
             $flag = $this->_ruleMap[$flag];
@@ -646,7 +646,7 @@ class Zend_Console_Getopt
         foreach ($aliasMap as $flag => $alias)
         {
             if ($this->_getoptConfig[self::CONFIG_IGNORECASE]) {
-                $flag = strtolower($flag);
+                $flag = strtolower((string)$flag);
                 $alias = strtolower((string) $alias);
             }
             if (!isset($this->_ruleMap[$flag])) {
@@ -800,7 +800,7 @@ class Zend_Console_Getopt
     protected function _parseSingleOption($flag, &$argv)
     {
         if ($this->_getoptConfig[self::CONFIG_IGNORECASE]) {
-            $flag = strtolower($flag);
+            $flag = strtolower((string)$flag);
         }
         if (!isset($this->_ruleMap[$flag])) {
             require_once 'Zend/Console/Getopt/Exception.php';
@@ -895,7 +895,7 @@ class Zend_Console_Getopt
             $r = array();
             $flag = substr($rule, 0, 1);
             if ($this->_getoptConfig[self::CONFIG_IGNORECASE]) {
-                $flag = strtolower($flag);
+                $flag = strtolower((string)$flag);
             }
             $r['alias'][] = $flag;
             if (substr($rule, 1, 1) == ':') {
@@ -932,7 +932,7 @@ class Zend_Console_Getopt
                 $delimiter = $paramType = null;
             }
             if ($this->_getoptConfig[self::CONFIG_IGNORECASE]) {
-                $flagList = strtolower($flagList);
+                $flagList = strtolower((string)$flagList);
             }
             $flags = explode('|', (string) $flagList);
             $rule = array();

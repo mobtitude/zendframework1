@@ -80,7 +80,7 @@ class Zend_Cache_Backend
             if (!is_string($name)) {
                 Zend_Cache::throwException("Incorrect option name : $name");
             }
-            $name = strtolower($name);
+            $name = strtolower((string)$name);
             if (array_key_exists($name, $this->_directives)) {
                 $this->_directives[$name] = $value;
             }
@@ -103,7 +103,7 @@ class Zend_Cache_Backend
         if (!is_string($name)) {
             Zend_Cache::throwException("Incorrect option name : $name");
         }
-        $name = strtolower($name);
+        $name = strtolower((string)$name);
         if (array_key_exists($name, $this->_options)) {
             $this->_options[$name] = $value;
         }
@@ -118,7 +118,7 @@ class Zend_Cache_Backend
      */
     public function getOption($name)
     {
-        $name = strtolower($name);
+        $name = strtolower((string)$name);
 
         if (array_key_exists($name, $this->_options)) {
             return $this->_options[$name];

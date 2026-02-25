@@ -1051,7 +1051,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         switch ($type) {
             case self::FILTER:
             case self::VALIDATE:
-                $prefixSegment = ucfirst(strtolower($type));
+                $prefixSegment = ucfirst(strtolower((string)$type));
                 $pathSegment   = $prefixSegment;
             case self::DECORATOR:
                 if (!isset($prefixSegment)) {
@@ -1105,7 +1105,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
                 $prefix = rtrim($prefix, $nsSeparator) . $nsSeparator;
                 $path   = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
                 foreach (array(self::DECORATOR, self::FILTER, self::VALIDATE) as $type) {
-                    $cType        = ucfirst(strtolower($type));
+                    $cType        = ucfirst(strtolower((string)$type));
                     $loader       = $this->getPluginLoader($type);
                     $loader->addPrefixPath($prefix . $cType, $path . $cType . DIRECTORY_SEPARATOR);
                 }

@@ -251,7 +251,7 @@ class Zend_Http_UserAgent implements Serializable
         // And then loop through the remaining options
         $config = array();
         foreach ($options as $key => $value) {
-            switch (strtolower($key)) {
+            switch (strtolower((string)$key)) {
                 case 'browser_type':
                     $this->setBrowserType($value);
                     break;
@@ -311,7 +311,7 @@ class Zend_Http_UserAgent implements Serializable
      */
     protected function _getUserAgentDevice($browserType)
     {
-        $browserType = strtolower($browserType);
+        $browserType = strtolower((string)$browserType);
         if (isset($this->_browserTypeClass[$browserType])) {
             return $this->_browserTypeClass[$browserType];
         }
@@ -672,7 +672,7 @@ class Zend_Http_UserAgent implements Serializable
      */
     public function getServerValue($key)
     {
-        $key    = strtolower($key);
+        $key    = strtolower((string)$key);
         $server = $this->getServer();
         $return = null;
         if (isset($server[$key])) {
@@ -699,7 +699,7 @@ class Zend_Http_UserAgent implements Serializable
         }
 
         $server = $this->getServer(); // ensure it's been initialized
-        $key    = strtolower($key);
+        $key    = strtolower((string)$key);
         $this->_server[$key] = $value;
         return $this;
     }
@@ -781,7 +781,7 @@ class Zend_Http_UserAgent implements Serializable
      */
     protected function _validateLoaderType($type)
     {
-        $type = strtolower($type);
+        $type = strtolower((string)$type);
         if (!in_array($type, $this->_loaderTypes)) {
             $types = implode(', ', $this->_loaderTypes);
 

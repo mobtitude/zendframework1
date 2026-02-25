@@ -173,7 +173,7 @@ class Zend_Mime_Decode
 
         // normalize header names
         foreach ($headers as $name => $header) {
-            $lower = strtolower($name);
+            $lower = strtolower((string)$name);
             if ($lower == $name) {
                 continue;
             }
@@ -219,7 +219,7 @@ class Zend_Mime_Decode
     )
     {
         $wantedPart = strtolower((string) $wantedPart);
-        $firstName  = strtolower($firstName);
+        $firstName  = strtolower((string)$firstName);
 
         // special case - a bit optimized
         if ($firstName === $wantedPart) {
@@ -250,7 +250,7 @@ class Zend_Mime_Decode
 
         $split = array();
         foreach ($matches[1] as $key => $name) {
-            $name = strtolower($name);
+            $name = strtolower((string)$name);
             if ($matches[2][$key][0] == '"') {
                 $split[$name] = substr($matches[2][$key], 1, -1);
             } else {

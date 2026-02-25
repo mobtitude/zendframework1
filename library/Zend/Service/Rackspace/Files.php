@@ -197,7 +197,7 @@ class Zend_Service_Rackspace_Files extends Zend_Service_Rackspace_Abstract
         $headers=array();
         if (!empty($metadata)) {
             foreach ($metadata as $key => $value) {
-                $headers[self::METADATA_CONTAINER_HEADER.rawurlencode(strtolower($key))]= rawurlencode((string) $value);
+                $headers[self::METADATA_CONTAINER_HEADER.rawurlencode(strtolower((string)$key))]= rawurlencode((string) $value);
             }
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container),'PUT',$headers);
@@ -711,8 +711,8 @@ class Zend_Service_Rackspace_Files extends Zend_Service_Rackspace_Abstract
                     'cdn_uri'     => $result->getHeader(self::CDN_URI),
                     'cdn_uri_ssl' => $result->getHeader(self::CDN_SSL_URI)
                 );
-                $data['cdn_enabled']= (strtolower($result->getHeader(self::CDN_ENABLED))!=='false');
-                $data['log_retention']= (strtolower($result->getHeader(self::CDN_LOG_RETENTION))!=='false');
+                $data['cdn_enabled']= (strtolower((string)$result->getHeader(self::CDN_ENABLED))!=='false');
+                $data['log_retention']= (strtolower((string)$result->getHeader(self::CDN_LOG_RETENTION))!=='false');
                 return $data;
             case '404':
                 $this->errorMsg= self::ERROR_CONTAINER_NOT_FOUND;

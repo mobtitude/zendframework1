@@ -88,7 +88,7 @@ class Zend_View_Helper_FormRadio extends Zend_View_Helper_FormElement
 
             if ($tmp) {
                 // make sure first char is lowercase
-                $tmp[0] = strtolower($tmp[0]);
+                $tmp[0] = strtolower((string)$tmp[0]);
                 $label_attribs[$tmp] = $val;
                 unset($attribs[$key]);
             }
@@ -96,7 +96,7 @@ class Zend_View_Helper_FormRadio extends Zend_View_Helper_FormElement
 
         $labelPlacement = 'append';
         foreach ($label_attribs as $key => $val) {
-            switch (strtolower($key)) {
+            switch (strtolower((string)$key)) {
                 case 'placement':
                     unset($label_attribs[$key]);
                     $val = strtolower((string) $val);

@@ -340,7 +340,7 @@ class Zend_Locale_Data
         }
 
         $temp = array();
-        switch(strtolower($path)) {
+        switch(strtolower((string)$path)) {
             case 'language':
                 $temp = self::_getFile($locale, '/ldml/localeDisplayNames/languages/language', 'type');
                 break;
@@ -988,7 +988,7 @@ class Zend_Locale_Data
             return unserialize($result);
         }
 
-        switch(strtolower($path)) {
+        switch(strtolower((string)$path)) {
             case 'language':
                 $temp = self::_getFile($locale, '/ldml/localeDisplayNames/languages/language[@type=\'' . $value . '\']', 'type');
                 break;
@@ -1454,7 +1454,7 @@ class Zend_Locale_Data
                 break;
 
             case 'numberingsystem':
-                $temp = self::_getFile('numberingSystems', '/supplementalData/numberingSystems/numberingSystem[@id=\'' . strtolower($value) . '\']', 'digits', $value);
+                $temp = self::_getFile('numberingSystems', '/supplementalData/numberingSystems/numberingSystem[@id=\'' . strtolower((string)$value) . '\']', 'digits', $value);
                 break;
 
             case 'chartofallback':

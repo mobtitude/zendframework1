@@ -286,7 +286,7 @@ class Zend_TimeSync implements IteratorAggregate
             $port = null;
         }
 
-        $protocol = ucfirst(strtolower($protocol));
+        $protocol = ucfirst(strtolower((string)$protocol));
         if (!in_array($protocol, $this->_allowedSchemes)) {
             require_once 'Zend/TimeSync/Exception.php';
             throw new Zend_TimeSync_Exception("'$protocol' is not a supported protocol");

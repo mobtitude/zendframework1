@@ -836,9 +836,9 @@ class Zend_Service_WindowsAzure_Storage_Table
 		    $value[] = '>';
 		    
 		    if (!is_null($azureValue->Value)) {
-		        if (strtolower($azureValue->Type) == 'edm.boolean') {
+		        if (strtolower((string)$azureValue->Type) == 'edm.boolean') {
 		            $value[] = ($azureValue->Value == true ? '1' : '0');
-		        } else if (strtolower($azureValue->Type) == 'edm.datetime') {
+		        } else if (strtolower((string)$azureValue->Type) == 'edm.datetime') {
 		        	$value[] = $this->_convertToEdmDateTime($azureValue->Value);
 		        } else {
 		            $value[] = htmlspecialchars($azureValue->Value);

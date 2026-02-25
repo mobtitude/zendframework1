@@ -646,10 +646,10 @@ class Zend_Ldap_Dn implements ArrayAccess
                 case 1: // collect key
                     if ($ch === '=') {
                         $key = trim(substr($dn, $ko, $di - $ko));
-                        if ($caseFold == self::ATTR_CASEFOLD_LOWER) $key = strtolower($key);
+                        if ($caseFold == self::ATTR_CASEFOLD_LOWER) $key = strtolower((string)$key);
                         else if ($caseFold == self::ATTR_CASEFOLD_UPPER) $key = strtoupper($key);
                         if (is_array($multi)) {
-                            $keyId = strtolower($key);
+                            $keyId = strtolower((string)$key);
                             if (in_array($keyId, $multi)) {
                                 return false;
                             }
@@ -681,7 +681,7 @@ class Zend_Ldap_Dn implements ArrayAccess
                             $lastVal = array_pop($va);
                             $ka[] = array($lastKey);
                             $va[] = array($lastVal);
-                            $multi = array(strtolower($lastKey));
+                            $multi = array(strtolower((string)$lastKey));
                         } else if ($ch === ','|| $ch === ';' || $ch === 0) {
                             $multi = false;
                         }
@@ -723,7 +723,7 @@ class Zend_Ldap_Dn implements ArrayAccess
         $rdnParts = array();
         foreach ($part as $key => $value) {
             $value = self::escapeValue($value);
-            $keyId = strtolower($key);
+            $keyId = strtolower((string)$key);
             $rdnParts[$keyId] =  implode('=', array($key, $value));
         }
         ksort($rdnParts, SORT_STRING);

@@ -540,7 +540,7 @@ class Zend_Service_SlideShare
         $key, $value, $offset = null, $limit = null
     )
     {
-        $key = strtolower($key);
+        $key = strtolower((string)$key);
 
         switch ($key) {
             case 'username_for':

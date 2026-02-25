@@ -212,7 +212,7 @@ class Zend_Session extends Zend_Session_Abstract
         // set the options the user has requested to set
         foreach ($userOptions as $userOptionName => $userOptionValue) {
 
-            $userOptionName = strtolower($userOptionName);
+            $userOptionName = strtolower((string)$userOptionName);
 
             // set the ini based values
             if (array_key_exists($userOptionName, self::$_defaultOptions)) {

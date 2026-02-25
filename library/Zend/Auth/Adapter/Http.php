@@ -384,7 +384,7 @@ class Zend_Auth_Adapter_Http implements Zend_Auth_Adapter_Interface
         }
 
         list($clientScheme) = explode(' ', $authHeader);
-        $clientScheme = strtolower($clientScheme);
+        $clientScheme = strtolower((string)$clientScheme);
 
         // The server can issue multiple challenges, but the client should
         // answer with only the selected auth scheme.

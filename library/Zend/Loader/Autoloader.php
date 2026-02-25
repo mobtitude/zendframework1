@@ -530,7 +530,7 @@ class Zend_Loader_Autoloader
      */
     protected function _getVersionType($version)
     {
-        if (strtolower($version) == 'latest') {
+        if (strtolower((string)$version) == 'latest') {
             return 'latest';
         }
 

@@ -227,7 +227,7 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
 
         if(isset($type)) {
             if (is_string($type) && !empty($type)) {
-                switch (strtolower($type)) {
+                switch (strtolower((string)$type)) {
                     case 'mvc':
                         $type = 'Zend_Navigation_Page_Mvc';
                         break;
@@ -955,7 +955,7 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
      */
     public function setVisible($visible = true)
     {
-        if (is_string($visible) && 'false' == strtolower($visible)) {
+        if (is_string($visible) && 'false' == strtolower((string)$visible)) {
             $visible = false;
         }
         $this->_visible = (bool) $visible;

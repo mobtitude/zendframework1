@@ -175,7 +175,7 @@ class Zend_Uri_Http extends Zend_Uri
         }
 
         $uri            = explode(':', $uri, 2);
-        $scheme         = strtolower($uri[0]);
+        $scheme         = strtolower((string)$uri[0]);
         $schemeSpecific = isset($uri[1]) === true ? $uri[1] : '';
 
         if (in_array($scheme, array('http', 'https')) === false) {

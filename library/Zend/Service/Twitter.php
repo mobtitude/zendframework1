@@ -223,7 +223,7 @@ class Zend_Service_Twitter
      */
     public function __get($type)
     {
-        $type = strtolower($type);
+        $type = strtolower((string)$type);
         $type = str_replace('_', '', $type);
         if (!in_array($type, $this->methodTypes)) {
             require_once 'Zend/Service/Twitter/Exception.php';
@@ -259,7 +259,7 @@ class Zend_Service_Twitter
             );
         }
 
-        $test = str_replace('_', '', strtolower($method));
+        $test = str_replace('_', '', strtolower((string)$method));
         $test = $this->methodType . $test;
         if (!method_exists($this, $test)) {
             require_once 'Zend/Service/Twitter/Exception.php';
@@ -464,7 +464,7 @@ class Zend_Service_Twitter
         $path   = 'direct_messages';
         $params = array();
         foreach ($options as $key => $value) {
-            switch (strtolower($key)) {
+            switch (strtolower((string)$key)) {
                 case 'count':
                     $params['count'] = (int) $value;
                     break;
@@ -544,7 +544,7 @@ class Zend_Service_Twitter
         $path   = 'direct_messages/sent';
         $params = array();
         foreach ($options as $key => $value) {
-            switch (strtolower($key)) {
+            switch (strtolower((string)$key)) {
                 case 'count':
                     $params['count'] = (int) $value;
                     break;
@@ -624,7 +624,7 @@ class Zend_Service_Twitter
         $path = 'favorites/list';
         $params = array();
         foreach ($options as $key => $value) {
-            switch (strtolower($key)) {
+            switch (strtolower((string)$key)) {
                 case 'user_id':
                     $params['user_id'] = $this->validInteger($value);
                     break;
@@ -727,7 +727,7 @@ class Zend_Service_Twitter
 
         $params = array('q' => $query);
         foreach ($options as $key => $value) {
-            switch (strtolower($key)) {
+            switch (strtolower((string)$key)) {
                 case 'geocode':
                     if (!substr_count((string) $value, ',') !== 2) {
                         require_once 'Zend/Service/Twitter/Exception.php';
@@ -850,7 +850,7 @@ class Zend_Service_Twitter
         $path = 'statuses/home_timeline';
         $params = array();
         foreach ($options as $key => $value) {
-            switch (strtolower($key)) {
+            switch (strtolower((string)$key)) {
                 case 'count':
                     $params['count'] = (int) $value;
                     break;
@@ -907,7 +907,7 @@ class Zend_Service_Twitter
         $path   = 'statuses/mentions_timeline';
         $params = array();
         foreach ($options as $key => $value) {
-            switch (strtolower($key)) {
+            switch (strtolower((string)$key)) {
                 case 'count':
                     $params['count'] = (int) $value;
                     break;
@@ -1034,7 +1034,7 @@ class Zend_Service_Twitter
         $path = 'statuses/user_timeline';
         $params = array();
         foreach ($options as $key => $value) {
-            switch (strtolower($key)) {
+            switch (strtolower((string)$key)) {
                 case 'user_id':
                     $params['user_id'] = $this->validInteger($value);
                     break;
@@ -1104,7 +1104,7 @@ class Zend_Service_Twitter
 
         $params = array('q' => $query);
         foreach ($options as $key => $value) {
-            switch (strtolower($key)) {
+            switch (strtolower((string)$key)) {
                 case 'count':
                     $value = (int) $value;
                     if (1 > $value || 20 < $value) {

@@ -837,10 +837,10 @@ class Zend_Currency
         }
 
         foreach ($options as $name => $value) {
-            $name = strtolower($name);
+            $name = strtolower((string)$name);
             if ($name !== 'format') {
                 if (gettype($value) === 'string') {
-                    $value = strtolower($value);
+                    $value = strtolower((string)$value);
                 }
             }
 

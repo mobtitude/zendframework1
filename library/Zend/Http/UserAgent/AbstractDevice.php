@@ -316,14 +316,14 @@ abstract class Zend_Http_UserAgent_AbstractDevice
         $this->setFeature('is_text', false, 'product_info');
         $this->setFeature('device_claims_web_support', false, 'product_info');
 
-        $this->setFeature('is_' . strtolower($this->getType()), true, 'product_info');
+        $this->setFeature('is_' . strtolower((string)$this->getType()), true, 'product_info');
 
         /* sets the browser name */
         if (isset($this->list) && empty($this->_browser)) {
-            $lowerUserAgent = strtolower($this->getUserAgent());
+            $lowerUserAgent = strtolower((string)$this->getUserAgent());
             foreach ($this->list as $browser_signature) {
                 if (strpos($lowerUserAgent, $browser_signature) !== false) {
-                    $this->_browser = strtolower($browser_signature);
+                    $this->_browser = strtolower((string)$browser_signature);
                     $this->setFeature('browser_name', $this->_browser, 'product_info');
                 }
             }
@@ -472,7 +472,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
             }
         }
 
-        $product = strtolower($result['browser_name']);
+        $product = strtolower((string)$result['browser_name']);
 
         // Mozilla : true && false
         $compatibleOrIe = false;
@@ -556,7 +556,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
         );
         if (isset($result['compatibility_flag'])) {
             if (in_array($result['compatibility_flag'], $apple_device)) {
-                $result['device']           = strtolower($result['compatibility_flag']);
+                $result['device']           = strtolower((string)$result['compatibility_flag']);
                 $result['device_os_token']  = 'iPhone OS';
                 if (isset($comment[3])) {
                     $result['browser_language'] = trim($comment[3]);
@@ -636,7 +636,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
             // Gecko (Firefox or compatible)
             if ($result['others']['detail'][0][1] == 'Gecko') {
                 $searchRV = true;
-                if (!empty($result['others']['detail'][1][1]) && !empty($result['others']['detail'][count($result['others']['detail']) - 1][2]) || strpos(strtolower($result['others']['full']), 'opera') !== false) {
+                if (!empty($result['others']['detail'][1][1]) && !empty($result['others']['detail'][count($result['others']['detail']) - 1][2]) || strpos(strtolower((string)$result['others']['full']), 'opera') !== false) {
                     $searchRV = false;
                     $result['browser_engine'] = $result['others']['detail'][0][1];
 
@@ -983,7 +983,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
      */
     protected static function _matchAgentAgainstSignatures($userAgent, $signatures)
     {
-        $userAgent = strtolower($userAgent);
+        $userAgent = strtolower((string)$userAgent);
         foreach ($signatures as $signature) {
             if (!empty($signature)) {
                 if (strpos($userAgent, (string) $signature) !== false) {

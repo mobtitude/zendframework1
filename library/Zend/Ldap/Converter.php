@@ -192,7 +192,7 @@ class Zend_Ldap_Converter
         if (!is_scalar($value)) {
             return $return;
         }
-        if (true === $value || 'true' === strtolower($value) || 1 === $value) {
+        if (true === $value || 'true' === strtolower((string)$value) || 1 === $value) {
             $return = 'TRUE';
         }
         return $return;

@@ -57,7 +57,7 @@ class Zend_Search_Lucene_Analysis_TokenFilter_LowerCaseUtf8 extends Zend_Search_
      */
     public function normalize(Zend_Search_Lucene_Analysis_Token $srcToken)
     {
-        $srcToken->setTermText(mb_strtolower($srcToken->getTermText(), 'UTF-8'));
+        $srcToken->setTermText(mb_strtolower((string)$srcToken->getTermText(), 'UTF-8'));
         return $srcToken;
     }
 }

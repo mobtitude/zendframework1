@@ -63,7 +63,7 @@ class Zend_Feed_Reader_FeedSet extends ArrayObject
     public function addLinks(DOMNodeList $links, $uri)
     {
         foreach ($links as $link) {
-            if (strtolower($link->getAttribute('rel')) !== 'alternate'
+            if (strtolower((string)$link->getAttribute('rel')) !== 'alternate'
                 || !$link->getAttribute('type') || !$link->getAttribute('href')) {
                 continue;
             }

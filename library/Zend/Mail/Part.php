@@ -396,7 +396,7 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
             $this->getHeaders();
         }
 
-        $lowerName = strtolower($name);
+        $lowerName = strtolower((string)$name);
 
         if ($this->headerExists($name) == false) {
             $lowerName = strtolower((string) preg_replace('%([a-z])([A-Z])%', '\1-\2', $name));
@@ -435,7 +435,7 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
      */
     public function headerExists($name)
     {
-        $name = strtolower($name);
+        $name = strtolower((string)$name);
         if(isset($this->_headers[$name])) {
             return true;
         } else {

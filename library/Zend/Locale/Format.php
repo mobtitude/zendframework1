@@ -82,10 +82,10 @@ class Zend_Locale_Format
             return self::$_options;
         }
         foreach ($options as $name => $value) {
-            $name  = strtolower($name);
+            $name  = strtolower((string)$name);
             if ($name !== 'locale') {
                 if (gettype($value) === 'string') {
-                    $value = strtolower($value);
+                    $value = strtolower((string)$value);
                 }
             }
 
@@ -201,7 +201,7 @@ class Zend_Locale_Format
             trigger_error("Sorry, your PCRE extension does not support UTF8 which is needed for the I18N core", E_USER_NOTICE);
         }
 
-        $from   = strtolower($from);
+        $from   = strtolower((string)$from);
         $source = Zend_Locale_Data::getContent('en', 'numberingsystem', $from);
         if (empty($source)) {
             require_once 'Zend/Locale/Exception.php';
@@ -209,7 +209,7 @@ class Zend_Locale_Format
         }
 
         if ($to !== null) {
-            $to     = strtolower($to);
+            $to     = strtolower((string)$to);
             $target = Zend_Locale_Data::getContent('en', 'numberingsystem', $to);
             if (empty($target)) {
                 require_once 'Zend/Locale/Exception.php';
